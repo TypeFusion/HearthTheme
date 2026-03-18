@@ -6,9 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "node scripts/sync-themes.mjs && node_modules\\.bin\\astro dev",
-    "build": "node scripts/sync-themes.mjs && node_modules\\.bin\\astro build",
-    "preview": "node_modules\\.bin\\astro preview",
+    "dev": "node scripts/sync-themes.mjs && astro dev",
+    "build": "node scripts/sync-themes.mjs && astro build",
+    "preview": "astro preview",
     "sync": "node scripts/sync-themes.mjs",
     "pack:ext": "node scripts/pack.mjs"
   },
