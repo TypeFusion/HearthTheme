@@ -1,0 +1,36 @@
+name: Publish to VS Marketplace
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'themes/**'
+      - 'extension/**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: Sync themes
+        run: node scripts/sync-themes.mjs
+
+      - name: Install extension dependencies
+        working-directory: extension
+        run: pnpm install
+
+      - name: Publish to VS Marketplace
+        working-directory: extension
+        run: pnpm vsce publish --no-dependencies --skip-license
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
