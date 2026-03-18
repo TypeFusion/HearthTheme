@@ -15,8 +15,8 @@ for (const target of targets) {
 }
 
 // 2. 从 JSON 提取 token 颜色，生成 src/data/tokens.ts
-const dark = JSON.parse(readFileSync('themes/vesper-dark.json', 'utf8'))
-const light = JSON.parse(readFileSync('themes/vesper-light.json', 'utf8'))
+const dark = JSON.parse(readFileSync('themes/hearth-dark.json', 'utf8'))
+const light = JSON.parse(readFileSync('themes/hearth-light.json', 'utf8'))
 
 function getToken(theme, scopes) {
     for (const scope of scopes) {

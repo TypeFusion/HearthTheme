@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  site: 'https://vesper.dev',
+  site: 'https://theme.hearthcode.dev',
   integrations: [
     sitemap({
       i18n: {

@@ -25,10 +25,10 @@
         "theme": "dark"
     },
     "icon": "icon.png",
-    "homepage": "https://hearthcode.dev",
+    "homepage": "https://theme.hearthcode.dev",
     "repository": {
         "type": "git",
-        "url": "https://github.com/HearthCode/hearth"
+        "url": "https://github.com/TypeFusion/HearthTheme"
     },
     "license": "MIT",
     "contributes": {
@@ -36,12 +36,12 @@
             {
                 "label": "Hearth Dark",
                 "uiTheme": "vs-dark",
-                "path": "./themes/vesper-dark.json"
+                "path": "./themes/hearth-dark.json"
             },
             {
                 "label": "Hearth Light",
                 "uiTheme": "vs",
-                "path": "./themes/vesper-light.json"
+                "path": "./themes/hearth-light.json"
             }
         ]
     }
