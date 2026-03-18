@@ -27,7 +27,7 @@ jobs:
 
       - name: Install extension dependencies
         working-directory: extension
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Publish to VS Marketplace
         working-directory: extension
