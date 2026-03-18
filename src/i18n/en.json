@@ -1,0 +1,21 @@
+{
+  "nav.home": "Home",
+  "nav.docs": "Docs",
+  "nav.install": "Install",
+  "hero.eyebrow": "Hearth.dev / VSCode Color Theme",
+  "hero.title": "Hearth",
+  "hero.subtitle": "At dusk, light loses its edge and color returns to its essence. Hearth is a code theme built for long hours of focus.",
+  "hero.scroll": "scroll to explore",
+  "philosophy.label": "Design Philosophy",
+  "philosophy.01.title": "Ember, not flame",
+  "philosophy.01.body": "High-saturation syntax colors burn bright but exhaust your eyes. Hearth keeps all highlight colors at 40–60% saturation — warm like cooling coal, not blinding like fire.",
+  "philosophy.02.title": "Neither black nor white",
+  "philosophy.02.body": "Pure black backgrounds cause halation around white text, blurring edges. Hearth's dark background is #1e1a12 — a warm deep brown — and light is #f6f0e6, a warm off-white.",
+  "philosophy.03.title": "Hierarchy as semantics",
+  "philosophy.03.body": "Brightness maps directly to semantic weight: keywords are brightest, functions next, variables after, and comments deliberately fade into the background.",
+  "philosophy.04.title": "Color temperature as comfort",
+  "philosophy.04.body": "The entire palette is warm-toned, below 4500K. High blue-light content strains the retina. A warm coding environment is easier on your eyes over long sessions.",
+  "colors.label": "Color System",
+  "preview.label": "Code Preview",
+  "footer.tagline": "VSCode Color Theme · 2025"
+}

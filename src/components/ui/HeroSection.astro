@@ -1,0 +1,47 @@
+---
+import { t, type Lang } from '../../i18n/utils'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+---
+
+<section class="relative min-h-screen flex flex-col justify-center px-[8vw] overflow-hidden">
+  <div class="absolute right-[-10vw] top-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full pointer-events-none"
+    style="background: radial-gradient(circle, rgba(201,131,58,0.07) 0%, transparent 70%)">
+  </div>
+
+  <p class="hero-eyebrow font-mono text-[11px] tracking-[0.18em] uppercase text-[#c9833a] mb-8 opacity-0">
+    {t(lang, 'hero.eyebrow')}
+  </p>
+
+  <h1 class="hero-title font-serif font-light leading-[0.95] text-[#e8dcc8] mb-6 opacity-0"
+    style="font-size: clamp(4rem, 10vw, 9rem)">
+    Ves<em class="italic text-[#c9833a]">per</em>
+  </h1>
+
+  <p class="hero-subtitle font-serif font-light italic text-[#8a7e6a] max-w-[520px] mb-12 opacity-0"
+    style="font-size: clamp(1.1rem, 2.5vw, 1.5rem)">
+    {t(lang, 'hero.subtitle')}
+  </p>
+
+  <div class="hero-scroll flex items-center gap-3 opacity-0">
+    <span class="block w-8 h-px bg-[#504838]"></span>
+    <span class="font-mono text-[10px] tracking-[0.14em] uppercase text-[#504838]">
+      {t(lang, 'hero.scroll')}
+    </span>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp .8s .1s forwards; }
+  .hero-title   { animation: fadeUp .9s .2s forwards; }
+  .hero-subtitle{ animation: fadeUp .9s .35s forwards; }
+  .hero-scroll  { animation: fadeUp .9s .5s forwards; }
+</style>

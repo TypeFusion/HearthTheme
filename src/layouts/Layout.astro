@@ -1,0 +1,128 @@
+---
+import "../styles/global.css";
+import { t, getLangFromUrl, languages, type Lang } from "../i18n/utils";
+
+interface Props {
+	title?: string;
+	description?: string;
+	lang?: Lang;
+}
+
+const { lang = "en", title, description } = Astro.props;
+const url = Astro.url;
+
+const pageTitle = title ? `${title} — Hearth` : "Hearth — VSCode Color Theme";
+
+const pageDescription = description ?? t(lang, "hero.subtitle");
+
+const home = lang === "en" ? "/" : `/${lang}`;
+const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content={pageDescription} />
+		<meta name="author" content="Hearth" />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url.href} />
+
+		<!-- hreflang for i18n SEO -->
+		{
+			Object.keys(languages).map((l) => (
+				<link
+					rel="alternate"
+					hreflang={l}
+					href={`https://Hearth.dev/${l === "en" ? "" : l}`}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href="https://Hearth.dev" />
+		<link rel="canonical" href={url.href} />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{pageTitle}</title>
+	</head>
+	<body class="bg-[#1e1a12] text-[#cbbfa6] font-sans antialiased">
+		<!-- Nav -->
+		<nav
+			class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 border-b border-[#3a3020]/60 backdrop-blur-sm bg-[#1e1a12]/80"
+		>
+			<a
+				href={home}
+				class="font-serif text-xl italic text-[#e8dcc8] tracking-wide"
+			>
+				Hearth
+			</a>
+
+			<div class="flex items-center gap-8">
+				<a
+					href={home}
+					class="text-sm text-[#8a7e6a] hover:text-[#cbbfa6] transition-colors"
+				>
+					{t(lang, "nav.home")}
+				</a>
+				<a
+					href={docs}
+					class="text-sm text-[#8a7e6a] hover:text-[#cbbfa6] transition-colors"
+				>
+					{t(lang, "nav.docs")}
+				</a>
+				<a
+					href="/themes/Hearth-dark.json"
+					target="_blank"
+					class="text-sm px-4 py-1.5 border border-[#c9833a]/60 text-[#c9833a] hover:bg-[#c9833a]/10 transition-colors rounded-sm"
+				>
+					{t(lang, "nav.install")}
+				</a>
+
+				<div
+					class="flex items-center gap-2 border-l border-[#3a3020] pl-6"
+				>
+					<a
+						href="/"
+						class={lang === "en"
+							? "text-xs font-mono text-[#c9833a]"
+							: "text-xs font-mono text-[#504838] hover:text-[#8a7e6a] transition-colors"}
+						>en</a
+					>
+					<a
+						href="/zh"
+						class={lang === "zh"
+							? "text-xs font-mono text-[#c9833a]"
+							: "text-xs font-mono text-[#504838] hover:text-[#8a7e6a] transition-colors"}
+						>zh</a
+					>
+					<a
+						href="/ja"
+						class={lang === "ja"
+							? "text-xs font-mono text-[#c9833a]"
+							: "text-xs font-mono text-[#504838] hover:text-[#8a7e6a] transition-colors"}
+						>ja</a
+					>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Page content -->
+		<main class="pt-[65px]">
+			<slot />
+		</main>
+
+		<!-- Footer -->
+		<footer
+			class="border-t border-[#3a3020] px-8 py-8 flex items-center justify-between"
+		>
+			<span class="font-serif italic text-[#8a7e6a]">Hearth</span>
+			<span class="font-mono text-xs text-[#504838]">
+				Hearth.dev &nbsp;·&nbsp; {t(lang, "footer.tagline")}
+			</span>
+		</footer>
+	</body>
+</html>

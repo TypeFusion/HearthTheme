@@ -1,0 +1,45 @@
+---
+import { t, type Lang } from '../../i18n/utils'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const cards = [
+  { num: '01', titleKey: 'philosophy.01.title', bodyKey: 'philosophy.01.body' },
+  { num: '02', titleKey: 'philosophy.02.title', bodyKey: 'philosophy.02.body' },
+  { num: '03', titleKey: 'philosophy.03.title', bodyKey: 'philosophy.03.body' },
+  { num: '04', titleKey: 'philosophy.04.title', bodyKey: 'philosophy.04.body' },
+]
+---
+
+<section class="px-[8vw] py-[10vh] reveal">
+  <p class="font-mono text-[10px] tracking-[0.18em] uppercase text-[#8a5a28] mb-12 flex items-center gap-3">
+    {t(lang, 'philosophy.label')}
+    <span class="block w-16 h-px bg-[#3a3020]"></span>
+  </p>
+
+  <div class="grid grid-cols-2 gap-px bg-[#3a3020] border border-[#3a3020] max-w-[900px]">
+    {cards.map(({ num, titleKey, bodyKey }) => (
+      <div class="bg-[#1e1a12] hover:bg-[#252018] transition-colors p-10">
+        <div class="font-serif text-5xl font-light text-[#3a3020] leading-none mb-4">{num}</div>
+        <h3 class="font-serif text-xl text-[#e8dcc8] mb-3">{t(lang, titleKey)}</h3>
+        <p class="text-[13px] leading-relaxed text-[#8a7e6a]">{t(lang, bodyKey)}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+  }, { threshold: 0.1 })
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+</script>

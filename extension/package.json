@@ -1,0 +1,48 @@
+{
+    "name": "hearth-theme",
+    "displayName": "Hearth",
+    "description": "A warm-toned VSCode color theme grounded in eye science. Dark and light variants, WCAG AA contrast, low color temperature.",
+    "version": "1.0.0",
+    "publisher": "hearth-code",
+    "engines": {
+        "vscode": "^1.70.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "keywords": [
+        "theme",
+        "color theme",
+        "dark theme",
+        "light theme",
+        "warm",
+        "eye strain",
+        "readable",
+        "hearth"
+    ],
+    "galleryBanner": {
+        "color": "#1e1a12",
+        "theme": "dark"
+    },
+    "icon": "icon.png",
+    "homepage": "https://hearthcode.dev",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/HearthCode/hearth"
+    },
+    "license": "MIT",
+    "contributes": {
+        "themes": [
+            {
+                "label": "Hearth Dark",
+                "uiTheme": "vs-dark",
+                "path": "./themes/vesper-dark.json"
+            },
+            {
+                "label": "Hearth Light",
+                "uiTheme": "vs",
+                "path": "./themes/vesper-light.json"
+            }
+        ]
+    }
+}

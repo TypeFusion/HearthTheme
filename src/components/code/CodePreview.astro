@@ -1,0 +1,274 @@
+---
+import { t, type Lang } from '../../i18n/utils'
+import { codeToHtml } from 'shiki'
+import { tokens } from '../../data/tokens'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const d = tokens.dark
+const l = tokens.light
+
+const HearthDark = {
+  name: 'Hearth Dark',
+  type: 'dark' as const,
+  colors: {
+    'editor.background': d.bg,
+    'editor.foreground': d.fg,
+  },
+  tokenColors: [
+    { scope: ['comment'],                                               settings: { foreground: d.comment,  fontStyle: 'italic' } },
+    { scope: ['keyword', 'storage.type', 'storage.modifier'],          settings: { foreground: d.keyword } },
+    { scope: ['entity.name.function', 'support.function'],             settings: { foreground: d.fn } },
+    { scope: ['string', 'string.quoted', 'string.template'],           settings: { foreground: d.string } },
+    { scope: ['constant.numeric'],                                      settings: { foreground: d.number } },
+    { scope: ['entity.name.type', 'entity.name.class', 'support.type'],settings: { foreground: d.type, fontStyle: 'italic' } },
+    { scope: ['variable', 'variable.other'],                            settings: { foreground: d.variable } },
+    { scope: ['keyword.operator'],                                      settings: { foreground: d.operator } },
+    { scope: ['entity.name.tag', 'punctuation.definition.tag'],        settings: { foreground: d.keyword } },
+    { scope: ['entity.other.attribute-name'],                           settings: { foreground: d.type } },
+    { scope: ['support.type.property-name', 'variable.css'],           settings: { foreground: d.fn } },
+  ],
+}
+
+const HearthLight = {
+  name: 'Hearth Light',
+  type: 'light' as const,
+  colors: {
+    'editor.background': l.bg,
+    'editor.foreground': l.fg,
+  },
+  tokenColors: [
+    { scope: ['comment'],                                               settings: { foreground: l.comment,  fontStyle: 'italic' } },
+    { scope: ['keyword', 'storage.type', 'storage.modifier'],          settings: { foreground: l.keyword } },
+    { scope: ['entity.name.function', 'support.function'],             settings: { foreground: l.fn } },
+    { scope: ['string', 'string.quoted', 'string.template'],           settings: { foreground: l.string } },
+    { scope: ['constant.numeric'],                                      settings: { foreground: l.number } },
+    { scope: ['entity.name.type', 'entity.name.class', 'support.type'],settings: { foreground: l.type, fontStyle: 'italic' } },
+    { scope: ['variable', 'variable.other'],                            settings: { foreground: l.variable } },
+    { scope: ['keyword.operator'],                                      settings: { foreground: l.operator } },
+    { scope: ['entity.name.tag', 'punctuation.definition.tag'],        settings: { foreground: l.keyword } },
+    { scope: ['entity.other.attribute-name'],                           settings: { foreground: l.type } },
+    { scope: ['support.type.property-name', 'variable.css'],           settings: { foreground: l.fn } },
+  ],
+}
+
+const samples = {
+  ts: `// async data fetching with full type safety
+import { createContext, useContext } from 'react'
+
+interface ApiResponse<T> {
+  data: T
+  status: number
+  ok: boolean
+}
+
+async function request<T>(
+  url: string,
+  options?: RequestInit
+): Promise<ApiResponse<T>> {
+  const res = await fetch(url, options)
+  const data = await res.json() as T
+  return { data, status: res.status, ok: res.ok }
+}
+
+const BASE = 'https://api.Hearth.dev'
+const TIMEOUT = 5_000`,
+
+  py: `# dataclass-based connection pool
+from dataclasses import dataclass, field
+from typing import Optional, ClassVar
+import asyncio
+
+@dataclass
+class Connection:
+    host: str
+    port: int = 5432
+    timeout: float = 30.0
+
+class Pool:
+    MAX: ClassVar[int] = 20
+
+    def __init__(self, dsn: str):
+        self.dsn = dsn
+        self._pool: list[Connection] = []
+
+    async def acquire(self) -> Optional[Connection]:
+        if not self._pool:
+            return None
+        return self._pool.pop()`,
+
+  go: `// HTTP server with graceful shutdown
+package main
+
+import (
+  "context"
+  "net/http"
+  "time"
+)
+
+type Server struct {
+  addr    string
+  timeout time.Duration
+  mux     *http.ServeMux
+}
+
+func New(addr string) *Server {
+  return &Server{
+    addr:    addr,
+    timeout: 10 * time.Second,
+    mux:     http.NewServeMux(),
+  }
+}`,
+
+  html: `<!-- Hearth UI component -->
+<style>
+  :root {
+    --Hearth: #c9833a;
+    --bg: #1e1a12;
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--Hearth);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+</style>
+
+<div class="card">
+  <h2>Hearth</h2>
+  <p>黄昏之境</p>
+</div>`,
+}
+
+const langMap: Record<string, string> = {
+  ts:   'typescript',
+  py:   'python',
+  go:   'go',
+  html: 'html',
+}
+
+const rendered: Record<string, { dark: string; light: string }> = {}
+for (const [key, code] of Object.entries(samples)) {
+  const [dark, light] = await Promise.all([
+    codeToHtml(code, { lang: langMap[key], theme: HearthDark }),
+    codeToHtml(code, { lang: langMap[key], theme: HearthLight }),
+  ])
+  rendered[key] = { dark, light }
+}
+
+const tabs = [
+  { key: 'ts',   label: 'index.ts'   },
+  { key: 'py',   label: 'main.py'    },
+  { key: 'go',   label: 'server.go'  },
+  { key: 'html', label: 'index.html' },
+]
+---
+
+<section class="py-[10vh] reveal">
+  <div class="px-[8vw] mb-8">
+    <p class="font-mono text-[10px] tracking-[0.18em] uppercase flex items-center gap-3"
+      style={`color: ${d.operator}`}>
+      {t(lang, 'preview.label')}
+      <span class="block w-16 h-px" style={`background: ${d.border}`}></span>
+    </p>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="flex px-[8vw]" id="preview-tabs"
+    style={`border-bottom: 1px solid ${d.border}`}>
+    {tabs.map(({ key, label }) => (
+      <button
+        data-tab={key}
+        class="preview-tab font-mono text-[11px] px-5 py-2.5 border-b-2 transition-colors"
+        style={key === 'ts'
+          ? `color: ${d.fn}; border-bottom-color: ${d.keyword}`
+          : `color: ${d.comment}; border-bottom-color: transparent`}
+      >
+        {label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Dual preview -->
+  <div>
+    {tabs.map(({ key }) => (
+      <div
+        id={`panel-${key}`}
+        class={`preview-panel grid grid-cols-2 ${key !== 'ts' ? 'hidden' : ''}`}
+        style={`border-top: none; gap: 1px; background: ${d.border}`}
+      >
+        <!-- Dark -->
+        <div style={`background: ${d.bg}`}>
+          <div class="font-mono text-[9px] tracking-[0.14em] uppercase px-4 py-2"
+            style={`background: ${d.sidebar}; color: ${d.comment}; border-bottom: 1px solid ${d.border}`}>
+            Hearth Dark
+          </div>
+          <div class="overflow-x-auto text-[12px] leading-relaxed p-4 shiki-wrap"
+            set:html={rendered[key].dark} />
+        </div>
+
+        <!-- Light -->
+        <div style={`background: ${l.bg}`}>
+          <div class="font-mono text-[9px] tracking-[0.14em] uppercase px-4 py-2"
+            style={`background: ${l.sidebar}; color: ${l.comment}; border-bottom: 1px solid ${l.border}`}>
+            Hearth Light
+          </div>
+          <div class="overflow-x-auto text-[12px] leading-relaxed p-4 shiki-wrap"
+            set:html={rendered[key].light} />
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .shiki-wrap :global(pre) {
+    background: transparent !important;
+    margin: 0;
+    padding: 0;
+  }
+  .shiki-wrap :global(code) {
+    font-family: 'DM Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const d = {
+    fn:      getComputedStyle(document.documentElement).getPropertyValue('--Hearth-fn')      || '#ddb86a',
+    keyword: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-keyword') || '#cc8855',
+    comment: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-comment') || '#6a5e48',
+  }
+
+  const tabs = document.querySelectorAll('.preview-tab')
+  const panels = document.querySelectorAll('.preview-panel')
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const key = (tab as HTMLElement).getAttribute('data-tab')
+
+      tabs.forEach(t => {
+        const el = t as HTMLElement
+        el.style.borderBottomColor = 'transparent'
+        el.style.color = '#6a5e48'
+      })
+      const active = tab as HTMLElement
+      active.style.borderBottomColor = '#cc8855'
+      active.style.color = '#ddb86a'
+
+      panels.forEach(p => p.classList.add('hidden'))
+      document.getElementById(`panel-${key}`)?.classList.remove('hidden')
+    })
+  })
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+  }, { threshold: 0.1 })
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+</script>

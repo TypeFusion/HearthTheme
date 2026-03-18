@@ -1,0 +1,22 @@
+{
+  "name": "vesper-site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node scripts/sync-themes.mjs && node_modules\\.bin\\astro dev",
+    "build": "node scripts/sync-themes.mjs && node_modules\\.bin\\astro build",
+    "preview": "node_modules\\.bin\\astro preview",
+    "sync": "node scripts/sync-themes.mjs",
+    "pack:ext": "node scripts/pack.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.1",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.5",
+    "shiki": "^4.0.2",
+    "tailwindcss": "^4.2.1"
+  }
+}
