@@ -241,9 +241,9 @@ const tabs = [
 
 <script>
   const d = {
-    fn:      getComputedStyle(document.documentElement).getPropertyValue('--Hearth-fn')      || '#ddb86a',
-    keyword: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-keyword') || '#cc8855',
-    comment: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-comment') || '#6a5e48',
+    fn:      getComputedStyle(document.documentElement).getPropertyValue('--Hearth-fn')      || '#ddb06a',
+    keyword: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-keyword') || '#d0653b',
+    comment: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-comment') || '#6b5f4d',
   }
 
   const tabs = document.querySelectorAll('.preview-tab')
@@ -256,11 +256,11 @@ const tabs = [
       tabs.forEach(t => {
         const el = t as HTMLElement
         el.style.borderBottomColor = 'transparent'
-        el.style.color = '#6a5e48'
+        el.style.color = '#6b5f4d'
       })
       const active = tab as HTMLElement
-      active.style.borderBottomColor = '#cc8855'
-      active.style.color = '#ddb86a'
+      active.style.borderBottomColor = '#d0653b'
+      active.style.color = '#ddb06a'
 
       panels.forEach(p => p.classList.add('hidden'))
       document.getElementById(`panel-${key}`)?.classList.remove('hidden')

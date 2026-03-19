@@ -17,6 +17,15 @@ const pageDescription = description ?? t(lang, "hero.subtitle");
 
 const home = lang === "en" ? "/" : `/${lang}`;
 const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
+const isDocsPage = /\/docs\/?$/.test(url.pathname);
+const langHref = (target: Lang) =>
+	isDocsPage
+		? target === "en"
+			? "/docs"
+			: `/${target}/docs`
+		: target === "en"
+			? "/"
+			: `/${target}`;
 ---
 
 <!doctype html>
@@ -75,7 +84,7 @@ const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
 					{t(lang, "nav.docs")}
 				</a>
 				<a
-					href="/themes/Hearth-dark.json"
+					href="/themes/hearth-dark.json"
 					target="_blank"
 					class="text-sm px-4 py-1.5 border border-[#c9833a]/60 text-[#c9833a] hover:bg-[#c9833a]/10 transition-colors rounded-sm"
 				>
@@ -86,21 +95,21 @@ const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
 					class="flex items-center gap-2 border-l border-[#3a3020] pl-6"
 				>
 					<a
-						href="/"
+						href={langHref("en")}
 						class={lang === "en"
 							? "text-xs font-mono text-[#c9833a]"
 							: "text-xs font-mono text-[#504838] hover:text-[#8a7e6a] transition-colors"}
 						>en</a
 					>
 					<a
-						href="/zh"
+						href={langHref("zh")}
 						class={lang === "zh"
 							? "text-xs font-mono text-[#c9833a]"
 							: "text-xs font-mono text-[#504838] hover:text-[#8a7e6a] transition-colors"}
 						>zh</a
 					>
 					<a
-						href="/ja"
+						href={langHref("ja")}
 						class={lang === "ja"
 							? "text-xs font-mono text-[#c9833a]"
 							: "text-xs font-mono text-[#504838] hover:text-[#8a7e6a] transition-colors"}

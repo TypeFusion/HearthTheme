@@ -1,0 +1,14 @@
+{
+  "name": "hearth",
+  "mode": "light",
+  "palette": {
+    "keyword": "#8f1f00",
+    "function": "#5a3900",
+    "string": "#2e6a2c",
+    "type": "#0d6378"
+  },
+  "stability": {
+    "contrastBudget": true,
+    "semanticAlignment": true
+  }
+}

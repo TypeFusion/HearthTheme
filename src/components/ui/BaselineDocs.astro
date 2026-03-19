@@ -1,0 +1,334 @@
+---
+import { tokens } from "../../data/tokens";
+import { themeChangelog } from "../../data/themeChangelog";
+import type { Lang } from "../../i18n/utils";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = tokens.dark;
+const l = tokens.light;
+
+const copy = {
+	en: {
+		eyebrow: "Theme Governance",
+		title: "Hearth Baseline Report",
+		subtitle:
+			"A stable baseline for a soot-blackboard dark mode and parchment light mode.",
+		intentTitle: "Design Intent",
+		intent:
+			"Hearth keeps one semantic language across both modes. Dark is blackboard + chalk. Light is parchment + walnut ink. Syntax roles keep meaning; only brightness and saturation shift.",
+		matrixTitle: "Semantic Matrix",
+		role: "Role",
+		dark: "Dark",
+		light: "Light",
+		narrative: "Narrative Role",
+		budgetTitle: "Readability Budget",
+		budgetMetric: "Metric",
+		budgetTarget: "Target",
+		snapshotTitle: "Current Snapshot",
+		changelogTitle: "Change History",
+		changelogSubtitle: "Versioned theme evolution with rationale and scope.",
+		protocolTitle: "Change Protocol",
+		protocol: [
+			"Edit source files only in themes/.",
+			"Run node scripts/sync-themes.mjs.",
+			"Run npm run audit:theme.",
+			"Review fixtures in fixtures/theme-audit/.",
+			"If governance thresholds change, update docs/theme-baseline.md and scripts/theme-audit.mjs together.",
+		],
+		roles: {
+			background: "Blackboard vs parchment substrate",
+			foreground: "Chalk ink vs walnut ink",
+			keyword: "Ember red control-flow anchors",
+			operator: "Low-noise brass connective symbols",
+			function: "Brass amber callable targets",
+			string: "Moss green literal content",
+			number: "Terracotta numeric constants",
+			type: "Mineral teal structural symbols",
+			variable: "Neutral content carrier",
+			comment: "Quiet guidance layer",
+		},
+	},
+	zh: {
+		eyebrow: "主题治理",
+		title: "Hearth 基线报告",
+		subtitle: "用于稳定维护“黑板深色 + 羊皮纸浅色”的统一语义体系。",
+		intentTitle: "设计意图",
+		intent:
+			"Hearth 在深浅两套主题中保持同一语义语言。深色是黑板与粉笔，浅色是羊皮纸与胡桃墨。语法角色不变，只调整明度与饱和度。",
+		matrixTitle: "语义矩阵",
+		role: "角色",
+		dark: "深色",
+		light: "浅色",
+		narrative: "语义叙事",
+		budgetTitle: "可读性预算",
+		budgetMetric: "指标",
+		budgetTarget: "目标",
+		snapshotTitle: "当前快照",
+		changelogTitle: "变更历史",
+		changelogSubtitle: "按版本记录主题演进、动机与影响范围。",
+		protocolTitle: "变更流程",
+		protocol: [
+			"只在 themes/ 下修改源主题文件。",
+			"执行 node scripts/sync-themes.mjs。",
+			"执行 npm run audit:theme。",
+			"检查 fixtures/theme-audit/ 中的多语言样例。",
+			"若调整了治理阈值，需同时更新 docs/theme-baseline.md 与 scripts/theme-audit.mjs。",
+		],
+		roles: {
+			background: "黑板底 vs 羊皮纸底",
+			foreground: "粉笔墨感 vs 胡桃墨感",
+			keyword: "余烬红控制流锚点",
+			operator: "低噪黄铜连接符",
+			function: "黄铜琥珀可调用目标",
+			string: "苔绿文本字面量",
+			number: "赤陶色数字常量",
+			type: "矿物青结构符号",
+			variable: "中性承载信息",
+			comment: "安静的辅助层",
+		},
+	},
+	ja: {
+		eyebrow: "テーマ運用",
+		title: "Hearth ベースラインレポート",
+		subtitle:
+			"煤けた黒板ダークと羊皮紙ライトを、同じセマンティクスで安定運用するための基準。",
+		intentTitle: "デザイン意図",
+		intent:
+			"Hearth はダーク/ライトで同一のセマンティック言語を維持します。ダークは黒板+チョーク、ライトは羊皮紙+ウォルナットインク。役割は固定し、明度と彩度のみ調整します。",
+		matrixTitle: "セマンティック行列",
+		role: "役割",
+		dark: "ダーク",
+		light: "ライト",
+		narrative: "語義的な役割",
+		budgetTitle: "可読性バジェット",
+		budgetMetric: "指標",
+		budgetTarget: "目標",
+		snapshotTitle: "現在のスナップショット",
+		changelogTitle: "変更履歴",
+		changelogSubtitle: "テーマの進化を、意図と影響範囲とともにバージョン管理。",
+		protocolTitle: "変更プロトコル",
+		protocol: [
+			"変更は themes/ のソーステーマのみで行う。",
+			"node scripts/sync-themes.mjs を実行する。",
+			"npm run audit:theme を実行する。",
+			"fixtures/theme-audit/ の言語別サンプルで確認する。",
+			"閾値を変える場合は docs/theme-baseline.md と scripts/theme-audit.mjs を同一PRで更新する。",
+		],
+		roles: {
+			background: "黒板基盤 vs 羊皮紙基盤",
+			foreground: "チョークインク vs ウォルナットインク",
+			keyword: "残り火レッドの制御フロー錨",
+			operator: "低ノイズなブラス接続記号",
+			function: "ブラスアンバーの呼び出し対象",
+			string: "モスグリーンのリテラル",
+			number: "テラコッタの数値定数",
+			type: "ミネラルティールの構造記号",
+			variable: "中立的な情報キャリア",
+			comment: "静かな補助レイヤー",
+		},
+	},
+} as const;
+
+const c = copy[lang];
+const changelogRows = themeChangelog.map((entry) => ({
+	date: entry.date,
+	version: entry.version,
+	title: entry.title[lang],
+	summary: entry.summary[lang],
+	changes: entry.changes[lang],
+}));
+
+const semanticRows = [
+	{ role: "background", dark: d.bg, light: l.bg, note: c.roles.background },
+	{ role: "foreground", dark: d.fg, light: l.fg, note: c.roles.foreground },
+	{ role: "keyword", dark: d.keyword, light: l.keyword, note: c.roles.keyword },
+	{ role: "operator", dark: d.operator, light: l.operator, note: c.roles.operator },
+	{ role: "function", dark: d.fn, light: l.fn, note: c.roles.function },
+	{ role: "string", dark: d.string, light: l.string, note: c.roles.string },
+	{ role: "number", dark: d.number, light: l.number, note: c.roles.number },
+	{ role: "type", dark: d.type, light: l.type, note: c.roles.type },
+	{ role: "variable", dark: d.variable, light: l.variable, note: c.roles.variable },
+	{ role: "comment", dark: d.comment, light: l.comment, note: c.roles.comment },
+];
+
+const budgetRows = [
+	{ metric: "Editor fg/bg contrast", target: ">= 7.0" },
+	{ metric: "Comment contrast", target: "2.2 - 4.2" },
+	{ metric: "Operator contrast", target: "2.8 - 6.2" },
+	{ metric: "Role separation deltaE", target: ">= 10" },
+	{ metric: "Cross-theme hue drift", target: "<= 45°" },
+];
+
+function hexToRgb(hex: string) {
+	const raw = hex.slice(1);
+	return [
+		Number.parseInt(raw.slice(0, 2), 16),
+		Number.parseInt(raw.slice(2, 4), 16),
+		Number.parseInt(raw.slice(4, 6), 16),
+	];
+}
+
+function toLinear(channel: number) {
+	const c = channel / 255;
+	return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+}
+
+function contrastRatio(a: string, b: string) {
+	const [ar, ag, ab] = hexToRgb(a).map(toLinear);
+	const [br, bg, bb] = hexToRgb(b).map(toLinear);
+	const la = 0.2126 * ar + 0.7152 * ag + 0.0722 * ab;
+	const lb = 0.2126 * br + 0.7152 * bg + 0.0722 * bb;
+	const hi = Math.max(la, lb);
+	const lo = Math.min(la, lb);
+	return ((hi + 0.05) / (lo + 0.05)).toFixed(1);
+}
+
+const snapshot = {
+	darkFgBg: contrastRatio(d.fg, d.bg),
+	lightFgBg: contrastRatio(l.fg, l.bg),
+	darkComment: contrastRatio(d.comment, d.bg),
+	lightComment: contrastRatio(l.comment, l.bg),
+	darkOperator: contrastRatio(d.operator, d.bg),
+	lightOperator: contrastRatio(l.operator, l.bg),
+};
+---
+
+<section class="px-[8vw] py-[8vh] max-w-[1200px]">
+	<p class="font-mono text-[11px] tracking-[0.18em] uppercase text-[#a8824e] mb-6">
+		{c.eyebrow}
+	</p>
+	<h1 class="font-serif text-[#e8ddca] text-5xl md:text-6xl mb-5">{c.title}</h1>
+	<p class="text-[#91826b] max-w-[760px] leading-relaxed text-[15px] mb-10">{c.subtitle}</p>
+
+	<div class="grid gap-8">
+		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+			<h2 class="font-serif text-2xl text-[#d6cab4] mb-4">{c.intentTitle}</h2>
+			<p class="text-[#a39278] leading-relaxed">{c.intent}</p>
+		</section>
+
+		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+			<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.matrixTitle}</h2>
+			<div class="overflow-x-auto">
+				<table class="w-full border-collapse text-sm">
+					<thead>
+						<tr class="border-b border-[#2c261b]">
+							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.role}</th>
+							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.dark}</th>
+							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.light}</th>
+							<th class="text-left text-[#a39278] font-mono text-[11px] py-3">{c.narrative}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							semanticRows.map((row) => (
+								<tr class="border-b border-[#1f1a13]">
+									<td class="py-3 pr-4 text-[#d6cab4] font-mono text-[12px]">{row.role}</td>
+									<td class="py-3 pr-4">
+										<span class="inline-flex items-center gap-2 font-mono text-[12px] text-[#c1b59f]">
+											<span class="inline-block w-3.5 h-3.5 rounded-sm border border-[#2c261b]" style={`background: ${row.dark}`}></span>
+											{row.dark}
+										</span>
+									</td>
+									<td class="py-3 pr-4">
+										<span class="inline-flex items-center gap-2 font-mono text-[12px] text-[#c1b59f]">
+											<span class="inline-block w-3.5 h-3.5 rounded-sm border border-[#2c261b]" style={`background: ${row.light}`}></span>
+											{row.light}
+										</span>
+									</td>
+									<td class="py-3 text-[#a39278]">{row.note}</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="grid lg:grid-cols-2 gap-8">
+			<div class="border border-[#2c261b] bg-[#120f0b] p-7">
+				<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.budgetTitle}</h2>
+				<table class="w-full text-sm">
+					<thead>
+						<tr class="border-b border-[#2c261b]">
+							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.budgetMetric}</th>
+							<th class="text-left text-[#a39278] font-mono text-[11px] py-3">{c.budgetTarget}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							budgetRows.map((row) => (
+								<tr class="border-b border-[#1f1a13]">
+									<td class="py-3 pr-4 text-[#c1b59f]">{row.metric}</td>
+									<td class="py-3 text-[#d6cab4] font-mono text-[12px]">{row.target}</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="border border-[#2c261b] bg-[#120f0b] p-7">
+				<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.snapshotTitle}</h2>
+				<ul class="space-y-3 text-sm">
+					<li class="flex items-center justify-between border-b border-[#1f1a13] pb-2">
+						<span class="text-[#a39278]">dark fg/bg</span>
+						<span class="font-mono text-[#d6cab4]">{snapshot.darkFgBg}</span>
+					</li>
+					<li class="flex items-center justify-between border-b border-[#1f1a13] pb-2">
+						<span class="text-[#a39278]">light fg/bg</span>
+						<span class="font-mono text-[#d6cab4]">{snapshot.lightFgBg}</span>
+					</li>
+					<li class="flex items-center justify-between border-b border-[#1f1a13] pb-2">
+						<span class="text-[#a39278]">dark comment</span>
+						<span class="font-mono text-[#d6cab4]">{snapshot.darkComment}</span>
+					</li>
+					<li class="flex items-center justify-between border-b border-[#1f1a13] pb-2">
+						<span class="text-[#a39278]">light comment</span>
+						<span class="font-mono text-[#d6cab4]">{snapshot.lightComment}</span>
+					</li>
+					<li class="flex items-center justify-between border-b border-[#1f1a13] pb-2">
+						<span class="text-[#a39278]">dark operator</span>
+						<span class="font-mono text-[#d6cab4]">{snapshot.darkOperator}</span>
+					</li>
+					<li class="flex items-center justify-between">
+						<span class="text-[#a39278]">light operator</span>
+						<span class="font-mono text-[#d6cab4]">{snapshot.lightOperator}</span>
+					</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+			<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.protocolTitle}</h2>
+			<ol class="list-decimal pl-5 space-y-2 text-[#a39278] text-sm leading-relaxed">
+				{c.protocol.map((line) => <li>{line}</li>)}
+			</ol>
+		</section>
+
+		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+			<h2 class="font-serif text-2xl text-[#d6cab4] mb-2">{c.changelogTitle}</h2>
+			<p class="text-[#91826b] text-sm mb-6">{c.changelogSubtitle}</p>
+			<div class="grid gap-4">
+				{
+					changelogRows.map((entry) => (
+						<article class="border border-[#2c261b] bg-[#17130f] p-5">
+							<div class="flex items-center justify-between gap-4 mb-3">
+								<span class="font-mono text-[12px] text-[#d6cab4]">{entry.version}</span>
+								<span class="font-mono text-[11px] text-[#91826b]">{entry.date}</span>
+							</div>
+							<h3 class="font-serif text-xl text-[#d6cab4] mb-2">{entry.title}</h3>
+							<p class="text-[#a39278] text-sm leading-relaxed mb-3">{entry.summary}</p>
+							<ul class="space-y-1.5 text-[#b9ab93] text-sm leading-relaxed">
+								{entry.changes.map((line) => <li>• {line}</li>)}
+							</ul>
+						</article>
+					))
+				}
+			</div>
+		</section>
+	</div>
+</section>

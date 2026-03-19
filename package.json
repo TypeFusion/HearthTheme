@@ -10,6 +10,10 @@
     "build": "node scripts/sync-themes.mjs && astro build",
     "preview": "astro preview",
     "sync": "node scripts/sync-themes.mjs",
+    "audit:theme": "node scripts/theme-audit.mjs",
+    "changelog:draft": "node scripts/changelog-draft.mjs",
+    "changelog:append": "node scripts/changelog-draft.mjs --append",
+    "release:theme": "node scripts/release-theme.mjs",
     "pack:ext": "node scripts/pack.mjs"
   },
   "dependencies": {

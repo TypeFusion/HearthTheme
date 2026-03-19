@@ -1,34 +1,88 @@
-name: Publish to VS Marketplace
+name: Main Release Pipeline
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'themes/**'
-      - 'extension/**'
-      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  publish:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'pnpm'
 
-      - uses: pnpm/action-setup@v3
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run theme audit
+        run: pnpm run audit:theme
+
+      - name: Build site
+        run: pnpm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy-site:
+    runs-on: ubuntu-latest
+    needs: verify
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  publish-marketplace:
+    runs-on: ubuntu-latest
+    needs: verify
+    if: ${{ secrets.VSCE_PAT != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install root dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Sync themes
         run: node scripts/sync-themes.mjs
 
       - name: Install extension dependencies
         working-directory: extension
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Publish to VS Marketplace
         working-directory: extension
