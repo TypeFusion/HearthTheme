@@ -153,7 +153,83 @@ jobs:
         working-directory: extension
         run: pnpm install --frozen-lockfile
 
+      - name: Check Marketplace latest version
+        id: marketplace
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('node:fs')
+            const path = require('node:path')
+
+            const pkgPath = path.join(process.env.GITHUB_WORKSPACE, 'extension', 'package.json')
+            const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
+            const publisher = pkg.publisher
+            const extensionName = pkg.name
+            const localVersion = pkg.version
+
+            core.info(`Local extension: ${publisher}.${extensionName} v${localVersion}`)
+
+            const payload = {
+              filters: [
+                {
+                  criteria: [
+                    { filterType: 7, value: publisher },
+                    { filterType: 8, value: extensionName }
+                  ],
+                  pageNumber: 1,
+                  pageSize: 1,
+                  sortBy: 0,
+                  sortOrder: 0
+                }
+              ],
+              flags: 103
+            }
+
+            try {
+              const response = await fetch('https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json;api-version=7.1-preview.1;excludeUrls=true'
+                },
+                body: JSON.stringify(payload),
+              })
+
+              if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`)
+              }
+
+              const data = await response.json()
+              const remoteVersion = data?.results?.[0]?.extensions?.[0]?.versions?.[0]?.version ?? null
+
+              if (!remoteVersion) {
+                core.warning('Marketplace version not found. Publish step will run.')
+                core.setOutput('should_publish', 'true')
+                return
+              }
+
+              core.info(`Marketplace latest version: ${remoteVersion}`)
+              if (remoteVersion === localVersion) {
+                core.notice('Marketplace already has this version. Publish step will be skipped.')
+                core.setOutput('should_publish', 'false')
+                return
+              }
+
+              core.setOutput('should_publish', 'true')
+            } catch (error) {
+              core.warning(`Failed to query Marketplace (${error.message}). Publish step will still run.`)
+              core.setOutput('should_publish', 'true')
+            }
+
+      - name: Skip publish (no VSCE token)
+        if: ${{ env.VSCE_PAT == '' }}
+        run: echo "VSCE_PAT is missing. Skipping VS Marketplace publish."
+
+      - name: Skip publish (version already exists)
+        if: ${{ env.VSCE_PAT != '' && steps.marketplace.outputs.should_publish != 'true' }}
+        run: echo "Version already exists on Marketplace. Skipping publish."
+
       - name: Publish to VS Marketplace
-        if: ${{ env.VSCE_PAT != '' }}
+        if: ${{ env.VSCE_PAT != '' && steps.marketplace.outputs.should_publish == 'true' }}
         working-directory: extension
         run: pnpm vsce publish --no-dependencies --skip-license
