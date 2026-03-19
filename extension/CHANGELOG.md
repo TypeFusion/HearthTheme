@@ -1,3 +1,8 @@
+## 1.0.2
+
+- Bumped extension patch version for Marketplace republish
+- Kept dark/light Hearth palette synchronization updates
+
 ## 1.0.1
 
 - Refined color saturation for better eye comfort
