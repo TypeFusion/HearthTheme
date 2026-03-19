@@ -15,31 +15,19 @@ const cards = [
 ]
 ---
 
-<section class="px-[8vw] py-[10vh] reveal">
-  <p class="font-mono text-[10px] tracking-[0.18em] uppercase text-[#8a5a28] mb-12 flex items-center gap-3">
+<section class="hearth-section py-[10vh]" data-reveal>
+  <p class="hearth-kicker text-[#a46d36] mb-10 sm:mb-12 flex items-center gap-3">
     {t(lang, 'philosophy.label')}
     <span class="block w-16 h-px bg-[#3a3020]"></span>
   </p>
 
-  <div class="grid grid-cols-2 gap-px bg-[#3a3020] border border-[#3a3020] max-w-[900px]">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-px hearth-panel max-w-[940px]">
     {cards.map(({ num, titleKey, bodyKey }) => (
-      <div class="bg-[#1e1a12] hover:bg-[#252018] transition-colors p-10">
-        <div class="font-serif text-5xl font-light text-[#3a3020] leading-none mb-4">{num}</div>
-        <h3 class="font-serif text-xl text-[#e8dcc8] mb-3">{t(lang, titleKey)}</h3>
-        <p class="text-[13px] leading-relaxed text-[#8a7e6a]">{t(lang, bodyKey)}</p>
+      <div class="hearth-card bg-[#16120e]/92 hover:bg-[#201913]/96 p-7 sm:p-10">
+        <div class="font-serif text-4xl sm:text-5xl font-light text-[#4a3a26] leading-none mb-4">{num}</div>
+        <h3 class="font-serif text-[1.26rem] sm:text-[1.42rem] tracking-[0.01em] text-[#eadfcb] mb-3">{t(lang, titleKey)}</h3>
+        <p class="hearth-copy text-[14px] text-[#a29176]">{t(lang, bodyKey)}</p>
       </div>
     ))}
   </div>
 </section>
-
-<style>
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-</style>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
-  }, { threshold: 0.1 })
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-</script>

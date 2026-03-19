@@ -1,1 +1,322 @@
 @import "tailwindcss";
+
+:root {
+  --hearth-bg: #161411;
+  --hearth-bg-deep: #120f0c;
+  --hearth-fg: #d6cab4;
+  --hearth-muted: #8a7e6a;
+  --hearth-ember: #c9833a;
+  --hearth-brass: #ddb06a;
+  --hearth-border: #3a3020;
+  --hearth-ease: cubic-bezier(0.22, 0.65, 0.24, 1);
+  --hearth-section-y: clamp(4.2rem, 9vh, 7.2rem);
+
+  --font-display: "Cormorant Garamond", "Iowan Old Style", "Baskerville", "Georgia", serif;
+  --font-body: "Source Serif 4", "Iowan Old Style", "Baskerville", "Georgia", serif;
+  --font-ui: "Aptos", "Segoe UI Variable Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-code: "JetBrains Mono", "Cascadia Mono", "Cascadia Code", "Consolas", "IBM Plex Mono", "DM Mono", "Fira Code", ui-monospace, monospace;
+  --font-kicker: var(--font-code);
+  --font-metric: var(--font-code);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body.app-shell {
+  min-height: 100vh;
+  color: var(--hearth-fg);
+  font-family: var(--font-body);
+  font-synthesis-style: none;
+  font-synthesis-weight: none;
+  font-synthesis-small-caps: none;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  text-size-adjust: 100%;
+  letter-spacing: 0.005em;
+  background-color: var(--hearth-bg);
+  background-image:
+    radial-gradient(1100px 620px at 88% 16%, rgb(201 131 58 / 0.15), transparent 65%),
+    radial-gradient(900px 520px at 6% 88%, rgb(121 168 162 / 0.08), transparent 72%),
+    linear-gradient(155deg, #14120f 0%, #1b1712 52%, #13100d 100%),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.012) 0 1px, transparent 1px 5px);
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  body.app-shell {
+    background-attachment: scroll;
+    background-image:
+      radial-gradient(640px 420px at 88% 12%, rgb(201 131 58 / 0.13), transparent 62%),
+      radial-gradient(540px 340px at 8% 88%, rgb(121 168 162 / 0.07), transparent 70%),
+      linear-gradient(155deg, #14120f 0%, #1b1712 52%, #13100d 100%),
+      repeating-linear-gradient(0deg, rgb(255 255 255 / 0.014) 0 1px, transparent 1px 4px);
+  }
+}
+
+html:lang(zh) {
+  --font-display: "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-body: "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", "Microsoft YaHei UI", serif;
+  --font-ui: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", "Segoe UI", sans-serif;
+  --font-kicker: var(--font-ui);
+  --font-metric: var(--font-ui);
+}
+
+html:lang(ja) {
+  --font-display: "BIZ UDPMincho", "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", "Noto Serif JP", "MS PMincho", serif;
+  --font-body: "BIZ UDPMincho", "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", "Noto Serif JP", "MS PMincho", serif;
+  --font-ui: "BIZ UDPGothic", "Yu Gothic UI", "Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Noto Sans JP", "Segoe UI", sans-serif;
+  --font-kicker: var(--font-ui);
+  --font-metric: var(--font-ui);
+}
+
+.font-serif,
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono,
+.font-code {
+  font-family: var(--font-code);
+  letter-spacing: 0.01em;
+}
+
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+p {
+  line-height: 1.72;
+}
+
+a,
+button {
+  transition:
+    color 220ms var(--hearth-ease),
+    background-color 220ms var(--hearth-ease),
+    border-color 220ms var(--hearth-ease),
+    box-shadow 220ms var(--hearth-ease),
+    transform 220ms var(--hearth-ease);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgb(217 148 82 / 0.8);
+  outline-offset: 2px;
+}
+
+.hearth-section {
+  padding-inline: clamp(1rem, 8vw, 7rem);
+}
+
+.hearth-section-y {
+  padding-block: var(--hearth-section-y);
+}
+
+.hearth-copy {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.hearth-kicker {
+  font-family: var(--font-kicker);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+
+.hearth-meta {
+  font-family: var(--font-metric);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+}
+
+.hearth-nav-link {
+  color: #8a7e6a;
+  position: relative;
+  transition: color 220ms var(--hearth-ease);
+}
+
+.hearth-nav-link:hover {
+  color: #d6cab4;
+}
+
+.hearth-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 1px;
+  background: rgb(201 131 58 / 0.85);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms var(--hearth-ease);
+}
+
+.hearth-nav-link:hover::after,
+.hearth-nav-link.is-active {
+  color: #d7a162;
+}
+
+.hearth-nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.hearth-cta {
+  border: 1px solid rgb(201 131 58 / 0.65);
+  color: #d7a162;
+  background: linear-gradient(180deg, rgb(201 131 58 / 0.07), transparent);
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.hearth-cta:hover {
+  border-color: rgb(221 176 106 / 0.75);
+  color: #edc68d;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05), 0 8px 18px rgb(0 0 0 / 0.2);
+  transform: translateY(-1px);
+}
+
+.hearth-cta:active {
+  transform: translateY(0);
+}
+
+.hearth-tab {
+  position: relative;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: transparent;
+  color: #6b5f4d;
+}
+
+.hearth-tab:hover {
+  color: #c1b59f;
+}
+
+.hearth-tab.is-active {
+  color: #ddb06a;
+  border-bottom-color: #d0653b;
+}
+
+.hearth-card {
+  transition:
+    background-color 260ms var(--hearth-ease),
+    border-color 260ms var(--hearth-ease),
+    box-shadow 260ms var(--hearth-ease),
+    transform 260ms var(--hearth-ease);
+}
+
+.hearth-card:hover {
+  border-color: rgb(80 63 40 / 0.95);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 14px 30px rgb(0 0 0 / 0.24);
+  transform: translateY(-1px);
+}
+
+.hearth-panel {
+  background-image:
+    linear-gradient(180deg, rgb(255 255 255 / 0.02), transparent 38%),
+    linear-gradient(135deg, rgb(0 0 0 / 0.22), transparent 52%);
+  border: 1px solid rgb(58 48 32 / 0.8);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 18px 42px rgb(0 0 0 / 0.25);
+}
+
+.hearth-paper {
+  background-image:
+    linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(0 0 0 / 0.04)),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.04) 0 1px, transparent 1px 3px);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+html:lang(zh),
+html:lang(ja) {
+  text-underline-offset: 0.16em;
+}
+
+html:lang(zh) body.app-shell,
+html:lang(ja) body.app-shell {
+  letter-spacing: 0;
+}
+
+html:lang(zh) .hearth-copy,
+html:lang(ja) .hearth-copy {
+  line-height: 1.84;
+  overflow-wrap: break-word;
+  hyphens: manual;
+  font-variant-east-asian: proportional-width;
+}
+
+html:lang(zh) .hearth-copy {
+  line-break: loose;
+}
+
+html:lang(ja) .hearth-copy {
+  line-break: strict;
+  font-feature-settings: "palt" 1, "pkna" 1;
+}
+
+html:lang(zh) .hearth-kicker,
+html:lang(ja) .hearth-kicker {
+  text-transform: none;
+  letter-spacing: 0.06em;
+  font-size: 0.76rem;
+}
+
+html:lang(zh) .hearth-meta,
+html:lang(ja) .hearth-meta {
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+  font-variant-east-asian: proportional-width;
+}
+
+html:lang(zh) .font-mono,
+html:lang(ja) .font-mono {
+  letter-spacing: 0;
+}
+
+@media (max-width: 640px) {
+  .hearth-section {
+    padding-inline: 1rem;
+  }
+}

@@ -167,9 +167,9 @@ const tabs = [
 ]
 ---
 
-<section class="py-[10vh] reveal">
-  <div class="px-[8vw] mb-8">
-    <p class="font-mono text-[10px] tracking-[0.18em] uppercase flex items-center gap-3"
+<section class="hearth-section py-[10vh]" data-reveal>
+  <div class="mb-7 sm:mb-8">
+    <p class="hearth-kicker flex items-center gap-3"
       style={`color: ${d.operator}`}>
       {t(lang, 'preview.label')}
       <span class="block w-16 h-px" style={`background: ${d.border}`}></span>
@@ -177,19 +177,18 @@ const tabs = [
   </div>
 
   <!-- Tab bar -->
-  <div class="flex px-[8vw]" id="preview-tabs"
-    style={`border-bottom: 1px solid ${d.border}`}>
-    {tabs.map(({ key, label }) => (
-      <button
-        data-tab={key}
-        class="preview-tab font-mono text-[11px] px-5 py-2.5 border-b-2 transition-colors"
-        style={key === 'ts'
-          ? `color: ${d.fn}; border-bottom-color: ${d.keyword}`
-          : `color: ${d.comment}; border-bottom-color: transparent`}
-      >
-        {label}
-      </button>
-    ))}
+  <div>
+    <div class="flex overflow-x-auto whitespace-nowrap" id="preview-tabs"
+      style={`border-bottom: 1px solid ${d.border}`}>
+      {tabs.map(({ key, label }) => (
+        <button
+          data-tab={key}
+          class={`preview-tab hearth-tab font-mono text-[11px] px-4 sm:px-5 py-2.5 ${key === 'ts' ? 'is-active' : ''}`}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
   </div>
 
   <!-- Dual preview -->
@@ -197,7 +196,7 @@ const tabs = [
     {tabs.map(({ key }) => (
       <div
         id={`panel-${key}`}
-        class={`preview-panel grid grid-cols-2 ${key !== 'ts' ? 'hidden' : ''}`}
+        class={`preview-panel grid grid-cols-1 xl:grid-cols-2 hearth-panel ${key !== 'ts' ? 'hidden' : ''}`}
         style={`border-top: none; gap: 1px; background: ${d.border}`}
       >
         <!-- Dark -->
@@ -211,7 +210,7 @@ const tabs = [
         </div>
 
         <!-- Light -->
-        <div style={`background: ${l.bg}`}>
+        <div class="hearth-paper" style={`background: ${l.bg}`}>
           <div class="font-mono text-[9px] tracking-[0.14em] uppercase px-4 py-2"
             style={`background: ${l.sidebar}; color: ${l.comment}; border-bottom: 1px solid ${l.border}`}>
             Hearth Light
@@ -231,21 +230,30 @@ const tabs = [
     padding: 0;
   }
   .shiki-wrap :global(code) {
-    font-family: 'DM Mono', 'Fira Code', monospace;
+    font-family: var(--font-code);
     font-size: 12px;
-    line-height: 1.8;
+    line-height: 1.82;
   }
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  :global(html:lang(zh)) .shiki-wrap :global(code),
+  :global(html:lang(ja)) .shiki-wrap :global(code) {
+    font-family:
+      "JetBrains Mono",
+      "Cascadia Mono",
+      "Cascadia Code",
+      "Consolas",
+      "Sarasa Mono SC",
+      "Sarasa Mono J",
+      "Noto Sans Mono CJK SC",
+      "Noto Sans Mono CJK JP",
+      "Microsoft YaHei UI",
+      "Yu Gothic UI",
+      monospace;
+    line-height: 1.88;
+  }
 </style>
 
 <script>
-  const d = {
-    fn:      getComputedStyle(document.documentElement).getPropertyValue('--Hearth-fn')      || '#ddb06a',
-    keyword: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-keyword') || '#d0653b',
-    comment: getComputedStyle(document.documentElement).getPropertyValue('--Hearth-comment') || '#6b5f4d',
-  }
-
   const tabs = document.querySelectorAll('.preview-tab')
   const panels = document.querySelectorAll('.preview-panel')
 
@@ -254,21 +262,12 @@ const tabs = [
       const key = (tab as HTMLElement).getAttribute('data-tab')
 
       tabs.forEach(t => {
-        const el = t as HTMLElement
-        el.style.borderBottomColor = 'transparent'
-        el.style.color = '#6b5f4d'
+        t.classList.remove('is-active')
       })
-      const active = tab as HTMLElement
-      active.style.borderBottomColor = '#d0653b'
-      active.style.color = '#ddb06a'
+      tab.classList.add('is-active')
 
       panels.forEach(p => p.classList.add('hidden'))
       document.getElementById(`panel-${key}`)?.classList.remove('hidden')
     })
   })
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
-  }, { threshold: 0.1 })
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 </script>

@@ -50,7 +50,7 @@ function usage() {
   npm run release:theme -- --ver=vX.Y.Z
 
 Flow:
-  1) Run theme audit
+  1) Run all audits (theme + CJK typography)
   2) Build website and sync outputs
   3) Append changelog entry`)
 }
@@ -71,7 +71,7 @@ if (!version) {
 
 const nodeBin = process.execPath
 console.log(`Preparing theme release: ${version}`)
-runStep('1/3 Theme audit', nodeBin, ['scripts/theme-audit.mjs'])
+runNpmScript('1/3 Run audits', 'audit:all')
 runNpmScript('2/3 Build (sync + astro)', 'build')
 runStep('3/3 Append changelog', nodeBin, ['scripts/changelog-draft.mjs', '--append', version])
 

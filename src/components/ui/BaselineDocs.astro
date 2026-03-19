@@ -1,6 +1,6 @@
 ---
+import { readFileSync } from "node:fs";
 import { tokens } from "../../data/tokens";
-import { themeChangelog } from "../../data/themeChangelog";
 import type { Lang } from "../../i18n/utils";
 
 interface Props {
@@ -10,6 +10,48 @@ interface Props {
 const { lang } = Astro.props;
 const d = tokens.dark;
 const l = tokens.light;
+
+interface ExtensionReleaseRow {
+	version: string;
+	date: string;
+	summary: string;
+	changes: string[];
+}
+
+function parseExtensionChangelog(markdown: string): ExtensionReleaseRow[] {
+	const rows: ExtensionReleaseRow[] = [];
+	const normalized = markdown.replace(/\r\n/g, "\n");
+	const sections = normalized.split(/\n(?=##\s+)/g);
+
+	for (const section of sections) {
+		const headerMatch = section.match(/^##\s+(\d+\.\d+\.\d+)(?:\s*-\s*(\d{4}-\d{2}-\d{2}))?/m);
+		if (!headerMatch) continue;
+
+		const [, version, date = ""] = headerMatch;
+		const bullets = [...section.matchAll(/^- (.+)$/gm)].map((match) => match[1].trim()).filter(Boolean);
+		if (bullets.length === 0) continue;
+
+		const [summary, ...rest] = bullets;
+		rows.push({
+			version,
+			date,
+			summary,
+			changes: rest,
+		});
+	}
+
+	return rows;
+}
+
+function readExtensionChangelogRows(): ExtensionReleaseRow[] {
+	try {
+		const changelogPath = new URL("../../../extension/CHANGELOG.md", import.meta.url);
+		const content = readFileSync(changelogPath, "utf8");
+		return parseExtensionChangelog(content);
+	} catch {
+		return [];
+	}
+}
 
 const copy = {
 	en: {
@@ -30,12 +72,15 @@ const copy = {
 		budgetTarget: "Target",
 		snapshotTitle: "Current Snapshot",
 		changelogTitle: "Change History",
-		changelogSubtitle: "Versioned theme evolution with rationale and scope.",
+		changelogSubtitle: "Synced from extension/CHANGELOG.md to keep website and Marketplace releases aligned.",
+		releasePrefix: "Release",
+		noReleaseNotes: "No release notes found in extension/CHANGELOG.md.",
 		protocolTitle: "Change Protocol",
 		protocol: [
 			"Edit source files only in themes/.",
 			"Run node scripts/sync-themes.mjs.",
 			"Run npm run audit:theme.",
+			"Run npm run audit:cjk.",
 			"Review fixtures in fixtures/theme-audit/.",
 			"If governance thresholds change, update docs/theme-baseline.md and scripts/theme-audit.mjs together.",
 		],
@@ -69,14 +114,17 @@ const copy = {
 		budgetTarget: "目标",
 		snapshotTitle: "当前快照",
 		changelogTitle: "变更历史",
-		changelogSubtitle: "按版本记录主题演进、动机与影响范围。",
+		changelogSubtitle: "从 extension/CHANGELOG.md 同步，保证网站与 Marketplace 发布记录一致。",
+		releasePrefix: "版本",
+		noReleaseNotes: "未在 extension/CHANGELOG.md 中找到发布记录。",
 		protocolTitle: "变更流程",
 		protocol: [
 			"只在 themes/ 下修改源主题文件。",
 			"执行 node scripts/sync-themes.mjs。",
 			"执行 npm run audit:theme。",
+			"执行 npm run audit:cjk。",
 			"检查 fixtures/theme-audit/ 中的多语言样例。",
-			"若调整了治理阈值，需同时更新 docs/theme-baseline.md 与 scripts/theme-audit.mjs。",
+			"若调整了治理阈值，需同时更新 docs/theme-baseline.md 与审计脚本。",
 		],
 		roles: {
 			background: "黑板底 vs 羊皮纸底",
@@ -109,14 +157,17 @@ const copy = {
 		budgetTarget: "目標",
 		snapshotTitle: "現在のスナップショット",
 		changelogTitle: "変更履歴",
-		changelogSubtitle: "テーマの進化を、意図と影響範囲とともにバージョン管理。",
+		changelogSubtitle: "extension/CHANGELOG.md を単一ソースとして、Web と Marketplace の履歴を一致させます。",
+		releasePrefix: "リリース",
+		noReleaseNotes: "extension/CHANGELOG.md にリリース履歴が見つかりません。",
 		protocolTitle: "変更プロトコル",
 		protocol: [
 			"変更は themes/ のソーステーマのみで行う。",
 			"node scripts/sync-themes.mjs を実行する。",
 			"npm run audit:theme を実行する。",
+			"npm run audit:cjk を実行する。",
 			"fixtures/theme-audit/ の言語別サンプルで確認する。",
-			"閾値を変える場合は docs/theme-baseline.md と scripts/theme-audit.mjs を同一PRで更新する。",
+			"閾値を変える場合は docs/theme-baseline.md と監査スクリプトを同一PRで更新する。",
 		],
 		roles: {
 			background: "黒板基盤 vs 羊皮紙基盤",
@@ -134,13 +185,7 @@ const copy = {
 } as const;
 
 const c = copy[lang];
-const changelogRows = themeChangelog.map((entry) => ({
-	date: entry.date,
-	version: entry.version,
-	title: entry.title[lang],
-	summary: entry.summary[lang],
-	changes: entry.changes[lang],
-}));
+const changelogRows = readExtensionChangelogRows();
 
 const semanticRows = [
 	{ role: "background", dark: d.bg, light: l.bg, note: c.roles.background },
@@ -197,29 +242,29 @@ const snapshot = {
 };
 ---
 
-<section class="px-[8vw] py-[8vh] max-w-[1200px]">
-	<p class="font-mono text-[11px] tracking-[0.18em] uppercase text-[#a8824e] mb-6">
+<section class="hearth-section py-[8vh] max-w-[1200px] mx-auto" data-reveal>
+	<p class="hearth-kicker text-[#a8824e] mb-6">
 		{c.eyebrow}
 	</p>
-	<h1 class="font-serif text-[#e8ddca] text-5xl md:text-6xl mb-5">{c.title}</h1>
-	<p class="text-[#91826b] max-w-[760px] leading-relaxed text-[15px] mb-10">{c.subtitle}</p>
+	<h1 class="font-serif text-[#e8ddca] text-4xl sm:text-5xl md:text-6xl mb-5">{c.title}</h1>
+	<p class="hearth-copy text-[#91826b] max-w-[760px] leading-relaxed text-[14px] sm:text-[15px] mb-10">{c.subtitle}</p>
 
 	<div class="grid gap-8">
-		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+		<section class="hearth-panel hearth-card bg-[#120f0b] p-5 sm:p-7">
 			<h2 class="font-serif text-2xl text-[#d6cab4] mb-4">{c.intentTitle}</h2>
-			<p class="text-[#a39278] leading-relaxed">{c.intent}</p>
+			<p class="hearth-copy text-[#a39278] leading-relaxed">{c.intent}</p>
 		</section>
 
-		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+		<section class="hearth-panel hearth-card bg-[#120f0b] p-5 sm:p-7">
 			<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.matrixTitle}</h2>
 			<div class="overflow-x-auto">
 				<table class="w-full border-collapse text-sm">
 					<thead>
 						<tr class="border-b border-[#2c261b]">
-							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.role}</th>
-							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.dark}</th>
-							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.light}</th>
-							<th class="text-left text-[#a39278] font-mono text-[11px] py-3">{c.narrative}</th>
+							<th class="text-left text-[#a39278] hearth-meta py-3 pr-4">{c.role}</th>
+							<th class="text-left text-[#a39278] hearth-meta py-3 pr-4">{c.dark}</th>
+							<th class="text-left text-[#a39278] hearth-meta py-3 pr-4">{c.light}</th>
+							<th class="text-left text-[#a39278] hearth-meta py-3">{c.narrative}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -249,13 +294,13 @@ const snapshot = {
 		</section>
 
 		<section class="grid lg:grid-cols-2 gap-8">
-			<div class="border border-[#2c261b] bg-[#120f0b] p-7">
+			<div class="hearth-panel hearth-card bg-[#120f0b] p-5 sm:p-7">
 				<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.budgetTitle}</h2>
 				<table class="w-full text-sm">
 					<thead>
 						<tr class="border-b border-[#2c261b]">
-							<th class="text-left text-[#a39278] font-mono text-[11px] py-3 pr-4">{c.budgetMetric}</th>
-							<th class="text-left text-[#a39278] font-mono text-[11px] py-3">{c.budgetTarget}</th>
+							<th class="text-left text-[#a39278] hearth-meta py-3 pr-4">{c.budgetMetric}</th>
+							<th class="text-left text-[#a39278] hearth-meta py-3">{c.budgetTarget}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -271,7 +316,7 @@ const snapshot = {
 				</table>
 			</div>
 
-			<div class="border border-[#2c261b] bg-[#120f0b] p-7">
+			<div class="hearth-panel hearth-card bg-[#120f0b] p-5 sm:p-7">
 				<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.snapshotTitle}</h2>
 				<ul class="space-y-3 text-sm">
 					<li class="flex items-center justify-between border-b border-[#1f1a13] pb-2">
@@ -302,33 +347,45 @@ const snapshot = {
 			</div>
 		</section>
 
-		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+		<section class="hearth-panel hearth-card bg-[#120f0b] p-5 sm:p-7">
 			<h2 class="font-serif text-2xl text-[#d6cab4] mb-5">{c.protocolTitle}</h2>
 			<ol class="list-decimal pl-5 space-y-2 text-[#a39278] text-sm leading-relaxed">
 				{c.protocol.map((line) => <li>{line}</li>)}
 			</ol>
 		</section>
 
-		<section class="border border-[#2c261b] bg-[#120f0b] p-7">
+		<section class="hearth-panel hearth-card bg-[#120f0b] p-5 sm:p-7">
 			<h2 class="font-serif text-2xl text-[#d6cab4] mb-2">{c.changelogTitle}</h2>
-			<p class="text-[#91826b] text-sm mb-6">{c.changelogSubtitle}</p>
-			<div class="grid gap-4">
-				{
-					changelogRows.map((entry) => (
-						<article class="border border-[#2c261b] bg-[#17130f] p-5">
-							<div class="flex items-center justify-between gap-4 mb-3">
-								<span class="font-mono text-[12px] text-[#d6cab4]">{entry.version}</span>
-								<span class="font-mono text-[11px] text-[#91826b]">{entry.date}</span>
-							</div>
-							<h3 class="font-serif text-xl text-[#d6cab4] mb-2">{entry.title}</h3>
-							<p class="text-[#a39278] text-sm leading-relaxed mb-3">{entry.summary}</p>
-							<ul class="space-y-1.5 text-[#b9ab93] text-sm leading-relaxed">
-								{entry.changes.map((line) => <li>• {line}</li>)}
-							</ul>
-						</article>
-					))
-				}
-			</div>
+			<p class="hearth-copy text-[#91826b] text-sm mb-6">{c.changelogSubtitle}</p>
+			{
+				changelogRows.length === 0 ? (
+					<p class="hearth-copy text-[#a39278] text-sm">{c.noReleaseNotes}</p>
+				) : (
+					<div class="grid gap-4">
+						{
+							changelogRows.map((entry) => (
+								<article class="hearth-panel hearth-card bg-[#17130f] p-5">
+									<div class="flex items-center justify-between gap-4 mb-3">
+										<span class="font-mono text-[12px] text-[#d6cab4]">{entry.version}</span>
+										{entry.date ? (
+											<span class="font-mono text-[11px] text-[#91826b]">{entry.date}</span>
+										) : null}
+									</div>
+									<h3 class="font-serif text-xl text-[#d6cab4] mb-2">{c.releasePrefix} {entry.version}</h3>
+									<p class="hearth-copy text-[#a39278] text-sm leading-relaxed mb-3">{entry.summary}</p>
+									{
+										entry.changes.length > 0 ? (
+											<ul class="space-y-1.5 text-[#b9ab93] text-sm leading-relaxed hearth-copy">
+												{entry.changes.map((line) => <li>• {line}</li>)}
+											</ul>
+										) : null
+									}
+								</article>
+							))
+						}
+					</div>
+				)
+			}
 		</section>
 	</div>
 </section>

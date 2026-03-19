@@ -61,10 +61,11 @@ All palette changes must follow this order:
 1. Edit only source themes in `themes/`.
 2. Run `node scripts/sync-themes.mjs`.
 3. Run `npm run audit:theme`.
-4. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
-5. Run `npm run changelog:draft` (or `npm run changelog:append -- vX.Y.Z`) to generate/update history entry. For custom compare ranges, use `node scripts/changelog-draft.mjs --from HEAD~1 --to HEAD --ver vX.Y.Z`.
-6. Add a versioned entry to `src/data/themeChangelog.ts`.
-7. If thresholds or governance changed, update this document and `scripts/theme-audit.mjs` together in the same PR.
+4. Run `npm run audit:cjk` for zh/ja typography safeguards.
+5. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
+6. Run `npm run changelog:draft` (or `npm run changelog:append -- vX.Y.Z`) to generate/update history entry. For custom compare ranges, use `node scripts/changelog-draft.mjs --from HEAD~1 --to HEAD --ver vX.Y.Z`.
+7. Add a versioned entry to `src/data/themeChangelog.ts`.
+8. If thresholds or governance changed, update this document and audit scripts together in the same PR.
 
 One-shot alternative:
 
@@ -75,6 +76,7 @@ One-shot alternative:
 - `themes/hearth-dark.json` and `themes/hearth-light.json` preserve role parity.
 - `src/data/tokens.ts` regenerated via sync script.
 - `npm run audit:theme` passes without blocking issues.
+- `npm run audit:cjk` passes without typography regressions.
 - `npm run build` passes and static pages can be generated.
 - Any warnings are explicitly accepted with rationale in PR notes.
 - `src/data/themeChangelog.ts` includes a clear versioned entry for this change.
@@ -82,7 +84,7 @@ One-shot alternative:
 
 ## 7) Change History
 
-Structured history is maintained in `src/data/themeChangelog.ts` and rendered in `/docs`.
+Website `/docs` change history is sourced from `extension/CHANGELOG.md` to stay aligned with Marketplace releases.
 
 - 2026-03-19 `v0.4.3`: Added auto-generated changelog draft/append workflow.
 - 2026-03-19 `v0.4.2`: Added audit script, fixtures, and CI guardrails.

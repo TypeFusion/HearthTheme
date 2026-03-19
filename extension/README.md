@@ -9,15 +9,15 @@ It keeps dark/light modes semantically aligned: blackboard atmosphere in dark mo
 
 ### Hearth Dark
 
-![Hearth Dark](./images/preview-dark.png)
+![Hearth Dark](https://raw.githubusercontent.com/TypeFusion/HearthTheme/main/extension/images/preview-dark.png)
 
 ### Hearth Light
 
-![Hearth Light](./images/preview-light.png)
+![Hearth Light](https://raw.githubusercontent.com/TypeFusion/HearthTheme/main/extension/images/preview-light.png)
 
 ### Long-Session Comfort Tuning
 
-![Hearth Contrast](./images/preview-contrast.png)
+![Hearth Contrast](https://raw.githubusercontent.com/TypeFusion/HearthTheme/main/extension/images/preview-contrast.png)
 
 ## Design Language
 

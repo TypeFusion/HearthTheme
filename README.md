@@ -39,6 +39,9 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm build`           | Build your production site to `./dist/`          |
 | `pnpm preview`         | Preview your build locally, before deploying     |
 | `npm run audit:theme`  | Run theme quality audit (contrast, coverage, drift) |
+| `npm run audit:cjk`    | Run CJK typography audit (Windows zh/ja readability guardrails) |
+| `npm run audit:release` | Check release consistency (install URL + extension version/changelog sync) |
+| `npm run audit:all`    | Run full audits (theme + CJK typography + release consistency) |
 | `npm run changelog:draft` | Generate a theme changelog draft from theme diffs |
 | `npm run changelog:append -- vX.Y.Z` | Generate and append a changelog entry automatically |
 | `npm run bump:ext:patch` | Bump extension version (patch) and prepend changelog section |
@@ -53,8 +56,11 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 ## Theme Governance
 
 - Baseline report: `docs/theme-baseline.md`
-- Changelog data: `src/data/themeChangelog.ts`
+- Extension release notes source: `extension/CHANGELOG.md` (rendered in `/docs`)
 - Audit command: `npm run audit:theme`
+- CJK typography audit: `npm run audit:cjk`
+- Release consistency audit: `npm run audit:release`
+- Full audits: `npm run audit:all`
 - Changelog draft command: `npm run changelog:draft`
 - Changelog append command: `npm run changelog:append -- vX.Y.Z`
 - Extension bump command: `npm run bump:ext:patch` (or `:minor` / `:major`)

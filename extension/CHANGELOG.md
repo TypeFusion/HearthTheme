@@ -1,3 +1,9 @@
+## 1.0.4
+
+- Fixed Marketplace overview screenshots by switching extension README image links to stable absolute URLs.
+- Aligned website install CTA with the VS Marketplace listing URL.
+- Unified release history source so `/docs` now reflects `extension/CHANGELOG.md` for version parity.
+
 ## 1.0.3
 
 - Added new Hearth brand icon with higher-resolution Marketplace asset.

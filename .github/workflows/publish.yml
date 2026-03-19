@@ -37,8 +37,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run theme audit
-        run: pnpm run audit:theme
+      - name: Run audits
+        run: pnpm run audit:all
 
       - name: Build site
         run: pnpm run build
@@ -284,4 +284,7 @@ jobs:
       - name: Publish to VS Marketplace
         if: ${{ env.VSCE_PAT != '' && steps.marketplace.outputs.should_publish == 'true' }}
         working-directory: extension
-        run: pnpm vsce publish --no-dependencies --skip-license
+        run: >
+          pnpm vsce publish --no-dependencies --skip-license
+          --baseContentUrl "https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/extension"
+          --baseImagesUrl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/extension"
