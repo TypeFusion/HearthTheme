@@ -2,23 +2,33 @@
 
 Code by Hearthlight. 炉光码字。
 
-HearthCode is a warm, low-glare VS Code color theme set for long coding sessions.
-It keeps syntax semantics aligned across dark and light modes, with a blackboard feel in dark mode and a parchment feel in light mode.
+HearthCode is a warm, low-glare VS Code theme set made for long coding sessions.
+If bright themes tire your eyes after a few hours, HearthCode keeps contrast strong while reducing glare and color noise.
+Dark and light variants share the same semantic role mapping, so your syntax cues stay stable when switching modes.
+
+## Why Install
+
+- Built for long sessions: warm palette, controlled saturation, lower visual fatigue
+- Clear role hierarchy: keywords, functions, strings, and types stay easy to scan
+- Cross-mode consistency: Dark, Dark Soft, and Light keep matching token semantics
+
+## Install in 10 Seconds
+
+- Open VS Code Quick Open (`Ctrl+P`)
+- Run:
+
+```text
+ext install hearth-code.hearth-theme
+```
+
+- Marketplace page: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- If HearthCode helps your workflow, please leave a rating and star the repo.
 
 ## Included Themes
 
 - `Hearth Dark` (default)
 - `Hearth Dark Soft`
 - `Hearth Light`
-
-## Install
-
-- Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
-- VS Code Quick Open:
-
-```text
-ext install hearth-code.hearth-theme
-```
 
 ## Preview
 

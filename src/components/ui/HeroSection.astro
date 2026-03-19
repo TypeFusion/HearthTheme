@@ -6,6 +6,8 @@ interface Props {
 }
 
 const { lang } = Astro.props
+const marketplaceUrl = 'https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme'
+const githubUrl = 'https://github.com/TypeFusion/HearthTheme'
 ---
 
 <section class="hearth-section relative min-h-[95vh] sm:min-h-screen flex flex-col justify-center overflow-hidden">
@@ -36,6 +38,34 @@ const { lang } = Astro.props
       >
         {t(lang, 'hero.subtitle')}
       </p>
+
+      <div
+        data-reveal
+        style="--reveal-delay: 280ms;"
+        class="mb-10 sm:mb-12 flex flex-wrap items-center gap-3"
+      >
+        <a
+          href={marketplaceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-[#e1bc87]/35 bg-[linear-gradient(135deg,rgba(198,132,61,0.3),rgba(130,83,35,0.2))] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#f5ddba] shadow-[0_8px_24px_rgba(0,0,0,0.24)] hover:border-[#f0ca92]/55 hover:text-[#ffe8c5]"
+        >
+          <span>{t(lang, 'hero.cta.rate')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-[#d8c3a3]/30 bg-[rgba(255,255,255,0.02)] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#e5d5bd] shadow-[0_8px_24px_rgba(0,0,0,0.18)] hover:border-[#e7cfab]/55 hover:text-[#f5e6cc]"
+        >
+          <span>{t(lang, 'hero.cta.star')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <span class="hearth-meta text-[#9f8f77]">
+          {t(lang, 'hero.cta.hint')}
+        </span>
+      </div>
 
       <div
         data-reveal
