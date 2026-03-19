@@ -18,6 +18,8 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      PAGES_ENABLEMENT_TOKEN: ${{ secrets.PAGES_ENABLEMENT_TOKEN }}
     outputs:
       pages_ready: ${{ steps.pages_ready.outputs.ready }}
     steps:
@@ -61,11 +63,11 @@ jobs:
             }
 
       - name: Try enabling Pages (optional)
-        if: ${{ steps.pages_status.outputs.enabled == 'false' && secrets.PAGES_ENABLEMENT_TOKEN != '' }}
+        if: ${{ steps.pages_status.outputs.enabled == 'false' && env.PAGES_ENABLEMENT_TOKEN != '' }}
         continue-on-error: true
         uses: actions/configure-pages@v5
         with:
-          token: ${{ secrets.PAGES_ENABLEMENT_TOKEN }}
+          token: ${{ env.PAGES_ENABLEMENT_TOKEN }}
           enablement: true
 
       - name: Re-check Pages status
