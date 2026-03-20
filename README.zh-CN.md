@@ -6,6 +6,7 @@ HearthCode 是一个单仓库项目，包含：
 
 - 网站：<https://theme.hearthcode.dev>
 - VS Code 扩展：<https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Open VSX 扩展：<https://open-vsx.org/extension/hearth-code/hearth-theme>
 
 ## 项目产出
 
@@ -87,6 +88,7 @@ pnpm dev
 
 1. 安装依赖并执行审计
 2. 构建网站并在启用时部署到 GitHub Pages
-3. 检查 Marketplace 版本并按需发布扩展
+3. 检查 Marketplace 与 Open VSX 版本并按需发布扩展
+4. 根据 `extension/CHANGELOG.md` 自动创建/更新 GitHub Release
 
 如果扩展内容变更但版本未升级，CI 会阻断发布。

@@ -1,3 +1,10 @@
+## 1.0.8
+
+- Added Open VSX distribution support in CI (`publish-openvsx`), including duplicate-version guards.
+- Added automatic GitHub release creation from `extension/CHANGELOG.md` on extension version updates.
+- Updated project docs with Open VSX install/distribution links and release workflow details.
+- Refreshed extension README install section to include Open VSX.
+
 ## 1.0.7
 
 - Refined extension README to a mature, English-first presentation style for Marketplace.

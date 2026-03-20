@@ -6,6 +6,7 @@ HearthCode は以下を同一リポジトリで管理しています。
 
 - Web サイト: <https://theme.hearthcode.dev>
 - VS Code 拡張: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Open VSX 拡張: <https://open-vsx.org/extension/hearth-code/hearth-theme>
 
 ## 提供内容
 
@@ -87,6 +88,7 @@ pnpm dev
 
 1. 依存関係インストールと監査実行
 2. サイトビルドと（有効時）GitHub Pages へのデプロイ
-3. Marketplace 版を確認し必要時に拡張公開
+3. Marketplace と Open VSX の版を確認し必要時に拡張公開
+4. `extension/CHANGELOG.md` に合わせて GitHub Release を自動作成
 
 拡張内容が変わっているのにバージョン更新がない場合、CI は公開をブロックします。

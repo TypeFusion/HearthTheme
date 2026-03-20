@@ -21,6 +21,7 @@ It keeps semantic token roles consistent across dark and light variants, so synt
 ## Install
 
 - Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Open VSX: <https://open-vsx.org/extension/hearth-code/hearth-theme>
 - VS Code Quick Open:
 
 ```text

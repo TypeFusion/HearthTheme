@@ -6,6 +6,7 @@ HearthCode is a mono-repo for:
 
 - Website: <https://theme.hearthcode.dev>
 - VS Code extension: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Open VSX extension: <https://open-vsx.org/extension/hearth-code/hearth-theme>
 
 ## What This Project Ships
 
@@ -87,6 +88,12 @@ Run all commands in repo root:
 
 1. Install dependencies and run audits
 2. Build site and deploy to GitHub Pages (if enabled)
-3. Check Marketplace version and publish extension when needed
+3. Check Marketplace and Open VSX versions, then publish extension when needed
+4. Create/refresh GitHub release from the matching `extension/CHANGELOG.md` section
 
 If extension payload changes without a version bump, CI blocks the publish step.
+
+Required repository secrets for full publish:
+
+- `VSCE_PAT` for Visual Studio Marketplace
+- `OVSX_PAT` for Open VSX
