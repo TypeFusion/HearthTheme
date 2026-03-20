@@ -97,20 +97,31 @@ jobs:
               return
             }
 
-            const watchPrefixes = ['extension/themes/', 'extension/images/']
-            const watchFiles = new Set([
+            const requiresPublishPrefixes = ['extension/themes/']
+            const requiresPublishFiles = new Set([
               'extension/package.json',
-              'extension/README.md',
               'extension/CHANGELOG.md',
               'extension/icon.png',
             ])
+            const docsOnlyPrefixes = ['extension/images/']
+            const docsOnlyFiles = new Set([
+              'extension/README.md',
+            ])
 
-            const changed = files.some((file) =>
-              watchFiles.has(file) || watchPrefixes.some((prefix) => file.startsWith(prefix)),
+            const requiresPublish = files.some((file) =>
+              requiresPublishFiles.has(file) || requiresPublishPrefixes.some((prefix) => file.startsWith(prefix)),
             )
+            const docsOnly = files.some((file) =>
+              docsOnlyFiles.has(file) || docsOnlyPrefixes.some((prefix) => file.startsWith(prefix)),
+            )
+            const changed = requiresPublish || docsOnly
 
             core.info(`Extension payload changed: ${changed}`)
+            core.info(`Requires extension publish: ${requiresPublish}`)
+            core.info(`Docs/image-only changes: ${docsOnly && !requiresPublish}`)
             core.setOutput('changed', changed ? 'true' : 'false')
+            core.setOutput('requires_publish', requiresPublish ? 'true' : 'false')
+            core.setOutput('docs_only', docsOnly && !requiresPublish ? 'true' : 'false')
 
       - name: Check Marketplace latest version
         id: marketplace
@@ -179,12 +190,18 @@ jobs:
               core.setOutput('should_publish', 'true')
             }
 
-      - name: Enforce version bump for extension changes
-        if: ${{ env.VSCE_PAT != '' && steps.extension_diff.outputs.changed == 'true' && steps.marketplace.outputs.should_publish != 'true' }}
+      - name: Enforce version bump for extension release payload changes
+        if: ${{ env.VSCE_PAT != '' && steps.extension_diff.outputs.requires_publish == 'true' && steps.marketplace.outputs.should_publish != 'true' }}
         run: |
-          echo "Extension payload changed, but Marketplace already has this version."
+          echo "Release payload changed (theme/package/changelog/icon), but Marketplace already has this version."
           echo "Please bump extension/package.json version before publishing."
           exit 1
+
+      - name: Skip publish (docs/image-only changes with existing version)
+        if: ${{ env.VSCE_PAT != '' && steps.extension_diff.outputs.docs_only == 'true' && steps.marketplace.outputs.should_publish != 'true' }}
+        run: |
+          echo "Only README/images changed under extension."
+          echo "Marketplace publish is skipped because this version already exists."
 
       - name: Skip publish (no VSCE token)
         if: ${{ env.VSCE_PAT == '' }}
@@ -262,20 +279,31 @@ jobs:
               return
             }
 
-            const watchPrefixes = ['extension/themes/', 'extension/images/']
-            const watchFiles = new Set([
+            const requiresPublishPrefixes = ['extension/themes/']
+            const requiresPublishFiles = new Set([
               'extension/package.json',
-              'extension/README.md',
               'extension/CHANGELOG.md',
               'extension/icon.png',
             ])
+            const docsOnlyPrefixes = ['extension/images/']
+            const docsOnlyFiles = new Set([
+              'extension/README.md',
+            ])
 
-            const changed = files.some((file) =>
-              watchFiles.has(file) || watchPrefixes.some((prefix) => file.startsWith(prefix)),
+            const requiresPublish = files.some((file) =>
+              requiresPublishFiles.has(file) || requiresPublishPrefixes.some((prefix) => file.startsWith(prefix)),
             )
+            const docsOnly = files.some((file) =>
+              docsOnlyFiles.has(file) || docsOnlyPrefixes.some((prefix) => file.startsWith(prefix)),
+            )
+            const changed = requiresPublish || docsOnly
 
             core.info(`Extension payload changed: ${changed}`)
+            core.info(`Requires extension publish: ${requiresPublish}`)
+            core.info(`Docs/image-only changes: ${docsOnly && !requiresPublish}`)
             core.setOutput('changed', changed ? 'true' : 'false')
+            core.setOutput('requires_publish', requiresPublish ? 'true' : 'false')
+            core.setOutput('docs_only', docsOnly && !requiresPublish ? 'true' : 'false')
 
       - name: Check Open VSX latest version
         id: openvsx
@@ -326,12 +354,18 @@ jobs:
               core.setOutput('should_publish', 'true')
             }
 
-      - name: Enforce version bump for extension changes
-        if: ${{ env.OVSX_PAT != '' && steps.extension_diff.outputs.changed == 'true' && steps.openvsx.outputs.should_publish != 'true' }}
+      - name: Enforce version bump for extension release payload changes
+        if: ${{ env.OVSX_PAT != '' && steps.extension_diff.outputs.requires_publish == 'true' && steps.openvsx.outputs.should_publish != 'true' }}
         run: |
-          echo "Extension payload changed, but Open VSX already has this version."
+          echo "Release payload changed (theme/package/changelog/icon), but Open VSX already has this version."
           echo "Please bump extension/package.json version before publishing."
           exit 1
+
+      - name: Skip publish (docs/image-only changes with existing version)
+        if: ${{ env.OVSX_PAT != '' && steps.extension_diff.outputs.docs_only == 'true' && steps.openvsx.outputs.should_publish != 'true' }}
+        run: |
+          echo "Only README/images changed under extension."
+          echo "Open VSX publish is skipped because this version already exists."
 
       - name: Skip publish (no Open VSX token)
         if: ${{ env.OVSX_PAT == '' }}
