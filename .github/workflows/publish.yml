@@ -221,7 +221,7 @@ jobs:
               filters: [
                 {
                   criteria: [
-                    { filterType: 8, value: `${publisher}.${extensionName}` }
+                    { filterType: 7, value: `${publisher}.${extensionName}` }
                   ],
                   pageNumber: 1,
                   pageSize: 1,

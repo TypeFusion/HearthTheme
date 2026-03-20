@@ -1,3 +1,8 @@
+## 1.0.9
+
+- Updated extension repository and issue tracker links to the `hearth-code/HearthTheme` organization path.
+- Fixed Marketplace version detection in CI so duplicate-version checks resolve the extension correctly.
+
 ## 1.0.8
 
 - Added Open VSX distribution support in CI (`publish-openvsx`), including duplicate-version guards.
