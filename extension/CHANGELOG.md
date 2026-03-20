@@ -1,3 +1,9 @@
+## 1.0.11
+
+- Updated Marketplace display name to `HearthCode Theme` for clearer category recognition in search results.
+- Improved extension discoverability metadata (description + keywords), including `hearth code` and `cursor theme`.
+- Bumped patch release to publish updated listing metadata on Marketplace and Open VSX.
+
 ## 1.0.10
 
 - Reworked Marketplace README for clearer first-screen conversion flow (value proposition, quick install, variant guidance).
