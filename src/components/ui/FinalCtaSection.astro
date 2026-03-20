@@ -1,0 +1,71 @@
+---
+import { t, type Lang } from '../../i18n/utils'
+import extensionPackage from '../../../extension/package.json'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const releaseVersion = `v${extensionPackage.version}`
+const marketplaceUrl = 'https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme'
+const openVsxUrl = 'https://open-vsx.org/extension/hearth-code/hearth-theme'
+const githubUrl = 'https://github.com/hearth-code/HearthTheme'
+---
+
+<section class="hearth-section hearth-tail-wrap">
+  <div class="hearth-shell">
+    <div data-reveal class="hearth-tail-content">
+      <p class="hearth-kicker mb-4 flex items-center gap-3 text-[#c7985f]">
+        {t(lang, 'final.label')}
+        <span class="hearth-line"></span>
+      </p>
+
+      <h2 class="text-[1.7rem] sm:text-[2.1rem] leading-[1.15] tracking-[-0.015em] text-[#efe4d0] font-semibold mb-3">
+        {t(lang, 'final.title')}
+      </h2>
+
+      <p class="hearth-copy text-[#bda98c] max-w-[60ch] mb-7">
+        {t(lang, 'final.subtitle')}
+      </p>
+
+      <div class="mb-6 flex flex-wrap items-center gap-3">
+        <a
+          href={marketplaceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-[#e1bc87]/35 bg-[linear-gradient(135deg,rgba(198,132,61,0.3),rgba(130,83,35,0.2))] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#f5ddba] shadow-[0_8px_24px_rgba(0,0,0,0.24)] hover:border-[#f0ca92]/55 hover:text-[#ffe8c5]"
+        >
+          <span>{t(lang, 'hero.cta.install')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          href={openVsxUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-[#d8c3a3]/30 bg-[rgba(255,255,255,0.02)] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#e5d5bd] shadow-[0_8px_24px_rgba(0,0,0,0.18)] hover:border-[#e7cfab]/55 hover:text-[#f5e6cc]"
+        >
+          <span>{t(lang, 'hero.cta.openvsx')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-[#cfb07f]/24 bg-[rgba(255,255,255,0.015)] px-4 py-2.5 font-ui text-[0.8rem] font-semibold tracking-[0.02em] text-[#ceb996] hover:border-[#e7cfab]/45 hover:text-[#ecd8b3]"
+        >
+          <span>{t(lang, 'hero.cta.star')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <p class="hearth-meta text-[#9f8f77] flex flex-wrap items-center gap-x-2 gap-y-1">
+        <span>{t(lang, 'final.meta.primary')}</span>
+        <span aria-hidden="true">·</span>
+        <span>{t(lang, 'final.meta.secondary')}</span>
+        <span aria-hidden="true">·</span>
+        <span>{t(lang, 'final.meta.release')} {releaseVersion}</span>
+      </p>
+    </div>
+  </div>
+</section>

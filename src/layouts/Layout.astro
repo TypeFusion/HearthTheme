@@ -18,6 +18,9 @@ const pageDescription = description ?? t(lang, "hero.subtitle");
 const home = lang === "en" ? "/" : `/${lang}`;
 const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
 const marketplaceUrl = "https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme";
+const changelogUrl = "https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md";
+const issuesUrl = "https://github.com/hearth-code/HearthTheme/issues";
+const licenseUrl = "https://github.com/hearth-code/HearthTheme/blob/main/LICENSE";
 const isDocsPage = /\/docs\/?$/.test(url.pathname);
 const isHomePage = !isDocsPage;
 const footerMetaClass = "font-ui hearth-meta text-[#504838]";
@@ -155,16 +158,28 @@ const ogImage = new URL("/og-hearth.png", siteBase).href;
 		</main>
 
 		<!-- Footer -->
-		<footer
-			class="mt-6 px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-0 justify-between bg-[linear-gradient(180deg,rgba(255,255,255,0.015),rgba(0,0,0,0.04))]"
-		>
-			<span class="font-ui font-semibold tracking-[-0.01em] text-[1.05rem]">
-				<span class="text-[#d9cfbc]">Hearth</span>
-				<span class="text-[#d39b58] ml-1">Code</span>
-			</span>
-			<span class={footerMetaClass}>
-				HearthCode.dev &nbsp;·&nbsp; {t(lang, "footer.tagline")}
-			</span>
+		<footer class="hearth-footer">
+			<div class="hearth-footer-row">
+				<span class="font-ui font-semibold tracking-[-0.01em] text-[1.05rem]">
+					<span class="text-[#d9cfbc]">Hearth</span>
+					<span class="text-[#d39b58] ml-1">Code</span>
+				</span>
+				<span class={footerMetaClass}>
+					HearthCode.dev &nbsp;·&nbsp; {t(lang, "footer.tagline")}
+				</span>
+			</div>
+			<div class="hearth-footer-links">
+				<a href={docs} class="hearth-footer-link">{t(lang, "footer.docs")}</a>
+				<a href={changelogUrl} target="_blank" rel="noopener noreferrer" class="hearth-footer-link">
+					{t(lang, "footer.changelog")}
+				</a>
+				<a href={issuesUrl} target="_blank" rel="noopener noreferrer" class="hearth-footer-link">
+					{t(lang, "footer.issues")}
+				</a>
+				<a href={licenseUrl} target="_blank" rel="noopener noreferrer" class="hearth-footer-link">
+					{t(lang, "footer.license")}
+				</a>
+			</div>
 		</footer>
 		<script is:inline>
 			(() => {
