@@ -2,93 +2,68 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md) | [日本語](./README.ja.md)
 
-HearthCode 是一个单仓库项目，包含：
+[![VS Code 版本](https://img.shields.io/visual-studio-marketplace/v/hearth-code.hearth-theme)](https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme)
+[![VS Code 安装量](https://img.shields.io/visual-studio-marketplace/i/hearth-code.hearth-theme)](https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme)
+[![Open VSX 下载量](https://img.shields.io/open-vsx/dt/hearth-code/hearth-theme)](https://open-vsx.org/extension/hearth-code/hearth-theme)
+[![在 vscode.dev 预览](https://img.shields.io/badge/preview%20in-vscode.dev-blue)](https://vscode.dev/theme/hearth-code.hearth-theme/Hearth%20Dark)
 
-- 网站：<https://theme.hearthcode.dev>
-- VS Code 扩展：<https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
-- Open VSX 扩展：<https://open-vsx.org/extension/hearth-code/hearth-theme>
+HearthCode 是一套为长时编码设计的暖色、低眩光 VS Code 主题。
+在 `Hearth Dark`、`Hearth Dark Soft`、`Hearth Light` 三种模式下保持稳定语义层次，减少切换环境时的视觉重适应。
 
-## 项目产出
+![HearthCode 长时编码预览](./extension/images/preview-contrast.png)
 
-- Astro 网站：展示设计哲学、配色系统、预览与文档（en/zh/ja）
-- VS Code 主题扩展，包含：
-  - `Hearth Dark`（默认）
-  - `Hearth Dark Soft`
-  - `Hearth Light`
+## 安装
 
-## 预览图
+- VS Code Marketplace：<https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Open VSX：<https://open-vsx.org/extension/hearth-code/hearth-theme>
+- VS Code 快速安装：`ext install hearth-code.hearth-theme`
+
+## 为什么选择 HearthCode
+
+- 暖色与受控饱和度，减少刺眼眩光
+- 三个变体共享稳定语义映射，切换模式更自然
+- 固定样例截图 + 自动审计，保证版本一致性
+
+## 主题变体
+
+### Hearth Dark（默认）
+
+适合日常主力开发，暖色对比与层次平衡。
 
 ![Hearth Dark](./extension/images/preview-dark.png)
+
+### Hearth Dark Soft
+
+适合夜间或暗光环境，降低高对比带来的视觉压力。
+
 ![Hearth Dark Soft](./extension/images/preview-dark-soft.png)
+
+### Hearth Light
+
+纸张感浅色模式，适合白天工作与文档阅读。
+
 ![Hearth Light](./extension/images/preview-light.png)
-![Long-session Comfort Tuning](./extension/images/preview-contrast.png)
 
-## 技术栈
+## 链接
 
-- Astro 6
-- Tailwind CSS 4
-- Node.js `>=22.12.0`
-- pnpm
+- 网站：<https://theme.hearthcode.dev>
+- 文档（英文）：<https://theme.hearthcode.dev/docs>
+- 文档（中文）：<https://theme.hearthcode.dev/zh/docs>
+- 文档（日文）：<https://theme.hearthcode.dev/ja/docs>
+- 源码仓库：<https://github.com/hearth-code/HearthTheme>
+- 问题反馈：<https://github.com/hearth-code/HearthTheme/issues>
 
-## 仓库结构
+## 维护说明
 
-```text
-.
-├─ src/                   # 网站页面/组件/布局/i18n
-├─ themes/                # 主题源 JSON（单一真源）
-├─ public/themes/         # 同步后的站点主题 JSON
-├─ extension/             # VS Code 扩展包及资源
-├─ scripts/               # 同步、审计、发布、changelog 工具
-├─ fixtures/              # 审计与预览固定样例
-└─ docs/theme-baseline.md # 主题治理基线文档
-```
+该仓库为网站与扩展的一体化 mono-repo。
 
-## 快速开始
+- 网站代码：`src/`
+- 扩展包：`extension/`
+- 主题源：`themes/`
+- 自动化脚本：`scripts/`
 
-```bash
-pnpm install
-pnpm dev
-```
+常用命令：
 
-本地开发地址：`http://localhost:4321`
-
-## 常用命令
-
-在仓库根目录执行：
-
-| Command | Action |
-| :-- | :-- |
-| `pnpm dev` | 先同步主题，再启动本地开发 |
-| `pnpm build` | 先同步主题，再构建到 `dist/` |
-| `pnpm preview` | 本地预览生产构建 |
-| `pnpm run sync` | 同步主题 JSON，并重建 `src/data/tokens.ts` |
-| `pnpm run preview:generate` | 基于固定样例生成 Marketplace 预览图 |
-| `pnpm run audit:theme` | 主题质量审计（对比度/覆盖/漂移） |
-| `pnpm run audit:cjk` | 中文/日文可读性审计 |
-| `pnpm run audit:release` | 发布一致性审计 |
-| `pnpm run audit:all` | 运行全部审计 |
-| `pnpm run changelog:draft` | 从主题变更生成草稿 |
-| `pnpm run changelog:append -- vX.Y.Z` | 追加自动生成的 changelog |
-| `pnpm run bump:ext:patch` | 扩展补丁版本升级（支持 `minor`/`major`） |
-| `pnpm run release:theme -- vX.Y.Z` | 一键发布准备（审计 + 构建 + changelog） |
-| `pnpm run pack:ext` | 打包扩展 VSIX |
-
-## 主题更新流程
-
-1. 修改 `themes/*.json`
-2. 运行 `pnpm run sync`
-3. 运行 `pnpm run preview:generate`
-4. 运行 `pnpm run audit:all`
-5. 运行 `pnpm run changelog:append -- vX.Y.Z`
-6. 发扩展时先 bump 版本，再通过 CI 发布（或手动 `pnpm run pack:ext`）
-
-## CI / 发布
-
-`/.github/workflows/publish.yml` 会在 `main` 分支 push 后执行：
-
-1. 安装依赖并执行审计
-2. 构建网站（作为站点改动回归校验）
-3. 检查 Marketplace 与 Open VSX 版本并按需发布扩展
-4. 根据 `extension/CHANGELOG.md` 自动创建/更新 GitHub Release
-
-如果扩展内容变更但版本未升级，CI 会阻断发布。
+- `pnpm dev`
+- `pnpm run preview:generate`
+- `pnpm run audit:all`

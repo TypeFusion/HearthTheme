@@ -2,98 +2,68 @@
 
 [English](./README.md) | [Chinese (Simplified)](./README.zh-CN.md) | [Japanese](./README.ja.md)
 
-HearthCode is a mono-repo for:
+[![VS Code Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/hearth-code.hearth-theme)](https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme)
+[![VS Code Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/hearth-code.hearth-theme)](https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme)
+[![Open VSX Downloads](https://img.shields.io/open-vsx/dt/hearth-code/hearth-theme)](https://open-vsx.org/extension/hearth-code/hearth-theme)
+[![Preview in vscode.dev](https://img.shields.io/badge/preview%20in-vscode.dev-blue)](https://vscode.dev/theme/hearth-code.hearth-theme/Hearth%20Dark)
 
-- Website: <https://theme.hearthcode.dev>
-- VS Code extension: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
-- Open VSX extension: <https://open-vsx.org/extension/hearth-code/hearth-theme>
+HearthCode is a warm, low-glare VS Code theme set built for long coding sessions.
+It keeps semantic hierarchy stable across `Hearth Dark`, `Hearth Dark Soft`, and `Hearth Light`, so your eyes do less relearning when your environment changes.
 
-## What This Project Ships
+![HearthCode Long-session Preview](./extension/images/preview-contrast.png)
 
-- Astro site for philosophy, color system, previews, and docs (en/zh/ja)
-- VS Code theme extension with:
-  - `Hearth Dark` (default)
-  - `Hearth Dark Soft`
-  - `Hearth Light`
+## Install
 
-## Preview
+- VS Code Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Open VSX: <https://open-vsx.org/extension/hearth-code/hearth-theme>
+- VS Code Quick Open: `ext install hearth-code.hearth-theme`
+
+## Why HearthCode
+
+- Warm palette with controlled saturation to reduce harsh glare
+- Stable semantic token roles across all three variants
+- Fixture-based screenshots and automated audits for release consistency
+
+## Theme Variants
+
+### Hearth Dark (default)
+
+Balanced warm contrast for daily coding.
 
 ![Hearth Dark](./extension/images/preview-dark.png)
+
+### Hearth Dark Soft
+
+Lower contrast pressure for late-night or dim-room sessions.
+
 ![Hearth Dark Soft](./extension/images/preview-dark-soft.png)
+
+### Hearth Light
+
+Paper-toned light mode for daylight work and docs-heavy tasks.
+
 ![Hearth Light](./extension/images/preview-light.png)
-![Long-session Comfort Tuning](./extension/images/preview-contrast.png)
 
-## Stack
+## Links
 
-- Astro 6
-- Tailwind CSS 4
-- Node.js `>=22.12.0`
-- pnpm
+- Website: <https://theme.hearthcode.dev>
+- Docs (EN): <https://theme.hearthcode.dev/docs>
+- Docs (ZH): <https://theme.hearthcode.dev/zh/docs>
+- Docs (JA): <https://theme.hearthcode.dev/ja/docs>
+- Source: <https://github.com/hearth-code/HearthTheme>
+- Issues: <https://github.com/hearth-code/HearthTheme/issues>
 
-## Repository Layout
+## Maintainer Notes
 
-```text
-.
-├─ src/                   # Site pages/components/layouts/i18n
-├─ themes/                # Source theme JSON (single source of truth)
-├─ public/themes/         # Synced JSON for website consumption
-├─ extension/             # VS Code extension package and assets
-├─ scripts/               # Sync, audits, release, changelog tools
-├─ fixtures/              # Audit + preview fixtures
-└─ docs/theme-baseline.md # Theme governance baseline
-```
+This repository contains the website and extension package in one mono-repo.
 
-## Quick Start
+- Website app: `src/`
+- Extension package: `extension/`
+- Theme source of truth: `themes/`
+- Automation scripts: `scripts/`
 
-```bash
-pnpm install
-pnpm dev
-```
+Key commands:
 
-Local dev server: `http://localhost:4321`
-
-## Commands
-
-Run all commands in repo root:
-
-| Command | Action |
-| :-- | :-- |
-| `pnpm dev` | Sync themes then start local dev server |
-| `pnpm build` | Sync themes then build site to `dist/` |
-| `pnpm preview` | Preview production build locally |
-| `pnpm run sync` | Sync theme JSON + regenerate `src/data/tokens.ts` |
-| `pnpm run preview:generate` | Generate Marketplace preview PNGs from fixed fixture |
-| `pnpm run audit:theme` | Theme quality audit (contrast/coverage/drift) |
-| `pnpm run audit:cjk` | CJK readability audit |
-| `pnpm run audit:release` | Release consistency audit |
-| `pnpm run audit:all` | Run all audits |
-| `pnpm run changelog:draft` | Draft changelog from theme diffs |
-| `pnpm run changelog:append -- vX.Y.Z` | Append generated changelog section |
-| `pnpm run bump:ext:patch` | Bump extension patch version (`minor`/`major` available) |
-| `pnpm run release:theme -- vX.Y.Z` | One-shot release prep (audit + build + changelog) |
-| `pnpm run pack:ext` | Package extension VSIX |
-
-## Theme Update Flow
-
-1. Edit `themes/*.json`
-2. Run `pnpm run sync`
-3. Run `pnpm run preview:generate`
-4. Run `pnpm run audit:all`
-5. Run `pnpm run changelog:append -- vX.Y.Z`
-6. For extension release, bump version and publish via CI (or `pnpm run pack:ext`)
-
-## CI / Publish
-
-`/.github/workflows/publish.yml` runs on push to `main`:
-
-1. Install dependencies and run audits
-2. Build site (regression guard for docs/site changes)
-3. Check Marketplace and Open VSX versions, then publish extension when needed
-4. Create/refresh GitHub release from the matching `extension/CHANGELOG.md` section
-
-If extension payload changes without a version bump, CI blocks the publish step.
-
-Required repository secrets for full publish:
-
-- `VSCE_PAT` for Visual Studio Marketplace
-- `OVSX_PAT` for Open VSX
+- `pnpm dev`
+- `pnpm run preview:generate`
+- `pnpm run audit:all`

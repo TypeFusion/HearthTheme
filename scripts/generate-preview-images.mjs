@@ -1,11 +1,12 @@
 import { mkdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import sharp from "sharp";
 import { createHighlighter } from "shiki";
 
 const WIDTH = 1600;
 const HEIGHT = 1000;
 const OUTPUT_DIR = join("extension", "images");
+const WEBSITE_OUTPUT_DIR = join("public", "previews");
 const SAMPLE_PATH = join("fixtures", "preview", "sample.ts");
 const LANG = "typescript";
 
@@ -15,21 +16,25 @@ const THEME_META = [
     name: "Hearth Dark",
     file: join("themes", "hearth-dark.json"),
     output: join(OUTPUT_DIR, "preview-dark.png"),
+    webOutput: join(WEBSITE_OUTPUT_DIR, "preview-dark.png"),
   },
   {
     id: "darkSoft",
     name: "Hearth Dark Soft",
     file: join("themes", "hearth-dark-soft.json"),
     output: join(OUTPUT_DIR, "preview-dark-soft.png"),
+    webOutput: join(WEBSITE_OUTPUT_DIR, "preview-dark-soft.png"),
   },
   {
     id: "light",
     name: "Hearth Light",
     file: join("themes", "hearth-light.json"),
     output: join(OUTPUT_DIR, "preview-light.png"),
+    webOutput: join(WEBSITE_OUTPUT_DIR, "preview-light.png"),
   },
 ];
 const CONTRAST_OUTPUT = join(OUTPUT_DIR, "preview-contrast.png");
+const CONTRAST_WEB_OUTPUT = join(WEBSITE_OUTPUT_DIR, "preview-contrast.png");
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -253,6 +258,7 @@ function renderContrastSvg({ cards }) {
 }
 
 async function writePng(svg, outputPath) {
+  mkdirSync(dirname(outputPath), { recursive: true });
   await sharp(Buffer.from(svg))
     .png({ compressionLevel: 9, quality: 100 })
     .toFile(outputPath);
@@ -261,6 +267,7 @@ async function writePng(svg, outputPath) {
 
 async function run() {
   mkdirSync(OUTPUT_DIR, { recursive: true });
+  mkdirSync(WEBSITE_OUTPUT_DIR, { recursive: true });
 
   const sourceCode = readFileSync(SAMPLE_PATH, "utf8").trimEnd();
   const themes = THEME_META.map((meta) => ({ ...meta, theme: readJson(meta.file) }));
@@ -321,9 +328,13 @@ async function run() {
     });
 
     await writePng(darkSvg, darkMeta.output);
+    await writePng(darkSvg, darkMeta.webOutput);
     await writePng(darkSoftSvg, darkSoftMeta.output);
+    await writePng(darkSoftSvg, darkSoftMeta.webOutput);
     await writePng(lightSvg, lightMeta.output);
+    await writePng(lightSvg, lightMeta.webOutput);
     await writePng(contrastSvg, CONTRAST_OUTPUT);
+    await writePng(contrastSvg, CONTRAST_WEB_OUTPUT);
   } finally {
     await highlighter.dispose();
   }

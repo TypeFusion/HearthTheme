@@ -1,5 +1,6 @@
 ---
 import { t, type Lang } from '../../i18n/utils'
+import CodePreview from '../code/CodePreview.astro'
 
 interface Props {
   lang: Lang
@@ -7,84 +8,82 @@ interface Props {
 
 const { lang } = Astro.props
 const marketplaceUrl = 'https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme'
+const openVsxUrl = 'https://open-vsx.org/extension/hearth-code/hearth-theme'
 const githubUrl = 'https://github.com/hearth-code/HearthTheme'
 ---
 
-<section class="hearth-section relative min-h-[95vh] sm:min-h-screen flex flex-col justify-center overflow-hidden">
+<section class="hearth-section relative overflow-hidden min-h-[calc(100svh-82px)] sm:min-h-[calc(100svh-92px)] flex items-center">
   <div class="hearth-shell">
-    <div data-reveal style="--reveal-delay: 50ms;" class="max-w-[1140px] py-10 sm:py-14 lg:py-20">
-      <p
-        data-reveal
-        style="--reveal-delay: 90ms;"
-        class="hearth-kicker inline-flex items-center gap-3 mb-8 sm:mb-10 text-[#c7985f]"
-      >
-        <span class="hearth-line"></span>
-        {t(lang, 'hero.eyebrow')}
-      </p>
-
-      <h1
-        data-reveal
-        style="--reveal-delay: 150ms;"
-        class="hearth-hero-title mb-7 sm:mb-10"
-      >
-        <span class="text-[#ece2cf]">{t(lang, 'hero.brand.hearth')}</span>
-        <span class="text-[#d09452] ml-2 sm:ml-3">{t(lang, 'hero.brand.code')}</span>
-      </h1>
-
-      <p
-        data-reveal
-        style="--reveal-delay: 240ms;"
-        class="hearth-copy hearth-subtitle hearth-hero-subtitle mb-12 sm:mb-14"
-      >
-        {t(lang, 'hero.subtitle')}
-      </p>
-
-      <div
-        data-reveal
-        style="--reveal-delay: 280ms;"
-        class="mb-10 sm:mb-12 flex flex-wrap items-center gap-3"
-      >
-        <a
-          href={marketplaceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full border border-[#e1bc87]/35 bg-[linear-gradient(135deg,rgba(198,132,61,0.3),rgba(130,83,35,0.2))] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#f5ddba] shadow-[0_8px_24px_rgba(0,0,0,0.24)] hover:border-[#f0ca92]/55 hover:text-[#ffe8c5]"
+    <div class="w-full py-3 sm:py-5 lg:py-7 grid items-start gap-6 lg:gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] xl:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)]">
+      <div data-reveal style="--reveal-delay: 60ms;" class="max-w-[560px]">
+        <p
+          data-reveal
+          style="--reveal-delay: 90ms;"
+          class="hearth-kicker inline-flex items-center gap-3 mb-6 sm:mb-8 text-[#c7985f]"
         >
-          <span>{t(lang, 'hero.cta.rate')}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full border border-[#d8c3a3]/30 bg-[rgba(255,255,255,0.02)] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#e5d5bd] shadow-[0_8px_24px_rgba(0,0,0,0.18)] hover:border-[#e7cfab]/55 hover:text-[#f5e6cc]"
+          <span class="hearth-line"></span>
+          {t(lang, 'hero.eyebrow')}
+        </p>
+
+        <h1
+          data-reveal
+          style="--reveal-delay: 150ms;"
+          class="hearth-hero-title mb-6 sm:mb-8"
         >
-          <span>{t(lang, 'hero.cta.star')}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-        <span class="hearth-meta text-[#9f8f77]">
+          <span class="text-[#ece2cf]">{t(lang, 'hero.brand.hearth')}</span>
+          <span class="text-[#d09452] ml-2 sm:ml-3">{t(lang, 'hero.brand.code')}</span>
+        </h1>
+
+        <p
+          data-reveal
+          style="--reveal-delay: 230ms;"
+          class="hearth-copy hearth-subtitle hearth-hero-subtitle mb-7 sm:mb-9"
+        >
+          {t(lang, 'hero.subtitle')}
+        </p>
+
+        <div
+          data-reveal
+          style="--reveal-delay: 260ms;"
+          class="mb-7 sm:mb-8 flex flex-wrap items-center gap-3"
+        >
+          <a
+            href={marketplaceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-[#e1bc87]/35 bg-[linear-gradient(135deg,rgba(198,132,61,0.3),rgba(130,83,35,0.2))] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#f5ddba] shadow-[0_8px_24px_rgba(0,0,0,0.24)] hover:border-[#f0ca92]/55 hover:text-[#ffe8c5]"
+          >
+            <span>{t(lang, 'hero.cta.install')}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a
+            href={openVsxUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-[#d8c3a3]/30 bg-[rgba(255,255,255,0.02)] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#e5d5bd] shadow-[0_8px_24px_rgba(0,0,0,0.18)] hover:border-[#e7cfab]/55 hover:text-[#f5e6cc]"
+          >
+            <span>{t(lang, 'hero.cta.openvsx')}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-[#cfb07f]/24 bg-[rgba(255,255,255,0.015)] px-4 py-2.5 font-ui text-[0.8rem] font-semibold tracking-[0.02em] text-[#ceb996] hover:border-[#e7cfab]/45 hover:text-[#ecd8b3]"
+          >
+            <span>{t(lang, 'hero.cta.star')}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <p data-reveal style="--reveal-delay: 300ms;" class="hearth-meta text-[#9f8f77]">
           {t(lang, 'hero.cta.hint')}
-        </span>
+        </p>
       </div>
 
-      <div
-        data-reveal
-        style="--reveal-delay: 300ms;"
-        class="hearth-hero-variants flex flex-wrap items-center gap-3 text-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
-      >
-        <span class="hearth-meta text-[#d6b385]">Hearth Dark · Default</span>
-        <span class="text-[#6f5f48]/60">/</span>
-        <span class="hearth-meta text-[#c9b497]">Hearth Dark Soft</span>
-        <span class="text-[#6f5f48]/60">/</span>
-        <span class="hearth-meta text-[#c1a173]">Hearth Light</span>
+      <div data-reveal style="--reveal-delay: 180ms;" class="lg:pt-7 xl:pt-8">
+        <CodePreview lang={lang} compact={true} />
       </div>
     </div>
-  </div>
-
-  <div data-reveal style="--reveal-delay: 380ms;" class="hearth-scroll-cue flex items-center gap-3">
-    <span class="hearth-line !w-8"></span>
-    <span class="hearth-kicker text-[#504838]">
-      {t(lang, 'hero.scroll')}
-    </span>
   </div>
 </section>

@@ -1,0 +1,83 @@
+---
+import { t, type Lang } from "../../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const metrics = [
+  { valueKey: "proof.metric.1.value", labelKey: "proof.metric.1.label" },
+  { valueKey: "proof.metric.2.value", labelKey: "proof.metric.2.label" },
+  { valueKey: "proof.metric.3.value", labelKey: "proof.metric.3.label" },
+];
+
+const variants = [
+  {
+    image: "/previews/preview-dark.png",
+    titleKey: "proof.variant.dark.title",
+    bodyKey: "proof.variant.dark.body",
+  },
+  {
+    image: "/previews/preview-dark-soft.png",
+    titleKey: "proof.variant.soft.title",
+    bodyKey: "proof.variant.soft.body",
+  },
+  {
+    image: "/previews/preview-light.png",
+    titleKey: "proof.variant.light.title",
+    bodyKey: "proof.variant.light.body",
+  },
+];
+---
+
+<section class="hearth-section hearth-section-y" data-reveal>
+  <div class="hearth-shell">
+    <div class="hearth-intro">
+      <p class="hearth-kicker mb-4 flex items-center gap-3">
+        {t(lang, "proof.label")}
+        <span class="hearth-line"></span>
+      </p>
+      <h2 class="text-[1.9rem] sm:text-[2.25rem] leading-[1.18] tracking-[-0.015em] text-[#f0e2ca] font-semibold mb-4">
+        {t(lang, "proof.title")}
+      </h2>
+      <p class="hearth-copy text-[#c7b69b] max-w-[920px] mb-8">
+        {t(lang, "proof.subtitle")}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+      {
+        metrics.map(({ valueKey, labelKey }, index) => (
+          <article
+            data-reveal
+            style={`--reveal-delay: ${90 + index * 70}ms;`}
+            class="rounded-xl border border-[#d6b587]/20 bg-[rgba(255,255,255,0.02)] px-4 py-4"
+          >
+            <p class="font-ui text-[1.1rem] font-semibold text-[#f0dfc4]">{t(lang, valueKey)}</p>
+            <p class="hearth-meta text-[#9f8f77] mt-1">{t(lang, labelKey)}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-2">
+      {
+        variants.map(({ image, titleKey, bodyKey }, index) => (
+          <article
+            data-reveal
+            style={`--reveal-delay: ${320 + index * 70}ms;`}
+            class="rounded-xl border border-[#d6b587]/18 bg-[rgba(255,255,255,0.015)] overflow-hidden"
+          >
+            <img src={image} alt={t(lang, titleKey)} class="w-full h-auto" loading="lazy" />
+            <div class="px-4 py-4">
+              <h3 class="font-ui text-[1rem] font-semibold text-[#ead8bc]">{t(lang, titleKey)}</h3>
+              <p class="hearth-meta text-[#a99980] mt-2 leading-[1.7]">{t(lang, bodyKey)}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

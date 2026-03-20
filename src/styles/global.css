@@ -16,11 +16,12 @@
   --hearth-copy-size: clamp(1rem, 0.28vw + 0.93rem, 1.14rem);
   --hearth-lead-size: clamp(1.16rem, 1.05vw + 0.9rem, 1.68rem);
   --hearth-title-size: clamp(2.5rem, 5.8vw, 6.6rem);
-  --hearth-hero-size: clamp(3.4rem, 10vw, 9.5rem);
+  --hearth-hero-size: clamp(3rem, 9.3vw, 8.3rem);
 
   --font-display: "Noto Sans", "Noto Sans SC", "Noto Sans JP", "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI", sans-serif;
   --font-body: "Noto Sans", "Noto Sans SC", "Noto Sans JP", "Segoe UI Variable Text", "Segoe UI", sans-serif;
   --font-ui: "Noto Sans", "Noto Sans SC", "Noto Sans JP", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+  --font-ui-stable: "Noto Sans", "Noto Sans SC", "Noto Sans JP", "Segoe UI Variable Text", "Segoe UI", sans-serif;
   --font-code: "JetBrains Mono", "Cascadia Mono", "Cascadia Code", "Consolas", "IBM Plex Mono", "DM Mono", "Fira Code", ui-monospace, monospace;
   --font-kicker: var(--font-code);
   --font-metric: var(--font-code);
@@ -121,22 +122,6 @@ body.app-shell > :not(.hearth-topbar) {
   body.app-shell::after {
     opacity: 0.31;
   }
-}
-
-html:lang(zh) {
-  --font-display: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Noto Sans SC", "Noto Sans", "Segoe UI", sans-serif;
-  --font-body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Noto Sans SC", "Noto Sans", "Segoe UI", sans-serif;
-  --font-ui: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Noto Sans SC", "Noto Sans", "Segoe UI", sans-serif;
-  --font-kicker: var(--font-ui);
-  --font-metric: var(--font-ui);
-}
-
-html:lang(ja) {
-  --font-display: "Hiragino Sans", "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Noto Sans", sans-serif;
-  --font-body: "Hiragino Sans", "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Noto Sans", sans-serif;
-  --font-ui: "Hiragino Sans", "Yu Gothic UI", "Meiryo", "Noto Sans JP", "Noto Sans", sans-serif;
-  --font-kicker: var(--font-ui);
-  --font-metric: var(--font-ui);
 }
 
 .font-serif,
@@ -365,13 +350,14 @@ button:focus-visible {
 .hearth-topbar-inner {
   max-width: min(1320px, 100%);
   margin: 0 auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.8rem;
+  column-gap: 0.9rem;
 }
 
 .hearth-brand {
+  justify-self: start;
   display: inline-flex;
   align-items: center;
   gap: 0.52rem;
@@ -411,15 +397,16 @@ button:focus-visible {
   font-weight: 700;
 }
 
-.hearth-topbar-actions {
+.hearth-topbar-center {
   display: inline-flex;
   align-items: center;
+  justify-self: center;
   gap: 1.02rem;
   min-width: 0;
   transition: gap 260ms var(--hearth-ease);
 }
 
-.hearth-topbar.is-condensed .hearth-topbar-actions {
+.hearth-topbar.is-condensed .hearth-topbar-center {
   gap: 0.88rem;
 }
 
@@ -438,6 +425,7 @@ button:focus-visible {
 }
 
 .hearth-lang-cluster {
+  justify-self: end;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -455,7 +443,7 @@ button:focus-visible {
 .hearth-lang-pill {
   position: relative;
   text-decoration: none;
-  font-family: var(--font-ui);
+  font-family: var(--font-ui-stable);
   text-align: center;
   line-height: 1;
   background: transparent;
@@ -469,8 +457,7 @@ button:focus-visible {
 }
 
 .hearth-nav-pill::after,
-.hearth-lang-pill::after,
-.hearth-install::after {
+.hearth-lang-pill::after {
   content: "";
   position: absolute;
   left: 0;
@@ -490,9 +477,13 @@ button:focus-visible {
 .hearth-nav-pill {
   color: #b1a188;
   font-size: 0.78rem;
-  letter-spacing: 0.055em;
+  letter-spacing: 0.03em;
   padding: 0.2rem 0.02rem;
   font-weight: 510;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .hearth-nav-pill:hover {
@@ -527,61 +518,16 @@ button:focus-visible {
   transform: translateY(-50%);
 }
 
-.hearth-install {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.34rem;
-  color: #e7c792;
-  text-decoration: none;
-  font-size: 0.73rem;
-  line-height: 1;
-  padding: 0.2rem 0.02rem;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  text-shadow: 0 1px 10px rgb(0 0 0 / 0.18);
-  transition:
-    color 220ms var(--hearth-ease),
-    transform 220ms var(--hearth-ease),
-    text-shadow 220ms var(--hearth-ease);
-  font-weight: 520;
-}
-
-.hearth-install::before {
-  display: none;
-}
-
-.hearth-install span[aria-hidden="true"] {
-  transition: transform 220ms var(--hearth-ease);
-}
-
-.hearth-install:hover {
-  color: #ffe1b3;
-  transform: translateY(-1px);
-  text-shadow: 0 0 12px rgb(255 196 126 / 0.26);
-}
-
-.hearth-install:hover::after {
-  opacity: 0.86;
-  transform: scaleX(1);
-}
-
-.hearth-install:hover span[aria-hidden="true"] {
-  transform: translateX(1px) translateY(-1px);
-}
-
-.hearth-install:active {
-  transform: translateY(0);
-}
-
 .hearth-lang-pill {
   color: #a89579;
-  font-family: var(--font-metric);
+  font-family: var(--font-ui-stable);
   font-size: 0.69rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.035em;
   padding: 0.2rem 0;
   font-weight: 520;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hearth-lang-pill:hover {
@@ -604,7 +550,6 @@ button:focus-visible {
 }
 
 .hearth-nav-pill:focus-visible,
-.hearth-install:focus-visible,
 .hearth-lang-pill:focus-visible {
   outline: none;
   color: #ffe0b3;
@@ -612,7 +557,6 @@ button:focus-visible {
 }
 
 .hearth-nav-pill:focus-visible::after,
-.hearth-install:focus-visible::after,
 .hearth-lang-pill:focus-visible::after {
   opacity: 0.92;
   transform: scaleX(1);
@@ -621,6 +565,18 @@ button:focus-visible {
 @media (max-width: 860px) {
   .hearth-topbar {
     padding: 0.55rem 0.72rem 0.62rem;
+  }
+
+  .hearth-topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.56rem;
+  }
+
+  .hearth-topbar-center {
+    justify-self: auto;
+    gap: 0.7rem;
   }
 
   .hearth-brand {
@@ -634,19 +590,14 @@ button:focus-visible {
 
   .hearth-nav-pill {
     font-size: 0.72rem;
-    letter-spacing: 0.045em;
-    padding: 0.18rem 0;
-  }
-
-  .hearth-install {
-    font-size: 0.66rem;
+    letter-spacing: 0.03em;
     padding: 0.18rem 0;
   }
 
   .hearth-lang-pill {
     padding: 0.18rem 0;
     font-size: 0.64rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.03em;
   }
 }
 
@@ -659,7 +610,7 @@ button:focus-visible {
     gap: 0.5rem;
   }
 
-  .hearth-topbar-actions {
+  .hearth-topbar-center {
     gap: 0.52rem;
   }
 
@@ -671,12 +622,6 @@ button:focus-visible {
   .hearth-nav-pill {
     padding: 0.16rem 0;
     letter-spacing: 0.04em;
-  }
-
-  .hearth-install {
-    padding: 0.16rem 0;
-    gap: 0.18rem;
-    font-size: 0.62rem;
   }
 
   .hearth-lang-pill {
@@ -780,15 +725,10 @@ button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .hearth-topbar,
   .hearth-brand,
-  .hearth-topbar-actions,
-  .hearth-install,
+  .hearth-topbar-center,
   .hearth-nav-cluster::before,
   .hearth-lang-cluster::before {
     transition: none;
-  }
-
-  .hearth-install::before {
-    display: none;
   }
 
   body.app-shell::before {
@@ -830,35 +770,10 @@ button:focus-visible {
   }
 }
 
-html:lang(zh),
-html:lang(ja) {
-  text-underline-offset: 0.16em;
-}
-
-html:lang(zh) body.app-shell,
-html:lang(ja) body.app-shell {
-  letter-spacing: 0;
-  font-weight: 450;
-}
-
-html:lang(zh) h1,
-html:lang(zh) h2,
-html:lang(zh) h3,
-html:lang(zh) h4,
-html:lang(ja) h1,
-html:lang(ja) h2,
-html:lang(ja) h3,
-html:lang(ja) h4 {
-  letter-spacing: -0.008em;
-  font-weight: 620;
-}
-
 html:lang(zh) .hearth-copy,
 html:lang(ja) .hearth-copy {
-  line-height: 1.78;
   overflow-wrap: break-word;
-  hyphens: manual;
-  font-variant-east-asian: proportional-width;
+  hyphens: auto;
 }
 
 html:lang(zh) .hearth-copy {
@@ -867,51 +782,6 @@ html:lang(zh) .hearth-copy {
 
 html:lang(ja) .hearth-copy {
   line-break: strict;
-}
-
-html:lang(zh) .hearth-kicker,
-html:lang(ja) .hearth-kicker {
-  text-transform: none;
-  letter-spacing: 0.045em;
-  font-size: 0.79rem;
-}
-
-html:lang(zh) .hearth-meta,
-html:lang(ja) .hearth-meta {
-  letter-spacing: 0.035em;
-  font-size: 0.81rem;
-  font-variant-east-asian: proportional-width;
-}
-
-html:lang(zh) .hearth-hero-title,
-html:lang(ja) .hearth-hero-title {
-  font-size: clamp(3rem, 9.3vw, 8.3rem);
-  letter-spacing: -0.012em;
-  max-width: none;
-}
-
-html:lang(zh) .hearth-hero-subtitle,
-html:lang(ja) .hearth-hero-subtitle {
-  font-size: clamp(1.1rem, 0.95vw + 0.9rem, 1.56rem);
-}
-
-html:lang(zh) .hearth-feature-index,
-html:lang(ja) .hearth-feature-index {
-  letter-spacing: 0.05em;
-}
-
-html:lang(zh) .hearth-nav-pill,
-html:lang(ja) .hearth-nav-pill,
-html:lang(zh) .hearth-install,
-html:lang(ja) .hearth-install {
-  letter-spacing: 0.02em;
-  font-weight: 540;
-}
-
-html:lang(zh) .hearth-lang-pill,
-html:lang(ja) .hearth-lang-pill {
-  letter-spacing: 0.03em;
-  font-weight: 540;
 }
 
 .hearth-scroll-cue {

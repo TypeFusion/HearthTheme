@@ -1,16 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import HeroSection from '../components/ui/HeroSection.astro'
+import ProofSection from '../components/ui/ProofSection.astro'
 import PhilosophySection from '../components/ui/PhilosophySection.astro'
 import ColorSystem from '../components/ui/ColorSystem.astro'
-import CodePreview from '../components/code/CodePreview.astro'
 
 const lang = 'en'
 ---
 
 <Layout lang={lang}>
   <HeroSection lang={lang} />
+  <ProofSection lang={lang} />
   <PhilosophySection lang={lang} />
   <ColorSystem lang={lang} />
-  <CodePreview lang={lang} />
 </Layout>

@@ -17,10 +17,8 @@ const pageDescription = description ?? t(lang, "hero.subtitle");
 
 const home = lang === "en" ? "/" : `/${lang}`;
 const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
-const marketplaceUrl = "https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme";
 const isDocsPage = /\/docs\/?$/.test(url.pathname);
 const isHomePage = !isDocsPage;
-const installFontClass = "font-ui tracking-[0.03em] sm:tracking-[0.04em]";
 const footerMetaClass = "font-ui hearth-meta text-[#504838]";
 const siteBase = Astro.site ?? new URL(url.origin);
 const langHref = (target: Lang) =>
@@ -104,7 +102,7 @@ const ogImage = new URL("/og-hearth.png", siteBase).href;
 					</span>
 				</a>
 
-				<div class="hearth-topbar-actions">
+				<div class="hearth-topbar-center">
 					<div class="hearth-nav-cluster">
 						<a
 							href={home}
@@ -121,40 +119,30 @@ const ogImage = new URL("/og-hearth.png", siteBase).href;
 							{t(lang, "nav.docs")}
 						</a>
 					</div>
+				</div>
 
+				<div class="hearth-lang-cluster" aria-label="language switch">
 					<a
-						href={marketplaceUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						class={`hearth-install ${installFontClass}`}
+						href={langHref("en")}
+						data-lang="en"
+						class={`hearth-lang-pill ${lang === "en" ? "is-active" : ""}`}
 					>
-						<span>{t(lang, "nav.install")}</span>
-						<span aria-hidden="true" class="text-[0.95em]">↗</span>
+						EN
 					</a>
-
-					<div class="hearth-lang-cluster" aria-label="language switch">
-						<a
-							href={langHref("en")}
-							data-lang="en"
-							class={`hearth-lang-pill ${lang === "en" ? "is-active" : ""}`}
-						>
-							EN
-						</a>
-						<a
-							href={langHref("zh")}
-							data-lang="zh"
-							class={`hearth-lang-pill ${lang === "zh" ? "is-active" : ""}`}
-						>
-							中
-						</a>
-						<a
-							href={langHref("ja")}
-							data-lang="ja"
-							class={`hearth-lang-pill ${lang === "ja" ? "is-active" : ""}`}
-						>
-							日
-						</a>
-					</div>
+					<a
+						href={langHref("zh")}
+						data-lang="zh"
+						class={`hearth-lang-pill ${lang === "zh" ? "is-active" : ""}`}
+					>
+						中
+					</a>
+					<a
+						href={langHref("ja")}
+						data-lang="ja"
+						class={`hearth-lang-pill ${lang === "ja" ? "is-active" : ""}`}
+					>
+						日
+					</a>
 				</div>
 			</div>
 		</nav>

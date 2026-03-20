@@ -1,3 +1,10 @@
+## 1.0.10
+
+- Reworked Marketplace README for clearer first-screen conversion flow (value proposition, quick install, variant guidance).
+- Added promotion-oriented website proof section with side-by-side fixture comparisons and stronger install CTAs.
+- Added website-ready preview image outputs (`public/previews`) from the automated screenshot generator.
+- Refreshed multilingual GitHub READMEs with synchronized product messaging and install paths.
+
 ## 1.0.9
 
 - Updated extension repository and issue tracker links to the `hearth-code/HearthTheme` organization path.
