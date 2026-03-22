@@ -1,5 +1,9 @@
 import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { generateThemeVariants } from './generate-theme-variants.mjs'
+
+// 0. 以 Hearth Dark 为核心生成其他变体
+generateThemeVariants()
 
 // 1. 同步 JSON 到 public 和 extension
 const src = 'themes'

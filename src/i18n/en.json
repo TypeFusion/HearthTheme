@@ -37,7 +37,7 @@
   "philosophy.01.title": "Ember, not flame",
   "philosophy.01.body": "High-saturation syntax colors burn bright but exhaust your eyes. Hearth keeps all highlight colors at 40–60% saturation — warm like cooling coal, not blinding like fire.",
   "philosophy.02.title": "Neither black nor white",
-  "philosophy.02.body": "Pure black backgrounds cause halation around white text, blurring edges. Hearth Dark (default) uses #23201c, Dark Soft uses #2a2723, Hearth Light uses #efe6d8, and Light Soft uses #ece2d3 for calmer paper-like contrast.",
+  "philosophy.02.body": "Pure black backgrounds cause halation around white text, blurring edges. Hearth Dark (default) uses #23201c, Dark Soft uses #312c27, Hearth Light uses #efe6d8, and Light Soft uses #e4d8c5 for calmer paper-like contrast.",
   "philosophy.03.title": "Hierarchy as semantics",
   "philosophy.03.body": "Brightness maps directly to semantic weight: keywords are brightest, functions next, variables after, and comments deliberately fade into the background.",
   "philosophy.04.title": "Color temperature as comfort",

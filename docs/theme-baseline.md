@@ -1,6 +1,6 @@
 # Hearth Theme Baseline
 
-Updated: 2026-03-20
+Updated: 2026-03-22
 
 ## 1) Design Intent
 
@@ -49,7 +49,7 @@ Current snapshot from audit:
 - dark comment: `2.6`
 - dark soft comment: `2.8`
 - light comment: `3.8`
-- light soft comment: `3.6`
+- light soft comment: `2.6`
 - dark operator: `4.4`
 - dark soft operator: `4.3`
 - light operator: `4.1`
@@ -67,10 +67,10 @@ Theme releases must keep both layers aligned:
 
 All palette changes must follow this order:
 
-1. Edit only source themes in `themes/`.
-2. Run `node scripts/sync-themes.mjs`.
-3. Run `npm run audit:theme`.
-4. Run `npm run audit:cjk` for zh/ja typography safeguards.
+1. Edit the core source theme: `themes/hearth-dark.json`.
+2. If this is a deliberate palette-direction reset, update templates in `themes/templates/*.base.json` in the same PR.
+3. Run `npm run sync` (this now generates Dark Soft / Light / Light Soft from core dark, then syncs outputs).
+4. Run `npm run audit:all` (`theme + copy + cjk + release`).
 5. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
 6. If thresholds or governance changed, update this document and audit scripts in the same PR.
 7. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
@@ -81,9 +81,12 @@ One-shot alternative:
 
 ## 6) PR Acceptance Checklist
 
-- `themes/hearth-dark.json`, `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` preserve role parity.
+- `themes/hearth-dark.json` is the only hand-edited source theme for palette evolution.
+- `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` are regenerated from core dark.
+- `themes/templates/*.base.json` are updated only when intentionally changing derivation baseline.
 - `src/data/tokens.ts` regenerated via sync script.
 - `npm run audit:theme` passes without blocking issues.
+- `npm run audit:copy` passes (variant count + color copy + README metrics parity).
 - `npm run audit:cjk` passes without typography regressions.
 - `npm run build` passes and static pages can be generated.
 - Any warnings are explicitly accepted with rationale in PR notes.

@@ -84,6 +84,21 @@ function addNote(message) {
   notes.push(message)
 }
 
+function summarizeList(values, limit = 8) {
+  if (values.length === 0) return 'none'
+  const sorted = [...values].sort()
+  if (sorted.length <= limit) return sorted.join(', ')
+  const shown = sorted.slice(0, limit).join(', ')
+  return `${shown} ... (+${sorted.length - limit} more)`
+}
+
+function diffSet(baseSet, targetSet) {
+  return {
+    missing: [...baseSet].filter((value) => !targetSet.has(value)),
+    extra: [...targetSet].filter((value) => !baseSet.has(value)),
+  }
+}
+
 function readJson(path) {
   try {
     const text = readFileSync(path, 'utf8')
@@ -97,6 +112,31 @@ function readJson(path) {
 function toScopes(entry) {
   if (!entry?.scope) return []
   return Array.isArray(entry.scope) ? entry.scope : [entry.scope]
+}
+
+function scopeSignature(entry) {
+  return toScopes(entry)
+    .map((scope) => String(scope).trim())
+    .filter(Boolean)
+    .sort()
+    .join(' | ')
+}
+
+function getColorKeySet(theme) {
+  return new Set(Object.keys(theme?.colors || {}))
+}
+
+function getTokenScopeSet(theme) {
+  const set = new Set()
+  for (const entry of theme?.tokenColors || []) {
+    const signature = scopeSignature(entry)
+    if (signature) set.add(signature)
+  }
+  return set
+}
+
+function getSemanticKeySet(theme) {
+  return new Set(Object.keys(theme?.semanticTokenColors || {}))
 }
 
 function getTokenColor(theme, scopes) {
@@ -369,6 +409,51 @@ function validateSoftPairDrift(darkSoftTheme, lightSoftTheme) {
   validateCrossThemeDrift(darkSoftTheme, lightSoftTheme, 'soft-pair')
 }
 
+function validateThemeParity(themes) {
+  const baseMeta = THEME_FILES.find((themeMeta) => themeMeta.id === 'dark')
+  if (!baseMeta) return
+
+  const baseTheme = themes[baseMeta.id]
+  if (!baseTheme) return
+
+  const baseColorKeys = getColorKeySet(baseTheme)
+  const baseTokenScopes = getTokenScopeSet(baseTheme)
+  const baseSemanticKeys = getSemanticKeySet(baseTheme)
+
+  for (const themeMeta of THEME_FILES) {
+    if (themeMeta.id === baseMeta.id) continue
+    const theme = themes[themeMeta.id]
+    if (!theme) continue
+
+    const colorDiff = diffSet(baseColorKeys, getColorKeySet(theme))
+    if (colorDiff.missing.length > 0 || colorDiff.extra.length > 0) {
+      addIssue(
+        `${themeMeta.path}: color key parity mismatch vs ${baseMeta.path}; ` +
+        `missing (${colorDiff.missing.length}): ${summarizeList(colorDiff.missing)}; ` +
+        `extra (${colorDiff.extra.length}): ${summarizeList(colorDiff.extra)}`
+      )
+    }
+
+    const tokenScopeDiff = diffSet(baseTokenScopes, getTokenScopeSet(theme))
+    if (tokenScopeDiff.missing.length > 0 || tokenScopeDiff.extra.length > 0) {
+      addIssue(
+        `${themeMeta.path}: token scope parity mismatch vs ${baseMeta.path}; ` +
+        `missing (${tokenScopeDiff.missing.length}): ${summarizeList(tokenScopeDiff.missing)}; ` +
+        `extra (${tokenScopeDiff.extra.length}): ${summarizeList(tokenScopeDiff.extra)}`
+      )
+    }
+
+    const semanticDiff = diffSet(baseSemanticKeys, getSemanticKeySet(theme))
+    if (semanticDiff.missing.length > 0 || semanticDiff.extra.length > 0) {
+      addIssue(
+        `${themeMeta.path}: semantic token key parity mismatch vs ${baseMeta.path}; ` +
+        `missing (${semanticDiff.missing.length}): ${summarizeList(semanticDiff.missing)}; ` +
+        `extra (${semanticDiff.extra.length}): ${summarizeList(semanticDiff.extra)}`
+      )
+    }
+  }
+}
+
 function run() {
   const themes = {}
 
@@ -387,6 +472,7 @@ function run() {
 
   validateCrossThemeDrift(themes.dark, themes.light, 'default-pair')
   validateSoftPairDrift(themes.darkSoft, themes.lightSoft)
+  validateThemeParity(themes)
   validateFixtures()
 
   if (issues.length > 0) {

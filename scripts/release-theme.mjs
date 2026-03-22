@@ -51,7 +51,7 @@ function usage() {
   npm run release:theme -- --ver=vX.Y.Z
 
 Flow:
-  1) Run all audits (theme + CJK typography)
+  1) Run all audits (theme + copy + CJK + release consistency)
   2) Build website and sync outputs
   3) Generate extension preview images from fixtures`)
 }
