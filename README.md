@@ -7,24 +7,33 @@
 [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/hearth-code/hearth-theme)](https://open-vsx.org/extension/hearth-code/hearth-theme)
 [![Preview in vscode.dev](https://img.shields.io/badge/preview%20in-vscode.dev-blue)](https://vscode.dev/theme/hearth-code.hearth-theme/Hearth%20Dark)
 
-HearthCode is a warm, low-glare VS Code theme set built for long coding sessions.
-It keeps semantic hierarchy stable across `Hearth Dark`, `Hearth Dark Soft`, `Hearth Light`, and `Hearth Light Soft`, so your eyes do less relearning when your environment changes.
+HearthCode is a warm, low-glare color language for code interfaces.
+It is shipped today for Open VSX-compatible editors and VS Code, with stable semantic hierarchy across four tuned variants.
 
 ![HearthCode Long-session Preview](./extension/images/preview-contrast-v2.png)
 
-## Install
-
-- VS Code Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
-- Open VSX: <https://open-vsx.org/extension/hearth-code/hearth-theme>
-- VS Code Quick Open: `ext install hearth-code.hearth-theme`
-
 ## Why HearthCode
 
-- Warm palette with controlled saturation to reduce harsh glare
-- Stable semantic token roles across all four variants
-- Fixture-based screenshots and automated audits for release consistency
+- Warm palette with controlled saturation to reduce glare in long sessions
+- Stable semantic token roles across variants, so dark/light switching stays predictable
+- Contrast and hierarchy tuned as one system, not isolated single themes
 
-## Theme Variants
+## Quick Start
+
+1. Open VSX-compatible editors: <https://open-vsx.org/extension/hearth-code/hearth-theme>
+2. VS Code Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+3. VS Code Quick Open: `ext install hearth-code.hearth-theme`
+
+## Implementation Status
+
+| Surface | Status | Notes |
+| --- | --- | --- |
+| Open VSX ecosystem | Available | Primary cross-editor channel for Open VSX-compatible editors |
+| VS Code Marketplace | Available | Official VS Code distribution |
+| Web theme surfaces | Planned | Extend the same color language to site/UI surfaces |
+| More editor targets | Planned | Keep semantic mapping consistent across tooling |
+
+## Variants
 
 ### Hearth Dark (default)
 
@@ -57,32 +66,7 @@ Softer light contrast for long daytime sessions and reduced visual pressure.
 - Docs (ZH): <https://theme.hearthcode.dev/zh/docs>
 - Docs (JA): <https://theme.hearthcode.dev/ja/docs>
 - Source: <https://github.com/hearth-code/HearthTheme>
+- Changelog: <https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
 - Issues: <https://github.com/hearth-code/HearthTheme/issues>
 
-## Maintainer Notes
-
-This repository contains the website and extension package in one mono-repo.
-
-- Website app: `src/`
-- Extension package: `extension/`
-- Theme source of truth: `themes/`
-- Automation scripts: `scripts/`
-
-Key commands:
-
-- `pnpm dev`
-- `pnpm run sync`
-- `pnpm run check:sync`
-- `pnpm run audit:generated-origin -- --staged`
-- `pnpm run preview:generate`
-- `pnpm run audit:all`
-- `pnpm run build`
-
-Quality gates:
-
-- Git hooks (Husky):
-  - `pre-commit`: runs `pnpm run check:sync`
-  - `pre-commit`: runs `pnpm run audit:generated-origin -- --staged`
-  - `pre-push`: runs `pnpm run audit:generated-origin -- --upstream`
-  - `pre-push`: runs `pnpm run audit:all` and `pnpm run build`
-- CI (PR): runs `check:sync`, `audit:generated-origin`, `audit:all`, `build`, and extension package smoke test
+For maintainers, core source locations are `themes/`, `extension/`, `src/`, and `scripts/`.

@@ -5,18 +5,24 @@
 [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/hearth-code/hearth-theme)](https://open-vsx.org/extension/hearth-code/hearth-theme)
 [![Preview in vscode.dev](https://img.shields.io/badge/preview%20in-vscode.dev-blue)](https://vscode.dev/theme/hearth-code.hearth-theme/Hearth%20Dark)
 
-HearthCode is a warm, low-glare VS Code theme set built for long coding sessions.
-It keeps semantic token hierarchy stable across four variants, so switching between dark and light modes stays predictable.
+HearthCode is a warm, low-glare color language for code interfaces.  
+This package is the implementation surface for Open VSX-compatible editors and VS Code.
 
 ![HearthCode Long-session Comparison](images/preview-contrast-v2.png)
 
 ## Install
 
-- Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
-- Open VSX: <https://open-vsx.org/extension/hearth-code/hearth-theme>
-- VS Code Quick Open: `ext install hearth-code.hearth-theme`
+1. Open VSX-compatible editors: <https://open-vsx.org/extension/hearth-code/hearth-theme>
+2. VS Code Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+3. VS Code Quick Open: `ext install hearth-code.hearth-theme`
 
-## Pick Your Variant
+## Why this theme pack
+
+- Warm palette with controlled saturation to reduce harsh glare
+- Stable semantic mapping across all variants
+- One color language tuned for dark and light usage
+
+## Pick your variant
 
 ### Hearth Dark (default)
 
@@ -42,13 +48,7 @@ Softer light contrast for longer daytime sessions and calmer reading flow.
 
 ![Hearth Light Soft](images/preview-light-soft.png)
 
-## Why It Feels Better
-
-- Warm palette with controlled saturation to reduce harsh glare
-- Stable semantic mapping for keywords/functions/strings/types across all variants
-- Fixture-based screenshot generation and automated quality audits before release
-
-## Accessibility Snapshot
+## Accessibility snapshot
 
 - Dark editor foreground/background contrast: `9.9`
 - Dark Soft editor foreground/background contrast: `8.9`
@@ -56,17 +56,14 @@ Softer light contrast for longer daytime sessions and calmer reading flow.
 - Light Soft editor foreground/background contrast: `7.7`
 - Comment contrast window: `2.3 - 2.6`
 
-## Localized Docs
-
-- English docs: <https://theme.hearthcode.dev/docs>
-- Chinese docs: <https://theme.hearthcode.dev/zh/docs>
-- Japanese docs: <https://theme.hearthcode.dev/ja/docs>
-
-## Project Links
+## Learn more
 
 - Website: <https://theme.hearthcode.dev>
+- Baseline docs (EN): <https://theme.hearthcode.dev/docs>
+- Baseline docs (ZH): <https://theme.hearthcode.dev/zh/docs>
+- Baseline docs (JA): <https://theme.hearthcode.dev/ja/docs>
 - Source repository: <https://github.com/hearth-code/HearthTheme>
 - Changelog: [CHANGELOG.md](./CHANGELOG.md)
 - Issue tracker: <https://github.com/hearth-code/HearthTheme/issues>
 
-If HearthCode improves your workflow, a Marketplace rating helps more users discover it.
+If HearthCode improves your workflow, a rating or review helps more users discover it.
