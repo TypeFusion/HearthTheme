@@ -346,10 +346,6 @@ button:focus-visible {
   color: var(--hearth-logo-accent);
 }
 
-.hearth-nav-icon-shell {
-  background: var(--hearth-nav-icon-bg);
-}
-
 .hearth-heading {
   color: var(--hearth-text-heading);
 }

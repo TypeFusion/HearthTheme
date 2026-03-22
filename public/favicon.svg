@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
   <title>Hearth</title>
-  <rect width="128" height="128" rx="24" fill="#14120f" />
   <defs>
     <radialGradient id="hearthGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 64) rotate(90) scale(54)">
       <stop offset="0" stop-color="#52391f" />
