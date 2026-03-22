@@ -71,10 +71,11 @@ All palette changes must follow this order:
 2. If this is a deliberate palette-direction reset, update templates in `themes/templates/*.base.json` in the same PR.
 3. Run `npm run sync` (this generates Dark Soft / Light / Light Soft, then refreshes `src/data/tokens.ts`, `src/styles/theme-vars.css`, docs snapshot rows, and extension metadata color sync).
 4. Run `npm run check:sync` (must be clean right after sync).
-5. Run `npm run audit:all` (`theme + copy + cjk + release`).
-6. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
-7. If thresholds or governance changed, update this document and audit scripts in the same PR.
-8. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
+5. Run `npm run audit:generated-origin` (generated outputs must be backed by changes in `themes/` or `scripts/`).
+6. Run `npm run audit:all` (`theme + copy + generated-origin + cjk + release`).
+7. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
+8. If thresholds or governance changed, update this document and audit scripts in the same PR.
+9. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
 
 One-shot alternative:
 
@@ -90,6 +91,7 @@ One-shot alternative:
 - `extension/package.json` `galleryBanner.color` matches `themes/hearth-dark.json` background.
 - `docs/theme-baseline.md` semantic matrix + snapshot lines are in sync with current themes.
 - `npm run check:sync` passes (no generated drift after sync).
+- `npm run audit:generated-origin` passes (generated outputs are source-linked).
 - `npm run audit:theme` passes without blocking issues.
 - `npm run audit:copy` passes (variant count + color copy + README metrics parity).
 - `npm run audit:copy` also enforces "no hardcoded color literals" in site source files.

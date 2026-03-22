@@ -73,6 +73,7 @@ Key commands:
 - `pnpm dev`
 - `pnpm run sync`
 - `pnpm run check:sync`
+- `pnpm run audit:generated-origin -- --staged`
 - `pnpm run preview:generate`
 - `pnpm run audit:all`
 - `pnpm run build`
@@ -81,5 +82,7 @@ Quality gates:
 
 - Git hooks (Husky):
   - `pre-commit`: runs `pnpm run check:sync`
+  - `pre-commit`: runs `pnpm run audit:generated-origin -- --staged`
+  - `pre-push`: runs `pnpm run audit:generated-origin -- --upstream`
   - `pre-push`: runs `pnpm run audit:all` and `pnpm run build`
-- CI (PR): runs `pnpm run check:sync`, `pnpm run audit:all`, and `pnpm run build`
+- CI (PR): runs `check:sync`, `audit:generated-origin`, `audit:all`, `build`, and extension package smoke test

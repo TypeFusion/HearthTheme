@@ -73,6 +73,7 @@ HearthCode 是一套为长时编码设计的暖色、低眩光 VS Code 主题。
 - `pnpm dev`
 - `pnpm run sync`
 - `pnpm run check:sync`
+- `pnpm run audit:generated-origin -- --staged`
 - `pnpm run preview:generate`
 - `pnpm run audit:all`
 - `pnpm run build`
@@ -81,8 +82,9 @@ HearthCode 是一套为长时编码设计的暖色、低眩光 VS Code 主题。
 
 - Git hooks（Husky）：
   - `pre-commit`：执行 `pnpm run check:sync`
+  - `pre-commit`：执行 `pnpm run audit:generated-origin -- --staged`
+  - `pre-push`：执行 `pnpm run audit:generated-origin -- --upstream`
   - `pre-push`：执行 `pnpm run audit:all` 与 `pnpm run build`
 - CI（PR）：
-  - 执行 `pnpm run check:sync`
-  - 执行 `pnpm run audit:all`
-  - 执行 `pnpm run build`
+  - 执行 `check:sync`、`audit:generated-origin`、`audit:all`、`build`
+  - 增加扩展打包冒烟（产出 `.vsix` artifact）

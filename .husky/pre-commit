@@ -1,1 +1,2 @@
 pnpm run check:sync
+pnpm run audit:generated-origin -- --staged

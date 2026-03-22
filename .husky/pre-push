@@ -1,2 +1,3 @@
+pnpm run audit:generated-origin -- --upstream
 pnpm run audit:all
 pnpm run build

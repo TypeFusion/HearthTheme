@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         with:
@@ -33,6 +35,9 @@ jobs:
 
       - name: Verify sync output is committed
         run: pnpm run check:sync
+
+      - name: Audit generated output source-of-truth linkage
+        run: pnpm run audit:generated-origin -- --base-sha "${{ github.event.before }}" --head-sha "${{ github.sha }}"
 
       - name: Run audits
         run: pnpm run audit:all

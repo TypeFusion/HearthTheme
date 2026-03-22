@@ -32,15 +32,31 @@ function diffChangedFiles(paths) {
     .filter(Boolean)
 }
 
+function toSet(items) {
+  return new Set(items.map((item) => item.trim()).filter(Boolean))
+}
+
+function difference(left, right) {
+  const out = []
+  for (const item of left) {
+    if (!right.has(item)) out.push(item)
+  }
+  return out.sort()
+}
+
 function main() {
+  const beforeSync = toSet(diffChangedFiles(SYNCED_PATHS))
+
   process.stdout.write('[sync-check] Running theme sync...\n')
   execSync('node scripts/sync-themes.mjs', { stdio: 'inherit' })
 
-  const changed = diffChangedFiles(SYNCED_PATHS)
-  if (changed.length > 0) {
+  const afterSync = toSet(diffChangedFiles(SYNCED_PATHS))
+  const introduced = difference(afterSync, beforeSync)
+
+  if (introduced.length > 0) {
     process.stderr.write('\n[sync-check] Generated files drift detected after sync.\n')
     process.stderr.write('[sync-check] Stage/update these files before committing:\n')
-    for (const file of changed) {
+    for (const file of introduced) {
       process.stderr.write(`  - ${file}\n`)
     }
     process.stderr.write('\nRun: pnpm run sync && git add <files> && commit again.\n')

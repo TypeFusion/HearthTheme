@@ -1,0 +1,11 @@
+# Default owner
+* @hearth-code
+
+# Theme governance critical paths
+/themes/** @hearth-code
+/scripts/** @hearth-code
+/.github/workflows/** @hearth-code
+
+# Extension publish surface
+/extension/package.json @hearth-code
+/extension/themes/** @hearth-code

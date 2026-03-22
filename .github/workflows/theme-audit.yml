@@ -17,12 +17,16 @@ on:
       - 'pnpm-lock.yaml'
       - 'astro.config.mjs'
       - '.github/workflows/theme-audit.yml'
+      - '.github/CODEOWNERS'
+      - '.github/pull_request_template.md'
 
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         with:
@@ -39,8 +43,23 @@ jobs:
       - name: Verify sync output is committed
         run: pnpm run check:sync
 
+      - name: Audit generated output source-of-truth linkage
+        run: pnpm run audit:generated-origin -- --base-ref "${{ github.base_ref }}"
+
       - name: Run audits
         run: pnpm run audit:all
 
       - name: Build site
         run: pnpm run build
+
+      - name: Package extension smoke test
+        working-directory: extension
+        run: pnpm dlx @vscode/vsce package --no-dependencies --out hearth-theme-pr.vsix
+
+      - name: Upload extension smoke artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hearth-theme-pr-vsix
+          path: extension/hearth-theme-pr.vsix
+          if-no-files-found: error
+          retention-days: 7

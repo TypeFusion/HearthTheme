@@ -73,6 +73,7 @@ HearthCode は、長時間コーディング向けに設計した暖色・低グ
 - `pnpm dev`
 - `pnpm run sync`
 - `pnpm run check:sync`
+- `pnpm run audit:generated-origin -- --staged`
 - `pnpm run preview:generate`
 - `pnpm run audit:all`
 - `pnpm run build`
@@ -81,8 +82,9 @@ HearthCode は、長時間コーディング向けに設計した暖色・低グ
 
 - Git hooks (Husky):
   - `pre-commit`: `pnpm run check:sync` を実行
+  - `pre-commit`: `pnpm run audit:generated-origin -- --staged` を実行
+  - `pre-push`: `pnpm run audit:generated-origin -- --upstream` を実行
   - `pre-push`: `pnpm run audit:all` と `pnpm run build` を実行
 - CI (PR):
-  - `pnpm run check:sync`
-  - `pnpm run audit:all`
-  - `pnpm run build`
+  - `check:sync` / `audit:generated-origin` / `audit:all` / `build`
+  - 拡張パッケージのスモークパッケージング（`.vsix` artifact）を実行
