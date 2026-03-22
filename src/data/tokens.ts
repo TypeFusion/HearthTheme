@@ -42,12 +42,12 @@ export const tokens = {
     "status": "#9d4b12",
     "sidebar": "#e3d7c0",
     "border": "#d2c2a5",
-    "keyword": "#9e2f31",
-    "fn": "#0f69ca",
-    "string": "#006a0c",
-    "number": "#983e04",
-    "type": "#036470",
-    "variable": "#563620",
+    "keyword": "#9d3032",
+    "fn": "#1d53a4",
+    "string": "#00690f",
+    "number": "#973e07",
+    "type": "#106772",
+    "variable": "#56361f",
     "operator": "#81704e",
     "comment": "#a48e6a"
   },
@@ -59,14 +59,14 @@ export const tokens = {
     "status": "#8c5830",
     "sidebar": "#d3c4aa",
     "border": "#bdac8f",
-    "keyword": "#b25749",
-    "fn": "#1680cd",
-    "string": "#447f4d",
-    "number": "#b35823",
-    "type": "#3a7c7e",
-    "variable": "#4b2f16",
-    "operator": "#80704f",
-    "comment": "#988465"
+    "keyword": "#ae594c",
+    "fn": "#2971b0",
+    "string": "#487f4f",
+    "number": "#b05b29",
+    "type": "#437d7e",
+    "variable": "#4b2f18",
+    "operator": "#817050",
+    "comment": "#998466"
   }
 } as const
 export type TokenSet = typeof tokens.dark

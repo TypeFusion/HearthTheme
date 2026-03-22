@@ -20,7 +20,6 @@ const DOCS_BASELINE = 'docs/theme-baseline.md'
 const SITE_THEME_VARS = 'src/styles/theme-vars.css'
 const SOURCE_COLOR_SCAN_PATHS = ['src/components', 'src/layouts', 'src/styles']
 const LEGACY_HEX = ['#2a2723', '#ece2d3']
-const PHILOSOPHY_TOKENS = ['{darkBg}', '{darkSoftBg}', '{lightBg}', '{lightSoftBg}']
 
 const issues = []
 
@@ -172,10 +171,13 @@ function validatePhilosophyCopy() {
       continue
     }
 
-    for (const token of PHILOSOPHY_TOKENS) {
-      if (!body.includes(token)) {
-        addIssue(`${file}: philosophy.02.body missing token ${token}`)
-      }
+    const swatchAria = dict['philosophy.02.swatchesAria']
+    if (typeof swatchAria !== 'string' || swatchAria.trim().length === 0) {
+      addIssue(`${file}: missing "philosophy.02.swatchesAria"`)
+    }
+
+    if (/\{(?:darkBg|darkSoftBg|lightBg|lightSoftBg)\}/.test(body)) {
+      addIssue(`${file}: philosophy.02.body should not include raw palette placeholders`)
     }
 
     const hexSet = new Set(extractHexes(body))

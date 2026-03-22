@@ -19,14 +19,14 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 | --- | --- | --- | --- | --- | --- |
 | background | `#23201c` | `#2b2926` | `#efe6d8` | `#e4d8c5` | Blackboard vs parchment substrate |
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk ink vs walnut ink |
-| keyword | `#c26f59` | `#c26f59` | `#9e2f31` | `#b25749` | Ember red control-flow anchors |
-| operator | `#8f846f` | `#8f846f` | `#81704e` | `#80704f` | Low-noise brass connective symbols |
-| function | `#d7ad70` | `#d7ad70` | `#0f69ca` | `#1680cd` | Brass amber callable targets |
-| string | `#8fb87d` | `#8fb87d` | `#006a0c` | `#447f4d` | Moss green literal content |
-| number | `#ba846d` | `#ba846d` | `#983e04` | `#b35823` | Terracotta numeric constants |
-| type | `#5d98a4` | `#5d98a4` | `#036470` | `#3a7c7e` | Mineral teal structural symbols |
-| variable | `#dfd5c7` | `#dfd5c7` | `#563620` | `#4b2f16` | Neutral content carrier |
-| comment | `#6b5f4d` | `#6b5f4d` | `#a48e6a` | `#988465` | Intentionally quiet guidance layer |
+| keyword | `#c26f59` | `#c26f59` | `#9d3032` | `#ae594c` | Ember red control-flow anchors |
+| operator | `#8f846f` | `#8f846f` | `#81704e` | `#817050` | Low-noise brass connective symbols |
+| function | `#d7ad70` | `#d7ad70` | `#1d53a4` | `#2971b0` | Brass amber callable targets |
+| string | `#8fb87d` | `#8fb87d` | `#00690f` | `#487f4f` | Moss green literal content |
+| number | `#ba846d` | `#ba846d` | `#973e07` | `#b05b29` | Terracotta numeric constants |
+| type | `#5d98a4` | `#5d98a4` | `#106772` | `#437d7e` | Mineral teal structural symbols |
+| variable | `#dfd5c7` | `#dfd5c7` | `#56361f` | `#4b2f18` | Neutral content carrier |
+| comment | `#6b5f4d` | `#6b5f4d` | `#a48e6a` | `#998466` | Intentionally quiet guidance layer |
 
 ## 3) Readability Budget (Theme Audit Gates)
 

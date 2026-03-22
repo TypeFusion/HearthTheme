@@ -1,5 +1,5 @@
 ---
-import { t, tf, type Lang } from '../../i18n/utils'
+import { t, type Lang } from '../../i18n/utils'
 import { tokens } from '../../data/tokens'
 
 interface Props {
@@ -12,12 +12,12 @@ const s = tokens.darkSoft
 const l = tokens.light
 const ls = tokens.lightSoft
 
-const paletteVars = {
-  darkBg: d.bg,
-  darkSoftBg: s.bg,
-  lightBg: l.bg,
-  lightSoftBg: ls.bg,
-}
+const bgSwatches = [
+  { id: 'dark', label: 'Hearth Dark', color: d.bg },
+  { id: 'darkSoft', label: 'Dark Soft', color: s.bg },
+  { id: 'light', label: 'Hearth Light', color: l.bg },
+  { id: 'lightSoft', label: 'Light Soft', color: ls.bg },
+]
 
 const cards = [
   { num: '01', titleKey: 'philosophy.01.title', bodyKey: 'philosophy.01.body' },
@@ -26,10 +26,7 @@ const cards = [
   { num: '04', titleKey: 'philosophy.04.title', bodyKey: 'philosophy.04.body' },
 ]
 
-const bodyText = (key: string) => {
-  if (key !== 'philosophy.02.body') return t(lang, key)
-  return tf(lang, key, paletteVars)
-}
+const bodyText = (key: string) => t(lang, key)
 ---
 
 <section class="hearth-section hearth-section-y" data-reveal>
@@ -51,6 +48,16 @@ const bodyText = (key: string) => {
           <div class="hearth-feature-index">{num}</div>
           <h3 class="hearth-feature-title">{t(lang, titleKey)}</h3>
           <p class="hearth-copy hearth-feature-body">{bodyText(bodyKey)}</p>
+          {bodyKey === 'philosophy.02.body' && (
+            <ul class="hearth-bg-swatch-list" aria-label={t(lang, 'philosophy.02.swatchesAria')}>
+              {bgSwatches.map((swatch) => (
+                <li class="hearth-bg-swatch-item">
+                  <span class="hearth-bg-swatch-dot" style={`--swatch-color: ${swatch.color};`} aria-hidden="true"></span>
+                  <span class="hearth-bg-swatch-name">{swatch.label}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </article>
       ))}
     </div>

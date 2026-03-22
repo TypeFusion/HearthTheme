@@ -1,3 +1,10 @@
+## 1.0.16
+
+- Reworked light-theme separation strategy to prioritize perceptual layering (lightness structure) over aggressive chroma boosts.
+- Kept blue semantic roles in light variants while reducing over-saturation in `function`/`method`/`property`/`type` for a cleaner, more textured look.
+- Updated philosophy copy and homepage presentation for background strategy, replacing parameter-heavy text with direct visual swatches.
+- Regenerated synced theme assets, docs baseline, and preview images across website and extension outputs.
+
 ## 1.0.15
 
 - Fine-tuned blue/cool token saturation in `Hearth Light` and `Hearth Light Soft` to reduce over-vivid highlights while preserving token separability.

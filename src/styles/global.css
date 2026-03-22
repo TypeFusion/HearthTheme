@@ -967,6 +967,38 @@ button:focus-visible {
   max-width: 48ch;
 }
 
+.hearth-bg-swatch-list {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 0.56rem 1.1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hearth-bg-swatch-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hearth-bg-swatch-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 999px;
+  border: 1px solid var(--hearth-feature-border);
+  background: var(--swatch-color);
+  box-shadow:
+    inset 0 1px 0 var(--hearth-paper-edge-highlight),
+    0 0 0 1px var(--hearth-shadow-012);
+}
+
+.hearth-bg-swatch-name {
+  font-size: 0.8rem;
+  letter-spacing: 0.015em;
+  color: var(--hearth-metric-muted);
+}
+
 .hearth-paper {
   background-image:
     radial-gradient(560px 220px at 14% 0%, var(--hearth-paper-glow), transparent 70%),

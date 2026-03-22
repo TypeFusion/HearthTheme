@@ -309,48 +309,48 @@ const VARIANT_BOOST_PROFILE = {
     maxChroma: null,
   },
   light: {
-    maxNeededFactor: 1.75,
+    maxNeededFactor: 1.55,
     maxBoostRounds: 6,
-    roleBoostScale: 1,
+    roleBoostScale: 0.86,
     lightnessLiftScale: 1,
     maxChroma: null,
   },
   lightSoft: {
-    maxNeededFactor: 1.22,
+    maxNeededFactor: 1.16,
     maxBoostRounds: 4,
-    roleBoostScale: 0.48,
+    roleBoostScale: 0.42,
     lightnessLiftScale: 0.35,
-    maxChroma: 62,
+    maxChroma: 58,
   },
 }
 
 const LIGHT_COOL_ROLE_SOFTEN = {
   light: {
     factorByRole: {
-      function: 0.98,
-      method: 0.97,
-      property: 0.98,
-      type: 0.99,
+      function: 0.92,
+      method: 0.91,
+      property: 0.94,
+      type: 0.95,
     },
     maxChromaByRole: {
-      function: 63,
-      method: 59,
-      property: 56,
-      type: 52,
+      function: 54,
+      method: 51,
+      property: 49,
+      type: 45,
     },
   },
   lightSoft: {
     factorByRole: {
-      function: 0.97,
-      method: 0.96,
-      property: 0.98,
-      type: 0.98,
+      function: 0.89,
+      method: 0.88,
+      property: 0.92,
+      type: 0.93,
     },
     maxChromaByRole: {
-      function: 58,
-      method: 55,
-      property: 50,
-      type: 46,
+      function: 50,
+      method: 47,
+      property: 45,
+      type: 41,
     },
   },
 }
@@ -824,9 +824,17 @@ function roleSeparationBoostFactor(roleId) {
   if (roleId === 'comment') return 0.65
   if (roleId === 'operator') return 0.9
   if (roleId === 'variable' || roleId === 'parameter') return 0.75
-  if (roleId === 'method') return 1.6
-  if (roleId === 'function') return 1.4
-  return 1.18
+  if (roleId === 'method') return 1.22
+  if (roleId === 'function') return 1.02
+  return 1.08
+}
+
+function roleSeparationLightnessLift(roleId) {
+  if (roleId === 'method') return 3.2
+  if (roleId === 'function') return -1.6
+  if (roleId === 'property') return 0.8
+  if (roleId === 'type') return 0.4
+  return 0
 }
 
 function scaleColorChroma(hex, chromaFactor, lightnessLift = 0, maxChroma = null) {
@@ -867,7 +875,7 @@ function boostGlobalSeparation(theme, darkTheme, variantId, warnings, target, bo
     if (!current) continue
     const roleId = resolveRoleIdForTokenEntry(entry)
     const localFactor = 1 + (neededFactor - 1) * roleSeparationBoostFactor(roleId) * roleBoostScale
-    const baseLift = roleId === 'method' ? 4 : roleId === 'function' ? 2 : 0
+    const baseLift = roleSeparationLightnessLift(roleId)
     const lift = baseLift * lightnessLiftScale
     entry.settings = {
       ...entry.settings,
@@ -880,7 +888,7 @@ function boostGlobalSeparation(theme, darkTheme, variantId, warnings, target, bo
     if (!current) continue
     const roleId = resolveRoleIdForSemanticKey(semanticKey)
     const localFactor = 1 + (neededFactor - 1) * roleSeparationBoostFactor(roleId) * roleBoostScale
-    const baseLift = roleId === 'method' ? 4 : roleId === 'function' ? 2 : 0
+    const baseLift = roleSeparationLightnessLift(roleId)
     const lift = baseLift * lightnessLiftScale
     const boosted = scaleColorChroma(current, localFactor, lift, maxChroma)
     setSemanticColor(theme, semanticKey, boosted)
