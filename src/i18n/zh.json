@@ -37,7 +37,7 @@
   "philosophy.01.title": "余烬，而非火焰",
   "philosophy.01.body": "高饱和的语法色像明火，吸引注意但消耗眼力。Hearth 将所有高亮色的饱和度控制在 40–60%，像熄灭后的炭——有温度，不刺眼。",
   "philosophy.02.title": "非黑非白的背景",
-  "philosophy.02.body": "纯黑背景会在白色文字周围产生光晕效应，让文字边缘模糊。Hearth Dark（默认）使用 #23201c，Dark Soft 使用 #312c27，Hearth Light 使用 #efe6d8，Light Soft 使用 #e4d8c5，整体保持更暖更低眩光。",
+  "philosophy.02.body": "纯黑背景会在白色文字周围产生光晕效应，让文字边缘模糊。Hearth Dark（默认）使用 {darkBg}，Dark Soft 使用 {darkSoftBg}，Hearth Light 使用 {lightBg}，Light Soft 使用 {lightSoftBg}，整体保持更暖更低眩光。",
   "philosophy.03.title": "层次即语义",
   "philosophy.03.body": "颜色亮度直接映射代码语义权重：关键字最显眼，函数名次之，变量再次，注释刻意退到背景里。",
   "philosophy.04.title": "色温即护眼",

@@ -16,6 +16,7 @@ const I18N_FILES = {
 const EXTENSION_README = 'extension/README.md'
 const README_JA = 'README.ja.md'
 const LEGACY_HEX = ['#2a2723', '#ece2d3']
+const PHILOSOPHY_TOKENS = ['{darkBg}', '{darkSoftBg}', '{lightBg}', '{lightSoftBg}']
 
 const issues = []
 
@@ -105,19 +106,6 @@ function escapeRegExp(text) {
 }
 
 function validatePhilosophyCopy() {
-  const dark = readJson(THEME_FILES.dark)
-  const darkSoft = readJson(THEME_FILES.darkSoft)
-  const light = readJson(THEME_FILES.light)
-  const lightSoft = readJson(THEME_FILES.lightSoft)
-  if (!dark || !darkSoft || !light || !lightSoft) return
-
-  const expectedHex = [
-    normalizeHex(dark.colors?.['editor.background']),
-    normalizeHex(darkSoft.colors?.['editor.background']),
-    normalizeHex(light.colors?.['editor.background']),
-    normalizeHex(lightSoft.colors?.['editor.background']),
-  ].filter(Boolean)
-
   for (const [lang, file] of Object.entries(I18N_FILES)) {
     const dict = readJson(file)
     if (!dict) continue
@@ -128,20 +116,24 @@ function validatePhilosophyCopy() {
       continue
     }
 
-    const hexSet = new Set(extractHexes(body))
-    for (const hex of expectedHex) {
-      if (!hexSet.has(hex)) {
-        addIssue(`${file}: philosophy.02.body missing expected hex ${hex}`)
+    for (const token of PHILOSOPHY_TOKENS) {
+      if (!body.includes(token)) {
+        addIssue(`${file}: philosophy.02.body missing token ${token}`)
       }
     }
 
+    const hexSet = new Set(extractHexes(body))
+    if (hexSet.size > 0) {
+      addIssue(`${file}: philosophy.02.body should not hardcode palette hex values`)
+    }
+
     for (const staleHex of LEGACY_HEX) {
-      if (hexSet.has(staleHex)) {
+      if (body.includes(staleHex)) {
         addIssue(`${file}: philosophy.02.body still contains stale hex ${staleHex}`)
       }
     }
 
-    if (lang !== 'en' && (hexSet.size < 4 || body.includes('3 variants'))) {
+    if (lang !== 'en' && body.includes('3 variants')) {
       addIssue(`${file}: philosophy.02.body appears stale or incomplete`)
     }
   }

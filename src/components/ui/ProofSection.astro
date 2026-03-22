@@ -44,10 +44,10 @@ const variants = [
         {t(lang, "proof.label")}
         <span class="hearth-line"></span>
       </p>
-      <h2 class="text-[1.9rem] sm:text-[2.25rem] leading-[1.18] tracking-[-0.015em] text-[#f0e2ca] font-semibold mb-4">
+      <h2 class="hearth-heading text-[1.9rem] sm:text-[2.25rem] leading-[1.18] tracking-[-0.015em] font-semibold mb-4">
         {t(lang, "proof.title")}
       </h2>
-      <p class="hearth-copy text-[#c7b69b] max-w-[920px] mb-8">
+      <p class="hearth-copy hearth-copy-soft max-w-[920px] mb-8">
         {t(lang, "proof.subtitle")}
       </p>
     </div>
@@ -58,10 +58,10 @@ const variants = [
           <article
             data-reveal
             style={`--reveal-delay: ${90 + index * 70}ms;`}
-            class="rounded-xl border border-[#d6b587]/20 bg-[rgba(255,255,255,0.02)] px-4 py-4"
+            class="hearth-proof-metric-card rounded-xl px-4 py-4"
           >
-            <p class="font-ui text-[1.1rem] font-semibold text-[#f0dfc4]">{t(lang, valueKey)}</p>
-            <p class="hearth-meta text-[#9f8f77] mt-1">{t(lang, labelKey)}</p>
+            <p class="hearth-proof-metric-title font-ui text-[1.1rem] font-semibold">{t(lang, valueKey)}</p>
+            <p class="hearth-meta hearth-meta-muted mt-1">{t(lang, labelKey)}</p>
           </article>
         ))
       }
@@ -73,12 +73,12 @@ const variants = [
           <article
             data-reveal
             style={`--reveal-delay: ${320 + index * 70}ms;`}
-            class="rounded-xl border border-[#d6b587]/18 bg-[rgba(255,255,255,0.015)] overflow-hidden"
+            class="hearth-proof-variant-card rounded-xl overflow-hidden"
           >
             <img src={image} alt={t(lang, titleKey)} class="w-full h-auto" loading="lazy" />
             <div class="px-4 py-4">
-              <h3 class="font-ui text-[1rem] font-semibold text-[#ead8bc]">{t(lang, titleKey)}</h3>
-              <p class="hearth-meta text-[#a99980] mt-2 leading-[1.7]">{t(lang, bodyKey)}</p>
+              <h3 class="hearth-proof-variant-title font-ui text-[1rem] font-semibold">{t(lang, titleKey)}</h3>
+              <p class="hearth-proof-variant-body hearth-meta mt-2 leading-[1.7]">{t(lang, bodyKey)}</p>
             </div>
           </article>
         ))

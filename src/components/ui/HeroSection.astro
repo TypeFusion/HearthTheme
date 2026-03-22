@@ -19,7 +19,7 @@ const githubUrl = 'https://github.com/hearth-code/HearthTheme'
         <p
           data-reveal
           style="--reveal-delay: 90ms;"
-          class="hearth-kicker inline-flex items-center gap-3 mb-6 sm:mb-8 text-[#c7985f]"
+          class="hearth-kicker hearth-kicker-accent inline-flex items-center gap-3 mb-6 sm:mb-8"
         >
           <span class="hearth-line"></span>
           {t(lang, 'hero.eyebrow')}
@@ -30,8 +30,8 @@ const githubUrl = 'https://github.com/hearth-code/HearthTheme'
           style="--reveal-delay: 150ms;"
           class="hearth-hero-title mb-6 sm:mb-8"
         >
-          <span class="text-[#ece2cf]">{t(lang, 'hero.brand.hearth')}</span>
-          <span class="text-[#d09452] ml-2 sm:ml-3">{t(lang, 'hero.brand.code')}</span>
+          <span class="hearth-brand-main">{t(lang, 'hero.brand.hearth')}</span>
+          <span class="hearth-brand-accent ml-2 sm:ml-3">{t(lang, 'hero.brand.code')}</span>
         </h1>
 
         <p
@@ -51,7 +51,7 @@ const githubUrl = 'https://github.com/hearth-code/HearthTheme'
             href={marketplaceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full border border-[#e1bc87]/35 bg-[linear-gradient(135deg,rgba(198,132,61,0.3),rgba(130,83,35,0.2))] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#f5ddba] shadow-[0_8px_24px_rgba(0,0,0,0.24)] hover:border-[#f0ca92]/55 hover:text-[#ffe8c5]"
+            class="hearth-btn-primary inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em]"
           >
             <span>{t(lang, 'hero.cta.install')}</span>
             <span aria-hidden="true">↗</span>
@@ -60,7 +60,7 @@ const githubUrl = 'https://github.com/hearth-code/HearthTheme'
             href={openVsxUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full border border-[#d8c3a3]/30 bg-[rgba(255,255,255,0.02)] px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em] text-[#e5d5bd] shadow-[0_8px_24px_rgba(0,0,0,0.18)] hover:border-[#e7cfab]/55 hover:text-[#f5e6cc]"
+            class="hearth-btn-secondary inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em]"
           >
             <span>{t(lang, 'hero.cta.openvsx')}</span>
             <span aria-hidden="true">↗</span>
@@ -69,14 +69,14 @@ const githubUrl = 'https://github.com/hearth-code/HearthTheme'
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full border border-[#cfb07f]/24 bg-[rgba(255,255,255,0.015)] px-4 py-2.5 font-ui text-[0.8rem] font-semibold tracking-[0.02em] text-[#ceb996] hover:border-[#e7cfab]/45 hover:text-[#ecd8b3]"
+            class="hearth-btn-tertiary inline-flex items-center gap-2 rounded-full border px-4 py-2.5 font-ui text-[0.8rem] font-semibold tracking-[0.02em]"
           >
             <span>{t(lang, 'hero.cta.star')}</span>
             <span aria-hidden="true">↗</span>
           </a>
         </div>
 
-        <p data-reveal style="--reveal-delay: 300ms;" class="hearth-meta text-[#9f8f77]">
+        <p data-reveal style="--reveal-delay: 300ms;" class="hearth-meta hearth-meta-muted">
           {t(lang, 'hero.cta.hint')}
         </p>
       </div>

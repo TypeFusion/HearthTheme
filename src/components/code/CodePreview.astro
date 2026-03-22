@@ -220,8 +220,8 @@ npm run build
   html: `<!-- Hearth UI component -->
 <style>
   :root {
-    --HearthCode: #c9833a;
-    --bg: #23201c;
+    --HearthCode: var(--hearth-ember);
+    --bg: var(--hearth-bg);
   }
   .card {
     background: var(--bg);
@@ -284,7 +284,7 @@ const tabs = [
               </button>
             ))}
           </div>
-          <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border border-[#d4b58d]/22 p-1">
+          <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border p-1">
             <button data-theme-tab="dark" class="theme-tab is-active">Dark</button>
             <button data-theme-tab="soft" class="theme-tab">Dark Soft</button>
             <button data-theme-tab="light" class="theme-tab">Light</button>
@@ -360,7 +360,7 @@ const tabs = [
                 </button>
               ))}
             </div>
-            <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border border-[#d4b58d]/22 p-1">
+            <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border p-1">
               <button data-theme-tab="dark" class="theme-tab is-active">Dark</button>
               <button data-theme-tab="soft" class="theme-tab">Dark Soft</button>
               <button data-theme-tab="light" class="theme-tab">Light</button>
@@ -445,7 +445,7 @@ const tabs = [
 
   .preview-tab {
     position: relative;
-    color: #a08e74;
+    color: var(--hearth-muted);
     background: transparent;
     border: none;
     border-radius: 0;
@@ -470,7 +470,7 @@ const tabs = [
   }
 
   .preview-tab:hover {
-    color: #dec9aa;
+    color: var(--hearth-fg);
   }
 
   .preview-tab:hover::after {
@@ -479,8 +479,12 @@ const tabs = [
   }
 
   .preview-tab.is-active {
-    color: #f3ddbd;
+    color: var(--hearth-brand-main);
     text-shadow: 0 0 10px rgb(255 202 138 / 0.16);
+  }
+
+  .theme-switch {
+    border-color: rgb(212 181 141 / 0.22);
   }
 
   .preview-tab.is-active::after {
@@ -493,7 +497,7 @@ const tabs = [
     border-radius: 9999px;
     padding: 0.3rem 0.72rem;
     background: transparent;
-    color: #bba786;
+    color: var(--hearth-muted);
     font-family: var(--font-ui);
     font-size: 11px;
     line-height: 1;
@@ -503,11 +507,11 @@ const tabs = [
   }
 
   .theme-tab:hover {
-    color: #ead4b2;
+    color: var(--hearth-fg);
   }
 
   .theme-tab.is-active {
-    color: #f8e3c1;
+    color: var(--hearth-brand-main);
     background: rgb(199 140 75 / 0.26);
     box-shadow: inset 0 0 0 1px rgb(236 192 134 / 0.24);
   }
@@ -533,8 +537,8 @@ const tabs = [
   .preview-stage--compact .shiki-wrap {
     max-height: clamp(340px, 48svh, 480px);
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
-    mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, black 0%, black 86%, transparent 100%);
+    mask-image: linear-gradient(180deg, black 0%, black 86%, transparent 100%);
     scrollbar-width: none;
   }
 
@@ -575,8 +579,8 @@ const tabs = [
 
     .preview-stage--compact .shiki-wrap {
       max-height: clamp(180px, 27svh, 260px);
-      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 84%, transparent 100%);
-      mask-image: linear-gradient(180deg, #000 0%, #000 84%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, black 0%, black 84%, transparent 100%);
+      mask-image: linear-gradient(180deg, black 0%, black 84%, transparent 100%);
     }
 
     .shiki-wrap :global(code) {

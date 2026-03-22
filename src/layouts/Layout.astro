@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { t, languages, type Lang } from "../i18n/utils";
+import { tokens } from "../data/tokens";
 
 interface Props {
 	title?: string;
@@ -14,6 +15,7 @@ const url = Astro.url;
 const pageTitle = title ? `${title} — HearthCode` : "HearthCode — VSCode Color Theme";
 
 const pageDescription = description ?? t(lang, "hero.subtitle");
+const themeColor = tokens.dark.bg;
 
 const home = lang === "en" ? "/" : `/${lang}`;
 const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
@@ -23,7 +25,7 @@ const issuesUrl = "https://github.com/hearth-code/HearthTheme/issues";
 const licenseUrl = "https://github.com/hearth-code/HearthTheme/blob/main/LICENSE";
 const isDocsPage = /\/docs\/?$/.test(url.pathname);
 const isHomePage = !isDocsPage;
-const footerMetaClass = "font-ui hearth-meta text-[#504838]";
+const footerMetaClass = "font-ui hearth-meta hearth-footer-meta";
 const siteBase = Astro.site ?? new URL(url.origin);
 const langHref = (target: Lang) =>
 	isDocsPage
@@ -46,7 +48,7 @@ const ogImage = new URL("/og-hearth.png", siteBase).href;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content={pageDescription} />
 		<meta name="author" content="HearthCode" />
-		<meta name="theme-color" content="#23201c" />
+		<meta name="theme-color" content={themeColor} />
 		<meta name="hearthcode:marketplace" content={marketplaceUrl} />
 
 		<!-- Open Graph -->
@@ -99,7 +101,7 @@ const ogImage = new URL("/og-hearth.png", siteBase).href;
 					<img
 						src="/favicon.svg"
 						alt="HearthCode"
-						class="h-6 w-6 rounded-md bg-[#171411] p-0.5 shadow-[0_6px_16px_rgba(0,0,0,0.22)]"
+						class="hearth-nav-icon-shell h-6 w-6 rounded-md p-0.5 shadow-[0_6px_16px_rgba(0,0,0,0.22)]"
 					/>
 					<span class="hearth-brand-label">
 						<span class="hearth-brand-hearth">Hearth</span>
@@ -161,8 +163,8 @@ const ogImage = new URL("/og-hearth.png", siteBase).href;
 		<footer class="hearth-footer">
 			<div class="hearth-footer-row">
 				<span class="font-ui font-semibold tracking-[-0.01em] text-[1.05rem]">
-					<span class="text-[#d9cfbc]">Hearth</span>
-					<span class="text-[#d39b58] ml-1">Code</span>
+					<span class="hearth-logo-main">Hearth</span>
+					<span class="hearth-logo-accent ml-1">Code</span>
 				</span>
 				<span class={footerMetaClass}>
 					HearthCode.dev &nbsp;·&nbsp; {t(lang, "footer.tagline")}

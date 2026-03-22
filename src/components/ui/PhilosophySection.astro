@@ -1,11 +1,23 @@
 ---
-import { t, type Lang } from '../../i18n/utils'
+import { t, tf, type Lang } from '../../i18n/utils'
+import { tokens } from '../../data/tokens'
 
 interface Props {
   lang: Lang
 }
 
 const { lang } = Astro.props
+const d = tokens.dark
+const s = tokens.darkSoft
+const l = tokens.light
+const ls = tokens.lightSoft
+
+const paletteVars = {
+  darkBg: d.bg,
+  darkSoftBg: s.bg,
+  lightBg: l.bg,
+  lightSoftBg: ls.bg,
+}
 
 const cards = [
   { num: '01', titleKey: 'philosophy.01.title', bodyKey: 'philosophy.01.body' },
@@ -13,6 +25,11 @@ const cards = [
   { num: '03', titleKey: 'philosophy.03.title', bodyKey: 'philosophy.03.body' },
   { num: '04', titleKey: 'philosophy.04.title', bodyKey: 'philosophy.04.body' },
 ]
+
+const bodyText = (key: string) => {
+  if (key !== 'philosophy.02.body') return t(lang, key)
+  return tf(lang, key, paletteVars)
+}
 ---
 
 <section class="hearth-section hearth-section-y" data-reveal>
@@ -33,7 +50,7 @@ const cards = [
         >
           <div class="hearth-feature-index">{num}</div>
           <h3 class="hearth-feature-title">{t(lang, titleKey)}</h3>
-          <p class="hearth-copy hearth-feature-body">{t(lang, bodyKey)}</p>
+          <p class="hearth-copy hearth-feature-body">{bodyText(bodyKey)}</p>
         </article>
       ))}
     </div>
