@@ -24,7 +24,14 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+main {
+  display: block;
+  width: 100%;
+  min-width: 0;
 }
 
 body.app-shell {
@@ -174,6 +181,7 @@ button:focus-visible {
 
 .hearth-section {
   padding-inline: clamp(1.1rem, 6.2vw, 5.4rem);
+  min-width: 0;
 }
 
 .hearth-section-y {
@@ -183,10 +191,12 @@ button:focus-visible {
 .hearth-shell {
   width: min(var(--hearth-content-max), 100%);
   margin-inline: auto;
+  min-width: 0;
 }
 
 .hearth-intro {
   margin-bottom: var(--hearth-intro-gap);
+  min-width: 0;
 }
 
 .hearth-intro .hearth-kicker {
@@ -207,6 +217,8 @@ button:focus-visible {
   letter-spacing: -0.026em;
   line-height: 0.95;
   font-weight: 640;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hearth-subtitle {
@@ -215,6 +227,8 @@ button:focus-visible {
   line-height: 1.68;
   font-size: var(--hearth-lead-size);
   font-weight: 450;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hearth-hero-title {
@@ -247,6 +261,7 @@ button:focus-visible {
   background: transparent;
   backdrop-filter: none;
   box-shadow: none;
+  min-width: 0;
 }
 
 .hearth-surface::before {
@@ -410,10 +425,14 @@ button:focus-visible {
 
 .hearth-doc-heading {
   color: var(--hearth-doc-heading);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hearth-doc-body {
   color: var(--hearth-doc-body);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hearth-doc-mono {
@@ -422,6 +441,8 @@ button:focus-visible {
 
 .hearth-doc-note {
   color: var(--hearth-doc-note);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .hearth-doc-swatch {
@@ -589,11 +610,13 @@ button:focus-visible {
 
 .hearth-topbar-inner {
   max-width: min(1320px, 100%);
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   column-gap: 0.9rem;
+  min-width: 0;
 }
 
 .hearth-brand {
@@ -1114,6 +1137,11 @@ html:lang(ja) .font-mono {
 @media (max-width: 640px) {
   .hearth-section {
     padding-inline: 1rem;
+  }
+
+  .hearth-title {
+    font-size: clamp(2.06rem, 10vw, 2.55rem);
+    line-height: 1.02;
   }
 
   .hearth-tail-wrap {

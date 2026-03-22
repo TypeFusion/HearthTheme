@@ -12,6 +12,9 @@ const d = tokens.dark;
 const s = tokens.darkSoft;
 const l = tokens.light;
 const ls = tokens.lightSoft;
+const changelogUrl = "https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md";
+const CHANGELOG_VISIBLE_RELEASES = 6;
+const CHANGELOG_VISIBLE_CHANGES = 2;
 
 interface ExtensionReleaseRow {
 	version: string;
@@ -76,7 +79,9 @@ const copy = {
 		budgetTarget: "Target",
 		snapshotTitle: "Current Snapshot",
 		changelogTitle: "Change History",
-		changelogSubtitle: "Synced from extension/CHANGELOG.md to keep website and Marketplace releases aligned.",
+		changelogSubtitle: "Only the latest releases are shown here for quick scanning.",
+		changelogFullLink: "View full changelog",
+		changelogMoreChangesLabel: "more changes in full changelog",
 		releasePrefix: "Release",
 		noReleaseNotes: "No release notes found in extension/CHANGELOG.md.",
 		protocolTitle: "Change Protocol",
@@ -122,7 +127,9 @@ const copy = {
 		budgetTarget: "目标",
 		snapshotTitle: "当前快照",
 		changelogTitle: "变更历史",
-		changelogSubtitle: "从 extension/CHANGELOG.md 同步，保证网站与 Marketplace 发布记录一致。",
+		changelogSubtitle: "页面仅展示最新版本摘要，便于快速浏览。",
+		changelogFullLink: "查看完整变更日志",
+		changelogMoreChangesLabel: "项变更见完整日志",
 		releasePrefix: "版本",
 		noReleaseNotes: "未在 extension/CHANGELOG.md 中找到发布记录。",
 		protocolTitle: "变更流程",
@@ -169,7 +176,9 @@ const copy = {
 		budgetTarget: "目標",
 		snapshotTitle: "現在のスナップショット",
 		changelogTitle: "変更履歴",
-		changelogSubtitle: "extension/CHANGELOG.md を単一ソースとして、Web と Marketplace の履歴を一致させます。",
+		changelogSubtitle: "このページでは最新リリース要約のみを表示します。",
+		changelogFullLink: "完全な変更履歴を見る",
+		changelogMoreChangesLabel: "件の変更は完全版に掲載",
 		releasePrefix: "リリース",
 		noReleaseNotes: "extension/CHANGELOG.md にリリース履歴が見つかりません。",
 		protocolTitle: "変更プロトコル",
@@ -200,6 +209,7 @@ const copy = {
 
 const c = copy[lang];
 const changelogRows = readExtensionChangelogRows();
+const changelogPreviewRows = changelogRows.slice(0, CHANGELOG_VISIBLE_RELEASES);
 
 const semanticRows = [
 	{ role: "background", dark: d.bg, darkSoft: s.bg, light: l.bg, lightSoft: ls.bg, note: c.roles.background },
@@ -281,8 +291,36 @@ const snapshot = {
 
 			<section class="hearth-surface hearth-card p-6 sm:p-8">
 				<h2 class="font-ui font-semibold tracking-[-0.014em] text-[1.82rem] hearth-doc-heading mb-6">{c.matrixTitle}</h2>
-				<div class="overflow-x-auto">
-					<table class="hearth-table text-[0.95rem]">
+				<div class="md:hidden grid gap-3">
+					{
+						semanticRows.map((row) => (
+							<article class="hearth-surface hearth-surface-soft hearth-card border hearth-doc-divider bg-[var(--hearth-surface-soft-bg)] p-4">
+								<div class="mb-2">
+									<h3 class="hearth-doc-heading font-mono text-[13px] mb-1">{row.role}</h3>
+									<p class="hearth-doc-note text-[0.94rem] leading-relaxed">{row.note}</p>
+								</div>
+								<div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+									{[
+										{ label: c.dark, value: row.dark },
+										{ label: c.darkSoft, value: row.darkSoft },
+										{ label: c.light, value: row.light },
+										{ label: c.lightSoft, value: row.lightSoft },
+									].map((variant) => (
+										<div class="min-w-0 border hearth-doc-divider rounded-sm bg-[var(--hearth-grid-line-soft)] px-2.5 py-2">
+											<p class="hearth-meta mb-1">{variant.label}</p>
+											<span class="inline-flex items-center gap-2 font-mono text-[12px] hearth-doc-mono">
+												<span class="inline-block w-3 h-3 rounded-sm border hearth-doc-swatch" style={`background: ${variant.value}`}></span>
+												{variant.value}
+											</span>
+										</div>
+									))}
+								</div>
+							</article>
+						))
+					}
+				</div>
+				<div class="hidden md:block overflow-x-auto">
+					<table class="hearth-table text-[0.95rem] min-w-[980px]">
 						<thead>
 							<tr>
 								<th class="hearth-meta">{c.role}</th>
@@ -322,7 +360,7 @@ const snapshot = {
 												{row.lightSoft}
 											</span>
 										</td>
-										<td class="hearth-doc-note">{row.note}</td>
+										<td class="hearth-doc-note min-w-[16rem]">{row.note}</td>
 									</tr>
 								))
 							}
@@ -334,24 +372,26 @@ const snapshot = {
 			<section class="grid lg:grid-cols-2 gap-7 sm:gap-8">
 				<div class="hearth-surface hearth-card p-6 sm:p-8">
 					<h2 class="font-ui font-semibold tracking-[-0.014em] text-[1.76rem] hearth-doc-heading mb-6">{c.budgetTitle}</h2>
-					<table class="hearth-table text-[0.95rem]">
-						<thead>
-							<tr>
-								<th class="hearth-meta">{c.budgetMetric}</th>
-								<th class="hearth-meta">{c.budgetTarget}</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								budgetRows.map((row) => (
-									<tr>
-										<td class="hearth-doc-mono">{row.metric}</td>
-										<td class="hearth-doc-heading font-mono text-[12.5px]">{row.target}</td>
-									</tr>
-								))
-							}
-						</tbody>
-					</table>
+					<div class="overflow-x-auto">
+						<table class="hearth-table text-[0.95rem] min-w-[420px]">
+							<thead>
+								<tr>
+									<th class="hearth-meta">{c.budgetMetric}</th>
+									<th class="hearth-meta">{c.budgetTarget}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									budgetRows.map((row) => (
+										<tr>
+											<td class="hearth-doc-mono">{row.metric}</td>
+											<td class="hearth-doc-heading font-mono text-[12.5px]">{row.target}</td>
+										</tr>
+									))
+								}
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 				<div class="hearth-surface hearth-card p-6 sm:p-8">
@@ -418,14 +458,24 @@ const snapshot = {
 
 			<section class="hearth-surface hearth-card p-6 sm:p-8">
 				<h2 class="font-ui font-semibold tracking-[-0.014em] text-[1.76rem] hearth-doc-heading mb-2">{c.changelogTitle}</h2>
-				<p class="hearth-copy hearth-doc-date text-[0.98rem] mb-6">{c.changelogSubtitle}</p>
+				<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+					<p class="hearth-copy hearth-doc-date text-[0.98rem]">{c.changelogSubtitle}</p>
+					<a
+						href={changelogUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hearth-footer-link text-[0.78rem]"
+					>
+						{c.changelogFullLink}
+					</a>
+				</div>
 				{
 					changelogRows.length === 0 ? (
 						<p class="hearth-copy hearth-doc-body text-[0.98rem]">{c.noReleaseNotes}</p>
 					) : (
 						<div class="grid gap-4">
 							{
-								changelogRows.map((entry) => (
+								changelogPreviewRows.map((entry) => (
 									<article class="hearth-surface hearth-surface-soft hearth-card p-6">
 										<div class="flex items-center justify-between gap-4 mb-3">
 											<span class="font-mono text-[12.5px] hearth-doc-heading">{entry.version}</span>
@@ -438,8 +488,15 @@ const snapshot = {
 										{
 											entry.changes.length > 0 ? (
 												<ul class="space-y-1.5 hearth-doc-bullet text-[0.99rem] leading-relaxed hearth-copy">
-													{entry.changes.map((line) => <li>• {line}</li>)}
+													{entry.changes.slice(0, CHANGELOG_VISIBLE_CHANGES).map((line) => <li>• {line}</li>)}
 												</ul>
+											) : null
+										}
+										{
+											entry.changes.length > CHANGELOG_VISIBLE_CHANGES ? (
+												<p class="hearth-copy hearth-doc-date text-[0.88rem] mt-3">
+													+ {entry.changes.length - CHANGELOG_VISIBLE_CHANGES} {c.changelogMoreChangesLabel}
+												</p>
 											) : null
 										}
 									</article>
