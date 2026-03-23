@@ -250,7 +250,7 @@
     "lightSoft": {
       "maxNeededFactor": 1.16,
       "maxBoostRounds": 4,
-      "roleBoostScale": 0.42,
+      "roleBoostScale": 0.48,
       "lightnessLiftScale": 0.35,
       "maxChroma": 58
     }

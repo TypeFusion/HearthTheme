@@ -176,7 +176,7 @@
                 "meta.method-call.rust entity.name.function.rust"
             ],
             "settings": {
-                "foreground": "#8fcdec"
+                "foreground": "#8bc6d3"
             }
         },
         {
@@ -248,7 +248,7 @@
                 "variable.other.constant"
             ],
             "settings": {
-                "foreground": "#dfd5c7"
+                "foreground": "#d8cebf"
             }
         },
         {
@@ -369,14 +369,14 @@
     ],
     "semanticHighlighting": true,
     "semanticTokenColors": {
-        "variable": "#dfd5c7",
+        "variable": "#d8cebf",
         "variable.readonly": "#c89254",
         "property": "#6eb2d1",
         "property.readonly": "#c89254",
         "function": "#dbb171",
-        "method": "#8fcdec",
-        "function.defaultLibrary": "#8fcdec",
-        "method.defaultLibrary": "#8fcdec",
+        "method": "#8bc6d3",
+        "function.defaultLibrary": "#8bc6d3",
+        "method.defaultLibrary": "#8bc6d3",
         "class": {
             "foreground": "#60a3b1",
             "fontStyle": "italic"

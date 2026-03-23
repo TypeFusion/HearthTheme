@@ -26,8 +26,8 @@
       "lightSoft": "#8f6e2d"
     },
     "method": {
-      "dark": "#73c3e3",
-      "darkSoft": "#78d4ff",
+      "dark": "#6fbfd1",
+      "darkSoft": "#78cee0",
       "light": "#0092c2",
       "lightSoft": "#2f8fb3"
     },
@@ -46,7 +46,7 @@
     "number": {
       "dark": "#ba846d",
       "darkSoft": "#d5865f",
-      "light": "#bf5d22",
+      "light": "#b36938",
       "lightSoft": "#c36832"
     },
     "type": {
@@ -56,8 +56,8 @@
       "lightSoft": "#3a7a7e"
     },
     "variable": {
-      "dark": "#dfd5c7",
-      "darkSoft": "#dfd5c7",
+      "dark": "#d8cebf",
+      "darkSoft": "#d8cebf",
       "light": "#5a3c28",
       "lightSoft": "#654a35"
     },

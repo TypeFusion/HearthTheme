@@ -6,10 +6,10 @@ Updated: 2026-03-23
 
 Hearth uses one semantic language across four variants:
 
-- Dark mode (`Hearth Dark`): soot blackboard, chalk-like glyphs, ember highlights.
-- Dark Soft (`Hearth Dark Soft`): same semantic roles with softer substrate contrast.
-- Light mode (`Hearth Light`): parchment base, walnut ink text, brass/ember accents.
-- Light Soft (`Hearth Light Soft`): same light-mode semantics with calmer daytime contrast.
+- Dark mode (`Hearth Dark`): soot blackboard, chalk-like glyphs, ember highlights; tuned as a daily driver for mixed-light environments.
+- Dark Soft (`Hearth Dark Soft`): same semantic roles with softer substrate contrast; tuned for night work and low-stimulation focus.
+- Light mode (`Hearth Light`): parchment base, walnut ink text, brass/ember accents; tuned for daytime office and document-dense reading.
+- Light Soft (`Hearth Light Soft`): same light-mode semantics with calmer daytime contrast; tuned for long daytime sessions.
 
 Role parity is mandatory: syntax roles keep the same meaning across all variants; tuning is mainly via lightness/chroma, with bounded hue compensation when readability requires it.
 
@@ -17,17 +17,17 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 
 | Role | Dark | Dark Soft | Light | Light Soft | Narrative Role |
 | --- | --- | --- | --- | --- | --- |
-| background | `#23201c` | `#2b2926` | `#efe6d8` | `#e4d8c5` | Blackboard vs parchment substrate |
+| background | `#23201c` | `#2b2926` | `#ece2d3` | `#dfd2be` | Blackboard vs parchment substrate |
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk ink vs walnut ink |
 | keyword | `#c26f59` | `#cb6d4e` | `#a33a2f` | `#ab5b47` | Ember red control-flow anchors |
 | operator | `#8f846f` | `#8f846f` | `#71644a` | `#796c56` | Low-noise brass connective symbols |
-| function | `#d7ad70` | `#dbb171` | `#22668e` | `#4b6784` | Callable targets with variant-tuned polarity |
-| method | `#73c3e3` | `#8fcdec` | `#457abf` | `#5175ac` | Method call targets with tuned cool polarity |
-| property | `#5ea2c4` | `#6eb2d1` | `#4e5393` | `#444f7e` | Member access targets with tuned cool polarity |
+| function | `#d7ad70` | `#dbb171` | `#22668e` | `#44607d` | Callable targets with variant-tuned polarity |
+| method | `#6fbfd1` | `#8bc6d3` | `#457abf` | `#486da4` | Method call targets with tuned cool polarity |
+| property | `#5ea2c4` | `#6eb2d1` | `#4e5393` | `#534c76` | Member access targets with tuned cool polarity |
 | string | `#8fb87d` | `#8fbd79` | `#2a7a2e` | `#4e7a4e` | Moss green literal content |
-| number | `#ba846d` | `#cc8664` | `#bf5d22` | `#b86b3f` | Terracotta numeric constants |
+| number | `#ba846d` | `#cc8664` | `#b36938` | `#b86b3f` | Terracotta numeric constants |
 | type | `#5d98a4` | `#60a3b1` | `#00727d` | `#3e787c` | Mineral teal structural symbols |
-| variable | `#dfd5c7` | `#dfd5c7` | `#5a3c28` | `#654a35` | Neutral content carrier |
+| variable | `#d8cebf` | `#d8cebf` | `#5a3c28` | `#654a35` | Neutral content carrier |
 | comment | `#6b5f4d` | `#6b5f4d` | `#847257` | `#887861` | Intentionally quiet guidance layer |
 
 ## 3) Readability Budget (Theme Audit Gates)
@@ -50,16 +50,16 @@ Current snapshot from audit:
 
 - dark fg/bg: `9.9`
 - dark soft fg/bg: `8.9`
-- light fg/bg: `13.2`
-- light soft fg/bg: `7.7`
+- light fg/bg: `12.7`
+- light soft fg/bg: `7.3`
 - dark comment: `2.6`
 - dark soft comment: `2.3`
-- light comment: `3.8`
-- light soft comment: `3.0`
+- light comment: `3.6`
+- light soft comment: `2.9`
 - dark operator: `4.4`
 - dark soft operator: `3.9`
-- light operator: `4.7`
-- light soft operator: `3.6`
+- light operator: `4.5`
+- light soft operator: `3.4`
 
 ## 4) Token Coverage Standard
 
