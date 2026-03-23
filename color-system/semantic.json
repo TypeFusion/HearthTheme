@@ -16,8 +16,8 @@
     "operator": {
       "dark": "#8f846f",
       "darkSoft": "#8f846f",
-      "light": "#75674c",
-      "lightSoft": "#726549"
+      "light": "#6e6043",
+      "lightSoft": "#665a40"
     },
     "function": {
       "dark": "#7f97ae",
@@ -52,8 +52,8 @@
     "type": {
       "dark": "#857f9d",
       "darkSoft": "#918aa8",
-      "light": "#5a5472",
-      "lightSoft": "#665f7d"
+      "light": "#635276",
+      "lightSoft": "#726884"
     },
     "variable": {
       "dark": "#d0cbc5",

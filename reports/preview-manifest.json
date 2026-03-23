@@ -22,19 +22,19 @@
     },
     {
       "id": "light",
-      "svgSha256": "d3706ee1f565050a8890da67040e5a29f69aeafb35498b2157a5408fd6f63e3e",
+      "svgSha256": "f1bc1129d238a7c86d86fb2480ee82543ae24f4d801c4b3d00df0217db2816d9",
       "output": "extension/images/preview-light.png",
       "webOutput": "public/previews/preview-light.png"
     },
     {
       "id": "lightSoft",
-      "svgSha256": "e805360344a6e3716d0a8cb48a871390aec244d23eb4bcdebc6d109e20d90e44",
+      "svgSha256": "1c7838c7c407bebf0a9ce487a69de9bb375198ba15765d65ee83bbd9eab0b630",
       "output": "extension/images/preview-light-soft.png",
       "webOutput": "public/previews/preview-light-soft.png"
     }
   ],
   "contrastImage": {
-    "svgSha256": "e7d4c680ca0939c63e00d6c9a5d5584eb8fdc42b1aae6ce0ace4f72fed1fe52d",
+    "svgSha256": "02bf60cd2668d2923b22595a6715a293538637db984d16ae48bcd4acdacf7b70",
     "outputs": [
       "extension/images/preview-contrast-v2.png",
       "extension/images/preview-contrast.png"

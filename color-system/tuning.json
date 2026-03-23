@@ -6,7 +6,7 @@
         "minBgHueDistance": 3,
         "targetBgHueDistance": 16,
         "minAnchorDeltaE": 18,
-        "minGuardDeltaE": 19.4,
+        "minGuardDeltaE": 20.5,
         "minContrast": 3.3,
         "maxDeltaEFromSeed": 30,
         "anchorRoles": [
@@ -113,7 +113,7 @@
         "minBgHueDistance": 3,
         "targetBgHueDistance": 14,
         "minAnchorDeltaE": 20,
-        "minGuardDeltaE": 18,
+        "minGuardDeltaE": 18.8,
         "minContrast": 2.9,
         "maxDeltaEFromSeed": 28,
         "anchorRoles": [
@@ -225,12 +225,12 @@
     "light": {
       "median": 1.28,
       "p25": 1.03,
-      "p10": 0.75
+      "p10": 0.77
     },
     "lightSoft": {
-      "median": 0.83,
-      "p25": 0.68,
-      "p10": 0.47
+      "median": 0.85,
+      "p25": 0.7,
+      "p10": 0.5
     }
   },
   "globalSeparationToleranceByVariant": {
@@ -711,7 +711,7 @@
       {
         "id": "type",
         "key": "type",
-        "note": "Denim-teal structural symbols with reduced chroma"
+        "note": "Smoked violet structural symbols with restrained chroma"
       },
       {
         "id": "variable",
