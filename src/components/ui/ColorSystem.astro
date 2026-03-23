@@ -1,6 +1,7 @@
 ---
 import { t, type Lang } from "../../i18n/utils";
 import { tokens } from "../../data/tokens";
+import { getColorRows } from "../../data/colorSystemRows";
 
 interface Props {
     lang: Lang;
@@ -8,155 +9,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const d = tokens.dark;
-const s = tokens.darkSoft;
-const l = tokens.light;
-const ls = tokens.lightSoft;
-
-const rawRows = [
-    {
-        swatch: d.bg,
-        name: "bg · dark",
-        hex: d.bg,
-        bgRef: null,
-        role: {
-            en: "Dark canvas — soot blackboard beside the hearth",
-            zh: "深色画布 — 壁炉旁的炭黑黑板底",
-            ja: "ダークキャンバス — 暖炉脇の煤けた黒板面",
-        },
-    },
-    {
-        swatch: s.bg,
-        name: "bg · dark-soft",
-        hex: s.bg,
-        bgRef: null,
-        role: {
-            en: "Dark Soft canvas — warmer gray-black for lower night contrast stress",
-            zh: "柔和深色画布 — 更暖更灰的黑底，降低夜间对比刺激",
-            ja: "Dark Softキャンバス — 夜間の刺激を抑える暖かいグレーブラック",
-        },
-    },
-    {
-        swatch: d.fg,
-        name: "fg · dark",
-        hex: d.fg,
-        bgRef: d.bg,
-        role: {
-            en: "Dark foreground — chalky parchment white for long focus",
-            zh: "深色正文 — 粉笔羊皮纸白，适合长时专注",
-            ja: "ダーク前景 — 長時間読解向けのチョーク系羊皮紙ホワイト",
-        },
-    },
-    {
-        swatch: d.keyword,
-        name: "keyword",
-        hex: d.keyword,
-        bgRef: d.bg,
-        role: {
-            en: "Keywords — ember red for control flow anchors",
-            zh: "关键字 — 余烬红，用于控制流锚点",
-            ja: "キーワード — 制御フローを示す余燼レッド",
-        },
-    },
-    {
-        swatch: d.fn,
-        name: "function",
-        hex: d.fn,
-        bgRef: d.bg,
-        role: {
-            en: "Functions — brass amber for callable targets",
-            zh: "函数名 — 黄铜琥珀色，用于可调用目标",
-            ja: "関数名 — 呼び出し対象を示すブラスアンバー",
-        },
-    },
-    {
-        swatch: d.string,
-        name: "string",
-        hex: d.string,
-        bgRef: d.bg,
-        role: {
-            en: "Strings — moss green with warm base",
-            zh: "字符串 — 苔绿，保留暖底",
-            ja: "文字列 — 暖かさを残したモスグリーン",
-        },
-    },
-    {
-        swatch: d.type,
-        name: "type",
-        hex: d.type,
-        bgRef: d.bg,
-        role: {
-            en: "Types — mineral teal + italic for structural symbols",
-            zh: "类型 — 矿物青 + 斜体，用于结构符号",
-            ja: "型 — 構造記号のためのミネラルティール + イタリック",
-        },
-    },
-    {
-        swatch: d.number,
-        name: "number",
-        hex: d.number,
-        bgRef: d.bg,
-        role: {
-            en: "Numbers — terracotta red for constants",
-            zh: "数字 — 赤陶色，用于常量",
-            ja: "数値 — 定数を示すテラコッタレッド",
-        },
-    },
-    {
-        swatch: d.comment,
-        name: "comment",
-        hex: d.comment,
-        bgRef: d.bg,
-        role: {
-            en: "Comments — intentionally dim, eye skips naturally",
-            zh: "注释 — 故意低亮度，视线自然略过",
-            ja: "コメント — 意図的に暗く",
-        },
-    },
-    {
-        swatch: l.bg,
-        name: "bg · light",
-        hex: l.bg,
-        bgRef: null,
-        role: {
-            en: "Light background — parchment off-white to reduce glare",
-            zh: "浅色背景 — 羊皮纸米白，降低炫光",
-            ja: "ライト背景 — 眩しさを抑える羊皮紙オフホワイト",
-        },
-    },
-    {
-        swatch: ls.bg,
-        name: "bg · light-soft",
-        hex: ls.bg,
-        bgRef: null,
-        role: {
-            en: "Light Soft background — softer parchment tone for calmer daylight contrast",
-            zh: "柔和浅色背景 — 更柔和的羊皮纸底，适合白天低刺激对比",
-            ja: "Light Soft背景 — 日中でも刺激を抑える柔らかな羊皮紙トーン",
-        },
-    },
-    {
-        swatch: l.fg,
-        name: "fg · light",
-        hex: l.fg,
-        bgRef: l.bg,
-        role: {
-            en: "Light foreground — deep walnut brown for long-form reading",
-            zh: "浅色正文 — 深胡桃棕，适合长时阅读",
-            ja: "ライト前景 — 長文読解向けの深いウォルナットブラウン",
-        },
-    },
-    {
-        swatch: ls.fg,
-        name: "fg · light-soft",
-        hex: ls.fg,
-        bgRef: ls.bg,
-        role: {
-            en: "Light Soft foreground — mellow walnut ink to keep contrast pressure low",
-            zh: "柔和浅色正文 — 更温和的胡桃墨色，降低持续阅读压力",
-            ja: "Light Soft前景 — コントラスト負荷を抑える穏やかなウォルナットインク",
-        },
-    },
-];
+const docsUrl = lang === "en" ? "/docs" : `/${lang}/docs`;
+const reportUrl = "https://github.com/hearth-code/HearthTheme/blob/main/docs/color-language-report.md";
+const sourceUrl = "https://github.com/hearth-code/HearthTheme/tree/main/color-system";
 
 function hexToRgb(hex: string) {
     const raw = hex.slice(1);
@@ -182,7 +37,7 @@ function contrastRatio(a: string, b: string) {
     return (hi + 0.05) / (lo + 0.05);
 }
 
-const colorRows = rawRows.map((row) => {
+const colorRows = getColorRows().map((row) => {
     if (!row.bgRef) {
         return {
             ...row,
@@ -219,7 +74,7 @@ const levelClass: Record<string, string> = {
 
         <div class="max-w-[1020px]">
             {
-                colorRows.map(({ swatch, name, hex, role, contrast, level }) => (
+                colorRows.map(({ swatch, name, hex, roleKey, contrast, level }) => (
                     <div
                         class="flex flex-col sm:flex-row items-stretch transition-opacity duration-300 hover:opacity-94"
                         style="border-bottom: 1px solid var(--hearth-colorsystem-row-border)"
@@ -248,7 +103,7 @@ const levelClass: Record<string, string> = {
                                 class="hearth-copy text-[14px] sm:text-[15px] flex-1 min-w-0 leading-[1.7]"
                                 style={`color: ${d.variable}`}
                             >
-                                {role[lang as keyof typeof role]}
+                                {t(lang, roleKey)}
                             </span>
                             <span
                                 class={`font-mono text-[10px] px-2.5 py-1 rounded-[4px] border flex-shrink-0 self-start sm:self-auto ${levelClass[level]}`}
@@ -266,6 +121,42 @@ const levelClass: Record<string, string> = {
                     </div>
                 ))
             }
+
+            <article class="hearth-proof-metric-card rounded-xl px-4 sm:px-5 py-4 sm:py-5 mt-5">
+                <h3 class="hearth-proof-variant-title font-ui text-[1rem] font-semibold mb-2">
+                    {t(lang, "colors.proof.title")}
+                </h3>
+                <p class="hearth-copy hearth-meta-muted text-[0.95rem] leading-[1.68] mb-3">
+                    {t(lang, "colors.proof.body")}
+                </p>
+                <div class="flex flex-wrap gap-2.5 text-[0.8rem] font-ui tracking-[0.01em]">
+                    <a
+                        href={docsUrl}
+                        class="hearth-btn-secondary inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-semibold"
+                    >
+                        <span>{t(lang, "colors.proof.cta.docs")}</span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+                    <a
+                        href={reportUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hearth-btn-tertiary inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-semibold"
+                    >
+                        <span>{t(lang, "colors.proof.cta.report")}</span>
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                    <a
+                        href={sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hearth-btn-tertiary inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 font-semibold"
+                    >
+                        <span>{t(lang, "colors.proof.cta.source")}</span>
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
         </div>
     </div>
 </section>
