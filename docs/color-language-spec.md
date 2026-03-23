@@ -22,6 +22,10 @@ Current source files:
 - `color-system/tuning.json` (algorithmic compensation + soft chroma budgets)
 - `color-system/hearth-dark.source.json` (UI/chrome baseline source)
 
+Tuning key quick reference:
+
+- `docs/color-system-tuning.md`
+
 ## 2. Token Architecture
 
 HearthCode uses four token layers:
@@ -74,7 +78,7 @@ When changing colors:
 1. Change semantic role colors in `color-system/semantic.json`.
 2. If role mapping changes, update `color-system/adapters.json` in the same change set.
 3. If variant registration/paths change, update `color-system/variants.json`.
-4. If compensation/chroma policy changes, update `color-system/tuning.json`.
+4. If compensation/chroma policy changes, update `color-system/tuning.json` (use `docs/color-system-tuning.md` as key reference).
 5. If UI/chrome baseline shifts, update `color-system/hearth-dark.source.json`.
 6. If the derivation baseline itself changes, update `color-system/templates/*.base.json` in the same change set.
 7. Regenerate platform artifacts via `pnpm run sync`.

@@ -87,6 +87,7 @@ Color-language references:
 - Adapter contract source: `color-system/adapters.json`
 - Variant routing source: `color-system/variants.json`
 - Tuning profile source: `color-system/tuning.json`
+- Tuning key reference: `docs/color-system-tuning.md`
 
 Release version source-of-truth:
 

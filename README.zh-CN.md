@@ -87,6 +87,7 @@ HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。
 - 适配映射源：`color-system/adapters.json`
 - 变体路由源：`color-system/variants.json`
 - 调优策略源：`color-system/tuning.json`
+- 调优字段参考：`docs/color-system-tuning.md`
 
 发布版本源（唯一真值）：
 
