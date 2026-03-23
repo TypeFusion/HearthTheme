@@ -94,6 +94,26 @@ function alpha(hex, value) {
   return `rgb(${r} ${g} ${b} / ${v})`
 }
 
+function srgbToLinear(channel) {
+  const normalized = channel / 255
+  if (normalized <= 0.04045) return normalized / 12.92
+  return ((normalized + 0.055) / 1.055) ** 2.4
+}
+
+function relativeLuminance(hex) {
+  const [r, g, b] = hexToRgb(hex)
+  const lr = srgbToLinear(r)
+  const lg = srgbToLinear(g)
+  const lb = srgbToLinear(b)
+  return 0.2126 * lr + 0.7152 * lg + 0.0722 * lb
+}
+
+function pickContrastText(backgroundHex) {
+  const darkText = '#1b1712'
+  const lightText = '#f5eee4'
+  return relativeLuminance(backgroundHex) > 0.34 ? darkText : lightText
+}
+
 function getToken(theme, scopes) {
   for (const scope of scopes) {
     const hit = (theme.tokenColors || []).find((entry) => (
@@ -141,8 +161,23 @@ function assertTokenSet(id, tokenSet) {
 function buildVars(tokens) {
   const accent = tokens.cursor
   const accentHover = mixHex(accent, tokens.fg, 0.18)
+  const accentSoft = alpha(accent, 0.18)
   const bgSecondary = mixHex(tokens.sidebar, tokens.bg, 0.5)
   const bgSecondaryAlt = mixHex(tokens.lineBg, tokens.bg, 0.4)
+  const borderHover = alpha(tokens.border, 0.48)
+  const borderFocus = alpha(accent, 0.46)
+  const codeBackground = alpha(mixHex(tokens.border, tokens.bg, 0.45), 0.38)
+  const linkUnresolved = mixHex(tokens.comment, tokens.keyword, 0.22)
+  const h1 = tokens.keyword
+  const h2 = tokens.fn
+  const h3 = tokens.property
+  const h4 = tokens.string
+  const h5 = tokens.number
+  const h6 = mixHex(tokens.comment, tokens.fg, 0.4)
+  const calloutNote = tokens.property
+  const calloutTip = tokens.string
+  const calloutWarning = tokens.number
+  const calloutDanger = tokens.keyword
 
   return {
     '--background-primary': tokens.bg,
@@ -150,6 +185,8 @@ function buildVars(tokens) {
     '--background-secondary': bgSecondary,
     '--background-secondary-alt': bgSecondaryAlt,
     '--background-modifier-border': alpha(tokens.border, 0.72),
+    '--background-modifier-border-hover': borderHover,
+    '--background-modifier-border-focus': borderFocus,
     '--background-modifier-form-field': alpha(tokens.border, 0.22),
     '--background-modifier-hover': alpha(tokens.border, 0.28),
     '--background-modifier-active-hover': alpha(accent, 0.26),
@@ -157,12 +194,17 @@ function buildVars(tokens) {
     '--background-modifier-success': alpha(tokens.string, 0.24),
     '--background-modifier-error': alpha(tokens.keyword, 0.2),
     '--background-modifier-error-hover': alpha(tokens.keyword, 0.3),
+    '--background-modifier-message': accentSoft,
     '--background-modifier-cover': alpha(tokens.bg, 0.72),
     '--text-normal': tokens.fg,
     '--text-muted': mixHex(tokens.comment, tokens.fg, 0.36),
     '--text-faint': mixHex(tokens.comment, tokens.bg, 0.28),
     '--text-accent': accent,
     '--text-accent-hover': accentHover,
+    '--text-on-accent': pickContrastText(accent),
+    '--text-success': tokens.string,
+    '--text-warning': tokens.number,
+    '--text-error': tokens.keyword,
     '--text-highlight-bg': alpha(tokens.selection, 0.34),
     '--text-selection': alpha(tokens.selection, 0.42),
     '--interactive-normal': alpha(tokens.border, 0.2),
@@ -174,6 +216,33 @@ function buildVars(tokens) {
     '--scrollbar-active-thumb-bg': alpha(tokens.border, 0.72),
     '--link-color': accent,
     '--link-color-hover': accentHover,
+    '--link-unresolved-color': linkUnresolved,
+    '--code-background': codeBackground,
+    '--blockquote-border-color': alpha(tokens.property, 0.46),
+    '--blockquote-color': mixHex(tokens.comment, tokens.fg, 0.42),
+    '--hr-color': alpha(tokens.border, 0.7),
+    '--tag-color': tokens.type,
+    '--tag-color-hover': tokens.fg,
+    '--tag-background': alpha(tokens.type, 0.14),
+    '--tag-background-hover': alpha(tokens.type, 0.22),
+    '--table-border-color': alpha(tokens.border, 0.58),
+    '--table-header-border-color': alpha(tokens.border, 0.76),
+    '--list-marker-color': mixHex(tokens.number, tokens.fg, 0.35),
+    '--h1-color': h1,
+    '--h2-color': h2,
+    '--h3-color': h3,
+    '--h4-color': h4,
+    '--h5-color': h5,
+    '--h6-color': h6,
+    '--hearth-inline-code': mixHex(tokens.number, tokens.fg, 0.4),
+    '--hearth-callout-note-bg': alpha(calloutNote, 0.12),
+    '--hearth-callout-note-border': alpha(calloutNote, 0.5),
+    '--hearth-callout-tip-bg': alpha(calloutTip, 0.12),
+    '--hearth-callout-tip-border': alpha(calloutTip, 0.5),
+    '--hearth-callout-warning-bg': alpha(calloutWarning, 0.14),
+    '--hearth-callout-warning-border': alpha(calloutWarning, 0.56),
+    '--hearth-callout-danger-bg': alpha(calloutDanger, 0.14),
+    '--hearth-callout-danger-border': alpha(calloutDanger, 0.56),
     '--code-normal': tokens.variable,
     '--code-comment': tokens.comment,
     '--code-function': tokens.fn,
@@ -249,6 +318,42 @@ ${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-tag {
   color: var(--code-tag);
 }
 
+${modeClass} .cm-s-obsidian span.cm-atom,
+${modeClass} .cm-s-obsidian span.cm-builtin,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-atom,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-builtin,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-meta,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-qualifier {
+  color: var(--code-important);
+}
+
+${modeClass} .cm-s-obsidian span.cm-attribute,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-attribute,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-variable-3 {
+  color: var(--code-property);
+}
+
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-link {
+  color: var(--text-accent);
+  text-decoration-color: var(--text-accent);
+}
+
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-url {
+  color: var(--text-muted);
+}
+
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-quote {
+  color: var(--code-comment);
+}
+
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-strong {
+  color: var(--h2-color);
+}
+
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-em {
+  color: var(--h4-color);
+}
+
 ${modeClass} .markdown-preview-view pre code .hljs-comment {
   color: var(--code-comment);
 }
@@ -258,14 +363,203 @@ ${modeClass} .markdown-preview-view pre code .hljs-selector-tag {
   color: var(--code-keyword);
 }
 
+${modeClass} .markdown-preview-view pre code .hljs-built_in,
+${modeClass} .markdown-preview-view pre code .hljs-type,
+${modeClass} .markdown-preview-view pre code .hljs-class,
+${modeClass} .markdown-preview-view pre code .hljs-meta {
+  color: var(--code-important);
+}
+
+${modeClass} .markdown-preview-view pre code .hljs-function,
+${modeClass} .markdown-preview-view pre code .hljs-title.function_ {
+  color: var(--code-function);
+}
+
+${modeClass} .markdown-preview-view pre code .hljs-attr,
+${modeClass} .markdown-preview-view pre code .hljs-property {
+  color: var(--code-property);
+}
+
+${modeClass} .markdown-preview-view pre code .hljs-variable,
+${modeClass} .markdown-preview-view pre code .hljs-template-variable {
+  color: var(--code-normal);
+}
+
 ${modeClass} .markdown-preview-view pre code .hljs-string,
 ${modeClass} .markdown-preview-view pre code .hljs-title {
   color: var(--code-string);
 }
 
 ${modeClass} .markdown-preview-view pre code .hljs-number,
-${modeClass} .markdown-preview-view pre code .hljs-literal {
+${modeClass} .markdown-preview-view pre code .hljs-literal,
+${modeClass} .markdown-preview-view pre code .hljs-operator {
   color: var(--code-value);
+}
+`
+}
+
+function renderMarkdownSelectors(modeClass) {
+  return `${modeClass} .markdown-rendered h1,
+${modeClass} .markdown-source-view.mod-cm6 .cm-header.cm-header-1,
+${modeClass} .markdown-source-view.mod-cm6 .HyperMD-header-1 {
+  color: var(--h1-color);
+}
+
+${modeClass} .markdown-rendered h2,
+${modeClass} .markdown-source-view.mod-cm6 .cm-header.cm-header-2,
+${modeClass} .markdown-source-view.mod-cm6 .HyperMD-header-2 {
+  color: var(--h2-color);
+}
+
+${modeClass} .markdown-rendered h3,
+${modeClass} .markdown-source-view.mod-cm6 .cm-header.cm-header-3,
+${modeClass} .markdown-source-view.mod-cm6 .HyperMD-header-3 {
+  color: var(--h3-color);
+}
+
+${modeClass} .markdown-rendered h4,
+${modeClass} .markdown-source-view.mod-cm6 .cm-header.cm-header-4,
+${modeClass} .markdown-source-view.mod-cm6 .HyperMD-header-4 {
+  color: var(--h4-color);
+}
+
+${modeClass} .markdown-rendered h5,
+${modeClass} .markdown-source-view.mod-cm6 .cm-header.cm-header-5,
+${modeClass} .markdown-source-view.mod-cm6 .HyperMD-header-5 {
+  color: var(--h5-color);
+}
+
+${modeClass} .markdown-rendered h6,
+${modeClass} .markdown-source-view.mod-cm6 .cm-header.cm-header-6,
+${modeClass} .markdown-source-view.mod-cm6 .HyperMD-header-6 {
+  color: var(--h6-color);
+}
+
+${modeClass} .markdown-rendered a,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-link {
+  color: var(--link-color);
+}
+
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-hmd-internal-link,
+${modeClass} .markdown-rendered .internal-link.is-unresolved {
+  color: var(--link-unresolved-color);
+}
+
+${modeClass} .markdown-rendered blockquote {
+  border-inline-start-color: var(--blockquote-border-color);
+  color: var(--blockquote-color);
+}
+
+${modeClass} .markdown-rendered hr {
+  border-color: var(--hr-color);
+}
+
+${modeClass} .markdown-rendered ul > li::marker,
+${modeClass} .markdown-rendered ol > li::marker,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-formatting-list {
+  color: var(--list-marker-color);
+}
+
+${modeClass} .markdown-rendered :not(pre) > code,
+${modeClass} .markdown-source-view.mod-cm6 .cm-line .cm-inline-code {
+  color: var(--hearth-inline-code);
+  background-color: var(--code-background);
+  border-radius: 4px;
+}
+
+${modeClass} .markdown-rendered pre,
+${modeClass} .markdown-rendered pre code {
+  background-color: var(--code-background);
+}
+
+${modeClass} .markdown-rendered table {
+  border-color: var(--table-border-color);
+}
+
+${modeClass} .markdown-rendered th {
+  border-color: var(--table-header-border-color);
+}
+
+${modeClass} .markdown-rendered td {
+  border-color: var(--table-border-color);
+}
+
+${modeClass} .tag,
+${modeClass} a.tag {
+  color: var(--tag-color);
+  background-color: var(--tag-background);
+  border: 1px solid var(--background-modifier-border);
+}
+
+${modeClass} .tag:hover,
+${modeClass} a.tag:hover {
+  color: var(--tag-color-hover);
+  background-color: var(--tag-background-hover);
+}
+
+${modeClass} input[type='checkbox'] {
+  accent-color: var(--interactive-accent);
+}
+`
+}
+
+function renderCalloutSelectors(modeClass) {
+  return `${modeClass} .callout {
+  border: 1px solid var(--background-modifier-border);
+}
+
+${modeClass} .callout .callout-title {
+  color: var(--text-normal);
+}
+
+${modeClass} .callout[data-callout='note'] {
+  border-color: var(--hearth-callout-note-border);
+  background-color: var(--hearth-callout-note-bg);
+}
+
+${modeClass} .callout[data-callout='tip'],
+${modeClass} .callout[data-callout='success'] {
+  border-color: var(--hearth-callout-tip-border);
+  background-color: var(--hearth-callout-tip-bg);
+}
+
+${modeClass} .callout[data-callout='warning'],
+${modeClass} .callout[data-callout='caution'] {
+  border-color: var(--hearth-callout-warning-border);
+  background-color: var(--hearth-callout-warning-bg);
+}
+
+${modeClass} .callout[data-callout='danger'],
+${modeClass} .callout[data-callout='error'],
+${modeClass} .callout[data-callout='bug'] {
+  border-color: var(--hearth-callout-danger-border);
+  background-color: var(--hearth-callout-danger-bg);
+}
+`
+}
+
+function renderUiSelectors(modeClass) {
+  return `${modeClass} .workspace-tab-header.is-active {
+  border-color: var(--interactive-accent);
+}
+
+${modeClass} .workspace-tab-header.is-active .workspace-tab-header-inner {
+  color: var(--text-normal);
+}
+
+${modeClass} .nav-file-title.is-active,
+${modeClass} .tree-item-self.is-clickable:hover,
+${modeClass} .suggestion-item.is-selected {
+  background-color: var(--background-modifier-active-hover);
+}
+
+${modeClass} .cm-active,
+${modeClass} .markdown-source-view.mod-cm6 .cm-active.cm-line {
+  background-color: var(--background-modifier-hover);
+}
+
+${modeClass} .status-bar-item:hover {
+  background-color: var(--background-modifier-hover);
 }
 `
 }
@@ -278,7 +572,7 @@ function renderThemeCss(meta, themePath, vars) {
     '',
   ]
 
-  return `${header.join('\n')}${renderVars(meta.modeClass, vars)}${renderSyntaxSelectors(meta.modeClass)}`
+  return `${header.join('\n')}${renderVars(meta.modeClass, vars)}${renderSyntaxSelectors(meta.modeClass)}${renderMarkdownSelectors(meta.modeClass)}${renderCalloutSelectors(meta.modeClass)}${renderUiSelectors(meta.modeClass)}`
 }
 
 export function buildVariantCssById(id) {
