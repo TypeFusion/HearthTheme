@@ -74,39 +74,6 @@ HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。
 - 更新日志：<https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
 - 问题反馈：<https://github.com/hearth-code/HearthTheme/issues>
 
-## 维护者说明
+## 维护者指南
 
-维护者入口目录：`color-system/`、`themes/`（生成产物）、`extension/`、`obsidian/`、`src/`、`scripts/`。
-
-色彩语言参考文件：
-
-- 规范文档：`docs/color-language-spec.md`
-- 报告（可读版）：`docs/color-language-report.md`
-- 报告（机器版）：`reports/color-language-consistency.json`
-- 语义色源：`color-system/semantic.json`
-- 适配映射源：`color-system/adapters.json`
-- 变体路由源：`color-system/variants.json`
-- 调优策略源：`color-system/tuning.json`
-- 调优字段参考：`docs/color-system-tuning.md`
-
-发布版本源（唯一真值）：
-
-- 主版本文件：`releases/color-language.json`
-- 推荐递增命令：`pnpm run bump:release:patch`（也支持 `minor` / `major`）
-- 该命令会同步更新 `releases/color-language.json`、`extension/package.json`，并确保 changelog 新版本标题存在。
-
-Obsidian App Theme 发布：
-
-1. 执行 `pnpm run release:obsidian`
-2. 产物路径：`release/obsidian/hearth-obsidian-app-theme-v<version>.zip`
-
-可选：仅打包 snippets：
-
-1. 执行 `pnpm run pack:obsidian:snippets`
-2. 产物路径：`release/obsidian/hearth-obsidian-snippets-v<version>.zip`
-
-CI 自动化说明：
-
-- 当 `main` 分支 push 且发布版本/更新日志发生变更时，`.github/workflows/publish.yml` 会自动打包并上传两个 Obsidian zip 资产到对应的 GitHub Release tag。
-
-Obsidian 社区目录源：<https://github.com/obsidianmd/obsidian-releases/blob/master/community-css-themes.json>
+维护流程、发布闸门与源文件真值说明见 [`docs/maintainer.md`](./docs/maintainer.md)。

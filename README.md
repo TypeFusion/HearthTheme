@@ -74,39 +74,6 @@ Softer light contrast for long daytime sessions and reduced visual pressure.
 - Changelog: <https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
 - Issues: <https://github.com/hearth-code/HearthTheme/issues>
 
-## Maintainer Notes
+## Maintainer Guide
 
-Core source locations: `color-system/`, `themes/` (generated), `extension/`, `obsidian/`, `src/`, and `scripts/`.
-
-Color-language references:
-
-- Spec: `docs/color-language-spec.md`
-- Generated report (human-readable): `docs/color-language-report.md`
-- Generated report (machine-readable): `reports/color-language-consistency.json`
-- Semantic palette source: `color-system/semantic.json`
-- Adapter contract source: `color-system/adapters.json`
-- Variant routing source: `color-system/variants.json`
-- Tuning profile source: `color-system/tuning.json`
-- Tuning key reference: `docs/color-system-tuning.md`
-
-Release version source-of-truth:
-
-- Canonical version file: `releases/color-language.json`
-- Recommended bump command: `pnpm run bump:release:patch` (also supports `minor` / `major`)
-- This command updates `releases/color-language.json`, `extension/package.json`, and ensures a new changelog heading.
-
-Obsidian app-theme release:
-
-1. Run `pnpm run release:obsidian`
-2. Package output: `release/obsidian/hearth-obsidian-app-theme-v<version>.zip`
-
-Optional snippet-only bundle:
-
-1. Run `pnpm run pack:obsidian:snippets`
-2. Package output: `release/obsidian/hearth-obsidian-snippets-v<version>.zip`
-
-CI automation note:
-
-- On `main` push with release version/changelog update, `.github/workflows/publish.yml` automatically packs and uploads both Obsidian zip assets to the matching GitHub Release tag.
-
-Community directory source: <https://github.com/obsidianmd/obsidian-releases/blob/master/community-css-themes.json>
+Maintainer workflows, release gates, and source-of-truth files are documented in [`docs/maintainer.md`](./docs/maintainer.md).
