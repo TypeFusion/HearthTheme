@@ -157,6 +157,8 @@ export function loadColorSystemTuning() {
   assert(rawSoftBudget && typeof rawSoftBudget === 'object' && !Array.isArray(rawSoftBudget), `${COLOR_SYSTEM_TUNING_PATH}: softRoleChromaBudget must be an object`)
   const rawGlobalSeparationTargets = data.globalSeparationTargetByVariant ?? {}
   assert(rawGlobalSeparationTargets && typeof rawGlobalSeparationTargets === 'object' && !Array.isArray(rawGlobalSeparationTargets), `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationTargetByVariant must be an object`)
+  const rawGlobalSeparationBoostProfiles = data.globalSeparationBoostProfileByVariant ?? {}
+  assert(rawGlobalSeparationBoostProfiles && typeof rawGlobalSeparationBoostProfiles === 'object' && !Array.isArray(rawGlobalSeparationBoostProfiles), `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationBoostProfileByVariant must be an object`)
 
   const lightPolarityRoleOptimization = {}
   for (const [variantId, roleProfiles] of Object.entries(rawPolarity)) {
@@ -218,9 +220,28 @@ export function loadColorSystemTuning() {
     }
   }
 
+  const globalSeparationBoostProfileByVariant = {}
+  const boostVariantIds = new Set(['default', ...variantIds])
+  for (const [variantId, profile] of Object.entries(rawGlobalSeparationBoostProfiles)) {
+    assert(boostVariantIds.has(variantId), `${COLOR_SYSTEM_TUNING_PATH}: unknown variant "${variantId}" in globalSeparationBoostProfileByVariant`)
+    assert(profile && typeof profile === 'object' && !Array.isArray(profile), `${COLOR_SYSTEM_TUNING_PATH}: invalid global separation boost profile for "${variantId}"`)
+
+    const maxBoostRounds = normalizeNumber(profile.maxBoostRounds, `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationBoostProfileByVariant.${variantId}.maxBoostRounds`, { min: 0, max: 30 })
+    assert(Number.isInteger(maxBoostRounds), `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationBoostProfileByVariant.${variantId}.maxBoostRounds must be an integer`)
+
+    globalSeparationBoostProfileByVariant[variantId] = {
+      maxNeededFactor: normalizeNumber(profile.maxNeededFactor, `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationBoostProfileByVariant.${variantId}.maxNeededFactor`, { min: 1, max: 4 }),
+      maxBoostRounds,
+      roleBoostScale: normalizeNumber(profile.roleBoostScale, `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationBoostProfileByVariant.${variantId}.roleBoostScale`, { min: 0, max: 4 }),
+      lightnessLiftScale: normalizeNumber(profile.lightnessLiftScale, `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationBoostProfileByVariant.${variantId}.lightnessLiftScale`, { min: 0, max: 4 }),
+      maxChroma: normalizeNumber(profile.maxChroma, `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationBoostProfileByVariant.${variantId}.maxChroma`, { min: 0, max: 200, allowNull: true }),
+    }
+  }
+
   return {
     lightPolarityRoleOptimization,
     softRoleChromaBudget,
     globalSeparationTargetByVariant,
+    globalSeparationBoostProfileByVariant,
   }
 }

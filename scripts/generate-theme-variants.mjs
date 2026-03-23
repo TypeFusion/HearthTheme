@@ -202,7 +202,7 @@ const GLOBAL_SEPARATION_TARGET_BY_VARIANT = {
   ...(COLOR_SYSTEM_TUNING.globalSeparationTargetByVariant || {}),
 }
 const GLOBAL_SEPARATION_MAX_BOOST_ROUNDS = 6
-const VARIANT_BOOST_PROFILE = {
+const VARIANT_BOOST_PROFILE_DEFAULTS = {
   default: {
     maxNeededFactor: 1.45,
     maxBoostRounds: 3,
@@ -224,6 +224,10 @@ const VARIANT_BOOST_PROFILE = {
     lightnessLiftScale: 0.35,
     maxChroma: 58,
   },
+}
+const VARIANT_BOOST_PROFILE = {
+  ...VARIANT_BOOST_PROFILE_DEFAULTS,
+  ...(COLOR_SYSTEM_TUNING.globalSeparationBoostProfileByVariant || {}),
 }
 
 const LIGHT_COOL_ROLE_SOFTEN = {

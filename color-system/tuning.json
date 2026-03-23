@@ -231,6 +231,29 @@
       "p10": 0.5
     }
   },
+  "globalSeparationBoostProfileByVariant": {
+    "default": {
+      "maxNeededFactor": 1.45,
+      "maxBoostRounds": 3,
+      "roleBoostScale": 1,
+      "lightnessLiftScale": 1,
+      "maxChroma": null
+    },
+    "light": {
+      "maxNeededFactor": 1.55,
+      "maxBoostRounds": 6,
+      "roleBoostScale": 0.86,
+      "lightnessLiftScale": 1,
+      "maxChroma": null
+    },
+    "lightSoft": {
+      "maxNeededFactor": 1.16,
+      "maxBoostRounds": 4,
+      "roleBoostScale": 0.42,
+      "lightnessLiftScale": 0.35,
+      "maxChroma": 58
+    }
+  },
   "softRoleChromaBudget": {
     "darkSoft": {
       "keyword": {
