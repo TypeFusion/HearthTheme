@@ -1,3 +1,10 @@
+## 1.0.19
+
+- Added `color-system/tuning.json` as a first-class source-of-truth for algorithmic color tuning (light polarity compensation + soft-mode chroma budgets).
+- Refactored the theme generator to load tuning profiles from config instead of hardcoded script constants, improving reproducibility and release governance.
+- Updated theme audit and color-language docs so pipeline checks, source references, and change protocol now explicitly include tuning configuration.
+- Tuned `Hearth Dark Soft` and `Hearth Light Soft` warm/cool role saturation to reduce visual noise while preserving semantic separation and readability thresholds.
+
 ## 1.0.18
 
 - Completed three-surface release alignment across VS Code Marketplace, Open VSX, and Obsidian app-theme distribution.
