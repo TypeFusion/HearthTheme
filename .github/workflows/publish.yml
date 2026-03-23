@@ -539,8 +539,31 @@ jobs:
             const releaseId = releaseResp.data.id
 
             const assetsToUpload = [
-              `hearth-obsidian-app-theme-v${version}.zip`,
-              `hearth-obsidian-snippets-v${version}.zip`,
+              {
+                name: 'manifest.json',
+                path: path.join(process.env.GITHUB_WORKSPACE, 'obsidian', 'app-theme', 'manifest.json'),
+                contentType: 'application/json',
+              },
+              {
+                name: 'theme.css',
+                path: path.join(process.env.GITHUB_WORKSPACE, 'obsidian', 'app-theme', 'theme.css'),
+                contentType: 'text/css',
+              },
+              {
+                name: 'versions.json',
+                path: path.join(process.env.GITHUB_WORKSPACE, 'obsidian', 'app-theme', 'versions.json'),
+                contentType: 'application/json',
+              },
+              {
+                name: `hearth-obsidian-app-theme-v${version}.zip`,
+                path: path.join(process.env.GITHUB_WORKSPACE, 'release', 'obsidian', `hearth-obsidian-app-theme-v${version}.zip`),
+                contentType: 'application/zip',
+              },
+              {
+                name: `hearth-obsidian-snippets-v${version}.zip`,
+                path: path.join(process.env.GITHUB_WORKSPACE, 'release', 'obsidian', `hearth-obsidian-snippets-v${version}.zip`),
+                contentType: 'application/zip',
+              },
             ]
 
             const existingAssets = await github.paginate(github.rest.repos.listReleaseAssets, {
@@ -550,8 +573,8 @@ jobs:
               per_page: 100,
             })
 
-            for (const assetName of assetsToUpload) {
-              const assetPath = path.join(process.env.GITHUB_WORKSPACE, 'release', 'obsidian', assetName)
+            for (const asset of assetsToUpload) {
+              const { name: assetName, path: assetPath, contentType } = asset
               if (!fs.existsSync(assetPath)) {
                 core.setFailed(`Missing release asset: ${assetPath}`)
                 return
@@ -571,7 +594,7 @@ jobs:
                 name: assetName,
                 data,
                 headers: {
-                  'content-type': 'application/zip',
+                  'content-type': contentType,
                   'content-length': data.length,
                 },
               })
