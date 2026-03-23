@@ -324,14 +324,14 @@
           "contrastToBackground": 4.88
         },
         "lightSoft": {
-          "textmate": "#44607d",
-          "semantic": "#44607d",
+          "textmate": "#3f617c",
+          "semantic": "#3f617c",
           "contrastToBackground": 4.39
         }
       },
       "metrics": {
         "defaultPairHueDrift": 166.7,
-        "softPairHueDrift": 174.3,
+        "softPairHueDrift": 170.3,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -380,14 +380,14 @@
           "contrastToBackground": 3.42
         },
         "lightSoft": {
-          "textmate": "#486da4",
-          "semantic": "#486da4",
-          "contrastToBackground": 3.53
+          "textmate": "#3d6fa4",
+          "semantic": "#3d6fa4",
+          "contrastToBackground": 3.52
         }
       },
       "metrics": {
         "defaultPairHueDrift": 22.9,
-        "softPairHueDrift": 25,
+        "softPairHueDrift": 20,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -430,14 +430,14 @@
           "contrastToBackground": 5.49
         },
         "lightSoft": {
-          "textmate": "#534c76",
-          "semantic": "#534c76",
-          "contrastToBackground": 5.29
+          "textmate": "#4e5681",
+          "semantic": "#4e5681",
+          "contrastToBackground": 4.74
         }
       },
       "metrics": {
         "defaultPairHueDrift": 35.7,
-        "softPairHueDrift": 51.2,
+        "softPairHueDrift": 31.8,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -694,15 +694,15 @@
     },
     "function": {
       "defaultPairHueDrift": 166.7,
-      "softPairHueDrift": 174.3
+      "softPairHueDrift": 170.3
     },
     "method": {
       "defaultPairHueDrift": 22.9,
-      "softPairHueDrift": 25
+      "softPairHueDrift": 20
     },
     "property": {
       "defaultPairHueDrift": 35.7,
-      "softPairHueDrift": 51.2
+      "softPairHueDrift": 31.8
     },
     "string": {
       "defaultPairHueDrift": 21.3,
@@ -793,11 +793,11 @@
     {
       "variantId": "lightSoft",
       "roleId": "function",
-      "color": "#44607d",
+      "color": "#3f617c",
       "metrics": {
-        "bgHueDistance": 174.2,
-        "minAnchorDeltaE": 34.5,
-        "minGuardDeltaE": 20.8
+        "bgHueDistance": 170.2,
+        "minAnchorDeltaE": 34.3,
+        "minGuardDeltaE": 18.8
       },
       "targets": {
         "minBgHueDistance": 56,
@@ -809,11 +809,11 @@
     {
       "variantId": "lightSoft",
       "roleId": "method",
-      "color": "#486da4",
+      "color": "#3d6fa4",
       "metrics": {
-        "bgHueDistance": 179.5,
-        "minAnchorDeltaE": 47.9,
-        "minGuardDeltaE": 16.3
+        "bgHueDistance": 174.5,
+        "minAnchorDeltaE": 47.8,
+        "minGuardDeltaE": 16.4
       },
       "targets": {
         "minBgHueDistance": 56,
@@ -825,16 +825,16 @@
     {
       "variantId": "lightSoft",
       "roleId": "property",
-      "color": "#534c76",
+      "color": "#4e5681",
       "metrics": {
-        "bgHueDistance": 146.4,
-        "minAnchorDeltaE": 40.7,
-        "minGuardDeltaE": 16.3
+        "bgHueDistance": 165.8,
+        "minAnchorDeltaE": 40.9,
+        "minGuardDeltaE": 14.3
       },
       "targets": {
         "minBgHueDistance": 58,
         "minAnchorDeltaE": 24,
-        "minGuardDeltaE": 16
+        "minGuardDeltaE": 14
       },
       "status": "pass"
     },
@@ -845,7 +845,7 @@
       "metrics": {
         "bgHueDistance": 147.5,
         "minAnchorDeltaE": 29.4,
-        "minGuardDeltaE": 20.8
+        "minGuardDeltaE": 18.8
       },
       "targets": {
         "minBgHueDistance": 48,

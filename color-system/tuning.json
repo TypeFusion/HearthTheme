@@ -163,9 +163,9 @@
         "minBgHueDistance": 58,
         "targetBgHueDistance": 98,
         "minAnchorDeltaE": 24,
-        "minGuardDeltaE": 16,
+        "minGuardDeltaE": 14,
         "minContrast": 2.8,
-        "maxDeltaEFromSeed": 90,
+        "maxDeltaEFromSeed": 28,
         "anchorRoles": [
           "keyword",
           "number",
@@ -183,7 +183,7 @@
           "method",
           "type"
         ],
-        "targetPreferredHueDistance": 34,
+        "targetPreferredHueDistance": 26,
         "applyOnlyWhenCompensationNeeded": true
       },
       "type": {
