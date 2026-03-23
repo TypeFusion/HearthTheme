@@ -88,4 +88,8 @@ Optional snippet-only bundle:
 1. Run `pnpm run pack:obsidian:snippets`
 2. Package output: `release/obsidian/hearth-obsidian-snippets-v<version>.zip`
 
+CI automation note:
+
+- On `main` push with extension version/changelog update, `.github/workflows/publish.yml` automatically packs and uploads both Obsidian zip assets to the matching GitHub Release tag.
+
 Community directory source: <https://github.com/obsidianmd/obsidian-releases/blob/master/community-css-themes.json>

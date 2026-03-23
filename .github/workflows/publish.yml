@@ -493,3 +493,87 @@ jobs:
             })
 
             core.info(`Created release ${tag}`)
+
+      - name: Setup pnpm
+        if: ${{ steps.ext_version.outputs.changed == 'true' }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        if: ${{ steps.ext_version.outputs.changed == 'true' }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        if: ${{ steps.ext_version.outputs.changed == 'true' }}
+        run: pnpm install --frozen-lockfile
+
+      - name: Pack Obsidian release assets
+        if: ${{ steps.ext_version.outputs.changed == 'true' }}
+        run: pnpm run pack:obsidian && pnpm run pack:obsidian:snippets
+
+      - name: Upload Obsidian assets to GitHub release
+        if: ${{ steps.ext_version.outputs.changed == 'true' }}
+        uses: actions/github-script@v8
+        env:
+          VERSION: ${{ steps.ext_version.outputs.version }}
+          TAG: ${{ steps.ext_version.outputs.tag }}
+        with:
+          script: |
+            const fs = require('node:fs')
+            const path = require('node:path')
+
+            const version = String(process.env.VERSION || '').trim()
+            const tag = String(process.env.TAG || '').trim()
+            const { owner, repo } = context.repo
+
+            if (!version || !tag) {
+              core.setFailed('Missing VERSION/TAG outputs for release upload.')
+              return
+            }
+
+            const releaseResp = await github.rest.repos.getReleaseByTag({ owner, repo, tag })
+            const releaseId = releaseResp.data.id
+
+            const assetsToUpload = [
+              `hearth-obsidian-app-theme-v${version}.zip`,
+              `hearth-obsidian-snippets-v${version}.zip`,
+            ]
+
+            const existingAssets = await github.paginate(github.rest.repos.listReleaseAssets, {
+              owner,
+              repo,
+              release_id: releaseId,
+              per_page: 100,
+            })
+
+            for (const assetName of assetsToUpload) {
+              const assetPath = path.join(process.env.GITHUB_WORKSPACE, 'release', 'obsidian', assetName)
+              if (!fs.existsSync(assetPath)) {
+                core.setFailed(`Missing release asset: ${assetPath}`)
+                return
+              }
+
+              const existing = existingAssets.find((asset) => asset.name === assetName)
+              if (existing) {
+                core.info(`Deleting existing asset ${assetName} (id=${existing.id}) before upload`)
+                await github.rest.repos.deleteReleaseAsset({ owner, repo, asset_id: existing.id })
+              }
+
+              const data = fs.readFileSync(assetPath)
+              await github.rest.repos.uploadReleaseAsset({
+                owner,
+                repo,
+                release_id: releaseId,
+                name: assetName,
+                data,
+                headers: {
+                  'content-type': 'application/zip',
+                  'content-length': data.length,
+                },
+              })
+              core.info(`Uploaded ${assetName}`)
+            }

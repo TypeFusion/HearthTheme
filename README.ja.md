@@ -88,4 +88,8 @@ Obsidian App Theme リリース:
 1. `pnpm run pack:obsidian:snippets` を実行
 2. 出力先: `release/obsidian/hearth-obsidian-snippets-v<version>.zip`
 
+CI 自動化メモ:
+
+- `main` への push で extension の version/changelog が更新された場合、`.github/workflows/publish.yml` が対応する GitHub Release tag へ Obsidian の2つの zip アセットを自動アップロードします。
+
 Obsidian コミュニティディレクトリ元データ: <https://github.com/obsidianmd/obsidian-releases/blob/master/community-css-themes.json>

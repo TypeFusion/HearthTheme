@@ -88,4 +88,8 @@ Obsidian App Theme 发布：
 1. 执行 `pnpm run pack:obsidian:snippets`
 2. 产物路径：`release/obsidian/hearth-obsidian-snippets-v<version>.zip`
 
+CI 自动化说明：
+
+- 当 `main` 分支 push 且 extension 版本/更新日志发生变更时，`.github/workflows/publish.yml` 会自动打包并上传两个 Obsidian zip 资产到对应的 GitHub Release tag。
+
 Obsidian 社区目录源：<https://github.com/obsidianmd/obsidian-releases/blob/master/community-css-themes.json>
