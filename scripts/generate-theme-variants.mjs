@@ -1,29 +1,30 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
 
-const DARK_THEME_PATH = 'themes/hearth-dark.json'
-const TEMPLATE_DARK_PATH = 'themes/templates/hearth-dark.base.json'
+const DARK_THEME_SOURCE_PATH = 'color-system/hearth-dark.source.json'
+const DARK_THEME_OUTPUT_PATH = 'themes/hearth-dark.json'
+const TEMPLATE_DARK_PATH = 'color-system/templates/hearth-dark.base.json'
 
 const VARIANT_CONFIG = [
   {
     id: 'darkSoft',
     name: 'Hearth Dark Soft',
     type: 'dark',
-    templatePath: 'themes/templates/hearth-dark-soft.base.json',
+    templatePath: 'color-system/templates/hearth-dark-soft.base.json',
     outputPath: 'themes/hearth-dark-soft.json',
   },
   {
     id: 'light',
     name: 'Hearth Light',
     type: 'light',
-    templatePath: 'themes/templates/hearth-light.base.json',
+    templatePath: 'color-system/templates/hearth-light.base.json',
     outputPath: 'themes/hearth-light.json',
   },
   {
     id: 'lightSoft',
     name: 'Hearth Light Soft',
     type: 'light',
-    templatePath: 'themes/templates/hearth-light-soft.base.json',
+    templatePath: 'color-system/templates/hearth-light-soft.base.json',
     outputPath: 'themes/hearth-light-soft.json',
   },
 ]
@@ -1162,21 +1163,27 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
 }
 
 export function generateThemeVariants() {
-  validateTemplateAvailability(DARK_THEME_PATH)
+  validateTemplateAvailability(DARK_THEME_SOURCE_PATH)
   validateTemplateAvailability(TEMPLATE_DARK_PATH)
 
-  const currentDark = readJson(DARK_THEME_PATH)
+  const currentDark = readJson(DARK_THEME_SOURCE_PATH)
   const baselineDark = readJson(TEMPLATE_DARK_PATH)
   const warnings = []
 
   warnTemplateDrift(currentDark, baselineDark, warnings)
+  const darkChanged = writeJson(DARK_THEME_OUTPUT_PATH, currentDark)
+  console.log(
+    `${darkChanged ? '✓ generated' : '- unchanged'} ${DARK_THEME_OUTPUT_PATH} from ${DARK_THEME_SOURCE_PATH}`
+  )
 
   for (const variantMeta of VARIANT_CONFIG) {
     validateTemplateAvailability(variantMeta.templatePath)
     const baselineVariant = readJson(variantMeta.templatePath)
     const generated = buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMeta, warnings)
     const changed = writeJson(variantMeta.outputPath, generated)
-    console.log(`${changed ? '✓ generated' : '- unchanged'} ${variantMeta.outputPath} from ${DARK_THEME_PATH}`)
+    console.log(
+      `${changed ? '✓ generated' : '- unchanged'} ${variantMeta.outputPath} from ${DARK_THEME_SOURCE_PATH}`
+    )
   }
 
   if (warnings.length > 0) {

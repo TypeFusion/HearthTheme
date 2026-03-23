@@ -76,7 +76,7 @@ HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。
 
 ## 维护者说明
 
-维护者入口目录：`themes/`、`extension/`、`obsidian/`、`src/`、`scripts/`。
+维护者入口目录：`color-system/`、`themes/`（生成产物）、`extension/`、`obsidian/`、`src/`、`scripts/`。
 
 色彩语言参考文件：
 

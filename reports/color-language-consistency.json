@@ -1,7 +1,14 @@
 {
   "schemaVersion": 1,
   "sourceOfTruth": {
-    "themes": [
+    "colorSystem": [
+      "color-system/hearth-dark.source.json",
+      "color-system/templates/hearth-dark.base.json",
+      "color-system/templates/hearth-dark-soft.base.json",
+      "color-system/templates/hearth-light.base.json",
+      "color-system/templates/hearth-light-soft.base.json"
+    ],
+    "generatedThemes": [
       "themes/hearth-dark.json",
       "themes/hearth-dark-soft.json",
       "themes/hearth-light.json",

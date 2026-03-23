@@ -312,7 +312,14 @@ function buildReportObject(roleRows) {
   return {
     schemaVersion: 1,
     sourceOfTruth: {
-      themes: Object.values(THEME_FILES),
+      colorSystem: [
+        'color-system/hearth-dark.source.json',
+        'color-system/templates/hearth-dark.base.json',
+        'color-system/templates/hearth-dark-soft.base.json',
+        'color-system/templates/hearth-light.base.json',
+        'color-system/templates/hearth-light-soft.base.json',
+      ],
+      generatedThemes: Object.values(THEME_FILES),
       generator: 'scripts/generate-theme-variants.mjs',
     },
     adapterContract,

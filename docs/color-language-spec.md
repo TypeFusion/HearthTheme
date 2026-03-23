@@ -12,6 +12,7 @@ It is a semantic color language that is adapted to multiple surfaces:
 - Website and docs presentation surfaces
 
 Platform files are delivery artifacts. Semantic role mapping is the source-of-truth.
+Authoring source files live under `color-system/`.
 
 ## 2. Token Architecture
 
@@ -62,12 +63,13 @@ All variants share one semantic hierarchy with different contrast texture and en
 
 When changing colors:
 
-1. Change semantic intent first.
-2. Regenerate platform artifacts via `pnpm run sync`.
-3. Review generated consistency report:
+1. Change semantic intent in `color-system/hearth-dark.source.json` first.
+2. If the derivation baseline itself changes, update `color-system/templates/*.base.json` in the same change set.
+3. Regenerate platform artifacts via `pnpm run sync`.
+4. Review generated consistency report:
   - `docs/color-language-report.md`
   - `reports/color-language-consistency.json`
-4. Run full audits (`pnpm run audit:all`) before release.
+5. Run full audits (`pnpm run audit:all`) before release.
 
 ## 6. Release Narrative
 

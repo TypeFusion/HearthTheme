@@ -8,6 +8,16 @@ const THEME_FILES = [
   { id: 'lightSoft', path: 'themes/hearth-light-soft.json', type: 'light' },
 ]
 
+const COLOR_SYSTEM = {
+  darkSource: 'color-system/hearth-dark.source.json',
+  templates: [
+    'color-system/templates/hearth-dark.base.json',
+    'color-system/templates/hearth-dark-soft.base.json',
+    'color-system/templates/hearth-light.base.json',
+    'color-system/templates/hearth-light-soft.base.json',
+  ],
+}
+
 const REQUIRED_UI_KEYS = [
   'editor.background',
   'editor.foreground',
@@ -264,6 +274,20 @@ function fixed(n) {
   return Number(n).toFixed(1)
 }
 
+function normalizeJson(value) {
+  if (Array.isArray(value)) return value.map((item) => normalizeJson(item))
+  if (!value || typeof value !== 'object') return value
+  const out = {}
+  for (const key of Object.keys(value).sort()) {
+    out[key] = normalizeJson(value[key])
+  }
+  return out
+}
+
+function jsonEqual(a, b) {
+  return JSON.stringify(normalizeJson(a)) === JSON.stringify(normalizeJson(b))
+}
+
 function validateFixtures() {
   if (!existsSync(FIXTURE_DIR)) {
     addIssue(`${FIXTURE_DIR}: missing fixture directory`)
@@ -409,6 +433,27 @@ function validateSoftPairDrift(darkSoftTheme, lightSoftTheme) {
   validateCrossThemeDrift(darkSoftTheme, lightSoftTheme, 'soft-pair')
 }
 
+function validateColorSystemSource(themes) {
+  if (!existsSync(COLOR_SYSTEM.darkSource)) {
+    addIssue(`${COLOR_SYSTEM.darkSource}: source file not found`)
+    return
+  }
+
+  const sourceTheme = readJson(COLOR_SYSTEM.darkSource)
+  const generatedDark = themes.dark
+  if (!sourceTheme || !generatedDark) return
+
+  if (!jsonEqual(sourceTheme, generatedDark)) {
+    addIssue(`themes/hearth-dark.json is out of sync with ${COLOR_SYSTEM.darkSource}; run pnpm run sync`)
+  }
+
+  for (const templatePath of COLOR_SYSTEM.templates) {
+    if (!existsSync(templatePath)) {
+      addIssue(`${templatePath}: template file not found`)
+    }
+  }
+}
+
 function validateThemeParity(themes) {
   const baseMeta = THEME_FILES.find((themeMeta) => themeMeta.id === 'dark')
   if (!baseMeta) return
@@ -470,6 +515,7 @@ function run() {
     validateSemanticAlignment(themeMeta, theme)
   }
 
+  validateColorSystemSource(themes)
   validateCrossThemeDrift(themes.dark, themes.light, 'default-pair')
   validateSoftPairDrift(themes.darkSoft, themes.lightSoft)
   validateThemeParity(themes)

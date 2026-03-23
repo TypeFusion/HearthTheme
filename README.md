@@ -76,7 +76,7 @@ Softer light contrast for long daytime sessions and reduced visual pressure.
 
 ## Maintainer Notes
 
-Core source locations: `themes/`, `extension/`, `obsidian/`, `src/`, and `scripts/`.
+Core source locations: `color-system/`, `themes/` (generated), `extension/`, `obsidian/`, `src/`, and `scripts/`.
 
 Color-language references:
 

@@ -1,6 +1,7 @@
 import { execSync } from 'node:child_process'
 
 const GENERATED_PATH_RULES = [
+  { type: 'prefix', value: 'themes/' },
   { type: 'prefix', value: 'public/themes/' },
   { type: 'prefix', value: 'extension/themes/' },
   { type: 'prefix', value: 'obsidian/themes/' },
@@ -12,7 +13,7 @@ const GENERATED_PATH_RULES = [
 ]
 
 const SOURCE_OF_TRUTH_RULES = [
-  { type: 'prefix', value: 'themes/' },
+  { type: 'prefix', value: 'color-system/' },
   { type: 'prefix', value: 'releases/' },
   { type: 'prefix', value: 'scripts/' },
 ]
@@ -199,11 +200,11 @@ function main() {
 
   if (!hasSourceChange) {
     console.error('[FAIL] Generated-origin audit failed.')
-    console.error('Generated outputs changed without changes in themes/ or scripts/:')
+    console.error('Generated outputs changed without changes in color-system/ or scripts/:')
     for (const file of generatedChanged) {
       console.error(`  - ${file}`)
     }
-    console.error('Please modify theme sources (themes/) or generators (scripts/) in the same change set.')
+    console.error('Please modify color-system sources (color-system/) or generators (scripts/) in the same change set.')
     process.exit(1)
   }
 

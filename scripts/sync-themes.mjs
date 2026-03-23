@@ -6,7 +6,7 @@ import { generateObsidianThemes } from './generate-obsidian-themes.mjs'
 import { generateObsidianAppTheme } from './generate-obsidian-app-theme.mjs'
 import { generateColorLanguageReport } from './generate-color-language-report.mjs'
 
-// 0. 以 Hearth Dark 为核心生成其他变体
+// 0. 从 color-system 源生成四个主题 JSON 变体（themes/ 仅作为产物）
 generateThemeVariants()
 
 // 1. 同步 JSON 到 public 和 extension

@@ -67,11 +67,11 @@ Theme releases must keep both layers aligned:
 
 All palette changes must follow this order:
 
-1. Edit the core source theme: `themes/hearth-dark.json`.
-2. If this is a deliberate palette-direction reset, update templates in `themes/templates/*.base.json` in the same PR.
+1. Edit the core color-system source: `color-system/hearth-dark.source.json`.
+2. If this is a deliberate palette-direction reset, update templates in `color-system/templates/*.base.json` in the same PR.
 3. Run `npm run sync` (this generates Dark Soft / Light / Light Soft, then refreshes `src/data/tokens.ts`, `src/styles/theme-vars.css`, docs snapshot rows, and extension metadata color sync).
 4. Run `npm run check:sync` (must be clean right after sync).
-5. Run `npm run audit:generated-origin` (generated outputs must be backed by changes in `themes/` or `scripts/`).
+5. Run `npm run audit:generated-origin` (generated outputs must be backed by changes in `color-system/` or `scripts/`).
 6. Run `npm run audit:all` (`theme + copy + generated-origin + cjk + release`).
 7. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
 8. If thresholds or governance changed, update this document and audit scripts in the same PR.
@@ -83,9 +83,9 @@ One-shot alternative:
 
 ## 6) PR Acceptance Checklist
 
-- `themes/hearth-dark.json` is the only hand-edited source theme for palette evolution.
-- `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` are regenerated from core dark.
-- `themes/templates/*.base.json` are updated only when intentionally changing derivation baseline.
+- `color-system/hearth-dark.source.json` is the only hand-edited palette source for color evolution.
+- `themes/hearth-dark.json`, `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` are regenerated artifacts.
+- `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline.
 - `src/data/tokens.ts` regenerated via sync script.
 - `src/styles/theme-vars.css` regenerated via sync script.
 - `extension/package.json` `galleryBanner.color` matches `themes/hearth-dark.json` background.
