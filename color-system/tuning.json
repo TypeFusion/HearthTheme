@@ -255,7 +255,7 @@
     "lightSoft": {
       "maxNeededFactor": 1.16,
       "maxBoostRounds": 4,
-      "roleBoostScale": 0.48,
+      "roleBoostScale": 0.54,
       "lightnessLiftScale": 0.35,
       "maxChroma": 58
     }
@@ -834,31 +834,31 @@
         "lightnessLift": -0.8
       },
       "function": {
-        "factor": 0.86,
-        "maxChroma": 56,
-        "lightnessLift": -1.2
+        "factor": 0.9,
+        "maxChroma": 58,
+        "lightnessLift": -0.8
       },
       "method": {
-        "factor": 0.74,
-        "maxChroma": 45,
-        "lightnessLift": -1.6
+        "factor": 0.82,
+        "maxChroma": 50,
+        "lightnessLift": -1.0
       },
       "property": {
-        "factor": 0.85,
-        "maxChroma": 42,
-        "lightnessLift": -1.5
+        "factor": 0.9,
+        "maxChroma": 46,
+        "lightnessLift": -0.9
       },
       "type": {
-        "factor": 0.9,
-        "maxChroma": 36,
-        "lightnessLift": -1
+        "factor": 0.93,
+        "maxChroma": 40,
+        "lightnessLift": -0.7
       }
     },
     "lightSoft": {
       "operator": {
-        "factor": 0.9,
-        "maxChroma": 30,
-        "lightnessLift": -2
+        "factor": 0.91,
+        "maxChroma": 31,
+        "lightnessLift": -1.8
       },
       "keyword": {
         "factor": 0.92,
@@ -876,24 +876,24 @@
         "lightnessLift": -0.5
       },
       "function": {
-        "factor": 0.74,
-        "maxChroma": 37,
-        "lightnessLift": -1.1
-      },
-      "method": {
-        "factor": 0.86,
+        "factor": 0.8,
         "maxChroma": 40,
         "lightnessLift": -0.8
       },
-      "property": {
-        "factor": 0.88,
-        "maxChroma": 31,
-        "lightnessLift": -0.6
+      "method": {
+        "factor": 0.89,
+        "maxChroma": 42,
+        "lightnessLift": -0.5
       },
-      "type": {
-        "factor": 0.94,
+      "property": {
+        "factor": 0.9,
         "maxChroma": 34,
         "lightnessLift": -0.4
+      },
+      "type": {
+        "factor": 0.96,
+        "maxChroma": 36,
+        "lightnessLift": -0.2
       }
     }
   },

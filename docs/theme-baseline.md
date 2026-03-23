@@ -20,13 +20,13 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 | background | `#23201c` | `#2b2926` | `#ece2d3` | `#dfd2be` | Blackboard vs parchment substrate |
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk ink vs walnut ink |
 | keyword | `#c26f59` | `#cb6d4e` | `#a33a2f` | `#ab5b47` | Ember red control-flow anchors |
-| operator | `#8f846f` | `#8f846f` | `#71644a` | `#796c56` | Low-noise brass connective symbols |
-| function | `#7f97ae` | `#8a9db0` | `#406074` | `#4c586b` | Denim-blue callable targets as restrained cool anchors |
-| method | `#c0a37a` | `#beaa8e` | `#87505d` | `#8b5d67` | Warm sand method calls for relaxed action emphasis |
-| property | `#889566` | `#909b74` | `#304c37` | `#385543` | Olive member access cues to keep structure low-stimulus |
+| operator | `#8f846f` | `#8f846f` | `#71644a` | `#6d6147` | Low-noise brass connective symbols |
+| function | `#7f97ae` | `#8a9fb2` | `#406074` | `#546072` | Denim-blue callable targets as restrained cool anchors |
+| method | `#c0a37a` | `#c2ab8c` | `#87505d` | `#895f68` | Warm sand method calls for relaxed action emphasis |
+| property | `#889566` | `#929d73` | `#304c37` | `#325649` | Olive member access cues to keep structure low-stimulus |
 | string | `#94ab78` | `#9bb17f` | `#5e7342` | `#697a54` | Muted olive literal content for calm scan rhythm |
 | number | `#ba846d` | `#cc8664` | `#b36938` | `#b86b3f` | Terracotta numeric constants |
-| type | `#5e8f8a` | `#6a9591` | `#2f6f64` | `#31676a` | Denim-teal structural symbols with reduced chroma |
+| type | `#5e8f8a` | `#699692` | `#2f6f64` | `#376f72` | Denim-teal structural symbols with reduced chroma |
 | variable | `#d0cbc5` | `#cbc7c1` | `#5a3c28` | `#654a35` | Neutral content carrier |
 | comment | `#6b5f4d` | `#6b5f4d` | `#847257` | `#887861` | Intentionally quiet guidance layer |
 
@@ -62,7 +62,7 @@ Current snapshot from audit:
 - dark operator: `4.4`
 - dark soft operator: `3.9`
 - light operator: `4.5`
-- light soft operator: `3.4`
+- light soft operator: `4.1`
 
 ## 4) Token Coverage Standard
 

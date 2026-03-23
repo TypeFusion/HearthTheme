@@ -176,7 +176,7 @@
                 "meta.method-call.rust entity.name.function.rust"
             ],
             "settings": {
-                "foreground": "#beaa8e"
+                "foreground": "#c2ab8c"
             }
         },
         {
@@ -186,7 +186,7 @@
                 "meta.function-call.generic"
             ],
             "settings": {
-                "foreground": "#8a9db0"
+                "foreground": "#8a9fb2"
             }
         },
         {
@@ -201,7 +201,7 @@
                 "support.type.property-name"
             ],
             "settings": {
-                "foreground": "#909b74"
+                "foreground": "#929d73"
             }
         },
         {
@@ -239,7 +239,7 @@
                 "support.class"
             ],
             "settings": {
-                "foreground": "#6a9591",
+                "foreground": "#699692",
                 "fontStyle": "italic"
             }
         },
@@ -373,34 +373,34 @@
     "semanticTokenColors": {
         "variable": "#cbc7c1",
         "variable.readonly": "#c89254",
-        "property": "#909b74",
+        "property": "#929d73",
         "property.readonly": "#c89254",
-        "function": "#8a9db0",
-        "method": "#beaa8e",
-        "function.defaultLibrary": "#beaa8e",
-        "method.defaultLibrary": "#beaa8e",
+        "function": "#8a9fb2",
+        "method": "#c2ab8c",
+        "function.defaultLibrary": "#c2ab8c",
+        "method.defaultLibrary": "#c2ab8c",
         "class": {
-            "foreground": "#6a9591",
+            "foreground": "#699692",
             "fontStyle": "italic"
         },
         "interface": {
-            "foreground": "#6a9591",
+            "foreground": "#699692",
             "fontStyle": "italic"
         },
         "type": {
-            "foreground": "#6a9591",
+            "foreground": "#699692",
             "fontStyle": "italic"
         },
         "type.defaultLibrary": {
-            "foreground": "#6a9591",
+            "foreground": "#699692",
             "fontStyle": "italic"
         },
         "typeParameter": {
-            "foreground": "#6a9591",
+            "foreground": "#699692",
             "fontStyle": "italic"
         },
         "enum": {
-            "foreground": "#6a9591",
+            "foreground": "#699692",
             "fontStyle": "italic"
         },
         "enumMember": "#cc8664",

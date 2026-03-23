@@ -16,7 +16,7 @@
     },
     {
       "id": "darkSoft",
-      "svgSha256": "5b2a46fa23a1183d4e9bf6f443c1997221a3c0f32de16f7623c22c23b20ac85b",
+      "svgSha256": "497eb44c3e1334f499b74e6d735fa0fed5fed53c431a99560fdb372a29ac3302",
       "output": "extension/images/preview-dark-soft.png",
       "webOutput": "public/previews/preview-dark-soft.png"
     },
@@ -28,13 +28,13 @@
     },
     {
       "id": "lightSoft",
-      "svgSha256": "5eb50ea81ea13f7930b85dac7f0e10c379298fe35ac36fad0be27fa88fc5f6d3",
+      "svgSha256": "9f9a12ad31491daf699a50a0e816b379ed16db7ca3307ca630bc14baa4ef26a6",
       "output": "extension/images/preview-light-soft.png",
       "webOutput": "public/previews/preview-light-soft.png"
     }
   ],
   "contrastImage": {
-    "svgSha256": "7985c0e2ef0afdb445be7f97f70f73a01a5ecb466a035f0da39fcc22b2c9c093",
+    "svgSha256": "e516c6e314e58e2c5dbe2400dd76a7b6dcb7c1570d1ba03a172cda20a343d7a1",
     "outputs": [
       "extension/images/preview-contrast-v2.png",
       "extension/images/preview-contrast.png"
