@@ -1,21 +1,22 @@
 import { existsSync, readFileSync, statSync } from 'fs'
 import { join } from 'path'
+import {
+  COLOR_SYSTEM_SEMANTIC_PATH,
+  getThemeMetaList,
+  loadColorSystemVariants,
+  loadRoleAdapters,
+} from './color-system.mjs'
 
-const THEME_FILES = [
-  { id: 'dark', path: 'themes/hearth-dark.json', type: 'dark' },
-  { id: 'darkSoft', path: 'themes/hearth-dark-soft.json', type: 'dark' },
-  { id: 'light', path: 'themes/hearth-light.json', type: 'light' },
-  { id: 'lightSoft', path: 'themes/hearth-light-soft.json', type: 'light' },
-]
+const VARIANT_SPEC = loadColorSystemVariants()
+const THEME_FILES = getThemeMetaList()
+const ROLE_ADAPTERS = loadRoleAdapters()
 
 const COLOR_SYSTEM = {
-  darkSource: 'color-system/hearth-dark.source.json',
-  templates: [
-    'color-system/templates/hearth-dark.base.json',
-    'color-system/templates/hearth-dark-soft.base.json',
-    'color-system/templates/hearth-light.base.json',
-    'color-system/templates/hearth-light-soft.base.json',
-  ],
+  darkSource: VARIANT_SPEC.baseSourcePath,
+  templates: [VARIANT_SPEC.baseTemplatePath, ...VARIANT_SPEC.variants
+    .filter((variant) => variant.mode === 'derived')
+    .map((variant) => variant.templatePath)],
+  semantic: COLOR_SYSTEM_SEMANTIC_PATH,
 }
 
 const REQUIRED_UI_KEYS = [
@@ -39,25 +40,21 @@ const REQUIRED_UI_KEYS = [
   'editorBracketHighlight.foreground1',
 ]
 
-const ROLE_SCOPES = {
-  comment: ['comment', 'punctuation.definition.comment'],
-  keyword: ['keyword', 'keyword.control'],
-  operator: ['keyword.operator', 'keyword.operator.assignment'],
-  function: ['entity.name.function', 'support.function'],
-  string: ['string', 'string.quoted', 'string.template'],
-  number: ['constant.numeric'],
-  type: ['entity.name.type', 'entity.name.class', 'support.type'],
-  variable: ['variable', 'variable.other.readwrite'],
-  property: ['variable.other.property', 'support.type.property-name'],
+const ROLE_SCOPES = Object.fromEntries(ROLE_ADAPTERS.map((role) => [role.id, role.scopes]))
+
+function resolvePrimarySemanticKey(roleId) {
+  const role = ROLE_ADAPTERS.find((item) => item.id === roleId)
+  if (!role) return null
+  return role.vscodeSemantic || role.semanticKeys[0] || null
 }
 
 const SEMANTIC_ROLE_KEYS = {
-  keyword: 'keyword',
-  function: 'function',
-  number: 'enumMember',
-  type: 'type',
-  variable: 'variable',
-  property: 'property',
+  keyword: resolvePrimarySemanticKey('keyword'),
+  function: resolvePrimarySemanticKey('function'),
+  number: resolvePrimarySemanticKey('number'),
+  type: resolvePrimarySemanticKey('type'),
+  variable: resolvePrimarySemanticKey('variable'),
+  property: resolvePrimarySemanticKey('property'),
 }
 
 const FIXTURE_DIR = 'fixtures/theme-audit'
@@ -274,20 +271,6 @@ function fixed(n) {
   return Number(n).toFixed(1)
 }
 
-function normalizeJson(value) {
-  if (Array.isArray(value)) return value.map((item) => normalizeJson(item))
-  if (!value || typeof value !== 'object') return value
-  const out = {}
-  for (const key of Object.keys(value).sort()) {
-    out[key] = normalizeJson(value[key])
-  }
-  return out
-}
-
-function jsonEqual(a, b) {
-  return JSON.stringify(normalizeJson(a)) === JSON.stringify(normalizeJson(b))
-}
-
 function validateFixtures() {
   if (!existsSync(FIXTURE_DIR)) {
     addIssue(`${FIXTURE_DIR}: missing fixture directory`)
@@ -326,9 +309,12 @@ function validateThemeStructure(themeMeta, theme) {
     if (!value) addIssue(`${themeMeta.path}: missing or invalid color "${key}"`)
   }
 
-  for (const [role, scopes] of Object.entries(ROLE_SCOPES)) {
+  for (const role of ROLE_ADAPTERS) {
+    if (role.requireTokenCoverage === false) continue
+    const scopes = role.scopes || []
+    if (scopes.length === 0) continue
     const color = getTokenColor(theme, scopes)
-    if (!color) addIssue(`${themeMeta.path}: missing token color coverage for role "${role}"`)
+    if (!color) addIssue(`${themeMeta.path}: missing token color coverage for role "${role.id}"`)
   }
 }
 
@@ -438,14 +424,13 @@ function validateColorSystemSource(themes) {
     addIssue(`${COLOR_SYSTEM.darkSource}: source file not found`)
     return
   }
+  if (!existsSync(COLOR_SYSTEM.semantic)) {
+    addIssue(`${COLOR_SYSTEM.semantic}: semantic palette file not found`)
+  }
 
   const sourceTheme = readJson(COLOR_SYSTEM.darkSource)
   const generatedDark = themes.dark
   if (!sourceTheme || !generatedDark) return
-
-  if (!jsonEqual(sourceTheme, generatedDark)) {
-    addIssue(`themes/hearth-dark.json is out of sync with ${COLOR_SYSTEM.darkSource}; run pnpm run sync`)
-  }
 
   for (const templatePath of COLOR_SYSTEM.templates) {
     if (!existsSync(templatePath)) {

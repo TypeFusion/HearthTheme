@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "baseSourcePath": "color-system/hearth-dark.source.json",
+  "baseTemplatePath": "color-system/templates/hearth-dark.base.json",
+  "variants": [
+    {
+      "id": "dark",
+      "name": "Hearth Dark",
+      "type": "dark",
+      "mode": "source",
+      "outputPath": "themes/hearth-dark.json"
+    },
+    {
+      "id": "darkSoft",
+      "name": "Hearth Dark Soft",
+      "type": "dark",
+      "mode": "derived",
+      "templatePath": "color-system/templates/hearth-dark-soft.base.json",
+      "outputPath": "themes/hearth-dark-soft.json"
+    },
+    {
+      "id": "light",
+      "name": "Hearth Light",
+      "type": "light",
+      "mode": "derived",
+      "templatePath": "color-system/templates/hearth-light.base.json",
+      "outputPath": "themes/hearth-light.json"
+    },
+    {
+      "id": "lightSoft",
+      "name": "Hearth Light Soft",
+      "type": "light",
+      "mode": "derived",
+      "templatePath": "color-system/templates/hearth-light-soft.base.json",
+      "outputPath": "themes/hearth-light-soft.json"
+    }
+  ]
+}

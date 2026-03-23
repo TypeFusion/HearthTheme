@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "roles": {
+    "comment": {
+      "dark": "#6b5f4d",
+      "darkSoft": "#6b5f4d",
+      "light": "#847257",
+      "lightSoft": "#887861"
+    },
+    "keyword": {
+      "dark": "#c26f59",
+      "darkSoft": "#d36b4a",
+      "light": "#a33a2f",
+      "lightSoft": "#b15a44"
+    },
+    "operator": {
+      "dark": "#8f846f",
+      "darkSoft": "#8f846f",
+      "light": "#75674c",
+      "lightSoft": "#7f7158"
+    },
+    "function": {
+      "dark": "#d7ad70",
+      "darkSoft": "#e3b368",
+      "light": "#1f5f98",
+      "lightSoft": "#2a638f"
+    },
+    "method": {
+      "dark": "#73c3e3",
+      "darkSoft": "#78d4ff",
+      "light": "#0092c2",
+      "lightSoft": "#2f8fb3"
+    },
+    "property": {
+      "dark": "#5ea2c4",
+      "darkSoft": "#62b8dc",
+      "light": "#3a69a8",
+      "lightSoft": "#4d72a2"
+    },
+    "string": {
+      "dark": "#8fb87d",
+      "darkSoft": "#8fbd79",
+      "light": "#2a7a2e",
+      "lightSoft": "#4e7a4e"
+    },
+    "number": {
+      "dark": "#ba846d",
+      "darkSoft": "#d5865f",
+      "light": "#bf5d22",
+      "lightSoft": "#c36832"
+    },
+    "type": {
+      "dark": "#5d98a4",
+      "darkSoft": "#5aa7b6",
+      "light": "#00727d",
+      "lightSoft": "#3a7a7e"
+    },
+    "variable": {
+      "dark": "#dfd5c7",
+      "darkSoft": "#dfd5c7",
+      "light": "#5a3c28",
+      "lightSoft": "#654a35"
+    },
+    "parameter": {
+      "dark": "#d9cebd",
+      "darkSoft": "#d9cebd",
+      "light": "#433323",
+      "lightSoft": "#574633"
+    },
+    "tag": {
+      "dark": "#c46f58",
+      "darkSoft": "#d06a4a",
+      "light": "#a63b1d",
+      "lightSoft": "#914833"
+    }
+  }
+}

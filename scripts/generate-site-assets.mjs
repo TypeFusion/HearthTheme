@@ -1,12 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import { getThemeOutputFiles } from './color-system.mjs'
 
-const THEME_FILES = {
-  dark: 'themes/hearth-dark.json',
-  darkSoft: 'themes/hearth-dark-soft.json',
-  light: 'themes/hearth-light.json',
-  lightSoft: 'themes/hearth-light-soft.json',
-}
+const THEME_FILES = getThemeOutputFiles()
 
 const EXTENSION_PACKAGE_PATH = 'extension/package.json'
 const DOCS_BASELINE_PATH = 'docs/theme-baseline.md'

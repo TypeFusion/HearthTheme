@@ -1,12 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import { getThemeOutputFiles } from './color-system.mjs'
 
-export const THEME_FILES = {
-  dark: 'themes/hearth-dark.json',
-  darkSoft: 'themes/hearth-dark-soft.json',
-  light: 'themes/hearth-light.json',
-  lightSoft: 'themes/hearth-light-soft.json',
-}
+export const THEME_FILES = getThemeOutputFiles()
 
 export const VARIANT_META = {
   dark: {

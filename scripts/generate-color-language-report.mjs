@@ -1,87 +1,16 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import {
+  COLOR_SYSTEM_ADAPTERS_PATH,
+  COLOR_SYSTEM_SEMANTIC_PATH,
+  COLOR_SYSTEM_VARIANTS_PATH,
+  getThemeOutputFiles,
+  loadRoleAdapters,
+} from './color-system.mjs'
 
-const THEME_FILES = {
-  dark: 'themes/hearth-dark.json',
-  darkSoft: 'themes/hearth-dark-soft.json',
-  light: 'themes/hearth-light.json',
-  lightSoft: 'themes/hearth-light-soft.json',
-}
-
-const VARIANT_ORDER = ['dark', 'darkSoft', 'light', 'lightSoft']
-
-const ROLE_SPECS = [
-  {
-    id: 'comment',
-    scopes: ['comment', 'punctuation.definition.comment'],
-    vscodeSemantic: null,
-    obsidianVar: '--code-comment',
-    webToken: 'comment',
-  },
-  {
-    id: 'keyword',
-    scopes: ['keyword', 'keyword.control'],
-    vscodeSemantic: 'keyword',
-    obsidianVar: '--code-keyword',
-    webToken: 'keyword',
-  },
-  {
-    id: 'operator',
-    scopes: ['keyword.operator', 'keyword.operator.assignment'],
-    vscodeSemantic: null,
-    obsidianVar: '--code-operator',
-    webToken: 'operator',
-  },
-  {
-    id: 'function',
-    scopes: ['entity.name.function', 'support.function'],
-    vscodeSemantic: 'function',
-    obsidianVar: '--code-function',
-    webToken: 'fn',
-  },
-  {
-    id: 'string',
-    scopes: ['string', 'string.quoted', 'string.template'],
-    vscodeSemantic: null,
-    obsidianVar: '--code-string',
-    webToken: 'string',
-  },
-  {
-    id: 'number',
-    scopes: ['constant.numeric'],
-    vscodeSemantic: 'enumMember',
-    obsidianVar: '--code-value',
-    webToken: 'number',
-  },
-  {
-    id: 'type',
-    scopes: ['entity.name.type', 'entity.name.class', 'support.type'],
-    vscodeSemantic: 'type',
-    obsidianVar: '--code-important',
-    webToken: 'type',
-  },
-  {
-    id: 'variable',
-    scopes: ['variable', 'variable.other.readwrite'],
-    vscodeSemantic: 'variable',
-    obsidianVar: '--code-normal',
-    webToken: 'variable',
-  },
-  {
-    id: 'property',
-    scopes: ['variable.other.property', 'support.type.property-name', 'meta.object-literal.key'],
-    vscodeSemantic: 'property',
-    obsidianVar: '--code-property',
-    webToken: null,
-  },
-  {
-    id: 'tag',
-    scopes: ['entity.name.tag', 'punctuation.definition.tag'],
-    vscodeSemantic: null,
-    obsidianVar: '--code-tag',
-    webToken: null,
-  },
-]
+const THEME_FILES = getThemeOutputFiles()
+const VARIANT_ORDER = Object.keys(THEME_FILES)
+const ROLE_SPECS = loadRoleAdapters().filter((role) => role.includeInReport)
 
 const OUTPUT_JSON = 'reports/color-language-consistency.json'
 const OUTPUT_MARKDOWN = 'docs/color-language-report.md'
@@ -312,13 +241,7 @@ function buildReportObject(roleRows) {
   return {
     schemaVersion: 1,
     sourceOfTruth: {
-      colorSystem: [
-        'color-system/hearth-dark.source.json',
-        'color-system/templates/hearth-dark.base.json',
-        'color-system/templates/hearth-dark-soft.base.json',
-        'color-system/templates/hearth-light.base.json',
-        'color-system/templates/hearth-light-soft.base.json',
-      ],
+      colorSystem: [COLOR_SYSTEM_VARIANTS_PATH, COLOR_SYSTEM_ADAPTERS_PATH, COLOR_SYSTEM_SEMANTIC_PATH],
       generatedThemes: Object.values(THEME_FILES),
       generator: 'scripts/generate-theme-variants.mjs',
     },

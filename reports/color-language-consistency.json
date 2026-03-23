@@ -2,11 +2,9 @@
   "schemaVersion": 1,
   "sourceOfTruth": {
     "colorSystem": [
-      "color-system/hearth-dark.source.json",
-      "color-system/templates/hearth-dark.base.json",
-      "color-system/templates/hearth-dark-soft.base.json",
-      "color-system/templates/hearth-light.base.json",
-      "color-system/templates/hearth-light-soft.base.json"
+      "color-system/variants.json",
+      "color-system/adapters.json",
+      "color-system/semantic.json"
     ],
     "generatedThemes": [
       "themes/hearth-dark.json",
@@ -31,7 +29,9 @@
       "role": "keyword",
       "scopes": [
         "keyword",
-        "keyword.control"
+        "keyword.control",
+        "storage.type",
+        "storage.modifier"
       ],
       "vscodeSemantic": "keyword",
       "obsidianVar": "--code-keyword",
@@ -51,18 +51,36 @@
       "role": "function",
       "scopes": [
         "entity.name.function",
-        "support.function"
+        "support.function",
+        "meta.function-call.generic"
       ],
       "vscodeSemantic": "function",
       "obsidianVar": "--code-function",
       "webToken": "fn"
     },
     {
+      "role": "property",
+      "scopes": [
+        "entity.name.function.member",
+        "entity.name.function.member.python",
+        "entity.name.function.member.go",
+        "entity.name.function.member.rust",
+        "variable.other.property",
+        "variable.other.member",
+        "meta.property-name",
+        "support.type.property-name"
+      ],
+      "vscodeSemantic": "property",
+      "obsidianVar": "--code-property",
+      "webToken": null
+    },
+    {
       "role": "string",
       "scopes": [
         "string",
         "string.quoted",
-        "string.template"
+        "string.template",
+        "string.regexp"
       ],
       "vscodeSemantic": null,
       "obsidianVar": "--code-string",
@@ -71,7 +89,12 @@
     {
       "role": "number",
       "scopes": [
-        "constant.numeric"
+        "constant.numeric",
+        "constant.language.boolean",
+        "constant.language.null",
+        "constant.language.undefined",
+        "constant.other.color",
+        "support.constant"
       ],
       "vscodeSemantic": "enumMember",
       "obsidianVar": "--code-value",
@@ -82,7 +105,11 @@
       "scopes": [
         "entity.name.type",
         "entity.name.class",
-        "support.type"
+        "entity.name.struct.rust",
+        "entity.name.type.class",
+        "support.type",
+        "support.type.builtin",
+        "support.class"
       ],
       "vscodeSemantic": "type",
       "obsidianVar": "--code-important",
@@ -92,22 +119,12 @@
       "role": "variable",
       "scopes": [
         "variable",
-        "variable.other.readwrite"
+        "variable.other.readwrite",
+        "variable.other.constant"
       ],
       "vscodeSemantic": "variable",
       "obsidianVar": "--code-normal",
       "webToken": "variable"
-    },
-    {
-      "role": "property",
-      "scopes": [
-        "variable.other.property",
-        "support.type.property-name",
-        "meta.object-literal.key"
-      ],
-      "vscodeSemantic": "property",
-      "obsidianVar": "--code-property",
-      "webToken": null
     },
     {
       "role": "tag",
@@ -144,19 +161,19 @@
           "contrastToBackground": 2.33
         },
         "light": {
-          "textmate": "#a48e6a",
+          "textmate": "#847257",
           "semantic": null,
-          "contrastToBackground": 2.55
+          "contrastToBackground": 3.75
         },
         "lightSoft": {
-          "textmate": "#998466",
+          "textmate": "#887861",
           "semantic": null,
-          "contrastToBackground": 2.55
+          "contrastToBackground": 3.04
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 1.2,
-        "softPairHueDrift": 0.7,
+        "defaultPairHueDrift": 0,
+        "softPairHueDrift": 0.6,
         "semanticDeltaE": {
           "dark": null,
           "darkSoft": null,
@@ -169,7 +186,9 @@
       "id": "keyword",
       "scopes": [
         "keyword",
-        "keyword.control"
+        "keyword.control",
+        "storage.type",
+        "storage.modifier"
       ],
       "adapters": {
         "vscodeSemantic": "keyword",
@@ -183,24 +202,24 @@
           "contrastToBackground": 4.41
         },
         "darkSoft": {
-          "textmate": "#c26f59",
-          "semantic": "#c26f59",
-          "contrastToBackground": 3.95
+          "textmate": "#d36b4a",
+          "semantic": "#d36b4a",
+          "contrastToBackground": 4.12
         },
         "light": {
-          "textmate": "#9d3032",
-          "semantic": "#9d3032",
-          "contrastToBackground": 5.85
+          "textmate": "#a33a2f",
+          "semantic": "#a33a2f",
+          "contrastToBackground": 5.3
         },
         "lightSoft": {
-          "textmate": "#ae594c",
-          "semantic": "#ae594c",
-          "contrastToBackground": 3.45
+          "textmate": "#b15a44",
+          "semantic": "#b15a44",
+          "contrastToBackground": 3.38
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 13.7,
-        "softPairHueDrift": 4.6,
+        "defaultPairHueDrift": 6.9,
+        "softPairHueDrift": 2.3,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -232,19 +251,19 @@
           "contrastToBackground": 3.94
         },
         "light": {
-          "textmate": "#81704e",
+          "textmate": "#75674c",
           "semantic": null,
-          "contrastToBackground": 3.89
+          "contrastToBackground": 4.47
         },
         "lightSoft": {
-          "textmate": "#817050",
+          "textmate": "#7f7158",
           "semantic": null,
-          "contrastToBackground": 3.42
+          "contrastToBackground": 3.39
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 0.6,
-        "softPairHueDrift": 0.2,
+        "defaultPairHueDrift": 0.1,
+        "softPairHueDrift": 0.9,
         "semanticDeltaE": {
           "dark": null,
           "darkSoft": null,
@@ -257,7 +276,8 @@
       "id": "function",
       "scopes": [
         "entity.name.function",
-        "support.function"
+        "support.function",
+        "meta.function-call.generic"
       ],
       "adapters": {
         "vscodeSemantic": "function",
@@ -271,24 +291,74 @@
           "contrastToBackground": 7.8
         },
         "darkSoft": {
-          "textmate": "#d7ad70",
-          "semantic": "#d7ad70",
-          "contrastToBackground": 6.98
+          "textmate": "#e3b368",
+          "semantic": "#e3b368",
+          "contrastToBackground": 7.54
         },
         "light": {
-          "textmate": "#1d53a4",
-          "semantic": "#1d53a4",
-          "contrastToBackground": 6.01
+          "textmate": "#1f5f98",
+          "semantic": "#1f5f98",
+          "contrastToBackground": 5.39
         },
         "lightSoft": {
-          "textmate": "#2971b0",
-          "semantic": "#2971b0",
-          "contrastToBackground": 3.66
+          "textmate": "#2a638f",
+          "semantic": "#2a638f",
+          "contrastToBackground": 4.55
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 179.5,
-        "softPairHueDrift": 172.5,
+        "defaultPairHueDrift": 172.7,
+        "softPairHueDrift": 169.6,
+        "semanticDeltaE": {
+          "dark": 0,
+          "darkSoft": 0,
+          "light": 0,
+          "lightSoft": 0
+        }
+      }
+    },
+    {
+      "id": "property",
+      "scopes": [
+        "entity.name.function.member",
+        "entity.name.function.member.python",
+        "entity.name.function.member.go",
+        "entity.name.function.member.rust",
+        "variable.other.property",
+        "variable.other.member",
+        "meta.property-name",
+        "support.type.property-name"
+      ],
+      "adapters": {
+        "vscodeSemantic": "property",
+        "obsidianVar": "--code-property",
+        "webToken": null
+      },
+      "variants": {
+        "dark": {
+          "textmate": "#5ea2c4",
+          "semantic": "#5ea2c4",
+          "contrastToBackground": 5.75
+        },
+        "darkSoft": {
+          "textmate": "#62b8dc",
+          "semantic": "#62b8dc",
+          "contrastToBackground": 6.5
+        },
+        "light": {
+          "textmate": "#3a69a8",
+          "semantic": "#3a69a8",
+          "contrastToBackground": 4.51
+        },
+        "lightSoft": {
+          "textmate": "#4d72a2",
+          "semantic": "#4d72a2",
+          "contrastToBackground": 3.52
+        }
+      },
+      "metrics": {
+        "defaultPairHueDrift": 14.4,
+        "softPairHueDrift": 16.2,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -302,7 +372,8 @@
       "scopes": [
         "string",
         "string.quoted",
-        "string.template"
+        "string.template",
+        "string.regexp"
       ],
       "adapters": {
         "vscodeSemantic": null,
@@ -316,24 +387,24 @@
           "contrastToBackground": 7.2
         },
         "darkSoft": {
-          "textmate": "#8fb87d",
+          "textmate": "#8fbd79",
           "semantic": null,
-          "contrastToBackground": 6.44
+          "contrastToBackground": 6.72
         },
         "light": {
-          "textmate": "#00690f",
+          "textmate": "#2a7a2e",
           "semantic": null,
-          "contrastToBackground": 5.61
+          "contrastToBackground": 4.33
         },
         "lightSoft": {
-          "textmate": "#487f4f",
+          "textmate": "#4e7a4e",
           "semantic": null,
-          "contrastToBackground": 3.37
+          "contrastToBackground": 3.54
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 26.9,
-        "softPairHueDrift": 25.9,
+        "defaultPairHueDrift": 21.3,
+        "softPairHueDrift": 19.4,
         "semanticDeltaE": {
           "dark": null,
           "darkSoft": null,
@@ -345,7 +416,12 @@
     {
       "id": "number",
       "scopes": [
-        "constant.numeric"
+        "constant.numeric",
+        "constant.language.boolean",
+        "constant.language.null",
+        "constant.language.undefined",
+        "constant.other.color",
+        "support.constant"
       ],
       "adapters": {
         "vscodeSemantic": "enumMember",
@@ -359,24 +435,24 @@
           "contrastToBackground": 5.1
         },
         "darkSoft": {
-          "textmate": "#ba846d",
-          "semantic": "#ba846d",
-          "contrastToBackground": 4.56
+          "textmate": "#d5865f",
+          "semantic": "#d5865f",
+          "contrastToBackground": 5.11
         },
         "light": {
-          "textmate": "#973e07",
-          "semantic": "#973e07",
-          "contrastToBackground": 5.65
+          "textmate": "#bf5d22",
+          "semantic": "#bf5d22",
+          "contrastToBackground": 3.53
         },
         "lightSoft": {
-          "textmate": "#b05b29",
-          "semantic": "#b05b29",
-          "contrastToBackground": 3.41
+          "textmate": "#c36832",
+          "semantic": "#c36832",
+          "contrastToBackground": 2.79
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 5,
-        "softPairHueDrift": 4.3,
+        "defaultPairHueDrift": 4.6,
+        "softPairHueDrift": 2.5,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -390,7 +466,11 @@
       "scopes": [
         "entity.name.type",
         "entity.name.class",
-        "support.type"
+        "entity.name.struct.rust",
+        "entity.name.type.class",
+        "support.type",
+        "support.type.builtin",
+        "support.class"
       ],
       "adapters": {
         "vscodeSemantic": "type",
@@ -404,24 +484,24 @@
           "contrastToBackground": 5.01
         },
         "darkSoft": {
-          "textmate": "#5d98a4",
-          "semantic": "#5d98a4",
-          "contrastToBackground": 4.48
+          "textmate": "#5aa7b6",
+          "semantic": "#5aa7b6",
+          "contrastToBackground": 5.28
         },
         "light": {
-          "textmate": "#106772",
-          "semantic": "#106772",
-          "contrastToBackground": 5.3
+          "textmate": "#00727d",
+          "semantic": "#00727d",
+          "contrastToBackground": 4.59
         },
         "lightSoft": {
-          "textmate": "#437d7e",
-          "semantic": "#437d7e",
-          "contrastToBackground": 3.34
+          "textmate": "#3a7a7e",
+          "semantic": "#3a7a7e",
+          "contrastToBackground": 3.5
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 3.4,
-        "softPairHueDrift": 9.1,
+        "defaultPairHueDrift": 4.9,
+        "softPairHueDrift": 6.3,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -434,7 +514,8 @@
       "id": "variable",
       "scopes": [
         "variable",
-        "variable.other.readwrite"
+        "variable.other.readwrite",
+        "variable.other.constant"
       ],
       "adapters": {
         "vscodeSemantic": "variable",
@@ -453,64 +534,19 @@
           "contrastToBackground": 10
         },
         "light": {
-          "textmate": "#56361f",
-          "semantic": "#56361f",
-          "contrastToBackground": 8.74
+          "textmate": "#5a3c28",
+          "semantic": "#5a3c28",
+          "contrastToBackground": 8.04
         },
         "lightSoft": {
-          "textmate": "#4b2f18",
-          "semantic": "#4b2f18",
-          "contrastToBackground": 8.68
+          "textmate": "#654a35",
+          "semantic": "#654a35",
+          "contrastToBackground": 5.78
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 9.9,
-        "softPairHueDrift": 7.9,
-        "semanticDeltaE": {
-          "dark": 0,
-          "darkSoft": 0,
-          "light": 0,
-          "lightSoft": 0
-        }
-      }
-    },
-    {
-      "id": "property",
-      "scopes": [
-        "variable.other.property",
-        "support.type.property-name",
-        "meta.object-literal.key"
-      ],
-      "adapters": {
-        "vscodeSemantic": "property",
-        "obsidianVar": "--code-property",
-        "webToken": null
-      },
-      "variants": {
-        "dark": {
-          "textmate": "#5ea2c4",
-          "semantic": "#5ea2c4",
-          "contrastToBackground": 5.75
-        },
-        "darkSoft": {
-          "textmate": "#5ea2c4",
-          "semantic": "#5ea2c4",
-          "contrastToBackground": 5.14
-        },
-        "light": {
-          "textmate": "#3561aa",
-          "semantic": "#3561aa",
-          "contrastToBackground": 4.93
-        },
-        "lightSoft": {
-          "textmate": "#5d78ac",
-          "semantic": "#5d78ac",
-          "contrastToBackground": 3.14
-        }
-      },
-      "metrics": {
-        "defaultPairHueDrift": 17.4,
-        "softPairHueDrift": 19.5,
+        "defaultPairHueDrift": 11,
+        "softPairHueDrift": 8.8,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -537,24 +573,24 @@
           "contrastToBackground": 4.45
         },
         "darkSoft": {
-          "textmate": "#c46f58",
+          "textmate": "#d06a4a",
           "semantic": null,
-          "contrastToBackground": 3.98
+          "contrastToBackground": 4.04
         },
         "light": {
-          "textmate": "#a42911",
+          "textmate": "#a63b1d",
           "semantic": null,
-          "contrastToBackground": 5.85
+          "contrastToBackground": 5.2
         },
         "lightSoft": {
-          "textmate": "#a85d4c",
+          "textmate": "#914833",
           "semantic": null,
-          "contrastToBackground": 3.44
+          "contrastToBackground": 4.7
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 3,
-        "softPairHueDrift": 1.7,
+        "defaultPairHueDrift": 0.4,
+        "softPairHueDrift": 0.9,
         "semanticDeltaE": {
           "dark": null,
           "darkSoft": null,
@@ -566,44 +602,44 @@
   ],
   "driftSummary": {
     "comment": {
-      "defaultPairHueDrift": 1.2,
-      "softPairHueDrift": 0.7
+      "defaultPairHueDrift": 0,
+      "softPairHueDrift": 0.6
     },
     "keyword": {
-      "defaultPairHueDrift": 13.7,
-      "softPairHueDrift": 4.6
+      "defaultPairHueDrift": 6.9,
+      "softPairHueDrift": 2.3
     },
     "operator": {
-      "defaultPairHueDrift": 0.6,
-      "softPairHueDrift": 0.2
+      "defaultPairHueDrift": 0.1,
+      "softPairHueDrift": 0.9
     },
     "function": {
-      "defaultPairHueDrift": 179.5,
-      "softPairHueDrift": 172.5
-    },
-    "string": {
-      "defaultPairHueDrift": 26.9,
-      "softPairHueDrift": 25.9
-    },
-    "number": {
-      "defaultPairHueDrift": 5,
-      "softPairHueDrift": 4.3
-    },
-    "type": {
-      "defaultPairHueDrift": 3.4,
-      "softPairHueDrift": 9.1
-    },
-    "variable": {
-      "defaultPairHueDrift": 9.9,
-      "softPairHueDrift": 7.9
+      "defaultPairHueDrift": 172.7,
+      "softPairHueDrift": 169.6
     },
     "property": {
-      "defaultPairHueDrift": 17.4,
-      "softPairHueDrift": 19.5
+      "defaultPairHueDrift": 14.4,
+      "softPairHueDrift": 16.2
+    },
+    "string": {
+      "defaultPairHueDrift": 21.3,
+      "softPairHueDrift": 19.4
+    },
+    "number": {
+      "defaultPairHueDrift": 4.6,
+      "softPairHueDrift": 2.5
+    },
+    "type": {
+      "defaultPairHueDrift": 4.9,
+      "softPairHueDrift": 6.3
+    },
+    "variable": {
+      "defaultPairHueDrift": 11,
+      "softPairHueDrift": 8.8
     },
     "tag": {
-      "defaultPairHueDrift": 3,
-      "softPairHueDrift": 1.7
+      "defaultPairHueDrift": 0.4,
+      "softPairHueDrift": 0.9
     }
   }
 }

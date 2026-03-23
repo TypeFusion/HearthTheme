@@ -83,6 +83,9 @@ Color-language references:
 - Spec: `docs/color-language-spec.md`
 - Generated report (human-readable): `docs/color-language-report.md`
 - Generated report (machine-readable): `reports/color-language-consistency.json`
+- Semantic palette source: `color-system/semantic.json`
+- Adapter contract source: `color-system/adapters.json`
+- Variant routing source: `color-system/variants.json`
 
 Release version source-of-truth:
 

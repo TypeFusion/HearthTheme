@@ -19,14 +19,14 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 | --- | --- | --- | --- | --- | --- |
 | background | `#23201c` | `#2b2926` | `#efe6d8` | `#e4d8c5` | Blackboard vs parchment substrate |
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk ink vs walnut ink |
-| keyword | `#c26f59` | `#c26f59` | `#9d3032` | `#ae594c` | Ember red control-flow anchors |
-| operator | `#8f846f` | `#8f846f` | `#81704e` | `#817050` | Low-noise brass connective symbols |
-| function | `#d7ad70` | `#d7ad70` | `#1d53a4` | `#2971b0` | Brass amber callable targets |
-| string | `#8fb87d` | `#8fb87d` | `#00690f` | `#487f4f` | Moss green literal content |
-| number | `#ba846d` | `#ba846d` | `#973e07` | `#b05b29` | Terracotta numeric constants |
-| type | `#5d98a4` | `#5d98a4` | `#106772` | `#437d7e` | Mineral teal structural symbols |
-| variable | `#dfd5c7` | `#dfd5c7` | `#56361f` | `#4b2f18` | Neutral content carrier |
-| comment | `#6b5f4d` | `#6b5f4d` | `#a48e6a` | `#998466` | Intentionally quiet guidance layer |
+| keyword | `#c26f59` | `#d36b4a` | `#a33a2f` | `#b15a44` | Ember red control-flow anchors |
+| operator | `#8f846f` | `#8f846f` | `#75674c` | `#7f7158` | Low-noise brass connective symbols |
+| function | `#d7ad70` | `#e3b368` | `#1f5f98` | `#2a638f` | Brass amber callable targets |
+| string | `#8fb87d` | `#8fbd79` | `#2a7a2e` | `#4e7a4e` | Moss green literal content |
+| number | `#ba846d` | `#d5865f` | `#bf5d22` | `#c36832` | Terracotta numeric constants |
+| type | `#5d98a4` | `#5aa7b6` | `#00727d` | `#3a7a7e` | Mineral teal structural symbols |
+| variable | `#dfd5c7` | `#dfd5c7` | `#5a3c28` | `#654a35` | Neutral content carrier |
+| comment | `#6b5f4d` | `#6b5f4d` | `#847257` | `#887861` | Intentionally quiet guidance layer |
 
 ## 3) Readability Budget (Theme Audit Gates)
 
@@ -48,11 +48,11 @@ Current snapshot from audit:
 - light soft fg/bg: `7.7`
 - dark comment: `2.6`
 - dark soft comment: `2.3`
-- light comment: `2.6`
-- light soft comment: `2.6`
+- light comment: `3.8`
+- light soft comment: `3.0`
 - dark operator: `4.4`
 - dark soft operator: `3.9`
-- light operator: `3.9`
+- light operator: `4.5`
 - light soft operator: `3.4`
 
 ## 4) Token Coverage Standard
@@ -67,15 +67,18 @@ Theme releases must keep both layers aligned:
 
 All palette changes must follow this order:
 
-1. Edit the core color-system source: `color-system/hearth-dark.source.json`.
-2. If this is a deliberate palette-direction reset, update templates in `color-system/templates/*.base.json` in the same PR.
-3. Run `npm run sync` (this generates Dark Soft / Light / Light Soft, then refreshes `src/data/tokens.ts`, `src/styles/theme-vars.css`, docs snapshot rows, and extension metadata color sync).
-4. Run `npm run check:sync` (must be clean right after sync).
-5. Run `npm run audit:generated-origin` (generated outputs must be backed by changes in `color-system/` or `scripts/`).
-6. Run `npm run audit:all` (`theme + copy + generated-origin + cjk + release`).
-7. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
-8. If thresholds or governance changed, update this document and audit scripts in the same PR.
-9. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
+1. Edit semantic role palette: `color-system/semantic.json`.
+2. If role mapping changes, update `color-system/adapters.json` in the same PR.
+3. If variant registration/path rules change, update `color-system/variants.json`.
+4. If this is a UI/chrome baseline shift, update `color-system/hearth-dark.source.json`.
+5. If this is a deliberate derivation reset, update templates in `color-system/templates/*.base.json` in the same PR.
+6. Run `npm run sync` (this regenerates `themes/*.json` and all downstream artifacts).
+7. Run `npm run check:sync` (must be clean right after sync).
+8. Run `npm run audit:generated-origin` (generated outputs must be backed by changes in `color-system/` or `scripts/`).
+9. Run `npm run audit:all` (`theme + copy + generated-origin + cjk + release`).
+10. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
+11. If thresholds or governance changed, update this document and audit scripts in the same PR.
+12. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
 
 One-shot alternative:
 
@@ -83,7 +86,10 @@ One-shot alternative:
 
 ## 6) PR Acceptance Checklist
 
-- `color-system/hearth-dark.source.json` is the only hand-edited palette source for color evolution.
+- `color-system/semantic.json` is the semantic color authority.
+- `color-system/adapters.json` is the adapter contract authority.
+- `color-system/variants.json` is the variant/output routing authority.
+- `color-system/hearth-dark.source.json` is the UI/chrome baseline source.
 - `themes/hearth-dark.json`, `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` are regenerated artifacts.
 - `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline.
 - `src/data/tokens.ts` regenerated via sync script.

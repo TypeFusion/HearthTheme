@@ -1,130 +1,26 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import { loadColorSystemVariants, loadRoleAdapters, loadSemanticPalette } from './color-system.mjs'
 
-const DARK_THEME_SOURCE_PATH = 'color-system/hearth-dark.source.json'
-const DARK_THEME_OUTPUT_PATH = 'themes/hearth-dark.json'
-const TEMPLATE_DARK_PATH = 'color-system/templates/hearth-dark.base.json'
+const VARIANT_SPEC = loadColorSystemVariants()
+const SEMANTIC_PALETTE = loadSemanticPalette()
+const READABILITY_ROLE_DEFS = loadRoleAdapters()
 
-const VARIANT_CONFIG = [
-  {
-    id: 'darkSoft',
-    name: 'Hearth Dark Soft',
-    type: 'dark',
-    templatePath: 'color-system/templates/hearth-dark-soft.base.json',
-    outputPath: 'themes/hearth-dark-soft.json',
-  },
-  {
-    id: 'light',
-    name: 'Hearth Light',
-    type: 'light',
-    templatePath: 'color-system/templates/hearth-light.base.json',
-    outputPath: 'themes/hearth-light.json',
-  },
-  {
-    id: 'lightSoft',
-    name: 'Hearth Light Soft',
-    type: 'light',
-    templatePath: 'color-system/templates/hearth-light-soft.base.json',
-    outputPath: 'themes/hearth-light-soft.json',
-  },
-]
+const DARK_THEME_SOURCE_PATH = VARIANT_SPEC.baseSourcePath
+const DARK_THEME_OUTPUT_PATH = VARIANT_SPEC.variants.find((variant) => variant.id === 'dark')?.outputPath ?? 'themes/hearth-dark.json'
+const TEMPLATE_DARK_PATH = VARIANT_SPEC.baseTemplatePath
+const VARIANT_CONFIG = VARIANT_SPEC.variants
+  .filter((variant) => variant.mode !== 'source')
+  .map((variant) => ({
+    id: variant.id,
+    name: variant.name,
+    type: variant.type,
+    templatePath: variant.templatePath,
+    outputPath: variant.outputPath,
+  }))
 
 const REF_BG_KEY = 'editor.background'
 const REF_FG_KEY = 'editor.foreground'
-
-const READABILITY_ROLE_DEFS = [
-  {
-    id: 'comment',
-    scopes: ['comment', 'punctuation.definition.comment'],
-  },
-  {
-    id: 'keyword',
-    scopes: ['keyword', 'keyword.control', 'storage.type', 'storage.modifier'],
-    semanticKeys: ['keyword'],
-  },
-  {
-    id: 'operator',
-    scopes: ['keyword.operator', 'keyword.operator.assignment'],
-  },
-  {
-    id: 'function',
-    scopes: ['entity.name.function', 'support.function', 'meta.function-call.generic'],
-    semanticKeys: ['function'],
-  },
-  {
-    id: 'method',
-    scopes: [
-      'meta.function-call entity.name.function',
-      'meta.function-call.js entity.name.function.js',
-      'meta.function-call.ts entity.name.function.ts',
-      'meta.function-call.py entity.name.function.py',
-      'meta.function-call.python entity.name.function.python',
-      'meta.function-call.go entity.name.function.go',
-      'meta.function-call.rust entity.name.function.rust',
-      'meta.method-call entity.name.function',
-      'meta.method-call.js entity.name.function.js',
-      'meta.method-call.ts entity.name.function.ts',
-      'meta.method-call.py entity.name.function.py',
-      'meta.method-call.python entity.name.function.python',
-      'meta.method-call.go entity.name.function.go',
-      'meta.method-call.rust entity.name.function.rust',
-    ],
-    semanticKeys: ['method', 'function.defaultLibrary', 'method.defaultLibrary'],
-  },
-  {
-    id: 'property',
-    scopes: [
-      'entity.name.function.member',
-      'entity.name.function.member.python',
-      'entity.name.function.member.go',
-      'entity.name.function.member.rust',
-      'variable.other.property',
-      'variable.other.member',
-      'meta.property-name',
-      'support.type.property-name',
-    ],
-    semanticKeys: ['property'],
-  },
-  {
-    id: 'string',
-    scopes: ['string', 'string.quoted', 'string.template', 'string.regexp'],
-  },
-  {
-    id: 'number',
-    scopes: [
-      'constant.numeric',
-      'constant.language.boolean',
-      'constant.language.null',
-      'constant.language.undefined',
-      'constant.other.color',
-      'support.constant',
-    ],
-    semanticKeys: ['enumMember'],
-  },
-  {
-    id: 'type',
-    scopes: [
-      'entity.name.type',
-      'entity.name.class',
-      'entity.name.struct.rust',
-      'entity.name.type.class',
-      'support.type',
-      'support.type.builtin',
-      'support.class',
-    ],
-    semanticKeys: ['class', 'interface', 'type', 'type.defaultLibrary', 'typeParameter', 'enum'],
-  },
-  {
-    id: 'variable',
-    scopes: ['variable', 'variable.other.readwrite', 'variable.other.constant'],
-    semanticKeys: ['variable'],
-  },
-  {
-    id: 'parameter',
-    scopes: ['variable.parameter'],
-    semanticKeys: ['parameter'],
-  },
-]
 
 const LIGHT_ROLE_CALIBRATION = {
   comment: {
@@ -766,6 +662,23 @@ function applyRoleColorToTokenEntries(theme, scopes, nextHex) {
   }
 }
 
+function applySemanticPalette(theme, variantId, warnings) {
+  if (!theme || !variantId) return
+  for (const roleDef of READABILITY_ROLE_DEFS) {
+    const roleId = roleDef.id
+    if (!roleId) continue
+    const color = SEMANTIC_PALETTE[roleId]?.[variantId]
+    if (!color) {
+      warnings.push(`${variantId}: semantic palette missing role "${roleId}"`)
+      continue
+    }
+    applyRoleColorToTokenEntries(theme, roleDef.scopes || [], color)
+    for (const semanticKey of roleDef.semanticKeys || []) {
+      setSemanticColor(theme, semanticKey, color)
+    }
+  }
+}
+
 function resolveRoleIdForTokenEntry(entry) {
   for (const roleDef of READABILITY_ROLE_DEFS) {
     if (entryHasAnyScope(entry, roleDef.scopes || [])) return roleDef.id
@@ -1159,6 +1072,8 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
     calibrateLightReadability(generated, currentDark, warnings, variantMeta.id)
   }
 
+  applySemanticPalette(generated, variantMeta.id, warnings)
+
   return generated
 }
 
@@ -1171,6 +1086,7 @@ export function generateThemeVariants() {
   const warnings = []
 
   warnTemplateDrift(currentDark, baselineDark, warnings)
+  applySemanticPalette(currentDark, 'dark', warnings)
   const darkChanged = writeJson(DARK_THEME_OUTPUT_PATH, currentDark)
   console.log(
     `${darkChanged ? '✓ generated' : '- unchanged'} ${DARK_THEME_OUTPUT_PATH} from ${DARK_THEME_SOURCE_PATH}`

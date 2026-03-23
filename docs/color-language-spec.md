@@ -14,6 +14,13 @@ It is a semantic color language that is adapted to multiple surfaces:
 Platform files are delivery artifacts. Semantic role mapping is the source-of-truth.
 Authoring source files live under `color-system/`.
 
+Current source files:
+
+- `color-system/semantic.json` (role -> variant palette values)
+- `color-system/adapters.json` (role -> TextMate / semantic / Obsidian / web mappings)
+- `color-system/variants.json` (variant registry + output wiring)
+- `color-system/hearth-dark.source.json` (UI/chrome baseline source)
+
 ## 2. Token Architecture
 
 HearthCode uses four token layers:
@@ -63,13 +70,16 @@ All variants share one semantic hierarchy with different contrast texture and en
 
 When changing colors:
 
-1. Change semantic intent in `color-system/hearth-dark.source.json` first.
-2. If the derivation baseline itself changes, update `color-system/templates/*.base.json` in the same change set.
-3. Regenerate platform artifacts via `pnpm run sync`.
-4. Review generated consistency report:
+1. Change semantic role colors in `color-system/semantic.json`.
+2. If role mapping changes, update `color-system/adapters.json` in the same change set.
+3. If variant registration/paths change, update `color-system/variants.json`.
+4. If UI/chrome baseline shifts, update `color-system/hearth-dark.source.json`.
+5. If the derivation baseline itself changes, update `color-system/templates/*.base.json` in the same change set.
+6. Regenerate platform artifacts via `pnpm run sync`.
+7. Review generated consistency report:
   - `docs/color-language-report.md`
   - `reports/color-language-consistency.json`
-5. Run full audits (`pnpm run audit:all`) before release.
+8. Run full audits (`pnpm run audit:all`) before release.
 
 ## 6. Release Narrative
 

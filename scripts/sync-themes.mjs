@@ -5,6 +5,7 @@ import { generateSiteAssets } from './generate-site-assets.mjs'
 import { generateObsidianThemes } from './generate-obsidian-themes.mjs'
 import { generateObsidianAppTheme } from './generate-obsidian-app-theme.mjs'
 import { generateColorLanguageReport } from './generate-color-language-report.mjs'
+import { getThemeOutputFiles } from './color-system.mjs'
 
 // 0. 从 color-system 源生成四个主题 JSON 变体（themes/ 仅作为产物）
 generateThemeVariants()
@@ -12,6 +13,7 @@ generateThemeVariants()
 // 1. 同步 JSON 到 public 和 extension
 const src = 'themes'
 const targets = ['public/themes', 'extension/themes']
+const THEME_FILES = getThemeOutputFiles()
 
 for (const target of targets) {
     mkdirSync(target, { recursive: true })
@@ -23,10 +25,9 @@ for (const target of targets) {
 }
 
 // 2. 从 JSON 提取 token 颜色，生成 src/data/tokens.ts
-const dark = JSON.parse(readFileSync('themes/hearth-dark.json', 'utf8'))
-const darkSoft = JSON.parse(readFileSync('themes/hearth-dark-soft.json', 'utf8'))
-const light = JSON.parse(readFileSync('themes/hearth-light.json', 'utf8'))
-const lightSoft = JSON.parse(readFileSync('themes/hearth-light-soft.json', 'utf8'))
+const themes = Object.fromEntries(
+    Object.entries(THEME_FILES).map(([id, path]) => [id, JSON.parse(readFileSync(path, 'utf8'))])
+)
 
 function getToken(theme, scopes) {
     for (const scope of scopes) {
@@ -40,76 +41,29 @@ function getToken(theme, scopes) {
     return null
 }
 
-const tokens = {
-    dark: {
-        bg: dark.colors['editor.background'],
-        fg: dark.colors['editor.foreground'],
-        lineBg: dark.colors['editor.lineHighlightBackground'],
-        lineNo: dark.colors['editorLineNumber.foreground'],
-        status: dark.colors['statusBar.background'],
-        sidebar: dark.colors['sideBar.background'],
-        border: dark.colors['sideBar.border'],
-        keyword: getToken(dark, ['keyword']),
-        fn: getToken(dark, ['entity.name.function']),
-        string: getToken(dark, ['string']),
-        number: getToken(dark, ['constant.numeric']),
-        type: getToken(dark, ['entity.name.type']),
-        variable: getToken(dark, ['variable']),
-        operator: getToken(dark, ['keyword.operator']),
-        comment: getToken(dark, ['comment']),
-    },
-    darkSoft: {
-        bg: darkSoft.colors['editor.background'],
-        fg: darkSoft.colors['editor.foreground'],
-        lineBg: darkSoft.colors['editor.lineHighlightBackground'],
-        lineNo: darkSoft.colors['editorLineNumber.foreground'],
-        status: darkSoft.colors['statusBar.background'],
-        sidebar: darkSoft.colors['sideBar.background'],
-        border: darkSoft.colors['sideBar.border'],
-        keyword: getToken(darkSoft, ['keyword']),
-        fn: getToken(darkSoft, ['entity.name.function']),
-        string: getToken(darkSoft, ['string']),
-        number: getToken(darkSoft, ['constant.numeric']),
-        type: getToken(darkSoft, ['entity.name.type']),
-        variable: getToken(darkSoft, ['variable']),
-        operator: getToken(darkSoft, ['keyword.operator']),
-        comment: getToken(darkSoft, ['comment']),
-    },
-    light: {
-        bg: light.colors['editor.background'],
-        fg: light.colors['editor.foreground'],
-        lineBg: light.colors['editor.lineHighlightBackground'],
-        lineNo: light.colors['editorLineNumber.foreground'],
-        status: light.colors['statusBar.background'],
-        sidebar: light.colors['sideBar.background'],
-        border: light.colors['sideBar.border'],
-        keyword: getToken(light, ['keyword']),
-        fn: getToken(light, ['entity.name.function']),
-        string: getToken(light, ['string']),
-        number: getToken(light, ['constant.numeric']),
-        type: getToken(light, ['entity.name.type']),
-        variable: getToken(light, ['variable']),
-        operator: getToken(light, ['keyword.operator']),
-        comment: getToken(light, ['comment']),
-    },
-    lightSoft: {
-        bg: lightSoft.colors['editor.background'],
-        fg: lightSoft.colors['editor.foreground'],
-        lineBg: lightSoft.colors['editor.lineHighlightBackground'],
-        lineNo: lightSoft.colors['editorLineNumber.foreground'],
-        status: lightSoft.colors['statusBar.background'],
-        sidebar: lightSoft.colors['sideBar.background'],
-        border: lightSoft.colors['sideBar.border'],
-        keyword: getToken(lightSoft, ['keyword']),
-        fn: getToken(lightSoft, ['entity.name.function']),
-        string: getToken(lightSoft, ['string']),
-        number: getToken(lightSoft, ['constant.numeric']),
-        type: getToken(lightSoft, ['entity.name.type']),
-        variable: getToken(lightSoft, ['variable']),
-        operator: getToken(lightSoft, ['keyword.operator']),
-        comment: getToken(lightSoft, ['comment']),
-    },
+function buildTokenSet(theme) {
+    return {
+        bg: theme.colors['editor.background'],
+        fg: theme.colors['editor.foreground'],
+        lineBg: theme.colors['editor.lineHighlightBackground'],
+        lineNo: theme.colors['editorLineNumber.foreground'],
+        status: theme.colors['statusBar.background'],
+        sidebar: theme.colors['sideBar.background'],
+        border: theme.colors['sideBar.border'],
+        keyword: getToken(theme, ['keyword']),
+        fn: getToken(theme, ['entity.name.function']),
+        string: getToken(theme, ['string']),
+        number: getToken(theme, ['constant.numeric']),
+        type: getToken(theme, ['entity.name.type']),
+        variable: getToken(theme, ['variable']),
+        operator: getToken(theme, ['keyword.operator']),
+        comment: getToken(theme, ['comment']),
+    }
 }
+
+const tokens = Object.fromEntries(
+    Object.entries(themes).map(([id, theme]) => [id, buildTokenSet(theme)])
+)
 
 mkdirSync('src/data', { recursive: true })
 writeFileSync(
