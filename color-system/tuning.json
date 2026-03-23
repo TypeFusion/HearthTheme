@@ -6,7 +6,7 @@
         "minBgHueDistance": 3,
         "targetBgHueDistance": 16,
         "minAnchorDeltaE": 18,
-        "minGuardDeltaE": 20.5,
+        "minGuardDeltaE": 20.4,
         "minContrast": 3.3,
         "maxDeltaEFromSeed": 30,
         "anchorRoles": [
@@ -28,12 +28,12 @@
         "applyOnlyWhenCompensationNeeded": true
       },
       "method": {
-        "minBgHueDistance": 18,
-        "targetBgHueDistance": 34,
-        "minAnchorDeltaE": 20,
-        "minGuardDeltaE": 12,
+        "minBgHueDistance": 10,
+        "targetBgHueDistance": 22,
+        "minAnchorDeltaE": 16,
+        "minGuardDeltaE": 9,
         "minContrast": 3,
-        "maxDeltaEFromSeed": 30,
+        "maxDeltaEFromSeed": 22,
         "anchorRoles": [
           "keyword",
           "number",
@@ -50,16 +50,16 @@
           "property",
           "type"
         ],
-        "targetPreferredHueDistance": 14,
+        "targetPreferredHueDistance": 10,
         "applyOnlyWhenCompensationNeeded": true
       },
       "property": {
-        "minBgHueDistance": 8,
-        "targetBgHueDistance": 20,
-        "minAnchorDeltaE": 18,
-        "minGuardDeltaE": 11,
+        "minBgHueDistance": 3,
+        "targetBgHueDistance": 8,
+        "minAnchorDeltaE": 11,
+        "minGuardDeltaE": 6,
         "minContrast": 3,
-        "maxDeltaEFromSeed": 22,
+        "maxDeltaEFromSeed": 10,
         "anchorRoles": [
           "keyword",
           "number",
@@ -77,7 +77,7 @@
           "method",
           "type"
         ],
-        "targetPreferredHueDistance": 12,
+        "targetPreferredHueDistance": 6,
         "applyOnlyWhenCompensationNeeded": true
       },
       "type": {
@@ -135,12 +135,12 @@
         "applyOnlyWhenCompensationNeeded": true
       },
       "method": {
-        "minBgHueDistance": 16,
-        "targetBgHueDistance": 30,
-        "minAnchorDeltaE": 18,
-        "minGuardDeltaE": 10,
+        "minBgHueDistance": 8,
+        "targetBgHueDistance": 18,
+        "minAnchorDeltaE": 14,
+        "minGuardDeltaE": 8,
         "minContrast": 2.6,
-        "maxDeltaEFromSeed": 30,
+        "maxDeltaEFromSeed": 20,
         "anchorRoles": [
           "keyword",
           "number",
@@ -157,16 +157,16 @@
           "property",
           "type"
         ],
-        "targetPreferredHueDistance": 14,
+        "targetPreferredHueDistance": 10,
         "applyOnlyWhenCompensationNeeded": true
       },
       "property": {
-        "minBgHueDistance": 8,
-        "targetBgHueDistance": 18,
-        "minAnchorDeltaE": 18,
-        "minGuardDeltaE": 10,
+        "minBgHueDistance": 3,
+        "targetBgHueDistance": 6,
+        "minAnchorDeltaE": 10,
+        "minGuardDeltaE": 6,
         "minContrast": 2.8,
-        "maxDeltaEFromSeed": 22,
+        "maxDeltaEFromSeed": 7,
         "anchorRoles": [
           "keyword",
           "number",
@@ -184,7 +184,7 @@
           "method",
           "type"
         ],
-        "targetPreferredHueDistance": 12,
+        "targetPreferredHueDistance": 6,
         "applyOnlyWhenCompensationNeeded": true
       },
       "type": {
@@ -646,9 +646,10 @@
           "minBgContrast": 2.9
         },
         "operator": {
-          "minDeltaE": 10,
+          "minDeltaE": 12,
           "maxDeltaE": 24,
-          "minBgContrast": 2.8
+          "minBgContrast": 2.8,
+          "targetDeltaE": 16
         }
       }
     },

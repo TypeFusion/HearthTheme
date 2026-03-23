@@ -10,31 +10,31 @@
   "themeImages": [
     {
       "id": "dark",
-      "svgSha256": "bc18dd70703e9ceb36f2288a7b071c3d0b82fc983a6893e0cd24d7b76c3248b4",
+      "svgSha256": "0b3ad3fe6310d333ea865f364395f2a5ffb5611181849e9ab2ce73b02a771bcd",
       "output": "extension/images/preview-dark.png",
       "webOutput": "public/previews/preview-dark.png"
     },
     {
       "id": "darkSoft",
-      "svgSha256": "ae746231577377f1ac909bf2a38dd93d54a02b6c540d4eba951592a57f90aeaa",
+      "svgSha256": "c35180ef81b21f49bea41fb6c1ca6454b19c719fcc0a3e210e0475f609289087",
       "output": "extension/images/preview-dark-soft.png",
       "webOutput": "public/previews/preview-dark-soft.png"
     },
     {
       "id": "light",
-      "svgSha256": "f1bc1129d238a7c86d86fb2480ee82543ae24f4d801c4b3d00df0217db2816d9",
+      "svgSha256": "4dc35163302a18e4ae83dfc411123774b721a961be02da650424fffef58b5d66",
       "output": "extension/images/preview-light.png",
       "webOutput": "public/previews/preview-light.png"
     },
     {
       "id": "lightSoft",
-      "svgSha256": "1c7838c7c407bebf0a9ce487a69de9bb375198ba15765d65ee83bbd9eab0b630",
+      "svgSha256": "d6d69ff2170ea5c6303926275f4c63a976df8e220e0ae66e9d0d6f2fc84eda69",
       "output": "extension/images/preview-light-soft.png",
       "webOutput": "public/previews/preview-light-soft.png"
     }
   ],
   "contrastImage": {
-    "svgSha256": "02bf60cd2668d2923b22595a6715a293538637db984d16ae48bcd4acdacf7b70",
+    "svgSha256": "7ceb0c26321a0799e2825f0dc8dfc08a6eee5dd9537f2afddfe121d68d0e5c81",
     "outputs": [
       "extension/images/preview-contrast-v2.png",
       "extension/images/preview-contrast.png"

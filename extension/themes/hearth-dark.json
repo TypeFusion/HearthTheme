@@ -201,7 +201,7 @@
                 "support.type.property-name"
             ],
             "settings": {
-                "foreground": "#889566"
+                "foreground": "#7e8658"
             }
         },
         {
@@ -239,7 +239,7 @@
                 "support.class"
             ],
             "settings": {
-                "foreground": "#857f9d",
+                "foreground": "#766f92",
                 "fontStyle": "italic"
             }
         },
@@ -373,34 +373,34 @@
     "semanticTokenColors": {
         "variable": "#d0cbc5",
         "variable.readonly": "#c89254",
-        "property": "#889566",
+        "property": "#7e8658",
         "property.readonly": "#c89254",
         "function": "#7f97ae",
         "method": "#c0a37a",
         "function.defaultLibrary": "#c0a37a",
         "method.defaultLibrary": "#c0a37a",
         "class": {
-            "foreground": "#857f9d",
+            "foreground": "#766f92",
             "fontStyle": "italic"
         },
         "interface": {
-            "foreground": "#857f9d",
+            "foreground": "#766f92",
             "fontStyle": "italic"
         },
         "type": {
-            "foreground": "#857f9d",
+            "foreground": "#766f92",
             "fontStyle": "italic"
         },
         "type.defaultLibrary": {
-            "foreground": "#857f9d",
+            "foreground": "#766f92",
             "fontStyle": "italic"
         },
         "typeParameter": {
-            "foreground": "#857f9d",
+            "foreground": "#766f92",
             "fontStyle": "italic"
         },
         "enum": {
-            "foreground": "#857f9d",
+            "foreground": "#766f92",
             "fontStyle": "italic"
         },
         "enumMember": "#ba846d",
