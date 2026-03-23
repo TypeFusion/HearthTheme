@@ -2,6 +2,8 @@ import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } fro
 import { join } from 'path'
 import { generateThemeVariants } from './generate-theme-variants.mjs'
 import { generateSiteAssets } from './generate-site-assets.mjs'
+import { generateObsidianThemes } from './generate-obsidian-themes.mjs'
+import { generateObsidianAppTheme } from './generate-obsidian-app-theme.mjs'
 
 // 0. 以 Hearth Dark 为核心生成其他变体
 generateThemeVariants()
@@ -119,3 +121,9 @@ console.log('✓ src/data/tokens.ts generated')
 
 // 3. 生成站点与文档派生产物（CSS vars / docs baseline / extension metadata）
 generateSiteAssets()
+
+// 4. 生成 Obsidian 主题产物（基于同一 token 语义）
+generateObsidianThemes()
+
+// 5. 生成 Obsidian 社区主题标准产物（manifest/theme.css/versions/screenshot）
+await generateObsidianAppTheme()

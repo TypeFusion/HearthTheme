@@ -10,6 +10,7 @@ const { lang } = Astro.props
 const releaseVersion = `v${extensionPackage.version}`
 const marketplaceUrl = 'https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme'
 const openVsxUrl = 'https://open-vsx.org/extension/hearth-code/hearth-theme'
+const obsidianUrl = 'https://github.com/hearth-code/HearthTheme/releases'
 const githubUrl = 'https://github.com/hearth-code/HearthTheme'
 ---
 
@@ -46,6 +47,15 @@ const githubUrl = 'https://github.com/hearth-code/HearthTheme'
           class="hearth-btn-secondary inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em]"
         >
           <span>{t(lang, 'hero.cta.install')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          href={obsidianUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hearth-btn-secondary inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-ui text-[0.84rem] font-semibold tracking-[0.02em]"
+        >
+          <span>{t(lang, 'hero.cta.obsidian')}</span>
           <span aria-hidden="true">↗</span>
         </a>
         <a

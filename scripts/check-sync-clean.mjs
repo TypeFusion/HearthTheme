@@ -4,6 +4,8 @@ const SYNCED_PATHS = [
   'themes',
   'public/themes',
   'extension/themes',
+  'obsidian/themes',
+  'obsidian/app-theme',
   'src/data/tokens.ts',
   'src/styles/theme-vars.css',
   'docs/theme-baseline.md',

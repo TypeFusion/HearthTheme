@@ -51,9 +51,13 @@ function usage() {
   npm run release:theme -- --ver=vX.Y.Z
 
 Flow:
-  1) Run all audits (theme + copy + CJK + release consistency)
+  1) Run all audits (theme + obsidian + copy + CJK + release consistency)
   2) Build website and sync outputs
-  3) Generate extension preview images from fixtures`)
+  3) Generate extension preview images from fixtures
+
+Optional after this flow:
+  - npm run pack:obsidian (build Obsidian app-theme package)
+  - npm run pack:obsidian:snippets (optional snippet bundle)`)
 }
 
 if (hasFlag('--help')) {
@@ -76,4 +80,4 @@ runNpmScript('2/3 Build (sync + astro)', 'build')
 runNpmScript('3/3 Generate previews', 'preview:generate')
 
 console.log(`\n[OK] Theme release pipeline completed${version ? ` for ${version}` : ''}`)
-console.log('Next: git add -A && git commit && git push')
+console.log('Next: npm run pack:obsidian (optional), then git add -A && git commit && git push')

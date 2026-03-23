@@ -1,0 +1,10 @@
+{
+  "name": "HearthCode",
+  "author": "HearthCode",
+  "repo": "hearth-code/HearthTheme",
+  "screenshot": "obsidian/app-theme/screenshot.png",
+  "modes": [
+    "dark",
+    "light"
+  ]
+}

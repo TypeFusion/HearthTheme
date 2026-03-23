@@ -8,7 +8,7 @@
 [![在 vscode.dev 预览](https://img.shields.io/badge/preview%20in-vscode.dev-blue)](https://vscode.dev/theme/hearth-code.hearth-theme/Hearth%20Dark)
 
 HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。  
-目前已落地到 Open VSX 兼容编辑器与 VS Code，并在四个变体中保持稳定语义层次。
+目前已覆盖 Open VSX 兼容编辑器、VS Code 与 Obsidian，并在四个变体中保持稳定语义层次。
 
 ![HearthCode 长时编码预览](./extension/images/preview-contrast-v2.png)
 
@@ -23,6 +23,7 @@ HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。
 1. Open VSX 兼容编辑器：<https://open-vsx.org/extension/hearth-code/hearth-theme>
 2. VS Code Marketplace：<https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
 3. VS Code 快速安装：`ext install hearth-code.hearth-theme`
+4. Obsidian 主题：<https://github.com/hearth-code/HearthTheme/releases>
 
 ## 实现状态
 
@@ -30,8 +31,9 @@ HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。
 | --- | --- | --- |
 | Open VSX 生态 | 已可用 | 面向 Open VSX 兼容编辑器的跨编辑器主渠道 |
 | VS Code Marketplace | 已可用 | VS Code 官方分发渠道 |
-| 网站主题表面 | 规划中 | 把同一色彩语言扩展到站点/界面主题 |
-| 更多编辑器目标 | 规划中 | 在更多工具上保持一致语义映射 |
+| Obsidian 主题 | 已可用 | 可从 GitHub Releases 安装 |
+| 社区主题目录收录 | 评审流程中 | 提交流程进行中 |
+| 更多编辑器目标 | 规划中 | 下一阶段扩展方向 |
 
 ## 主题变体
 
@@ -65,8 +67,25 @@ HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。
 - 文档（英文）：<https://theme.hearthcode.dev/docs>
 - 文档（中文）：<https://theme.hearthcode.dev/zh/docs>
 - 文档（日文）：<https://theme.hearthcode.dev/ja/docs>
+- Open VSX：<https://open-vsx.org/extension/hearth-code/hearth-theme>
+- VS Code Marketplace：<https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Obsidian Releases：<https://github.com/hearth-code/HearthTheme/releases>
 - 源码仓库：<https://github.com/hearth-code/HearthTheme>
 - 更新日志：<https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
 - 问题反馈：<https://github.com/hearth-code/HearthTheme/issues>
 
-维护者入口目录：`themes/`、`extension/`、`src/`、`scripts/`。
+## 维护者说明
+
+维护者入口目录：`themes/`、`extension/`、`obsidian/`、`src/`、`scripts/`。
+
+Obsidian App Theme 发布：
+
+1. 执行 `pnpm run release:obsidian`
+2. 产物路径：`release/obsidian/hearth-obsidian-app-theme-v<version>.zip`
+
+可选：仅打包 snippets：
+
+1. 执行 `pnpm run pack:obsidian:snippets`
+2. 产物路径：`release/obsidian/hearth-obsidian-snippets-v<version>.zip`
+
+Obsidian 社区目录源：<https://github.com/obsidianmd/obsidian-releases/blob/master/community-css-themes.json>

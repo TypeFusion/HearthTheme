@@ -1,6 +1,6 @@
 # Hearth Theme Baseline
 
-Updated: 2026-03-22
+Updated: 2026-03-23
 
 ## 1) Design Intent
 

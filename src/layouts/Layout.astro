@@ -20,6 +20,7 @@ const themeColor = tokens.dark.bg;
 const home = lang === "en" ? "/" : `/${lang}`;
 const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
 const marketplaceUrl = "https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme";
+const obsidianReleaseUrl = "https://github.com/hearth-code/HearthTheme/releases";
 const changelogUrl = "https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md";
 const issuesUrl = "https://github.com/hearth-code/HearthTheme/issues";
 const licenseUrl = "https://github.com/hearth-code/HearthTheme/blob/main/LICENSE";
@@ -50,6 +51,7 @@ const ogImage = new URL("/og-hearth.png", siteBase).href;
 		<meta name="author" content="HearthCode" />
 		<meta name="theme-color" content={themeColor} />
 		<meta name="hearthcode:marketplace" content={marketplaceUrl} />
+		<meta name="hearthcode:obsidian" content={obsidianReleaseUrl} />
 
 		<!-- Open Graph -->
 		<meta property="og:title" content={pageTitle} />

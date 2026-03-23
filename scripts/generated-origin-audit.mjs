@@ -3,6 +3,8 @@ import { execSync } from 'node:child_process'
 const GENERATED_PATH_RULES = [
   { type: 'prefix', value: 'public/themes/' },
   { type: 'prefix', value: 'extension/themes/' },
+  { type: 'prefix', value: 'obsidian/themes/' },
+  { type: 'prefix', value: 'obsidian/app-theme/' },
   { type: 'exact', value: 'src/data/tokens.ts' },
   { type: 'exact', value: 'src/styles/theme-vars.css' },
 ]

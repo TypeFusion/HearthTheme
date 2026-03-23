@@ -8,7 +8,7 @@
 [![Preview in vscode.dev](https://img.shields.io/badge/preview%20in-vscode.dev-blue)](https://vscode.dev/theme/hearth-code.hearth-theme/Hearth%20Dark)
 
 HearthCode is a warm, low-glare color language for code interfaces.
-It is shipped today for Open VSX-compatible editors and VS Code, with stable semantic hierarchy across four tuned variants.
+It is available on Open VSX-compatible editors, VS Code, and Obsidian, with one consistent semantic hierarchy across four tuned variants.
 
 ![HearthCode Long-session Preview](./extension/images/preview-contrast-v2.png)
 
@@ -23,6 +23,7 @@ It is shipped today for Open VSX-compatible editors and VS Code, with stable sem
 1. Open VSX-compatible editors: <https://open-vsx.org/extension/hearth-code/hearth-theme>
 2. VS Code Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
 3. VS Code Quick Open: `ext install hearth-code.hearth-theme`
+4. Obsidian Theme: <https://github.com/hearth-code/HearthTheme/releases>
 
 ## Implementation Status
 
@@ -30,8 +31,9 @@ It is shipped today for Open VSX-compatible editors and VS Code, with stable sem
 | --- | --- | --- |
 | Open VSX ecosystem | Available | Primary cross-editor channel for Open VSX-compatible editors |
 | VS Code Marketplace | Available | Official VS Code distribution |
-| Web theme surfaces | Planned | Extend the same color language to site/UI surfaces |
-| More editor targets | Planned | Keep semantic mapping consistent across tooling |
+| Obsidian Theme | Available | Install from GitHub Releases |
+| Community theme directory | In review flow | Submission is in progress |
+| More editor targets | Planned | Next expansion stage |
 
 ## Variants
 
@@ -65,8 +67,25 @@ Softer light contrast for long daytime sessions and reduced visual pressure.
 - Docs (EN): <https://theme.hearthcode.dev/docs>
 - Docs (ZH): <https://theme.hearthcode.dev/zh/docs>
 - Docs (JA): <https://theme.hearthcode.dev/ja/docs>
+- Open VSX: <https://open-vsx.org/extension/hearth-code/hearth-theme>
+- VS Code Marketplace: <https://marketplace.visualstudio.com/items?itemName=hearth-code.hearth-theme>
+- Obsidian Releases: <https://github.com/hearth-code/HearthTheme/releases>
 - Source: <https://github.com/hearth-code/HearthTheme>
 - Changelog: <https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
 - Issues: <https://github.com/hearth-code/HearthTheme/issues>
 
-For maintainers, core source locations are `themes/`, `extension/`, `src/`, and `scripts/`.
+## Maintainer Notes
+
+Core source locations: `themes/`, `extension/`, `obsidian/`, `src/`, and `scripts/`.
+
+Obsidian app-theme release:
+
+1. Run `pnpm run release:obsidian`
+2. Package output: `release/obsidian/hearth-obsidian-app-theme-v<version>.zip`
+
+Optional snippet-only bundle:
+
+1. Run `pnpm run pack:obsidian:snippets`
+2. Package output: `release/obsidian/hearth-obsidian-snippets-v<version>.zip`
+
+Community directory source: <https://github.com/obsidianmd/obsidian-releases/blob/master/community-css-themes.json>
