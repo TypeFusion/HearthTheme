@@ -128,6 +128,8 @@
       "scopes": [
         "entity.name.type",
         "entity.name.class",
+        "storage.type.java",
+        "storage.type.primitive.java",
         "entity.name.struct.rust",
         "entity.name.type.class",
         "support.type",
@@ -309,29 +311,29 @@
       },
       "variants": {
         "dark": {
-          "textmate": "#78aecd",
-          "semantic": "#78aecd",
-          "contrastToBackground": 6.75
+          "textmate": "#7f97ae",
+          "semantic": "#7f97ae",
+          "contrastToBackground": 5.36
         },
         "darkSoft": {
-          "textmate": "#88b2ca",
-          "semantic": "#88b2ca",
-          "contrastToBackground": 6.4
+          "textmate": "#8a9db0",
+          "semantic": "#8a9db0",
+          "contrastToBackground": 5.2
         },
         "light": {
-          "textmate": "#38698a",
-          "semantic": "#38698a",
-          "contrastToBackground": 4.61
+          "textmate": "#406074",
+          "semantic": "#406074",
+          "contrastToBackground": 5.21
         },
         "lightSoft": {
-          "textmate": "#39576b",
-          "semantic": "#39576b",
-          "contrastToBackground": 5.13
+          "textmate": "#4c586b",
+          "semantic": "#4c586b",
+          "contrastToBackground": 4.84
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 2.3,
-        "softPairHueDrift": 2.2,
+        "defaultPairHueDrift": 6.3,
+        "softPairHueDrift": 6.8,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -365,29 +367,29 @@
       },
       "variants": {
         "dark": {
-          "textmate": "#67c2c8",
-          "semantic": "#67c2c8",
-          "contrastToBackground": 7.82
+          "textmate": "#c0a37a",
+          "semantic": "#c0a37a",
+          "contrastToBackground": 6.77
         },
         "darkSoft": {
-          "textmate": "#89c4c8",
-          "semantic": "#89c4c8",
-          "contrastToBackground": 7.45
+          "textmate": "#beaa8e",
+          "semantic": "#beaa8e",
+          "contrastToBackground": 6.44
         },
         "light": {
-          "textmate": "#4c6baa",
-          "semantic": "#4c6baa",
-          "contrastToBackground": 4.11
+          "textmate": "#87505d",
+          "semantic": "#87505d",
+          "contrastToBackground": 4.91
         },
         "lightSoft": {
-          "textmate": "#5181a6",
-          "semantic": "#5181a6",
-          "contrastToBackground": 2.8
+          "textmate": "#8b5d67",
+          "semantic": "#8b5d67",
+          "contrastToBackground": 3.65
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 36.5,
-        "softPairHueDrift": 22.3,
+        "defaultPairHueDrift": 49.3,
+        "softPairHueDrift": 48,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -415,29 +417,29 @@
       },
       "variants": {
         "dark": {
-          "textmate": "#7a8fc8",
-          "semantic": "#7a8fc8",
-          "contrastToBackground": 5.09
+          "textmate": "#889566",
+          "semantic": "#889566",
+          "contrastToBackground": 5.05
         },
         "darkSoft": {
-          "textmate": "#8797be",
-          "semantic": "#8797be",
-          "contrastToBackground": 4.97
+          "textmate": "#909b74",
+          "semantic": "#909b74",
+          "contrastToBackground": 4.92
         },
         "light": {
-          "textmate": "#564576",
-          "semantic": "#564576",
-          "contrastToBackground": 6.53
+          "textmate": "#304c37",
+          "semantic": "#304c37",
+          "contrastToBackground": 7.4
         },
         "lightSoft": {
-          "textmate": "#55648d",
-          "semantic": "#55648d",
-          "contrastToBackground": 3.92
+          "textmate": "#385543",
+          "semantic": "#385543",
+          "contrastToBackground": 5.53
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 37,
-        "softPairHueDrift": 1.4,
+        "defaultPairHueDrift": 58.4,
+        "softPairHueDrift": 65.8,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -461,29 +463,29 @@
       },
       "variants": {
         "dark": {
-          "textmate": "#8fb87d",
+          "textmate": "#94ab78",
           "semantic": null,
-          "contrastToBackground": 7.2
+          "contrastToBackground": 6.45
         },
         "darkSoft": {
-          "textmate": "#8fbd79",
+          "textmate": "#9bb17f",
           "semantic": null,
-          "contrastToBackground": 6.72
+          "contrastToBackground": 6.21
         },
         "light": {
-          "textmate": "#2a7a2e",
+          "textmate": "#5e7342",
           "semantic": null,
-          "contrastToBackground": 4.18
+          "contrastToBackground": 4.09
         },
         "lightSoft": {
-          "textmate": "#4e7a4e",
+          "textmate": "#697a54",
           "semantic": null,
-          "contrastToBackground": 3.34
+          "contrastToBackground": 3.12
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 21.3,
-        "softPairHueDrift": 19.4,
+        "defaultPairHueDrift": 1.3,
+        "softPairHueDrift": 0.4,
         "semanticDeltaE": {
           "dark": null,
           "darkSoft": null,
@@ -545,6 +547,8 @@
       "scopes": [
         "entity.name.type",
         "entity.name.class",
+        "storage.type.java",
+        "storage.type.primitive.java",
         "entity.name.struct.rust",
         "entity.name.type.class",
         "support.type",
@@ -558,29 +562,29 @@
       },
       "variants": {
         "dark": {
-          "textmate": "#5d9ca1",
-          "semantic": "#5d9ca1",
-          "contrastToBackground": 5.2
+          "textmate": "#5e8f8a",
+          "semantic": "#5e8f8a",
+          "contrastToBackground": 4.46
         },
         "darkSoft": {
-          "textmate": "#6aa1a6",
-          "semantic": "#6aa1a6",
-          "contrastToBackground": 5.02
-        },
-        "light": {
-          "textmate": "#117379",
-          "semantic": "#117379",
+          "textmate": "#6a9591",
+          "semantic": "#6a9591",
           "contrastToBackground": 4.37
         },
+        "light": {
+          "textmate": "#2f6f64",
+          "semantic": "#2f6f64",
+          "contrastToBackground": 4.58
+        },
         "lightSoft": {
-          "textmate": "#477a7d",
-          "semantic": "#477a7d",
-          "contrastToBackground": 3.24
+          "textmate": "#31676a",
+          "semantic": "#31676a",
+          "contrastToBackground": 4.3
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 1,
-        "softPairHueDrift": 1.7,
+        "defaultPairHueDrift": 4.2,
+        "softPairHueDrift": 8.7,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -693,28 +697,28 @@
       "softPairHueDrift": 1.7
     },
     "function": {
-      "defaultPairHueDrift": 2.3,
-      "softPairHueDrift": 2.2
+      "defaultPairHueDrift": 6.3,
+      "softPairHueDrift": 6.8
     },
     "method": {
-      "defaultPairHueDrift": 36.5,
-      "softPairHueDrift": 22.3
+      "defaultPairHueDrift": 49.3,
+      "softPairHueDrift": 48
     },
     "property": {
-      "defaultPairHueDrift": 37,
-      "softPairHueDrift": 1.4
+      "defaultPairHueDrift": 58.4,
+      "softPairHueDrift": 65.8
     },
     "string": {
-      "defaultPairHueDrift": 21.3,
-      "softPairHueDrift": 19.4
+      "defaultPairHueDrift": 1.3,
+      "softPairHueDrift": 0.4
     },
     "number": {
       "defaultPairHueDrift": 6,
       "softPairHueDrift": 2.2
     },
     "type": {
-      "defaultPairHueDrift": 1,
-      "softPairHueDrift": 1.7
+      "defaultPairHueDrift": 4.2,
+      "softPairHueDrift": 8.7
     },
     "variable": {
       "defaultPairHueDrift": 8.7,
@@ -729,59 +733,59 @@
     {
       "variantId": "light",
       "roleId": "function",
-      "color": "#38698a",
+      "color": "#406074",
       "metrics": {
-        "bgHueDistance": 168.1,
-        "minAnchorDeltaE": 40.5,
-        "minGuardDeltaE": 21.4
+        "bgHueDistance": 167.1,
+        "minAnchorDeltaE": 32.6,
+        "minGuardDeltaE": 23.3
       },
       "targets": {
-        "minBgHueDistance": 60,
-        "minAnchorDeltaE": 26,
-        "minGuardDeltaE": 20
+        "minBgHueDistance": 3,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 19.4
       },
       "status": "pass"
     },
     {
       "variantId": "light",
       "roleId": "method",
-      "color": "#4c6baa",
+      "color": "#87505d",
       "metrics": {
-        "bgHueDistance": 175.8,
-        "minAnchorDeltaE": 54.4,
-        "minGuardDeltaE": 20
+        "bgHueDistance": 50.2,
+        "minAnchorDeltaE": 28,
+        "minGuardDeltaE": 35.3
       },
       "targets": {
-        "minBgHueDistance": 60,
-        "minAnchorDeltaE": 28,
-        "minGuardDeltaE": 18
+        "minBgHueDistance": 18,
+        "minAnchorDeltaE": 20,
+        "minGuardDeltaE": 12
       },
       "status": "pass"
     },
     {
       "variantId": "light",
       "roleId": "property",
-      "color": "#564576",
+      "color": "#304c37",
       "metrics": {
-        "bgHueDistance": 135.2,
-        "minAnchorDeltaE": 46.8,
-        "minGuardDeltaE": 20.3
+        "bgHueDistance": 99,
+        "minAnchorDeltaE": 22.6,
+        "minGuardDeltaE": 17.7
       },
       "targets": {
-        "minBgHueDistance": 62,
-        "minAnchorDeltaE": 30,
-        "minGuardDeltaE": 18
+        "minBgHueDistance": 8,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 11
       },
       "status": "pass"
     },
     {
       "variantId": "light",
       "roleId": "type",
-      "color": "#117379",
+      "color": "#2f6f64",
       "metrics": {
-        "bgHueDistance": 147.5,
-        "minAnchorDeltaE": 36.9,
-        "minGuardDeltaE": 21.4
+        "bgHueDistance": 133.7,
+        "minAnchorDeltaE": 29.5,
+        "minGuardDeltaE": 17.7
       },
       "targets": {
         "minBgHueDistance": 52,
@@ -793,15 +797,15 @@
     {
       "variantId": "lightSoft",
       "roleId": "function",
-      "color": "#39576b",
+      "color": "#4c586b",
       "metrics": {
-        "bgHueDistance": 167.6,
-        "minAnchorDeltaE": 31.7,
-        "minGuardDeltaE": 18.5
+        "bgHueDistance": 179.6,
+        "minAnchorDeltaE": 28.2,
+        "minGuardDeltaE": 18.1
       },
       "targets": {
-        "minBgHueDistance": 56,
-        "minAnchorDeltaE": 22,
+        "minBgHueDistance": 3,
+        "minAnchorDeltaE": 20,
         "minGuardDeltaE": 18
       },
       "status": "pass"
@@ -809,43 +813,43 @@
     {
       "variantId": "lightSoft",
       "roleId": "method",
-      "color": "#5181a6",
+      "color": "#8b5d67",
       "metrics": {
-        "bgHueDistance": 169.8,
-        "minAnchorDeltaE": 39.9,
-        "minGuardDeltaE": 19.2
+        "bgHueDistance": 49.4,
+        "minAnchorDeltaE": 22.6,
+        "minGuardDeltaE": 25.9
       },
       "targets": {
-        "minBgHueDistance": 56,
-        "minAnchorDeltaE": 24,
-        "minGuardDeltaE": 16
+        "minBgHueDistance": 16,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 10
       },
       "status": "pass"
     },
     {
       "variantId": "lightSoft",
       "roleId": "property",
-      "color": "#55648d",
+      "color": "#385543",
       "metrics": {
-        "bgHueDistance": 172.4,
-        "minAnchorDeltaE": 39,
-        "minGuardDeltaE": 14.3
+        "bgHueDistance": 106.4,
+        "minAnchorDeltaE": 22.2,
+        "minGuardDeltaE": 15.9
       },
       "targets": {
-        "minBgHueDistance": 58,
-        "minAnchorDeltaE": 24,
-        "minGuardDeltaE": 14
+        "minBgHueDistance": 8,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 10
       },
       "status": "pass"
     },
     {
       "variantId": "lightSoft",
       "roleId": "type",
-      "color": "#477a7d",
+      "color": "#31676a",
       "metrics": {
-        "bgHueDistance": 147,
-        "minAnchorDeltaE": 27.6,
-        "minGuardDeltaE": 18.5
+        "bgHueDistance": 146.8,
+        "minAnchorDeltaE": 28.8,
+        "minGuardDeltaE": 15.9
       },
       "targets": {
         "minBgHueDistance": 48,

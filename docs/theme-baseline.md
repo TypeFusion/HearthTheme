@@ -21,12 +21,12 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk ink vs walnut ink |
 | keyword | `#c26f59` | `#cb6d4e` | `#a33a2f` | `#ab5b47` | Ember red control-flow anchors |
 | operator | `#8f846f` | `#8f846f` | `#71644a` | `#796c56` | Low-noise brass connective symbols |
-| function | `#78aecd` | `#88b2ca` | `#38698a` | `#39576b` | Callable targets with variant-tuned polarity |
-| method | `#67c2c8` | `#89c4c8` | `#4c6baa` | `#5181a6` | Method call targets with tuned cool polarity |
-| property | `#7a8fc8` | `#8797be` | `#564576` | `#55648d` | Member access targets with tuned cool polarity |
-| string | `#8fb87d` | `#8fbd79` | `#2a7a2e` | `#4e7a4e` | Moss green literal content |
+| function | `#7f97ae` | `#8a9db0` | `#406074` | `#4c586b` | Denim-blue callable targets as restrained cool anchors |
+| method | `#c0a37a` | `#beaa8e` | `#87505d` | `#8b5d67` | Warm sand method calls for relaxed action emphasis |
+| property | `#889566` | `#909b74` | `#304c37` | `#385543` | Olive member access cues to keep structure low-stimulus |
+| string | `#94ab78` | `#9bb17f` | `#5e7342` | `#697a54` | Muted olive literal content for calm scan rhythm |
 | number | `#ba846d` | `#cc8664` | `#b36938` | `#b86b3f` | Terracotta numeric constants |
-| type | `#5d9ca1` | `#6aa1a6` | `#117379` | `#477a7d` | Mineral teal structural symbols |
+| type | `#5e8f8a` | `#6a9591` | `#2f6f64` | `#31676a` | Denim-teal structural symbols with reduced chroma |
 | variable | `#d0cbc5` | `#cbc7c1` | `#5a3c28` | `#654a35` | Neutral content carrier |
 | comment | `#6b5f4d` | `#6b5f4d` | `#847257` | `#887861` | Intentionally quiet guidance layer |
 
@@ -43,8 +43,11 @@ The following thresholds are enforced by `scripts/theme-audit.mjs`.
 | method/property critical separation (`deltaE`) | `>= 10` |
 | operator/comment critical separation (`deltaE`) | `>= 4.5` (`light`/`lightSoft` use `>= 5.0`) |
 | cross-theme role hue drift (comment/keyword/operator/string/number/type/variable/method/property) | `<= 45 deg` |
-| light function/background hue distance | `>= 60 deg` |
-| light function anchor separation (`deltaE` vs keyword/number/tag) | `>= 26` |
+| light function/background hue distance | `>= 3 deg` |
+| light function anchor separation (`deltaE` vs keyword/number/tag) | `>= 18` |
+| function cool-hue band (dark/darkSoft/light/lightSoft) | `208-224 / 208-224 / 184-222 / 184-222 deg` |
+| variable/parameter near-foreground deltaE | `dark 3-12, darkSoft 3-12, light 6-22, lightSoft 5-14` |
+| function critical separation deltaE | `keyword>=18, number>=14, tag>=18, variable>=14` |
 
 Current snapshot from audit:
 

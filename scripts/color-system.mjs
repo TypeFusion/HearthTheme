@@ -279,6 +279,8 @@ export function loadColorSystemTuning() {
   assert(rawGlobalSeparationDeficitProfile && typeof rawGlobalSeparationDeficitProfile === 'object' && !Array.isArray(rawGlobalSeparationDeficitProfile), `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationDeficitProfile must be an object`)
   const rawPairSeparationGates = data.pairSeparationGates ?? {}
   assert(rawPairSeparationGates && typeof rawPairSeparationGates === 'object' && !Array.isArray(rawPairSeparationGates), `${COLOR_SYSTEM_TUNING_PATH}: pairSeparationGates must be an object`)
+  const rawRoleSignalProfile = data.roleSignalProfile ?? {}
+  assert(rawRoleSignalProfile && typeof rawRoleSignalProfile === 'object' && !Array.isArray(rawRoleSignalProfile), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile must be an object`)
   const rawLightReadabilitySearchProfile = data.lightReadabilitySearchProfile ?? {}
   assert(rawLightReadabilitySearchProfile && typeof rawLightReadabilitySearchProfile === 'object' && !Array.isArray(rawLightReadabilitySearchProfile), `${COLOR_SYSTEM_TUNING_PATH}: lightReadabilitySearchProfile must be an object`)
   const rawTelemetryProfile = data.telemetryProfile ?? {}
@@ -528,6 +530,117 @@ export function loadColorSystemTuning() {
     pairSeparationGates[gateId] = out
   }
 
+  const roleSignalProfile = {
+    coolHueBandByVariant: {},
+    nearForegroundDeltaEByVariant: {},
+    criticalPairDeltaEByVariant: {},
+  }
+
+  const rawCoolHueBandByVariant = rawRoleSignalProfile.coolHueBandByVariant ?? {}
+  assert(rawCoolHueBandByVariant && typeof rawCoolHueBandByVariant === 'object' && !Array.isArray(rawCoolHueBandByVariant), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant must be an object`)
+  const coolHueVariantIds = new Set(['default', ...variantIds])
+  for (const [variantId, roleMap] of Object.entries(rawCoolHueBandByVariant)) {
+    assert(coolHueVariantIds.has(variantId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant has unknown variant "${variantId}"`)
+    assert(roleMap && typeof roleMap === 'object' && !Array.isArray(roleMap), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId} must be an object`)
+    const normalizedRoleMap = {}
+    for (const [roleId, profile] of Object.entries(roleMap)) {
+      assert(roleIds.has(roleId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId} has unknown role "${roleId}"`)
+      assert(profile && typeof profile === 'object' && !Array.isArray(profile), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId}.${roleId} must be an object`)
+      const hueMin = normalizeNumber(
+        profile.hueMin,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId}.${roleId}.hueMin`,
+        { min: 0, max: 360 }
+      )
+      const hueMax = normalizeNumber(
+        profile.hueMax,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId}.${roleId}.hueMax`,
+        { min: 0, max: 360 }
+      )
+      assert(hueMin !== hueMax, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId}.${roleId} hueMin/hueMax cannot be identical`)
+      normalizedRoleMap[roleId] = {
+        hueMin,
+        hueMax,
+        minBgContrast: normalizeNumber(
+          profile.minBgContrast,
+          `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId}.${roleId}.minBgContrast`,
+          { min: 1, max: 21 }
+        ),
+        maxDeltaEFromSeed: normalizeNumber(
+          profile.maxDeltaEFromSeed,
+          `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.coolHueBandByVariant.${variantId}.${roleId}.maxDeltaEFromSeed`,
+          { min: 0, max: 200, allowNull: true }
+        ),
+      }
+    }
+    roleSignalProfile.coolHueBandByVariant[variantId] = normalizedRoleMap
+  }
+
+  const rawNearForegroundByVariant = rawRoleSignalProfile.nearForegroundDeltaEByVariant ?? {}
+  assert(rawNearForegroundByVariant && typeof rawNearForegroundByVariant === 'object' && !Array.isArray(rawNearForegroundByVariant), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant must be an object`)
+  const nearFgVariantIds = new Set(['default', ...variantIds])
+  for (const [variantId, roleMap] of Object.entries(rawNearForegroundByVariant)) {
+    assert(nearFgVariantIds.has(variantId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant has unknown variant "${variantId}"`)
+    assert(roleMap && typeof roleMap === 'object' && !Array.isArray(roleMap), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId} must be an object`)
+    const normalizedRoleMap = {}
+    for (const [roleId, profile] of Object.entries(roleMap)) {
+      assert(roleIds.has(roleId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId} has unknown role "${roleId}"`)
+      assert(profile && typeof profile === 'object' && !Array.isArray(profile), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId}.${roleId} must be an object`)
+      const minDeltaE = normalizeNumber(
+        profile.minDeltaE,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId}.${roleId}.minDeltaE`,
+        { min: 0, max: 200 }
+      )
+      const maxDeltaE = normalizeNumber(
+        profile.maxDeltaE,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId}.${roleId}.maxDeltaE`,
+        { min: 0, max: 200 }
+      )
+      assert(minDeltaE <= maxDeltaE, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId}.${roleId} minDeltaE must be <= maxDeltaE`)
+      const targetDeltaE = normalizeOptionalNumber(
+        profile.targetDeltaE,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId}.${roleId}.targetDeltaE`,
+        { min: 0, max: 200 }
+      )
+      if (targetDeltaE != null) {
+        assert(targetDeltaE >= minDeltaE && targetDeltaE <= maxDeltaE, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId}.${roleId}.targetDeltaE must be between minDeltaE and maxDeltaE`)
+      }
+      normalizedRoleMap[roleId] = {
+        minDeltaE,
+        maxDeltaE,
+        targetDeltaE: targetDeltaE ?? null,
+        minBgContrast: normalizeNumber(
+          profile.minBgContrast,
+          `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.nearForegroundDeltaEByVariant.${variantId}.${roleId}.minBgContrast`,
+          { min: 1, max: 21 }
+        ),
+      }
+    }
+    roleSignalProfile.nearForegroundDeltaEByVariant[variantId] = normalizedRoleMap
+  }
+
+  const rawCriticalPairByVariant = rawRoleSignalProfile.criticalPairDeltaEByVariant ?? {}
+  assert(rawCriticalPairByVariant && typeof rawCriticalPairByVariant === 'object' && !Array.isArray(rawCriticalPairByVariant), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.criticalPairDeltaEByVariant must be an object`)
+  const criticalPairVariantIds = new Set(['default', ...variantIds])
+  for (const [variantId, pairMap] of Object.entries(rawCriticalPairByVariant)) {
+    assert(criticalPairVariantIds.has(variantId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.criticalPairDeltaEByVariant has unknown variant "${variantId}"`)
+    assert(pairMap && typeof pairMap === 'object' && !Array.isArray(pairMap), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.criticalPairDeltaEByVariant.${variantId} must be an object`)
+    const normalizedPairMap = {}
+    for (const [pairKey, thresholdRaw] of Object.entries(pairMap)) {
+      const key = String(pairKey || '').trim()
+      const match = key.match(/^([a-zA-Z0-9_-]+)->([a-zA-Z0-9_-]+)$/)
+      assert(match, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.criticalPairDeltaEByVariant.${variantId} has invalid pair key "${key}" (expected left->right)`)
+      const [, leftRole, rightRole] = match
+      assert(roleIds.has(leftRole), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.criticalPairDeltaEByVariant.${variantId} unknown left role "${leftRole}"`)
+      assert(roleIds.has(rightRole), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.criticalPairDeltaEByVariant.${variantId} unknown right role "${rightRole}"`)
+      normalizedPairMap[key] = normalizeNumber(
+        thresholdRaw,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.criticalPairDeltaEByVariant.${variantId}.${key}`,
+        { min: 0, max: 200 }
+      )
+    }
+    roleSignalProfile.criticalPairDeltaEByVariant[variantId] = normalizedPairMap
+  }
+
   const lightReadabilitySearchProfile = {
     scaleStep: normalizeNumber(rawLightReadabilitySearchProfile.scaleStep, `${COLOR_SYSTEM_TUNING_PATH}: lightReadabilitySearchProfile.scaleStep`, { min: 0.001, max: 1 }),
     driftDivisor: normalizeNumber(rawLightReadabilitySearchProfile.driftDivisor, `${COLOR_SYSTEM_TUNING_PATH}: lightReadabilitySearchProfile.driftDivisor`, { min: 1, max: 400 }),
@@ -626,6 +739,7 @@ export function loadColorSystemTuning() {
     lightPolaritySearchProfile,
     globalSeparationDeficitProfile,
     pairSeparationGates,
+    roleSignalProfile,
     lightReadabilitySearchProfile,
     telemetryProfile,
     siteDocsProfile,

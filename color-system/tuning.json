@@ -3,12 +3,12 @@
   "lightPolarityRoleOptimization": {
     "light": {
       "function": {
-        "minBgHueDistance": 60,
-        "targetBgHueDistance": 92,
-        "minAnchorDeltaE": 26,
-        "minGuardDeltaE": 20,
+        "minBgHueDistance": 3,
+        "targetBgHueDistance": 16,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 19.4,
         "minContrast": 3.3,
-        "maxDeltaEFromSeed": 95,
+        "maxDeltaEFromSeed": 30,
         "anchorRoles": [
           "keyword",
           "number",
@@ -24,15 +24,16 @@
           "type",
           "property"
         ],
-        "targetPreferredHueDistance": 42
+        "targetPreferredHueDistance": 20,
+        "applyOnlyWhenCompensationNeeded": true
       },
       "method": {
-        "minBgHueDistance": 60,
-        "targetBgHueDistance": 96,
-        "minAnchorDeltaE": 28,
-        "minGuardDeltaE": 18,
+        "minBgHueDistance": 18,
+        "targetBgHueDistance": 34,
+        "minAnchorDeltaE": 20,
+        "minGuardDeltaE": 12,
         "minContrast": 3,
-        "maxDeltaEFromSeed": 92,
+        "maxDeltaEFromSeed": 30,
         "anchorRoles": [
           "keyword",
           "number",
@@ -49,16 +50,16 @@
           "property",
           "type"
         ],
-        "targetPreferredHueDistance": 24,
+        "targetPreferredHueDistance": 14,
         "applyOnlyWhenCompensationNeeded": true
       },
       "property": {
-        "minBgHueDistance": 62,
-        "targetBgHueDistance": 104,
-        "minAnchorDeltaE": 30,
-        "minGuardDeltaE": 18,
+        "minBgHueDistance": 8,
+        "targetBgHueDistance": 20,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 11,
         "minContrast": 3,
-        "maxDeltaEFromSeed": 92,
+        "maxDeltaEFromSeed": 22,
         "anchorRoles": [
           "keyword",
           "number",
@@ -76,7 +77,7 @@
           "method",
           "type"
         ],
-        "targetPreferredHueDistance": 30,
+        "targetPreferredHueDistance": 12,
         "applyOnlyWhenCompensationNeeded": true
       },
       "type": {
@@ -109,12 +110,12 @@
     },
     "lightSoft": {
       "function": {
-        "minBgHueDistance": 56,
-        "targetBgHueDistance": 86,
-        "minAnchorDeltaE": 22,
+        "minBgHueDistance": 3,
+        "targetBgHueDistance": 14,
+        "minAnchorDeltaE": 20,
         "minGuardDeltaE": 18,
         "minContrast": 2.9,
-        "maxDeltaEFromSeed": 92,
+        "maxDeltaEFromSeed": 28,
         "anchorRoles": [
           "keyword",
           "number",
@@ -130,16 +131,16 @@
           "type",
           "property"
         ],
-        "targetPreferredHueDistance": 46,
+        "targetPreferredHueDistance": 20,
         "applyOnlyWhenCompensationNeeded": true
       },
       "method": {
-        "minBgHueDistance": 56,
-        "targetBgHueDistance": 92,
-        "minAnchorDeltaE": 24,
-        "minGuardDeltaE": 16,
+        "minBgHueDistance": 16,
+        "targetBgHueDistance": 30,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 10,
         "minContrast": 2.6,
-        "maxDeltaEFromSeed": 90,
+        "maxDeltaEFromSeed": 30,
         "anchorRoles": [
           "keyword",
           "number",
@@ -156,16 +157,16 @@
           "property",
           "type"
         ],
-        "targetPreferredHueDistance": 28,
+        "targetPreferredHueDistance": 14,
         "applyOnlyWhenCompensationNeeded": true
       },
       "property": {
-        "minBgHueDistance": 58,
-        "targetBgHueDistance": 98,
-        "minAnchorDeltaE": 24,
-        "minGuardDeltaE": 14,
+        "minBgHueDistance": 8,
+        "targetBgHueDistance": 18,
+        "minAnchorDeltaE": 18,
+        "minGuardDeltaE": 10,
         "minContrast": 2.8,
-        "maxDeltaEFromSeed": 28,
+        "maxDeltaEFromSeed": 22,
         "anchorRoles": [
           "keyword",
           "number",
@@ -183,7 +184,7 @@
           "method",
           "type"
         ],
-        "targetPreferredHueDistance": 26,
+        "targetPreferredHueDistance": 12,
         "applyOnlyWhenCompensationNeeded": true
       },
       "type": {
@@ -337,10 +338,10 @@
         "minL": 38,
         "maxL": 84,
         "minScale": 1,
-        "maxScale": 2.35,
-        "targetL": 53,
+        "maxScale": 1.8,
+        "targetL": 50,
         "wL": 0.26,
-        "minFgContrast": 2.7
+        "minFgContrast": 2.5
       },
       "property": {
         "bgPow": 0.64,
@@ -351,7 +352,7 @@
         "minL": 34,
         "maxL": 80,
         "minScale": 0.92,
-        "maxScale": 2,
+        "maxScale": 1.75,
         "targetL": 48,
         "wL": 0.2,
         "minFgContrast": 2.4
@@ -365,7 +366,7 @@
         "minL": 34,
         "maxL": 78,
         "minScale": 0.92,
-        "maxScale": 1.9,
+        "maxScale": 1.7,
         "targetL": 47,
         "wL": 0.2,
         "minFgContrast": 2.3
@@ -467,16 +468,16 @@
       "operator": 0.9,
       "variable": 0.75,
       "parameter": 0.75,
-      "method": 1.22,
-      "function": 1.02
+      "method": 1.08,
+      "function": 1
     },
     "lightnessLiftByRole": {
       "_default": 0,
       "_unmapped": 0,
-      "method": 3.2,
+      "method": 1.4,
       "function": -1.6,
-      "property": 0.8,
-      "type": 0.4
+      "property": 0.4,
+      "type": 0.2
     }
   },
   "lightPolaritySearchProfile": {
@@ -534,6 +535,132 @@
       "default": 10
     }
   },
+  "roleSignalProfile": {
+    "coolHueBandByVariant": {
+      "dark": {
+        "function": {
+          "hueMin": 208,
+          "hueMax": 224,
+          "minBgContrast": 3.8,
+          "maxDeltaEFromSeed": 72
+        }
+      },
+      "darkSoft": {
+        "function": {
+          "hueMin": 208,
+          "hueMax": 224,
+          "minBgContrast": 3.4,
+          "maxDeltaEFromSeed": 72
+        }
+      },
+      "light": {
+        "function": {
+          "hueMin": 184,
+          "hueMax": 222,
+          "minBgContrast": 3.3,
+          "maxDeltaEFromSeed": 60
+        }
+      },
+      "lightSoft": {
+        "function": {
+          "hueMin": 184,
+          "hueMax": 222,
+          "minBgContrast": 2.9,
+          "maxDeltaEFromSeed": 56
+        }
+      }
+    },
+    "nearForegroundDeltaEByVariant": {
+      "default": {
+        "variable": {
+          "minDeltaE": 3,
+          "maxDeltaE": 22,
+          "minBgContrast": 2.2
+        },
+        "parameter": {
+          "minDeltaE": 3,
+          "maxDeltaE": 22,
+          "minBgContrast": 2.1
+        }
+      },
+      "dark": {
+        "variable": {
+          "minDeltaE": 3,
+          "maxDeltaE": 12,
+          "minBgContrast": 2.2
+        },
+        "parameter": {
+          "minDeltaE": 3,
+          "maxDeltaE": 12,
+          "minBgContrast": 2.1
+        },
+        "operator": {
+          "minDeltaE": 12,
+          "maxDeltaE": 30,
+          "minBgContrast": 2.8
+        }
+      },
+      "darkSoft": {
+        "variable": {
+          "minDeltaE": 3,
+          "maxDeltaE": 12,
+          "minBgContrast": 2.2
+        },
+        "parameter": {
+          "minDeltaE": 3,
+          "maxDeltaE": 12,
+          "minBgContrast": 2.1
+        },
+        "operator": {
+          "minDeltaE": 12,
+          "maxDeltaE": 30,
+          "minBgContrast": 2.6
+        }
+      },
+      "light": {
+        "variable": {
+          "minDeltaE": 6,
+          "maxDeltaE": 22,
+          "minBgContrast": 4.2
+        },
+        "parameter": {
+          "minDeltaE": 6,
+          "maxDeltaE": 22,
+          "minBgContrast": 3.8
+        },
+        "operator": {
+          "minDeltaE": 12,
+          "maxDeltaE": 34,
+          "minBgContrast": 2.8
+        }
+      },
+      "lightSoft": {
+        "variable": {
+          "minDeltaE": 5,
+          "maxDeltaE": 14,
+          "minBgContrast": 3.1
+        },
+        "parameter": {
+          "minDeltaE": 5,
+          "maxDeltaE": 14,
+          "minBgContrast": 2.9
+        },
+        "operator": {
+          "minDeltaE": 10,
+          "maxDeltaE": 24,
+          "minBgContrast": 2.8
+        }
+      }
+    },
+    "criticalPairDeltaEByVariant": {
+      "default": {
+        "function->keyword": 18,
+        "function->number": 14,
+        "function->tag": 18,
+        "function->variable": 14
+      }
+    }
+  },
   "siteDocsProfile": {
     "semanticRows": [
       {
@@ -559,22 +686,22 @@
       {
         "id": "function",
         "key": "fn",
-        "note": "Callable targets with variant-tuned polarity"
+        "note": "Denim-blue callable targets as restrained cool anchors"
       },
       {
         "id": "method",
         "key": "method",
-        "note": "Method call targets with tuned cool polarity"
+        "note": "Warm sand method calls for relaxed action emphasis"
       },
       {
         "id": "property",
         "key": "property",
-        "note": "Member access targets with tuned cool polarity"
+        "note": "Olive member access cues to keep structure low-stimulus"
       },
       {
         "id": "string",
         "key": "string",
-        "note": "Moss green literal content"
+        "note": "Muted olive literal content for calm scan rhythm"
       },
       {
         "id": "number",
@@ -584,7 +711,7 @@
       {
         "id": "type",
         "key": "type",
-        "note": "Mineral teal structural symbols"
+        "note": "Denim-teal structural symbols with reduced chroma"
       },
       {
         "id": "variable",

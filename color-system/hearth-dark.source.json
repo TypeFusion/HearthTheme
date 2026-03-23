@@ -227,14 +227,16 @@
             }
         },
         {
-            "scope": [
-                "entity.name.type",
-                "entity.name.class",
-                "entity.name.struct.rust",
-                "entity.name.type.class",
-                "support.type",
-                "support.type.builtin",
-                "support.class"
+      "scope": [
+        "entity.name.type",
+        "entity.name.class",
+        "storage.type.java",
+        "storage.type.primitive.java",
+        "entity.name.struct.rust",
+        "entity.name.type.class",
+        "support.type",
+        "support.type.builtin",
+        "support.class"
             ],
             "settings": {
                 "foreground": "#5d98a4",

@@ -81,6 +81,10 @@ const MAX_ROLE_HUE_DRIFT = 45
 const PAIR_SEPARATION_GATES = COLOR_SYSTEM_TUNING.pairSeparationGates || {}
 const OPERATOR_COMMENT_PAIR_GATE = PAIR_SEPARATION_GATES.operatorCommentDeltaE || {}
 const METHOD_PROPERTY_PAIR_GATE = PAIR_SEPARATION_GATES.methodPropertyDeltaE || {}
+const ROLE_SIGNAL_PROFILE = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
+const ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.coolHueBandByVariant || {}
+const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEByVariant || {}
+const ROLE_SIGNAL_CRITICAL_PAIRS_BY_VARIANT = ROLE_SIGNAL_PROFILE.criticalPairDeltaEByVariant || {}
 
 const issues = []
 const warnings = []
@@ -238,6 +242,12 @@ function hueDiff(a, b) {
   return Math.min(diff, 360 - diff)
 }
 
+function isHueInBand(hue, minHue, maxHue) {
+  if (hue == null) return false
+  if (minHue <= maxHue) return hue >= minHue && hue <= maxHue
+  return hue >= minHue || hue <= maxHue
+}
+
 function rgbToXyz([r, g, b]) {
   const rl = toLinear(r)
   const gl = toLinear(g)
@@ -289,6 +299,24 @@ function resolvePairGateThreshold(profile, variantId, fallback) {
   if (typeof defaultValue === 'number' && Number.isFinite(defaultValue)) return defaultValue
 
   return fallback
+}
+
+function resolveVariantRoleProfile(profileByVariant, variantId) {
+  const base = profileByVariant?.default || {}
+  const specific = profileByVariant?.[variantId] || {}
+  return {
+    ...base,
+    ...specific,
+  }
+}
+
+function resolveCriticalPairThresholds(profileByVariant, variantId) {
+  const base = profileByVariant?.default || {}
+  const specific = profileByVariant?.[variantId] || {}
+  return {
+    ...base,
+    ...specific,
+  }
 }
 
 function validateFixtures() {
@@ -510,6 +538,65 @@ function validateLightPolarityCompensation(themeMeta, theme) {
   }
 }
 
+function validateRoleSignalProfile(themeMeta, theme) {
+  if (!theme) return
+
+  const bg = normalizeHex(theme.colors?.['editor.background'])
+  const fg = normalizeHex(theme.colors?.['editor.foreground'])
+  if (!bg || !fg) return
+
+  const coolHueRoleProfile = resolveVariantRoleProfile(ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, themeMeta.id)
+  for (const [roleId, profile] of Object.entries(coolHueRoleProfile)) {
+    const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
+    if (!roleColor) continue
+
+    const hsl = rgbToHsl(roleColor)
+    if (!hsl) continue
+    if (!isHueInBand(hsl.h, profile.hueMin, profile.hueMax)) {
+      addIssue(`${themeMeta.path}: role signal cool hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
+    }
+
+    const ratio = contrastRatio(roleColor, bg)
+    if (ratio == null || ratio < profile.minBgContrast) {
+      addIssue(`${themeMeta.path}: role signal cool hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+    }
+  }
+
+  const nearForegroundRoleProfile = resolveVariantRoleProfile(ROLE_SIGNAL_NEAR_FG_BY_VARIANT, themeMeta.id)
+  for (const [roleId, profile] of Object.entries(nearForegroundRoleProfile)) {
+    const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
+    if (!roleColor) continue
+
+    const fgDelta = deltaE(roleColor, fg)
+    if (fgDelta == null) continue
+    if (fgDelta < profile.minDeltaE || fgDelta > profile.maxDeltaE) {
+      addIssue(
+        `${themeMeta.path}: role signal near-foreground budget failed for "${roleId}" (deltaE ${fixed(fgDelta)} not in ${fixed(profile.minDeltaE)}-${fixed(profile.maxDeltaE)})`
+      )
+    }
+
+    const ratio = contrastRatio(roleColor, bg)
+    if (ratio == null || ratio < profile.minBgContrast) {
+      addIssue(`${themeMeta.path}: role signal near-foreground contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+    }
+  }
+
+  const criticalPairs = resolveCriticalPairThresholds(ROLE_SIGNAL_CRITICAL_PAIRS_BY_VARIANT, themeMeta.id)
+  for (const [pairKey, threshold] of Object.entries(criticalPairs)) {
+    const pairMatch = String(pairKey).match(/^([a-zA-Z0-9_-]+)->([a-zA-Z0-9_-]+)$/)
+    if (!pairMatch) continue
+    const [, leftRole, rightRole] = pairMatch
+    const leftColor = getTokenColor(theme, ROLE_SCOPES[leftRole] || [])
+    const rightColor = getTokenColor(theme, ROLE_SCOPES[rightRole] || [])
+    if (!leftColor || !rightColor) continue
+    const dE = deltaE(leftColor, rightColor)
+    if (dE == null) continue
+    if (dE < threshold) {
+      addIssue(`${themeMeta.path}: role signal critical pair "${leftRole}" vs "${rightRole}" deltaE ${fixed(dE)} is below ${fixed(threshold)}`)
+    }
+  }
+}
+
 function validateCrossThemeDrift(darkTheme, lightTheme, pairLabel = 'core') {
   if (!darkTheme || !lightTheme) return
 
@@ -622,6 +709,7 @@ function run() {
     validateCriticalPairSeparation(themeMeta, theme)
     validateSemanticAlignment(themeMeta, theme)
     validateLightPolarityCompensation(themeMeta, theme)
+    validateRoleSignalProfile(themeMeta, theme)
   }
 
   validateColorSystemSource(themes)

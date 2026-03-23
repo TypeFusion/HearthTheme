@@ -141,6 +141,8 @@
       "scopes": [
         "entity.name.type",
         "entity.name.class",
+        "storage.type.java",
+        "storage.type.primitive.java",
         "entity.name.struct.rust",
         "entity.name.type.class",
         "support.type",

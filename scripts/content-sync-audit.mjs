@@ -124,6 +124,23 @@ function resolvePairGateThreshold(profile, variantId, fallback) {
   return fallback
 }
 
+function resolveVariantRoleProfile(profileByVariant, variantId) {
+  const base = profileByVariant?.default || {}
+  const specific = profileByVariant?.[variantId] || {}
+  return {
+    ...base,
+    ...specific,
+  }
+}
+
+function resolveCriticalPairThreshold(profileByVariant, variantId, pairKey, fallback = null) {
+  const specific = profileByVariant?.[variantId]?.[pairKey]
+  if (typeof specific === 'number' && Number.isFinite(specific)) return specific
+  const base = profileByVariant?.default?.[pairKey]
+  if (typeof base === 'number' && Number.isFinite(base)) return base
+  return fallback
+}
+
 function getTokenColor(theme, scope) {
   for (const entry of theme.tokenColors || []) {
     const scopes = Array.isArray(entry.scope) ? entry.scope : [entry.scope]
@@ -539,6 +556,10 @@ function validateReadabilityBudgetContract() {
   const operatorCommentProfile = COLOR_SYSTEM_TUNING.pairSeparationGates?.operatorCommentDeltaE || {}
   const methodPropertyProfile = COLOR_SYSTEM_TUNING.pairSeparationGates?.methodPropertyDeltaE || {}
   const lightFunctionProfile = COLOR_SYSTEM_TUNING.lightPolarityRoleOptimization?.light?.function || {}
+  const roleSignalProfile = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
+  const coolHueByVariant = roleSignalProfile.coolHueBandByVariant || {}
+  const nearForegroundByVariant = roleSignalProfile.nearForegroundDeltaEByVariant || {}
+  const criticalPairsByVariant = roleSignalProfile.criticalPairDeltaEByVariant || {}
 
   const operatorCommentDefault = resolvePairGateThreshold(operatorCommentProfile, 'dark', 4.5)
   const operatorCommentLight = resolvePairGateThreshold(operatorCommentProfile, 'light', operatorCommentDefault)
@@ -550,6 +571,22 @@ function validateReadabilityBudgetContract() {
   const lightFunctionAnchorDeltaE = typeof lightFunctionProfile.minAnchorDeltaE === 'number'
     ? lightFunctionProfile.minAnchorDeltaE
     : 22
+  const functionCoolBandDark = resolveVariantRoleProfile(coolHueByVariant, 'dark').function || { hueMin: 196, hueMax: 236 }
+  const functionCoolBandDarkSoft = resolveVariantRoleProfile(coolHueByVariant, 'darkSoft').function || { hueMin: 196, hueMax: 236 }
+  const functionCoolBandLight = resolveVariantRoleProfile(coolHueByVariant, 'light').function || { hueMin: 188, hueMax: 228 }
+  const functionCoolBandLightSoft = resolveVariantRoleProfile(coolHueByVariant, 'lightSoft').function || { hueMin: 188, hueMax: 228 }
+  const variableNearFgDark = resolveVariantRoleProfile(nearForegroundByVariant, 'dark').variable || { minDeltaE: 3, maxDeltaE: 12 }
+  const variableNearFgDarkSoft = resolveVariantRoleProfile(nearForegroundByVariant, 'darkSoft').variable || { minDeltaE: 3, maxDeltaE: 12 }
+  const variableNearFgLight = resolveVariantRoleProfile(nearForegroundByVariant, 'light').variable || { minDeltaE: 6, maxDeltaE: 22 }
+  const variableNearFgLightSoft = resolveVariantRoleProfile(nearForegroundByVariant, 'lightSoft').variable || { minDeltaE: 5, maxDeltaE: 14 }
+  const functionKeywordDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->keyword', 18)
+  const functionNumberDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->number', 14)
+  const functionTagDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->tag', 18)
+  const functionVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->variable', 14)
+
+  const functionCoolBandDoc = `${formatDocNumber(functionCoolBandDark.hueMin)}-${formatDocNumber(functionCoolBandDark.hueMax)} / ${formatDocNumber(functionCoolBandDarkSoft.hueMin)}-${formatDocNumber(functionCoolBandDarkSoft.hueMax)} / ${formatDocNumber(functionCoolBandLight.hueMin)}-${formatDocNumber(functionCoolBandLight.hueMax)} / ${formatDocNumber(functionCoolBandLightSoft.hueMin)}-${formatDocNumber(functionCoolBandLightSoft.hueMax)} deg`
+  const variableNearFgDoc = `dark ${formatDocNumber(variableNearFgDark.minDeltaE)}-${formatDocNumber(variableNearFgDark.maxDeltaE)}, darkSoft ${formatDocNumber(variableNearFgDarkSoft.minDeltaE)}-${formatDocNumber(variableNearFgDarkSoft.maxDeltaE)}, light ${formatDocNumber(variableNearFgLight.minDeltaE)}-${formatDocNumber(variableNearFgLight.maxDeltaE)}, lightSoft ${formatDocNumber(variableNearFgLightSoft.minDeltaE)}-${formatDocNumber(variableNearFgLightSoft.maxDeltaE)}`
+  const functionCriticalDoc = `keyword>=${formatDocNumber(functionKeywordDeltaE)}, number>=${formatDocNumber(functionNumberDeltaE)}, tag>=${formatDocNumber(functionTagDeltaE)}, variable>=${formatDocNumber(functionVariableDeltaE)}`
 
   const expectedBaselineRows = [
     `| editor fg/bg contrast | \`>= ${minTextContrast.raw}\` |`,
@@ -560,6 +597,9 @@ function validateReadabilityBudgetContract() {
     `| cross-theme role hue drift (comment/keyword/operator/string/number/type/variable/method/property) | \`<= ${formatDocNumber(maxRoleHueDrift.value)} deg\` |`,
     `| light function/background hue distance | \`>= ${formatDocNumber(lightFunctionBgHueDistance)} deg\` |`,
     `| light function anchor separation (\`deltaE\` vs keyword/number/tag) | \`>= ${formatDocNumber(lightFunctionAnchorDeltaE)}\` |`,
+    `| function cool-hue band (dark/darkSoft/light/lightSoft) | \`${functionCoolBandDoc}\` |`,
+    `| variable/parameter near-foreground deltaE | \`${variableNearFgDoc}\` |`,
+    `| function critical separation deltaE | \`${functionCriticalDoc}\` |`,
   ]
 
   for (const expectedRow of expectedBaselineRows) {
@@ -586,6 +626,9 @@ function validateReadabilityBudgetContract() {
     ['Method/property separation deltaE', `>= ${formatDocNumber(methodPropertyThreshold)}`],
     ['Operator/comment separation deltaE', `>= ${formatDocNumber(operatorCommentDefault, { forceOneDecimal: true })} (light & light soft >= ${formatDocNumber(operatorCommentLight, { forceOneDecimal: true })})`],
     ['Cross-theme hue drift', `<= ${formatDocNumber(maxRoleHueDrift.value)}°`],
+    ['Function cool-hue band', functionCoolBandDoc],
+    ['Variable/parameter near-foreground deltaE', variableNearFgDoc],
+    ['Function critical separation deltaE', functionCriticalDoc],
   ]
 
   for (const [metric, target] of expectedUiBudgetRows) {

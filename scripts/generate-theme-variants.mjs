@@ -35,6 +35,9 @@ const LIGHT_POLARITY_SEARCH_PROFILE = COLOR_SYSTEM_TUNING.lightPolaritySearchPro
 const GLOBAL_SEPARATION_DEFICIT_PROFILE = COLOR_SYSTEM_TUNING.globalSeparationDeficitProfile
 const LIGHT_READABILITY_SEARCH_PROFILE = COLOR_SYSTEM_TUNING.lightReadabilitySearchProfile
 const TELEMETRY_PROFILE = COLOR_SYSTEM_TUNING.telemetryProfile
+const ROLE_SIGNAL_PROFILE = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
+const ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.coolHueBandByVariant || {}
+const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEByVariant || {}
 const DEFAULT_LIGHT_CALIBRATION = LIGHT_READABILITY_CALIBRATION.default || {}
 const LIGHT_ROLE_CALIBRATION = LIGHT_READABILITY_CALIBRATION.byRole || {}
 const GLOBAL_SEPARATION_MAX_BOOST_ROUNDS = VARIANT_BOOST_PROFILE.default?.maxBoostRounds ?? 6
@@ -230,6 +233,41 @@ function rgbToHsl([r, g, b]) {
 function hueDistance(a, b) {
   const diff = Math.abs(a - b)
   return Math.min(diff, 360 - diff)
+}
+
+function isHueInBand(hue, hueMin, hueMax) {
+  if (hue == null) return false
+  if (hueMin <= hueMax) return hue >= hueMin && hue <= hueMax
+  return hue >= hueMin || hue <= hueMax
+}
+
+function nearestHueOnBand(hue, hueMin, hueMax) {
+  if (isHueInBand(hue, hueMin, hueMax)) return hue
+  const toMin = hueDistance(hue, hueMin)
+  const toMax = hueDistance(hue, hueMax)
+  return toMin <= toMax ? hueMin : hueMax
+}
+
+function mixHex(a, b, t) {
+  const rgbA = hexToRgb(a)
+  const rgbB = hexToRgb(b)
+  if (!rgbA || !rgbB) return a
+  const ratio = clamp(t, 0, 1)
+  return rgbaToHex({
+    r: rgbA[0] + (rgbB[0] - rgbA[0]) * ratio,
+    g: rgbA[1] + (rgbB[1] - rgbA[1]) * ratio,
+    b: rgbA[2] + (rgbB[2] - rgbA[2]) * ratio,
+    hasAlpha: false,
+  })
+}
+
+function resolveVariantRoleProfile(rawProfileMap, variantId) {
+  const base = rawProfileMap?.default || {}
+  const specific = rawProfileMap?.[variantId] || {}
+  return {
+    ...base,
+    ...specific,
+  }
 }
 
 function circularMean(angles) {
@@ -736,6 +774,164 @@ function applySoftRoleChromaBudget(theme, variantId, warnings) {
   }
 }
 
+function enforceRoleCoolHueBand(theme, variantId, warnings) {
+  const bgColor = resolveHexValue(theme?.colors?.[REF_BG_KEY])
+  if (!bgColor) return
+
+  const roleBands = resolveVariantRoleProfile(ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, variantId)
+  for (const [roleId, band] of Object.entries(roleBands)) {
+    if (!band || typeof band !== 'object') continue
+    const roleDef = getRoleDefById(roleId)
+    if (!roleDef) continue
+
+    const current = getRoleColorFromTheme(theme, roleDef)
+    if (!current) continue
+
+    const seedHue = hexHue(current)
+    if (seedHue == null) continue
+    const seedContrast = contrastRatio(current, bgColor) ?? 0
+    const inBand = isHueInBand(seedHue, band.hueMin, band.hueMax)
+    if (inBand && seedContrast >= band.minBgContrast) continue
+
+    const seedLab = xyzToLab(rgbToXyz(hexToRgb(current)))
+    const [seedL, seedC] = labToLch(seedLab)
+    const targetHue = nearestHueOnBand(seedHue, band.hueMin, band.hueMax)
+    let bestHex = null
+    let bestScore = Number.POSITIVE_INFINITY
+
+    for (const lightnessShift of [-8, -4, 0, 4, 8]) {
+      for (const chromaScale of [0.82, 0.9, 1, 1.1]) {
+        for (const hueShift of [-6, -3, 0, 3, 6]) {
+          const candidateHue = ((targetHue + hueShift) % 360 + 360) % 360
+          if (!isHueInBand(candidateHue, band.hueMin, band.hueMax)) continue
+          const candidateL = clamp(seedL + lightnessShift, 6, 94)
+          const candidateC = clamp(seedC * chromaScale, 3, 90)
+          const candidateHex = labToHex(lchToLab([candidateL, candidateC, candidateHue]))
+          const candidateContrast = contrastRatio(candidateHex, bgColor)
+          if (candidateContrast == null || candidateContrast < band.minBgContrast) continue
+          const drift = deltaE(candidateHex, current) ?? 0
+          if (band.maxDeltaEFromSeed != null && drift > band.maxDeltaEFromSeed) continue
+
+          const score = drift * 0.86 + hueDistance(candidateHue, seedHue) * 0.14
+          if (score < bestScore) {
+            bestScore = score
+            bestHex = candidateHex
+          }
+        }
+      }
+    }
+
+    if (!bestHex || String(bestHex).toLowerCase() === String(current).toLowerCase()) {
+      warnings.push(`${variantId}: role signal cool band could not adjust ${roleId} into hue range ${band.hueMin}-${band.hueMax}`)
+      continue
+    }
+
+    applyRoleColorToTokenEntries(theme, roleDef.scopes || [], bestHex)
+    for (const semanticKey of roleDef.semanticKeys || []) {
+      setSemanticColor(theme, semanticKey, bestHex)
+    }
+
+    const nextHue = hexHue(bestHex)
+    warnings.push(
+      `telemetry: ${variantId}: role signal cool band adjusted ${roleId} hue ${(seedHue ?? 0).toFixed(1)} -> ${(nextHue ?? 0).toFixed(1)}`
+    )
+  }
+}
+
+function enforceNearForegroundBudget(theme, variantId, warnings) {
+  const fgColor = resolveHexValue(theme?.colors?.[REF_FG_KEY])
+  const bgColor = resolveHexValue(theme?.colors?.[REF_BG_KEY])
+  if (!fgColor || !bgColor) return
+
+  const roleProfiles = resolveVariantRoleProfile(ROLE_SIGNAL_NEAR_FG_BY_VARIANT, variantId)
+  for (const [roleId, profile] of Object.entries(roleProfiles)) {
+    if (!profile || typeof profile !== 'object') continue
+    const roleDef = getRoleDefById(roleId)
+    if (!roleDef) continue
+
+    const current = getRoleColorFromTheme(theme, roleDef)
+    if (!current) continue
+
+    const currentDelta = deltaE(current, fgColor)
+    if (currentDelta == null) continue
+    const currentContrast = contrastRatio(current, bgColor) ?? 0
+    const minDeltaE = profile.minDeltaE ?? 0
+    const maxDeltaE = profile.maxDeltaE ?? 200
+    const minBgContrast = profile.minBgContrast ?? 1
+    const targetDeltaE = profile.targetDeltaE ?? clamp((minDeltaE + maxDeltaE) / 2, minDeltaE, maxDeltaE)
+
+    if (
+      currentDelta >= minDeltaE &&
+      currentDelta <= maxDeltaE &&
+      currentContrast >= minBgContrast
+    ) {
+      continue
+    }
+
+    let bestHex = null
+    let bestScore = Number.POSITIVE_INFINITY
+
+    if (currentDelta > maxDeltaE || currentContrast < minBgContrast) {
+      for (let step = 1; step <= 24; step += 1) {
+        const t = step / 24
+        const candidate = mixHex(current, fgColor, t)
+        const nextDelta = deltaE(candidate, fgColor)
+        if (nextDelta == null || nextDelta < minDeltaE || nextDelta > maxDeltaE) continue
+        const nextContrast = contrastRatio(candidate, bgColor)
+        if (nextContrast == null || nextContrast < minBgContrast) continue
+        const drift = deltaE(candidate, current) ?? 0
+        const score = Math.abs(nextDelta - targetDeltaE) + drift * 0.05
+        if (score < bestScore) {
+          bestScore = score
+          bestHex = candidate
+        }
+      }
+    } else if (currentDelta < minDeltaE) {
+      const seedLab = xyzToLab(rgbToXyz(hexToRgb(current)))
+      const [seedL, seedC, seedHue] = labToLch(seedLab)
+      for (const chromaScale of [1.05, 1.12, 1.2, 1.32]) {
+        for (const lightnessShift of [-8, -4, 0, 4, 8]) {
+          const candidate = labToHex(lchToLab([
+            clamp(seedL + lightnessShift, 6, 94),
+            clamp(seedC * chromaScale, 2, 92),
+            seedHue,
+          ]))
+          const nextDelta = deltaE(candidate, fgColor)
+          if (nextDelta == null || nextDelta < minDeltaE || nextDelta > maxDeltaE) continue
+          const nextContrast = contrastRatio(candidate, bgColor)
+          if (nextContrast == null || nextContrast < minBgContrast) continue
+          const drift = deltaE(candidate, current) ?? 0
+          const score = Math.abs(nextDelta - targetDeltaE) + drift * 0.08
+          if (score < bestScore) {
+            bestScore = score
+            bestHex = candidate
+          }
+        }
+      }
+    }
+
+    if (!bestHex || String(bestHex).toLowerCase() === String(current).toLowerCase()) {
+      warnings.push(`${variantId}: role signal near-foreground budget could not adjust ${roleId} into deltaE ${minDeltaE}-${maxDeltaE}`)
+      continue
+    }
+
+    applyRoleColorToTokenEntries(theme, roleDef.scopes || [], bestHex)
+    for (const semanticKey of roleDef.semanticKeys || []) {
+      setSemanticColor(theme, semanticKey, bestHex)
+    }
+
+    const nextDelta = deltaE(bestHex, fgColor) ?? 0
+    warnings.push(
+      `telemetry: ${variantId}: role signal near-foreground adjusted ${roleId} deltaE-to-fg ${currentDelta.toFixed(1)} -> ${nextDelta.toFixed(1)}`
+    )
+  }
+}
+
+function applyRoleSignalProfile(theme, variantId, warnings) {
+  enforceRoleCoolHueBand(theme, variantId, warnings)
+  enforceNearForegroundBudget(theme, variantId, warnings)
+}
+
 function resolveRoleIdForTokenEntry(entry) {
   for (const roleDef of READABILITY_ROLE_DEFS) {
     if (entryHasAnyScope(entry, roleDef.scopes || [])) return roleDef.id
@@ -1148,6 +1344,7 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
     // Soft chroma budgets can reintroduce low-separation cases; run a final polarity guard pass.
     applyLightPolarityCompensation(generated, variantMeta.id, warnings)
   }
+  applyRoleSignalProfile(generated, variantMeta.id, warnings)
 
   return generated
 }
@@ -1162,6 +1359,7 @@ export function generateThemeVariants() {
 
   warnTemplateDrift(currentDark, baselineDark, warnings)
   applySemanticPalette(currentDark, 'dark', warnings)
+  applyRoleSignalProfile(currentDark, 'dark', warnings)
   const darkChanged = writeJson(DARK_THEME_OUTPUT_PATH, currentDark)
   console.log(
     `${darkChanged ? '✓ generated' : '- unchanged'} ${DARK_THEME_OUTPUT_PATH} from ${DARK_THEME_SOURCE_PATH}`
