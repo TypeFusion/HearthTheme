@@ -55,6 +55,10 @@ function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
 }
 
+function toPosixPath(path) {
+  return String(path || "").replaceAll("\\", "/");
+}
+
 function sha256(content) {
   return createHash("sha256").update(content).digest("hex");
 }
@@ -369,19 +373,19 @@ async function run() {
     const manifest = {
       schemaVersion: 1,
       generator: "scripts/generate-preview-images.mjs",
-      samplePath: SAMPLE_PATH,
+      samplePath: toPosixPath(SAMPLE_PATH),
       language: LANG,
       canvas: { width: WIDTH, height: HEIGHT },
       themeImages: [
-        { id: darkMeta.id, svgSha256: sha256(darkSvg), output: darkMeta.output, webOutput: darkMeta.webOutput },
-        { id: darkSoftMeta.id, svgSha256: sha256(darkSoftSvg), output: darkSoftMeta.output, webOutput: darkSoftMeta.webOutput },
-        { id: lightMeta.id, svgSha256: sha256(lightSvg), output: lightMeta.output, webOutput: lightMeta.webOutput },
-        { id: lightSoftMeta.id, svgSha256: sha256(lightSoftSvg), output: lightSoftMeta.output, webOutput: lightSoftMeta.webOutput },
+        { id: darkMeta.id, svgSha256: sha256(darkSvg), output: toPosixPath(darkMeta.output), webOutput: toPosixPath(darkMeta.webOutput) },
+        { id: darkSoftMeta.id, svgSha256: sha256(darkSoftSvg), output: toPosixPath(darkSoftMeta.output), webOutput: toPosixPath(darkSoftMeta.webOutput) },
+        { id: lightMeta.id, svgSha256: sha256(lightSvg), output: toPosixPath(lightMeta.output), webOutput: toPosixPath(lightMeta.webOutput) },
+        { id: lightSoftMeta.id, svgSha256: sha256(lightSoftSvg), output: toPosixPath(lightSoftMeta.output), webOutput: toPosixPath(lightSoftMeta.webOutput) },
       ],
       contrastImage: {
         svgSha256: sha256(contrastSvg),
-        outputs: CONTRAST_OUTPUTS,
-        webOutputs: CONTRAST_WEB_OUTPUTS,
+        outputs: CONTRAST_OUTPUTS.map(toPosixPath),
+        webOutputs: CONTRAST_WEB_OUTPUTS.map(toPosixPath),
       },
     };
 
