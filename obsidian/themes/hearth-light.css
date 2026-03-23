@@ -22,8 +22,8 @@
   --blockquote-color: #5e4f39;
   --code-background: rgb(222 208 186 / 0.38);
   --code-comment: #847257;
-  --code-function: #406074;
-  --code-important: #2f6f64;
+  --code-function: #3b6171;
+  --code-important: #5a5472;
   --code-keyword: #a33a2f;
   --code-normal: #5a3c28;
   --code-operator: #71644a;
@@ -32,7 +32,7 @@
   --code-tag: #a63b1d;
   --code-value: #b36938;
   --h1-color: #a33a2f;
-  --h2-color: #406074;
+  --h2-color: #3b6171;
   --h3-color: #304c37;
   --h4-color: #5e7342;
   --h5-color: #b36938;
@@ -60,9 +60,9 @@
   --scrollbar-thumb-bg: rgb(210 194 165 / 0.5);
   --table-border-color: rgb(210 194 165 / 0.58);
   --table-header-border-color: rgb(210 194 165 / 0.76);
-  --tag-background: rgb(47 111 100 / 0.14);
-  --tag-background-hover: rgb(47 111 100 / 0.22);
-  --tag-color: #2f6f64;
+  --tag-background: rgb(90 84 114 / 0.14);
+  --tag-background-hover: rgb(90 84 114 / 0.22);
+  --tag-color: #5a5472;
   --tag-color-hover: #2a1e0f;
   --text-accent: #b8742b;
   --text-accent-hover: #9e6526;

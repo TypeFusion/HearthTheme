@@ -22,8 +22,8 @@
   --blockquote-color: #6e5e49;
   --code-background: rgb(204 189 164 / 0.38);
   --code-comment: #887861;
-  --code-function: #546072;
-  --code-important: #376f72;
+  --code-function: #47646d;
+  --code-important: #655f7b;
   --code-keyword: #ab5b47;
   --code-normal: #654a35;
   --code-operator: #6d6147;
@@ -32,7 +32,7 @@
   --code-tag: #8b4936;
   --code-value: #b86b3f;
   --h1-color: #ab5b47;
-  --h2-color: #546072;
+  --h2-color: #47646d;
   --h3-color: #325649;
   --h4-color: #697a54;
   --h5-color: #b86b3f;
@@ -60,9 +60,9 @@
   --scrollbar-thumb-bg: rgb(189 172 143 / 0.5);
   --table-border-color: rgb(189 172 143 / 0.58);
   --table-header-border-color: rgb(189 172 143 / 0.76);
-  --tag-background: rgb(55 111 114 / 0.14);
-  --tag-background-hover: rgb(55 111 114 / 0.22);
-  --tag-color: #376f72;
+  --tag-background: rgb(101 95 123 / 0.14);
+  --tag-background-hover: rgb(101 95 123 / 0.22);
+  --tag-color: #655f7b;
   --tag-color-hover: #4b3a27;
   --text-accent: #b8742b;
   --text-accent-hover: #a46a2a;

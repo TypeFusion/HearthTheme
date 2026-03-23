@@ -23,7 +23,7 @@
   --code-background: rgb(48 42 35 / 0.38);
   --code-comment: #6b5f4d;
   --code-function: #7f97ae;
-  --code-important: #5e8f8a;
+  --code-important: #857f9d;
   --code-keyword: #c26f59;
   --code-normal: #d0cbc5;
   --code-operator: #8f846f;
@@ -60,9 +60,9 @@
   --scrollbar-thumb-bg: rgb(58 51 40 / 0.5);
   --table-border-color: rgb(58 51 40 / 0.58);
   --table-header-border-color: rgb(58 51 40 / 0.76);
-  --tag-background: rgb(94 143 138 / 0.14);
-  --tag-background-hover: rgb(94 143 138 / 0.22);
-  --tag-color: #5e8f8a;
+  --tag-background: rgb(133 127 157 / 0.14);
+  --tag-background-hover: rgb(133 127 157 / 0.22);
+  --tag-color: #857f9d;
   --tag-color-hover: #d3c9b8;
   --text-accent: #c27a38;
   --text-accent-hover: #c5884f;

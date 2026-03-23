@@ -239,7 +239,7 @@
                 "support.class"
             ],
             "settings": {
-                "foreground": "#5e8f8a",
+                "foreground": "#857f9d",
                 "fontStyle": "italic"
             }
         },
@@ -380,27 +380,27 @@
         "function.defaultLibrary": "#c0a37a",
         "method.defaultLibrary": "#c0a37a",
         "class": {
-            "foreground": "#5e8f8a",
+            "foreground": "#857f9d",
             "fontStyle": "italic"
         },
         "interface": {
-            "foreground": "#5e8f8a",
+            "foreground": "#857f9d",
             "fontStyle": "italic"
         },
         "type": {
-            "foreground": "#5e8f8a",
+            "foreground": "#857f9d",
             "fontStyle": "italic"
         },
         "type.defaultLibrary": {
-            "foreground": "#5e8f8a",
+            "foreground": "#857f9d",
             "fontStyle": "italic"
         },
         "typeParameter": {
-            "foreground": "#5e8f8a",
+            "foreground": "#857f9d",
             "fontStyle": "italic"
         },
         "enum": {
-            "foreground": "#5e8f8a",
+            "foreground": "#857f9d",
             "fontStyle": "italic"
         },
         "enumMember": "#ba846d",

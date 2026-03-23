@@ -321,19 +321,19 @@
           "contrastToBackground": 5.31
         },
         "light": {
-          "textmate": "#406074",
-          "semantic": "#406074",
-          "contrastToBackground": 5.21
+          "textmate": "#3b6171",
+          "semantic": "#3b6171",
+          "contrastToBackground": 5.23
         },
         "lightSoft": {
-          "textmate": "#546072",
-          "semantic": "#546072",
-          "contrastToBackground": 4.28
+          "textmate": "#47646d",
+          "semantic": "#47646d",
+          "contrastToBackground": 4.26
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 6.3,
-        "softPairHueDrift": 7.5,
+        "defaultPairHueDrift": 11.6,
+        "softPairHueDrift": 14.3,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -562,29 +562,29 @@
       },
       "variants": {
         "dark": {
-          "textmate": "#5e8f8a",
-          "semantic": "#5e8f8a",
-          "contrastToBackground": 4.46
+          "textmate": "#857f9d",
+          "semantic": "#857f9d",
+          "contrastToBackground": 4.26
         },
         "darkSoft": {
-          "textmate": "#699692",
-          "semantic": "#699692",
-          "contrastToBackground": 4.41
+          "textmate": "#8f88a4",
+          "semantic": "#8f88a4",
+          "contrastToBackground": 4.3
         },
         "light": {
-          "textmate": "#2f6f64",
-          "semantic": "#2f6f64",
-          "contrastToBackground": 4.58
+          "textmate": "#5a5472",
+          "semantic": "#5a5472",
+          "contrastToBackground": 5.56
         },
         "lightSoft": {
-          "textmate": "#376f72",
-          "semantic": "#376f72",
-          "contrastToBackground": 3.83
+          "textmate": "#655f7b",
+          "semantic": "#655f7b",
+          "contrastToBackground": 4.06
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 4.2,
-        "softPairHueDrift": 8.4,
+        "defaultPairHueDrift": 0,
+        "softPairHueDrift": 2.1,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -697,8 +697,8 @@
       "softPairHueDrift": 1.7
     },
     "function": {
-      "defaultPairHueDrift": 6.3,
-      "softPairHueDrift": 7.5
+      "defaultPairHueDrift": 11.6,
+      "softPairHueDrift": 14.3
     },
     "method": {
       "defaultPairHueDrift": 49.3,
@@ -717,8 +717,8 @@
       "softPairHueDrift": 2.2
     },
     "type": {
-      "defaultPairHueDrift": 4.2,
-      "softPairHueDrift": 8.4
+      "defaultPairHueDrift": 0,
+      "softPairHueDrift": 2.1
     },
     "variable": {
       "defaultPairHueDrift": 8.7,
@@ -733,18 +733,18 @@
     {
       "variantId": "light",
       "roleId": "function",
-      "color": "#406074",
+      "color": "#3b6171",
       "metrics": {
-        "bgHueDistance": 167.1,
-        "minAnchorDeltaE": 32.6,
-        "minGuardDeltaE": 23.3
+        "bgHueDistance": 161.8,
+        "minAnchorDeltaE": 31.7,
+        "minGuardDeltaE": 18.5
       },
       "targets": {
         "minBgHueDistance": 3,
         "minAnchorDeltaE": 18,
         "minGuardDeltaE": 19.4
       },
-      "status": "pass"
+      "status": "fail:guard"
     },
     {
       "variantId": "light",
@@ -753,7 +753,7 @@
       "metrics": {
         "bgHueDistance": 50.2,
         "minAnchorDeltaE": 28,
-        "minGuardDeltaE": 35.3
+        "minGuardDeltaE": 24.4
       },
       "targets": {
         "minBgHueDistance": 18,
@@ -769,7 +769,7 @@
       "metrics": {
         "bgHueDistance": 99,
         "minAnchorDeltaE": 22.6,
-        "minGuardDeltaE": 17.7
+        "minGuardDeltaE": 22.3
       },
       "targets": {
         "minBgHueDistance": 8,
@@ -781,11 +781,11 @@
     {
       "variantId": "light",
       "roleId": "type",
-      "color": "#2f6f64",
+      "color": "#5a5472",
       "metrics": {
-        "bgHueDistance": 133.7,
-        "minAnchorDeltaE": 29.5,
-        "minGuardDeltaE": 17.7
+        "bgHueDistance": 144,
+        "minAnchorDeltaE": 34.4,
+        "minGuardDeltaE": 18.5
       },
       "targets": {
         "minBgHueDistance": 52,
@@ -797,11 +797,11 @@
     {
       "variantId": "lightSoft",
       "roleId": "function",
-      "color": "#546072",
+      "color": "#47646d",
       "metrics": {
-        "bgHueDistance": 179.6,
-        "minAnchorDeltaE": 28.3,
-        "minGuardDeltaE": 18.1
+        "bgHueDistance": 157.8,
+        "minAnchorDeltaE": 26.6,
+        "minGuardDeltaE": 18
       },
       "targets": {
         "minBgHueDistance": 3,
@@ -817,7 +817,7 @@
       "metrics": {
         "bgHueDistance": 49.2,
         "minAnchorDeltaE": 23.6,
-        "minGuardDeltaE": 23.5
+        "minGuardDeltaE": 19.6
       },
       "targets": {
         "minBgHueDistance": 16,
@@ -833,7 +833,7 @@
       "metrics": {
         "bgHueDistance": 122,
         "minAnchorDeltaE": 22.8,
-        "minGuardDeltaE": 14.6
+        "minGuardDeltaE": 16.1
       },
       "targets": {
         "minBgHueDistance": 8,
@@ -845,11 +845,11 @@
     {
       "variantId": "lightSoft",
       "roleId": "type",
-      "color": "#376f72",
+      "color": "#655f7b",
       "metrics": {
-        "bgHueDistance": 146.7,
-        "minAnchorDeltaE": 30,
-        "minGuardDeltaE": 14.6
+        "bgHueDistance": 143.5,
+        "minAnchorDeltaE": 32.5,
+        "minGuardDeltaE": 18
       },
       "targets": {
         "minBgHueDistance": 48,
