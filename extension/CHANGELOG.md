@@ -1,3 +1,9 @@
+## 1.0.18
+
+- Completed three-surface release alignment across VS Code Marketplace, Open VSX, and Obsidian app-theme distribution.
+- Added CI upload of Obsidian release assets (`manifest.json`, `theme.css`, `versions.json`, and zip bundles) to the matching GitHub Release tag.
+- Unified website and multilingual README messaging so public pages stay promotion-oriented while maintainer release details remain in dedicated sections.
+
 ## 1.0.17
 
 - Refreshed extension icon to the circular transparent-corner mark so Marketplace and Open VSX branding matches the website identity.

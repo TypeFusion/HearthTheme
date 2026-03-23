@@ -103,6 +103,10 @@ function isSourceOfTruthPath(path) {
   return SOURCE_OF_TRUTH_RULES.some((rule) => matchesRule(path, rule))
 }
 
+function isVersionDerivedGeneratedPath(path) {
+  return path === 'obsidian/app-theme/manifest.json' || path === 'obsidian/app-theme/versions.json'
+}
+
 function resolveDiffMode(args) {
   if (args.staged) {
     return {
@@ -178,6 +182,14 @@ function main() {
   }
 
   const hasSourceChange = files.some(isSourceOfTruthPath)
+  const hasExtensionVersionSource = files.includes('extension/package.json')
+  const onlyVersionDerivedGenerated = generatedChanged.every(isVersionDerivedGeneratedPath)
+
+  if (!hasSourceChange && hasExtensionVersionSource && onlyVersionDerivedGenerated) {
+    console.log(`[PASS] Generated-origin audit passed (${label}): version-derived Obsidian metadata updated from extension/package.json.`)
+    return
+  }
+
   if (!hasSourceChange) {
     console.error('[FAIL] Generated-origin audit failed.')
     console.error('Generated outputs changed without changes in themes/ or scripts/:')
