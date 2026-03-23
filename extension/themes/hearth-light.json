@@ -186,7 +186,7 @@
                 "meta.function-call.generic"
             ],
             "settings": {
-                "foreground": "#1f5f98"
+                "foreground": "#006895"
             }
         },
         {
@@ -373,7 +373,7 @@
         "variable.readonly": "#854200",
         "property": "#3a69a8",
         "property.readonly": "#854200",
-        "function": "#1f5f98",
+        "function": "#006895",
         "method": "#0092c2",
         "function.defaultLibrary": "#0092c2",
         "method.defaultLibrary": "#0092c2",

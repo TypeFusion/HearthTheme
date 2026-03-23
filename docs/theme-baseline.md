@@ -19,12 +19,12 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 | --- | --- | --- | --- | --- | --- |
 | background | `#23201c` | `#2b2926` | `#efe6d8` | `#e4d8c5` | Blackboard vs parchment substrate |
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk ink vs walnut ink |
-| keyword | `#c26f59` | `#d36b4a` | `#a33a2f` | `#b15a44` | Ember red control-flow anchors |
+| keyword | `#c26f59` | `#cb6d4e` | `#a33a2f` | `#ab5b47` | Ember red control-flow anchors |
 | operator | `#8f846f` | `#8f846f` | `#75674c` | `#7f7158` | Low-noise brass connective symbols |
-| function | `#d7ad70` | `#e3b368` | `#1f5f98` | `#2a638f` | Brass amber callable targets |
+| function | `#d7ad70` | `#dbb171` | `#006895` | `#306c87` | Brass amber callable targets |
 | string | `#8fb87d` | `#8fbd79` | `#2a7a2e` | `#4e7a4e` | Moss green literal content |
-| number | `#ba846d` | `#d5865f` | `#bf5d22` | `#c36832` | Terracotta numeric constants |
-| type | `#5d98a4` | `#5aa7b6` | `#00727d` | `#3a7a7e` | Mineral teal structural symbols |
+| number | `#ba846d` | `#cc8664` | `#bf5d22` | `#b86b3f` | Terracotta numeric constants |
+| type | `#5d98a4` | `#60a3b1` | `#00727d` | `#3e787c` | Mineral teal structural symbols |
 | variable | `#dfd5c7` | `#dfd5c7` | `#5a3c28` | `#654a35` | Neutral content carrier |
 | comment | `#6b5f4d` | `#6b5f4d` | `#847257` | `#887861` | Intentionally quiet guidance layer |
 
@@ -38,7 +38,9 @@ The following thresholds are enforced by `scripts/theme-audit.mjs`.
 | comment contrast window | `2.2 - 4.2` |
 | operator contrast window | `2.8 - 6.2` |
 | minimum role separation (`deltaE`) | `>= 10` |
-| cross-theme role hue drift | `<= 45 deg` |
+| cross-theme role hue drift (comment/keyword/operator/string/number/type/variable) | `<= 45 deg` |
+| light function/background hue distance | `>= 60 deg` |
+| light function anchor separation (`deltaE` vs keyword/number/tag) | `>= 22` |
 
 Current snapshot from audit:
 
@@ -70,15 +72,16 @@ All palette changes must follow this order:
 1. Edit semantic role palette: `color-system/semantic.json`.
 2. If role mapping changes, update `color-system/adapters.json` in the same PR.
 3. If variant registration/path rules change, update `color-system/variants.json`.
-4. If this is a UI/chrome baseline shift, update `color-system/hearth-dark.source.json`.
-5. If this is a deliberate derivation reset, update templates in `color-system/templates/*.base.json` in the same PR.
-6. Run `npm run sync` (this regenerates `themes/*.json` and all downstream artifacts).
-7. Run `npm run check:sync` (must be clean right after sync).
-8. Run `npm run audit:generated-origin` (generated outputs must be backed by changes in `color-system/` or `scripts/`).
-9. Run `npm run audit:all` (`theme + copy + generated-origin + cjk + release`).
-10. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
-11. If thresholds or governance changed, update this document and audit scripts in the same PR.
-12. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
+4. If compensation/chroma policy changes, update `color-system/tuning.json` in the same PR.
+5. If this is a UI/chrome baseline shift, update `color-system/hearth-dark.source.json`.
+6. If this is a deliberate derivation reset, update templates in `color-system/templates/*.base.json` in the same PR.
+7. Run `npm run sync` (this regenerates `themes/*.json` and all downstream artifacts).
+8. Run `npm run check:sync` (must be clean right after sync).
+9. Run `npm run audit:generated-origin` (generated outputs must be backed by changes in `color-system/` or `scripts/`).
+10. Run `npm run audit:all` (`theme + copy + generated-origin + cjk + release`).
+11. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
+12. If thresholds or governance changed, update this document and audit scripts in the same PR.
+13. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
 
 One-shot alternative:
 
@@ -89,6 +92,7 @@ One-shot alternative:
 - `color-system/semantic.json` is the semantic color authority.
 - `color-system/adapters.json` is the adapter contract authority.
 - `color-system/variants.json` is the variant/output routing authority.
+- `color-system/tuning.json` is the algorithmic compensation authority.
 - `color-system/hearth-dark.source.json` is the UI/chrome baseline source.
 - `themes/hearth-dark.json`, `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` are regenerated artifacts.
 - `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline.

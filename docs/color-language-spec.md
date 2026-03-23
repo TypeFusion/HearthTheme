@@ -19,6 +19,7 @@ Current source files:
 - `color-system/semantic.json` (role -> variant palette values)
 - `color-system/adapters.json` (role -> TextMate / semantic / Obsidian / web mappings)
 - `color-system/variants.json` (variant registry + output wiring)
+- `color-system/tuning.json` (algorithmic compensation + soft chroma budgets)
 - `color-system/hearth-dark.source.json` (UI/chrome baseline source)
 
 ## 2. Token Architecture
@@ -51,7 +52,7 @@ HearthCode uses four token layers:
 Each semantic role must satisfy:
 
 - **Role stability**: meaning remains consistent across all variants.
-- **Cross-theme continuity**: dark/light pair drift should stay controlled.
+- **Cross-theme continuity**: dark/light pair drift should stay controlled for stable roles; light variants may use polarity compensation on selected roles (for example `function`) when readability gains are measurable.
 - **Readability floor**: foreground/background contrast and role separability remain above guardrails.
 - **Adapter parity**: VS Code TextMate roles and semantic token roles should remain aligned.
 
@@ -73,10 +74,11 @@ When changing colors:
 1. Change semantic role colors in `color-system/semantic.json`.
 2. If role mapping changes, update `color-system/adapters.json` in the same change set.
 3. If variant registration/paths change, update `color-system/variants.json`.
-4. If UI/chrome baseline shifts, update `color-system/hearth-dark.source.json`.
-5. If the derivation baseline itself changes, update `color-system/templates/*.base.json` in the same change set.
-6. Regenerate platform artifacts via `pnpm run sync`.
-7. Review generated consistency report:
+4. If compensation/chroma policy changes, update `color-system/tuning.json`.
+5. If UI/chrome baseline shifts, update `color-system/hearth-dark.source.json`.
+6. If the derivation baseline itself changes, update `color-system/templates/*.base.json` in the same change set.
+7. Regenerate platform artifacts via `pnpm run sync`.
+8. Review generated consistency report:
   - `docs/color-language-report.md`
   - `reports/color-language-consistency.json`
 8. Run full audits (`pnpm run audit:all`) before release.

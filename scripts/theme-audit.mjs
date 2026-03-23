@@ -2,6 +2,7 @@ import { existsSync, readFileSync, statSync } from 'fs'
 import { join } from 'path'
 import {
   COLOR_SYSTEM_SEMANTIC_PATH,
+  COLOR_SYSTEM_TUNING_PATH,
   getThemeMetaList,
   loadColorSystemVariants,
   loadRoleAdapters,
@@ -17,6 +18,7 @@ const COLOR_SYSTEM = {
     .filter((variant) => variant.mode === 'derived')
     .map((variant) => variant.templatePath)],
   semantic: COLOR_SYSTEM_SEMANTIC_PATH,
+  tuning: COLOR_SYSTEM_TUNING_PATH,
 }
 
 const REQUIRED_UI_KEYS = [
@@ -74,6 +76,8 @@ const OPERATOR_CONTRAST_MIN = 2.8
 const OPERATOR_CONTRAST_MAX = 6.2
 const MIN_ROLE_DELTA_E = 10
 const MAX_ROLE_HUE_DRIFT = 45
+const LIGHT_FUNCTION_BG_HUE_MIN = 60
+const LIGHT_FUNCTION_ANCHOR_DELTA_E_MIN = 22
 
 const issues = []
 const warnings = []
@@ -391,10 +395,46 @@ function validateSemanticAlignment(themeMeta, theme) {
   }
 }
 
+function validateLightPolarityCompensation(themeMeta, theme) {
+  if (!theme || themeMeta.type !== 'light') return
+
+  const bg = normalizeHex(theme.colors?.['editor.background'])
+  const fn = getTokenColor(theme, ROLE_SCOPES.function || [])
+  const keyword = getTokenColor(theme, ROLE_SCOPES.keyword || [])
+  const number = getTokenColor(theme, ROLE_SCOPES.number || [])
+  const tag = getTokenColor(theme, ROLE_SCOPES.tag || [])
+  if (!bg || !fn) return
+
+  const bgHsl = rgbToHsl(bg)
+  const fnHsl = rgbToHsl(fn)
+  if (bgHsl && fnHsl) {
+    const bgHueGap = hueDiff(bgHsl.h, fnHsl.h)
+    if (bgHueGap < LIGHT_FUNCTION_BG_HUE_MIN) {
+      addWarning(`${themeMeta.path}: function/background hue distance ${fixed(bgHueGap)} is below ${LIGHT_FUNCTION_BG_HUE_MIN}`)
+    } else {
+      addNote(`${themeMeta.id}: function/background hue distance ${fixed(bgHueGap)}`)
+    }
+  }
+
+  const anchors = [keyword, number, tag].filter(Boolean)
+  if (anchors.length === 0) return
+  const anchorDeltaEValues = anchors
+    .map((anchor) => deltaE(fn, anchor))
+    .filter((value) => value != null)
+  if (anchorDeltaEValues.length === 0) return
+
+  const minAnchorDeltaE = Math.min(...anchorDeltaEValues)
+  if (minAnchorDeltaE < LIGHT_FUNCTION_ANCHOR_DELTA_E_MIN) {
+    addWarning(`${themeMeta.path}: function anchor separation deltaE ${fixed(minAnchorDeltaE)} is below ${LIGHT_FUNCTION_ANCHOR_DELTA_E_MIN}`)
+  } else {
+    addNote(`${themeMeta.id}: function anchor separation deltaE ${fixed(minAnchorDeltaE)}`)
+  }
+}
+
 function validateCrossThemeDrift(darkTheme, lightTheme, pairLabel = 'core') {
   if (!darkTheme || !lightTheme) return
 
-  const roles = ['comment', 'keyword', 'operator', 'function', 'string', 'number', 'type', 'variable']
+  const roles = ['comment', 'keyword', 'operator', 'string', 'number', 'type', 'variable']
   for (const role of roles) {
     const darkColor = getTokenColor(darkTheme, ROLE_SCOPES[role])
     const lightColor = getTokenColor(lightTheme, ROLE_SCOPES[role])
@@ -426,6 +466,9 @@ function validateColorSystemSource(themes) {
   }
   if (!existsSync(COLOR_SYSTEM.semantic)) {
     addIssue(`${COLOR_SYSTEM.semantic}: semantic palette file not found`)
+  }
+  if (!existsSync(COLOR_SYSTEM.tuning)) {
+    addIssue(`${COLOR_SYSTEM.tuning}: tuning file not found`)
   }
 
   const sourceTheme = readJson(COLOR_SYSTEM.darkSource)
@@ -498,6 +541,7 @@ function run() {
     validateReadability(themeMeta, theme)
     validateRoleSeparation(themeMeta, theme)
     validateSemanticAlignment(themeMeta, theme)
+    validateLightPolarityCompensation(themeMeta, theme)
   }
 
   validateColorSystemSource(themes)

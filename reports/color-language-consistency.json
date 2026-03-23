@@ -4,7 +4,8 @@
     "colorSystem": [
       "color-system/variants.json",
       "color-system/adapters.json",
-      "color-system/semantic.json"
+      "color-system/semantic.json",
+      "color-system/tuning.json"
     ],
     "generatedThemes": [
       "themes/hearth-dark.json",
@@ -202,9 +203,9 @@
           "contrastToBackground": 4.41
         },
         "darkSoft": {
-          "textmate": "#d36b4a",
-          "semantic": "#d36b4a",
-          "contrastToBackground": 4.12
+          "textmate": "#cb6d4e",
+          "semantic": "#cb6d4e",
+          "contrastToBackground": 4.03
         },
         "light": {
           "textmate": "#a33a2f",
@@ -212,14 +213,14 @@
           "contrastToBackground": 5.3
         },
         "lightSoft": {
-          "textmate": "#b15a44",
-          "semantic": "#b15a44",
-          "contrastToBackground": 3.38
+          "textmate": "#ab5b47",
+          "semantic": "#ab5b47",
+          "contrastToBackground": 3.46
         }
       },
       "metrics": {
         "defaultPairHueDrift": 6.9,
-        "softPairHueDrift": 2.3,
+        "softPairHueDrift": 2.9,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -291,24 +292,24 @@
           "contrastToBackground": 7.8
         },
         "darkSoft": {
-          "textmate": "#e3b368",
-          "semantic": "#e3b368",
-          "contrastToBackground": 7.54
+          "textmate": "#dbb171",
+          "semantic": "#dbb171",
+          "contrastToBackground": 7.28
         },
         "light": {
-          "textmate": "#1f5f98",
-          "semantic": "#1f5f98",
-          "contrastToBackground": 5.39
+          "textmate": "#006895",
+          "semantic": "#006895",
+          "contrastToBackground": 4.97
         },
         "lightSoft": {
-          "textmate": "#2a638f",
-          "semantic": "#2a638f",
-          "contrastToBackground": 4.55
+          "textmate": "#306c87",
+          "semantic": "#306c87",
+          "contrastToBackground": 4.12
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 172.7,
-        "softPairHueDrift": 169.6,
+        "defaultPairHueDrift": 162.6,
+        "softPairHueDrift": 162.4,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -341,9 +342,9 @@
           "contrastToBackground": 5.75
         },
         "darkSoft": {
-          "textmate": "#62b8dc",
-          "semantic": "#62b8dc",
-          "contrastToBackground": 6.5
+          "textmate": "#6eb2d1",
+          "semantic": "#6eb2d1",
+          "contrastToBackground": 6.18
         },
         "light": {
           "textmate": "#3a69a8",
@@ -351,14 +352,14 @@
           "contrastToBackground": 4.51
         },
         "lightSoft": {
-          "textmate": "#4d72a2",
-          "semantic": "#4d72a2",
-          "contrastToBackground": 3.52
+          "textmate": "#50719d",
+          "semantic": "#50719d",
+          "contrastToBackground": 3.56
         }
       },
       "metrics": {
         "defaultPairHueDrift": 14.4,
-        "softPairHueDrift": 16.2,
+        "softPairHueDrift": 15.5,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -435,9 +436,9 @@
           "contrastToBackground": 5.1
         },
         "darkSoft": {
-          "textmate": "#d5865f",
-          "semantic": "#d5865f",
-          "contrastToBackground": 5.11
+          "textmate": "#cc8664",
+          "semantic": "#cc8664",
+          "contrastToBackground": 4.95
         },
         "light": {
           "textmate": "#bf5d22",
@@ -445,14 +446,14 @@
           "contrastToBackground": 3.53
         },
         "lightSoft": {
-          "textmate": "#c36832",
-          "semantic": "#c36832",
-          "contrastToBackground": 2.79
+          "textmate": "#b86b3f",
+          "semantic": "#b86b3f",
+          "contrastToBackground": 2.86
         }
       },
       "metrics": {
         "defaultPairHueDrift": 4.6,
-        "softPairHueDrift": 2.5,
+        "softPairHueDrift": 2.2,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -484,9 +485,9 @@
           "contrastToBackground": 5.01
         },
         "darkSoft": {
-          "textmate": "#5aa7b6",
-          "semantic": "#5aa7b6",
-          "contrastToBackground": 5.28
+          "textmate": "#60a3b1",
+          "semantic": "#60a3b1",
+          "contrastToBackground": 5.09
         },
         "light": {
           "textmate": "#00727d",
@@ -494,14 +495,14 @@
           "contrastToBackground": 4.59
         },
         "lightSoft": {
-          "textmate": "#3a7a7e",
-          "semantic": "#3a7a7e",
-          "contrastToBackground": 3.5
+          "textmate": "#3e787c",
+          "semantic": "#3e787c",
+          "contrastToBackground": 3.57
         }
       },
       "metrics": {
         "defaultPairHueDrift": 4.9,
-        "softPairHueDrift": 6.3,
+        "softPairHueDrift": 6.5,
         "semanticDeltaE": {
           "dark": 0,
           "darkSoft": 0,
@@ -573,9 +574,9 @@
           "contrastToBackground": 4.45
         },
         "darkSoft": {
-          "textmate": "#d06a4a",
+          "textmate": "#c86c4e",
           "semantic": null,
-          "contrastToBackground": 4.04
+          "contrastToBackground": 3.94
         },
         "light": {
           "textmate": "#a63b1d",
@@ -583,14 +584,14 @@
           "contrastToBackground": 5.2
         },
         "lightSoft": {
-          "textmate": "#914833",
+          "textmate": "#8b4936",
           "semantic": null,
-          "contrastToBackground": 4.7
+          "contrastToBackground": 4.81
         }
       },
       "metrics": {
         "defaultPairHueDrift": 0.4,
-        "softPairHueDrift": 0.9,
+        "softPairHueDrift": 1.3,
         "semanticDeltaE": {
           "dark": null,
           "darkSoft": null,
@@ -607,19 +608,19 @@
     },
     "keyword": {
       "defaultPairHueDrift": 6.9,
-      "softPairHueDrift": 2.3
+      "softPairHueDrift": 2.9
     },
     "operator": {
       "defaultPairHueDrift": 0.1,
       "softPairHueDrift": 0.9
     },
     "function": {
-      "defaultPairHueDrift": 172.7,
-      "softPairHueDrift": 169.6
+      "defaultPairHueDrift": 162.6,
+      "softPairHueDrift": 162.4
     },
     "property": {
       "defaultPairHueDrift": 14.4,
-      "softPairHueDrift": 16.2
+      "softPairHueDrift": 15.5
     },
     "string": {
       "defaultPairHueDrift": 21.3,
@@ -627,11 +628,11 @@
     },
     "number": {
       "defaultPairHueDrift": 4.6,
-      "softPairHueDrift": 2.5
+      "softPairHueDrift": 2.2
     },
     "type": {
       "defaultPairHueDrift": 4.9,
-      "softPairHueDrift": 6.3
+      "softPairHueDrift": 6.5
     },
     "variable": {
       "defaultPairHueDrift": 11,
@@ -639,7 +640,7 @@
     },
     "tag": {
       "defaultPairHueDrift": 0.4,
-      "softPairHueDrift": 0.9
+      "softPairHueDrift": 1.3
     }
   }
 }

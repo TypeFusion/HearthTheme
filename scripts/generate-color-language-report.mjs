@@ -3,6 +3,7 @@ import { pathToFileURL } from 'url'
 import {
   COLOR_SYSTEM_ADAPTERS_PATH,
   COLOR_SYSTEM_SEMANTIC_PATH,
+  COLOR_SYSTEM_TUNING_PATH,
   COLOR_SYSTEM_VARIANTS_PATH,
   getThemeOutputFiles,
   loadRoleAdapters,
@@ -241,7 +242,7 @@ function buildReportObject(roleRows) {
   return {
     schemaVersion: 1,
     sourceOfTruth: {
-      colorSystem: [COLOR_SYSTEM_VARIANTS_PATH, COLOR_SYSTEM_ADAPTERS_PATH, COLOR_SYSTEM_SEMANTIC_PATH],
+      colorSystem: [COLOR_SYSTEM_VARIANTS_PATH, COLOR_SYSTEM_ADAPTERS_PATH, COLOR_SYSTEM_SEMANTIC_PATH, COLOR_SYSTEM_TUNING_PATH],
       generatedThemes: Object.values(THEME_FILES),
       generator: 'scripts/generate-theme-variants.mjs',
     },

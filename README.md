@@ -86,6 +86,7 @@ Color-language references:
 - Semantic palette source: `color-system/semantic.json`
 - Adapter contract source: `color-system/adapters.json`
 - Variant routing source: `color-system/variants.json`
+- Tuning profile source: `color-system/tuning.json`
 
 Release version source-of-truth:
 

@@ -1,10 +1,11 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
-import { loadColorSystemVariants, loadRoleAdapters, loadSemanticPalette } from './color-system.mjs'
+import { loadColorSystemTuning, loadColorSystemVariants, loadRoleAdapters, loadSemanticPalette } from './color-system.mjs'
 
 const VARIANT_SPEC = loadColorSystemVariants()
 const SEMANTIC_PALETTE = loadSemanticPalette()
 const READABILITY_ROLE_DEFS = loadRoleAdapters()
+const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
 
 const DARK_THEME_SOURCE_PATH = VARIANT_SPEC.baseSourcePath
 const DARK_THEME_OUTPUT_PATH = VARIANT_SPEC.variants.find((variant) => variant.id === 'dark')?.outputPath ?? 'themes/hearth-dark.json'
@@ -253,6 +254,9 @@ const LIGHT_COOL_ROLE_SOFTEN = {
 }
 const GLOBAL_SEPARATION_BASELINE_DELTA_E = 8
 
+const LIGHT_POLARITY_ROLE_OPTIMIZATION = COLOR_SYSTEM_TUNING.lightPolarityRoleOptimization
+const SOFT_ROLE_CHROMA_BUDGET = COLOR_SYSTEM_TUNING.softRoleChromaBudget
+
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'))
 }
@@ -416,6 +420,75 @@ function deltaE(hexA, hexB) {
   const [l1, a1, b1] = xyzToLab(rgbToXyz(rgbA))
   const [l2, a2, b2] = xyzToLab(rgbToXyz(rgbB))
   return Math.sqrt((l1 - l2) ** 2 + (a1 - a2) ** 2 + (b1 - b2) ** 2)
+}
+
+function rgbToHsl([r, g, b]) {
+  const rn = r / 255
+  const gn = g / 255
+  const bn = b / 255
+
+  const max = Math.max(rn, gn, bn)
+  const min = Math.min(rn, gn, bn)
+  const delta = max - min
+
+  let h = 0
+  const l = (max + min) / 2
+  const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+
+  if (delta !== 0) {
+    if (max === rn) h = 60 * (((gn - bn) / delta) % 6)
+    else if (max === gn) h = 60 * ((bn - rn) / delta + 2)
+    else h = 60 * ((rn - gn) / delta + 4)
+  }
+  if (h < 0) h += 360
+
+  return { h, s, l }
+}
+
+function hueDistance(a, b) {
+  const diff = Math.abs(a - b)
+  return Math.min(diff, 360 - diff)
+}
+
+function circularMean(angles) {
+  if (!angles || angles.length === 0) return null
+  const sum = angles.reduce(
+    (acc, angle) => {
+      const radians = (angle * Math.PI) / 180
+      return {
+        x: acc.x + Math.cos(radians),
+        y: acc.y + Math.sin(radians),
+      }
+    },
+    { x: 0, y: 0 }
+  )
+  if (sum.x === 0 && sum.y === 0) return null
+  let mean = (Math.atan2(sum.y, sum.x) * 180) / Math.PI
+  if (mean < 0) mean += 360
+  return mean
+}
+
+function hexHue(hex) {
+  const rgb = hexToRgb(hex)
+  if (!rgb) return null
+  return rgbToHsl(rgb).h
+}
+
+function labToLch([l, a, b]) {
+  const c = Math.sqrt(a ** 2 + b ** 2)
+  let h = Math.atan2(b, a) * (180 / Math.PI)
+  if (h < 0) h += 360
+  return [l, c, h]
+}
+
+function lchToLab([l, c, h]) {
+  const radians = (h * Math.PI) / 180
+  return [l, c * Math.cos(radians), c * Math.sin(radians)]
+}
+
+function labToHex(lab) {
+  const [r, g, b] = xyzToRgb(labToXyz(lab))
+  return rgbaToHex({ r, g, b, hasAlpha: false })
 }
 
 function scopeSignature(entry) {
@@ -676,6 +749,173 @@ function applySemanticPalette(theme, variantId, warnings) {
     for (const semanticKey of roleDef.semanticKeys || []) {
       setSemanticColor(theme, semanticKey, color)
     }
+  }
+}
+
+function getRoleDefById(roleId) {
+  return READABILITY_ROLE_DEFS.find((role) => role.id === roleId) ?? null
+}
+
+function getRoleColorFromTheme(theme, roleDef) {
+  if (!theme || !roleDef) return null
+  return getTokenColorByScopes(theme, roleDef.scopes || []) ?? getSemanticColorByKeys(theme, roleDef.semanticKeys || [])
+}
+
+function evaluatePolarityCandidate(hex, bgColor, seedColor, anchorColors, guardColors, profile) {
+  const contrast = contrastRatio(hex, bgColor)
+  if (contrast == null || contrast < profile.minContrast) return null
+
+  const bgHue = hexHue(bgColor)
+  const candidateHue = hexHue(hex)
+  if (bgHue == null || candidateHue == null) return null
+
+  const bgHueDistance = hueDistance(candidateHue, bgHue)
+  const anchorDeltaEValues = anchorColors
+    .map((anchor) => deltaE(hex, anchor))
+    .filter((value) => value != null)
+  const minAnchorDeltaE = anchorDeltaEValues.length > 0 ? Math.min(...anchorDeltaEValues) : profile.minAnchorDeltaE
+  const guardDeltaEValues = guardColors
+    .map((guard) => deltaE(hex, guard))
+    .filter((value) => value != null)
+  const minGuardDeltaE = guardDeltaEValues.length > 0 ? Math.min(...guardDeltaEValues) : null
+  const driftFromSeed = deltaE(hex, seedColor) ?? 0
+
+  if (driftFromSeed > profile.maxDeltaEFromSeed) return null
+  if (profile.minGuardDeltaE != null && minGuardDeltaE != null && minGuardDeltaE < profile.minGuardDeltaE) return null
+
+  const bgScore = Math.min(bgHueDistance / profile.targetBgHueDistance, 1.4)
+  const anchorScore = Math.min(minAnchorDeltaE / profile.minAnchorDeltaE, 1.4)
+  const contrastScore = Math.min(contrast / profile.minContrast, 1.4)
+  const driftPenalty = driftFromSeed / profile.maxDeltaEFromSeed
+  const preferredHue = profile.preferredHue ?? null
+  const preferredDistanceTarget = profile.targetPreferredHueDistance ?? null
+  let preferredScore = 0
+  if (preferredHue != null && preferredDistanceTarget) {
+    const distance = hueDistance(candidateHue, preferredHue)
+    preferredScore = 1 - Math.min(distance / preferredDistanceTarget, 1.4)
+  }
+
+  const score = bgScore * 0.42 + anchorScore * 0.32 + contrastScore * 0.18 + preferredScore * 0.08 - driftPenalty * 0.26
+  return {
+    score,
+    contrast,
+    bgHueDistance,
+    minAnchorDeltaE,
+    minGuardDeltaE,
+    driftFromSeed,
+  }
+}
+
+function optimizeRoleAgainstLightBackground(theme, roleId, profile, variantId, warnings) {
+  const roleDef = getRoleDefById(roleId)
+  if (!roleDef) return
+
+  const seedColor = getRoleColorFromTheme(theme, roleDef)
+  const bgColor = resolveHexValue(theme?.colors?.[REF_BG_KEY])
+  if (!seedColor || !bgColor) return
+
+  const anchorColors = (profile.anchorRoles || [])
+    .map((anchorRoleId) => getRoleDefById(anchorRoleId))
+    .filter(Boolean)
+    .map((anchorRoleDef) => getRoleColorFromTheme(theme, anchorRoleDef))
+    .filter(Boolean)
+  const guardColors = (profile.guardRoles || [])
+    .map((guardRoleId) => getRoleDefById(guardRoleId))
+    .filter(Boolean)
+    .map((guardRoleDef) => getRoleColorFromTheme(theme, guardRoleDef))
+    .filter(Boolean)
+  const preferredHueCandidates = (profile.preferredRoles || [])
+    .map((preferredRoleId) => getRoleDefById(preferredRoleId))
+    .filter(Boolean)
+    .map((preferredRoleDef) => getRoleColorFromTheme(theme, preferredRoleDef))
+    .filter(Boolean)
+    .map((hex) => hexHue(hex))
+    .filter((value) => value != null)
+  const preferredHue = circularMean(preferredHueCandidates)
+  const scoringProfile = {
+    ...profile,
+    preferredHue,
+  }
+
+  const seedLab = xyzToLab(rgbToXyz(hexToRgb(seedColor)))
+  const [seedL, seedC] = labToLch(seedLab)
+
+  const seedMetrics = evaluatePolarityCandidate(seedColor, bgColor, seedColor, anchorColors, guardColors, scoringProfile)
+  let bestHex = seedColor
+  let bestMetrics = seedMetrics
+
+  for (let hue = 0; hue < 360; hue += 6) {
+    for (const chromaScale of [0.88, 1.0, 1.12]) {
+      for (const lightnessShift of [-6, -3, 0, 3, 6]) {
+        const candidateL = clamp(seedL + lightnessShift, 8, 92)
+        const candidateC = clamp(seedC * chromaScale, 4, 88)
+        const candidateHex = labToHex(lchToLab([candidateL, candidateC, hue]))
+        const metrics = evaluatePolarityCandidate(candidateHex, bgColor, seedColor, anchorColors, guardColors, scoringProfile)
+        if (!metrics) continue
+        if (!bestMetrics || metrics.score > bestMetrics.score) {
+          bestHex = candidateHex
+          bestMetrics = metrics
+        }
+      }
+    }
+  }
+
+  if (!bestMetrics) return
+
+  const seedBgDistance = seedMetrics?.bgHueDistance ?? 0
+  const seedScore = seedMetrics?.score ?? -Infinity
+  const mustCompensate = seedBgDistance < profile.minBgHueDistance
+  const improved = bestMetrics.score > seedScore + 0.04
+  const hitHueTarget = bestMetrics.bgHueDistance >= profile.minBgHueDistance
+  if (!mustCompensate && !improved) return
+  if (!hitHueTarget && bestHex !== seedColor) return
+  if (bestHex === seedColor) return
+
+  applyRoleColorToTokenEntries(theme, roleDef.scopes || [], bestHex)
+  for (const semanticKey of roleDef.semanticKeys || []) {
+    setSemanticColor(theme, semanticKey, bestHex)
+  }
+
+  warnings.push(
+    `telemetry: ${variantId}: ${roleId} polarity compensation hue-bg ${seedBgDistance.toFixed(1)} -> ${bestMetrics.bgHueDistance.toFixed(1)}, anchor deltaE ${(seedMetrics?.minAnchorDeltaE ?? 0).toFixed(1)} -> ${bestMetrics.minAnchorDeltaE.toFixed(1)}, guard deltaE ${(seedMetrics?.minGuardDeltaE ?? 0).toFixed(1)} -> ${(bestMetrics.minGuardDeltaE ?? 0).toFixed(1)}`
+  )
+}
+
+function applyLightPolarityCompensation(theme, variantId, warnings) {
+  const roleProfiles = LIGHT_POLARITY_ROLE_OPTIMIZATION[variantId]
+  if (!roleProfiles) return
+
+  for (const [roleId, profile] of Object.entries(roleProfiles)) {
+    optimizeRoleAgainstLightBackground(theme, roleId, profile, variantId, warnings)
+  }
+}
+
+function applySoftRoleChromaBudget(theme, variantId, warnings) {
+  const budgets = SOFT_ROLE_CHROMA_BUDGET[variantId]
+  if (!budgets) return
+
+  for (const [roleId, tuning] of Object.entries(budgets)) {
+    const roleDef = getRoleDefById(roleId)
+    if (!roleDef) continue
+
+    const current = getRoleColorFromTheme(theme, roleDef)
+    if (!current) continue
+
+    const next = scaleColorChroma(
+      current,
+      tuning.factor ?? 1,
+      tuning.lightnessLift ?? 0,
+      tuning.maxChroma ?? null
+    )
+    if (String(next).toLowerCase() === String(current).toLowerCase()) continue
+
+    applyRoleColorToTokenEntries(theme, roleDef.scopes || [], next)
+    for (const semanticKey of roleDef.semanticKeys || []) {
+      setSemanticColor(theme, semanticKey, next)
+    }
+
+    const drift = deltaE(current, next) ?? 0
+    warnings.push(`telemetry: ${variantId}: soft chroma budget adjusted ${roleId} by deltaE ${drift.toFixed(1)}`)
   }
 }
 
@@ -1073,6 +1313,10 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
   }
 
   applySemanticPalette(generated, variantMeta.id, warnings)
+  if (variantMeta.type === 'light') {
+    applyLightPolarityCompensation(generated, variantMeta.id, warnings)
+  }
+  applySoftRoleChromaBudget(generated, variantMeta.id, warnings)
 
   return generated
 }
@@ -1103,9 +1347,21 @@ export function generateThemeVariants() {
   }
 
   if (warnings.length > 0) {
-    console.log('\n[WARN] Variant generator fallbacks:')
-    for (const warning of warnings) {
-      console.log(`  - ${warning}`)
+    const telemetry = warnings.filter((message) => message.startsWith('telemetry: '))
+    const realWarnings = warnings.filter((message) => !message.startsWith('telemetry: '))
+
+    if (realWarnings.length > 0) {
+      console.log('\n[WARN] Variant generator fallbacks:')
+      for (const warning of realWarnings) {
+        console.log(`  - ${warning}`)
+      }
+    }
+
+    if (telemetry.length > 0) {
+      console.log('\n[INFO] Variant tuning telemetry:')
+      for (const message of telemetry) {
+        console.log(`  - ${message.replace(/^telemetry:\s*/, '')}`)
+      }
     }
   }
 }

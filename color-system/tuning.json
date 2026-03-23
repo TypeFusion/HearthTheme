@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "lightPolarityRoleOptimization": {
+    "light": {
+      "function": {
+        "minBgHueDistance": 60,
+        "targetBgHueDistance": 92,
+        "minAnchorDeltaE": 26,
+        "minGuardDeltaE": 20,
+        "minContrast": 3.3,
+        "maxDeltaEFromSeed": 95,
+        "anchorRoles": [
+          "keyword",
+          "number",
+          "tag",
+          "operator"
+        ],
+        "guardRoles": [
+          "type",
+          "string"
+        ],
+        "preferredRoles": [
+          "method",
+          "type",
+          "property"
+        ],
+        "targetPreferredHueDistance": 42
+      }
+    },
+    "lightSoft": {
+      "function": {
+        "minBgHueDistance": 56,
+        "targetBgHueDistance": 86,
+        "minAnchorDeltaE": 22,
+        "minGuardDeltaE": 18,
+        "minContrast": 2.9,
+        "maxDeltaEFromSeed": 92,
+        "anchorRoles": [
+          "keyword",
+          "number",
+          "tag",
+          "operator"
+        ],
+        "guardRoles": [
+          "type",
+          "string"
+        ],
+        "preferredRoles": [
+          "method",
+          "type",
+          "property"
+        ],
+        "targetPreferredHueDistance": 46
+      }
+    }
+  },
+  "softRoleChromaBudget": {
+    "darkSoft": {
+      "keyword": {
+        "factor": 0.9,
+        "maxChroma": 52,
+        "lightnessLift": -0.8
+      },
+      "number": {
+        "factor": 0.88,
+        "maxChroma": 50,
+        "lightnessLift": -1.0
+      },
+      "tag": {
+        "factor": 0.9,
+        "maxChroma": 52,
+        "lightnessLift": -0.8
+      },
+      "function": {
+        "factor": 0.86,
+        "maxChroma": 56,
+        "lightnessLift": -1.2
+      },
+      "method": {
+        "factor": 0.72,
+        "maxChroma": 44,
+        "lightnessLift": -2.4
+      },
+      "property": {
+        "factor": 0.85,
+        "maxChroma": 42,
+        "lightnessLift": -1.5
+      },
+      "type": {
+        "factor": 0.9,
+        "maxChroma": 36,
+        "lightnessLift": -1.0
+      }
+    },
+    "lightSoft": {
+      "keyword": {
+        "factor": 0.92,
+        "maxChroma": 48,
+        "lightnessLift": -0.5
+      },
+      "number": {
+        "factor": 0.84,
+        "maxChroma": 46,
+        "lightnessLift": -0.8
+      },
+      "tag": {
+        "factor": 0.9,
+        "maxChroma": 46,
+        "lightnessLift": -0.5
+      },
+      "function": {
+        "factor": 0.78,
+        "maxChroma": 40,
+        "lightnessLift": -1.0
+      },
+      "method": {
+        "factor": 0.86,
+        "maxChroma": 40,
+        "lightnessLift": -0.8
+      },
+      "property": {
+        "factor": 0.92,
+        "maxChroma": 34,
+        "lightnessLift": -0.4
+      },
+      "type": {
+        "factor": 0.94,
+        "maxChroma": 34,
+        "lightnessLift": -0.4
+      }
+    }
+  }
+}
