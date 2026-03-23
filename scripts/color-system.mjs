@@ -138,6 +138,17 @@ function normalizeSiteAssetExpression(value, label, depth = 0) {
   }
 }
 
+function normalizeSiteAssetVarMap(mapValue, label) {
+  assert(mapValue && typeof mapValue === 'object' && !Array.isArray(mapValue), `${label} must be an object`)
+  const out = {}
+  for (const [varName, expr] of Object.entries(mapValue)) {
+    const key = String(varName || '').trim()
+    assert(key.startsWith('--'), `${label} key "${key}" must start with "--"`)
+    out[key] = normalizeSiteAssetExpression(expr, `${label}.${key}`)
+  }
+  return out
+}
+
 export function loadColorSystemVariants() {
   const data = readJson(COLOR_SYSTEM_VARIANTS_PATH)
   assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_VARIANTS_PATH} must be an object`)
@@ -534,16 +545,33 @@ export function loadColorSystemTuning() {
     derivedColors[key] = normalizeSiteAssetExpression(expr, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.derivedColors.${key}`)
   }
 
-  const rawVars = rawSiteAssetMapping.vars
-  assert(rawVars && typeof rawVars === 'object' && !Array.isArray(rawVars), `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.vars must be an object`)
-  const vars = {}
-  for (const [varName, expr] of Object.entries(rawVars)) {
-    const key = String(varName || '').trim()
-    assert(key.startsWith('--'), `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.vars key "${key}" must start with "--"`)
-    vars[key] = normalizeSiteAssetExpression(expr, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.vars.${key}`)
+  const groups = {}
+  const rawGroups = rawSiteAssetMapping.groups ?? null
+  if (rawGroups != null) {
+    assert(rawGroups && typeof rawGroups === 'object' && !Array.isArray(rawGroups), `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.groups must be an object`)
+    for (const [groupName, groupVars] of Object.entries(rawGroups)) {
+      const name = String(groupName || '').trim()
+      assert(name, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.groups has invalid group key`)
+      groups[name] = normalizeSiteAssetVarMap(groupVars, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.groups.${name}`)
+      assert(Object.keys(groups[name]).length > 0, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.groups.${name} must not be empty`)
+    }
   }
-  assert(Object.keys(vars).length > 0, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.vars must not be empty`)
-  const siteAssetMapping = { derivedColors, vars }
+
+  const rawVars = rawSiteAssetMapping.vars ?? null
+  if (rawVars != null) {
+    groups._ungrouped = normalizeSiteAssetVarMap(rawVars, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.vars`)
+    assert(Object.keys(groups._ungrouped).length > 0, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping.vars must not be empty`)
+  }
+
+  assert(Object.keys(groups).length > 0, `${COLOR_SYSTEM_TUNING_PATH}: siteAssetMapping must define either groups or vars`)
+  const vars = {}
+  for (const [groupName, groupVars] of Object.entries(groups)) {
+    for (const [varName, expr] of Object.entries(groupVars)) {
+      assert(vars[varName] == null, `${COLOR_SYSTEM_TUNING_PATH}: duplicate siteAssetMapping variable "${varName}" in group "${groupName}"`)
+      vars[varName] = expr
+    }
+  }
+  const siteAssetMapping = { derivedColors, groups, vars }
 
   return {
     lightPolarityRoleOptimization,
