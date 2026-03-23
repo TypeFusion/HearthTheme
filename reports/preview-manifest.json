@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "generator": "scripts/generate-preview-images.mjs",
+  "samplePath": "fixtures\\preview\\sample.ts",
+  "language": "typescript",
+  "canvas": {
+    "width": 1600,
+    "height": 1000
+  },
+  "themeImages": [
+    {
+      "id": "dark",
+      "svgSha256": "48178e30bb9ec2fd9d6dce634419ff7dcd3a8bb6a644c44115a694e1f42429e4",
+      "output": "extension\\images\\preview-dark.png",
+      "webOutput": "public\\previews\\preview-dark.png"
+    },
+    {
+      "id": "darkSoft",
+      "svgSha256": "b429100c0a30aed65350e2d909f7a29790435d0e0277c191ac217ca1bdee9f1f",
+      "output": "extension\\images\\preview-dark-soft.png",
+      "webOutput": "public\\previews\\preview-dark-soft.png"
+    },
+    {
+      "id": "light",
+      "svgSha256": "7f3048b58b8a434c6906464e33bbed5413ac801d0f6f3556f1db457e03469742",
+      "output": "extension\\images\\preview-light.png",
+      "webOutput": "public\\previews\\preview-light.png"
+    },
+    {
+      "id": "lightSoft",
+      "svgSha256": "ac07083f016c82b47d4cd3f729f0c6e269bd1b943310f71497681cc1055421d2",
+      "output": "extension\\images\\preview-light-soft.png",
+      "webOutput": "public\\previews\\preview-light-soft.png"
+    }
+  ],
+  "contrastImage": {
+    "svgSha256": "039db25a6c7278005126ab867d3faecd5950a20757aa497fa0ff8fdbe1bad686",
+    "outputs": [
+      "extension\\images\\preview-contrast-v2.png",
+      "extension\\images\\preview-contrast.png"
+    ],
+    "webOutputs": [
+      "public\\previews\\preview-contrast-v2.png",
+      "public\\previews\\preview-contrast.png"
+    ]
+  }
+}

@@ -1,4 +1,5 @@
-import { mkdirSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import sharp from "sharp";
 import { createHighlighter } from "shiki";
@@ -7,6 +8,7 @@ const WIDTH = 1600;
 const HEIGHT = 1000;
 const OUTPUT_DIR = join("extension", "images");
 const WEBSITE_OUTPUT_DIR = join("public", "previews");
+const MANIFEST_PATH = join("reports", "preview-manifest.json");
 const SAMPLE_PATH = join("fixtures", "preview", "sample.ts");
 const LANG = "typescript";
 
@@ -51,6 +53,21 @@ const CONTRAST_WEB_OUTPUTS = [
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
+}
+
+function sha256(content) {
+  return createHash("sha256").update(content).digest("hex");
+}
+
+function writeJsonIfChanged(path, data) {
+  const next = `${JSON.stringify(data, null, 2)}\n`;
+  mkdirSync(dirname(path), { recursive: true });
+  if (existsSync(path)) {
+    const prev = readFileSync(path, "utf8").replace(/\r\n/g, "\n");
+    if (prev === next) return false;
+  }
+  writeFileSync(path, next);
+  return true;
 }
 
 function escapeXml(input) {
@@ -282,6 +299,7 @@ async function writePng(svg, outputPath) {
 async function run() {
   mkdirSync(OUTPUT_DIR, { recursive: true });
   mkdirSync(WEBSITE_OUTPUT_DIR, { recursive: true });
+  mkdirSync(dirname(MANIFEST_PATH), { recursive: true });
 
   const sourceCode = readFileSync(SAMPLE_PATH, "utf8").trimEnd();
   const themes = THEME_META.map((meta) => ({ ...meta, theme: readJson(meta.file) }));
@@ -348,6 +366,25 @@ async function run() {
       }),
     });
 
+    const manifest = {
+      schemaVersion: 1,
+      generator: "scripts/generate-preview-images.mjs",
+      samplePath: SAMPLE_PATH,
+      language: LANG,
+      canvas: { width: WIDTH, height: HEIGHT },
+      themeImages: [
+        { id: darkMeta.id, svgSha256: sha256(darkSvg), output: darkMeta.output, webOutput: darkMeta.webOutput },
+        { id: darkSoftMeta.id, svgSha256: sha256(darkSoftSvg), output: darkSoftMeta.output, webOutput: darkSoftMeta.webOutput },
+        { id: lightMeta.id, svgSha256: sha256(lightSvg), output: lightMeta.output, webOutput: lightMeta.webOutput },
+        { id: lightSoftMeta.id, svgSha256: sha256(lightSoftSvg), output: lightSoftMeta.output, webOutput: lightSoftMeta.webOutput },
+      ],
+      contrastImage: {
+        svgSha256: sha256(contrastSvg),
+        outputs: CONTRAST_OUTPUTS,
+        webOutputs: CONTRAST_WEB_OUTPUTS,
+      },
+    };
+
     await writePng(darkSvg, darkMeta.output);
     await writePng(darkSvg, darkMeta.webOutput);
     await writePng(darkSoftSvg, darkSoftMeta.output);
@@ -362,6 +399,8 @@ async function run() {
     for (const output of CONTRAST_WEB_OUTPUTS) {
       await writePng(contrastSvg, output);
     }
+    const manifestChanged = writeJsonIfChanged(MANIFEST_PATH, manifest);
+    console.log(`${manifestChanged ? "✓ updated" : "- unchanged"} ${MANIFEST_PATH}`);
   } finally {
     await highlighter.dispose();
   }
