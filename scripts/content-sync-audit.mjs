@@ -18,6 +18,7 @@ const README_JA = 'README.ja.md'
 const DOCS_BASELINE = 'docs/theme-baseline.md'
 const BASELINE_DOCS_COMPONENT = 'src/components/ui/BaselineDocs.astro'
 const PROOF_SECTION_COMPONENT = 'src/components/ui/ProofSection.astro'
+const CODE_PREVIEW_COMPONENT = 'src/components/code/CodePreview.astro'
 const THEME_AUDIT_SCRIPT = 'scripts/theme-audit.mjs'
 const SITE_THEME_VARS = 'src/styles/theme-vars.css'
 const SOURCE_COLOR_SCAN_PATHS = ['src/components', 'src/layouts', 'src/styles']
@@ -238,6 +239,31 @@ function variantToProofTitleKeySuffix(variantId) {
   return variantId
 }
 
+function extractBraceBlock(text, marker, fromIndex = 0) {
+  const markerIndex = text.indexOf(marker, fromIndex)
+  if (markerIndex < 0) return null
+  const openIndex = text.indexOf('{', markerIndex + marker.length)
+  if (openIndex < 0) return null
+
+  let depth = 0
+  for (let i = openIndex; i < text.length; i += 1) {
+    const ch = text[i]
+    if (ch === '{') depth += 1
+    if (ch === '}') {
+      depth -= 1
+      if (depth === 0) {
+        return {
+          start: openIndex,
+          end: i,
+          body: text.slice(openIndex + 1, i),
+        }
+      }
+    }
+  }
+
+  return null
+}
+
 function validatePhilosophyCopy() {
   for (const [lang, file] of Object.entries(I18N_FILES)) {
     const dict = readJson(file)
@@ -354,12 +380,28 @@ function validateSiteParameterClaims() {
   }
 
   if (baselineDocsComponent) {
+    const enBlock = extractBraceBlock(baselineDocsComponent, 'en:')
+    const enRolesBlock = enBlock ? extractBraceBlock(enBlock.body, 'roles:') : null
+    if (!enRolesBlock) {
+      addIssue(`${BASELINE_DOCS_COMPONENT}: unable to locate copy.en.roles block for semantic narrative contract`)
+    }
+
     for (const row of SITE_DOCS_PROFILE.semanticRows) {
       if (!baselineDocsComponent.includes(`role: "${row.id}"`)) {
         addIssue(`${BASELINE_DOCS_COMPONENT}: semantic row "${row.id}" missing from matrix data`)
       }
-      if (!baselineDocsComponent.includes(row.note)) {
-        addIssue(`${BASELINE_DOCS_COMPONENT}: semantic narrative for "${row.id}" is out of sync with tuning`)
+
+      if (enRolesBlock) {
+        const rowPattern = new RegExp(`\\b${escapeRegExp(row.id)}\\s*:\\s*"([^"]+)"`)
+        const rowMatch = enRolesBlock.body.match(rowPattern)
+        if (!rowMatch) {
+          addIssue(`${BASELINE_DOCS_COMPONENT}: copy.en.roles is missing "${row.id}"`)
+          continue
+        }
+        const actual = String(rowMatch[1]).trim()
+        if (actual !== row.note) {
+          addIssue(`${BASELINE_DOCS_COMPONENT}: copy.en.roles["${row.id}"] expected "${row.note}", got "${actual}"`)
+        }
       }
     }
   }
@@ -400,6 +442,32 @@ function validateSiteParameterClaims() {
         }
       }
     }
+  }
+}
+
+function validateCodePreviewSourceOfTruth() {
+  const codePreview = readText(CODE_PREVIEW_COMPONENT)
+  if (!codePreview) return
+
+  const requiredThemeRefs = [
+    '../../../themes/hearth-dark.json',
+    '../../../themes/hearth-dark-soft.json',
+    '../../../themes/hearth-light.json',
+    '../../../themes/hearth-light-soft.json',
+  ]
+
+  for (const ref of requiredThemeRefs) {
+    if (!codePreview.includes(ref)) {
+      addIssue(`${CODE_PREVIEW_COMPONENT}: missing real theme source reference "${ref}"`)
+    }
+  }
+
+  if (!codePreview.includes("readFileSync(new URL(")) {
+    addIssue(`${CODE_PREVIEW_COMPONENT}: should load theme JSON via readFileSync + URL source path`)
+  }
+
+  if (codePreview.includes("import { tokens } from '../../data/tokens'")) {
+    addIssue(`${CODE_PREVIEW_COMPONENT}: should not use generated token snapshot as preview theme source`)
   }
 }
 
@@ -575,6 +643,10 @@ function validateReadabilityBudgetContract() {
   const functionCoolBandDarkSoft = resolveVariantRoleProfile(coolHueByVariant, 'darkSoft').function || { hueMin: 196, hueMax: 236 }
   const functionCoolBandLight = resolveVariantRoleProfile(coolHueByVariant, 'light').function || { hueMin: 188, hueMax: 228 }
   const functionCoolBandLightSoft = resolveVariantRoleProfile(coolHueByVariant, 'lightSoft').function || { hueMin: 188, hueMax: 228 }
+  const methodCoolBandDark = resolveVariantRoleProfile(coolHueByVariant, 'dark').method || { hueMin: 206, hueMax: 242 }
+  const methodCoolBandDarkSoft = resolveVariantRoleProfile(coolHueByVariant, 'darkSoft').method || { hueMin: 206, hueMax: 242 }
+  const methodCoolBandLight = resolveVariantRoleProfile(coolHueByVariant, 'light').method || { hueMin: 196, hueMax: 234 }
+  const methodCoolBandLightSoft = resolveVariantRoleProfile(coolHueByVariant, 'lightSoft').method || { hueMin: 196, hueMax: 234 }
   const variableNearFgDark = resolveVariantRoleProfile(nearForegroundByVariant, 'dark').variable || { minDeltaE: 3, maxDeltaE: 12 }
   const variableNearFgDarkSoft = resolveVariantRoleProfile(nearForegroundByVariant, 'darkSoft').variable || { minDeltaE: 3, maxDeltaE: 12 }
   const variableNearFgLight = resolveVariantRoleProfile(nearForegroundByVariant, 'light').variable || { minDeltaE: 6, maxDeltaE: 22 }
@@ -583,10 +655,13 @@ function validateReadabilityBudgetContract() {
   const functionNumberDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->number', 14)
   const functionTagDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->tag', 18)
   const functionVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->variable', 14)
+  const methodVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'method->variable', 12)
 
   const functionCoolBandDoc = `${formatDocNumber(functionCoolBandDark.hueMin)}-${formatDocNumber(functionCoolBandDark.hueMax)} / ${formatDocNumber(functionCoolBandDarkSoft.hueMin)}-${formatDocNumber(functionCoolBandDarkSoft.hueMax)} / ${formatDocNumber(functionCoolBandLight.hueMin)}-${formatDocNumber(functionCoolBandLight.hueMax)} / ${formatDocNumber(functionCoolBandLightSoft.hueMin)}-${formatDocNumber(functionCoolBandLightSoft.hueMax)} deg`
+  const methodCoolBandDoc = `${formatDocNumber(methodCoolBandDark.hueMin)}-${formatDocNumber(methodCoolBandDark.hueMax)} / ${formatDocNumber(methodCoolBandDarkSoft.hueMin)}-${formatDocNumber(methodCoolBandDarkSoft.hueMax)} / ${formatDocNumber(methodCoolBandLight.hueMin)}-${formatDocNumber(methodCoolBandLight.hueMax)} / ${formatDocNumber(methodCoolBandLightSoft.hueMin)}-${formatDocNumber(methodCoolBandLightSoft.hueMax)} deg`
   const variableNearFgDoc = `dark ${formatDocNumber(variableNearFgDark.minDeltaE)}-${formatDocNumber(variableNearFgDark.maxDeltaE)}, darkSoft ${formatDocNumber(variableNearFgDarkSoft.minDeltaE)}-${formatDocNumber(variableNearFgDarkSoft.maxDeltaE)}, light ${formatDocNumber(variableNearFgLight.minDeltaE)}-${formatDocNumber(variableNearFgLight.maxDeltaE)}, lightSoft ${formatDocNumber(variableNearFgLightSoft.minDeltaE)}-${formatDocNumber(variableNearFgLightSoft.maxDeltaE)}`
   const functionCriticalDoc = `keyword>=${formatDocNumber(functionKeywordDeltaE)}, number>=${formatDocNumber(functionNumberDeltaE)}, tag>=${formatDocNumber(functionTagDeltaE)}, variable>=${formatDocNumber(functionVariableDeltaE)}`
+  const methodCriticalDoc = `variable>=${formatDocNumber(methodVariableDeltaE)}`
 
   const expectedBaselineRows = [
     `| editor fg/bg contrast | \`>= ${minTextContrast.raw}\` |`,
@@ -598,8 +673,10 @@ function validateReadabilityBudgetContract() {
     `| light function/background hue distance | \`>= ${formatDocNumber(lightFunctionBgHueDistance)} deg\` |`,
     `| light function anchor separation (\`deltaE\` vs keyword/number/tag) | \`>= ${formatDocNumber(lightFunctionAnchorDeltaE)}\` |`,
     `| function cool-hue band (dark/darkSoft/light/lightSoft) | \`${functionCoolBandDoc}\` |`,
+    `| method cool-hue band (dark/darkSoft/light/lightSoft) | \`${methodCoolBandDoc}\` |`,
     `| variable/parameter near-foreground deltaE | \`${variableNearFgDoc}\` |`,
     `| function critical separation deltaE | \`${functionCriticalDoc}\` |`,
+    `| method critical separation deltaE | \`${methodCriticalDoc}\` |`,
   ]
 
   for (const expectedRow of expectedBaselineRows) {
@@ -627,8 +704,10 @@ function validateReadabilityBudgetContract() {
     ['Operator/comment separation deltaE', `>= ${formatDocNumber(operatorCommentDefault, { forceOneDecimal: true })} (light & light soft >= ${formatDocNumber(operatorCommentLight, { forceOneDecimal: true })})`],
     ['Cross-theme hue drift', `<= ${formatDocNumber(maxRoleHueDrift.value)}°`],
     ['Function cool-hue band', functionCoolBandDoc],
+    ['Method cool-hue band', methodCoolBandDoc],
     ['Variable/parameter near-foreground deltaE', variableNearFgDoc],
     ['Function critical separation deltaE', functionCriticalDoc],
+    ['Method critical separation deltaE', methodCriticalDoc],
   ]
 
   for (const [metric, target] of expectedUiBudgetRows) {
@@ -687,6 +766,7 @@ function run() {
   validatePhilosophyCopy()
   validateVariantCountCopy()
   validateSiteParameterClaims()
+  validateCodePreviewSourceOfTruth()
   validateExtensionReadmeSnapshot()
   validateThemeVarsAndMetadata(themes)
   const tokenSetsReady = Object.entries(tokenSets).every(([, set]) => (

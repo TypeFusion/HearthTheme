@@ -1,6 +1,6 @@
 # Hearth Theme Baseline
 
-Updated: 2026-03-23
+Updated: 2026-03-26
 
 ## 1) Design Intent
 
@@ -17,18 +17,18 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 
 | Role | Dark | Dark Soft | Light | Light Soft | Narrative Role |
 | --- | --- | --- | --- | --- | --- |
-| background | `#23201c` | `#2b2926` | `#ece2d3` | `#dfd2be` | Blackboard vs parchment substrate |
+| background | `#23201c` | `#2b2926` | `#ece2d3` | `#dfd2be` | Blackboard ember vs parchment fiber substrate |
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk ink vs walnut ink |
-| keyword | `#c26f59` | `#cb6d4e` | `#a33a2f` | `#ab5b47` | Ember red control-flow anchors |
-| operator | `#8f846f` | `#9b9283` | `#6a5d42` | `#736749` | Low-noise brass connective symbols |
-| function | `#7f97ae` | `#8a9fb2` | `#3b6176` | `#4d626f` | Denim-blue callable targets as restrained cool anchors |
-| method | `#c0a37a` | `#c2ab8c` | `#935e59` | `#946c64` | Warm sand method calls for relaxed action emphasis |
-| property | `#7e8658` | `#8c8765` | `#526447` | `#7b5748` | Olive member access cues to keep structure low-stimulus |
-| string | `#94ab78` | `#9bb17f` | `#5e7342` | `#697a54` | Muted olive literal content for calm scan rhythm |
-| number | `#ba846d` | `#cc8664` | `#b36938` | `#b86b3f` | Terracotta numeric constants |
-| type | `#766f92` | `#7f789a` | `#6a5b7c` | `#756687` | Smoked violet structural symbols with restrained chroma |
-| variable | `#d0cbc5` | `#cbc7c1` | `#5a3c28` | `#5c432f` | Neutral content carrier |
-| comment | `#6b5f4d` | `#6b5f4d` | `#847257` | `#887861` | Intentionally quiet guidance layer |
+| keyword | `#c2684f` | `#c0664d` | `#a74433` | `#a55b48` | Ember red control-flow anchors |
+| operator | `#91836a` | `#9b8d74` | `#6b5c41` | `#72654a` | Low-noise brass connective symbols |
+| function | `#6f8da4` | `#7a94a6` | `#436070` | `#495d68` | Denim-blue primary callable anchors |
+| method | `#8a90a3` | `#9095a3` | `#5d6772` | `#6a6e78` | Smoked indigo method calls as secondary cool anchors |
+| property | `#7d8558` | `#848a63` | `#596345` | `#65674c` | Muted olive member access cues |
+| string | `#90a773` | `#98ae7a` | `#607443` | `#6a7b55` | Calm olive literal content for scan rhythm |
+| number | `#b97a58` | `#b98264` | `#b16434` | `#ab6c46` | Terracotta numeric constants |
+| type | `#7f7399` | `#847a9c` | `#6f5d80` | `#2f7078` | Smoked violet structural symbols with restrained chroma |
+| variable | `#d0cac0` | `#cac5bc` | `#5b3f2b` | `#5f4734` | Near-foreground neutral information carriers |
+| comment | `#6b5f4d` | `#6e6150` | `#847257` | `#8a7962` | Intentionally quiet guidance layer |
 
 ## 3) Readability Budget (Theme Audit Gates)
 
@@ -45,9 +45,11 @@ The following thresholds are enforced by `scripts/theme-audit.mjs`.
 | cross-theme role hue drift (comment/keyword/operator/string/number/type/variable/method/property) | `<= 45 deg` |
 | light function/background hue distance | `>= 3 deg` |
 | light function anchor separation (`deltaE` vs keyword/number/tag) | `>= 18` |
-| function cool-hue band (dark/darkSoft/light/lightSoft) | `208-224 / 208-224 / 184-222 / 184-222 deg` |
+| function cool-hue band (dark/darkSoft/light/lightSoft) | `206-220 / 202-220 / 198-220 / 198-220 deg` |
+| method cool-hue band (dark/darkSoft/light/lightSoft) | `218-244 / 218-244 / 208-236 / 208-236 deg` |
 | variable/parameter near-foreground deltaE | `dark 3-12, darkSoft 3-12, light 6-22, lightSoft 5-14` |
-| function critical separation deltaE | `keyword>=18, number>=14, tag>=18, variable>=14` |
+| function critical separation deltaE | `keyword>=18, number>=14, tag>=18, variable>=18` |
+| method critical separation deltaE | `variable>=12` |
 
 Current snapshot from audit:
 
@@ -56,13 +58,13 @@ Current snapshot from audit:
 - light fg/bg: `12.7`
 - light soft fg/bg: `7.3`
 - dark comment: `2.6`
-- dark soft comment: `2.3`
+- dark soft comment: `2.4`
 - light comment: `3.6`
-- light soft comment: `2.9`
+- light soft comment: `2.8`
 - dark operator: `4.4`
-- dark soft operator: `4.7`
-- light operator: `5.0`
-- light soft operator: `3.7`
+- dark soft operator: `4.5`
+- light operator: `5.1`
+- light soft operator: `3.8`
 
 ## 4) Token Coverage Standard
 

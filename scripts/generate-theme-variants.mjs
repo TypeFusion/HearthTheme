@@ -807,12 +807,14 @@ function enforceRoleCoolHueBand(theme, variantId, warnings) {
           const candidateL = clamp(seedL + lightnessShift, 6, 94)
           const candidateC = clamp(seedC * chromaScale, 3, 90)
           const candidateHex = labToHex(lchToLab([candidateL, candidateC, candidateHue]))
+          const realizedHue = hexHue(candidateHex)
+          if (realizedHue == null || !isHueInBand(realizedHue, band.hueMin, band.hueMax)) continue
           const candidateContrast = contrastRatio(candidateHex, bgColor)
           if (candidateContrast == null || candidateContrast < band.minBgContrast) continue
           const drift = deltaE(candidateHex, current) ?? 0
           if (band.maxDeltaEFromSeed != null && drift > band.maxDeltaEFromSeed) continue
 
-          const score = drift * 0.86 + hueDistance(candidateHue, seedHue) * 0.14
+          const score = drift * 0.86 + hueDistance(realizedHue, seedHue) * 0.14
           if (score < bestScore) {
             bestScore = score
             bestHex = candidateHex

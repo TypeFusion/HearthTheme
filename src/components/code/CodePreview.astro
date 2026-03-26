@@ -1,7 +1,7 @@
 ---
+import { readFileSync } from 'node:fs'
 import { t, type Lang } from '../../i18n/utils'
 import { codeToHtml } from 'shiki'
-import { tokens } from '../../data/tokens'
 
 interface Props {
   lang: Lang
@@ -9,98 +9,61 @@ interface Props {
 }
 
 const { lang, compact = false } = Astro.props
-const d = tokens.dark
-const s = tokens.darkSoft
-const l = tokens.light
-const ls = tokens.lightSoft
 
-const HearthDark = {
-  name: 'Hearth Dark',
-  type: 'dark' as const,
-  colors: {
-    'editor.background': d.bg,
-    'editor.foreground': d.fg,
-  },
-  tokenColors: [
-    { scope: ['comment'],                                               settings: { foreground: d.comment,  fontStyle: 'italic' } },
-    { scope: ['keyword', 'storage.type', 'storage.modifier'],          settings: { foreground: d.keyword } },
-    { scope: ['entity.name.function', 'support.function'],             settings: { foreground: d.fn } },
-    { scope: ['string', 'string.quoted', 'string.template'],           settings: { foreground: d.string } },
-    { scope: ['constant.numeric'],                                      settings: { foreground: d.number } },
-    { scope: ['entity.name.type', 'entity.name.class', 'support.type', 'storage.type.java', 'storage.type.primitive.java'],settings: { foreground: d.type, fontStyle: 'italic' } },
-    { scope: ['variable', 'variable.other'],                            settings: { foreground: d.variable } },
-    { scope: ['keyword.operator'],                                      settings: { foreground: d.operator } },
-    { scope: ['entity.name.tag', 'punctuation.definition.tag'],        settings: { foreground: d.keyword } },
-    { scope: ['entity.other.attribute-name'],                           settings: { foreground: d.type } },
-    { scope: ['support.type.property-name', 'variable.css'],           settings: { foreground: d.fn } },
-  ],
+type PreviewTheme = {
+  name: string
+  type: 'dark' | 'light'
+  colors: Record<string, string>
+  tokenColors: Array<{
+    scope?: string | string[]
+    settings?: { foreground?: string }
+  }>
 }
 
-const HearthLight = {
-  name: 'Hearth Light',
-  type: 'light' as const,
-  colors: {
-    'editor.background': l.bg,
-    'editor.foreground': l.fg,
-  },
-  tokenColors: [
-    { scope: ['comment'],                                               settings: { foreground: l.comment,  fontStyle: 'italic' } },
-    { scope: ['keyword', 'storage.type', 'storage.modifier'],          settings: { foreground: l.keyword } },
-    { scope: ['entity.name.function', 'support.function'],             settings: { foreground: l.fn } },
-    { scope: ['string', 'string.quoted', 'string.template'],           settings: { foreground: l.string } },
-    { scope: ['constant.numeric'],                                      settings: { foreground: l.number } },
-    { scope: ['entity.name.type', 'entity.name.class', 'support.type', 'storage.type.java', 'storage.type.primitive.java'],settings: { foreground: l.type, fontStyle: 'italic' } },
-    { scope: ['variable', 'variable.other'],                            settings: { foreground: l.variable } },
-    { scope: ['keyword.operator'],                                      settings: { foreground: l.operator } },
-    { scope: ['entity.name.tag', 'punctuation.definition.tag'],        settings: { foreground: l.keyword } },
-    { scope: ['entity.other.attribute-name'],                           settings: { foreground: l.type } },
-    { scope: ['support.type.property-name', 'variable.css'],           settings: { foreground: l.fn } },
-  ],
+function loadTheme(relativePath: string, name: string, type: 'dark' | 'light'): PreviewTheme {
+  const raw = JSON.parse(readFileSync(new URL(relativePath, import.meta.url), 'utf8'))
+  return {
+    ...raw,
+    name,
+    type,
+  } as PreviewTheme
 }
 
-const HearthLightSoft = {
-  name: 'Hearth Light Soft',
-  type: 'light' as const,
-  colors: {
-    'editor.background': ls.bg,
-    'editor.foreground': ls.fg,
-  },
-  tokenColors: [
-    { scope: ['comment'],                                               settings: { foreground: ls.comment,  fontStyle: 'italic' } },
-    { scope: ['keyword', 'storage.type', 'storage.modifier'],          settings: { foreground: ls.keyword } },
-    { scope: ['entity.name.function', 'support.function'],             settings: { foreground: ls.fn } },
-    { scope: ['string', 'string.quoted', 'string.template'],           settings: { foreground: ls.string } },
-    { scope: ['constant.numeric'],                                      settings: { foreground: ls.number } },
-    { scope: ['entity.name.type', 'entity.name.class', 'support.type', 'storage.type.java', 'storage.type.primitive.java'],settings: { foreground: ls.type, fontStyle: 'italic' } },
-    { scope: ['variable', 'variable.other'],                            settings: { foreground: ls.variable } },
-    { scope: ['keyword.operator'],                                      settings: { foreground: ls.operator } },
-    { scope: ['entity.name.tag', 'punctuation.definition.tag'],        settings: { foreground: ls.keyword } },
-    { scope: ['entity.other.attribute-name'],                           settings: { foreground: ls.type } },
-    { scope: ['support.type.property-name', 'variable.css'],           settings: { foreground: ls.fn } },
-  ],
+function getTokenColor(theme: PreviewTheme, scopes: string[]): string | null {
+  for (const entry of theme.tokenColors || []) {
+    const entryScopes = Array.isArray(entry.scope) ? entry.scope : [entry.scope]
+    if (!entryScopes.some((scope) => scopes.includes(String(scope || '')))) continue
+    if (entry.settings?.foreground) return entry.settings.foreground
+  }
+  return null
 }
 
-const HearthDarkSoft = {
-  name: 'Hearth Dark Soft',
-  type: 'dark' as const,
-  colors: {
-    'editor.background': s.bg,
-    'editor.foreground': s.fg,
-  },
-  tokenColors: [
-    { scope: ['comment'],                                               settings: { foreground: s.comment,  fontStyle: 'italic' } },
-    { scope: ['keyword', 'storage.type', 'storage.modifier'],          settings: { foreground: s.keyword } },
-    { scope: ['entity.name.function', 'support.function'],             settings: { foreground: s.fn } },
-    { scope: ['string', 'string.quoted', 'string.template'],           settings: { foreground: s.string } },
-    { scope: ['constant.numeric'],                                      settings: { foreground: s.number } },
-    { scope: ['entity.name.type', 'entity.name.class', 'support.type', 'storage.type.java', 'storage.type.primitive.java'],settings: { foreground: s.type, fontStyle: 'italic' } },
-    { scope: ['variable', 'variable.other'],                            settings: { foreground: s.variable } },
-    { scope: ['keyword.operator'],                                      settings: { foreground: s.operator } },
-    { scope: ['entity.name.tag', 'punctuation.definition.tag'],        settings: { foreground: s.keyword } },
-    { scope: ['entity.other.attribute-name'],                           settings: { foreground: s.type } },
-    { scope: ['support.type.property-name', 'variable.css'],           settings: { foreground: s.fn } },
-  ],
+function requireThemeColor(value: string | undefined, key: string): string {
+  if (!value) {
+    throw new Error(`CodePreview: missing required theme color "${key}"`)
+  }
+  return value
 }
+
+function getPanelPalette(theme: PreviewTheme) {
+  const bg = requireThemeColor(theme.colors?.['editor.background'], 'editor.background')
+  const sidebar = theme.colors?.['sideBar.background'] || bg
+  const comment = getTokenColor(theme, ['comment'])
+    || theme.colors?.['editor.foreground']
+    || theme.colors?.['editorLineNumber.foreground']
+    || sidebar
+  return { bg, sidebar, comment }
+}
+
+const HearthDark = loadTheme('../../../themes/hearth-dark.json', 'Hearth Dark', 'dark')
+const HearthDarkSoft = loadTheme('../../../themes/hearth-dark-soft.json', 'Hearth Dark Soft', 'dark')
+const HearthLight = loadTheme('../../../themes/hearth-light.json', 'Hearth Light', 'light')
+const HearthLightSoft = loadTheme('../../../themes/hearth-light-soft.json', 'Hearth Light Soft', 'light')
+
+const d = getPanelPalette(HearthDark)
+const s = getPanelPalette(HearthDarkSoft)
+const l = getPanelPalette(HearthLight)
+const ls = getPanelPalette(HearthLightSoft)
 
 const samples = {
   ts: `// async data fetching with full type safety

@@ -539,34 +539,58 @@
     "coolHueBandByVariant": {
       "dark": {
         "function": {
-          "hueMin": 208,
-          "hueMax": 224,
+          "hueMin": 206,
+          "hueMax": 220,
           "minBgContrast": 3.8,
-          "maxDeltaEFromSeed": 72
+          "maxDeltaEFromSeed": 64
+        },
+        "method": {
+          "hueMin": 218,
+          "hueMax": 244,
+          "minBgContrast": 3.2,
+          "maxDeltaEFromSeed": 58
         }
       },
       "darkSoft": {
         "function": {
-          "hueMin": 208,
-          "hueMax": 224,
+          "hueMin": 202,
+          "hueMax": 220,
           "minBgContrast": 3.4,
-          "maxDeltaEFromSeed": 72
+          "maxDeltaEFromSeed": 64
+        },
+        "method": {
+          "hueMin": 218,
+          "hueMax": 244,
+          "minBgContrast": 2.9,
+          "maxDeltaEFromSeed": 56
         }
       },
       "light": {
         "function": {
-          "hueMin": 184,
-          "hueMax": 222,
+          "hueMin": 198,
+          "hueMax": 220,
           "minBgContrast": 3.3,
-          "maxDeltaEFromSeed": 60
+          "maxDeltaEFromSeed": 56
+        },
+        "method": {
+          "hueMin": 208,
+          "hueMax": 236,
+          "minBgContrast": 3,
+          "maxDeltaEFromSeed": 52
         }
       },
       "lightSoft": {
         "function": {
-          "hueMin": 184,
-          "hueMax": 222,
+          "hueMin": 198,
+          "hueMax": 220,
           "minBgContrast": 2.9,
-          "maxDeltaEFromSeed": 56
+          "maxDeltaEFromSeed": 52
+        },
+        "method": {
+          "hueMin": 208,
+          "hueMax": 236,
+          "minBgContrast": 2.7,
+          "maxDeltaEFromSeed": 48
         }
       }
     },
@@ -658,7 +682,8 @@
         "function->keyword": 18,
         "function->number": 14,
         "function->tag": 18,
-        "function->variable": 14
+        "function->variable": 18,
+        "method->variable": 12
       }
     }
   },
@@ -667,7 +692,7 @@
       {
         "id": "background",
         "key": "bg",
-        "note": "Blackboard vs parchment substrate"
+        "note": "Blackboard ember vs parchment fiber substrate"
       },
       {
         "id": "foreground",
@@ -687,22 +712,22 @@
       {
         "id": "function",
         "key": "fn",
-        "note": "Denim-blue callable targets as restrained cool anchors"
+        "note": "Denim-blue primary callable anchors"
       },
       {
         "id": "method",
         "key": "method",
-        "note": "Warm sand method calls for relaxed action emphasis"
+        "note": "Smoked indigo method calls as secondary cool anchors"
       },
       {
         "id": "property",
         "key": "property",
-        "note": "Olive member access cues to keep structure low-stimulus"
+        "note": "Muted olive member access cues"
       },
       {
         "id": "string",
         "key": "string",
-        "note": "Muted olive literal content for calm scan rhythm"
+        "note": "Calm olive literal content for scan rhythm"
       },
       {
         "id": "number",
@@ -717,7 +742,7 @@
       {
         "id": "variable",
         "key": "variable",
-        "note": "Neutral content carrier"
+        "note": "Near-foreground neutral information carriers"
       },
       {
         "id": "comment",
@@ -820,81 +845,81 @@
     },
     "darkSoft": {
       "keyword": {
-        "factor": 0.9,
-        "maxChroma": 52,
-        "lightnessLift": -0.8
-      },
-      "number": {
-        "factor": 0.88,
+        "factor": 0.86,
         "maxChroma": 50,
         "lightnessLift": -1
       },
+      "number": {
+        "factor": 0.84,
+        "maxChroma": 48,
+        "lightnessLift": -1.2
+      },
       "tag": {
-        "factor": 0.9,
-        "maxChroma": 52,
-        "lightnessLift": -0.8
+        "factor": 0.86,
+        "maxChroma": 50,
+        "lightnessLift": -1
       },
       "function": {
-        "factor": 0.9,
-        "maxChroma": 58,
-        "lightnessLift": -0.8
+        "factor": 0.84,
+        "maxChroma": 52,
+        "lightnessLift": -1
       },
       "method": {
-        "factor": 0.82,
-        "maxChroma": 50,
-        "lightnessLift": -1.0
+        "factor": 0.78,
+        "maxChroma": 42,
+        "lightnessLift": -1.1
       },
       "property": {
-        "factor": 0.9,
-        "maxChroma": 46,
-        "lightnessLift": -0.9
+        "factor": 0.88,
+        "maxChroma": 44,
+        "lightnessLift": -1
       },
       "type": {
-        "factor": 0.93,
-        "maxChroma": 40,
-        "lightnessLift": -0.7
+        "factor": 0.9,
+        "maxChroma": 38,
+        "lightnessLift": -0.8
       }
     },
     "lightSoft": {
       "operator": {
-        "factor": 0.91,
-        "maxChroma": 31,
-        "lightnessLift": -1.8
+        "factor": 0.88,
+        "maxChroma": 30,
+        "lightnessLift": -1.9
       },
       "keyword": {
-        "factor": 0.92,
-        "maxChroma": 48,
-        "lightnessLift": -0.5
+        "factor": 0.88,
+        "maxChroma": 44,
+        "lightnessLift": -0.7
       },
       "number": {
-        "factor": 0.84,
-        "maxChroma": 46,
-        "lightnessLift": -0.8
+        "factor": 0.8,
+        "maxChroma": 42,
+        "lightnessLift": -1
       },
       "tag": {
-        "factor": 0.9,
-        "maxChroma": 46,
-        "lightnessLift": -0.5
+        "factor": 0.86,
+        "maxChroma": 44,
+        "lightnessLift": -0.7
       },
       "function": {
-        "factor": 0.8,
-        "maxChroma": 40,
-        "lightnessLift": -0.8
+        "factor": 0.74,
+        "maxChroma": 34,
+        "lightnessLift": -1
       },
       "method": {
-        "factor": 0.89,
-        "maxChroma": 42,
-        "lightnessLift": -0.5
+        "factor": 0.8,
+        "maxChroma": 36,
+        "lightnessLift": -0.8
       },
       "property": {
-        "factor": 0.9,
-        "maxChroma": 34,
-        "lightnessLift": -0.4
+        "factor": 0.86,
+        "maxChroma": 32,
+        "lightnessLift": -0.5
       },
       "type": {
-        "factor": 0.96,
-        "maxChroma": 36,
-        "lightnessLift": -0.2
+        "factor": 0.92,
+        "maxChroma": 34,
+        "lightnessLift": -0.3
       }
     }
   },
@@ -903,8 +928,26 @@
       "ember": {
         "type": "mix",
         "a": "dark.keyword",
-        "b": "dark.fn",
-        "t": 0.58
+        "b": "dark.number",
+        "t": 0.44
+      },
+      "brass": {
+        "type": "mix",
+        "a": "dark.operator",
+        "b": "dark.number",
+        "t": 0.32
+      },
+      "warmCore": {
+        "type": "mix",
+        "a": "@ember",
+        "b": "dark.operator",
+        "t": 0.48
+      },
+      "coolAnchor": {
+        "type": "mix",
+        "a": "dark.fn",
+        "b": "dark.type",
+        "t": 0.34
       }
     },
     "groups": {
@@ -925,13 +968,13 @@
         "--hearth-ember": "@ember",
         "--hearth-brass": {
           "type": "mix",
-          "a": "dark.fn",
+          "a": "@warmCore",
           "b": "light.bg",
           "t": 0.18
         },
         "--hearth-kicker-accent": {
           "type": "mix",
-          "a": "dark.fn",
+          "a": "@warmCore",
           "b": "dark.keyword",
           "t": 0.4
         },
@@ -943,7 +986,7 @@
         },
         "--hearth-brand-accent": {
           "type": "mix",
-          "a": "dark.fn",
+          "a": "@warmCore",
           "b": "dark.keyword",
           "t": 0.28
         },
@@ -955,7 +998,7 @@
         },
         "--hearth-logo-accent": {
           "type": "mix",
-          "a": "dark.fn",
+          "a": "@warmCore",
           "b": "dark.keyword",
           "t": 0.34
         },
@@ -1017,7 +1060,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@warmCore",
             "b": "dark.fg",
             "t": 0.24
           },
@@ -1027,7 +1070,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@warmCore",
             "b": "dark.fg",
             "t": 0.24
           },
@@ -1089,7 +1132,7 @@
         },
         "--hearth-badge-aa": {
           "type": "mix",
-          "a": "dark.fn",
+          "a": "@warmCore",
           "b": "light.bg",
           "t": 0.22
         },
@@ -1148,7 +1191,7 @@
           "color": {
             "type": "mix",
             "a": "light.bg",
-            "b": "dark.fn",
+            "b": "@warmCore",
             "t": 0.55
           },
           "value": 0.13
@@ -1183,7 +1226,7 @@
           "color": {
             "type": "mix",
             "a": "@ember",
-            "b": "dark.fn",
+            "b": "@warmCore",
             "t": 0.35
           },
           "value": 0.3
@@ -1285,7 +1328,7 @@
           "color": {
             "type": "mix",
             "a": "@ember",
-            "b": "dark.fn",
+            "b": "@coolAnchor",
             "t": 0.28
           },
           "value": 0.8
@@ -1294,7 +1337,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "dark.number",
             "t": 0.35
           },
@@ -1314,7 +1357,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.24
           },
@@ -1325,7 +1368,7 @@
           "color": {
             "type": "mix",
             "a": "@ember",
-            "b": "dark.fn",
+            "b": "@coolAnchor",
             "t": 0.4
           },
           "value": 0.3
@@ -1354,7 +1397,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.38
           },
@@ -1389,7 +1432,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.34
           },
@@ -1399,7 +1442,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "dark.comment",
             "t": 0.38
           },
@@ -1409,7 +1452,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.32
           },
@@ -1421,7 +1464,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@warmCore",
             "b": "dark.number",
             "t": 0.4
           },
@@ -1432,7 +1475,7 @@
           "color": {
             "type": "mix",
             "a": "@ember",
-            "b": "dark.fn",
+            "b": "@warmCore",
             "t": 0.44
           },
           "value": 0.09
@@ -1451,7 +1494,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@warmCore",
             "b": "dark.fg",
             "t": 0.25
           },
@@ -1482,7 +1525,7 @@
           "color": {
             "type": "mix",
             "a": "@ember",
-            "b": "dark.fn",
+            "b": "@warmCore",
             "t": 0.44
           },
           "value": 0.12
@@ -1581,7 +1624,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.35
           },
@@ -1591,7 +1634,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.42
           },
@@ -1601,7 +1644,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "dark.fg",
             "t": 0.33
           },
@@ -1611,7 +1654,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.45
           },
@@ -1621,7 +1664,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.35
           },
@@ -1764,7 +1807,7 @@
           "color": {
             "type": "mix",
             "a": "@ember",
-            "b": "dark.fn",
+            "b": "@coolAnchor",
             "t": 0.4
           },
           "value": 0.26
@@ -1773,7 +1816,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.34
           },
@@ -1783,7 +1826,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "dark.fg",
             "t": 0.24
           },
@@ -1793,7 +1836,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.fn",
+            "a": "@coolAnchor",
             "b": "light.bg",
             "t": 0.35
           },
