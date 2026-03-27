@@ -29,7 +29,7 @@
       "dark": "#ac6846",
       "darkSoft": "#9a6446",
       "light": "#955d3d",
-      "lightSoft": "#8f6247"
+      "lightSoft": "#8e5e43"
     },
     "property": {
       "dark": "#80855a",
@@ -58,7 +58,7 @@
     "variable": {
       "dark": "#c9bdaa",
       "darkSoft": "#cbbfae",
-      "light": "#5d422d",
+      "light": "#563d2a",
       "lightSoft": "#6a4f38"
     },
     "parameter": {

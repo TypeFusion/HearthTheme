@@ -22,7 +22,7 @@
     },
     {
       "id": "light",
-      "svgSha256": "f3520215e48212f78eb5814f611cc894a6e293c7f7a1f71dc9c3fc231b75d0d2",
+      "svgSha256": "6472c95bb2996c73211adff1142f125ccac9d6a6f8a601e8689e30ae497737ed",
       "output": "extension/images/preview-light.png",
       "webOutput": "public/previews/preview-light.png"
     },
@@ -34,7 +34,7 @@
     }
   ],
   "contrastImage": {
-    "svgSha256": "baaebd3face3c14f9765ff1f5f99b063bf957941372b874ba6c851ec49c65aa3",
+    "svgSha256": "9d84c31ca7e6bf9c04e157a039f7eb6690b34d63b465a2459870cc439a1b74d2",
     "outputs": [
       "extension/images/preview-contrast-v2.png",
       "extension/images/preview-contrast.png"

@@ -250,7 +250,7 @@
                 "variable.other.constant"
             ],
             "settings": {
-                "foreground": "#5c4330"
+                "foreground": "#553e2d"
             }
         },
         {
@@ -371,7 +371,7 @@
     ],
     "semanticHighlighting": true,
     "semanticTokenColors": {
-        "variable": "#5c4330",
+        "variable": "#553e2d",
         "variable.readonly": "#874100",
         "property": "#5e6349",
         "property.readonly": "#874100",

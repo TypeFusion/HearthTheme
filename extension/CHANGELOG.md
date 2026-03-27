@@ -1,3 +1,9 @@
+## 1.0.26
+
+- Fine-tuned `Hearth Light` variable tone toward deeper warm-neutral to improve separation from operator tokens while preserving low-stimulus readability.
+- Completed synchronized regeneration for VS Code/Open VSX themes, Obsidian app-theme files, website token data, and preview artifacts.
+- Kept all quality gates green (`check:sync`, `check:preview`, `audit:all`, `build`) after the refinement and release bump.
+
 ## 1.0.25
 
 - Update notes pending

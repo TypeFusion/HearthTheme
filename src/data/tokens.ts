@@ -53,7 +53,7 @@ export const tokens = {
     "string": "#787c5e",
     "number": "#b66b36",
     "type": "#756f36",
-    "variable": "#5c4330",
+    "variable": "#553e2d",
     "operator": "#675844",
     "comment": "#8a7a65"
   },
@@ -67,7 +67,7 @@ export const tokens = {
     "border": "#bdac8f",
     "keyword": "#a4604c",
     "fn": "#626f76",
-    "method": "#89624b",
+    "method": "#885e48",
     "property": "#69704f",
     "string": "#868d6e",
     "number": "#b57f56",
