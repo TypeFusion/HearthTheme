@@ -94,6 +94,35 @@ function contrastRatio(a, b) {
   return (hi + 0.05) / (lo + 0.05)
 }
 
+function rgbToHsl([r, g, b]) {
+  const rn = r / 255
+  const gn = g / 255
+  const bn = b / 255
+
+  const max = Math.max(rn, gn, bn)
+  const min = Math.min(rn, gn, bn)
+  const delta = max - min
+
+  let h = 0
+  const l = (max + min) / 2
+  const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+
+  if (delta !== 0) {
+    if (max === rn) h = 60 * (((gn - bn) / delta) % 6)
+    else if (max === gn) h = 60 * ((bn - rn) / delta + 2)
+    else h = 60 * ((rn - gn) / delta + 4)
+  }
+
+  if (h < 0) h += 360
+  return { h, s, l }
+}
+
+function hueInBand(hue, min, max) {
+  if (hue == null) return false
+  if (min <= max) return hue >= min && hue <= max
+  return hue >= min || hue <= max
+}
+
 function fixed(value) {
   return Number(value).toFixed(1)
 }
@@ -567,6 +596,105 @@ function validateThemeVarsAndMetadata(themes) {
   }
 }
 
+function validateWarmAnchorContract(tokens) {
+  const roleSignalProfile = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
+  const coolHueByVariant = roleSignalProfile.coolHueBandByVariant || {}
+  const warmHueByVariant = roleSignalProfile.warmHueBandByVariant || {}
+  const warmGamutGuard = roleSignalProfile.warmGamutGuard || null
+
+  for (const [variantId, roleBands] of Object.entries(coolHueByVariant)) {
+    if (Object.keys(roleBands || {}).length > 0) {
+      addIssue(`color-system/tuning.json: roleSignalProfile.coolHueBandByVariant must be empty in warm-only mode (found entries in "${variantId}")`)
+    }
+  }
+
+  const siteMapping = COLOR_SYSTEM_TUNING.siteAssetMapping || {}
+  const siteGroups = siteMapping.groups || {}
+  const siteDerived = siteMapping.derivedColors || {}
+  const hitPaths = []
+  const walkSite = (node, path = []) => {
+    if (typeof node === 'string') {
+      if (node.includes('@coolAnchor')) hitPaths.push(path.join('.'))
+      return
+    }
+    if (Array.isArray(node)) {
+      node.forEach((item, index) => walkSite(item, [...path, String(index)]))
+      return
+    }
+    if (node && typeof node === 'object') {
+      for (const [key, value] of Object.entries(node)) {
+        walkSite(value, [...path, key])
+      }
+    }
+  }
+  walkSite(siteDerived, ['siteAssetMapping', 'derivedColors'])
+  walkSite(siteGroups, ['siteAssetMapping', 'groups'])
+  for (const hit of hitPaths) {
+    addIssue(`color-system/tuning.json: site mapping must not reference @coolAnchor (${hit})`)
+  }
+
+  const variantToTokenSet = {
+    dark: tokens.dark,
+    darkSoft: tokens.darkSoft,
+    light: tokens.light,
+    lightSoft: tokens.lightSoft,
+  }
+  const roleTokenKey = {
+    comment: 'comment',
+    keyword: 'keyword',
+    operator: 'operator',
+    function: 'fn',
+    method: 'method',
+    property: 'property',
+    string: 'string',
+    number: 'number',
+    type: 'type',
+    variable: 'variable',
+  }
+
+  for (const [variantId, tokenSet] of Object.entries(variantToTokenSet)) {
+    if (!tokenSet) continue
+    const warmBandRoleProfile = resolveVariantRoleProfile(warmHueByVariant, variantId)
+    if (Object.keys(warmBandRoleProfile).length === 0) {
+      addIssue(`color-system/tuning.json: roleSignalProfile.warmHueBandByVariant missing profile for variant "${variantId}"`)
+      continue
+    }
+    for (const roleId of Object.keys(roleTokenKey)) {
+      if (!warmBandRoleProfile[roleId]) {
+        addIssue(`color-system/tuning.json: roleSignalProfile.warmHueBandByVariant missing "${roleId}" for variant "${variantId}"`)
+      }
+    }
+  }
+
+  if (!warmGamutGuard) {
+    addIssue('color-system/tuning.json: roleSignalProfile.warmGamutGuard is required in warm-only mode')
+    return
+  }
+
+  const guardedRoles = new Set(Array.isArray(warmGamutGuard.roles) ? warmGamutGuard.roles : [])
+  if (guardedRoles.size === 0) {
+    addIssue('color-system/tuning.json: roleSignalProfile.warmGamutGuard.roles must declare at least one guarded role')
+    return
+  }
+
+  for (const [variantId, tokenSet] of Object.entries(variantToTokenSet)) {
+    if (!tokenSet) continue
+    for (const [roleId, tokenKey] of Object.entries(roleTokenKey)) {
+      if (!guardedRoles.has(roleId)) continue
+      const color = normalizeHex(tokenSet[tokenKey])
+      if (!color) continue
+      const rgb = hexToRgb(color)
+      if (!rgb) continue
+      const { h, s } = rgbToHsl(rgb)
+      if (s >= (warmGamutGuard.minSaturation ?? 0) && hueInBand(h, warmGamutGuard.forbiddenHueMin, warmGamutGuard.forbiddenHueMax)) {
+        addIssue(
+          `${DOCS_BASELINE}: role "${roleId}" in "${variantId}" entered forbidden cool gamut ${warmGamutGuard.forbiddenHueMin}-${warmGamutGuard.forbiddenHueMax} (${color})`
+        )
+      }
+    }
+  }
+}
+
 function validateDocsBaseline(tokens) {
   const docs = readText(DOCS_BASELINE)
   if (!docs) return
@@ -625,7 +753,8 @@ function validateReadabilityBudgetContract() {
   const methodPropertyProfile = COLOR_SYSTEM_TUNING.pairSeparationGates?.methodPropertyDeltaE || {}
   const lightFunctionProfile = COLOR_SYSTEM_TUNING.lightPolarityRoleOptimization?.light?.function || {}
   const roleSignalProfile = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
-  const coolHueByVariant = roleSignalProfile.coolHueBandByVariant || {}
+  const warmGamutGuard = roleSignalProfile.warmGamutGuard || null
+  const warmExposureProfile = roleSignalProfile.warmExposureProfile || null
   const nearForegroundByVariant = roleSignalProfile.nearForegroundDeltaEByVariant || {}
   const criticalPairsByVariant = roleSignalProfile.criticalPairDeltaEByVariant || {}
 
@@ -639,14 +768,6 @@ function validateReadabilityBudgetContract() {
   const lightFunctionAnchorDeltaE = typeof lightFunctionProfile.minAnchorDeltaE === 'number'
     ? lightFunctionProfile.minAnchorDeltaE
     : 22
-  const functionCoolBandDark = resolveVariantRoleProfile(coolHueByVariant, 'dark').function || { hueMin: 196, hueMax: 236 }
-  const functionCoolBandDarkSoft = resolveVariantRoleProfile(coolHueByVariant, 'darkSoft').function || { hueMin: 196, hueMax: 236 }
-  const functionCoolBandLight = resolveVariantRoleProfile(coolHueByVariant, 'light').function || { hueMin: 188, hueMax: 228 }
-  const functionCoolBandLightSoft = resolveVariantRoleProfile(coolHueByVariant, 'lightSoft').function || { hueMin: 188, hueMax: 228 }
-  const methodCoolBandDark = resolveVariantRoleProfile(coolHueByVariant, 'dark').method || { hueMin: 206, hueMax: 242 }
-  const methodCoolBandDarkSoft = resolveVariantRoleProfile(coolHueByVariant, 'darkSoft').method || { hueMin: 206, hueMax: 242 }
-  const methodCoolBandLight = resolveVariantRoleProfile(coolHueByVariant, 'light').method || { hueMin: 196, hueMax: 234 }
-  const methodCoolBandLightSoft = resolveVariantRoleProfile(coolHueByVariant, 'lightSoft').method || { hueMin: 196, hueMax: 234 }
   const variableNearFgDark = resolveVariantRoleProfile(nearForegroundByVariant, 'dark').variable || { minDeltaE: 3, maxDeltaE: 12 }
   const variableNearFgDarkSoft = resolveVariantRoleProfile(nearForegroundByVariant, 'darkSoft').variable || { minDeltaE: 3, maxDeltaE: 12 }
   const variableNearFgLight = resolveVariantRoleProfile(nearForegroundByVariant, 'light').variable || { minDeltaE: 6, maxDeltaE: 22 }
@@ -655,13 +776,52 @@ function validateReadabilityBudgetContract() {
   const functionNumberDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->number', 14)
   const functionTagDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->tag', 18)
   const functionVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->variable', 14)
+  const functionMethodDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'function->method', Number.NaN)
   const methodVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'method->variable', 12)
+  const propertyOperatorDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'property->operator', Number.NaN)
+  const typeVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'type->variable', Number.NaN)
+  const typeOperatorDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'dark', 'type->operator', Number.NaN)
+  const lightKeywordTagDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'light', 'keyword->tag', Number.NaN)
+  const lightCommentTypeDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'light', 'comment->type', Number.NaN)
+  const lightPropertyStringDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'light', 'property->string', Number.NaN)
+  const lightMethodVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'light', 'method->variable', Number.NaN)
+  const lightSoftKeywordTagDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'lightSoft', 'keyword->tag', Number.NaN)
+  const lightSoftCommentTypeDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'lightSoft', 'comment->type', Number.NaN)
+  const lightSoftPropertyStringDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'lightSoft', 'property->string', Number.NaN)
+  const lightSoftMethodVariableDeltaE = resolveCriticalPairThreshold(criticalPairsByVariant, 'lightSoft', 'method->variable', Number.NaN)
 
-  const functionCoolBandDoc = `${formatDocNumber(functionCoolBandDark.hueMin)}-${formatDocNumber(functionCoolBandDark.hueMax)} / ${formatDocNumber(functionCoolBandDarkSoft.hueMin)}-${formatDocNumber(functionCoolBandDarkSoft.hueMax)} / ${formatDocNumber(functionCoolBandLight.hueMin)}-${formatDocNumber(functionCoolBandLight.hueMax)} / ${formatDocNumber(functionCoolBandLightSoft.hueMin)}-${formatDocNumber(functionCoolBandLightSoft.hueMax)} deg`
-  const methodCoolBandDoc = `${formatDocNumber(methodCoolBandDark.hueMin)}-${formatDocNumber(methodCoolBandDark.hueMax)} / ${formatDocNumber(methodCoolBandDarkSoft.hueMin)}-${formatDocNumber(methodCoolBandDarkSoft.hueMax)} / ${formatDocNumber(methodCoolBandLight.hueMin)}-${formatDocNumber(methodCoolBandLight.hueMax)} / ${formatDocNumber(methodCoolBandLightSoft.hueMin)}-${formatDocNumber(methodCoolBandLightSoft.hueMax)} deg`
+  const warmGuardDoc = warmGamutGuard
+    ? `forbid ${formatDocNumber(warmGamutGuard.forbiddenHueMin)}-${formatDocNumber(warmGamutGuard.forbiddenHueMax)} deg (s>=${formatDocNumber(warmGamutGuard.minSaturation)})`
+    : 'forbid 170-250 deg (s>=0.08)'
+  const warmExposureLanguages = warmExposureProfile
+    ? Object.keys(warmExposureProfile.languageMixWeights || {}).join('/')
+    : 'TS/Py/Go/Rust/JSON/MD'
+  const warmExposureDoc = `frequency-damped chroma + saliency boost (${warmExposureLanguages})`
+  const lightKeyPairsDoc = `keyword/tag>=${formatDocNumber(lightKeywordTagDeltaE)}, comment/type>=${formatDocNumber(lightCommentTypeDeltaE)}, property/string>=${formatDocNumber(lightPropertyStringDeltaE)}, method/variable>=${formatDocNumber(lightMethodVariableDeltaE)}`
+  const lightSoftKeyPairsDoc = `keyword/tag>=${formatDocNumber(lightSoftKeywordTagDeltaE)}, comment/type>=${formatDocNumber(lightSoftCommentTypeDeltaE)}, property/string>=${formatDocNumber(lightSoftPropertyStringDeltaE)}, method/variable>=${formatDocNumber(lightSoftMethodVariableDeltaE)}`
   const variableNearFgDoc = `dark ${formatDocNumber(variableNearFgDark.minDeltaE)}-${formatDocNumber(variableNearFgDark.maxDeltaE)}, darkSoft ${formatDocNumber(variableNearFgDarkSoft.minDeltaE)}-${formatDocNumber(variableNearFgDarkSoft.maxDeltaE)}, light ${formatDocNumber(variableNearFgLight.minDeltaE)}-${formatDocNumber(variableNearFgLight.maxDeltaE)}, lightSoft ${formatDocNumber(variableNearFgLightSoft.minDeltaE)}-${formatDocNumber(variableNearFgLightSoft.maxDeltaE)}`
-  const functionCriticalDoc = `keyword>=${formatDocNumber(functionKeywordDeltaE)}, number>=${formatDocNumber(functionNumberDeltaE)}, tag>=${formatDocNumber(functionTagDeltaE)}, variable>=${formatDocNumber(functionVariableDeltaE)}`
+  const functionCriticalParts = [
+    `keyword>=${formatDocNumber(functionKeywordDeltaE)}`,
+    `number>=${formatDocNumber(functionNumberDeltaE)}`,
+    `tag>=${formatDocNumber(functionTagDeltaE)}`,
+    `variable>=${formatDocNumber(functionVariableDeltaE)}`,
+  ]
+  if (Number.isFinite(functionMethodDeltaE)) {
+    functionCriticalParts.push(`method>=${formatDocNumber(functionMethodDeltaE)}`)
+  }
+  const functionCriticalDoc = functionCriticalParts.join(', ')
   const methodCriticalDoc = `variable>=${formatDocNumber(methodVariableDeltaE)}`
+  const propertyCriticalDoc = Number.isFinite(propertyOperatorDeltaE)
+    ? `operator>=${formatDocNumber(propertyOperatorDeltaE)}`
+    : null
+  const typeCriticalParts = []
+  if (Number.isFinite(typeVariableDeltaE)) {
+    typeCriticalParts.push(`variable>=${formatDocNumber(typeVariableDeltaE)}`)
+  }
+  if (Number.isFinite(typeOperatorDeltaE)) {
+    typeCriticalParts.push(`operator>=${formatDocNumber(typeOperatorDeltaE)}`)
+  }
+  const typeCriticalDoc = typeCriticalParts.length > 0 ? typeCriticalParts.join(', ') : null
 
   const expectedBaselineRows = [
     `| editor fg/bg contrast | \`>= ${minTextContrast.raw}\` |`,
@@ -672,12 +832,20 @@ function validateReadabilityBudgetContract() {
     `| cross-theme role hue drift (comment/keyword/operator/string/number/type/variable/method/property) | \`<= ${formatDocNumber(maxRoleHueDrift.value)} deg\` |`,
     `| light function/background hue distance | \`>= ${formatDocNumber(lightFunctionBgHueDistance)} deg\` |`,
     `| light function anchor separation (\`deltaE\` vs keyword/number/tag) | \`>= ${formatDocNumber(lightFunctionAnchorDeltaE)}\` |`,
-    `| function cool-hue band (dark/darkSoft/light/lightSoft) | \`${functionCoolBandDoc}\` |`,
-    `| method cool-hue band (dark/darkSoft/light/lightSoft) | \`${methodCoolBandDoc}\` |`,
+    `| warm gamut guard | \`${warmGuardDoc}\` |`,
+    `| red/yellow exposure balance | \`${warmExposureDoc}\` |`,
+    `| light key pair separation (\`deltaE\`) | \`${lightKeyPairsDoc}\` |`,
+    `| light soft key pair separation (\`deltaE\`) | \`${lightSoftKeyPairsDoc}\` |`,
     `| variable/parameter near-foreground deltaE | \`${variableNearFgDoc}\` |`,
     `| function critical separation deltaE | \`${functionCriticalDoc}\` |`,
     `| method critical separation deltaE | \`${methodCriticalDoc}\` |`,
   ]
+  if (propertyCriticalDoc) {
+    expectedBaselineRows.push(`| property critical separation deltaE | \`${propertyCriticalDoc}\` |`)
+  }
+  if (typeCriticalDoc) {
+    expectedBaselineRows.push(`| type critical separation deltaE | \`${typeCriticalDoc}\` |`)
+  }
 
   for (const expectedRow of expectedBaselineRows) {
     if (!docs.includes(expectedRow)) {
@@ -703,12 +871,20 @@ function validateReadabilityBudgetContract() {
     ['Method/property separation deltaE', `>= ${formatDocNumber(methodPropertyThreshold)}`],
     ['Operator/comment separation deltaE', `>= ${formatDocNumber(operatorCommentDefault, { forceOneDecimal: true })} (light & light soft >= ${formatDocNumber(operatorCommentLight, { forceOneDecimal: true })})`],
     ['Cross-theme hue drift', `<= ${formatDocNumber(maxRoleHueDrift.value)}°`],
-    ['Function cool-hue band', functionCoolBandDoc],
-    ['Method cool-hue band', methodCoolBandDoc],
+    ['Warm gamut guard', warmGuardDoc],
+    ['Red/yellow exposure balance', warmExposureDoc],
+    ['Light key pair separation deltaE', lightKeyPairsDoc],
+    ['Light soft key pair separation deltaE', lightSoftKeyPairsDoc],
     ['Variable/parameter near-foreground deltaE', variableNearFgDoc],
     ['Function critical separation deltaE', functionCriticalDoc],
     ['Method critical separation deltaE', methodCriticalDoc],
   ]
+  if (propertyCriticalDoc) {
+    expectedUiBudgetRows.push(['Property critical separation deltaE', propertyCriticalDoc])
+  }
+  if (typeCriticalDoc) {
+    expectedUiBudgetRows.push(['Type critical separation deltaE', typeCriticalDoc])
+  }
 
   for (const [metric, target] of expectedUiBudgetRows) {
     const rowPattern = new RegExp(`\\{\\s*metric:\\s*"${escapeRegExp(metric)}"\\s*,\\s*target:\\s*"([^"]+)"\\s*\\}`)
@@ -774,6 +950,7 @@ function run() {
   ))
   if (tokenSetsReady) {
     validateDocsBaseline(tokenSets)
+    validateWarmAnchorContract(tokenSets)
   } else {
     addIssue('theme token extraction failed while validating docs baseline')
   }

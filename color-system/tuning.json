@@ -4,11 +4,11 @@
     "light": {
       "function": {
         "minBgHueDistance": 3,
-        "targetBgHueDistance": 16,
-        "minAnchorDeltaE": 18,
-        "minGuardDeltaE": 20.4,
-        "minContrast": 3.3,
-        "maxDeltaEFromSeed": 30,
+        "targetBgHueDistance": 12,
+        "minAnchorDeltaE": 10,
+        "minGuardDeltaE": 8,
+        "minContrast": 3,
+        "maxDeltaEFromSeed": 24,
         "anchorRoles": [
           "keyword",
           "number",
@@ -24,149 +24,18 @@
           "type",
           "property"
         ],
-        "targetPreferredHueDistance": 20,
-        "applyOnlyWhenCompensationNeeded": true
-      },
-      "method": {
-        "minBgHueDistance": 10,
-        "targetBgHueDistance": 22,
-        "minAnchorDeltaE": 16,
-        "minGuardDeltaE": 9,
-        "minContrast": 3,
-        "maxDeltaEFromSeed": 22,
-        "anchorRoles": [
-          "keyword",
-          "number",
-          "tag",
-          "operator"
-        ],
-        "guardRoles": [
-          "function",
-          "type",
-          "string"
-        ],
-        "preferredRoles": [
-          "function",
-          "property",
-          "type"
-        ],
-        "targetPreferredHueDistance": 10,
-        "applyOnlyWhenCompensationNeeded": true
-      },
-      "property": {
-        "minBgHueDistance": 3,
-        "targetBgHueDistance": 8,
-        "minAnchorDeltaE": 11,
-        "minGuardDeltaE": 6,
-        "minContrast": 3,
-        "maxDeltaEFromSeed": 10,
-        "anchorRoles": [
-          "keyword",
-          "number",
-          "tag",
-          "operator"
-        ],
-        "guardRoles": [
-          "function",
-          "method",
-          "type",
-          "string"
-        ],
-        "preferredRoles": [
-          "function",
-          "method",
-          "type"
-        ],
-        "targetPreferredHueDistance": 6,
-        "applyOnlyWhenCompensationNeeded": true
-      },
-      "type": {
-        "minBgHueDistance": 52,
-        "targetBgHueDistance": 90,
-        "minAnchorDeltaE": 24,
-        "minGuardDeltaE": 16,
-        "minContrast": 3.1,
-        "maxDeltaEFromSeed": 90,
-        "anchorRoles": [
-          "keyword",
-          "number",
-          "tag",
-          "operator"
-        ],
-        "guardRoles": [
-          "function",
-          "method",
-          "property",
-          "string"
-        ],
-        "preferredRoles": [
-          "function",
-          "method",
-          "property"
-        ],
-        "targetPreferredHueDistance": 34,
+        "targetPreferredHueDistance": 16,
         "applyOnlyWhenCompensationNeeded": true
       }
     },
     "lightSoft": {
       "function": {
         "minBgHueDistance": 3,
-        "targetBgHueDistance": 14,
-        "minAnchorDeltaE": 20,
-        "minGuardDeltaE": 18.8,
-        "minContrast": 2.9,
-        "maxDeltaEFromSeed": 28,
-        "anchorRoles": [
-          "keyword",
-          "number",
-          "tag",
-          "operator"
-        ],
-        "guardRoles": [
-          "type",
-          "string"
-        ],
-        "preferredRoles": [
-          "method",
-          "type",
-          "property"
-        ],
-        "targetPreferredHueDistance": 20,
-        "applyOnlyWhenCompensationNeeded": true
-      },
-      "method": {
-        "minBgHueDistance": 8,
-        "targetBgHueDistance": 18,
-        "minAnchorDeltaE": 14,
-        "minGuardDeltaE": 8,
-        "minContrast": 2.6,
-        "maxDeltaEFromSeed": 20,
-        "anchorRoles": [
-          "keyword",
-          "number",
-          "tag",
-          "operator"
-        ],
-        "guardRoles": [
-          "function",
-          "type",
-          "string"
-        ],
-        "preferredRoles": [
-          "function",
-          "property",
-          "type"
-        ],
-        "targetPreferredHueDistance": 10,
-        "applyOnlyWhenCompensationNeeded": true
-      },
-      "property": {
-        "minBgHueDistance": 3,
-        "targetBgHueDistance": 6,
+        "targetBgHueDistance": 12,
         "minAnchorDeltaE": 10,
-        "minGuardDeltaE": 6,
-        "minContrast": 2.8,
-        "maxDeltaEFromSeed": 7,
+        "minGuardDeltaE": 8,
+        "minContrast": 2.7,
+        "maxDeltaEFromSeed": 24,
         "anchorRoles": [
           "keyword",
           "number",
@@ -174,44 +43,15 @@
           "operator"
         ],
         "guardRoles": [
-          "function",
-          "method",
           "type",
           "string"
         ],
         "preferredRoles": [
-          "function",
           "method",
-          "type"
-        ],
-        "targetPreferredHueDistance": 6,
-        "applyOnlyWhenCompensationNeeded": true
-      },
-      "type": {
-        "minBgHueDistance": 48,
-        "targetBgHueDistance": 84,
-        "minAnchorDeltaE": 20,
-        "minGuardDeltaE": 14,
-        "minContrast": 2.8,
-        "maxDeltaEFromSeed": 88,
-        "anchorRoles": [
-          "keyword",
-          "number",
-          "tag",
-          "operator"
-        ],
-        "guardRoles": [
-          "function",
-          "method",
-          "property",
-          "string"
-        ],
-        "preferredRoles": [
-          "function",
-          "method",
+          "type",
           "property"
         ],
-        "targetPreferredHueDistance": 38,
+        "targetPreferredHueDistance": 16,
         "applyOnlyWhenCompensationNeeded": true
       }
     }
@@ -429,36 +269,7 @@
       }
     }
   },
-  "lightCoolRoleSoften": {
-    "light": {
-      "factorByRole": {
-        "function": 0.88,
-        "method": 0.91,
-        "property": 0.9,
-        "type": 0.95
-      },
-      "maxChromaByRole": {
-        "function": 50,
-        "method": 51,
-        "property": 46,
-        "type": 45
-      }
-    },
-    "lightSoft": {
-      "factorByRole": {
-        "function": 0.84,
-        "method": 0.88,
-        "property": 0.87,
-        "type": 0.93
-      },
-      "maxChromaByRole": {
-        "function": 46,
-        "method": 47,
-        "property": 41,
-        "type": 41
-      }
-    }
-  },
+  "lightCoolRoleSoften": {},
   "globalSeparationRoleProfile": {
     "baselineDeltaE": 8,
     "boostFactorByRole": {
@@ -535,65 +346,31 @@
       "default": 10
     }
   },
-  "roleSignalProfile": {
-    "coolHueBandByVariant": {
-      "dark": {
-        "function": {
-          "hueMin": 206,
-          "hueMax": 220,
-          "minBgContrast": 3.8,
-          "maxDeltaEFromSeed": 64
-        },
-        "method": {
-          "hueMin": 218,
-          "hueMax": 244,
-          "minBgContrast": 3.2,
-          "maxDeltaEFromSeed": 58
-        }
-      },
-      "darkSoft": {
-        "function": {
-          "hueMin": 202,
-          "hueMax": 220,
-          "minBgContrast": 3.4,
-          "maxDeltaEFromSeed": 64
-        },
-        "method": {
-          "hueMin": 218,
-          "hueMax": 244,
-          "minBgContrast": 2.9,
-          "maxDeltaEFromSeed": 56
-        }
-      },
-      "light": {
-        "function": {
-          "hueMin": 198,
-          "hueMax": 220,
-          "minBgContrast": 3.3,
-          "maxDeltaEFromSeed": 56
-        },
-        "method": {
-          "hueMin": 208,
-          "hueMax": 236,
-          "minBgContrast": 3,
-          "maxDeltaEFromSeed": 52
-        }
-      },
-      "lightSoft": {
-        "function": {
-          "hueMin": 198,
-          "hueMax": 220,
-          "minBgContrast": 2.9,
-          "maxDeltaEFromSeed": 52
-        },
-        "method": {
-          "hueMin": 208,
-          "hueMax": 236,
-          "minBgContrast": 2.7,
-          "maxDeltaEFromSeed": 48
-        }
-      }
+  "darkSoftPerceptionGuard": {
+    "function": {
+      "hueMin": 198,
+      "hueMax": 216,
+      "maxSaturation": 0.12,
+      "maxLightness": 0.53
     },
+    "warmRoles": [
+      "comment",
+      "keyword",
+      "operator",
+      "method",
+      "number",
+      "type",
+      "property",
+      "string"
+    ],
+    "warmAverageMinSaturation": 0.17,
+    "minSaturationByRole": {
+      "method": 0.2,
+      "property": 0.11
+    }
+  },
+  "roleSignalProfile": {
+    "coolHueBandByVariant": {},
     "nearForegroundDeltaEByVariant": {
       "default": {
         "variable": {
@@ -654,7 +431,7 @@
         },
         "operator": {
           "minDeltaE": 12,
-          "maxDeltaE": 34,
+          "maxDeltaE": 38,
           "minBgContrast": 2.8
         }
       },
@@ -671,19 +448,379 @@
         },
         "operator": {
           "minDeltaE": 12,
-          "maxDeltaE": 24,
+          "maxDeltaE": 30,
           "minBgContrast": 2.8,
-          "targetDeltaE": 16
+          "targetDeltaE": 20
         }
       }
     },
     "criticalPairDeltaEByVariant": {
       "default": {
-        "function->keyword": 18,
-        "function->number": 14,
-        "function->tag": 18,
-        "function->variable": 18,
-        "method->variable": 12
+        "function->keyword": 13,
+        "function->number": 11,
+        "function->tag": 12,
+        "function->variable": 13,
+        "method->variable": 12,
+        "function->method": 9,
+        "property->operator": 9,
+        "type->variable": 9,
+        "type->operator": 9
+      },
+      "light": {
+        "method->variable": 12,
+        "keyword->tag": 9,
+        "comment->type": 8.5,
+        "property->string": 8
+      },
+      "darkSoft": {
+        "type->operator": 7.8
+      },
+      "lightSoft": {
+        "method->variable": 11,
+        "keyword->tag": 7,
+        "comment->type": 8,
+        "property->string": 6
+      }
+    },
+    "warmHueBandByVariant": {
+      "default": {
+        "keyword": {
+          "hueMin": 8,
+          "hueMax": 26,
+          "minBgContrast": 2.6,
+          "maxDeltaEFromSeed": 56
+        },
+        "tag": {
+          "hueMin": 8,
+          "hueMax": 26,
+          "minBgContrast": 2.4,
+          "maxDeltaEFromSeed": 56
+        },
+        "number": {
+          "hueMin": 23,
+          "hueMax": 40,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 56
+        },
+        "method": {
+          "hueMin": 12,
+          "hueMax": 24,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 54
+        },
+        "operator": {
+          "hueMin": 27,
+          "hueMax": 50,
+          "minBgContrast": 2.4,
+          "maxDeltaEFromSeed": 52
+        },
+        "function": {
+          "hueMin": 188,
+          "hueMax": 222,
+          "minBgContrast": 2.8,
+          "maxDeltaEFromSeed": 56
+        },
+        "type": {
+          "hueMin": 46,
+          "hueMax": 60,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 54
+        },
+        "property": {
+          "hueMin": 62,
+          "hueMax": 80,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 56
+        },
+        "string": {
+          "hueMin": 68,
+          "hueMax": 96,
+          "minBgContrast": 2.2,
+          "maxDeltaEFromSeed": 56
+        },
+        "variable": {
+          "hueMin": 22,
+          "hueMax": 62,
+          "minBgContrast": 2.1,
+          "maxDeltaEFromSeed": 50
+        },
+        "parameter": {
+          "hueMin": 22,
+          "hueMax": 62,
+          "minBgContrast": 2,
+          "maxDeltaEFromSeed": 50
+        },
+        "comment": {
+          "hueMin": 22,
+          "hueMax": 62,
+          "minBgContrast": 2,
+          "maxDeltaEFromSeed": 48
+        }
+      },
+      "darkSoft": {
+        "function": {
+          "hueMin": 198,
+          "hueMax": 216,
+          "minBgContrast": 2.6,
+          "maxDeltaEFromSeed": 48
+        },
+        "method": {
+          "hueMin": 14,
+          "hueMax": 24,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 54
+        },
+        "number": {
+          "hueMin": 22,
+          "hueMax": 38,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 56
+        },
+        "operator": {
+          "hueMin": 28,
+          "hueMax": 44,
+          "minBgContrast": 2.4,
+          "maxDeltaEFromSeed": 52
+        },
+        "type": {
+          "hueMin": 40,
+          "hueMax": 56,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 54
+        },
+        "property": {
+          "hueMin": 40,
+          "hueMax": 62,
+          "minBgContrast": 2.3,
+          "maxDeltaEFromSeed": 56
+        },
+        "string": {
+          "hueMin": 42,
+          "hueMax": 68,
+          "minBgContrast": 2.2,
+          "maxDeltaEFromSeed": 56
+        }
+      }
+    },
+    "warmGamutGuard": {
+      "forbiddenHueMin": 170,
+      "forbiddenHueMax": 250,
+      "minSaturation": 0.08,
+      "roles": [
+        "comment",
+        "keyword",
+        "operator",
+        "method",
+        "property",
+        "string",
+        "number",
+        "type",
+        "variable",
+        "parameter",
+        "tag"
+      ]
+    },
+    "warmExposureProfile": {
+      "languageMixWeights": {
+        "ts": 0.27,
+        "py": 0.2,
+        "go": 0.14,
+        "rust": 0.13,
+        "json": 0.14,
+        "md": 0.12
+      },
+      "roleFrequencyByLanguage": {
+        "ts": {
+          "comment": 0.08,
+          "keyword": 0.1,
+          "operator": 0.18,
+          "function": 0.07,
+          "method": 0.1,
+          "property": 0.12,
+          "string": 0.08,
+          "number": 0.06,
+          "type": 0.08,
+          "variable": 0.09,
+          "parameter": 0.02,
+          "tag": 0.02
+        },
+        "py": {
+          "comment": 0.1,
+          "keyword": 0.12,
+          "operator": 0.17,
+          "function": 0.07,
+          "method": 0.09,
+          "property": 0.07,
+          "string": 0.11,
+          "number": 0.07,
+          "type": 0.06,
+          "variable": 0.1,
+          "parameter": 0.03,
+          "tag": 0.01
+        },
+        "go": {
+          "comment": 0.08,
+          "keyword": 0.13,
+          "operator": 0.18,
+          "function": 0.08,
+          "method": 0.08,
+          "property": 0.06,
+          "string": 0.08,
+          "number": 0.07,
+          "type": 0.08,
+          "variable": 0.12,
+          "parameter": 0.03,
+          "tag": 0.01
+        },
+        "rust": {
+          "comment": 0.08,
+          "keyword": 0.13,
+          "operator": 0.19,
+          "function": 0.08,
+          "method": 0.08,
+          "property": 0.05,
+          "string": 0.07,
+          "number": 0.07,
+          "type": 0.1,
+          "variable": 0.11,
+          "parameter": 0.03,
+          "tag": 0.01
+        },
+        "json": {
+          "comment": 0.01,
+          "keyword": 0.02,
+          "operator": 0.16,
+          "function": 0,
+          "method": 0,
+          "property": 0.24,
+          "string": 0.3,
+          "number": 0.16,
+          "type": 0,
+          "variable": 0.03,
+          "parameter": 0,
+          "tag": 0.08
+        },
+        "md": {
+          "comment": 0.03,
+          "keyword": 0.04,
+          "operator": 0.08,
+          "function": 0,
+          "method": 0,
+          "property": 0.06,
+          "string": 0.2,
+          "number": 0.03,
+          "type": 0,
+          "variable": 0.03,
+          "parameter": 0,
+          "tag": 0.53
+        }
+      },
+      "saliencyByRole": {
+        "keyword": 1.28,
+        "tag": 1.16,
+        "number": 1.08,
+        "function": 1.18,
+        "method": 1.04,
+        "operator": 0.9,
+        "type": 1.06,
+        "property": 0.9,
+        "string": 0.86,
+        "variable": 0.74,
+        "parameter": 0.68,
+        "comment": 0.55
+      },
+      "variantTuning": {
+        "default": {
+          "frequencyWeight": 0.44,
+          "saliencyWeight": 0.34,
+          "baseChromaFactor": 0.92,
+          "minChromaFactor": 0.66,
+          "maxChromaFactor": 1.2,
+          "baseLightnessLift": 0,
+          "frequencyLightnessShift": 2.2,
+          "saliencyLightnessShift": 1.2,
+          "minLightnessLift": -3.2,
+          "maxLightnessLift": 3.2,
+          "maxChromaByRole": {
+            "keyword": 60,
+            "tag": 56,
+            "number": 58,
+            "function": 56,
+            "method": 52,
+            "operator": 46,
+            "type": 46,
+            "property": 42,
+            "string": 42,
+            "variable": 30,
+            "parameter": 28,
+            "comment": 24
+          }
+        },
+        "darkSoft": {
+          "baseChromaFactor": 0.86,
+          "maxChromaFactor": 1.08,
+          "minLightnessLift": -2.8,
+          "maxLightnessLift": 2.8,
+          "maxChromaByRole": {
+            "function": 34,
+            "method": 54,
+            "number": 58,
+            "operator": 56,
+            "type": 50,
+            "property": 40,
+            "string": 44
+          }
+        },
+        "light": {
+          "frequencyWeight": 0.48,
+          "saliencyWeight": 0.36,
+          "baseChromaFactor": 0.94,
+          "minChromaFactor": 0.7,
+          "maxChromaFactor": 1.22,
+          "frequencyLightnessShift": 2.6,
+          "saliencyLightnessShift": 1.4,
+          "minLightnessLift": -3.6,
+          "maxLightnessLift": 3.6,
+          "maxChromaByRole": {
+            "keyword": 56,
+            "tag": 52,
+            "number": 56,
+            "function": 52,
+            "method": 48,
+            "operator": 42,
+            "type": 42,
+            "property": 38,
+            "string": 40,
+            "variable": 26,
+            "parameter": 24,
+            "comment": 22
+          }
+        },
+        "lightSoft": {
+          "frequencyWeight": 0.46,
+          "saliencyWeight": 0.32,
+          "baseChromaFactor": 0.84,
+          "minChromaFactor": 0.62,
+          "maxChromaFactor": 1.06,
+          "frequencyLightnessShift": 2.4,
+          "saliencyLightnessShift": 1.2,
+          "minLightnessLift": -3,
+          "maxLightnessLift": 3,
+          "maxChromaByRole": {
+            "keyword": 48,
+            "tag": 46,
+            "number": 48,
+            "function": 46,
+            "method": 46,
+            "operator": 42,
+            "type": 40,
+            "property": 38,
+            "string": 40,
+            "variable": 24,
+            "parameter": 22,
+            "comment": 20
+          }
+        }
       }
     }
   },
@@ -692,32 +829,32 @@
       {
         "id": "background",
         "key": "bg",
-        "note": "Blackboard ember vs parchment fiber substrate"
+        "note": "Soot board base vs parchment desk-paper base"
       },
       {
         "id": "foreground",
         "key": "fg",
-        "note": "Chalk ink vs walnut ink"
+        "note": "Chalk-walnut ink readability spine"
       },
       {
         "id": "keyword",
         "key": "keyword",
-        "note": "Ember red control-flow anchors"
+        "note": "Brick-red control-flow anchors (accent only)"
       },
       {
         "id": "operator",
         "key": "operator",
-        "note": "Low-noise brass connective symbols"
+        "note": "Brass connective symbols with low noise"
       },
       {
         "id": "function",
         "key": "fn",
-        "note": "Denim-blue primary callable anchors"
+        "note": "Denim-blue callable anchors for deliberate contrast"
       },
       {
         "id": "method",
         "key": "method",
-        "note": "Smoked indigo method calls as secondary cool anchors"
+        "note": "Leather-orange method calls for secondary action"
       },
       {
         "id": "property",
@@ -727,27 +864,27 @@
       {
         "id": "string",
         "key": "string",
-        "note": "Calm olive literal content for scan rhythm"
+        "note": "Calm olive literals for reading rhythm"
       },
       {
         "id": "number",
         "key": "number",
-        "note": "Terracotta numeric constants"
+        "note": "Sunset terracotta numeric constants"
       },
       {
         "id": "type",
         "key": "type",
-        "note": "Smoked violet structural symbols with restrained chroma"
+        "note": "Dark-ochre structural symbols"
       },
       {
         "id": "variable",
         "key": "variable",
-        "note": "Near-foreground neutral information carriers"
+        "note": "Coffee-neutral information carriers"
       },
       {
         "id": "comment",
         "key": "comment",
-        "note": "Intentionally quiet guidance layer"
+        "note": "Quiet guidance layer"
       }
     ],
     "snapshotRatios": [
@@ -826,100 +963,142 @@
     ]
   },
   "softRoleChromaBudget": {
-    "light": {
-      "operator": {
-        "factor": 0.94,
-        "maxChroma": 34,
-        "lightnessLift": -1.4
-      },
+    "dark": {
       "function": {
-        "factor": 0.88,
-        "maxChroma": 50,
+        "factor": 0.9,
+        "maxChroma": 52,
+        "lightnessLift": -0.6
+      },
+      "keyword": {
+        "factor": 0.92,
+        "maxChroma": 56,
         "lightnessLift": -0.4
       },
-      "property": {
-        "factor": 0.9,
-        "maxChroma": 44,
-        "lightnessLift": -0.3
+      "method": {
+        "factor": 0.88,
+        "maxChroma": 40,
+        "lightnessLift": -1.1
       }
     },
     "darkSoft": {
       "keyword": {
         "factor": 0.86,
         "maxChroma": 50,
-        "lightnessLift": -1
-      },
-      "number": {
-        "factor": 0.84,
-        "maxChroma": 48,
-        "lightnessLift": -1.2
-      },
-      "tag": {
-        "factor": 0.86,
-        "maxChroma": 50,
-        "lightnessLift": -1
-      },
-      "function": {
-        "factor": 0.84,
-        "maxChroma": 52,
-        "lightnessLift": -1
-      },
-      "method": {
-        "factor": 0.78,
-        "maxChroma": 42,
-        "lightnessLift": -1.1
-      },
-      "property": {
-        "factor": 0.88,
-        "maxChroma": 44,
-        "lightnessLift": -1
-      },
-      "type": {
-        "factor": 0.9,
-        "maxChroma": 38,
-        "lightnessLift": -0.8
-      }
-    },
-    "lightSoft": {
-      "operator": {
-        "factor": 0.88,
-        "maxChroma": 30,
-        "lightnessLift": -1.9
-      },
-      "keyword": {
-        "factor": 0.88,
-        "maxChroma": 44,
         "lightnessLift": -0.7
       },
       "number": {
-        "factor": 0.8,
-        "maxChroma": 42,
-        "lightnessLift": -1
+        "factor": 0.95,
+        "maxChroma": 58,
+        "lightnessLift": 0.2
       },
       "tag": {
-        "factor": 0.86,
-        "maxChroma": 44,
+        "factor": 0.84,
+        "maxChroma": 48,
         "lightnessLift": -0.7
       },
       "function": {
         "factor": 0.74,
         "maxChroma": 34,
-        "lightnessLift": -1
+        "lightnessLift": 0.2
       },
       "method": {
-        "factor": 0.8,
-        "maxChroma": 36,
-        "lightnessLift": -0.8
+        "factor": 0.94,
+        "maxChroma": 54,
+        "lightnessLift": 0.1
+      },
+      "operator": {
+        "factor": 1.04,
+        "maxChroma": 56,
+        "lightnessLift": 0.2
       },
       "property": {
-        "factor": 0.86,
-        "maxChroma": 32,
-        "lightnessLift": -0.5
+        "factor": 0.9,
+        "maxChroma": 40,
+        "lightnessLift": -0.3
       },
       "type": {
-        "factor": 0.92,
+        "factor": 1.06,
+        "maxChroma": 50,
+        "lightnessLift": 0.2
+      },
+      "string": {
+        "factor": 0.98,
+        "maxChroma": 44,
+        "lightnessLift": 0.2
+      }
+    },
+    "light": {
+      "operator": {
+        "factor": 0.86,
         "maxChroma": 34,
+        "lightnessLift": 0.3
+      },
+      "function": {
+        "factor": 0.88,
+        "maxChroma": 38,
+        "lightnessLift": -0.8
+      },
+      "method": {
+        "factor": 0.86,
+        "maxChroma": 36,
+        "lightnessLift": -1
+      },
+      "property": {
+        "factor": 0.9,
+        "maxChroma": 34,
+        "lightnessLift": -0.6
+      },
+      "string": {
+        "factor": 0.96,
+        "maxChroma": 38,
+        "lightnessLift": 0.4
+      }
+    },
+    "lightSoft": {
+      "operator": {
+        "factor": 1.02,
+        "maxChroma": 42,
+        "lightnessLift": 0.2
+      },
+      "keyword": {
+        "factor": 0.9,
+        "maxChroma": 46,
         "lightnessLift": -0.3
+      },
+      "number": {
+        "factor": 0.9,
+        "maxChroma": 46,
+        "lightnessLift": -0.2
+      },
+      "tag": {
+        "factor": 0.88,
+        "maxChroma": 42,
+        "lightnessLift": -0.4
+      },
+      "function": {
+        "factor": 0.82,
+        "maxChroma": 36,
+        "lightnessLift": -0.6
+      },
+      "method": {
+        "factor": 0.92,
+        "maxChroma": 44,
+        "lightnessLift": -0.2
+      },
+      "property": {
+        "factor": 0.9,
+        "maxChroma": 38,
+        "lightnessLift": -0.4
+      },
+      "string": {
+        "factor": 1.02,
+        "maxChroma": 42,
+        "lightnessLift": 0.5
+      },
+      "type": {
+        "factor": 0.96,
+        "maxChroma": 40,
+        "lightnessLift": -0.1
       }
     }
   },
@@ -929,26 +1108,39 @@
         "type": "mix",
         "a": "dark.keyword",
         "b": "dark.number",
-        "t": 0.44
+        "t": 0.26
+      },
+      "amber": {
+        "type": "mix",
+        "a": "dark.number",
+        "b": "dark.operator",
+        "t": 0.34
       },
       "brass": {
         "type": "mix",
-        "a": "dark.operator",
-        "b": "dark.number",
-        "t": 0.32
+        "a": "@amber",
+        "b": "dark.operator",
+        "t": 0.28
       },
       "warmCore": {
         "type": "mix",
-        "a": "@ember",
-        "b": "dark.operator",
-        "t": 0.48
+        "a": "@amber",
+        "b": "@ember",
+        "t": 0.32
       },
-      "coolAnchor": {
+      "umber": {
         "type": "mix",
-        "a": "dark.fn",
-        "b": "dark.type",
-        "t": 0.34
-      }
+        "a": "dark.comment",
+        "b": "dark.operator",
+        "t": 0.38
+      },
+      "oliveSmoke": {
+        "type": "mix",
+        "a": "dark.string",
+        "b": "dark.comment",
+        "t": 0.44
+      },
+      "denim": "dark.fn"
     },
     "groups": {
       "foundation": {
@@ -1198,18 +1390,18 @@
         },
         "--hearth-bg-ambient-top-right": {
           "type": "alpha",
-          "color": "@ember",
-          "value": 0.16
+          "color": "@warmCore",
+          "value": 0.14
         },
         "--hearth-bg-ambient-bottom": {
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "dark.number",
+            "a": "@amber",
             "b": "dark.sidebar",
-            "t": 0.45
+            "t": 0.5
           },
-          "value": 0.2
+          "value": 0.18
         },
         "--hearth-grid-line-soft": {
           "type": "alpha",
@@ -1236,10 +1428,10 @@
           "color": {
             "type": "mix",
             "a": "@ember",
-            "b": "dark.keyword",
-            "t": 0.42
+            "b": "@amber",
+            "t": 0.5
           },
-          "value": 0.26
+          "value": 0.24
         },
         "--hearth-firelight-c": {
           "type": "alpha",
@@ -1327,19 +1519,19 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@ember",
-            "b": "@coolAnchor",
+            "a": "@warmCore",
+            "b": "@brass",
             "t": 0.28
           },
-          "value": 0.8
+          "value": 0.82
         },
         "--hearth-line-divider": {
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "dark.number",
-            "t": 0.35
+            "t": 0.34
           },
           "value": 0.36
         },
@@ -1357,7 +1549,7 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "light.bg",
             "t": 0.24
           },
@@ -1367,9 +1559,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@ember",
-            "b": "@coolAnchor",
-            "t": 0.4
+            "a": "@warmCore",
+            "b": "@brass",
+            "t": 0.64
           },
           "value": 0.3
         },
@@ -1397,9 +1589,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@ember",
             "b": "light.bg",
-            "t": 0.38
+            "t": 0.34
           },
           "value": 0.55
         },
@@ -1432,9 +1624,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "light.bg",
-            "t": 0.34
+            "t": 0.3
           },
           "value": 0.55
         },
@@ -1442,9 +1634,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "dark.comment",
-            "t": 0.38
+            "t": 0.34
           },
           "value": 0.24
         },
@@ -1452,9 +1644,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "light.bg",
-            "t": 0.32
+            "t": 0.28
           },
           "value": 0.45
         }
@@ -1624,9 +1816,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "light.bg",
-            "t": 0.35
+            "t": 0.32
           },
           "value": 0.2
         },
@@ -1634,9 +1826,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@ember",
             "b": "light.bg",
-            "t": 0.42
+            "t": 0.36
           },
           "value": 0.2
         },
@@ -1644,19 +1836,19 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
-            "b": "dark.fg",
-            "t": 0.33
+            "a": "@brass",
+            "b": "dark.number",
+            "t": 0.3
           },
-          "value": 0.4
+          "value": 0.44
         },
         "--hearth-lang-active-shadow": {
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "light.bg",
-            "t": 0.45
+            "t": 0.38
           },
           "value": 0.2
         },
@@ -1664,9 +1856,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@ember",
             "b": "light.bg",
-            "t": 0.35
+            "t": 0.32
           },
           "value": 0.3
         }
@@ -1806,29 +1998,29 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@ember",
-            "b": "@coolAnchor",
-            "t": 0.4
+            "a": "@warmCore",
+            "b": "@brass",
+            "t": 0.58
           },
-          "value": 0.26
+          "value": 0.28
         },
         "--hearth-preview-switch-active-ring": {
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
-            "b": "light.bg",
+            "a": "@brass",
+            "b": "@umber",
             "t": 0.34
           },
-          "value": 0.24
+          "value": 0.26
         },
         "--hearth-preview-switch-border": {
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "dark.fg",
-            "t": 0.24
+            "t": 0.22
           },
           "value": 0.22
         },
@@ -1836,9 +2028,9 @@
           "type": "alpha",
           "color": {
             "type": "mix",
-            "a": "@coolAnchor",
+            "a": "@brass",
             "b": "light.bg",
-            "t": 0.35
+            "t": 0.3
           },
           "value": 0.16
         },

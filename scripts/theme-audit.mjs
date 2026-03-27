@@ -83,8 +83,11 @@ const OPERATOR_COMMENT_PAIR_GATE = PAIR_SEPARATION_GATES.operatorCommentDeltaE |
 const METHOD_PROPERTY_PAIR_GATE = PAIR_SEPARATION_GATES.methodPropertyDeltaE || {}
 const ROLE_SIGNAL_PROFILE = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
 const ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.coolHueBandByVariant || {}
+const ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.warmHueBandByVariant || {}
 const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEByVariant || {}
 const ROLE_SIGNAL_CRITICAL_PAIRS_BY_VARIANT = ROLE_SIGNAL_PROFILE.criticalPairDeltaEByVariant || {}
+const ROLE_SIGNAL_WARM_GAMUT_GUARD = ROLE_SIGNAL_PROFILE.warmGamutGuard || null
+const DARK_SOFT_PERCEPTION_GUARD = COLOR_SYSTEM_TUNING.darkSoftPerceptionGuard || null
 
 const issues = []
 const warnings = []
@@ -562,6 +565,38 @@ function validateRoleSignalProfile(themeMeta, theme) {
     }
   }
 
+  const warmHueRoleProfile = resolveVariantRoleProfile(ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT, themeMeta.id)
+  for (const [roleId, profile] of Object.entries(warmHueRoleProfile)) {
+    const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
+    if (!roleColor) continue
+
+    const hsl = rgbToHsl(roleColor)
+    if (!hsl) continue
+    if (!isHueInBand(hsl.h, profile.hueMin, profile.hueMax)) {
+      addIssue(`${themeMeta.path}: role signal warm hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
+    }
+
+    const ratio = contrastRatio(roleColor, bg)
+    if (ratio == null || ratio < profile.minBgContrast) {
+      addIssue(`${themeMeta.path}: role signal warm hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+    }
+  }
+
+  if (ROLE_SIGNAL_WARM_GAMUT_GUARD) {
+    for (const roleId of ROLE_SIGNAL_WARM_GAMUT_GUARD.roles || []) {
+      const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
+      if (!roleColor) continue
+      const hsl = rgbToHsl(roleColor)
+      if (!hsl) continue
+      if (hsl.s < (ROLE_SIGNAL_WARM_GAMUT_GUARD.minSaturation ?? 0)) continue
+      if (isHueInBand(hsl.h, ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMin, ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMax)) {
+        addIssue(
+          `${themeMeta.path}: warm gamut guard failed for "${roleId}" (${fixed(hsl.h)} in ${fixed(ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMin)}-${fixed(ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMax)})`
+        )
+      }
+    }
+  }
+
   const nearForegroundRoleProfile = resolveVariantRoleProfile(ROLE_SIGNAL_NEAR_FG_BY_VARIANT, themeMeta.id)
   for (const [roleId, profile] of Object.entries(nearForegroundRoleProfile)) {
     const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
@@ -593,6 +628,58 @@ function validateRoleSignalProfile(themeMeta, theme) {
     if (dE == null) continue
     if (dE < threshold) {
       addIssue(`${themeMeta.path}: role signal critical pair "${leftRole}" vs "${rightRole}" deltaE ${fixed(dE)} is below ${fixed(threshold)}`)
+    }
+  }
+}
+
+function validateDarkSoftPerception(themeMeta, theme) {
+  if (!theme || themeMeta.id !== 'darkSoft' || !DARK_SOFT_PERCEPTION_GUARD) return
+
+  const functionProfile = DARK_SOFT_PERCEPTION_GUARD.function || null
+  const warmRoles = Array.isArray(DARK_SOFT_PERCEPTION_GUARD.warmRoles) ? DARK_SOFT_PERCEPTION_GUARD.warmRoles : []
+  const warmAverageMinSaturation = DARK_SOFT_PERCEPTION_GUARD.warmAverageMinSaturation
+  const minSaturationByRole = DARK_SOFT_PERCEPTION_GUARD.minSaturationByRole || {}
+
+  if (functionProfile) {
+    const fnColor = getTokenColor(theme, ROLE_SCOPES.function || [])
+    if (fnColor) {
+      const hsl = rgbToHsl(fnColor)
+      if (hsl) {
+        if (!isHueInBand(hsl.h, functionProfile.hueMin, functionProfile.hueMax)) {
+          addWarning(`${themeMeta.path}: darkSoft perception guard: function hue ${fixed(hsl.h)} outside ${fixed(functionProfile.hueMin)}-${fixed(functionProfile.hueMax)}`)
+        }
+        if (functionProfile.maxSaturation != null && hsl.s > functionProfile.maxSaturation) {
+          addWarning(`${themeMeta.path}: darkSoft perception guard: function saturation ${fixed(hsl.s)} exceeds ${fixed(functionProfile.maxSaturation)}`)
+        }
+        if (functionProfile.maxLightness != null && hsl.l > functionProfile.maxLightness) {
+          addWarning(`${themeMeta.path}: darkSoft perception guard: function lightness ${fixed(hsl.l)} exceeds ${fixed(functionProfile.maxLightness)}`)
+        }
+      }
+    }
+  }
+
+  const warmRoleSaturations = warmRoles
+    .map((roleId) => getTokenColor(theme, ROLE_SCOPES[roleId] || []))
+    .filter(Boolean)
+    .map((hex) => rgbToHsl(hex))
+    .filter(Boolean)
+    .map((hsl) => hsl.s)
+
+  if (typeof warmAverageMinSaturation === 'number' && warmRoleSaturations.length > 0) {
+    const averageSaturation = warmRoleSaturations.reduce((sum, value) => sum + value, 0) / warmRoleSaturations.length
+    if (averageSaturation < warmAverageMinSaturation) {
+      addWarning(`${themeMeta.path}: darkSoft perception guard: warm-role average saturation ${fixed(averageSaturation)} below ${fixed(warmAverageMinSaturation)}`)
+    }
+  }
+
+  for (const [roleId, minSaturation] of Object.entries(minSaturationByRole)) {
+    if (typeof minSaturation !== 'number') continue
+    const color = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
+    if (!color) continue
+    const hsl = rgbToHsl(color)
+    if (!hsl) continue
+    if (hsl.s < minSaturation) {
+      addWarning(`${themeMeta.path}: darkSoft perception guard: ${roleId} saturation ${fixed(hsl.s)} below ${fixed(minSaturation)}`)
     }
   }
 }
@@ -710,6 +797,7 @@ function run() {
     validateSemanticAlignment(themeMeta, theme)
     validateLightPolarityCompensation(themeMeta, theme)
     validateRoleSignalProfile(themeMeta, theme)
+    validateDarkSoftPerception(themeMeta, theme)
   }
 
   validateColorSystemSource(themes)

@@ -532,8 +532,11 @@ export function loadColorSystemTuning() {
 
   const roleSignalProfile = {
     coolHueBandByVariant: {},
+    warmHueBandByVariant: {},
     nearForegroundDeltaEByVariant: {},
     criticalPairDeltaEByVariant: {},
+    warmGamutGuard: null,
+    warmExposureProfile: null,
   }
 
   const rawCoolHueBandByVariant = rawRoleSignalProfile.coolHueBandByVariant ?? {}
@@ -573,6 +576,215 @@ export function loadColorSystemTuning() {
       }
     }
     roleSignalProfile.coolHueBandByVariant[variantId] = normalizedRoleMap
+  }
+
+  const rawWarmHueBandByVariant = rawRoleSignalProfile.warmHueBandByVariant ?? {}
+  assert(rawWarmHueBandByVariant && typeof rawWarmHueBandByVariant === 'object' && !Array.isArray(rawWarmHueBandByVariant), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant must be an object`)
+  const warmHueVariantIds = new Set(['default', ...variantIds])
+  for (const [variantId, roleMap] of Object.entries(rawWarmHueBandByVariant)) {
+    assert(warmHueVariantIds.has(variantId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant has unknown variant "${variantId}"`)
+    assert(roleMap && typeof roleMap === 'object' && !Array.isArray(roleMap), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId} must be an object`)
+    const normalizedRoleMap = {}
+    for (const [roleId, profile] of Object.entries(roleMap)) {
+      assert(roleIds.has(roleId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId} has unknown role "${roleId}"`)
+      assert(profile && typeof profile === 'object' && !Array.isArray(profile), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId}.${roleId} must be an object`)
+      const hueMin = normalizeNumber(
+        profile.hueMin,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId}.${roleId}.hueMin`,
+        { min: 0, max: 360 }
+      )
+      const hueMax = normalizeNumber(
+        profile.hueMax,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId}.${roleId}.hueMax`,
+        { min: 0, max: 360 }
+      )
+      assert(hueMin !== hueMax, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId}.${roleId} hueMin/hueMax cannot be identical`)
+      normalizedRoleMap[roleId] = {
+        hueMin,
+        hueMax,
+        minBgContrast: normalizeNumber(
+          profile.minBgContrast,
+          `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId}.${roleId}.minBgContrast`,
+          { min: 1, max: 21 }
+        ),
+        maxDeltaEFromSeed: normalizeNumber(
+          profile.maxDeltaEFromSeed,
+          `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmHueBandByVariant.${variantId}.${roleId}.maxDeltaEFromSeed`,
+          { min: 0, max: 200, allowNull: true }
+        ),
+      }
+    }
+    roleSignalProfile.warmHueBandByVariant[variantId] = normalizedRoleMap
+  }
+
+  const rawWarmGamutGuard = rawRoleSignalProfile.warmGamutGuard ?? {}
+  assert(rawWarmGamutGuard && typeof rawWarmGamutGuard === 'object' && !Array.isArray(rawWarmGamutGuard), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmGamutGuard must be an object`)
+  const warmGamutRoles = normalizeRoleList(
+    rawWarmGamutGuard.roles ?? Array.from(roleIds),
+    roleIds,
+    `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmGamutGuard.roles`
+  )
+  const warmForbiddenHueMin = normalizeNumber(
+    rawWarmGamutGuard.forbiddenHueMin ?? 170,
+    `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmGamutGuard.forbiddenHueMin`,
+    { min: 0, max: 360 }
+  )
+  const warmForbiddenHueMax = normalizeNumber(
+    rawWarmGamutGuard.forbiddenHueMax ?? 250,
+    `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmGamutGuard.forbiddenHueMax`,
+    { min: 0, max: 360 }
+  )
+  assert(warmForbiddenHueMin !== warmForbiddenHueMax, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmGamutGuard forbidden hue bounds cannot be identical`)
+  roleSignalProfile.warmGamutGuard = {
+    forbiddenHueMin: warmForbiddenHueMin,
+    forbiddenHueMax: warmForbiddenHueMax,
+    minSaturation: normalizeNumber(
+      rawWarmGamutGuard.minSaturation ?? 0.08,
+      `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmGamutGuard.minSaturation`,
+      { min: 0, max: 1 }
+    ),
+    roles: warmGamutRoles.length > 0 ? warmGamutRoles : Array.from(roleIds),
+  }
+
+  const rawWarmExposureProfile = rawRoleSignalProfile.warmExposureProfile ?? null
+  if (rawWarmExposureProfile != null) {
+    assert(rawWarmExposureProfile && typeof rawWarmExposureProfile === 'object' && !Array.isArray(rawWarmExposureProfile), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile must be an object`)
+
+    const rawLanguageMixWeights = rawWarmExposureProfile.languageMixWeights ?? {}
+    assert(rawLanguageMixWeights && typeof rawLanguageMixWeights === 'object' && !Array.isArray(rawLanguageMixWeights), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.languageMixWeights must be an object`)
+    const languageMixWeights = {}
+    for (const [langIdRaw, weightRaw] of Object.entries(rawLanguageMixWeights)) {
+      const langId = String(langIdRaw || '').trim()
+      assert(langId, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.languageMixWeights has invalid language id`)
+      languageMixWeights[langId] = normalizeNumber(
+        weightRaw,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.languageMixWeights.${langId}`,
+        { min: 0, max: 100 }
+      )
+    }
+    assert(Object.keys(languageMixWeights).length > 0, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.languageMixWeights must not be empty`)
+
+    const rawRoleFrequencyByLanguage = rawWarmExposureProfile.roleFrequencyByLanguage ?? {}
+    assert(rawRoleFrequencyByLanguage && typeof rawRoleFrequencyByLanguage === 'object' && !Array.isArray(rawRoleFrequencyByLanguage), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.roleFrequencyByLanguage must be an object`)
+    const roleFrequencyByLanguage = {}
+    for (const [langIdRaw, roleMap] of Object.entries(rawRoleFrequencyByLanguage)) {
+      const langId = String(langIdRaw || '').trim()
+      assert(langId, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.roleFrequencyByLanguage has invalid language id`)
+      roleFrequencyByLanguage[langId] = normalizeRoleNumberMap(
+        roleMap,
+        roleIds,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.roleFrequencyByLanguage.${langId}`,
+        { min: 0, max: 1 }
+      )
+    }
+    for (const langId of Object.keys(languageMixWeights)) {
+      assert(
+        roleFrequencyByLanguage[langId],
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.roleFrequencyByLanguage missing language "${langId}" from languageMixWeights`
+      )
+    }
+
+    const saliencyByRole = normalizeRoleNumberMap(
+      rawWarmExposureProfile.saliencyByRole ?? {},
+      roleIds,
+      `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.saliencyByRole`,
+      { min: 0, max: 4 }
+    )
+    assert(Object.keys(saliencyByRole).length > 0, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.saliencyByRole must not be empty`)
+
+    const rawVariantTuning = rawWarmExposureProfile.variantTuning ?? {}
+    assert(rawVariantTuning && typeof rawVariantTuning === 'object' && !Array.isArray(rawVariantTuning), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning must be an object`)
+    const exposureVariantIds = new Set(['default', ...variantIds])
+    const variantTuning = {}
+    for (const [variantId, profile] of Object.entries(rawVariantTuning)) {
+      assert(exposureVariantIds.has(variantId), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning has unknown variant "${variantId}"`)
+      assert(profile && typeof profile === 'object' && !Array.isArray(profile), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId} must be an object`)
+
+      const requireAll = variantId === 'default'
+      const frequencyWeight = requireAll
+        ? normalizeNumber(profile.frequencyWeight, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.frequencyWeight`, { min: 0, max: 4 })
+        : normalizeOptionalNumber(profile.frequencyWeight, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.frequencyWeight`, { min: 0, max: 4 })
+      const saliencyWeight = requireAll
+        ? normalizeNumber(profile.saliencyWeight, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.saliencyWeight`, { min: 0, max: 4 })
+        : normalizeOptionalNumber(profile.saliencyWeight, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.saliencyWeight`, { min: 0, max: 4 })
+      const baseChromaFactor = requireAll
+        ? normalizeNumber(profile.baseChromaFactor, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.baseChromaFactor`, { min: 0, max: 4 })
+        : normalizeOptionalNumber(profile.baseChromaFactor, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.baseChromaFactor`, { min: 0, max: 4 })
+      const minChromaFactor = requireAll
+        ? normalizeNumber(profile.minChromaFactor, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.minChromaFactor`, { min: 0, max: 4 })
+        : normalizeOptionalNumber(profile.minChromaFactor, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.minChromaFactor`, { min: 0, max: 4 })
+      const maxChromaFactor = requireAll
+        ? normalizeNumber(profile.maxChromaFactor, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.maxChromaFactor`, { min: 0, max: 4 })
+        : normalizeOptionalNumber(profile.maxChromaFactor, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.maxChromaFactor`, { min: 0, max: 4 })
+      const baseLightnessLift = requireAll
+        ? normalizeNumber(profile.baseLightnessLift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.baseLightnessLift`, { min: -100, max: 100 })
+        : normalizeOptionalNumber(profile.baseLightnessLift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.baseLightnessLift`, { min: -100, max: 100 })
+      const frequencyLightnessShift = requireAll
+        ? normalizeNumber(profile.frequencyLightnessShift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.frequencyLightnessShift`, { min: -100, max: 100 })
+        : normalizeOptionalNumber(profile.frequencyLightnessShift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.frequencyLightnessShift`, { min: -100, max: 100 })
+      const saliencyLightnessShift = requireAll
+        ? normalizeNumber(profile.saliencyLightnessShift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.saliencyLightnessShift`, { min: -100, max: 100 })
+        : normalizeOptionalNumber(profile.saliencyLightnessShift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.saliencyLightnessShift`, { min: -100, max: 100 })
+      const minLightnessLift = requireAll
+        ? normalizeNumber(profile.minLightnessLift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.minLightnessLift`, { min: -100, max: 100 })
+        : normalizeOptionalNumber(profile.minLightnessLift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.minLightnessLift`, { min: -100, max: 100 })
+      const maxLightnessLift = requireAll
+        ? normalizeNumber(profile.maxLightnessLift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.maxLightnessLift`, { min: -100, max: 100 })
+        : normalizeOptionalNumber(profile.maxLightnessLift, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.maxLightnessLift`, { min: -100, max: 100 })
+      const maxChromaByRole = normalizeRoleNumberMap(
+        profile.maxChromaByRole ?? {},
+        roleIds,
+        `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId}.maxChromaByRole`,
+        { min: 0, max: 200, allowNull: true }
+      )
+
+      const normalizedProfile = {
+        frequencyWeight,
+        saliencyWeight,
+        baseChromaFactor,
+        minChromaFactor,
+        maxChromaFactor,
+        baseLightnessLift,
+        frequencyLightnessShift,
+        saliencyLightnessShift,
+        minLightnessLift,
+        maxLightnessLift,
+        maxChromaByRole,
+      }
+      if (
+        normalizedProfile.minChromaFactor != null &&
+        normalizedProfile.maxChromaFactor != null
+      ) {
+        assert(
+          normalizedProfile.minChromaFactor <= normalizedProfile.maxChromaFactor,
+          `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId} minChromaFactor must be <= maxChromaFactor`
+        )
+      }
+      if (
+        normalizedProfile.minLightnessLift != null &&
+        normalizedProfile.maxLightnessLift != null
+      ) {
+        assert(
+          normalizedProfile.minLightnessLift <= normalizedProfile.maxLightnessLift,
+          `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.${variantId} minLightnessLift must be <= maxLightnessLift`
+        )
+      }
+
+      variantTuning[variantId] = Object.fromEntries(
+        Object.entries(normalizedProfile).filter(([key, value]) => (
+          value !== undefined &&
+          !(key === 'maxChromaByRole' && value && typeof value === 'object' && Object.keys(value).length === 0)
+        ))
+      )
+    }
+    assert(variantTuning.default, `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile.warmExposureProfile.variantTuning.default is required`)
+
+    roleSignalProfile.warmExposureProfile = {
+      languageMixWeights,
+      roleFrequencyByLanguage,
+      saliencyByRole,
+      variantTuning,
+    }
   }
 
   const rawNearForegroundByVariant = rawRoleSignalProfile.nearForegroundDeltaEByVariant ?? {}

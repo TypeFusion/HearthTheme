@@ -51,10 +51,10 @@ Softer light contrast for longer daytime sessions and calmer reading flow.
 ## Accessibility snapshot
 
 - Dark editor foreground/background contrast: `9.9`
-- Dark Soft editor foreground/background contrast: `8.9`
+- Dark Soft editor foreground/background contrast: `8.1`
 - Light editor foreground/background contrast: `12.7`
-- Light Soft editor foreground/background contrast: `7.3`
-- Comment contrast window: `2.4 - 3.6`
+- Light Soft editor foreground/background contrast: `7.7`
+- Comment contrast window: `2.7 - 3.4`
 
 ## Learn more
 

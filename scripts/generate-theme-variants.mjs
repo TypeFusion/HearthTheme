@@ -37,10 +37,14 @@ const LIGHT_READABILITY_SEARCH_PROFILE = COLOR_SYSTEM_TUNING.lightReadabilitySea
 const TELEMETRY_PROFILE = COLOR_SYSTEM_TUNING.telemetryProfile
 const ROLE_SIGNAL_PROFILE = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
 const ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.coolHueBandByVariant || {}
+const ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.warmHueBandByVariant || {}
 const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEByVariant || {}
+const ROLE_SIGNAL_WARM_GAMUT_GUARD = ROLE_SIGNAL_PROFILE.warmGamutGuard || null
+const ROLE_SIGNAL_WARM_EXPOSURE_PROFILE = ROLE_SIGNAL_PROFILE.warmExposureProfile || null
 const DEFAULT_LIGHT_CALIBRATION = LIGHT_READABILITY_CALIBRATION.default || {}
 const LIGHT_ROLE_CALIBRATION = LIGHT_READABILITY_CALIBRATION.byRole || {}
 const GLOBAL_SEPARATION_MAX_BOOST_ROUNDS = VARIANT_BOOST_PROFILE.default?.maxBoostRounds ?? 6
+let WARM_ROLE_FREQUENCY_CACHE = null
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'))
@@ -774,11 +778,11 @@ function applySoftRoleChromaBudget(theme, variantId, warnings) {
   }
 }
 
-function enforceRoleCoolHueBand(theme, variantId, warnings) {
+function enforceRoleHueBand(theme, variantId, warnings, bandByVariant, label) {
   const bgColor = resolveHexValue(theme?.colors?.[REF_BG_KEY])
   if (!bgColor) return
 
-  const roleBands = resolveVariantRoleProfile(ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, variantId)
+  const roleBands = resolveVariantRoleProfile(bandByVariant, variantId)
   for (const [roleId, band] of Object.entries(roleBands)) {
     if (!band || typeof band !== 'object') continue
     const roleDef = getRoleDefById(roleId)
@@ -824,7 +828,7 @@ function enforceRoleCoolHueBand(theme, variantId, warnings) {
     }
 
     if (!bestHex || String(bestHex).toLowerCase() === String(current).toLowerCase()) {
-      warnings.push(`${variantId}: role signal cool band could not adjust ${roleId} into hue range ${band.hueMin}-${band.hueMax}`)
+      warnings.push(`${variantId}: role signal ${label} could not adjust ${roleId} into hue range ${band.hueMin}-${band.hueMax}`)
       continue
     }
 
@@ -835,8 +839,160 @@ function enforceRoleCoolHueBand(theme, variantId, warnings) {
 
     const nextHue = hexHue(bestHex)
     warnings.push(
-      `telemetry: ${variantId}: role signal cool band adjusted ${roleId} hue ${(seedHue ?? 0).toFixed(1)} -> ${(nextHue ?? 0).toFixed(1)}`
+      `telemetry: ${variantId}: role signal ${label} adjusted ${roleId} hue ${(seedHue ?? 0).toFixed(1)} -> ${(nextHue ?? 0).toFixed(1)}`
     )
+  }
+}
+
+function computeWarmRoleFrequencyMap(profile) {
+  if (!profile) return {}
+  if (WARM_ROLE_FREQUENCY_CACHE) return WARM_ROLE_FREQUENCY_CACHE
+
+  const mix = profile.languageMixWeights || {}
+  const byLanguage = profile.roleFrequencyByLanguage || {}
+  const weighted = {}
+  let total = 0
+
+  for (const [langId, weight] of Object.entries(mix)) {
+    if (!(weight > 0)) continue
+    const freqMap = byLanguage[langId] || {}
+    total += weight
+    for (const [roleId, freq] of Object.entries(freqMap)) {
+      if (!(freq >= 0)) continue
+      weighted[roleId] = (weighted[roleId] || 0) + freq * weight
+    }
+  }
+
+  if (total > 0) {
+    for (const roleId of Object.keys(weighted)) {
+      weighted[roleId] = weighted[roleId] / total
+    }
+  }
+  WARM_ROLE_FREQUENCY_CACHE = weighted
+  return weighted
+}
+
+function resolveWarmExposureVariantProfile(variantId) {
+  const profile = ROLE_SIGNAL_WARM_EXPOSURE_PROFILE
+  if (!profile) return null
+  const base = profile.variantTuning?.default || null
+  if (!base) return null
+  const override = profile.variantTuning?.[variantId] || {}
+  return {
+    ...base,
+    ...override,
+    maxChromaByRole: {
+      ...(base.maxChromaByRole || {}),
+      ...(override.maxChromaByRole || {}),
+    },
+  }
+}
+
+function applyWarmRoleExposureBalance(theme, variantId, warnings) {
+  const profile = ROLE_SIGNAL_WARM_EXPOSURE_PROFILE
+  if (!profile) return
+  const variantProfile = resolveWarmExposureVariantProfile(variantId)
+  if (!variantProfile) return
+
+  const roleFrequency = computeWarmRoleFrequencyMap(profile)
+  const roleSaliency = profile.saliencyByRole || {}
+  const maxFrequency = Math.max(1e-6, ...Object.values(roleFrequency).filter((value) => Number.isFinite(value)))
+  const maxSaliency = Math.max(1e-6, ...Object.values(roleSaliency).filter((value) => Number.isFinite(value)))
+
+  for (const roleDef of READABILITY_ROLE_DEFS) {
+    const roleId = roleDef.id
+    if (!roleId) continue
+    const current = getRoleColorFromTheme(theme, roleDef)
+    if (!current) continue
+
+    const frequency = roleFrequency[roleId] ?? 0
+    const saliency = roleSaliency[roleId] ?? 1
+    const frequencyNorm = clamp(frequency / maxFrequency, 0, 1)
+    const saliencyNorm = clamp(saliency / maxSaliency, 0, 1.2)
+
+    const chromaFactor = clamp(
+      variantProfile.baseChromaFactor +
+      saliencyNorm * variantProfile.saliencyWeight -
+      frequencyNorm * variantProfile.frequencyWeight,
+      variantProfile.minChromaFactor,
+      variantProfile.maxChromaFactor
+    )
+    const lightnessLift = clamp(
+      variantProfile.baseLightnessLift +
+      (0.5 - frequencyNorm) * variantProfile.frequencyLightnessShift +
+      (saliencyNorm - 0.5) * variantProfile.saliencyLightnessShift,
+      variantProfile.minLightnessLift,
+      variantProfile.maxLightnessLift
+    )
+    const maxChroma = variantProfile.maxChromaByRole?.[roleId] ?? null
+    const next = scaleColorChroma(current, chromaFactor, lightnessLift, maxChroma)
+    if (String(next).toLowerCase() === String(current).toLowerCase()) continue
+
+    applyRoleColorToTokenEntries(theme, roleDef.scopes || [], next)
+    for (const semanticKey of roleDef.semanticKeys || []) {
+      setSemanticColor(theme, semanticKey, next)
+    }
+
+    const drift = deltaE(current, next) ?? 0
+    warnings.push(
+      `telemetry: ${variantId}: warm exposure tuned ${roleId} (freq=${frequency.toFixed(3)}, saliency=${saliency.toFixed(2)}) deltaE ${drift.toFixed(1)}`
+    )
+  }
+}
+
+function enforceWarmGamutGuard(theme, variantId, warnings) {
+  const guard = ROLE_SIGNAL_WARM_GAMUT_GUARD
+  if (!guard) return
+
+  for (const roleId of guard.roles || []) {
+    const roleDef = getRoleDefById(roleId)
+    if (!roleDef) continue
+    const current = getRoleColorFromTheme(theme, roleDef)
+    if (!current) continue
+
+    const rgb = hexToRgb(current)
+    if (!rgb) continue
+    const hsl = rgbToHsl(rgb)
+    if (!hsl) continue
+    if (hsl.s < (guard.minSaturation ?? 0) || !isHueInBand(hsl.h, guard.forbiddenHueMin, guard.forbiddenHueMax)) continue
+
+    const seedLab = xyzToLab(rgbToXyz(rgb))
+    const [seedL, seedC, seedHue] = labToLch(seedLab)
+    let bestHex = null
+    let bestScore = Number.POSITIVE_INFINITY
+
+    for (const hueShift of [-90, -72, -54, -36, -24, 24, 36, 54, 72, 90, 108, 126, 144]) {
+      const candidateHue = ((seedHue + hueShift) % 360 + 360) % 360
+      if (isHueInBand(candidateHue, guard.forbiddenHueMin, guard.forbiddenHueMax)) continue
+      for (const chromaScale of [0.8, 0.9, 1, 1.1]) {
+        for (const lightnessShift of [-6, -3, 0, 3, 6]) {
+          const candidateHex = labToHex(lchToLab([
+            clamp(seedL + lightnessShift, 6, 94),
+            clamp(seedC * chromaScale, 2, 90),
+            candidateHue,
+          ]))
+          const realizedHue = hexHue(candidateHex)
+          if (realizedHue == null || isHueInBand(realizedHue, guard.forbiddenHueMin, guard.forbiddenHueMax)) continue
+          const drift = deltaE(candidateHex, current) ?? 0
+          const score = drift + hueDistance(realizedHue, seedHue) * 0.08
+          if (score < bestScore) {
+            bestScore = score
+            bestHex = candidateHex
+          }
+        }
+      }
+    }
+
+    if (!bestHex || String(bestHex).toLowerCase() === String(current).toLowerCase()) {
+      warnings.push(`${variantId}: warm gamut guard could not re-map ${roleId} out of ${guard.forbiddenHueMin}-${guard.forbiddenHueMax}`)
+      continue
+    }
+
+    applyRoleColorToTokenEntries(theme, roleDef.scopes || [], bestHex)
+    for (const semanticKey of roleDef.semanticKeys || []) {
+      setSemanticColor(theme, semanticKey, bestHex)
+    }
+    warnings.push(`telemetry: ${variantId}: warm gamut guard remapped ${roleId}`)
   }
 }
 
@@ -930,8 +1086,13 @@ function enforceNearForegroundBudget(theme, variantId, warnings) {
 }
 
 function applyRoleSignalProfile(theme, variantId, warnings) {
-  enforceRoleCoolHueBand(theme, variantId, warnings)
+  enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, 'cool band')
+  enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT, 'warm band')
+  applyWarmRoleExposureBalance(theme, variantId, warnings)
+  enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT, 'warm band')
+  enforceWarmGamutGuard(theme, variantId, warnings)
   enforceNearForegroundBudget(theme, variantId, warnings)
+  enforceWarmGamutGuard(theme, variantId, warnings)
 }
 
 function resolveRoleIdForTokenEntry(entry) {
