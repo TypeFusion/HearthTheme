@@ -1,6 +1,6 @@
 # Hearth Theme Baseline
 
-Updated: 2026-03-27
+Updated: 2026-03-28
 
 ## 1) Design Intent
 
@@ -17,18 +17,18 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 
 | Role | Dark | Dark Soft | Light | Light Soft | Narrative Role |
 | --- | --- | --- | --- | --- | --- |
-| background | `#23201c` | `#392e1f` | `#ece2d3` | `#e4d8c4` | Soot board base vs parchment desk-paper base |
+| background | `#23201c` | `#2c261e` | `#ece2d3` | `#e4d8c4` | Soot board base vs parchment desk-paper base |
 | foreground | `#d3c9b8` | `#d3c9b8` | `#2a1e0f` | `#4b3a27` | Chalk-walnut ink readability spine |
-| keyword | `#c55d45` | `#b87963` | `#a54735` | `#a4604c` | Brick-red control-flow anchors (accent only) |
-| operator | `#a18d6a` | `#ac9271` | `#675844` | `#806d56` | Brass connective symbols with low noise |
-| function | `#7a92a1` | `#7e8184` | `#536b78` | `#626f76` | Denim-blue callable anchors for deliberate contrast |
-| method | `#ae6946` | `#95654a` | `#905e41` | `#885e48` | Leather-orange method calls for secondary action |
-| property | `#80855f` | `#87835b` | `#5e6349` | `#69704f` | Muted olive member access cues |
-| string | `#9ca57f` | `#a8ab88` | `#787c5e` | `#868d6e` | Calm olive literals for reading rhythm |
-| number | `#ca8351` | `#ce9868` | `#b66b36` | `#b57f56` | Sunset terracotta numeric constants |
-| type | `#8c8650` | `#ad9558` | `#756f36` | `#8f814e` | Dark-ochre structural symbols |
-| variable | `#c8bdac` | `#cabfb1` | `#553e2d` | `#66503e` | Coffee-neutral information carriers |
-| comment | `#74695a` | `#8f8069` | `#8a7a65` | `#8e806c` | Quiet guidance layer |
+| keyword | `#c55d45` | `#b67a65` | `#a54735` | `#a4604c` | Brick-red control-flow anchors (accent only) |
+| operator | `#a18d6a` | `#a99274` | `#675844` | `#806d56` | Brass connective symbols with low noise |
+| function | `#7a92a1` | `#7a8083` | `#536b78` | `#626f76` | Denim-blue callable anchors for deliberate contrast |
+| method | `#ae6946` | `#93674e` | `#905e41` | `#885e48` | Leather-orange method calls for secondary action |
+| property | `#80855f` | `#868260` | `#5e6349` | `#69704f` | Muted olive member access cues |
+| string | `#9ca57f` | `#a7aa8b` | `#787c5e` | `#868d6e` | Calm olive literals for reading rhythm |
+| number | `#ca8351` | `#c9996d` | `#b66b36` | `#b57f56` | Sunset terracotta numeric constants |
+| type | `#8c8650` | `#aa9460` | `#756f36` | `#8f814e` | Dark-ochre structural symbols |
+| variable | `#c8bdac` | `#c9c0b2` | `#553e2d` | `#66503e` | Coffee-neutral information carriers |
+| comment | `#74695a` | `#8e806a` | `#8a7a65` | `#8e806c` | Quiet guidance layer |
 
 ## 3) Readability Budget (Theme Audit Gates)
 
@@ -58,15 +58,15 @@ The following thresholds are enforced by `scripts/theme-audit.mjs`.
 Current snapshot from audit:
 
 - dark fg/bg: `9.9`
-- dark soft fg/bg: `8.1`
+- dark soft fg/bg: `9.1`
 - light fg/bg: `12.7`
 - light soft fg/bg: `7.7`
 - dark comment: `3.0`
-- dark soft comment: `3.4`
+- dark soft comment: `3.9`
 - light comment: `3.2`
 - light soft comment: `2.7`
 - dark operator: `5.0`
-- dark soft operator: `4.5`
+- dark soft operator: `5.0`
 - light operator: `5.4`
 - light soft operator: `3.5`
 

@@ -16,7 +16,7 @@
     },
     {
       "id": "darkSoft",
-      "svgSha256": "9922900dcb8e21eac5fc10f6c028339e82f10a1d7f712342b81c7e1e053b7ae6",
+      "svgSha256": "fa8382fb96034c964e36743d885643acf512b3bae72fb7bf821edb41ad449a99",
       "output": "extension/images/preview-dark-soft.png",
       "webOutput": "public/previews/preview-dark-soft.png"
     },
@@ -34,7 +34,7 @@
     }
   ],
   "contrastImage": {
-    "svgSha256": "9d84c31ca7e6bf9c04e157a039f7eb6690b34d63b465a2459870cc439a1b74d2",
+    "svgSha256": "520273fe08001e8df48f275faa59277266f7384ec2c54cd65485962aa726e67f",
     "outputs": [
       "extension/images/preview-contrast-v2.png",
       "extension/images/preview-contrast.png"

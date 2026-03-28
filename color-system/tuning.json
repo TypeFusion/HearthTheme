@@ -350,8 +350,8 @@
     "function": {
       "hueMin": 198,
       "hueMax": 216,
-      "maxSaturation": 0.12,
-      "maxLightness": 0.53
+      "maxSaturation": 0.2,
+      "maxLightness": 0.5
     },
     "warmRoles": [
       "comment",
@@ -414,8 +414,9 @@
         },
         "operator": {
           "minDeltaE": 12,
-          "maxDeltaE": 30,
-          "minBgContrast": 2.6
+          "maxDeltaE": 26,
+          "minBgContrast": 2.6,
+          "targetDeltaE": 18
         }
       },
       "light": {
@@ -473,7 +474,10 @@
         "property->string": 8
       },
       "darkSoft": {
-        "type->operator": 7.8
+        "type->operator": 8.8,
+        "function->method": 10.5,
+        "method->property": 10.5,
+        "function->property": 11.5
       },
       "lightSoft": {
         "method->variable": 11,
@@ -562,43 +566,43 @@
           "hueMin": 198,
           "hueMax": 216,
           "minBgContrast": 2.6,
-          "maxDeltaEFromSeed": 48
+          "maxDeltaEFromSeed": 22
         },
         "method": {
           "hueMin": 14,
           "hueMax": 24,
           "minBgContrast": 2.3,
-          "maxDeltaEFromSeed": 54
+          "maxDeltaEFromSeed": 28
         },
         "number": {
           "hueMin": 22,
           "hueMax": 38,
           "minBgContrast": 2.3,
-          "maxDeltaEFromSeed": 56
+          "maxDeltaEFromSeed": 36
         },
         "operator": {
           "hueMin": 28,
           "hueMax": 44,
           "minBgContrast": 2.4,
-          "maxDeltaEFromSeed": 52
+          "maxDeltaEFromSeed": 30
         },
         "type": {
           "hueMin": 40,
           "hueMax": 56,
           "minBgContrast": 2.3,
-          "maxDeltaEFromSeed": 54
+          "maxDeltaEFromSeed": 30
         },
         "property": {
           "hueMin": 40,
           "hueMax": 62,
           "minBgContrast": 2.3,
-          "maxDeltaEFromSeed": 56
+          "maxDeltaEFromSeed": 30
         },
         "string": {
           "hueMin": 42,
           "hueMax": 68,
           "minBgContrast": 2.2,
-          "maxDeltaEFromSeed": 56
+          "maxDeltaEFromSeed": 36
         }
       }
     },
@@ -757,18 +761,20 @@
           }
         },
         "darkSoft": {
-          "baseChromaFactor": 0.86,
-          "maxChromaFactor": 1.08,
-          "minLightnessLift": -2.8,
-          "maxLightnessLift": 2.8,
+          "baseChromaFactor": 0.8,
+          "maxChromaFactor": 1,
+          "minLightnessLift": -2.2,
+          "maxLightnessLift": 1.6,
           "maxChromaByRole": {
-            "function": 34,
-            "method": 54,
-            "number": 58,
-            "operator": 56,
-            "type": 50,
-            "property": 40,
-            "string": 44
+            "function": 50,
+            "method": 44,
+            "number": 50,
+            "operator": 44,
+            "type": 42,
+            "property": 34,
+            "string": 38,
+            "keyword": 50,
+            "tag": 46
           }
         },
         "light": {
@@ -983,48 +989,48 @@
     "darkSoft": {
       "keyword": {
         "factor": 0.86,
-        "maxChroma": 50,
+        "maxChroma": 46,
         "lightnessLift": -0.7
       },
       "number": {
-        "factor": 0.95,
-        "maxChroma": 58,
-        "lightnessLift": 0.2
+        "factor": 0.9,
+        "maxChroma": 50,
+        "lightnessLift": -0.25
       },
       "tag": {
         "factor": 0.84,
-        "maxChroma": 48,
-        "lightnessLift": -0.7
+        "maxChroma": 44,
+        "lightnessLift": -0.65
       },
       "function": {
-        "factor": 0.74,
-        "maxChroma": 34,
-        "lightnessLift": 0.2
+        "factor": 1.2,
+        "maxChroma": 50,
+        "lightnessLift": -0.55
       },
       "method": {
-        "factor": 0.94,
-        "maxChroma": 54,
-        "lightnessLift": -0.9
+        "factor": 0.9,
+        "maxChroma": 44,
+        "lightnessLift": -0.75
       },
       "operator": {
-        "factor": 1.04,
-        "maxChroma": 56,
-        "lightnessLift": 0.2
+        "factor": 0.95,
+        "maxChroma": 44,
+        "lightnessLift": -0.25
       },
       "property": {
-        "factor": 1.02,
-        "maxChroma": 44,
-        "lightnessLift": 0
+        "factor": 0.95,
+        "maxChroma": 38,
+        "lightnessLift": -0.2
       },
       "type": {
-        "factor": 1.06,
-        "maxChroma": 50,
-        "lightnessLift": 0.2
+        "factor": 0.96,
+        "maxChroma": 42,
+        "lightnessLift": -0.25
       },
       "string": {
-        "factor": 0.98,
-        "maxChroma": 44,
-        "lightnessLift": 0.2
+        "factor": 0.94,
+        "maxChroma": 38,
+        "lightnessLift": -0.2
       }
     },
     "light": {
