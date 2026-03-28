@@ -60,7 +60,7 @@ export const tokens = {
   "lightSoft": {
     "bg": "#e4d8c4",
     "fg": "#4b3a27",
-    "lineBg": "#e2d6c2",
+    "lineBg": "#dccdb5",
     "lineNo": "#9f8b6d",
     "status": "#8c5830",
     "sidebar": "#d8c8ad",
