@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, statSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import {
   COLOR_SYSTEM_SEMANTIC_PATH,
@@ -8,6 +8,16 @@ import {
   loadColorSystemVariants,
   loadRoleAdapters,
 } from './color-system.mjs'
+import {
+  contrastRatio,
+  deltaE,
+  hexToRgba,
+  hueDistance,
+  isHueInBand,
+  normalizeHex,
+  rgbToHsl,
+  rgbaToHex,
+} from './color-utils.mjs'
 
 const VARIANT_SPEC = loadColorSystemVariants()
 const THEME_FILES = getThemeMetaList()
@@ -88,10 +98,14 @@ const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEB
 const ROLE_SIGNAL_CRITICAL_PAIRS_BY_VARIANT = ROLE_SIGNAL_PROFILE.criticalPairDeltaEByVariant || {}
 const ROLE_SIGNAL_WARM_GAMUT_GUARD = ROLE_SIGNAL_PROFILE.warmGamutGuard || null
 const DARK_SOFT_PERCEPTION_GUARD = COLOR_SYSTEM_TUNING.darkSoftPerceptionGuard || null
+const INTERACTION_STATE_BUDGET = COLOR_SYSTEM_TUNING.interactionStateBudget || {}
+const INTERACTION_REPORT_JSON_PATH = 'reports/theme-audit-interaction.json'
+const INTERACTION_REPORT_MD_PATH = 'reports/theme-audit-interaction.md'
 
 const issues = []
 const warnings = []
 const notes = []
+const interactionMetricsByVariant = {}
 
 function addIssue(message) {
   issues.push(message)
@@ -179,114 +193,6 @@ function getSemanticColor(theme, semanticKey) {
   return null
 }
 
-function normalizeHex(hex) {
-  if (typeof hex !== 'string') return null
-  const value = hex.trim().toLowerCase()
-  if (/^#[0-9a-f]{6}$/.test(value)) return value
-  if (/^#[0-9a-f]{8}$/.test(value)) return value.slice(0, 7)
-  return null
-}
-
-function hexToRgb(hex) {
-  const normalized = normalizeHex(hex)
-  if (!normalized) return null
-  const raw = normalized.slice(1)
-  return [
-    Number.parseInt(raw.slice(0, 2), 16),
-    Number.parseInt(raw.slice(2, 4), 16),
-    Number.parseInt(raw.slice(4, 6), 16),
-  ]
-}
-
-function toLinear(channel) {
-  const c = channel / 255
-  return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-}
-
-function luminance(hex) {
-  const rgb = hexToRgb(hex)
-  if (!rgb) return null
-  const [r, g, b] = rgb.map(toLinear)
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
-}
-
-function contrastRatio(a, b) {
-  const l1 = luminance(a)
-  const l2 = luminance(b)
-  if (l1 == null || l2 == null) return null
-  const hi = Math.max(l1, l2)
-  const lo = Math.min(l1, l2)
-  return (hi + 0.05) / (lo + 0.05)
-}
-
-function rgbToHsl(hex) {
-  const rgb = hexToRgb(hex)
-  if (!rgb) return null
-  let [r, g, b] = rgb.map((x) => x / 255)
-  const max = Math.max(r, g, b)
-  const min = Math.min(r, g, b)
-  const d = max - min
-  let h = 0
-  const l = (max + min) / 2
-  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1))
-
-  if (d !== 0) {
-    if (max === r) h = 60 * (((g - b) / d) % 6)
-    else if (max === g) h = 60 * ((b - r) / d + 2)
-    else h = 60 * ((r - g) / d + 4)
-  }
-
-  if (h < 0) h += 360
-  return { h, s, l }
-}
-
-function hueDiff(a, b) {
-  const diff = Math.abs(a - b)
-  return Math.min(diff, 360 - diff)
-}
-
-function isHueInBand(hue, minHue, maxHue) {
-  if (hue == null) return false
-  if (minHue <= maxHue) return hue >= minHue && hue <= maxHue
-  return hue >= minHue || hue <= maxHue
-}
-
-function rgbToXyz([r, g, b]) {
-  const rl = toLinear(r)
-  const gl = toLinear(g)
-  const bl = toLinear(b)
-  return [
-    rl * 0.4124564 + gl * 0.3575761 + bl * 0.1804375,
-    rl * 0.2126729 + gl * 0.7151522 + bl * 0.0721750,
-    rl * 0.0193339 + gl * 0.1191920 + bl * 0.9503041,
-  ]
-}
-
-function xyzToLab([x, y, z]) {
-  const xr = x / 0.95047
-  const yr = y / 1.0
-  const zr = z / 1.08883
-
-  const f = (t) => (t > 0.008856 ? t ** (1 / 3) : 7.787 * t + 16 / 116)
-  const fx = f(xr)
-  const fy = f(yr)
-  const fz = f(zr)
-  return [
-    116 * fy - 16,
-    500 * (fx - fy),
-    200 * (fy - fz),
-  ]
-}
-
-function deltaE(hexA, hexB) {
-  const rgbA = hexToRgb(hexA)
-  const rgbB = hexToRgb(hexB)
-  if (!rgbA || !rgbB) return null
-  const [l1, a1, b1] = xyzToLab(rgbToXyz(rgbA))
-  const [l2, a2, b2] = xyzToLab(rgbToXyz(rgbB))
-  return Math.sqrt((l1 - l2) ** 2 + (a1 - a2) ** 2 + (b1 - b2) ** 2)
-}
-
 function fixed(n) {
   return Number(n).toFixed(1)
 }
@@ -320,6 +226,174 @@ function resolveCriticalPairThresholds(profileByVariant, variantId) {
     ...base,
     ...specific,
   }
+}
+
+function getInteractionBudget(variantId) {
+  return {
+    ...(INTERACTION_STATE_BUDGET.default || {}),
+    ...(INTERACTION_STATE_BUDGET[variantId] || {}),
+  }
+}
+
+function blendStateColorOverBackground(colorHex, bgHex) {
+  const state = hexToRgba(colorHex)
+  const bg = hexToRgba(bgHex)
+  if (!state || !bg) return colorHex
+  if (!state.hasAlpha) return rgbaToHex({ r: state.r, g: state.g, b: state.b, hasAlpha: false })
+  const alpha = state.a / 255
+  return rgbaToHex({
+    r: state.r * alpha + bg.r * (1 - alpha),
+    g: state.g * alpha + bg.g * (1 - alpha),
+    b: state.b * alpha + bg.b * (1 - alpha),
+    hasAlpha: false,
+  })
+}
+
+function contrastAgainstEditorBackground(colorHex, bgHex) {
+  const blended = blendStateColorOverBackground(colorHex, bgHex)
+  return contrastRatio(blended, bgHex)
+}
+
+function roundMetric(value, digits = 3) {
+  if (value == null || Number.isNaN(value)) return null
+  return Number(value.toFixed(digits))
+}
+
+function validateInteractionStateBudget(themeMeta, theme) {
+  if (!theme) return
+  const bg = normalizeHex(theme.colors?.['editor.background'])
+  const lineHighlight = normalizeHex(theme.colors?.['editor.lineHighlightBackground'])
+  const listHover = normalizeHex(theme.colors?.['list.hoverBackground'])
+  const tabHover = normalizeHex(theme.colors?.['tab.hoverBackground'])
+  const lineNo = normalizeHex(theme.colors?.['editorLineNumber.foreground'])
+  const lineNoActive = normalizeHex(theme.colors?.['editorLineNumber.activeForeground'])
+  if (!bg || !lineHighlight || !listHover || !tabHover || !lineNo || !lineNoActive) return
+
+  const budget = getInteractionBudget(themeMeta.id)
+  if (!budget || Object.keys(budget).length === 0) return
+
+  const lineHighlightContrast = contrastAgainstEditorBackground(lineHighlight, bg)
+  const listHoverContrast = contrastAgainstEditorBackground(listHover, bg)
+  const tabHoverContrast = contrastAgainstEditorBackground(tabHover, bg)
+  const lineNumberContrast = contrastRatio(lineNo, bg)
+  const lineNumberActiveContrast = contrastRatio(lineNoActive, bg)
+  const lineNumberActiveDelta =
+    lineNumberContrast == null || lineNumberActiveContrast == null
+      ? null
+      : lineNumberActiveContrast - lineNumberContrast
+
+  const checks = [
+    {
+      id: 'editor.lineHighlightBackground',
+      metric: lineHighlightContrast,
+      threshold: budget.lineHighlightMinContrast,
+    },
+    {
+      id: 'list.hoverBackground',
+      metric: listHoverContrast,
+      threshold: budget.listHoverMinContrast,
+    },
+    {
+      id: 'tab.hoverBackground',
+      metric: tabHoverContrast,
+      threshold: budget.tabHoverMinContrast,
+    },
+    {
+      id: 'editorLineNumber.activeDelta',
+      metric: lineNumberActiveDelta,
+      threshold: budget.lineNumberActiveDeltaMin,
+    },
+  ]
+
+  const failed = []
+  for (const check of checks) {
+    if (typeof check.threshold !== 'number' || check.metric == null) continue
+    if (check.metric < check.threshold) {
+      failed.push({
+        id: check.id,
+        metric: roundMetric(check.metric),
+        threshold: roundMetric(check.threshold),
+      })
+      addIssue(
+        `${themeMeta.path}: interaction state "${check.id}" ${fixed(check.metric)} is below ${fixed(check.threshold)}`
+      )
+    }
+  }
+
+  interactionMetricsByVariant[themeMeta.id] = {
+    thresholds: {
+      lineHighlightMinContrast: budget.lineHighlightMinContrast ?? null,
+      listHoverMinContrast: budget.listHoverMinContrast ?? null,
+      tabHoverMinContrast: budget.tabHoverMinContrast ?? null,
+      lineNumberActiveDeltaMin: budget.lineNumberActiveDeltaMin ?? null,
+    },
+    metrics: {
+      lineHighlightContrast: roundMetric(lineHighlightContrast),
+      listHoverContrast: roundMetric(listHoverContrast),
+      tabHoverContrast: roundMetric(tabHoverContrast),
+      lineNumberContrast: roundMetric(lineNumberContrast),
+      lineNumberActiveContrast: roundMetric(lineNumberActiveContrast),
+      lineNumberActiveDelta: roundMetric(lineNumberActiveDelta),
+    },
+    status: failed.length === 0 ? 'pass' : 'fail',
+    failedChecks: failed,
+  }
+
+  if (failed.length === 0) {
+    addNote(
+      `${themeMeta.id}: interaction visibility line=${fixed(lineHighlightContrast)}, list.hover=${fixed(listHoverContrast)}, tab.hover=${fixed(tabHoverContrast)}, lineNoDelta=${fixed(lineNumberActiveDelta)}`
+    )
+  }
+}
+
+function buildInteractionReport() {
+  return {
+    schemaVersion: 1,
+    generatedBy: 'scripts/theme-audit.mjs',
+    thresholds: INTERACTION_STATE_BUDGET,
+    variants: interactionMetricsByVariant,
+  }
+}
+
+function buildInteractionMarkdown(report) {
+  const lines = [
+    '# Theme Audit Interaction State Report',
+    '',
+    'Auto-generated by `scripts/theme-audit.mjs`.',
+    '',
+    '| Variant | Status | lineHighlight | list.hover | tab.hover | lineNo delta |',
+    '| --- | --- | --- | --- | --- | --- |',
+  ]
+
+  for (const [variantId, detail] of Object.entries(report.variants || {})) {
+    const status = detail.status || 'n/a'
+    const metrics = detail.metrics || {}
+    lines.push(
+      `| ${variantId} | ${status} | ${metrics.lineHighlightContrast ?? 'n/a'} / ${detail.thresholds?.lineHighlightMinContrast ?? 'n/a'} | ${metrics.listHoverContrast ?? 'n/a'} / ${detail.thresholds?.listHoverMinContrast ?? 'n/a'} | ${metrics.tabHoverContrast ?? 'n/a'} / ${detail.thresholds?.tabHoverMinContrast ?? 'n/a'} | ${metrics.lineNumberActiveDelta ?? 'n/a'} / ${detail.thresholds?.lineNumberActiveDeltaMin ?? 'n/a'} |`
+    )
+  }
+
+  lines.push('', '## Failed Checks', '')
+  for (const [variantId, detail] of Object.entries(report.variants || {})) {
+    const failedChecks = detail.failedChecks || []
+    if (failedChecks.length === 0) continue
+    lines.push(`- ${variantId}`)
+    for (const check of failedChecks) {
+      lines.push(`  - ${check.id}: ${check.metric} < ${check.threshold}`)
+    }
+  }
+  if (!Object.values(report.variants || {}).some((detail) => (detail.failedChecks || []).length > 0)) {
+    lines.push('- none')
+  }
+  lines.push('')
+  return lines.join('\n')
+}
+
+function writeInteractionReport() {
+  const report = buildInteractionReport()
+  mkdirSync('reports', { recursive: true })
+  writeFileSync(INTERACTION_REPORT_JSON_PATH, `${JSON.stringify(report, null, 2)}\n`)
+  writeFileSync(INTERACTION_REPORT_MD_PATH, `${buildInteractionMarkdown(report)}\n`)
 }
 
 function validateFixtures() {
@@ -497,7 +571,7 @@ function validateLightPolarityCompensation(themeMeta, theme) {
     const emitNote = roleId === 'function'
     const roleHsl = rgbToHsl(roleColor)
     if (bgHsl && roleHsl) {
-      const bgHueGap = hueDiff(bgHsl.h, roleHsl.h)
+      const bgHueGap = hueDistance(bgHsl.h, roleHsl.h)
       if (bgHueGap < profile.minBgHueDistance) {
         addWarning(`${themeMeta.path}: ${roleId}/background hue distance ${fixed(bgHueGap)} is below ${fixed(profile.minBgHueDistance)}`)
       } else if (emitNote) {
@@ -700,7 +774,7 @@ function validateCrossThemeDrift(darkTheme, lightTheme, pairLabel = 'core') {
     const lowSat = dh.s < 0.08 && lh.s < 0.08
     if (lowSat) continue
 
-    const drift = hueDiff(dh.h, lh.h)
+    const drift = hueDistance(dh.h, lh.h)
     if (drift > MAX_ROLE_HUE_DRIFT) {
       addWarning(`${pairLabel} cross-theme: role "${role}" hue drift ${fixed(drift)} exceeds ${MAX_ROLE_HUE_DRIFT}`)
     }
@@ -798,6 +872,7 @@ function run() {
     validateLightPolarityCompensation(themeMeta, theme)
     validateRoleSignalProfile(themeMeta, theme)
     validateDarkSoftPerception(themeMeta, theme)
+    validateInteractionStateBudget(themeMeta, theme)
   }
 
   validateColorSystemSource(themes)
@@ -805,6 +880,7 @@ function run() {
   validateSoftPairDrift(themes.darkSoft, themes.lightSoft)
   validateThemeParity(themes)
   validateFixtures()
+  writeInteractionReport()
 
   if (issues.length > 0) {
     console.log('[FAIL] Theme audit found blocking issues:')
@@ -822,6 +898,7 @@ function run() {
     console.log('\n[INFO] Key metrics:')
     for (const note of notes) console.log(`  - ${note}`)
   }
+  console.log(`\n[INFO] Interaction state report: ${INTERACTION_REPORT_JSON_PATH}`)
 
   process.exit(issues.length > 0 ? 1 : 0)
 }

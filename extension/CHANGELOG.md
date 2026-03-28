@@ -1,6 +1,16 @@
+## 1.0.28
+
+- Finalized interaction-state visibility budgets for line highlight, hover states, and active line-number emphasis across all four variants.
+- Added strict interaction-state audit gating plus machine-readable/markdown reports for CI artifact review.
+- Consolidated shared color math in `scripts/color-utils.mjs` and reused it in generation/audit/report scripts to lower maintenance overhead.
+- Completed maintainer-facing collaboration hardening (PR template alignment, CONTRIBUTING, issue templates, SECURITY) and enforced top-section changelog quality for releases.
+
 ## 1.0.27
 
-- Update notes pending
+- Added interaction-state visibility budgets for line highlight, hover states, and line-number active delta across all variants, and enforced them in generation + theme audit gates.
+- Added structured interaction audit reports (`reports/theme-audit-interaction.json` and `.md`) for PR review and CI artifact inspection.
+- Refactored shared color math into `scripts/color-utils.mjs` and reused it in variant generation, theme audit, and color-language report scripts.
+- Updated contribution governance (PR template, CONTRIBUTING, issue templates, SECURITY) and blocked release when the top changelog section still contains placeholder notes.
 
 ## 1.0.26
 

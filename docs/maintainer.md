@@ -8,7 +8,7 @@ Public-facing messaging belongs on the website and README; operational details s
 - Core color language inputs: `color-system/semantic.json`, `color-system/adapters.json`, `color-system/variants.json`, `color-system/tuning.json`
 - Canonical release version: `releases/color-language.json`
 - Generated theme payloads: `themes/`, `public/themes/`, `extension/themes/`, `obsidian/themes/`, `obsidian/app-theme/`
-- Generated site/report outputs: `src/data/tokens.ts`, `src/styles/theme-vars.css`, `docs/theme-baseline.md`, `docs/color-language-report.md`, `reports/color-language-consistency.json`
+- Generated site/report outputs: `src/data/tokens.ts`, `src/styles/theme-vars.css`, `docs/theme-baseline.md`, `docs/color-language-report.md`, `reports/color-language-consistency.json`, `reports/theme-audit-interaction.json`, `reports/theme-audit-interaction.md`
 - Extension release metadata: `extension/package.json`, `extension/CHANGELOG.md`
 
 ## Required Local Workflow
@@ -26,6 +26,7 @@ Public-facing messaging belongs on the website and README; operational details s
 
 - Bump release version from the canonical file: `pnpm run bump:release:patch` (or `minor` / `major`).
 - The bump command synchronizes `releases/color-language.json` and `extension/package.json`, and ensures a changelog heading exists.
+- Before publishing, replace placeholder notes in the top changelog section (release audit blocks `Update notes pending`).
 - Obsidian package release (local): `pnpm run release:obsidian`.
 - Optional snippets-only package: `pnpm run pack:obsidian:snippets`.
 

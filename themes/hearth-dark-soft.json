@@ -4,7 +4,7 @@
     "colors": {
         "editor.background": "#2c261e",
         "editor.foreground": "#d3c9b8",
-        "editor.lineHighlightBackground": "#372f25",
+        "editor.lineHighlightBackground": "#382f25",
         "editor.selectionBackground": "#b8742b13",
         "editor.selectionHighlightBackground": "#b8742b06",
         "editor.wordHighlightBackground": "#b8742b07",
@@ -56,7 +56,7 @@
         "tab.inactiveBackground": "#292117",
         "tab.inactiveForeground": "#918570",
         "tab.border": "#4b4031",
-        "tab.hoverBackground": "#352b21",
+        "tab.hoverBackground": "#372d22",
         "tab.unfocusedActiveForeground": "#a89b86",
         "editorGroupHeader.tabsBackground": "#292117",
         "editorGroupHeader.tabsBorder": "#4b4031",

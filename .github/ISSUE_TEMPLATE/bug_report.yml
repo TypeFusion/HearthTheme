@@ -1,0 +1,50 @@
+name: Bug report
+description: Report a functional or visual bug in HearthTheme surfaces.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please include enough detail for us to reproduce.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      options:
+        - VS Code / Open VSX
+        - Obsidian
+        - Website / docs
+        - Build / release pipeline
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      placeholder: Describe expected vs actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      placeholder: OS, editor version, extension version, theme variant.
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Extra context
+      description: Screenshots, logs, or related links.

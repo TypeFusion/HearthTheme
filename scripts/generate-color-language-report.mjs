@@ -9,6 +9,13 @@ import {
   loadColorSystemTuning,
   loadRoleAdapters,
 } from './color-system.mjs'
+import {
+  contrastRatio,
+  deltaE,
+  hueDistance,
+  normalizeHex,
+  rgbToHsl,
+} from './color-utils.mjs'
 
 const THEME_FILES = getThemeOutputFiles()
 const VARIANT_ORDER = Object.keys(THEME_FILES)
@@ -22,110 +29,6 @@ const OUTPUT_MARKDOWN = 'docs/color-language-report.md'
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'))
-}
-
-function normalizeHex(hex) {
-  if (typeof hex !== 'string') return null
-  const value = hex.trim().toLowerCase()
-  if (/^#[0-9a-f]{3}$/.test(value)) {
-    return `#${value[1]}${value[1]}${value[2]}${value[2]}${value[3]}${value[3]}`
-  }
-  if (/^#[0-9a-f]{6}$/.test(value)) return value
-  if (/^#[0-9a-f]{8}$/.test(value)) return value.slice(0, 7)
-  return null
-}
-
-function hexToRgb(hex) {
-  const normalized = normalizeHex(hex)
-  if (!normalized) return null
-  const raw = normalized.slice(1)
-  return [
-    Number.parseInt(raw.slice(0, 2), 16),
-    Number.parseInt(raw.slice(2, 4), 16),
-    Number.parseInt(raw.slice(4, 6), 16),
-  ]
-}
-
-function toLinear(channel) {
-  const c = channel / 255
-  return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-}
-
-function luminance(hex) {
-  const rgb = hexToRgb(hex)
-  if (!rgb) return null
-  const [r, g, b] = rgb.map(toLinear)
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
-}
-
-function contrastRatio(a, b) {
-  const l1 = luminance(a)
-  const l2 = luminance(b)
-  if (l1 == null || l2 == null) return null
-  const hi = Math.max(l1, l2)
-  const lo = Math.min(l1, l2)
-  return (hi + 0.05) / (lo + 0.05)
-}
-
-function rgbToHsl(hex) {
-  const rgb = hexToRgb(hex)
-  if (!rgb) return null
-  let [r, g, b] = rgb.map((x) => x / 255)
-  const max = Math.max(r, g, b)
-  const min = Math.min(r, g, b)
-  const d = max - min
-  let h = 0
-  const l = (max + min) / 2
-  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1))
-
-  if (d !== 0) {
-    if (max === r) h = 60 * (((g - b) / d) % 6)
-    else if (max === g) h = 60 * ((b - r) / d + 2)
-    else h = 60 * ((r - g) / d + 4)
-  }
-
-  if (h < 0) h += 360
-  return { h, s, l }
-}
-
-function hueDiff(a, b) {
-  const diff = Math.abs(a - b)
-  return Math.min(diff, 360 - diff)
-}
-
-function rgbToXyz([r, g, b]) {
-  const rl = toLinear(r)
-  const gl = toLinear(g)
-  const bl = toLinear(b)
-  return [
-    rl * 0.4124564 + gl * 0.3575761 + bl * 0.1804375,
-    rl * 0.2126729 + gl * 0.7151522 + bl * 0.072175,
-    rl * 0.0193339 + gl * 0.119192 + bl * 0.9503041,
-  ]
-}
-
-function xyzToLab([x, y, z]) {
-  const xr = x / 0.95047
-  const yr = y / 1.0
-  const zr = z / 1.08883
-  const f = (t) => (t > 0.008856 ? t ** (1 / 3) : 7.787 * t + 16 / 116)
-  const fx = f(xr)
-  const fy = f(yr)
-  const fz = f(zr)
-  return [
-    116 * fy - 16,
-    500 * (fx - fy),
-    200 * (fy - fz),
-  ]
-}
-
-function deltaE(hexA, hexB) {
-  const rgbA = hexToRgb(hexA)
-  const rgbB = hexToRgb(hexB)
-  if (!rgbA || !rgbB) return null
-  const [l1, a1, b1] = xyzToLab(rgbToXyz(rgbA))
-  const [l2, a2, b2] = xyzToLab(rgbToXyz(rgbB))
-  return Math.sqrt((l1 - l2) ** 2 + (a1 - a2) ** 2 + (b1 - b2) ** 2)
 }
 
 function fixed(value, digits = 1) {
@@ -213,8 +116,8 @@ function buildRoleRows(themes) {
     const darkSoftHue = variants.darkSoft.textmate ? rgbToHsl(variants.darkSoft.textmate) : null
     const lightSoftHue = variants.lightSoft.textmate ? rgbToHsl(variants.lightSoft.textmate) : null
 
-    const defaultPairHueDrift = darkHue && lightHue ? hueDiff(darkHue.h, lightHue.h) : null
-    const softPairHueDrift = darkSoftHue && lightSoftHue ? hueDiff(darkSoftHue.h, lightSoftHue.h) : null
+    const defaultPairHueDrift = darkHue && lightHue ? hueDistance(darkHue.h, lightHue.h) : null
+    const softPairHueDrift = darkSoftHue && lightSoftHue ? hueDistance(darkSoftHue.h, lightSoftHue.h) : null
 
     const semanticDeltaByVariant = {}
     for (const variant of VARIANT_ORDER) {
@@ -256,7 +159,7 @@ function buildLightPolarityRows(themes) {
 
       const roleColor = getRoleColor(theme, roleDef)
       const roleHue = roleColor ? rgbToHsl(roleColor) : null
-      const bgHueDistance = bgHue && roleHue ? hueDiff(bgHue.h, roleHue.h) : null
+      const bgHueDistance = bgHue && roleHue ? hueDistance(bgHue.h, roleHue.h) : null
 
       const anchorDeltaEValues = (profile.anchorRoles || [])
         .map((anchorRoleId) => ROLE_INDEX.get(anchorRoleId))

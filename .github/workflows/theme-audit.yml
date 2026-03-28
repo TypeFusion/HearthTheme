@@ -79,6 +79,8 @@ jobs:
             reports/color-language-consistency.json
             reports/color-language-version-summary.md
             reports/color-language-version-summary.json
+            reports/theme-audit-interaction.json
+            reports/theme-audit-interaction.md
           if-no-files-found: error
           retention-days: 7
 

@@ -22,7 +22,7 @@ export const tokens = {
   "darkSoft": {
     "bg": "#2c261e",
     "fg": "#d3c9b8",
-    "lineBg": "#372f25",
+    "lineBg": "#382f25",
     "lineNo": "#6d6457",
     "status": "#6a4122",
     "sidebar": "#272016",
@@ -41,7 +41,7 @@ export const tokens = {
   "light": {
     "bg": "#ece2d3",
     "fg": "#2a1e0f",
-    "lineBg": "#e2d5c1",
+    "lineBg": "#e0d3c0",
     "lineNo": "#b49d7b",
     "status": "#9d4b12",
     "sidebar": "#e3d7c0",
@@ -60,7 +60,7 @@ export const tokens = {
   "lightSoft": {
     "bg": "#e4d8c4",
     "fg": "#4b3a27",
-    "lineBg": "#dccdb5",
+    "lineBg": "#dacab3",
     "lineNo": "#9f8b6d",
     "status": "#8c5830",
     "sidebar": "#d8c8ad",

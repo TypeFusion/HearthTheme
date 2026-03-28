@@ -34,6 +34,8 @@ This document is a quick reference for editing `color-system/tuning.json`.
   - Readability search granularity and scoring normalization divisors.
 - `telemetryProfile`
   - Generation warning thresholds (for example drift warning deltaE).
+- `interactionStateBudget`
+  - Functional UI-state visibility budgets per variant (`lineHighlight`, `list/tab hover`, line-number active delta).
 - `siteDocsProfile`
   - Source-of-truth rows and snapshot metrics for `docs/theme-baseline.md`.
 - `siteAssetMapping`

@@ -346,6 +346,32 @@
       "default": 10
     }
   },
+  "interactionStateBudget": {
+    "dark": {
+      "lineHighlightMinContrast": 1.12,
+      "listHoverMinContrast": 1.14,
+      "tabHoverMinContrast": 1.14,
+      "lineNumberActiveDeltaMin": 2
+    },
+    "darkSoft": {
+      "lineHighlightMinContrast": 1.14,
+      "listHoverMinContrast": 1.1,
+      "tabHoverMinContrast": 1.1,
+      "lineNumberActiveDeltaMin": 2
+    },
+    "light": {
+      "lineHighlightMinContrast": 1.15,
+      "listHoverMinContrast": 1.08,
+      "tabHoverMinContrast": 1.08,
+      "lineNumberActiveDeltaMin": 1.8
+    },
+    "lightSoft": {
+      "lineHighlightMinContrast": 1.14,
+      "listHoverMinContrast": 1.08,
+      "tabHoverMinContrast": 1.08,
+      "lineNumberActiveDeltaMin": 1.4
+    }
+  },
   "darkSoftPerceptionGuard": {
     "function": {
       "hueMin": 198,

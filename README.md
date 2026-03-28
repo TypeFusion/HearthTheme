@@ -72,6 +72,8 @@ Softer light contrast for long daytime sessions and reduced visual pressure.
 - Obsidian Releases: <https://github.com/hearth-code/HearthTheme/releases>
 - Source: <https://github.com/hearth-code/HearthTheme>
 - Changelog: <https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
+- Contributing: <https://github.com/hearth-code/HearthTheme/blob/main/CONTRIBUTING.md>
+- Security: <https://github.com/hearth-code/HearthTheme/blob/main/SECURITY.md>
 - Issues: <https://github.com/hearth-code/HearthTheme/issues>
 
 ## Maintainer Guide

@@ -25,6 +25,12 @@ function firstChangelogVersion(markdown) {
   return match?.[1] ?? null;
 }
 
+function topReleaseSection(markdown) {
+  const normalized = String(markdown ?? "").replace(/\r\n/g, "\n");
+  const sections = normalized.split(/\n(?=##\s+\d+\.\d+\.\d+)/g);
+  return sections.find((section) => /^##\s+\d+\.\d+\.\d+/m.test(section)) ?? null;
+}
+
 try {
   const releaseMeta = readReleaseMetadata();
   const releaseVersion = String(releaseMeta.version ?? "").trim();
@@ -32,7 +38,9 @@ try {
   const pkgVersion = String(pkg.version ?? "").trim();
   const pkgPublisher = String(pkg.publisher ?? "").trim();
   const pkgName = String(pkg.name ?? "").trim();
-  const changelogVersion = firstChangelogVersion(readText(EXTENSION_CHANGELOG));
+  const changelogText = readText(EXTENSION_CHANGELOG);
+  const changelogVersion = firstChangelogVersion(changelogText);
+  const topSection = topReleaseSection(changelogText);
   const expectedMarketplaceUrl =
     pkgPublisher && pkgName
       ? `https://marketplace.visualstudio.com/items?itemName=${pkgPublisher}.${pkgName}`
@@ -61,6 +69,12 @@ try {
   } else if (releaseVersion && releaseVersion !== changelogVersion) {
     findings.push(
       `release version mismatch: ${RELEASE_METADATA_PATH}=${releaseVersion}, extension/CHANGELOG.md top=${changelogVersion}.`,
+    );
+  }
+
+  if (topSection && /update notes pending/i.test(topSection)) {
+    findings.push(
+      "extension/CHANGELOG.md top release still contains placeholder text (`Update notes pending`).",
     );
   }
 

@@ -1,6 +1,24 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
 import { loadColorSystemTuning, loadColorSystemVariants, loadRoleAdapters, loadSemanticPalette } from './color-system.mjs'
+import {
+  clamp,
+  contrastRatio,
+  deltaE,
+  hexToRgb,
+  hexToRgba,
+  hueDistance,
+  isHueInBand,
+  labToXyz,
+  mixHex,
+  nearestHueOnBand,
+  normalizeHex,
+  rgbToHsl,
+  rgbToXyz,
+  rgbaToHex,
+  xyzToLab,
+  xyzToRgb,
+} from './color-utils.mjs'
 
 const VARIANT_SPEC = loadColorSystemVariants()
 const SEMANTIC_PALETTE = loadSemanticPalette()
@@ -36,6 +54,7 @@ const GLOBAL_SEPARATION_DEFICIT_PROFILE = COLOR_SYSTEM_TUNING.globalSeparationDe
 const LIGHT_READABILITY_SEARCH_PROFILE = COLOR_SYSTEM_TUNING.lightReadabilitySearchProfile
 const TELEMETRY_PROFILE = COLOR_SYSTEM_TUNING.telemetryProfile
 const ROLE_SIGNAL_PROFILE = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
+const INTERACTION_STATE_BUDGET = COLOR_SYSTEM_TUNING.interactionStateBudget || {}
 const ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.coolHueBandByVariant || {}
 const ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.warmHueBandByVariant || {}
 const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEByVariant || {}
@@ -58,211 +77,6 @@ function writeJson(path, data) {
   }
   writeFileSync(path, next)
   return true
-}
-
-function normalizeHex(hex) {
-  if (typeof hex !== 'string') return null
-  const value = hex.trim().toLowerCase()
-  if (/^#[0-9a-f]{3}$/.test(value)) {
-    return `#${value[1]}${value[1]}${value[2]}${value[2]}${value[3]}${value[3]}`
-  }
-  if (/^#[0-9a-f]{4}$/.test(value)) {
-    return `#${value[1]}${value[1]}${value[2]}${value[2]}${value[3]}${value[3]}${value[4]}${value[4]}`
-  }
-  if (/^#[0-9a-f]{6}$/.test(value) || /^#[0-9a-f]{8}$/.test(value)) {
-    return value
-  }
-  return null
-}
-
-function hexToRgba(hex) {
-  const normalized = normalizeHex(hex)
-  if (!normalized) return null
-
-  const raw = normalized.slice(1)
-  if (raw.length === 6) {
-    return {
-      r: Number.parseInt(raw.slice(0, 2), 16),
-      g: Number.parseInt(raw.slice(2, 4), 16),
-      b: Number.parseInt(raw.slice(4, 6), 16),
-      a: 255,
-      hasAlpha: false,
-    }
-  }
-
-  return {
-    r: Number.parseInt(raw.slice(0, 2), 16),
-    g: Number.parseInt(raw.slice(2, 4), 16),
-    b: Number.parseInt(raw.slice(4, 6), 16),
-    a: Number.parseInt(raw.slice(6, 8), 16),
-    hasAlpha: true,
-  }
-}
-
-function clamp(n, min, max) {
-  return Math.min(Math.max(n, min), max)
-}
-
-function toHexByte(value) {
-  return Math.round(clamp(value, 0, 255)).toString(16).padStart(2, '0')
-}
-
-function rgbaToHex({ r, g, b, a = 255, hasAlpha = false }) {
-  const rgb = `${toHexByte(r)}${toHexByte(g)}${toHexByte(b)}`
-  if (!hasAlpha) return `#${rgb}`
-  return `#${rgb}${toHexByte(a)}`
-}
-
-function hexToRgb(hex) {
-  const rgba = hexToRgba(hex)
-  if (!rgba) return null
-  return [rgba.r, rgba.g, rgba.b]
-}
-
-function toLinear(channel) {
-  const c = channel / 255
-  return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-}
-
-function fromLinear(channel) {
-  const c = clamp(channel, 0, 1)
-  const value = c <= 0.0031308 ? 12.92 * c : 1.055 * (c ** (1 / 2.4)) - 0.055
-  return value * 255
-}
-
-function rgbToXyz([r, g, b]) {
-  const rl = toLinear(r)
-  const gl = toLinear(g)
-  const bl = toLinear(b)
-  return [
-    rl * 0.4124564 + gl * 0.3575761 + bl * 0.1804375,
-    rl * 0.2126729 + gl * 0.7151522 + bl * 0.072175,
-    rl * 0.0193339 + gl * 0.119192 + bl * 0.9503041,
-  ]
-}
-
-function xyzToLab([x, y, z]) {
-  const xr = x / 0.95047
-  const yr = y / 1.0
-  const zr = z / 1.08883
-
-  const f = (t) => (t > 0.008856 ? t ** (1 / 3) : 7.787 * t + 16 / 116)
-  const fx = f(xr)
-  const fy = f(yr)
-  const fz = f(zr)
-
-  return [
-    116 * fy - 16,
-    500 * (fx - fy),
-    200 * (fy - fz),
-  ]
-}
-
-function labToXyz([l, a, b]) {
-  const fy = (l + 16) / 116
-  const fx = a / 500 + fy
-  const fz = fy - b / 200
-
-  const fInv = (t) => {
-    const t3 = t ** 3
-    return t3 > 0.008856 ? t3 : (t - 16 / 116) / 7.787
-  }
-
-  const xr = fInv(fx)
-  const yr = fInv(fy)
-  const zr = fInv(fz)
-
-  return [xr * 0.95047, yr * 1.0, zr * 1.08883]
-}
-
-function xyzToRgb([x, y, z]) {
-  const rl = x * 3.2404542 + y * -1.5371385 + z * -0.4985314
-  const gl = x * -0.969266 + y * 1.8760108 + z * 0.041556
-  const bl = x * 0.0556434 + y * -0.2040259 + z * 1.0572252
-  return [
-    fromLinear(rl),
-    fromLinear(gl),
-    fromLinear(bl),
-  ]
-}
-
-function luminance(hex) {
-  const rgb = hexToRgb(hex)
-  if (!rgb) return null
-  const [r, g, b] = rgb.map(toLinear)
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
-}
-
-function contrastRatio(a, b) {
-  const l1 = luminance(a)
-  const l2 = luminance(b)
-  if (l1 == null || l2 == null) return null
-  const hi = Math.max(l1, l2)
-  const lo = Math.min(l1, l2)
-  return (hi + 0.05) / (lo + 0.05)
-}
-
-function deltaE(hexA, hexB) {
-  const rgbA = hexToRgb(hexA)
-  const rgbB = hexToRgb(hexB)
-  if (!rgbA || !rgbB) return null
-  const [l1, a1, b1] = xyzToLab(rgbToXyz(rgbA))
-  const [l2, a2, b2] = xyzToLab(rgbToXyz(rgbB))
-  return Math.sqrt((l1 - l2) ** 2 + (a1 - a2) ** 2 + (b1 - b2) ** 2)
-}
-
-function rgbToHsl([r, g, b]) {
-  const rn = r / 255
-  const gn = g / 255
-  const bn = b / 255
-
-  const max = Math.max(rn, gn, bn)
-  const min = Math.min(rn, gn, bn)
-  const delta = max - min
-
-  let h = 0
-  const l = (max + min) / 2
-  const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
-
-  if (delta !== 0) {
-    if (max === rn) h = 60 * (((gn - bn) / delta) % 6)
-    else if (max === gn) h = 60 * ((bn - rn) / delta + 2)
-    else h = 60 * ((rn - gn) / delta + 4)
-  }
-  if (h < 0) h += 360
-
-  return { h, s, l }
-}
-
-function hueDistance(a, b) {
-  const diff = Math.abs(a - b)
-  return Math.min(diff, 360 - diff)
-}
-
-function isHueInBand(hue, hueMin, hueMax) {
-  if (hue == null) return false
-  if (hueMin <= hueMax) return hue >= hueMin && hue <= hueMax
-  return hue >= hueMin || hue <= hueMax
-}
-
-function nearestHueOnBand(hue, hueMin, hueMax) {
-  if (isHueInBand(hue, hueMin, hueMax)) return hue
-  const toMin = hueDistance(hue, hueMin)
-  const toMax = hueDistance(hue, hueMax)
-  return toMin <= toMax ? hueMin : hueMax
-}
-
-function mixHex(a, b, t) {
-  const rgbA = hexToRgb(a)
-  const rgbB = hexToRgb(b)
-  if (!rgbA || !rgbB) return a
-  const ratio = clamp(t, 0, 1)
-  return rgbaToHex({
-    r: rgbA[0] + (rgbB[0] - rgbA[0]) * ratio,
-    g: rgbA[1] + (rgbB[1] - rgbA[1]) * ratio,
-    b: rgbA[2] + (rgbB[2] - rgbA[2]) * ratio,
-    hasAlpha: false,
-  })
 }
 
 function resolveVariantRoleProfile(rawProfileMap, variantId) {
@@ -1095,6 +909,160 @@ function applyRoleSignalProfile(theme, variantId, warnings) {
   enforceWarmGamutGuard(theme, variantId, warnings)
 }
 
+function getInteractionStateBudget(variantId) {
+  return {
+    ...(INTERACTION_STATE_BUDGET.default || {}),
+    ...(INTERACTION_STATE_BUDGET[variantId] || {}),
+  }
+}
+
+function blendStateColorOverBackground(colorHex, bgHex) {
+  const state = hexToRgba(colorHex)
+  const bg = hexToRgba(bgHex)
+  if (!state || !bg) return colorHex
+  if (!state.hasAlpha) {
+    return rgbaToHex({ r: state.r, g: state.g, b: state.b, hasAlpha: false })
+  }
+  const alpha = state.a / 255
+  return rgbaToHex({
+    r: state.r * alpha + bg.r * (1 - alpha),
+    g: state.g * alpha + bg.g * (1 - alpha),
+    b: state.b * alpha + bg.b * (1 - alpha),
+    hasAlpha: false,
+  })
+}
+
+function contrastAgainstEditorBackground(colorHex, bgHex) {
+  const blended = blendStateColorOverBackground(colorHex, bgHex)
+  return contrastRatio(blended, bgHex)
+}
+
+function enforceInteractionStateContrast(theme, variantId, warnings, key, minContrast, bgColor, fgColor) {
+  if (typeof minContrast !== 'number') return
+  const current = resolveHexValue(theme?.colors?.[key])
+  if (!current || !bgColor || !fgColor) return
+
+  const before = contrastAgainstEditorBackground(current, bgColor)
+  if (before == null || before >= minContrast) return
+
+  let low = 0
+  let high = 1
+  let next = current
+  let solved = false
+  for (let i = 0; i < 24; i += 1) {
+    const t = (low + high) / 2
+    const candidate = mixHex(current, fgColor, t)
+    const ratio = contrastAgainstEditorBackground(candidate, bgColor)
+    if (ratio != null && ratio >= minContrast) {
+      solved = true
+      next = candidate
+      high = t
+    } else {
+      low = t
+    }
+  }
+
+  const finalRatio = contrastAgainstEditorBackground(next, bgColor)
+  theme.colors[key] = next
+  if (finalRatio != null && before != null) {
+    warnings.push(
+      `telemetry: ${variantId}: interaction state ${key} contrast ${before.toFixed(3)} -> ${finalRatio.toFixed(3)} (target >= ${minContrast.toFixed(2)})`
+    )
+  }
+  if (!solved || finalRatio == null || finalRatio < minContrast) {
+    warnings.push(`${variantId}: interaction state ${key} contrast tuning could not satisfy target ${minContrast.toFixed(2)}`)
+  }
+}
+
+function enforceLineNumberActiveDelta(theme, variantId, warnings, minDelta, bgColor, fgColor) {
+  if (typeof minDelta !== 'number') return
+  const lineNo = resolveHexValue(theme?.colors?.['editorLineNumber.foreground'])
+  const lineNoActive = resolveHexValue(theme?.colors?.['editorLineNumber.activeForeground'])
+  if (!lineNo || !lineNoActive || !bgColor || !fgColor) return
+
+  const baseContrast = contrastRatio(lineNo, bgColor)
+  const beforeActiveContrast = contrastRatio(lineNoActive, bgColor)
+  if (baseContrast == null || beforeActiveContrast == null) return
+
+  const beforeDelta = beforeActiveContrast - baseContrast
+  if (beforeDelta >= minDelta) return
+
+  let low = 0
+  let high = 1
+  let next = lineNoActive
+  let solved = false
+  for (let i = 0; i < 24; i += 1) {
+    const t = (low + high) / 2
+    const candidate = mixHex(lineNoActive, fgColor, t)
+    const contrast = contrastRatio(candidate, bgColor)
+    const delta = contrast == null ? null : contrast - baseContrast
+    if (delta != null && delta >= minDelta) {
+      solved = true
+      next = candidate
+      high = t
+    } else {
+      low = t
+    }
+  }
+
+  theme.colors['editorLineNumber.activeForeground'] = next
+  const afterActiveContrast = contrastRatio(next, bgColor)
+  const afterDelta = afterActiveContrast == null ? null : afterActiveContrast - baseContrast
+  if (afterDelta != null) {
+    warnings.push(
+      `telemetry: ${variantId}: interaction state editorLineNumber.activeForeground delta ${beforeDelta.toFixed(3)} -> ${afterDelta.toFixed(3)} (target >= ${minDelta.toFixed(2)})`
+    )
+  }
+  if (!solved || afterDelta == null || afterDelta < minDelta) {
+    warnings.push(`${variantId}: interaction state line-number active delta tuning could not satisfy target ${minDelta.toFixed(2)}`)
+  }
+}
+
+function applyInteractionStateBudget(theme, variantId, warnings) {
+  const budget = getInteractionStateBudget(variantId)
+  if (!budget || Object.keys(budget).length === 0) return
+
+  const bgColor = resolveHexValue(theme?.colors?.[REF_BG_KEY])
+  const fgColor = resolveHexValue(theme?.colors?.[REF_FG_KEY])
+  if (!bgColor || !fgColor) return
+
+  enforceInteractionStateContrast(
+    theme,
+    variantId,
+    warnings,
+    'editor.lineHighlightBackground',
+    budget.lineHighlightMinContrast,
+    bgColor,
+    fgColor
+  )
+  enforceInteractionStateContrast(
+    theme,
+    variantId,
+    warnings,
+    'list.hoverBackground',
+    budget.listHoverMinContrast,
+    bgColor,
+    fgColor
+  )
+  enforceInteractionStateContrast(
+    theme,
+    variantId,
+    warnings,
+    'tab.hoverBackground',
+    budget.tabHoverMinContrast,
+    bgColor,
+    fgColor
+  )
+  enforceLineNumberActiveDelta(
+    theme,
+    variantId,
+    warnings,
+    budget.lineNumberActiveDeltaMin,
+    bgColor,
+    fgColor
+  )
+}
+
 function resolveRoleIdForTokenEntry(entry) {
   for (const roleDef of READABILITY_ROLE_DEFS) {
     if (entryHasAnyScope(entry, roleDef.scopes || [])) return roleDef.id
@@ -1508,6 +1476,7 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
     applyLightPolarityCompensation(generated, variantMeta.id, warnings)
   }
   applyRoleSignalProfile(generated, variantMeta.id, warnings)
+  applyInteractionStateBudget(generated, variantMeta.id, warnings)
 
   return generated
 }
@@ -1523,6 +1492,7 @@ export function generateThemeVariants() {
   warnTemplateDrift(currentDark, baselineDark, warnings)
   applySemanticPalette(currentDark, 'dark', warnings)
   applyRoleSignalProfile(currentDark, 'dark', warnings)
+  applyInteractionStateBudget(currentDark, 'dark', warnings)
   const darkChanged = writeJson(DARK_THEME_OUTPUT_PATH, currentDark)
   console.log(
     `${darkChanged ? '✓ generated' : '- unchanged'} ${DARK_THEME_OUTPUT_PATH} from ${DARK_THEME_SOURCE_PATH}`

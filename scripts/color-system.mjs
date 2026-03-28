@@ -279,6 +279,8 @@ export function loadColorSystemTuning() {
   assert(rawGlobalSeparationDeficitProfile && typeof rawGlobalSeparationDeficitProfile === 'object' && !Array.isArray(rawGlobalSeparationDeficitProfile), `${COLOR_SYSTEM_TUNING_PATH}: globalSeparationDeficitProfile must be an object`)
   const rawPairSeparationGates = data.pairSeparationGates ?? {}
   assert(rawPairSeparationGates && typeof rawPairSeparationGates === 'object' && !Array.isArray(rawPairSeparationGates), `${COLOR_SYSTEM_TUNING_PATH}: pairSeparationGates must be an object`)
+  const rawInteractionStateBudget = data.interactionStateBudget ?? {}
+  assert(rawInteractionStateBudget && typeof rawInteractionStateBudget === 'object' && !Array.isArray(rawInteractionStateBudget), `${COLOR_SYSTEM_TUNING_PATH}: interactionStateBudget must be an object`)
   const rawRoleSignalProfile = data.roleSignalProfile ?? {}
   assert(rawRoleSignalProfile && typeof rawRoleSignalProfile === 'object' && !Array.isArray(rawRoleSignalProfile), `${COLOR_SYSTEM_TUNING_PATH}: roleSignalProfile must be an object`)
   const rawLightReadabilitySearchProfile = data.lightReadabilitySearchProfile ?? {}
@@ -528,6 +530,35 @@ export function loadColorSystemTuning() {
     }
 
     pairSeparationGates[gateId] = out
+  }
+
+  const interactionStateBudget = {}
+  const interactionVariantIds = new Set(['default', ...variantIds])
+  for (const [variantId, profile] of Object.entries(rawInteractionStateBudget)) {
+    assert(interactionVariantIds.has(variantId), `${COLOR_SYSTEM_TUNING_PATH}: interactionStateBudget has unknown variant "${variantId}"`)
+    assert(profile && typeof profile === 'object' && !Array.isArray(profile), `${COLOR_SYSTEM_TUNING_PATH}: interactionStateBudget.${variantId} must be an object`)
+    interactionStateBudget[variantId] = {
+      lineHighlightMinContrast: normalizeOptionalNumber(
+        profile.lineHighlightMinContrast,
+        `${COLOR_SYSTEM_TUNING_PATH}: interactionStateBudget.${variantId}.lineHighlightMinContrast`,
+        { min: 1, max: 4 }
+      ),
+      listHoverMinContrast: normalizeOptionalNumber(
+        profile.listHoverMinContrast,
+        `${COLOR_SYSTEM_TUNING_PATH}: interactionStateBudget.${variantId}.listHoverMinContrast`,
+        { min: 1, max: 4 }
+      ),
+      tabHoverMinContrast: normalizeOptionalNumber(
+        profile.tabHoverMinContrast,
+        `${COLOR_SYSTEM_TUNING_PATH}: interactionStateBudget.${variantId}.tabHoverMinContrast`,
+        { min: 1, max: 4 }
+      ),
+      lineNumberActiveDeltaMin: normalizeOptionalNumber(
+        profile.lineNumberActiveDeltaMin,
+        `${COLOR_SYSTEM_TUNING_PATH}: interactionStateBudget.${variantId}.lineNumberActiveDeltaMin`,
+        { min: 0, max: 12 }
+      ),
+    }
   }
 
   const roleSignalProfile = {
@@ -951,6 +982,7 @@ export function loadColorSystemTuning() {
     lightPolaritySearchProfile,
     globalSeparationDeficitProfile,
     pairSeparationGates,
+    interactionStateBudget,
     roleSignalProfile,
     lightReadabilitySearchProfile,
     telemetryProfile,
