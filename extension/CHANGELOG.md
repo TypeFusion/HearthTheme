@@ -1,3 +1,7 @@
+## 1.0.27
+
+- Update notes pending
+
 ## 1.0.26
 
 - Fine-tuned `Hearth Light` variable tone toward deeper warm-neutral to improve separation from operator tokens while preserving low-stimulus readability.
