@@ -55,7 +55,6 @@
   "philosophy.01.body": "Hearth keeps highlight colors in a controlled saturation band first, then enforces role separation thresholds so syntax remains readable before style polish.",
   "philosophy.02.title": "Neither black nor white",
   "philosophy.02.body": "Pure black backgrounds can create halation around white text and blur edges. Hearth uses warm, non-extreme background tones across all four variants to keep glare down and reading layers stable.",
-  "philosophy.02.swatchesAria": "Background swatches for all theme variants",
   "philosophy.03.title": "Hierarchy as semantics",
   "philosophy.03.body": "Hierarchy is semantic and measurable: role contrast and deltaE gates are enforced so keywords, functions, methods, and variables stay distinguishable in long sessions.",
   "philosophy.04.title": "Color temperature as comfort",

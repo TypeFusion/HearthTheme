@@ -55,7 +55,6 @@
   "philosophy.01.body": "Hearth 先把高亮色压在受控饱和度区间，再执行角色分离阈值，让可读性先成立，再谈风格质感。",
   "philosophy.02.title": "非黑非白的背景",
   "philosophy.02.body": "纯黑背景会让白色文字边缘发虚。Hearth 的四个主题都采用偏暖、非纯黑非纯白的基底，在不同光线环境下都保持更低眩光和更稳定的阅读层次。",
-  "philosophy.02.swatchesAria": "四个主题背景色示意",
   "philosophy.03.title": "层次即语义",
   "philosophy.03.body": "层次不仅是感受，也是可度量约束：通过对比与 deltaE 闸门，保证关键字、函数、方法、变量在长时阅读中始终可区分。",
   "philosophy.04.title": "色温即护眼",

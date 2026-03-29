@@ -424,11 +424,6 @@ function validatePhilosophyCopy() {
       continue
     }
 
-    const swatchAria = dict['philosophy.02.swatchesAria']
-    if (typeof swatchAria !== 'string' || swatchAria.trim().length === 0) {
-      addIssue(`${file}: missing "philosophy.02.swatchesAria"`)
-    }
-
     if (/\{(?:darkBg|darkSoftBg|lightBg|lightSoftBg)\}/.test(body)) {
       addIssue(`${file}: philosophy.02.body should not include raw palette placeholders`)
     }
