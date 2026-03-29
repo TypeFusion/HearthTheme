@@ -12,6 +12,8 @@ It is available on Open VSX-compatible editors, VS Code, and Obsidian, with one 
 
 ![HearthCode Long-session Preview](./extension/images/preview-contrast-v2.png)
 
+Preview images in this README are generated from the shipped theme files, so the installed variants match what you see here.
+
 ## Why HearthCode
 
 - Warm palette with controlled saturation to reduce glare in long sessions

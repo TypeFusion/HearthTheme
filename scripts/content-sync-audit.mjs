@@ -14,7 +14,10 @@ const I18N_FILES = {
 
 const EXTENSION_README = 'extension/README.md'
 const EXTENSION_PACKAGE = 'extension/package.json'
+const README_EN = 'README.md'
+const README_ZH = 'README.zh-CN.md'
 const README_JA = 'README.ja.md'
+const PREVIEW_MANIFEST = 'reports/preview-manifest.json'
 const DOCS_BASELINE = 'docs/theme-baseline.md'
 const BASELINE_DOCS_COMPONENT = 'src/components/ui/BaselineDocs.astro'
 const PROOF_SECTION_COMPONENT = 'src/components/ui/ProofSection.astro'
@@ -679,6 +682,92 @@ function validateExtensionReadmeSnapshot() {
   }
 }
 
+function normalizeRepoPath(path) {
+  if (typeof path !== 'string') return null
+  return path.replace(/\\/g, '/').replace(/^\.\//, '')
+}
+
+function collectMarkdownImagePaths(text) {
+  if (typeof text !== 'string') return []
+  return [...text.matchAll(/!\[[^\]]*]\(([^)]+)\)/g)].map((match) => String(match[1]).trim())
+}
+
+function validateReadmePreviewAssets() {
+  const manifest = readJson(PREVIEW_MANIFEST)
+  if (!manifest) return
+
+  const contrastOutput = normalizeRepoPath(manifest.contrastImage?.outputs?.[0])
+  const themeOutputs = Array.isArray(manifest.themeImages)
+    ? manifest.themeImages
+      .map((entry) => normalizeRepoPath(entry?.output))
+      .filter(Boolean)
+    : []
+
+  if (!contrastOutput) {
+    addIssue(`${PREVIEW_MANIFEST}: missing primary contrast preview output`)
+    return
+  }
+
+  if (themeOutputs.length !== VARIANT_SPEC.variants.length) {
+    addIssue(`${PREVIEW_MANIFEST}: expected ${VARIANT_SPEC.variants.length} theme preview outputs, got ${themeOutputs.length}`)
+    return
+  }
+
+  const expectedRootPreviewPaths = [contrastOutput, ...themeOutputs].map((path) => `./${path}`)
+  const expectedExtensionPreviewPaths = [contrastOutput, ...themeOutputs].map((path) => {
+    if (!path.startsWith('extension/')) return path
+    return path.slice('extension/'.length)
+  })
+
+  const expectedReadmes = [
+    {
+      file: README_EN,
+      note: 'Preview images in this README are generated from the shipped theme files, so the installed variants match what you see here.',
+      previewPaths: expectedRootPreviewPaths,
+    },
+    {
+      file: README_ZH,
+      note: '本 README 中的所有预览图都由随包发布的主题文件生成，因此安装后的实际显示会与这里保持一致。',
+      previewPaths: expectedRootPreviewPaths,
+    },
+    {
+      file: README_JA,
+      note: 'この README のプレビュー画像は同梱されるテーマファイルから生成されるため、インストール後の表示とここで見える内容が一致します。',
+      previewPaths: expectedRootPreviewPaths,
+    },
+    {
+      file: EXTENSION_README,
+      note: 'Preview images in this README are generated from the shipped theme files, so the installed variants match what you see here.',
+      previewPaths: expectedExtensionPreviewPaths,
+    },
+  ]
+
+  for (const spec of expectedReadmes) {
+    const readme = readText(spec.file)
+    if (!readme) continue
+
+    if (!readme.includes(spec.note)) {
+      addIssue(`${spec.file}: missing preview/source-of-truth note`)
+    }
+
+    const previewPaths = collectMarkdownImagePaths(readme).filter((path) => /preview-.*\.png$/i.test(path))
+    if (previewPaths.length !== spec.previewPaths.length) {
+      addIssue(
+        `${spec.file}: expected ${spec.previewPaths.length} generated preview images, got ${previewPaths.length}`
+      )
+      continue
+    }
+
+    for (let i = 0; i < spec.previewPaths.length; i += 1) {
+      const actual = previewPaths[i]
+      const expected = spec.previewPaths[i]
+      if (actual !== expected) {
+        addIssue(`${spec.file}: preview image ${i + 1} expected "${expected}", got "${actual}"`)
+      }
+    }
+  }
+}
+
 function getLineAtIndex(text, index) {
   if (index <= 0) return 1
   let line = 1
@@ -1063,6 +1152,7 @@ function run() {
   validateSiteParameterClaims()
   validateCodePreviewSourceOfTruth()
   validateExtensionReadmeSnapshot()
+  validateReadmePreviewAssets()
   validateThemeVarsAndMetadata(themes)
   const tokenSetsReady = Object.entries(tokenSets).every(([, set]) => (
     set && Object.values(set).every(Boolean)

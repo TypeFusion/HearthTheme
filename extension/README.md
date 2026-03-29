@@ -10,6 +10,8 @@ This package is the implementation surface for Open VSX-compatible editors and V
 
 ![HearthCode Long-session Comparison](images/preview-contrast-v2.png)
 
+Preview images in this README are generated from the shipped theme files, so the installed variants match what you see here.
+
 ## Install
 
 1. Open VSX-compatible editors: <https://open-vsx.org/extension/hearth-code/hearth-theme>

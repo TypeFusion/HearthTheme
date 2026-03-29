@@ -12,6 +12,8 @@ HearthCode 是一套面向代码界面的暖色、低眩光色彩语言。
 
 ![HearthCode 长时编码预览](./extension/images/preview-contrast-v2.png)
 
+本 README 中的所有预览图都由随包发布的主题文件生成，因此安装后的实际显示会与这里保持一致。
+
 ## 为什么是 HearthCode
 
 - 暖色与受控饱和度，降低长时间使用的眩光刺激

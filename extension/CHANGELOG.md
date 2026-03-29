@@ -1,3 +1,9 @@
+## 1.1.1
+
+- Clarified in every README that preview images are generated from the shipped theme files, reducing mismatch risk between marketplace/docs screenshots and the installed result.
+- Added README preview-source auditing against the generated preview manifest so image paths, count, and explanatory copy stay locked to the real release artifacts.
+- Promoted preview drift checking into `audit:all`, ensuring patch releases fail fast if theme previews and release docs fall out of sync.
+
 ## 1.1.0
 
 - Rebased the full color language on a cleaner warm-neutral foundation, sharpened `keyword`/`function` brand anchors, and stabilized all four variants for a long-lived `1.1` baseline.
