@@ -1,11 +1,13 @@
 ---
 import { t, type Lang } from "../../i18n/utils";
 import { tokens } from "../../data/tokens";
-import { getColorRows } from "../../data/colorSystemRows";
 
 interface Props {
     lang: Lang;
 }
+
+type VariantId = keyof typeof tokens;
+type TokenId = keyof (typeof tokens)["dark"];
 
 const { lang } = Astro.props;
 const docsUrl = lang === "en" ? "/docs" : `/${lang}/docs`;
@@ -36,23 +38,32 @@ function contrastRatio(a: string, b: string) {
     return (hi + 0.05) / (lo + 0.05);
 }
 
-const colorRows = getColorRows().map((row) => {
-    if (!row.bgRef) {
+function withAlpha(hex: string, alpha: number) {
+    const normalized = Math.min(Math.max(alpha, 0), 1);
+    const alphaHex = Math.round(normalized * 255)
+        .toString(16)
+        .padStart(2, "0");
+    return `${hex}${alphaHex}`;
+}
+
+function getToken(variant: VariantId, token: TokenId) {
+    return tokens[variant][token];
+}
+
+function getContrastMetric(a: string, b: string | null) {
+    if (!b) {
         return {
-            ...row,
             contrast: "—",
             level: "",
         };
     }
 
-    const ratio = contrastRatio(row.swatch, row.bgRef);
-    const level = ratio >= 7 ? "aaa" : ratio >= 4.5 ? "aa" : "dec";
+    const ratio = contrastRatio(a, b);
     return {
-        ...row,
         contrast: `${ratio.toFixed(1)}:1`,
-        level,
+        level: ratio >= 7 ? "aaa" : ratio >= 4.5 ? "aa" : "dec",
     };
-});
+}
 
 const levelClass: Record<string, string> = {
     aaa: "hearth-badge-aaa",
@@ -60,77 +71,421 @@ const levelClass: Record<string, string> = {
     dec: "hearth-badge-dec",
     "": "hearth-badge-dec",
 };
+
+const copy = {
+    en: {
+        darkEyebrow: "Dark family",
+        darkTitle: "Warm night canvas",
+        darkBody: "Charcoal surfaces stay calm and focused while the syntax accents still feel alive.",
+        lightEyebrow: "Light family",
+        lightTitle: "Paper tones for long reading",
+        lightBody: "Parchment backgrounds keep the bright side gentle, readable, and still clearly structured.",
+        surfaceLabel: "Surface pair",
+        roleLabel: "Role colors",
+        surfacePreview: "Preview",
+    },
+    zh: {
+        darkEyebrow: "深色组",
+        darkTitle: "温暖的夜色画布",
+        darkBody: "炭黑底色保持安静与专注，语义色点到为止，但仍然有存在感。",
+        lightEyebrow: "浅色组",
+        lightTitle: "适合长读的纸面色调",
+        lightBody: "纸张感背景让亮面更柔和，阅读更轻松，层级也依然清楚。",
+        surfaceLabel: "背景关系",
+        roleLabel: "语义角色",
+        surfacePreview: "预览",
+    },
+    ja: {
+        darkEyebrow: "ダーク系",
+        darkTitle: "温かい夜のキャンバス",
+        darkBody: "木炭のような背景で集中を保ちつつ、構文色は静かに効かせています。",
+        lightEyebrow: "ライト系",
+        lightTitle: "長時間読める紙のトーン",
+        lightBody: "紙のような背景でまぶしさを抑え、明るい面でも階層が崩れません。",
+        surfaceLabel: "背景の関係",
+        roleLabel: "役割カラー",
+        surfacePreview: "Preview",
+    },
+} satisfies Record<
+    Lang,
+    {
+        darkEyebrow: string;
+        darkTitle: string;
+        darkBody: string;
+        lightEyebrow: string;
+        lightTitle: string;
+        lightBody: string;
+        surfaceLabel: string;
+        roleLabel: string;
+        surfacePreview: string;
+    }
+>;
+
+const localeCopy = copy[lang];
+
+function buildSurfaceCard(options: {
+    name: string;
+    variant: VariantId;
+    roleKey: string;
+    sample: string;
+}) {
+    return {
+        name: options.name,
+        hex: getToken(options.variant, "bg"),
+        description: t(lang, options.roleKey),
+        bg: getToken(options.variant, "bg"),
+        fg: getToken(options.variant, "fg"),
+        muted: getToken(options.variant, "comment"),
+        border: withAlpha(getToken(options.variant, "border"), 0.92),
+        highlight: withAlpha(getToken(options.variant, "fg"), options.variant === "light" || options.variant === "lightSoft" ? 0.12 : 0.08),
+        shadow: withAlpha(getToken(options.variant, "status"), options.variant === "light" || options.variant === "lightSoft" ? 0.16 : 0.14),
+        sample: options.sample,
+    };
+}
+
+function buildRoleCard(options: {
+    name: string;
+    variant: VariantId;
+    token: TokenId;
+    bgVariant: VariantId;
+    bgToken?: TokenId;
+    roleKey: string;
+    sample: string;
+}) {
+    const swatch = getToken(options.variant, options.token);
+    const bg = getToken(options.bgVariant, options.bgToken ?? "bg");
+    const metric = getContrastMetric(swatch, bg);
+
+    return {
+        name: options.name,
+        hex: swatch,
+        description: t(lang, options.roleKey),
+        sample: options.sample,
+        accent: swatch,
+        contrast: metric.contrast,
+        level: metric.level,
+    };
+}
+
+const darkSurfaceCards = [
+    buildSurfaceCard({
+        name: "bg · dark",
+        variant: "dark",
+        roleKey: "colors.role.bg.dark",
+        sample: `const focus = "hearth";`,
+    }),
+    buildSurfaceCard({
+        name: "bg · dark-soft",
+        variant: "darkSoft",
+        roleKey: "colors.role.bg.darkSoft",
+        sample: `const reading = "soft glow";`,
+    }),
+];
+
+const lightSurfaceCards = [
+    buildSurfaceCard({
+        name: "bg · light",
+        variant: "light",
+        roleKey: "colors.role.bg.light",
+        sample: `render(paper, notes);`,
+    }),
+    buildSurfaceCard({
+        name: "bg · light-soft",
+        variant: "lightSoft",
+        roleKey: "colors.role.bg.lightSoft",
+        sample: `compose(reading, calm);`,
+    }),
+];
+
+const darkRoleCards = [
+    buildRoleCard({
+        name: "fg · dark",
+        variant: "dark",
+        token: "fg",
+        bgVariant: "dark",
+        roleKey: "colors.role.fg.dark",
+        sample: "Readable body copy",
+    }),
+    buildRoleCard({
+        name: "keyword",
+        variant: "dark",
+        token: "keyword",
+        bgVariant: "dark",
+        roleKey: "colors.role.keyword",
+        sample: "if (ready)",
+    }),
+    buildRoleCard({
+        name: "function",
+        variant: "dark",
+        token: "fn",
+        bgVariant: "dark",
+        roleKey: "colors.role.function",
+        sample: "renderTheme()",
+    }),
+    buildRoleCard({
+        name: "string",
+        variant: "dark",
+        token: "string",
+        bgVariant: "dark",
+        roleKey: "colors.role.string",
+        sample: '"embers"',
+    }),
+    buildRoleCard({
+        name: "type",
+        variant: "dark",
+        token: "type",
+        bgVariant: "dark",
+        roleKey: "colors.role.type",
+        sample: "ThemeToken",
+    }),
+    buildRoleCard({
+        name: "number",
+        variant: "dark",
+        token: "number",
+        bgVariant: "dark",
+        roleKey: "colors.role.number",
+        sample: "4.5",
+    }),
+    buildRoleCard({
+        name: "comment",
+        variant: "dark",
+        token: "comment",
+        bgVariant: "dark",
+        roleKey: "colors.role.comment",
+        sample: "// stays quiet",
+    }),
+];
+
+const lightRoleCards = [
+    buildRoleCard({
+        name: "fg · light",
+        variant: "light",
+        token: "fg",
+        bgVariant: "light",
+        roleKey: "colors.role.fg.light",
+        sample: "Readable body copy",
+    }),
+    buildRoleCard({
+        name: "fg · light-soft",
+        variant: "lightSoft",
+        token: "fg",
+        bgVariant: "lightSoft",
+        roleKey: "colors.role.fg.lightSoft",
+        sample: "Long-form reading",
+    }),
+    buildRoleCard({
+        name: "keyword",
+        variant: "light",
+        token: "keyword",
+        bgVariant: "light",
+        roleKey: "colors.role.keyword",
+        sample: "if (ready)",
+    }),
+    buildRoleCard({
+        name: "function",
+        variant: "light",
+        token: "fn",
+        bgVariant: "light",
+        roleKey: "colors.role.function",
+        sample: "renderTheme()",
+    }),
+    buildRoleCard({
+        name: "string",
+        variant: "light",
+        token: "string",
+        bgVariant: "light",
+        roleKey: "colors.role.string",
+        sample: '"embers"',
+    }),
+    buildRoleCard({
+        name: "type",
+        variant: "light",
+        token: "type",
+        bgVariant: "light",
+        roleKey: "colors.role.type",
+        sample: "ThemeToken",
+    }),
+    buildRoleCard({
+        name: "number",
+        variant: "light",
+        token: "number",
+        bgVariant: "light",
+        roleKey: "colors.role.number",
+        sample: "4.5",
+    }),
+    buildRoleCard({
+        name: "comment",
+        variant: "light",
+        token: "comment",
+        bgVariant: "light",
+        roleKey: "colors.role.comment",
+        sample: "// stays quiet",
+    }),
+];
+
+const families = [
+    {
+        id: "dark",
+        eyebrow: localeCopy.darkEyebrow,
+        title: localeCopy.darkTitle,
+        body: localeCopy.darkBody,
+        shellStart: withAlpha(getToken("dark", "sidebar"), 0.96),
+        shellEnd: withAlpha(getToken("darkSoft", "bg"), 0.95),
+        shellBorder: withAlpha(getToken("dark", "border"), 0.88),
+        shadow: withAlpha(getToken("dark", "status"), 0.16),
+        accent: withAlpha(getToken("dark", "status"), 0.88),
+        headingColor: getToken("dark", "fg"),
+        bodyColor: getToken("dark", "variable"),
+        labelColor: getToken("dark", "comment"),
+        shellHighlight: withAlpha(getToken("dark", "fg"), 0.08),
+        roleHighlight: withAlpha(getToken("dark", "fg"), 0.06),
+        roleBg: withAlpha(getToken("dark", "lineBg"), 0.84),
+        roleBorder: withAlpha(getToken("dark", "border"), 0.78),
+        surfaceCards: darkSurfaceCards,
+        roleCards: darkRoleCards,
+    },
+    {
+        id: "light",
+        eyebrow: localeCopy.lightEyebrow,
+        title: localeCopy.lightTitle,
+        body: localeCopy.lightBody,
+        shellStart: withAlpha(getToken("light", "bg"), 0.98),
+        shellEnd: withAlpha(getToken("lightSoft", "lineBg"), 0.96),
+        shellBorder: withAlpha(getToken("light", "border"), 0.92),
+        shadow: withAlpha(getToken("light", "status"), 0.14),
+        accent: withAlpha(getToken("light", "status"), 0.84),
+        headingColor: getToken("light", "fg"),
+        bodyColor: getToken("light", "variable"),
+        labelColor: getToken("light", "comment"),
+        shellHighlight: withAlpha(getToken("light", "fg"), 0.14),
+        roleHighlight: withAlpha(getToken("light", "fg"), 0.1),
+        roleBg: withAlpha(getToken("light", "lineBg"), 0.92),
+        roleBorder: withAlpha(getToken("light", "border"), 0.86),
+        surfaceCards: lightSurfaceCards,
+        roleCards: lightRoleCards,
+    },
+];
 ---
 
-<section class="hearth-section hearth-section-y" data-reveal>
+<section class="hearth-section hearth-section-y hearth-color-section" data-reveal>
     <div class="hearth-shell">
-        <div class="hearth-intro">
+        <div class="hearth-intro hearth-color-intro">
             <p class="hearth-kicker mb-5 flex items-center gap-3">
                 {t(lang, "colors.label")}
                 <span class="hearth-line"></span>
             </p>
         </div>
 
-        <div class="max-w-[1020px]">
+        <div class="hearth-color-board">
             {
-                colorRows.map(({ swatch, name, hex, roleKey, contrast, level, contextVariant, bgRef }) => {
-                    const rowTokens = tokens[contextVariant];
-                    const rowBg = bgRef ?? rowTokens.bg;
+                families.map((family) => (
+                    <article
+                        class={`hearth-color-family hearth-color-family--${family.id}`}
+                        style={`
+                            --family-shell-start: ${family.shellStart};
+                            --family-shell-end: ${family.shellEnd};
+                            --family-shell-border: ${family.shellBorder};
+                            --family-shadow: ${family.shadow};
+                            --family-accent: ${family.accent};
+                            --family-heading: ${family.headingColor};
+                            --family-body: ${family.bodyColor};
+                            --family-label: ${family.labelColor};
+                            --family-shell-highlight: ${family.shellHighlight};
+                            --family-role-highlight: ${family.roleHighlight};
+                            --family-role-bg: ${family.roleBg};
+                            --family-role-border: ${family.roleBorder};
+                        `}
+                    >
+                        <div class="hearth-color-family__header">
+                            <div class="hearth-color-family__mast">
+                                <p class="hearth-color-family__eyebrow">{family.eyebrow}</p>
+                                <span class="hearth-color-family__rule" aria-hidden="true"></span>
+                            </div>
+                            <h3 class="hearth-color-family__title">{family.title}</h3>
+                            <p class="hearth-color-family__body">{family.body}</p>
+                        </div>
 
-                    return (
-                        <div
-                            class="flex flex-col sm:flex-row items-stretch transition-opacity duration-300 hover:opacity-94"
-                            style="border-bottom: 1px solid var(--hearth-colorsystem-row-border)"
-                        >
-                            <div
-                                class="w-full h-3 sm:h-auto sm:w-[4.6rem] flex-shrink-0"
-                                style={`background: ${swatch}`}
-                            />
-                            <div
-                                class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-7 px-4 sm:px-6 py-4 sm:py-[1.05rem] flex-1 min-w-0"
-                                style={`background: ${rowBg}`}
-                            >
-                                <span
-                                    class="font-mono text-[12.5px] sm:w-28 flex-shrink-0"
-                                    style={`color: ${rowTokens.fg}`}
-                                >
-                                    {name}
-                                </span>
-                                <span
-                                    class="font-mono text-[12px] sm:w-24 flex-shrink-0"
-                                    style={`color: ${rowTokens.comment}`}
-                                >
-                                    {hex}
-                                </span>
-                                <span
-                                    class="hearth-copy text-[14px] sm:text-[15px] flex-1 min-w-0 leading-[1.7]"
-                                    style={`color: ${rowTokens.variable}`}
-                                >
-                                    {t(lang, roleKey)}
-                                </span>
-                                <span
-                                    class={`font-mono text-[10px] px-2.5 py-1 rounded-[4px] border flex-shrink-0 self-start sm:self-auto ${levelClass[level]}`}
-                                >
-                                    {contrast}
-                                    {level === "aaa"
-                                        ? " AAA"
-                                        : level === "aa"
-                                          ? " AA"
-                                          : level === "dec"
-                                            ? " dec"
-                                            : ""}
-                                </span>
+                        <div class="hearth-color-family__layout">
+                            <div class="hearth-color-cluster hearth-color-cluster--surface">
+                                <p class="hearth-color-section-label">{localeCopy.surfaceLabel}</p>
+                                <div class="hearth-color-surface-grid">
+                                    {
+                                        family.surfaceCards.map((card) => (
+                                            <article
+                                                class="hearth-color-surface-card"
+                                                style={`
+                                                    --surface-bg: ${card.bg};
+                                                    --surface-fg: ${card.fg};
+                                                    --surface-muted: ${card.muted};
+                                                    --surface-border: ${card.border};
+                                                    --surface-highlight: ${card.highlight};
+                                                    --surface-shadow: ${card.shadow};
+                                                `}
+                                            >
+                                                <div class="hearth-color-surface-card__meta">
+                                                    <span class="hearth-color-surface-card__name">{card.name}</span>
+                                                    <span class="hearth-color-surface-card__hex">{card.hex}</span>
+                                                </div>
+                                                <p class="hearth-color-surface-card__body">{card.description}</p>
+                                                <div class="hearth-color-surface-card__sample">
+                                                    <span class="hearth-color-surface-card__sample-label">
+                                                        {localeCopy.surfacePreview}
+                                                    </span>
+                                                    <code>{card.sample}</code>
+                                                </div>
+                                            </article>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="hearth-color-cluster hearth-color-cluster--roles">
+                                <p class="hearth-color-section-label">{localeCopy.roleLabel}</p>
+                                <div class="hearth-color-role-grid">
+                                    {
+                                        family.roleCards.map((card) => (
+                                            <article
+                                                class="hearth-color-role-card"
+                                                style={`
+                                                    --role-accent: ${card.accent};
+                                                    --role-highlight: ${family.roleHighlight};
+                                                `}
+                                            >
+                                                <div class="hearth-color-role-card__meta">
+                                                    <span class="hearth-color-role-card__name">{card.name}</span>
+                                                    <span class="hearth-color-role-card__hex">{card.hex}</span>
+                                                </div>
+                                                <code class="hearth-color-role-card__sample">{card.sample}</code>
+                                                <p class="hearth-color-role-card__body">{card.description}</p>
+                                                <div class="hearth-color-role-card__foot">
+                                                    <span
+                                                        class={`font-mono text-[10px] px-2.5 py-1 rounded-[999px] border flex-shrink-0 ${levelClass[card.level]}`}
+                                                    >
+                                                        {card.contrast}
+                                                        {card.level === "aaa"
+                                                            ? " AAA"
+                                                            : card.level === "aa"
+                                                              ? " AA"
+                                                              : card.level === "dec"
+                                                                ? " dec"
+                                                                : ""}
+                                                    </span>
+                                                </div>
+                                            </article>
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </div>
-                    );
-                })
+                    </article>
+                ))
             }
 
-            <article class="hearth-proof-metric-card rounded-xl px-4 sm:px-5 py-4 sm:py-5 mt-5">
+            <article class="hearth-proof-metric-card hearth-color-proof rounded-[24px] px-5 sm:px-6 py-5 sm:py-6">
                 <h3 class="hearth-proof-variant-title font-ui text-[1rem] font-semibold mb-2">
                     {t(lang, "colors.proof.title")}
                 </h3>
-                <p class="hearth-copy hearth-meta-muted text-[0.95rem] leading-[1.68] mb-3">
+                <p class="hearth-copy hearth-meta-muted text-[0.95rem] leading-[1.68] mb-4">
                     {t(lang, "colors.proof.body")}
                 </p>
                 <div class="flex flex-wrap gap-2.5 text-[0.8rem] font-ui tracking-[0.01em]">
@@ -164,3 +519,295 @@ const levelClass: Record<string, string> = {
         </div>
     </div>
 </section>
+
+<style>
+    .hearth-color-section {
+        position: relative;
+    }
+
+    .hearth-color-intro {
+        margin-bottom: clamp(1.55rem, 3.4vw, 2.35rem);
+    }
+
+    .hearth-color-board {
+        width: 100%;
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    .hearth-color-family {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        align-content: start;
+        gap: 1.1rem;
+        border-radius: 28px;
+        border: 1px solid var(--family-shell-border);
+        background: linear-gradient(180deg, var(--family-shell-start), var(--family-shell-end));
+        box-shadow:
+            0 22px 52px var(--family-shadow),
+            inset 0 1px 0 var(--family-shell-highlight);
+        padding: clamp(1.05rem, 2.2vw, 1.35rem);
+        min-width: 0;
+    }
+
+    .hearth-color-family::after {
+        content: "";
+        position: absolute;
+        inset: auto -8% -18% 42%;
+        height: 12rem;
+        background: radial-gradient(circle at center, var(--family-accent), transparent 72%);
+        opacity: 0.26;
+        filter: blur(20px);
+        pointer-events: none;
+    }
+
+    .hearth-color-family__header,
+    .hearth-color-cluster {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hearth-color-family__header {
+        display: grid;
+        gap: 0.42rem;
+    }
+
+    .hearth-color-family__mast {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+    }
+
+    .hearth-color-family__eyebrow {
+        margin: 0;
+        color: var(--family-label);
+        font-family: var(--font-ui);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .hearth-color-family__rule {
+        width: clamp(2.4rem, 9vw, 4.8rem);
+        height: 1px;
+        background: linear-gradient(90deg, var(--family-accent), transparent);
+        opacity: 0.7;
+    }
+
+    .hearth-color-family__title {
+        margin: 0;
+        color: var(--family-heading);
+        font-family: var(--font-display);
+        font-size: clamp(1.35rem, 2vw, 1.6rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        max-width: 16ch;
+    }
+
+    .hearth-color-family__body {
+        margin: 0;
+        color: var(--family-body);
+        font-size: 0.95rem;
+        line-height: 1.72;
+        max-width: 44ch;
+    }
+
+    .hearth-color-family__layout {
+        display: grid;
+        gap: 1rem;
+        min-width: 0;
+    }
+
+    .hearth-color-section-label {
+        margin: 0 0 0.7rem;
+        color: var(--family-label);
+        font-family: var(--font-ui);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .hearth-color-surface-grid,
+    .hearth-color-role-grid {
+        display: grid;
+        gap: 0.85rem;
+    }
+
+    .hearth-color-surface-card {
+        min-height: 11rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        border-radius: 20px;
+        border: 1px solid var(--surface-border);
+        background: var(--surface-bg);
+        color: var(--surface-fg);
+        padding: 1rem;
+        box-shadow:
+            inset 0 1px 0 var(--surface-highlight),
+            0 16px 28px var(--surface-shadow);
+    }
+
+    .hearth-color-surface-card__meta,
+    .hearth-color-role-card__meta {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .hearth-color-surface-card__name,
+    .hearth-color-role-card__name {
+        font-family: var(--font-code);
+        font-size: 0.84rem;
+        font-weight: 600;
+    }
+
+    .hearth-color-surface-card__hex,
+    .hearth-color-role-card__hex {
+        font-family: var(--font-code);
+        font-size: 0.72rem;
+        color: var(--surface-muted);
+    }
+
+    .hearth-color-surface-card__body {
+        margin: 0;
+        color: color-mix(in srgb, var(--surface-fg) 82%, transparent);
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .hearth-color-surface-card__sample {
+        margin-top: auto;
+        display: grid;
+        gap: 0.38rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid var(--surface-border);
+    }
+
+    .hearth-color-surface-card__sample-label {
+        color: var(--surface-muted);
+        font-family: var(--font-ui);
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .hearth-color-surface-card__sample code {
+        font-family: var(--font-code);
+        font-size: 0.88rem;
+        color: var(--surface-fg);
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .hearth-color-role-card {
+        min-height: 10.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.72rem;
+        border-radius: 18px;
+        border: 1px solid var(--family-role-border);
+        background: var(--family-role-bg);
+        padding: 0.95rem;
+        box-shadow: inset 0 1px 0 var(--role-highlight);
+    }
+
+    .hearth-color-role-card::before {
+        content: "";
+        display: block;
+        height: 0.24rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--role-accent), transparent 82%);
+    }
+
+    .hearth-color-role-card__hex {
+        color: var(--family-label);
+    }
+
+    .hearth-color-role-card__sample {
+        font-family: var(--font-code);
+        font-size: 0.94rem;
+        color: var(--role-accent);
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .hearth-color-role-card__body {
+        margin: 0;
+        color: var(--family-body);
+        font-size: 0.92rem;
+        line-height: 1.68;
+    }
+
+    .hearth-color-role-card__foot {
+        margin-top: auto;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .hearth-color-proof {
+        border-color: var(--hearth-surface-border-soft);
+        background:
+            linear-gradient(180deg, var(--hearth-surface-soft-bg), var(--hearth-topbar-overlay-glaze)),
+            radial-gradient(circle at top right, var(--hearth-shadow-024), transparent 56%);
+        display: grid;
+        gap: 1rem;
+    }
+
+    @media (min-width: 760px) {
+        .hearth-color-surface-grid,
+        .hearth-color-role-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 980px) {
+        .hearth-color-board {
+            grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+            align-items: stretch;
+        }
+
+        .hearth-color-proof {
+            grid-column: 1 / -1;
+        }
+    }
+
+    @media (min-width: 1080px) {
+        .hearth-color-family--light .hearth-color-family__layout {
+            grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+            align-items: start;
+        }
+
+        .hearth-color-family--light .hearth-color-surface-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (min-width: 1180px) {
+        .hearth-color-proof {
+            grid-template-columns: minmax(0, 1.2fr) auto;
+            align-items: center;
+        }
+
+        .hearth-color-proof > p {
+            margin-bottom: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .hearth-color-family {
+            padding: 0.95rem;
+            border-radius: 22px;
+        }
+
+        .hearth-color-surface-card,
+        .hearth-color-role-card {
+            min-height: unset;
+        }
+    }
+</style>

@@ -1,3 +1,10 @@
+## 1.1.0
+
+- Rebased the full color language on a cleaner warm-neutral foundation, sharpened `keyword`/`function` brand anchors, and stabilized all four variants for a long-lived `1.1` baseline.
+- Gave `Hearth Dark Soft` and `Hearth Light Soft` their own calmer atmosphere instead of treating them as simple low-contrast derivatives, then added tuning guards so the softer variants stay stable under audit.
+- Reduced homepage DOM weight by collapsing the code preview into a single active rendering surface and refreshed the color-system presentation into fuller family cards for dark and light contexts.
+- Synced the release surface end-to-end: regenerated themes and previews, refreshed accessibility snapshot documentation, and cleared site-source literal/audit issues so the full release pipeline is green again.
+
 ## 1.0.29
 
 - Improved site readability for low-emphasis small text by raising contrast for footer/meta/date token usage while keeping the warm visual character.

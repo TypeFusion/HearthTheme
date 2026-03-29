@@ -505,14 +505,15 @@
         "method->property": 10.5,
         "function->property": 11.5
       },
-      "lightSoft": {
-        "method->variable": 11,
-        "keyword->tag": 7,
-        "comment->type": 8,
-        "property->string": 6
-      }
-    },
-    "warmHueBandByVariant": {
+        "lightSoft": {
+          "method->variable": 11,
+          "keyword->tag": 7,
+          "comment->type": 8,
+          "property->string": 6,
+          "property->operator": 8
+        }
+      },
+      "warmHueBandByVariant": {
       "default": {
         "keyword": {
           "hueMin": 8,
@@ -587,11 +588,11 @@
           "maxDeltaEFromSeed": 48
         }
       },
-      "darkSoft": {
-        "function": {
-          "hueMin": 198,
-          "hueMax": 216,
-          "minBgContrast": 2.6,
+        "darkSoft": {
+          "function": {
+            "hueMin": 198,
+            "hueMax": 216,
+            "minBgContrast": 2.6,
           "maxDeltaEFromSeed": 22
         },
         "method": {
@@ -624,14 +625,22 @@
           "minBgContrast": 2.3,
           "maxDeltaEFromSeed": 30
         },
-        "string": {
-          "hueMin": 42,
-          "hueMax": 68,
-          "minBgContrast": 2.2,
-          "maxDeltaEFromSeed": 36
+          "string": {
+            "hueMin": 42,
+            "hueMax": 68,
+            "minBgContrast": 2.2,
+            "maxDeltaEFromSeed": 36
+          }
+        },
+        "lightSoft": {
+          "property": {
+            "hueMin": 56,
+            "hueMax": 80,
+            "minBgContrast": 2.3,
+            "maxDeltaEFromSeed": 56
+          }
         }
-      }
-    },
+      },
     "warmGamutGuard": {
       "forbiddenHueMin": 170,
       "forbiddenHueMax": 250,

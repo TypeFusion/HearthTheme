@@ -10,6 +10,8 @@ interface Props {
 
 const { lang, compact = false } = Astro.props
 
+type ThemeKey = 'dark' | 'soft' | 'light' | 'lightSoft'
+
 type PreviewTheme = {
   name: string
   type: 'dark' | 'light'
@@ -18,6 +20,23 @@ type PreviewTheme = {
     scope?: string | string[]
     settings?: { foreground?: string }
   }>
+}
+
+type PreviewThemeState = {
+  label: string
+  panelBg: string
+  stripBg: string
+  stripColor: string
+  stripBorder: string
+  toolbarBg: string
+  toolbarBorder: string
+  tabColor: string
+  tabHoverColor: string
+  tabActiveColor: string
+  switchColor: string
+  switchHoverColor: string
+  switchActiveColor: string
+  paper: boolean
 }
 
 function loadTheme(relativePath: string, name: string, type: 'dark' | 'light'): PreviewTheme {
@@ -57,6 +76,10 @@ function getPanelPalette(theme: PreviewTheme) {
     || fg
     || comment
   return { bg, fg, sidebar, comment, variable }
+}
+
+function escapeJsonForScript(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c')
 }
 
 const HearthDark = loadTheme('../../../themes/hearth-dark.json', 'Hearth Dark', 'dark')
@@ -205,16 +228,16 @@ npm run build
 }
 
 const langMap: Record<string, string> = {
-  ts:   'typescript',
-  py:   'python',
-  go:   'go',
-  rs:   'rust',
+  ts: 'typescript',
+  py: 'python',
+  go: 'go',
+  rs: 'rust',
   java: 'java',
   bash: 'bash',
   html: 'html',
 }
 
-const rendered: Record<string, { dark: string; soft: string; light: string; lightSoft: string }> = {}
+const rendered: Record<string, Record<ThemeKey, string>> = {}
 for (const [key, code] of Object.entries(samples)) {
   const [dark, soft, light, lightSoft] = await Promise.all([
     codeToHtml(code, { lang: langMap[key], theme: HearthDark }),
@@ -226,17 +249,22 @@ for (const [key, code] of Object.entries(samples)) {
 }
 
 const tabs = [
-  { key: 'ts',   label: 'index.ts'   },
-  { key: 'py',   label: 'main.py'    },
-  { key: 'go',   label: 'server.go'  },
-  { key: 'rs',   label: 'main.rs'    },
-  { key: 'java', label: 'App.java'   },
-  { key: 'bash', label: 'build.sh'   },
+  { key: 'ts', label: 'index.ts' },
+  { key: 'py', label: 'main.py' },
+  { key: 'go', label: 'server.go' },
+  { key: 'rs', label: 'main.rs' },
+  { key: 'java', label: 'App.java' },
+  { key: 'bash', label: 'build.sh' },
   { key: 'html', label: 'index.html' },
 ]
 
-const previewUiByTheme = {
+const previewThemeStateByKey: Record<ThemeKey, PreviewThemeState> = {
   dark: {
+    label: 'Hearth Dark',
+    panelBg: d.bg,
+    stripBg: d.sidebar,
+    stripColor: d.comment,
+    stripBorder: 'var(--hearth-preview-strip-border-dark)',
     toolbarBg: d.sidebar,
     toolbarBorder: 'var(--hearth-preview-strip-border-dark)',
     tabColor: d.comment,
@@ -245,8 +273,14 @@ const previewUiByTheme = {
     switchColor: d.comment,
     switchHoverColor: d.variable,
     switchActiveColor: d.fg,
+    paper: false,
   },
   soft: {
+    label: 'Hearth Dark Soft',
+    panelBg: s.bg,
+    stripBg: s.sidebar,
+    stripColor: s.comment,
+    stripBorder: 'var(--hearth-preview-strip-border-dark)',
     toolbarBg: s.sidebar,
     toolbarBorder: 'var(--hearth-preview-strip-border-dark)',
     tabColor: s.comment,
@@ -255,8 +289,14 @@ const previewUiByTheme = {
     switchColor: s.comment,
     switchHoverColor: s.variable,
     switchActiveColor: s.fg,
+    paper: false,
   },
   light: {
+    label: 'Hearth Light',
+    panelBg: l.bg,
+    stripBg: l.sidebar,
+    stripColor: l.comment,
+    stripBorder: 'var(--hearth-preview-strip-border-light)',
     toolbarBg: l.sidebar,
     toolbarBorder: 'var(--hearth-preview-strip-border-light)',
     tabColor: l.comment,
@@ -265,8 +305,14 @@ const previewUiByTheme = {
     switchColor: l.comment,
     switchHoverColor: l.variable,
     switchActiveColor: l.variable,
+    paper: true,
   },
   lightSoft: {
+    label: 'Hearth Light Soft',
+    panelBg: ls.bg,
+    stripBg: ls.sidebar,
+    stripColor: ls.comment,
+    stripBorder: 'var(--hearth-preview-strip-border-light)',
     toolbarBg: ls.sidebar,
     toolbarBorder: 'var(--hearth-preview-strip-border-light)',
     tabColor: ls.comment,
@@ -275,30 +321,41 @@ const previewUiByTheme = {
     switchColor: ls.comment,
     switchHoverColor: ls.variable,
     switchActiveColor: ls.variable,
+    paper: true,
   },
 }
 
-const previewUiJson = JSON.stringify(previewUiByTheme)
 const previewRootStyle = [
-  `--preview-toolbar-bg: ${previewUiByTheme.dark.toolbarBg}`,
-  `--preview-toolbar-border: ${previewUiByTheme.dark.toolbarBorder}`,
-  `--preview-tab-color: ${previewUiByTheme.dark.tabColor}`,
-  `--preview-tab-hover-color: ${previewUiByTheme.dark.tabHoverColor}`,
-  `--preview-tab-active-color: ${previewUiByTheme.dark.tabActiveColor}`,
-  `--preview-switch-color: ${previewUiByTheme.dark.switchColor}`,
-  `--preview-switch-hover-color: ${previewUiByTheme.dark.switchHoverColor}`,
-  `--preview-switch-active-color: ${previewUiByTheme.dark.switchActiveColor}`,
+  `--preview-toolbar-bg: ${previewThemeStateByKey.dark.toolbarBg}`,
+  `--preview-toolbar-border: ${previewThemeStateByKey.dark.toolbarBorder}`,
+  `--preview-tab-color: ${previewThemeStateByKey.dark.tabColor}`,
+  `--preview-tab-hover-color: ${previewThemeStateByKey.dark.tabHoverColor}`,
+  `--preview-tab-active-color: ${previewThemeStateByKey.dark.tabActiveColor}`,
+  `--preview-switch-color: ${previewThemeStateByKey.dark.switchColor}`,
+  `--preview-switch-hover-color: ${previewThemeStateByKey.dark.switchHoverColor}`,
+  `--preview-switch-active-color: ${previewThemeStateByKey.dark.switchActiveColor}`,
+  `--preview-panel-bg: ${previewThemeStateByKey.dark.panelBg}`,
+  `--preview-strip-bg: ${previewThemeStateByKey.dark.stripBg}`,
+  `--preview-strip-color: ${previewThemeStateByKey.dark.stripColor}`,
+  `--preview-strip-border-color: ${previewThemeStateByKey.dark.stripBorder}`,
 ].join('; ')
+
+const previewThemeJson = escapeJsonForScript(previewThemeStateByKey)
+const renderedJson = escapeJsonForScript(rendered)
 ---
 
 {
   compact ? (
-    <div class="code-preview-root" data-code-preview data-auto-carousel="true" data-theme-ui={previewUiJson} style={previewRootStyle}>
+    <div class="code-preview-root" data-code-preview data-auto-carousel="true" style={previewRootStyle}>
+      <script type="application/json" data-preview-rendered set:html={renderedJson}></script>
+      <script type="application/json" data-preview-themes set:html={previewThemeJson}></script>
+
       <div class="preview-stage preview-stage--compact overflow-hidden">
         <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3">
           <div class="flex overflow-x-auto whitespace-nowrap gap-2" data-preview-tabs>
             {tabs.map(({ key, label }) => (
               <button
+                type="button"
                 data-file-tab={key}
                 class={`preview-tab hearth-tab font-ui text-[12px] sm:text-[12.5px] px-3 sm:px-3.5 py-2 ${key === 'ts' ? 'is-active' : ''}`}
               >
@@ -307,56 +364,22 @@ const previewRootStyle = [
             ))}
           </div>
           <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border p-1">
-            <button data-theme-tab="dark" class="theme-tab is-active">Dark</button>
-            <button data-theme-tab="soft" class="theme-tab">Dark Soft</button>
-            <button data-theme-tab="light" class="theme-tab">Light</button>
-            <button data-theme-tab="lightSoft" class="theme-tab">Light Soft</button>
+            <button type="button" data-theme-tab="dark" class="theme-tab is-active">Dark</button>
+            <button type="button" data-theme-tab="soft" class="theme-tab">Dark Soft</button>
+            <button type="button" data-theme-tab="light" class="theme-tab">Light</button>
+            <button type="button" data-theme-tab="lightSoft" class="theme-tab">Light Soft</button>
           </div>
         </div>
 
-        <div>
-          {tabs.map(({ key }) => (
-            <div
-              class={`preview-file-panel ${key !== 'ts' ? 'hidden' : ''}`}
-              data-file-panel={key}
-            >
-              <div class="preview-theme-panel" data-theme-panel="dark" style={`background: ${d.bg}`}>
-                <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                  style={`background: ${d.sidebar}; color: ${d.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-dark)`}>
-                  Hearth Dark
-                </div>
-                <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                  set:html={rendered[key].dark} />
-              </div>
-
-              <div class="preview-theme-panel hidden" data-theme-panel="soft" style={`background: ${s.bg}`}>
-                <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                  style={`background: ${s.sidebar}; color: ${s.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-dark)`}>
-                  Hearth Dark Soft
-                </div>
-                <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                  set:html={rendered[key].soft} />
-              </div>
-
-              <div class="preview-theme-panel hidden hearth-paper" data-theme-panel="light" style={`background: ${l.bg}`}>
-                <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                  style={`background: ${l.sidebar}; color: ${l.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-light)`}>
-                  Hearth Light
-                </div>
-                <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                  set:html={rendered[key].light} />
-              </div>
-
-              <div class="preview-theme-panel hidden hearth-paper" data-theme-panel="lightSoft" style={`background: ${ls.bg}`}>
-                <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                  style={`background: ${ls.sidebar}; color: ${ls.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-light)`}>
-                  Hearth Light Soft
-                </div>
-                <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                  set:html={rendered[key].lightSoft} />
-              </div>
-            </div>
-          ))}
+        <div class="preview-display preview-theme-panel" data-preview-display>
+          <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5" data-preview-theme-label>
+            Hearth Dark
+          </div>
+          <div
+            class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
+            data-preview-content
+            set:html={rendered.ts.dark}
+          />
         </div>
       </div>
     </div>
@@ -370,11 +393,15 @@ const previewRootStyle = [
           </p>
         </div>
 
-        <div class="code-preview-root preview-stage overflow-hidden" data-code-preview data-theme-ui={previewUiJson} style={previewRootStyle}>
+        <div class="code-preview-root preview-stage overflow-hidden" data-code-preview style={previewRootStyle}>
+          <script type="application/json" data-preview-rendered set:html={renderedJson}></script>
+          <script type="application/json" data-preview-themes set:html={previewThemeJson}></script>
+
           <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3">
             <div class="flex overflow-x-auto whitespace-nowrap gap-2" data-preview-tabs>
               {tabs.map(({ key, label }) => (
                 <button
+                  type="button"
                   data-file-tab={key}
                   class={`preview-tab hearth-tab font-ui text-[12px] sm:text-[12.5px] px-3 sm:px-3.5 py-2 ${key === 'ts' ? 'is-active' : ''}`}
                 >
@@ -383,56 +410,22 @@ const previewRootStyle = [
               ))}
             </div>
             <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border p-1">
-              <button data-theme-tab="dark" class="theme-tab is-active">Dark</button>
-              <button data-theme-tab="soft" class="theme-tab">Dark Soft</button>
-              <button data-theme-tab="light" class="theme-tab">Light</button>
-              <button data-theme-tab="lightSoft" class="theme-tab">Light Soft</button>
+              <button type="button" data-theme-tab="dark" class="theme-tab is-active">Dark</button>
+              <button type="button" data-theme-tab="soft" class="theme-tab">Dark Soft</button>
+              <button type="button" data-theme-tab="light" class="theme-tab">Light</button>
+              <button type="button" data-theme-tab="lightSoft" class="theme-tab">Light Soft</button>
             </div>
           </div>
 
-          <div>
-            {tabs.map(({ key }) => (
-              <div
-                class={`preview-file-panel ${key !== 'ts' ? 'hidden' : ''}`}
-                data-file-panel={key}
-              >
-                <div class="preview-theme-panel" data-theme-panel="dark" style={`background: ${d.bg}`}>
-                  <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                    style={`background: ${d.sidebar}; color: ${d.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-dark)`}>
-                    Hearth Dark
-                  </div>
-                  <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                    set:html={rendered[key].dark} />
-                </div>
-
-                <div class="preview-theme-panel hidden" data-theme-panel="soft" style={`background: ${s.bg}`}>
-                  <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                    style={`background: ${s.sidebar}; color: ${s.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-dark)`}>
-                    Hearth Dark Soft
-                  </div>
-                  <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                    set:html={rendered[key].soft} />
-                </div>
-
-                <div class="preview-theme-panel hidden hearth-paper" data-theme-panel="light" style={`background: ${l.bg}`}>
-                  <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                    style={`background: ${l.sidebar}; color: ${l.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-light)`}>
-                    Hearth Light
-                  </div>
-                  <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                    set:html={rendered[key].light} />
-                </div>
-
-                <div class="preview-theme-panel hidden hearth-paper" data-theme-panel="lightSoft" style={`background: ${ls.bg}`}>
-                  <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5"
-                    style={`background: ${ls.sidebar}; color: ${ls.comment}; border-bottom: 1px solid var(--hearth-preview-strip-border-light)`}>
-                    Hearth Light Soft
-                  </div>
-                  <div class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
-                    set:html={rendered[key].lightSoft} />
-                </div>
-              </div>
-            ))}
+          <div class="preview-display preview-theme-panel" data-preview-display>
+            <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5" data-preview-theme-label>
+              Hearth Dark
+            </div>
+            <div
+              class="overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
+              data-preview-content
+              set:html={rendered.ts.dark}
+            />
           </div>
         </div>
       </div>
@@ -539,21 +532,23 @@ const previewRootStyle = [
     box-shadow: inset 0 0 0 1px var(--hearth-preview-switch-active-ring);
   }
 
-  .preview-theme-panel {
+  .preview-display {
     min-height: 380px;
+    background: var(--preview-panel-bg);
     will-change: opacity, transform, filter;
   }
 
-  .preview-file-panel {
-    will-change: opacity, transform, filter;
-  }
-
-  .preview-file-panel.is-entering,
-  .preview-theme-panel.is-entering {
+  .preview-display.is-entering {
     animation: preview-enter 620ms var(--hearth-ease);
   }
 
-  .preview-stage--compact .preview-theme-panel {
+  .theme-strip {
+    background: var(--preview-strip-bg);
+    color: var(--preview-strip-color);
+    border-bottom: 1px solid var(--preview-strip-border-color);
+  }
+
+  .preview-stage--compact .preview-display {
     min-height: clamp(390px, 53svh, 540px);
   }
 
@@ -596,7 +591,7 @@ const previewRootStyle = [
       padding: 0.26rem 0.56rem;
     }
 
-    .preview-stage--compact .preview-theme-panel {
+    .preview-stage--compact .preview-display {
       min-height: clamp(250px, 34svh, 340px);
     }
 
@@ -633,7 +628,7 @@ const previewRootStyle = [
       padding: 0.24rem 0.48rem;
     }
 
-    .preview-stage--compact .preview-theme-panel {
+    .preview-stage--compact .preview-display {
       min-height: clamp(220px, 31svh, 300px);
     }
 
@@ -652,6 +647,7 @@ const previewRootStyle = [
     margin: 0;
     padding: 0;
   }
+
   .shiki-wrap :global(code) {
     font-family: var(--font-code);
     font-size: 13px;
@@ -699,21 +695,36 @@ const previewRootStyle = [
     root.dataset.previewReady = 'true'
 
     const fileTabs = root.querySelectorAll<HTMLElement>('[data-file-tab]')
-    const filePanels = root.querySelectorAll<HTMLElement>('[data-file-panel]')
     const themeTabs = root.querySelectorAll<HTMLElement>('[data-theme-tab]')
-    const themeUiMap = (() => {
+    const previewDisplay = root.querySelector<HTMLElement>('[data-preview-display]')
+    const previewContent = root.querySelector<HTMLElement>('[data-preview-content]')
+    const themeLabel = root.querySelector<HTMLElement>('[data-preview-theme-label]')
+    const renderedScript = root.querySelector<HTMLScriptElement>('[data-preview-rendered]')
+    const themeScript = root.querySelector<HTMLScriptElement>('[data-preview-themes]')
+
+    const renderedMap = (() => {
       try {
-        return JSON.parse(root.dataset.themeUi || '{}') as Record<string, Record<string, string>>
+        return JSON.parse(renderedScript?.textContent || '{}') as Record<string, Record<string, string>>
       } catch {
         return {}
       }
     })()
+
+    const themeStateMap = (() => {
+      try {
+        return JSON.parse(themeScript?.textContent || '{}') as Record<string, Record<string, string | boolean>>
+      } catch {
+        return {}
+      }
+    })()
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const fileOrder = Array.from(fileTabs).map(tab => tab.dataset.fileTab).filter(Boolean) as string[]
     const themeOrder = Array.from(themeTabs).map(tab => tab.dataset.themeTab).filter(Boolean) as string[]
 
     let currentFile = fileOrder[0] ?? 'ts'
     let currentTheme = themeOrder[0] ?? 'dark'
+    let currentRenderKey = `${currentFile}:${currentTheme}`
     let lastInteractionAt = 0
     let fileTimer: number | undefined
     let themeTimer: number | undefined
@@ -726,26 +737,48 @@ const previewRootStyle = [
       lastInteractionAt = Date.now()
     }
 
-    const triggerEnter = (el: Element | null, animate = true) => {
+    const triggerEnter = (el: HTMLElement | null, animate = true) => {
       if (!el || !animate || prefersReducedMotion) return
-      const target = el as HTMLElement
-      target.classList.remove('is-entering')
-      void target.offsetWidth
-      target.classList.add('is-entering')
-      window.setTimeout(() => target.classList.remove('is-entering'), 700)
+      el.classList.remove('is-entering')
+      window.requestAnimationFrame(() => {
+        el.classList.add('is-entering')
+        window.setTimeout(() => el.classList.remove('is-entering'), 700)
+      })
+    }
+
+    const renderActive = (animate = true) => {
+      const nextRenderKey = `${currentFile}:${currentTheme}`
+      const nextHtml = renderedMap?.[currentFile]?.[currentTheme]
+      if (previewContent && nextHtml && currentRenderKey !== nextRenderKey) {
+        previewContent.innerHTML = nextHtml
+      }
+      currentRenderKey = nextRenderKey
+      triggerEnter(previewDisplay, animate)
     }
 
     const applyThemeUi = (themeKey: string) => {
-      const ui = themeUiMap?.[themeKey]
+      const ui = themeStateMap?.[themeKey]
       if (!ui) return
-      if (ui.toolbarBg) root.style.setProperty('--preview-toolbar-bg', ui.toolbarBg)
-      if (ui.toolbarBorder) root.style.setProperty('--preview-toolbar-border', ui.toolbarBorder)
-      if (ui.tabColor) root.style.setProperty('--preview-tab-color', ui.tabColor)
-      if (ui.tabHoverColor) root.style.setProperty('--preview-tab-hover-color', ui.tabHoverColor)
-      if (ui.tabActiveColor) root.style.setProperty('--preview-tab-active-color', ui.tabActiveColor)
-      if (ui.switchColor) root.style.setProperty('--preview-switch-color', ui.switchColor)
-      if (ui.switchHoverColor) root.style.setProperty('--preview-switch-hover-color', ui.switchHoverColor)
-      if (ui.switchActiveColor) root.style.setProperty('--preview-switch-active-color', ui.switchActiveColor)
+      if (typeof ui.toolbarBg === 'string') root.style.setProperty('--preview-toolbar-bg', ui.toolbarBg)
+      if (typeof ui.toolbarBorder === 'string') root.style.setProperty('--preview-toolbar-border', ui.toolbarBorder)
+      if (typeof ui.tabColor === 'string') root.style.setProperty('--preview-tab-color', ui.tabColor)
+      if (typeof ui.tabHoverColor === 'string') root.style.setProperty('--preview-tab-hover-color', ui.tabHoverColor)
+      if (typeof ui.tabActiveColor === 'string') root.style.setProperty('--preview-tab-active-color', ui.tabActiveColor)
+      if (typeof ui.switchColor === 'string') root.style.setProperty('--preview-switch-color', ui.switchColor)
+      if (typeof ui.switchHoverColor === 'string') root.style.setProperty('--preview-switch-hover-color', ui.switchHoverColor)
+      if (typeof ui.switchActiveColor === 'string') root.style.setProperty('--preview-switch-active-color', ui.switchActiveColor)
+      if (typeof ui.panelBg === 'string') root.style.setProperty('--preview-panel-bg', ui.panelBg)
+      if (typeof ui.stripBg === 'string') root.style.setProperty('--preview-strip-bg', ui.stripBg)
+      if (typeof ui.stripColor === 'string') root.style.setProperty('--preview-strip-color', ui.stripColor)
+      if (typeof ui.stripBorder === 'string') root.style.setProperty('--preview-strip-border-color', ui.stripBorder)
+
+      if (themeLabel && typeof ui.label === 'string') {
+        themeLabel.textContent = ui.label
+      }
+
+      if (previewDisplay) {
+        previewDisplay.classList.toggle('hearth-paper', Boolean(ui.paper))
+      }
     }
 
     const setTheme = (themeKey: string | null, animate = true) => {
@@ -757,16 +790,7 @@ const previewRootStyle = [
         tab.classList.toggle('is-active', tab.dataset.themeTab === themeKey)
       })
 
-      filePanels.forEach(filePanel => {
-        const scopedThemes = filePanel.querySelectorAll<HTMLElement>('[data-theme-panel]')
-        scopedThemes.forEach(panel => {
-          panel.classList.toggle('hidden', panel.dataset.themePanel !== themeKey)
-        })
-      })
-
-      const activeFilePanel = root.querySelector<HTMLElement>(`[data-file-panel="${currentFile}"]`)
-      const activeThemePanel = activeFilePanel?.querySelector<HTMLElement>(`[data-theme-panel="${currentTheme}"]`)
-      triggerEnter(activeThemePanel ?? null, animate)
+      renderActive(animate)
     }
 
     const setFile = (fileKey: string | null, animate = true) => {
@@ -777,15 +801,7 @@ const previewRootStyle = [
         tab.classList.toggle('is-active', tab.dataset.fileTab === fileKey)
       })
 
-      filePanels.forEach(panel => {
-        panel.classList.toggle('hidden', panel.dataset.filePanel !== fileKey)
-      })
-
-      const activeFilePanel = root.querySelector<HTMLElement>(`[data-file-panel="${currentFile}"]`)
-      triggerEnter(activeFilePanel ?? null, animate)
-
-      const activeThemePanel = activeFilePanel?.querySelector<HTMLElement>(`[data-theme-panel="${currentTheme}"]`)
-      triggerEnter(activeThemePanel ?? null, animate)
+      renderActive(animate)
     }
 
     const nextFrom = (items: string[], current: string) => {
@@ -829,7 +845,7 @@ const previewRootStyle = [
     root.addEventListener('pointerenter', markInteraction, { passive: true })
     root.addEventListener('focusin', markInteraction, { passive: true })
 
-    setTheme(currentTheme, false)
+    applyThemeUi(currentTheme)
     setFile(currentFile, false)
     setupAutoCarousel()
 
