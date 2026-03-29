@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const d = tokens.dark;
 const docsUrl = lang === "en" ? "/docs" : `/${lang}/docs`;
 const reportUrl = "https://github.com/hearth-code/HearthTheme/blob/main/docs/color-language-report.md";
 const sourceUrl = "https://github.com/hearth-code/HearthTheme/tree/main/color-system";
@@ -74,52 +73,57 @@ const levelClass: Record<string, string> = {
 
         <div class="max-w-[1020px]">
             {
-                colorRows.map(({ swatch, name, hex, roleKey, contrast, level }) => (
-                    <div
-                        class="flex flex-col sm:flex-row items-stretch transition-opacity duration-300 hover:opacity-94"
-                        style="border-bottom: 1px solid var(--hearth-colorsystem-row-border)"
-                    >
+                colorRows.map(({ swatch, name, hex, roleKey, contrast, level, contextVariant, bgRef }) => {
+                    const rowTokens = tokens[contextVariant];
+                    const rowBg = bgRef ?? rowTokens.bg;
+
+                    return (
                         <div
-                            class="w-full h-3 sm:h-auto sm:w-[4.6rem] flex-shrink-0"
-                            style={`background: ${swatch}`}
-                        />
-                        <div
-                            class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-7 px-4 sm:px-6 py-4 sm:py-[1.05rem] flex-1 min-w-0"
-                            style={`background: ${d.bg}`}
+                            class="flex flex-col sm:flex-row items-stretch transition-opacity duration-300 hover:opacity-94"
+                            style="border-bottom: 1px solid var(--hearth-colorsystem-row-border)"
                         >
-                            <span
-                                class="font-mono text-[12.5px] sm:w-28 flex-shrink-0"
-                                style={`color: ${d.fg}`}
+                            <div
+                                class="w-full h-3 sm:h-auto sm:w-[4.6rem] flex-shrink-0"
+                                style={`background: ${swatch}`}
+                            />
+                            <div
+                                class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-7 px-4 sm:px-6 py-4 sm:py-[1.05rem] flex-1 min-w-0"
+                                style={`background: ${rowBg}`}
                             >
-                                {name}
-                            </span>
-                            <span
-                                class="font-mono text-[12px] sm:w-24 flex-shrink-0"
-                                style={`color: ${d.comment}`}
-                            >
-                                {hex}
-                            </span>
-                            <span
-                                class="hearth-copy text-[14px] sm:text-[15px] flex-1 min-w-0 leading-[1.7]"
-                                style={`color: ${d.variable}`}
-                            >
-                                {t(lang, roleKey)}
-                            </span>
-                            <span
-                                class={`font-mono text-[10px] px-2.5 py-1 rounded-[4px] border flex-shrink-0 self-start sm:self-auto ${levelClass[level]}`}
-                            >
-                                {contrast}
-                                {level === "aaa"
-                                    ? " AAA"
-                                    : level === "aa"
-                                      ? " AA"
-                                      : level === "dec"
-                                        ? " dec"
-                                        : ""}
-                            </span>
+                                <span
+                                    class="font-mono text-[12.5px] sm:w-28 flex-shrink-0"
+                                    style={`color: ${rowTokens.fg}`}
+                                >
+                                    {name}
+                                </span>
+                                <span
+                                    class="font-mono text-[12px] sm:w-24 flex-shrink-0"
+                                    style={`color: ${rowTokens.comment}`}
+                                >
+                                    {hex}
+                                </span>
+                                <span
+                                    class="hearth-copy text-[14px] sm:text-[15px] flex-1 min-w-0 leading-[1.7]"
+                                    style={`color: ${rowTokens.variable}`}
+                                >
+                                    {t(lang, roleKey)}
+                                </span>
+                                <span
+                                    class={`font-mono text-[10px] px-2.5 py-1 rounded-[4px] border flex-shrink-0 self-start sm:self-auto ${levelClass[level]}`}
+                                >
+                                    {contrast}
+                                    {level === "aaa"
+                                        ? " AAA"
+                                        : level === "aa"
+                                          ? " AA"
+                                          : level === "dec"
+                                            ? " dec"
+                                            : ""}
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                ))
+                    );
+                })
             }
 
             <article class="hearth-proof-metric-card rounded-xl px-4 sm:px-5 py-4 sm:py-5 mt-5">

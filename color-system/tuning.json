@@ -1199,8 +1199,8 @@
         "--hearth-kicker-accent": {
           "type": "mix",
           "a": "@warmCore",
-          "b": "dark.keyword",
-          "t": 0.4
+          "b": "@brass",
+          "t": 0.42
         },
         "--hearth-brand-main": {
           "type": "mix",
@@ -1212,7 +1212,7 @@
           "type": "mix",
           "a": "@warmCore",
           "b": "dark.keyword",
-          "t": 0.28
+          "t": 0.32
         },
         "--hearth-logo-main": {
           "type": "mix",
@@ -1224,7 +1224,7 @@
           "type": "mix",
           "a": "@warmCore",
           "b": "dark.keyword",
-          "t": 0.34
+          "t": 0.32
         },
         "--hearth-nav-icon-bg": {
           "type": "mix",
@@ -1260,7 +1260,7 @@
           "type": "mix",
           "a": "dark.comment",
           "b": "dark.fg",
-          "t": 0.24
+          "t": 0.33
         },
         "--hearth-proof-metric-title": {
           "type": "mix",
@@ -1334,7 +1334,7 @@
           "type": "mix",
           "a": "dark.comment",
           "b": "dark.fg",
-          "t": 0.22
+          "t": 0.31
         },
         "--hearth-doc-bullet": {
           "type": "mix",
@@ -1345,8 +1345,8 @@
         "--hearth-footer-meta": {
           "type": "mix",
           "a": "dark.comment",
-          "b": "dark.bg",
-          "t": 0.46
+          "b": "dark.fg",
+          "t": 0.3
         },
         "--hearth-badge-aaa": {
           "type": "mix",
@@ -1637,6 +1637,11 @@
           },
           "value": 0.3
         },
+        "--hearth-btn-secondary-bg": {
+          "type": "alpha",
+          "color": "light.bg",
+          "value": 0.045
+        },
         "--hearth-surface-soft-bg": {
           "type": "alpha",
           "color": "light.bg",
@@ -1671,6 +1676,16 @@
             "t": 0.34
           },
           "value": 0.24
+        },
+        "--hearth-btn-tertiary-bg": {
+          "type": "alpha",
+          "color": {
+            "type": "mix",
+            "a": "@brass",
+            "b": "dark.sidebar",
+            "t": 0.36
+          },
+          "value": 0.14
         },
         "--hearth-btn-tertiary-hover-border": {
           "type": "alpha",

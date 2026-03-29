@@ -376,7 +376,7 @@ button:focus-visible {
 
 .hearth-btn-secondary {
   border-color: var(--hearth-btn-secondary-border);
-  background: var(--hearth-surface-soft-bg);
+  background: var(--hearth-btn-secondary-bg);
   color: var(--hearth-doc-heading);
   box-shadow: 0 8px 24px var(--hearth-shadow-018);
 }
@@ -388,7 +388,7 @@ button:focus-visible {
 
 .hearth-btn-tertiary {
   border-color: var(--hearth-btn-tertiary-border);
-  background: var(--hearth-grid-line-soft);
+  background: var(--hearth-btn-tertiary-bg);
   color: var(--hearth-doc-bullet);
 }
 
@@ -647,6 +647,10 @@ button:focus-visible {
   display: inline-flex;
   align-items: baseline;
   gap: 0.2rem;
+}
+
+.hearth-logo-mark {
+  box-shadow: 0 6px 16px var(--hearth-shadow-024);
 }
 
 .hearth-brand-hearth {

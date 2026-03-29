@@ -23,6 +23,16 @@ const THEME_AUDIT_SCRIPT = 'scripts/theme-audit.mjs'
 const SITE_THEME_VARS = 'src/styles/theme-vars.css'
 const SOURCE_COLOR_SCAN_PATHS = ['src/components', 'src/layouts', 'src/styles']
 const LEGACY_HEX = ['#2a2723', '#ece2d3']
+const SITE_TEXT_CONTRAST_BUDGET = [
+  { fgVar: '--hearth-metric-muted', bgVar: '--hearth-bg', minRatio: 4.5 },
+  { fgVar: '--hearth-doc-date', bgVar: '--hearth-bg', minRatio: 4.5 },
+  { fgVar: '--hearth-footer-meta', bgVar: '--hearth-bg', minRatio: 4.5 },
+]
+const SITE_BUTTON_BUDGET = {
+  minVisualSeparation: 4,
+  secondaryTextMinRatio: 4.5,
+  tertiaryTextMinRatio: 4.5,
+}
 
 const issues = []
 const LIVE_SURFACE_IDS = ['vsx', 'vscode', 'obsidian']
@@ -244,6 +254,113 @@ function walkFiles(targetPath) {
   }
 
   return files
+}
+
+function parseSiteThemeVars(varsText) {
+  const vars = {}
+  for (const match of varsText.matchAll(/(--hearth-[a-z0-9-]+):\s*([^;]+);/g)) {
+    vars[match[1]] = String(match[2]).trim()
+  }
+  return vars
+}
+
+function parseRgbWithAlpha(value) {
+  if (typeof value !== 'string') return null
+  const match = value.trim().match(/^rgb\(\s*(\d{1,3})\s+(\d{1,3})\s+(\d{1,3})\s*\/\s*(0|1|0?\.\d+)\s*\)$/)
+  if (!match) return null
+
+  const r = Number(match[1])
+  const g = Number(match[2])
+  const b = Number(match[3])
+  const a = Number(match[4])
+  if ([r, g, b, a].some((x) => Number.isNaN(x))) return null
+  if (r > 255 || g > 255 || b > 255) return null
+  if (a < 0 || a > 1) return null
+  return { r, g, b, a }
+}
+
+function rgbToHex({ r, g, b }) {
+  const clamp = (v) => Math.max(0, Math.min(255, Math.round(v)))
+  const toHex = (v) => clamp(v).toString(16).padStart(2, '0')
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+}
+
+function blendOverBackground(rgba, bgHex) {
+  const bg = hexToRgb(bgHex)
+  if (!bg || !rgba) return null
+  const alpha = Math.max(0, Math.min(1, rgba.a))
+  return rgbToHex({
+    r: rgba.r * alpha + bg[0] * (1 - alpha),
+    g: rgba.g * alpha + bg[1] * (1 - alpha),
+    b: rgba.b * alpha + bg[2] * (1 - alpha),
+  })
+}
+
+function rgbDistance(a, b) {
+  const ar = hexToRgb(a)
+  const br = hexToRgb(b)
+  if (!ar || !br) return null
+  const dr = ar[0] - br[0]
+  const dg = ar[1] - br[1]
+  const db = ar[2] - br[2]
+  return Math.sqrt(dr * dr + dg * dg + db * db)
+}
+
+function validateSiteContrastBudget(vars) {
+  for (const { fgVar, bgVar, minRatio } of SITE_TEXT_CONTRAST_BUDGET) {
+    const fg = normalizeHex(vars[fgVar])
+    const bg = normalizeHex(vars[bgVar])
+    if (!fg || !bg) {
+      addIssue(`${SITE_THEME_VARS}: missing contrast budget vars ${fgVar} or ${bgVar}`)
+      continue
+    }
+    const ratio = contrastRatio(fg, bg)
+    if (ratio == null || ratio < minRatio) {
+      const actual = ratio == null ? 'n/a' : fixed(ratio)
+      addIssue(`${SITE_THEME_VARS}: contrast ${fgVar} on ${bgVar} is ${actual}, below ${fixed(minRatio)}`)
+    }
+  }
+
+  const baseBg = normalizeHex(vars['--hearth-bg'])
+  const secondaryBgRaw = parseRgbWithAlpha(vars['--hearth-btn-secondary-bg'])
+  const tertiaryBgRaw = parseRgbWithAlpha(vars['--hearth-btn-tertiary-bg'])
+  const secondaryText = normalizeHex(vars['--hearth-doc-heading'])
+  const tertiaryText = normalizeHex(vars['--hearth-doc-bullet'])
+  if (!baseBg || !secondaryBgRaw || !tertiaryBgRaw || !secondaryText || !tertiaryText) {
+    addIssue(`${SITE_THEME_VARS}: button hierarchy budget vars are missing or invalid`)
+    return
+  }
+
+  const secondaryBg = blendOverBackground(secondaryBgRaw, baseBg)
+  const tertiaryBg = blendOverBackground(tertiaryBgRaw, baseBg)
+  if (!secondaryBg || !tertiaryBg) {
+    addIssue(`${SITE_THEME_VARS}: failed to resolve button background contrast budget colors`)
+    return
+  }
+
+  const separation = rgbDistance(secondaryBg, tertiaryBg)
+  if (separation == null || separation < SITE_BUTTON_BUDGET.minVisualSeparation) {
+    const actual = separation == null ? 'n/a' : Number(separation).toFixed(2)
+    addIssue(
+      `${SITE_THEME_VARS}: button background separation is ${actual}, below ${SITE_BUTTON_BUDGET.minVisualSeparation.toFixed(2)}`
+    )
+  }
+
+  const secondaryTextRatio = contrastRatio(secondaryText, secondaryBg)
+  if (secondaryTextRatio == null || secondaryTextRatio < SITE_BUTTON_BUDGET.secondaryTextMinRatio) {
+    const actual = secondaryTextRatio == null ? 'n/a' : fixed(secondaryTextRatio)
+    addIssue(
+      `${SITE_THEME_VARS}: secondary button text contrast is ${actual}, below ${fixed(SITE_BUTTON_BUDGET.secondaryTextMinRatio)}`
+    )
+  }
+
+  const tertiaryTextRatio = contrastRatio(tertiaryText, tertiaryBg)
+  if (tertiaryTextRatio == null || tertiaryTextRatio < SITE_BUTTON_BUDGET.tertiaryTextMinRatio) {
+    const actual = tertiaryTextRatio == null ? 'n/a' : fixed(tertiaryTextRatio)
+    addIssue(
+      `${SITE_THEME_VARS}: tertiary button text contrast is ${actual}, below ${fixed(SITE_BUTTON_BUDGET.tertiaryTextMinRatio)}`
+    )
+  }
 }
 
 function escapeRegExp(text) {
@@ -584,6 +701,8 @@ function validateThemeVarsAndMetadata(themes) {
   if (!varsText.includes(`--hearth-bg: ${darkSet.bg};`)) {
     addIssue(`${SITE_THEME_VARS}: --hearth-bg is out of sync with ${THEME_FILES.dark}`)
   }
+  const siteVars = parseSiteThemeVars(varsText)
+  validateSiteContrastBudget(siteVars)
 
   const pkg = readJson(EXTENSION_PACKAGE)
   if (pkg) {
@@ -901,7 +1020,7 @@ function validateReadabilityBudgetContract() {
 }
 
 function validateNoHardcodedColorLiterals() {
-  const colorLiteral = /#[0-9a-fA-F]{3,8}\b|\b(?:rgb|rgba|hsl|hsla)\(/g
+  const colorLiteral = /#[0-9a-fA-F]{3,8}\b|(?<![a-zA-Z0-9])(?:rgb|rgba|hsl|hsla)\(/g
   const tailwindPaletteClass = /\b(?:text|bg|border)-(?:white|black|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(?:\/\d+|-\d+)?\b/g
   const allowedGenerated = new Set([SITE_THEME_VARS.replace(/\\/g, '/')])
 

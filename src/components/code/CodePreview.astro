@@ -47,12 +47,16 @@ function requireThemeColor(value: string | undefined, key: string): string {
 
 function getPanelPalette(theme: PreviewTheme) {
   const bg = requireThemeColor(theme.colors?.['editor.background'], 'editor.background')
+  const fg = requireThemeColor(theme.colors?.['editor.foreground'], 'editor.foreground')
   const sidebar = theme.colors?.['sideBar.background'] || bg
   const comment = getTokenColor(theme, ['comment'])
-    || theme.colors?.['editor.foreground']
+    || fg
     || theme.colors?.['editorLineNumber.foreground']
     || sidebar
-  return { bg, sidebar, comment }
+  const variable = getTokenColor(theme, ['variable', 'variable.other.readwrite'])
+    || fg
+    || comment
+  return { bg, fg, sidebar, comment, variable }
 }
 
 const HearthDark = loadTheme('../../../themes/hearth-dark.json', 'Hearth Dark', 'dark')
@@ -230,13 +234,68 @@ const tabs = [
   { key: 'bash', label: 'build.sh'   },
   { key: 'html', label: 'index.html' },
 ]
+
+const previewUiByTheme = {
+  dark: {
+    toolbarBg: d.sidebar,
+    toolbarBorder: 'var(--hearth-preview-strip-border-dark)',
+    tabColor: d.comment,
+    tabHoverColor: d.variable,
+    tabActiveColor: d.fg,
+    switchColor: d.comment,
+    switchHoverColor: d.variable,
+    switchActiveColor: d.fg,
+  },
+  soft: {
+    toolbarBg: s.sidebar,
+    toolbarBorder: 'var(--hearth-preview-strip-border-dark)',
+    tabColor: s.comment,
+    tabHoverColor: s.variable,
+    tabActiveColor: s.fg,
+    switchColor: s.comment,
+    switchHoverColor: s.variable,
+    switchActiveColor: s.fg,
+  },
+  light: {
+    toolbarBg: l.sidebar,
+    toolbarBorder: 'var(--hearth-preview-strip-border-light)',
+    tabColor: l.comment,
+    tabHoverColor: l.variable,
+    tabActiveColor: l.variable,
+    switchColor: l.comment,
+    switchHoverColor: l.variable,
+    switchActiveColor: l.variable,
+  },
+  lightSoft: {
+    toolbarBg: ls.sidebar,
+    toolbarBorder: 'var(--hearth-preview-strip-border-light)',
+    tabColor: ls.comment,
+    tabHoverColor: ls.variable,
+    tabActiveColor: ls.variable,
+    switchColor: ls.comment,
+    switchHoverColor: ls.variable,
+    switchActiveColor: ls.variable,
+  },
+}
+
+const previewUiJson = JSON.stringify(previewUiByTheme)
+const previewRootStyle = [
+  `--preview-toolbar-bg: ${previewUiByTheme.dark.toolbarBg}`,
+  `--preview-toolbar-border: ${previewUiByTheme.dark.toolbarBorder}`,
+  `--preview-tab-color: ${previewUiByTheme.dark.tabColor}`,
+  `--preview-tab-hover-color: ${previewUiByTheme.dark.tabHoverColor}`,
+  `--preview-tab-active-color: ${previewUiByTheme.dark.tabActiveColor}`,
+  `--preview-switch-color: ${previewUiByTheme.dark.switchColor}`,
+  `--preview-switch-hover-color: ${previewUiByTheme.dark.switchHoverColor}`,
+  `--preview-switch-active-color: ${previewUiByTheme.dark.switchActiveColor}`,
+].join('; ')
 ---
 
 {
   compact ? (
-    <div class="code-preview-root" data-code-preview data-auto-carousel="true">
+    <div class="code-preview-root" data-code-preview data-auto-carousel="true" data-theme-ui={previewUiJson} style={previewRootStyle}>
       <div class="preview-stage preview-stage--compact overflow-hidden">
-        <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3" style={`background: ${d.sidebar}`}>
+        <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3">
           <div class="flex overflow-x-auto whitespace-nowrap gap-2" data-preview-tabs>
             {tabs.map(({ key, label }) => (
               <button
@@ -311,8 +370,8 @@ const tabs = [
           </p>
         </div>
 
-        <div class="code-preview-root preview-stage overflow-hidden" data-code-preview>
-          <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3" style={`background: ${d.sidebar}`}>
+        <div class="code-preview-root preview-stage overflow-hidden" data-code-preview data-theme-ui={previewUiJson} style={previewRootStyle}>
+          <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3">
             <div class="flex overflow-x-auto whitespace-nowrap gap-2" data-preview-tabs>
               {tabs.map(({ key, label }) => (
                 <button
@@ -403,12 +462,13 @@ const tabs = [
   }
 
   .preview-toolbar {
-    border-bottom: 1px solid var(--hearth-preview-strip-border-dark);
+    background: var(--preview-toolbar-bg);
+    border-bottom: 1px solid var(--preview-toolbar-border);
   }
 
   .preview-tab {
     position: relative;
-    color: var(--hearth-muted);
+    color: var(--preview-tab-color);
     background: transparent;
     border: none;
     border-radius: 0;
@@ -433,7 +493,7 @@ const tabs = [
   }
 
   .preview-tab:hover {
-    color: var(--hearth-fg);
+    color: var(--preview-tab-hover-color);
   }
 
   .preview-tab:hover::after {
@@ -442,7 +502,7 @@ const tabs = [
   }
 
   .preview-tab.is-active {
-    color: var(--hearth-brand-main);
+    color: var(--preview-tab-active-color);
     text-shadow: 0 0 10px var(--hearth-preview-tab-active-shadow);
   }
 
@@ -460,7 +520,7 @@ const tabs = [
     border-radius: 9999px;
     padding: 0.3rem 0.72rem;
     background: transparent;
-    color: var(--hearth-muted);
+    color: var(--preview-switch-color);
     font-family: var(--font-ui);
     font-size: 11px;
     line-height: 1;
@@ -470,11 +530,11 @@ const tabs = [
   }
 
   .theme-tab:hover {
-    color: var(--hearth-fg);
+    color: var(--preview-switch-hover-color);
   }
 
   .theme-tab.is-active {
-    color: var(--hearth-brand-main);
+    color: var(--preview-switch-active-color);
     background: var(--hearth-preview-switch-active-bg);
     box-shadow: inset 0 0 0 1px var(--hearth-preview-switch-active-ring);
   }
@@ -641,6 +701,13 @@ const tabs = [
     const fileTabs = root.querySelectorAll<HTMLElement>('[data-file-tab]')
     const filePanels = root.querySelectorAll<HTMLElement>('[data-file-panel]')
     const themeTabs = root.querySelectorAll<HTMLElement>('[data-theme-tab]')
+    const themeUiMap = (() => {
+      try {
+        return JSON.parse(root.dataset.themeUi || '{}') as Record<string, Record<string, string>>
+      } catch {
+        return {}
+      }
+    })()
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const fileOrder = Array.from(fileTabs).map(tab => tab.dataset.fileTab).filter(Boolean) as string[]
     const themeOrder = Array.from(themeTabs).map(tab => tab.dataset.themeTab).filter(Boolean) as string[]
@@ -668,9 +735,23 @@ const tabs = [
       window.setTimeout(() => target.classList.remove('is-entering'), 700)
     }
 
+    const applyThemeUi = (themeKey: string) => {
+      const ui = themeUiMap?.[themeKey]
+      if (!ui) return
+      if (ui.toolbarBg) root.style.setProperty('--preview-toolbar-bg', ui.toolbarBg)
+      if (ui.toolbarBorder) root.style.setProperty('--preview-toolbar-border', ui.toolbarBorder)
+      if (ui.tabColor) root.style.setProperty('--preview-tab-color', ui.tabColor)
+      if (ui.tabHoverColor) root.style.setProperty('--preview-tab-hover-color', ui.tabHoverColor)
+      if (ui.tabActiveColor) root.style.setProperty('--preview-tab-active-color', ui.tabActiveColor)
+      if (ui.switchColor) root.style.setProperty('--preview-switch-color', ui.switchColor)
+      if (ui.switchHoverColor) root.style.setProperty('--preview-switch-hover-color', ui.switchHoverColor)
+      if (ui.switchActiveColor) root.style.setProperty('--preview-switch-active-color', ui.switchActiveColor)
+    }
+
     const setTheme = (themeKey: string | null, animate = true) => {
       if (!themeKey) return
       currentTheme = themeKey
+      applyThemeUi(themeKey)
 
       themeTabs.forEach(tab => {
         tab.classList.toggle('is-active', tab.dataset.themeTab === themeKey)

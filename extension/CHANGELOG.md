@@ -1,3 +1,10 @@
+## 1.0.29
+
+- Improved site readability for low-emphasis small text by raising contrast for footer/meta/date token usage while keeping the warm visual character.
+- Strengthened color-governance auditing: added site UI contrast/hierarchy budget checks and fixed literal detection blind spots for Tailwind arbitrary class patterns.
+- Clarified CTA hierarchy with distinct secondary/tertiary backgrounds and removed remaining hardcoded shadow color usage from layout chrome.
+- Aligned web presentation semantics by making code-preview toolbar colors follow the active theme and rendering color-system rows in matching dark/light context.
+
 ## 1.0.28
 
 - Finalized interaction-state visibility budgets for line highlight, hover states, and active line-number emphasis across all four variants.
