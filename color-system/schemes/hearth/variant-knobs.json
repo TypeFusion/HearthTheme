@@ -34,5 +34,43 @@
       "light": 0.169,
       "lightSoft": 0.231
     }
+  },
+  "interfaceMix": {
+    "supportInk": {
+      "dark": 0.311,
+      "darkSoft": 0.217,
+      "light": 0.232,
+      "lightSoft": 0.298
+    },
+    "mutedInk": {
+      "dark": 0.454,
+      "darkSoft": 0.363,
+      "light": 0.497,
+      "lightSoft": 0.589
+    },
+    "subtleInk": {
+      "dark": 0.296,
+      "darkSoft": 0.243,
+      "light": 0.398,
+      "lightSoft": 0.005
+    },
+    "shellRaised": {
+      "dark": 0.242,
+      "darkSoft": 0.285,
+      "light": 0.098,
+      "lightSoft": 0.113
+    },
+    "navActiveFill": {
+      "dark": 0.195,
+      "darkSoft": 0.204,
+      "light": 0.015,
+      "lightSoft": 0.012
+    },
+    "navInactiveFill": {
+      "dark": 0.134,
+      "darkSoft": 0.175,
+      "light": 0.041,
+      "lightSoft": 0
+    }
   }
 }

@@ -122,7 +122,7 @@ function buildVars(tokens, platformVars = {}) {
   const accentHover = mixHex(accent, tokens.fg, 0.18)
   const accentSoft = alpha(accent, 0.18)
   const bgSecondary = platformVars['--background-secondary'] ?? mixHex(tokens.sidebar, tokens.bg, 0.5)
-  const bgSecondaryAlt = mixHex(tokens.lineBg, tokens.bg, 0.4)
+  const bgSecondaryAlt = platformVars['--background-secondary-alt'] ?? mixHex(tokens.lineBg, tokens.bg, 0.4)
   const borderHover = alpha(tokens.border, 0.48)
   const borderFocus = platformVars['--background-modifier-border-focus'] ?? alpha(accent, 0.46)
   const codeBackground = alpha(mixHex(tokens.border, tokens.bg, 0.45), 0.38)
@@ -152,8 +152,8 @@ function buildVars(tokens, platformVars = {}) {
     '--background-modifier-border-hover': borderHover,
     '--background-modifier-border-focus': borderFocus,
     '--background-modifier-form-field': alpha(tokens.border, 0.22),
-    '--background-modifier-hover': platformVars['--interactive-hover'] ?? alpha(tokens.border, 0.28),
-    '--background-modifier-active-hover': alpha(accent, 0.26),
+    '--background-modifier-hover': platformVars['--background-modifier-hover'] ?? platformVars['--interactive-hover'] ?? alpha(tokens.border, 0.28),
+    '--background-modifier-active-hover': platformVars['--background-modifier-active-hover'] ?? alpha(accent, 0.26),
     '--background-modifier-box-shadow': alpha(tokens.bg, 0.6),
     '--background-modifier-success': alpha(tokens.string, 0.24),
     '--background-modifier-error': alpha(tokens.keyword, 0.2),
@@ -161,11 +161,11 @@ function buildVars(tokens, platformVars = {}) {
     '--background-modifier-message': accentSoft,
     '--background-modifier-cover': alpha(tokens.bg, 0.72),
     '--text-normal': platformVars['--text-normal'] ?? tokens.fg,
-    '--text-muted': mixHex(tokens.comment, tokens.fg, 0.36),
-    '--text-faint': mixHex(tokens.comment, tokens.bg, 0.28),
+    '--text-muted': platformVars['--text-muted'] ?? mixHex(tokens.comment, tokens.fg, 0.36),
+    '--text-faint': platformVars['--text-faint'] ?? mixHex(tokens.comment, tokens.bg, 0.28),
     '--text-accent': accent,
     '--text-accent-hover': accentHover,
-    '--text-on-accent': pickContrastText(accent),
+    '--text-on-accent': platformVars['--text-on-accent'] ?? pickContrastText(accent),
     '--text-success': feedbackSuccess,
     '--text-warning': feedbackWarning,
     '--text-error': feedbackError,

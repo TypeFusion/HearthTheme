@@ -73,6 +73,15 @@ function main() {
     }
   }
 
+  const expectedInterfaces = new Set(model.interfaceAdapters.map((entry) => entry.id))
+  for (const interfaceId of expectedInterfaces) {
+    assert(report.interfaces?.[interfaceId], `${REPORT_PATH}: missing interface lineage for "${interfaceId}"`)
+    for (const variant of model.variants.variants) {
+      const variantEntry = report.interfaces[interfaceId].variants?.[variant.id]
+      assert(variantEntry, `${REPORT_PATH}: missing variant lineage for interface "${interfaceId}" / "${variant.id}"`)
+    }
+  }
+
   console.log('[PASS] Lineage audit passed.')
 }
 

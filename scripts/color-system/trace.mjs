@@ -25,6 +25,10 @@ function pushIndexed(indexes, entry) {
     if (!indexes.byFeedback[entry.feedbackId]) indexes.byFeedback[entry.feedbackId] = []
     indexes.byFeedback[entry.feedbackId].push(entry.id)
   }
+  if (entry.interfaceId) {
+    if (!indexes.byInterface[entry.interfaceId]) indexes.byInterface[entry.interfaceId] = []
+    indexes.byInterface[entry.interfaceId].push(entry.id)
+  }
   if (entry.familyId) {
     if (!indexes.byFamily[entry.familyId]) indexes.byFamily[entry.familyId] = []
     indexes.byFamily[entry.familyId].push(entry.id)
@@ -162,6 +166,78 @@ function buildInteractionEntries(model, artifactMaps, indexes) {
           familyId: sourceId,
           resolvedColor: outputColor,
           chainRefs: [...resolved.chainRefs, `adapters.interactions.${contract.id}`],
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+    }
+  }
+
+  return entries
+}
+
+function buildInterfaceEntries(model, artifactMaps, indexes) {
+  const entries = []
+  const siteKeys = new Set(getExportedSiteTokenKeys())
+
+  for (const variant of model.variants.variants) {
+    for (const contract of model.interfaceAdapters) {
+      const resolved = model.interfaceRules.interfaces[contract.id].resolved[variant.id]
+      const resolvedColor = resolved.color
+      const sourceId = resolved.family || `interface:${contract.id}`
+
+      if (contract.webToken && siteKeys.has(contract.webToken)) {
+        const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
+        const entry = {
+          id: `web-interface:${contract.id}:${variant.id}`,
+          path: 'src/data/tokens.ts',
+          field: `tokens.${variant.id}.${contract.webToken}`,
+          artifactType: 'webToken',
+          adapter: 'web',
+          variant: variant.id,
+          roleId: null,
+          interfaceId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.interfaces.${contract.id}`], resolvedColor, outputColor),
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+
+      if (contract.vscodeColor) {
+        const outputColor = artifactMaps.vscode?.workbench?.[variant.id]?.[contract.vscodeColor] ?? model.platformTokenMaps.vscode.workbench[variant.id][contract.vscodeColor]
+        const entry = {
+          id: `vscode-interface:${contract.id}:${variant.id}`,
+          path: variant.outputPath,
+          field: `colors.${contract.vscodeColor}`,
+          artifactType: 'vscodeWorkbench',
+          adapter: 'vscode',
+          variant: variant.id,
+          roleId: null,
+          interfaceId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.interfaces.${contract.id}`], resolvedColor, outputColor),
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+
+      if (contract.obsidianVar) {
+        const outputColor = artifactMaps.obsidian?.[variant.id]?.[contract.obsidianVar] ?? model.platformTokenMaps.obsidian[variant.id][contract.obsidianVar]
+        const entry = {
+          id: `obsidian-interface:${contract.id}:${variant.id}`,
+          path: OBSIDIAN_THEME_PATHS[variant.id],
+          field: contract.obsidianVar,
+          artifactType: 'obsidianVar',
+          adapter: 'obsidian',
+          variant: variant.id,
+          roleId: null,
+          interfaceId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: [...resolved.chainRefs, `adapters.interfaces.${contract.id}`],
         }
         entries.push(entry)
         pushIndexed(indexes, entry)
@@ -367,12 +443,14 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     byVariant: {},
     byRole: {},
     byFeedback: {},
+    byInterface: {},
     byFamily: {},
   }
 
   const artifactEntries = [
     ...buildSurfaceEntries(model, artifactMaps, indexes),
     ...buildInteractionEntries(model, artifactMaps, indexes),
+    ...buildInterfaceEntries(model, artifactMaps, indexes),
     ...buildFeedbackEntries(model, artifactMaps, indexes),
     ...buildRoleEntries(model, artifactMaps, indexes),
   ]
@@ -425,8 +503,32 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     }
   }
 
+  const interfaces = {}
+  for (const [interfaceId, entry] of Object.entries(model.interfaceRules.interfaces)) {
+    const firstVariantId = Object.keys(entry.resolved)[0]
+    const first = entry.resolved[firstVariantId]
+    interfaces[interfaceId] = {
+      source: {
+        family: first.family,
+        tone: first.tone,
+      },
+      variants: Object.fromEntries(
+        Object.entries(entry.resolved).map(([variantId, resolved]) => [
+          variantId,
+          {
+            color: resolved.color,
+            family: resolved.family,
+            tone: resolved.tone,
+            usedEscapeHatch: resolved.usedEscapeHatch,
+            steps: resolved.steps,
+          },
+        ])
+      ),
+    }
+  }
+
   return {
-    schemaVersion: 4,
+    schemaVersion: 5,
     sources: model.sources,
     scheme: {
       id: model.scheme.id,
@@ -446,6 +548,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
         ])
       ),
     },
+    interfaces,
     feedbacks,
     surfaceRules: Object.fromEntries(
       Object.entries(model.surfaceRules.surfaces).map(([surfaceId, values]) => [

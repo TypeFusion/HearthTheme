@@ -91,6 +91,9 @@ function resolveBindingBaseColor(binding, model, variantId) {
   if (binding.surface) {
     return normalizeHex(model.surfaceRules?.surfaces?.[binding.surface]?.[variantId])
   }
+  if (binding.interface) {
+    return normalizeHex(model.interfaceRules?.interfaces?.[binding.interface]?.values?.[variantId])
+  }
   if (binding.interaction) {
     return normalizeHex(model.interactionRules?.interactions?.[binding.interaction]?.values?.[variantId])
   }

@@ -43,6 +43,7 @@ export const COLOR_SYSTEM_PHILOSOPHY_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/p
 export const COLOR_SYSTEM_TAXONOMY_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/taxonomy.json`
 export const COLOR_SYSTEM_FOUNDATION_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/foundation.json`
 export const COLOR_SYSTEM_SURFACE_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/surface-rules.json`
+export const COLOR_SYSTEM_INTERFACE_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/interface-rules.json`
 export const COLOR_SYSTEM_INTERACTION_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/interaction-rules.json`
 export const COLOR_SYSTEM_FEEDBACK_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/feedback-rules.json`
 export const COLOR_SYSTEM_SEMANTIC_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/semantic-rules.json`
@@ -307,6 +308,12 @@ export function loadSurfaceAdapters() {
   return normalizePlatformContractList(data.surfaces, `${COLOR_SYSTEM_ADAPTERS_PATH}: surfaces`)
 }
 
+export function loadInterfaceAdapters() {
+  const data = readJson(COLOR_SYSTEM_ADAPTERS_PATH)
+  assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_ADAPTERS_PATH} must be an object`)
+  return normalizePlatformContractList(data.interfaces, `${COLOR_SYSTEM_ADAPTERS_PATH}: interfaces`)
+}
+
 export function loadInteractionAdapters() {
   const data = readJson(COLOR_SYSTEM_ADAPTERS_PATH)
   assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_ADAPTERS_PATH} must be an object`)
@@ -333,14 +340,16 @@ export function loadVscodeChromeContract() {
     keys.add(key)
 
     const surface = binding.surface == null ? null : String(binding.surface).trim() || null
+    const interfaceId = binding.interface == null ? null : String(binding.interface).trim() || null
     const interaction = binding.interaction == null ? null : String(binding.interaction).trim() || null
     const feedback = binding.feedback == null ? null : String(binding.feedback).trim() || null
-    const bindingKinds = [surface, interaction, feedback].filter(Boolean)
-    assert(bindingKinds.length === 1, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: "${key}" must define exactly one of surface, interaction, or feedback`)
+    const bindingKinds = [surface, interfaceId, interaction, feedback].filter(Boolean)
+    assert(bindingKinds.length === 1, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: "${key}" must define exactly one of surface, interface, interaction, or feedback`)
 
     const out = {
       key,
       surface,
+      interface: interfaceId,
       interaction,
       feedback,
     }
@@ -441,6 +450,7 @@ export function loadSchemeTaxonomy() {
     families: normalizeNamedIdGroups(data.families, `${COLOR_SYSTEM_TAXONOMY_PATH}: families`),
     roles: normalizeNamedIdGroups(data.roles, `${COLOR_SYSTEM_TAXONOMY_PATH}: roles`),
     surfaces: normalizeNamedIdGroups(data.surfaces, `${COLOR_SYSTEM_TAXONOMY_PATH}: surfaces`),
+    interfaces: normalizeNamedIdGroups(data.interfaces, `${COLOR_SYSTEM_TAXONOMY_PATH}: interfaces`),
     interactions: normalizeNamedIdGroups(data.interactions, `${COLOR_SYSTEM_TAXONOMY_PATH}: interactions`),
     feedback: normalizeNamedIdGroups(data.feedback, `${COLOR_SYSTEM_TAXONOMY_PATH}: feedback`),
     variants: normalizeNamedIdGroups(data.variants, `${COLOR_SYSTEM_TAXONOMY_PATH}: variants`),
@@ -496,7 +506,7 @@ function normalizeSurfaceValueMap(valuesByVariant, label, variantIds) {
   return out
 }
 
-function normalizeAbstractColorSource(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null) {
+function normalizeAbstractColorSource(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null) {
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
   const type = String(value.type || '').trim()
   assert(type, `${label}.type is required`)
@@ -534,12 +544,20 @@ function normalizeAbstractColorSource(value, families, label, variantIds, allowe
     return { type, id }
   }
 
+  if (type === 'interface') {
+    const id = String(value.id || '').trim()
+    assert(id, `${label}.id is required`)
+    assert(interfaceIds instanceof Set && interfaceIds.size > 0, `${label}.type "interface" is not supported in this layer`)
+    assert(interfaceIds.has(id), `${label}.id "${id}" does not exist in interface-rules.json`)
+    return { type, id }
+  }
+
   const id = String(value.id || '').trim()
   assert(id, `${label}.id is required`)
   return { type, id }
 }
 
-function normalizeAbstractColorDerive(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null) {
+function normalizeAbstractColorDerive(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null) {
   if (value == null) return {}
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
   const out = {}
@@ -547,7 +565,7 @@ function normalizeAbstractColorDerive(value, families, label, variantIds, allowe
   if (value.mix != null) {
     assert(value.mix && typeof value.mix === 'object' && !Array.isArray(value.mix), `${label}.mix must be an object`)
     out.mix = {
-      with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds, roleIds, feedbackIds),
+      with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
     }
     if (value.mix.t !== undefined) {
       out.mix.t = normalizeNumber(value.mix.t, `${label}.mix.t`, { min: 0, max: 1 })
@@ -596,7 +614,7 @@ function isLegacyVariantMap(entry, variantIds) {
   return variantIds.every((variantId) => entry[variantId] !== undefined)
 }
 
-function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null) {
+function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null) {
   assert(entry && typeof entry === 'object' && !Array.isArray(entry), `${label} must be an object`)
 
   const sourceInput = isLegacyVariantMap(entry, variantIds)
@@ -612,16 +630,16 @@ function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedK
     assert(variantEntry && typeof variantEntry === 'object' && !Array.isArray(variantEntry), `${label}.byVariant.${variantId} must be an object`)
     byVariant[variantId] = {
       source: variantEntry.source
-        ? normalizeAbstractColorSource(variantEntry.source, families, `${label}.byVariant.${variantId}.source`, variantIds, allowedKinds, roleIds, feedbackIds)
+        ? normalizeAbstractColorSource(variantEntry.source, families, `${label}.byVariant.${variantId}.source`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds)
         : null,
-      derive: normalizeAbstractColorDerive(variantEntry.derive, families, `${label}.byVariant.${variantId}.derive`, variantIds, allowedKinds, roleIds, feedbackIds),
+      derive: normalizeAbstractColorDerive(variantEntry.derive, families, `${label}.byVariant.${variantId}.derive`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
     }
   }
 
   return {
     description: typeof entry.description === 'string' ? entry.description.trim() : '',
-    source: normalizeAbstractColorSource(sourceInput, families, `${label}.source`, variantIds, allowedKinds, roleIds, feedbackIds),
-    derive: normalizeAbstractColorDerive(entry.derive, families, `${label}.derive`, variantIds, allowedKinds, roleIds, feedbackIds),
+    source: normalizeAbstractColorSource(sourceInput, families, `${label}.source`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
+    derive: normalizeAbstractColorDerive(entry.derive, families, `${label}.derive`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
     byVariant,
   }
 }
@@ -655,9 +673,43 @@ export function loadSurfaceRules() {
   }
 }
 
+export function loadInterfaceRules() {
+  const foundation = loadFoundationPalette()
+  const variants = loadColorSystemVariants().variants
+  const variantIds = variants.map((variant) => variant.id)
+  const data = readJson(COLOR_SYSTEM_INTERFACE_RULES_PATH)
+  assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_INTERFACE_RULES_PATH} must be an object`)
+  assert(data.interfaces && typeof data.interfaces === 'object' && !Array.isArray(data.interfaces), `${COLOR_SYSTEM_INTERFACE_RULES_PATH}: interfaces must be an object`)
+
+  const interfaces = {}
+  const interfaceIds = new Set(Object.keys(data.interfaces))
+  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interface'])
+  for (const [interfaceIdRaw, entry] of Object.entries(data.interfaces)) {
+    const interfaceId = String(interfaceIdRaw || '').trim()
+    assert(interfaceId, `${COLOR_SYSTEM_INTERFACE_RULES_PATH}: invalid interface id`)
+    interfaces[interfaceId] = normalizeDerivedColorEntry(
+      entry,
+      foundation.families,
+      `${COLOR_SYSTEM_INTERFACE_RULES_PATH}: interfaces.${interfaceId}`,
+      variantIds,
+      allowedKinds,
+      null,
+      null,
+      interfaceIds
+    )
+  }
+
+  return {
+    schemaVersion: Number(data.schemaVersion || 1),
+    description: typeof data.description === 'string' ? data.description.trim() : '',
+    interfaces,
+  }
+}
+
 export function loadInteractionRules() {
   const foundation = loadFoundationPalette()
   const semanticRules = loadSemanticRules()
+  const interfaceRules = loadInterfaceRules()
   const variants = loadColorSystemVariants().variants
   const variantIds = variants.map((variant) => variant.id)
   const data = readJson(COLOR_SYSTEM_INTERACTION_RULES_PATH)
@@ -665,8 +717,9 @@ export function loadInteractionRules() {
   assert(data.interactions && typeof data.interactions === 'object' && !Array.isArray(data.interactions), `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions must be an object`)
 
   const interactions = {}
-  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction', 'role'])
+  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction', 'role', 'interface'])
   const roleIds = new Set(Object.keys(semanticRules.roles))
+  const interfaceIds = new Set(Object.keys(interfaceRules.interfaces))
   for (const [interactionIdRaw, entry] of Object.entries(data.interactions)) {
     const interactionId = String(interactionIdRaw || '').trim()
     assert(interactionId, `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: invalid interaction id`)
@@ -676,7 +729,9 @@ export function loadInteractionRules() {
       `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions.${interactionId}`,
       variantIds,
       allowedKinds,
-      roleIds
+      roleIds,
+      null,
+      interfaceIds
     )
   }
 
@@ -690,6 +745,7 @@ export function loadInteractionRules() {
 export function loadFeedbackRules() {
   const foundation = loadFoundationPalette()
   const semanticRules = loadSemanticRules()
+  const interfaceRules = loadInterfaceRules()
   const variants = loadColorSystemVariants().variants
   const variantIds = variants.map((variant) => variant.id)
   const data = readJson(COLOR_SYSTEM_FEEDBACK_RULES_PATH)
@@ -698,8 +754,9 @@ export function loadFeedbackRules() {
 
   const roleIds = new Set(Object.keys(semanticRules.roles))
   const feedbackIds = new Set(loadFeedbackAdapters().map((entry) => entry.id))
+  const interfaceIds = new Set(Object.keys(interfaceRules.interfaces))
   const feedbacks = {}
-  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction', 'role', 'feedback'])
+  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction', 'role', 'feedback', 'interface'])
   for (const [feedbackIdRaw, entry] of Object.entries(data.feedbacks)) {
     const feedbackId = String(feedbackIdRaw || '').trim()
     assert(feedbackId, `${COLOR_SYSTEM_FEEDBACK_RULES_PATH}: invalid feedback id`)
@@ -710,7 +767,8 @@ export function loadFeedbackRules() {
       variantIds,
       allowedKinds,
       roleIds,
-      feedbackIds
+      feedbackIds,
+      interfaceIds
     )
   }
 

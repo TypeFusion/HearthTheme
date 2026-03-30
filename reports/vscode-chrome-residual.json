@@ -17,8 +17,8 @@
         ]
     },
     "summary": {
-        "migratedKeyCount": 47,
-        "residualKeyCount": 75,
+        "migratedKeyCount": 75,
+        "residualKeyCount": 47,
         "variantsCovered": [
             "dark",
             "darkSoft",
@@ -31,20 +31,11 @@
         "dark": {
             "sourcePath": "color-system/templates/hearth-dark.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 75,
+            "residualKeyCount": 47,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
-                "activityBar.foreground",
-                "activityBar.inactiveForeground",
-                "activityBarBadge.foreground",
-                "badge.foreground",
-                "button.foreground",
                 "button.hoverBackground",
-                "button.secondaryBackground",
-                "button.secondaryForeground",
-                "dropdown.border",
-                "dropdown.foreground",
                 "editorBracketHighlight.foreground1",
                 "editorBracketHighlight.foreground2",
                 "editorBracketHighlight.foreground3",
@@ -60,34 +51,17 @@
                 "gitDecoration.ignoredResourceForeground",
                 "gitDecoration.modifiedResourceForeground",
                 "gitDecoration.untrackedResourceForeground",
-                "input.border",
-                "input.foreground",
-                "input.placeholderForeground",
-                "list.activeSelectionBackground",
                 "list.activeSelectionForeground",
-                "list.focusBackground",
-                "list.hoverForeground",
-                "list.inactiveSelectionBackground",
-                "notifications.border",
-                "notifications.foreground",
-                "panelTitle.activeForeground",
-                "panelTitle.inactiveForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBar.foreground",
                 "sideBarSectionHeader.background",
                 "sideBarSectionHeader.border",
-                "sideBarSectionHeader.foreground",
-                "sideBarTitle.foreground",
                 "statusBar.border",
                 "statusBar.debuggingBackground",
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.activeForeground",
                 "tab.hoverBackground",
-                "tab.inactiveForeground",
-                "tab.unfocusedActiveForeground",
                 "terminal.ansiBlack",
                 "terminal.ansiBlue",
                 "terminal.ansiBrightBlack",
@@ -104,9 +78,7 @@
                 "terminal.ansiRed",
                 "terminal.ansiWhite",
                 "terminal.ansiYellow",
-                "titleBar.activeForeground",
                 "titleBar.inactiveBackground",
-                "titleBar.inactiveForeground",
                 "widget.shadow"
             ],
             "buckets": {
@@ -118,10 +90,6 @@
                         "activityBar.background",
                         "activityBar.border",
                         "button.hoverBackground",
-                        "button.secondaryBackground",
-                        "dropdown.border",
-                        "input.border",
-                        "notifications.border",
                         "sideBarSectionHeader.background",
                         "sideBarSectionHeader.border",
                         "statusBar.border",
@@ -130,45 +98,7 @@
                         "tab.hoverBackground",
                         "titleBar.inactiveBackground"
                     ],
-                    "keyCount": 14
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "activityBar.foreground",
-                        "activityBar.inactiveForeground",
-                        "button.secondaryForeground",
-                        "dropdown.foreground",
-                        "editorLineNumber.activeForeground",
-                        "input.foreground",
-                        "input.placeholderForeground",
-                        "notifications.foreground",
-                        "panelTitle.activeForeground",
-                        "panelTitle.inactiveForeground",
-                        "sideBar.foreground",
-                        "sideBarSectionHeader.foreground",
-                        "sideBarTitle.foreground",
-                        "statusBar.foreground",
-                        "tab.activeForeground",
-                        "tab.inactiveForeground",
-                        "tab.unfocusedActiveForeground",
-                        "titleBar.activeForeground",
-                        "titleBar.inactiveForeground"
-                    ],
-                    "keyCount": 19
-                },
-                "accent-on-fill": {
-                    "label": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                    "keys": [
-                        "activityBarBadge.foreground",
-                        "badge.foreground",
-                        "button.foreground"
-                    ],
-                    "keyCount": 3
+                    "keyCount": 10
                 },
                 "editor-guides": {
                     "label": "Editor Guides and Brackets",
@@ -185,6 +115,16 @@
                         "editorWhitespace.foreground"
                     ],
                     "keyCount": 8
+                },
+                "chrome-ink": {
+                    "label": "Chrome Ink",
+                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
+                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
+                    "keys": [
+                        "editorLineNumber.activeForeground",
+                        "statusBar.foreground"
+                    ],
+                    "keyCount": 2
                 },
                 "feedback-status": {
                     "label": "Feedback and Status",
@@ -205,13 +145,9 @@
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
                     "keys": [
-                        "list.activeSelectionBackground",
-                        "list.activeSelectionForeground",
-                        "list.focusBackground",
-                        "list.hoverForeground",
-                        "list.inactiveSelectionBackground"
+                        "list.activeSelectionForeground"
                     ],
-                    "keyCount": 5
+                    "keyCount": 1
                 },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
@@ -268,84 +204,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "activityBar.foreground",
-                    "value": "#d3c9b8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBar.inactiveForeground",
-                    "value": "#655c4f",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBarBadge.foreground",
-                    "value": "#161411",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "badge.foreground",
-                    "value": "#161411",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "button.foreground",
-                    "value": "#161411",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
                     "key": "button.hoverBackground",
                     "value": "#d08a4c",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryBackground",
-                    "value": "#4a4338",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryForeground",
-                    "value": "#d3c9b8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "dropdown.border",
-                    "value": "#4a4338",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "dropdown.foreground",
-                    "value": "#d3c9b8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "editorBracketHighlight.foreground1",
@@ -468,100 +332,12 @@
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
-                    "key": "input.border",
-                    "value": "#4a4338",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "input.foreground",
-                    "value": "#d3c9b8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "input.placeholderForeground",
-                    "value": "#655c4f",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "list.activeSelectionBackground",
-                    "value": "#423a30",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
                     "key": "list.activeSelectionForeground",
                     "value": "#e8ddca",
                     "bucket": "selection-list-state",
                     "bucketLabel": "Selection and List State",
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.focusBackground",
-                    "value": "#423a30",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.hoverForeground",
-                    "value": "#d3c9b8",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.inactiveSelectionBackground",
-                    "value": "#372f26",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "notifications.border",
-                    "value": "#4a4338",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "notifications.foreground",
-                    "value": "#d3c9b8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.activeForeground",
-                    "value": "#d6cab4",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.inactiveForeground",
-                    "value": "#877a65",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "scrollbarSlider.activeBackground",
@@ -588,14 +364,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBar.foreground",
-                    "value": "#a0937e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "sideBarSectionHeader.background",
                     "value": "#26211c",
                     "bucket": "chrome-surface",
@@ -610,22 +378,6 @@
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.foreground",
-                    "value": "#877a65",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "sideBarTitle.foreground",
-                    "value": "#877a65",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "statusBar.border",
@@ -660,36 +412,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "tab.activeForeground",
-                    "value": "#d3c9b8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "tab.hoverBackground",
                     "value": "#312b26",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.inactiveForeground",
-                    "value": "#877a65",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "tab.unfocusedActiveForeground",
-                    "value": "#a0937e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "terminal.ansiBlack",
@@ -820,28 +548,12 @@
                     "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
                 },
                 {
-                    "key": "titleBar.activeForeground",
-                    "value": "#d3c9b8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#191511",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveForeground",
-                    "value": "#877a65",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "widget.shadow",
@@ -856,20 +568,11 @@
         "darkSoft": {
             "sourcePath": "color-system/templates/hearth-dark-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 75,
+            "residualKeyCount": 47,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
-                "activityBar.foreground",
-                "activityBar.inactiveForeground",
-                "activityBarBadge.foreground",
-                "badge.foreground",
-                "button.foreground",
                 "button.hoverBackground",
-                "button.secondaryBackground",
-                "button.secondaryForeground",
-                "dropdown.border",
-                "dropdown.foreground",
                 "editorBracketHighlight.foreground1",
                 "editorBracketHighlight.foreground2",
                 "editorBracketHighlight.foreground3",
@@ -885,34 +588,17 @@
                 "gitDecoration.ignoredResourceForeground",
                 "gitDecoration.modifiedResourceForeground",
                 "gitDecoration.untrackedResourceForeground",
-                "input.border",
-                "input.foreground",
-                "input.placeholderForeground",
-                "list.activeSelectionBackground",
                 "list.activeSelectionForeground",
-                "list.focusBackground",
-                "list.hoverForeground",
-                "list.inactiveSelectionBackground",
-                "notifications.border",
-                "notifications.foreground",
-                "panelTitle.activeForeground",
-                "panelTitle.inactiveForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBar.foreground",
                 "sideBarSectionHeader.background",
                 "sideBarSectionHeader.border",
-                "sideBarSectionHeader.foreground",
-                "sideBarTitle.foreground",
                 "statusBar.border",
                 "statusBar.debuggingBackground",
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.activeForeground",
                 "tab.hoverBackground",
-                "tab.inactiveForeground",
-                "tab.unfocusedActiveForeground",
                 "terminal.ansiBlack",
                 "terminal.ansiBlue",
                 "terminal.ansiBrightBlack",
@@ -929,9 +615,7 @@
                 "terminal.ansiRed",
                 "terminal.ansiWhite",
                 "terminal.ansiYellow",
-                "titleBar.activeForeground",
                 "titleBar.inactiveBackground",
-                "titleBar.inactiveForeground",
                 "widget.shadow"
             ],
             "buckets": {
@@ -943,10 +627,6 @@
                         "activityBar.background",
                         "activityBar.border",
                         "button.hoverBackground",
-                        "button.secondaryBackground",
-                        "dropdown.border",
-                        "input.border",
-                        "notifications.border",
                         "sideBarSectionHeader.background",
                         "sideBarSectionHeader.border",
                         "statusBar.border",
@@ -955,45 +635,7 @@
                         "tab.hoverBackground",
                         "titleBar.inactiveBackground"
                     ],
-                    "keyCount": 14
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "activityBar.foreground",
-                        "activityBar.inactiveForeground",
-                        "button.secondaryForeground",
-                        "dropdown.foreground",
-                        "editorLineNumber.activeForeground",
-                        "input.foreground",
-                        "input.placeholderForeground",
-                        "notifications.foreground",
-                        "panelTitle.activeForeground",
-                        "panelTitle.inactiveForeground",
-                        "sideBar.foreground",
-                        "sideBarSectionHeader.foreground",
-                        "sideBarTitle.foreground",
-                        "statusBar.foreground",
-                        "tab.activeForeground",
-                        "tab.inactiveForeground",
-                        "tab.unfocusedActiveForeground",
-                        "titleBar.activeForeground",
-                        "titleBar.inactiveForeground"
-                    ],
-                    "keyCount": 19
-                },
-                "accent-on-fill": {
-                    "label": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                    "keys": [
-                        "activityBarBadge.foreground",
-                        "badge.foreground",
-                        "button.foreground"
-                    ],
-                    "keyCount": 3
+                    "keyCount": 10
                 },
                 "editor-guides": {
                     "label": "Editor Guides and Brackets",
@@ -1010,6 +652,16 @@
                         "editorWhitespace.foreground"
                     ],
                     "keyCount": 8
+                },
+                "chrome-ink": {
+                    "label": "Chrome Ink",
+                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
+                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
+                    "keys": [
+                        "editorLineNumber.activeForeground",
+                        "statusBar.foreground"
+                    ],
+                    "keyCount": 2
                 },
                 "feedback-status": {
                     "label": "Feedback and Status",
@@ -1030,13 +682,9 @@
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
                     "keys": [
-                        "list.activeSelectionBackground",
-                        "list.activeSelectionForeground",
-                        "list.focusBackground",
-                        "list.hoverForeground",
-                        "list.inactiveSelectionBackground"
+                        "list.activeSelectionForeground"
                     ],
-                    "keyCount": 5
+                    "keyCount": 1
                 },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
@@ -1093,84 +741,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "activityBar.foreground",
-                    "value": "#cec5ba",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBar.inactiveForeground",
-                    "value": "#766d63",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBarBadge.foreground",
-                    "value": "#1b1713",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "badge.foreground",
-                    "value": "#1b1713",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "button.foreground",
-                    "value": "#1b1713",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
                     "key": "button.hoverBackground",
                     "value": "#b98858",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryBackground",
-                    "value": "#564b41",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryForeground",
-                    "value": "#cec5ba",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "dropdown.border",
-                    "value": "#5a5044",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "dropdown.foreground",
-                    "value": "#cec5ba",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "editorBracketHighlight.foreground1",
@@ -1293,100 +869,12 @@
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
-                    "key": "input.border",
-                    "value": "#5a5044",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "input.foreground",
-                    "value": "#cec5ba",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "input.placeholderForeground",
-                    "value": "#766d63",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "list.activeSelectionBackground",
-                    "value": "#473d35",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
                     "key": "list.activeSelectionForeground",
                     "value": "#dfd2be",
                     "bucket": "selection-list-state",
                     "bucketLabel": "Selection and List State",
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.focusBackground",
-                    "value": "#493f36",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.hoverForeground",
-                    "value": "#cec5ba",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.inactiveSelectionBackground",
-                    "value": "#423830",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "notifications.border",
-                    "value": "#5a5044",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "notifications.foreground",
-                    "value": "#cec5ba",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.activeForeground",
-                    "value": "#d6cec2",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.inactiveForeground",
-                    "value": "#948879",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "scrollbarSlider.activeBackground",
@@ -1413,14 +901,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBar.foreground",
-                    "value": "#aba193",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "sideBarSectionHeader.background",
                     "value": "#28221d",
                     "bucket": "chrome-surface",
@@ -1435,22 +915,6 @@
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.foreground",
-                    "value": "#948879",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "sideBarTitle.foreground",
-                    "value": "#948879",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "statusBar.border",
@@ -1485,36 +949,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "tab.activeForeground",
-                    "value": "#cec5ba",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "tab.hoverBackground",
                     "value": "#332c26",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.inactiveForeground",
-                    "value": "#948879",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "tab.unfocusedActiveForeground",
-                    "value": "#aba193",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "terminal.ansiBlack",
@@ -1645,28 +1085,12 @@
                     "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
                 },
                 {
-                    "key": "titleBar.activeForeground",
-                    "value": "#cec5ba",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#1d1814",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveForeground",
-                    "value": "#948879",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "widget.shadow",
@@ -1681,20 +1105,11 @@
         "light": {
             "sourcePath": "color-system/templates/hearth-light.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 75,
+            "residualKeyCount": 47,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
-                "activityBar.foreground",
-                "activityBar.inactiveForeground",
-                "activityBarBadge.foreground",
-                "badge.foreground",
-                "button.foreground",
                 "button.hoverBackground",
-                "button.secondaryBackground",
-                "button.secondaryForeground",
-                "dropdown.border",
-                "dropdown.foreground",
                 "editorBracketHighlight.foreground1",
                 "editorBracketHighlight.foreground2",
                 "editorBracketHighlight.foreground3",
@@ -1710,34 +1125,17 @@
                 "gitDecoration.ignoredResourceForeground",
                 "gitDecoration.modifiedResourceForeground",
                 "gitDecoration.untrackedResourceForeground",
-                "input.border",
-                "input.foreground",
-                "input.placeholderForeground",
-                "list.activeSelectionBackground",
                 "list.activeSelectionForeground",
-                "list.focusBackground",
-                "list.hoverForeground",
-                "list.inactiveSelectionBackground",
-                "notifications.border",
-                "notifications.foreground",
-                "panelTitle.activeForeground",
-                "panelTitle.inactiveForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBar.foreground",
                 "sideBarSectionHeader.background",
                 "sideBarSectionHeader.border",
-                "sideBarSectionHeader.foreground",
-                "sideBarTitle.foreground",
                 "statusBar.border",
                 "statusBar.debuggingBackground",
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.activeForeground",
                 "tab.hoverBackground",
-                "tab.inactiveForeground",
-                "tab.unfocusedActiveForeground",
                 "terminal.ansiBlack",
                 "terminal.ansiBlue",
                 "terminal.ansiBrightBlack",
@@ -1754,9 +1152,7 @@
                 "terminal.ansiRed",
                 "terminal.ansiWhite",
                 "terminal.ansiYellow",
-                "titleBar.activeForeground",
                 "titleBar.inactiveBackground",
-                "titleBar.inactiveForeground",
                 "widget.shadow"
             ],
             "buckets": {
@@ -1768,10 +1164,6 @@
                         "activityBar.background",
                         "activityBar.border",
                         "button.hoverBackground",
-                        "button.secondaryBackground",
-                        "dropdown.border",
-                        "input.border",
-                        "notifications.border",
                         "sideBarSectionHeader.background",
                         "sideBarSectionHeader.border",
                         "statusBar.border",
@@ -1780,45 +1172,7 @@
                         "tab.hoverBackground",
                         "titleBar.inactiveBackground"
                     ],
-                    "keyCount": 14
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "activityBar.foreground",
-                        "activityBar.inactiveForeground",
-                        "button.secondaryForeground",
-                        "dropdown.foreground",
-                        "editorLineNumber.activeForeground",
-                        "input.foreground",
-                        "input.placeholderForeground",
-                        "notifications.foreground",
-                        "panelTitle.activeForeground",
-                        "panelTitle.inactiveForeground",
-                        "sideBar.foreground",
-                        "sideBarSectionHeader.foreground",
-                        "sideBarTitle.foreground",
-                        "statusBar.foreground",
-                        "tab.activeForeground",
-                        "tab.inactiveForeground",
-                        "tab.unfocusedActiveForeground",
-                        "titleBar.activeForeground",
-                        "titleBar.inactiveForeground"
-                    ],
-                    "keyCount": 19
-                },
-                "accent-on-fill": {
-                    "label": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                    "keys": [
-                        "activityBarBadge.foreground",
-                        "badge.foreground",
-                        "button.foreground"
-                    ],
-                    "keyCount": 3
+                    "keyCount": 10
                 },
                 "editor-guides": {
                     "label": "Editor Guides and Brackets",
@@ -1835,6 +1189,16 @@
                         "editorWhitespace.foreground"
                     ],
                     "keyCount": 8
+                },
+                "chrome-ink": {
+                    "label": "Chrome Ink",
+                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
+                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
+                    "keys": [
+                        "editorLineNumber.activeForeground",
+                        "statusBar.foreground"
+                    ],
+                    "keyCount": 2
                 },
                 "feedback-status": {
                     "label": "Feedback and Status",
@@ -1855,13 +1219,9 @@
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
                     "keys": [
-                        "list.activeSelectionBackground",
-                        "list.activeSelectionForeground",
-                        "list.focusBackground",
-                        "list.hoverForeground",
-                        "list.inactiveSelectionBackground"
+                        "list.activeSelectionForeground"
                     ],
-                    "keyCount": 5
+                    "keyCount": 1
                 },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
@@ -1918,84 +1278,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "activityBar.foreground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBar.inactiveForeground",
-                    "value": "#b49d7b",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBarBadge.foreground",
-                    "value": "#ffffff",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "badge.foreground",
-                    "value": "#ffffff",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "button.foreground",
-                    "value": "#ffffff",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
                     "key": "button.hoverBackground",
                     "value": "#a86629",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryBackground",
-                    "value": "#d2c2a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryForeground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "dropdown.border",
-                    "value": "#d2c2a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "dropdown.foreground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "editorBracketHighlight.foreground1",
@@ -2118,100 +1406,12 @@
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
-                    "key": "input.border",
-                    "value": "#d2c2a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "input.foreground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "input.placeholderForeground",
-                    "value": "#b49d7b",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "list.activeSelectionBackground",
-                    "value": "#ddd0b8",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
                     "key": "list.activeSelectionForeground",
                     "value": "#2f210e",
                     "bucket": "selection-list-state",
                     "bucketLabel": "Selection and List State",
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.focusBackground",
-                    "value": "#ddd0b8",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.hoverForeground",
-                    "value": "#2f210e",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.inactiveSelectionBackground",
-                    "value": "#d9ccb2",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "notifications.border",
-                    "value": "#d2c2a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "notifications.foreground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.activeForeground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.inactiveForeground",
-                    "value": "#8e7a5c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "scrollbarSlider.activeBackground",
@@ -2238,14 +1438,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBar.foreground",
-                    "value": "#624a2c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "sideBarSectionHeader.background",
                     "value": "#e7ddcc",
                     "bucket": "chrome-surface",
@@ -2260,22 +1452,6 @@
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.foreground",
-                    "value": "#8e7a5c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "sideBarTitle.foreground",
-                    "value": "#8e7a5c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "statusBar.border",
@@ -2310,36 +1486,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "tab.activeForeground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "tab.hoverBackground",
                     "value": "#e7ddcc",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.inactiveForeground",
-                    "value": "#8e7a5c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "tab.unfocusedActiveForeground",
-                    "value": "#624a2c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "terminal.ansiBlack",
@@ -2470,28 +1622,12 @@
                     "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
                 },
                 {
-                    "key": "titleBar.activeForeground",
-                    "value": "#2f210e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#ddd0b8",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveForeground",
-                    "value": "#8e7a5c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "widget.shadow",
@@ -2506,20 +1642,11 @@
         "lightSoft": {
             "sourcePath": "color-system/templates/hearth-light-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 75,
+            "residualKeyCount": 47,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
-                "activityBar.foreground",
-                "activityBar.inactiveForeground",
-                "activityBarBadge.foreground",
-                "badge.foreground",
-                "button.foreground",
                 "button.hoverBackground",
-                "button.secondaryBackground",
-                "button.secondaryForeground",
-                "dropdown.border",
-                "dropdown.foreground",
                 "editorBracketHighlight.foreground1",
                 "editorBracketHighlight.foreground2",
                 "editorBracketHighlight.foreground3",
@@ -2535,34 +1662,17 @@
                 "gitDecoration.ignoredResourceForeground",
                 "gitDecoration.modifiedResourceForeground",
                 "gitDecoration.untrackedResourceForeground",
-                "input.border",
-                "input.foreground",
-                "input.placeholderForeground",
-                "list.activeSelectionBackground",
                 "list.activeSelectionForeground",
-                "list.focusBackground",
-                "list.hoverForeground",
-                "list.inactiveSelectionBackground",
-                "notifications.border",
-                "notifications.foreground",
-                "panelTitle.activeForeground",
-                "panelTitle.inactiveForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBar.foreground",
                 "sideBarSectionHeader.background",
                 "sideBarSectionHeader.border",
-                "sideBarSectionHeader.foreground",
-                "sideBarTitle.foreground",
                 "statusBar.border",
                 "statusBar.debuggingBackground",
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.activeForeground",
                 "tab.hoverBackground",
-                "tab.inactiveForeground",
-                "tab.unfocusedActiveForeground",
                 "terminal.ansiBlack",
                 "terminal.ansiBlue",
                 "terminal.ansiBrightBlack",
@@ -2579,9 +1689,7 @@
                 "terminal.ansiRed",
                 "terminal.ansiWhite",
                 "terminal.ansiYellow",
-                "titleBar.activeForeground",
                 "titleBar.inactiveBackground",
-                "titleBar.inactiveForeground",
                 "widget.shadow"
             ],
             "buckets": {
@@ -2593,10 +1701,6 @@
                         "activityBar.background",
                         "activityBar.border",
                         "button.hoverBackground",
-                        "button.secondaryBackground",
-                        "dropdown.border",
-                        "input.border",
-                        "notifications.border",
                         "sideBarSectionHeader.background",
                         "sideBarSectionHeader.border",
                         "statusBar.border",
@@ -2605,45 +1709,7 @@
                         "tab.hoverBackground",
                         "titleBar.inactiveBackground"
                     ],
-                    "keyCount": 14
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "activityBar.foreground",
-                        "activityBar.inactiveForeground",
-                        "button.secondaryForeground",
-                        "dropdown.foreground",
-                        "editorLineNumber.activeForeground",
-                        "input.foreground",
-                        "input.placeholderForeground",
-                        "notifications.foreground",
-                        "panelTitle.activeForeground",
-                        "panelTitle.inactiveForeground",
-                        "sideBar.foreground",
-                        "sideBarSectionHeader.foreground",
-                        "sideBarTitle.foreground",
-                        "statusBar.foreground",
-                        "tab.activeForeground",
-                        "tab.inactiveForeground",
-                        "tab.unfocusedActiveForeground",
-                        "titleBar.activeForeground",
-                        "titleBar.inactiveForeground"
-                    ],
-                    "keyCount": 19
-                },
-                "accent-on-fill": {
-                    "label": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                    "keys": [
-                        "activityBarBadge.foreground",
-                        "badge.foreground",
-                        "button.foreground"
-                    ],
-                    "keyCount": 3
+                    "keyCount": 10
                 },
                 "editor-guides": {
                     "label": "Editor Guides and Brackets",
@@ -2660,6 +1726,16 @@
                         "editorWhitespace.foreground"
                     ],
                     "keyCount": 8
+                },
+                "chrome-ink": {
+                    "label": "Chrome Ink",
+                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
+                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
+                    "keys": [
+                        "editorLineNumber.activeForeground",
+                        "statusBar.foreground"
+                    ],
+                    "keyCount": 2
                 },
                 "feedback-status": {
                     "label": "Feedback and Status",
@@ -2680,13 +1756,9 @@
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
                     "keys": [
-                        "list.activeSelectionBackground",
-                        "list.activeSelectionForeground",
-                        "list.focusBackground",
-                        "list.hoverForeground",
-                        "list.inactiveSelectionBackground"
+                        "list.activeSelectionForeground"
                     ],
-                    "keyCount": 5
+                    "keyCount": 1
                 },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
@@ -2743,84 +1815,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "activityBar.foreground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBar.inactiveForeground",
-                    "value": "#9d907e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "activityBarBadge.foreground",
-                    "value": "#ffffff",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "badge.foreground",
-                    "value": "#ffffff",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
-                    "key": "button.foreground",
-                    "value": "#ffffff",
-                    "bucket": "accent-on-fill",
-                    "bucketLabel": "Accent On Fill",
-                    "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                    "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse."
-                },
-                {
                     "key": "button.hoverBackground",
                     "value": "#b88653",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryBackground",
-                    "value": "#c4b8a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.secondaryForeground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "dropdown.border",
-                    "value": "#c4b8a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "dropdown.foreground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "editorBracketHighlight.foreground1",
@@ -2943,100 +1943,12 @@
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
-                    "key": "input.border",
-                    "value": "#c4b8a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "input.foreground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "input.placeholderForeground",
-                    "value": "#9d907e",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "list.activeSelectionBackground",
-                    "value": "#d0c5b4",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
                     "key": "list.activeSelectionForeground",
                     "value": "#4d4032",
                     "bucket": "selection-list-state",
                     "bucketLabel": "Selection and List State",
                     "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                     "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.focusBackground",
-                    "value": "#d0c5b4",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.hoverForeground",
-                    "value": "#4d4032",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "list.inactiveSelectionBackground",
-                    "value": "#d2c7b5",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
-                {
-                    "key": "notifications.border",
-                    "value": "#c4b8a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "notifications.foreground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.activeForeground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "panelTitle.inactiveForeground",
-                    "value": "#9e907c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "scrollbarSlider.activeBackground",
@@ -3063,14 +1975,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBar.foreground",
-                    "value": "#776758",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "sideBarSectionHeader.background",
                     "value": "#e0d7ca",
                     "bucket": "chrome-surface",
@@ -3085,22 +1989,6 @@
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.foreground",
-                    "value": "#9e907c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "sideBarTitle.foreground",
-                    "value": "#9e907c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "statusBar.border",
@@ -3135,36 +2023,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "tab.activeForeground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "tab.hoverBackground",
                     "value": "#e0d7ca",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.inactiveForeground",
-                    "value": "#9e907c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "tab.unfocusedActiveForeground",
-                    "value": "#776758",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "terminal.ansiBlack",
@@ -3295,28 +2159,12 @@
                     "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
                 },
                 {
-                    "key": "titleBar.activeForeground",
-                    "value": "#4d4032",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#d0c3ad",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveForeground",
-                    "value": "#9e907c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
                 },
                 {
                     "key": "widget.shadow",
@@ -3339,10 +2187,6 @@
                     "activityBar.background",
                     "activityBar.border",
                     "button.hoverBackground",
-                    "button.secondaryBackground",
-                    "dropdown.border",
-                    "input.border",
-                    "notifications.border",
                     "sideBarSectionHeader.background",
                     "sideBarSectionHeader.border",
                     "statusBar.border",
@@ -3351,45 +2195,7 @@
                     "tab.hoverBackground",
                     "titleBar.inactiveBackground"
                 ],
-                "keyCount": 14
-            },
-            "chrome-ink": {
-                "label": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "keys": [
-                    "activityBar.foreground",
-                    "activityBar.inactiveForeground",
-                    "button.secondaryForeground",
-                    "dropdown.foreground",
-                    "editorLineNumber.activeForeground",
-                    "input.foreground",
-                    "input.placeholderForeground",
-                    "notifications.foreground",
-                    "panelTitle.activeForeground",
-                    "panelTitle.inactiveForeground",
-                    "sideBar.foreground",
-                    "sideBarSectionHeader.foreground",
-                    "sideBarTitle.foreground",
-                    "statusBar.foreground",
-                    "tab.activeForeground",
-                    "tab.inactiveForeground",
-                    "tab.unfocusedActiveForeground",
-                    "titleBar.activeForeground",
-                    "titleBar.inactiveForeground"
-                ],
-                "keyCount": 19
-            },
-            "accent-on-fill": {
-                "label": "Accent On Fill",
-                "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                "keys": [
-                    "activityBarBadge.foreground",
-                    "badge.foreground",
-                    "button.foreground"
-                ],
-                "keyCount": 3
+                "keyCount": 10
             },
             "editor-guides": {
                 "label": "Editor Guides and Brackets",
@@ -3406,6 +2212,16 @@
                     "editorWhitespace.foreground"
                 ],
                 "keyCount": 8
+            },
+            "chrome-ink": {
+                "label": "Chrome Ink",
+                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
+                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
+                "keys": [
+                    "editorLineNumber.activeForeground",
+                    "statusBar.foreground"
+                ],
+                "keyCount": 2
             },
             "feedback-status": {
                 "label": "Feedback and Status",
@@ -3426,13 +2242,9 @@
                 "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
                 "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
                 "keys": [
-                    "list.activeSelectionBackground",
-                    "list.activeSelectionForeground",
-                    "list.focusBackground",
-                    "list.hoverForeground",
-                    "list.inactiveSelectionBackground"
+                    "list.activeSelectionForeground"
                 ],
-                "keyCount": 5
+                "keyCount": 1
             },
             "scrollbar-shadow": {
                 "label": "Scrollbar and Shadow",
@@ -3499,71 +2311,6 @@
                 }
             },
             {
-                "key": "activityBar.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
-                "key": "activityBar.inactiveForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#655c4f",
-                    "darkSoft": "#766d63",
-                    "light": "#b49d7b",
-                    "lightSoft": "#9d907e"
-                }
-            },
-            {
-                "key": "activityBarBadge.foreground",
-                "bucket": "accent-on-fill",
-                "bucketLabel": "Accent On Fill",
-                "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                "variants": {
-                    "dark": "#161411",
-                    "darkSoft": "#1b1713",
-                    "light": "#ffffff",
-                    "lightSoft": "#ffffff"
-                }
-            },
-            {
-                "key": "badge.foreground",
-                "bucket": "accent-on-fill",
-                "bucketLabel": "Accent On Fill",
-                "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                "variants": {
-                    "dark": "#161411",
-                    "darkSoft": "#1b1713",
-                    "light": "#ffffff",
-                    "lightSoft": "#ffffff"
-                }
-            },
-            {
-                "key": "button.foreground",
-                "bucket": "accent-on-fill",
-                "bucketLabel": "Accent On Fill",
-                "suggestion": "candidate chrome roles like accentOnFill / inverseInk",
-                "rationale": "Text that sits on accent backgrounds should be normalized through on-fill contrast roles for easier cross-platform reuse.",
-                "variants": {
-                    "dark": "#161411",
-                    "darkSoft": "#1b1713",
-                    "light": "#ffffff",
-                    "lightSoft": "#ffffff"
-                }
-            },
-            {
                 "key": "button.hoverBackground",
                 "bucket": "chrome-surface",
                 "bucketLabel": "Chrome Surface",
@@ -3574,58 +2321,6 @@
                     "darkSoft": "#b98858",
                     "light": "#a86629",
                     "lightSoft": "#b88653"
-                }
-            },
-            {
-                "key": "button.secondaryBackground",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#4a4338",
-                    "darkSoft": "#564b41",
-                    "light": "#d2c2a5",
-                    "lightSoft": "#c4b8a5"
-                }
-            },
-            {
-                "key": "button.secondaryForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
-                "key": "dropdown.border",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#4a4338",
-                    "darkSoft": "#5a5044",
-                    "light": "#d2c2a5",
-                    "lightSoft": "#c4b8a5"
-                }
-            },
-            {
-                "key": "dropdown.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
                 }
             },
             {
@@ -3824,58 +2519,6 @@
                 }
             },
             {
-                "key": "input.border",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#4a4338",
-                    "darkSoft": "#5a5044",
-                    "light": "#d2c2a5",
-                    "lightSoft": "#c4b8a5"
-                }
-            },
-            {
-                "key": "input.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
-                "key": "input.placeholderForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#655c4f",
-                    "darkSoft": "#766d63",
-                    "light": "#b49d7b",
-                    "lightSoft": "#9d907e"
-                }
-            },
-            {
-                "key": "list.activeSelectionBackground",
-                "bucket": "selection-list-state",
-                "bucketLabel": "Selection and List State",
-                "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                "variants": {
-                    "dark": "#423a30",
-                    "darkSoft": "#473d35",
-                    "light": "#ddd0b8",
-                    "lightSoft": "#d0c5b4"
-                }
-            },
-            {
                 "key": "list.activeSelectionForeground",
                 "bucket": "selection-list-state",
                 "bucketLabel": "Selection and List State",
@@ -3886,97 +2529,6 @@
                     "darkSoft": "#dfd2be",
                     "light": "#2f210e",
                     "lightSoft": "#4d4032"
-                }
-            },
-            {
-                "key": "list.focusBackground",
-                "bucket": "selection-list-state",
-                "bucketLabel": "Selection and List State",
-                "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                "variants": {
-                    "dark": "#423a30",
-                    "darkSoft": "#493f36",
-                    "light": "#ddd0b8",
-                    "lightSoft": "#d0c5b4"
-                }
-            },
-            {
-                "key": "list.hoverForeground",
-                "bucket": "selection-list-state",
-                "bucketLabel": "Selection and List State",
-                "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
-                "key": "list.inactiveSelectionBackground",
-                "bucket": "selection-list-state",
-                "bucketLabel": "Selection and List State",
-                "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                "variants": {
-                    "dark": "#372f26",
-                    "darkSoft": "#423830",
-                    "light": "#d9ccb2",
-                    "lightSoft": "#d2c7b5"
-                }
-            },
-            {
-                "key": "notifications.border",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#4a4338",
-                    "darkSoft": "#5a5044",
-                    "light": "#d2c2a5",
-                    "lightSoft": "#c4b8a5"
-                }
-            },
-            {
-                "key": "notifications.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
-                "key": "panelTitle.activeForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d6cab4",
-                    "darkSoft": "#d6cec2",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
-                "key": "panelTitle.inactiveForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#877a65",
-                    "darkSoft": "#948879",
-                    "light": "#8e7a5c",
-                    "lightSoft": "#9e907c"
                 }
             },
             {
@@ -4019,19 +2571,6 @@
                 }
             },
             {
-                "key": "sideBar.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#a0937e",
-                    "darkSoft": "#aba193",
-                    "light": "#624a2c",
-                    "lightSoft": "#776758"
-                }
-            },
-            {
                 "key": "sideBarSectionHeader.background",
                 "bucket": "chrome-surface",
                 "bucketLabel": "Chrome Surface",
@@ -4055,32 +2594,6 @@
                     "darkSoft": "#4a4138",
                     "light": "#d2c2a5",
                     "lightSoft": "#c4b8a5"
-                }
-            },
-            {
-                "key": "sideBarSectionHeader.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#877a65",
-                    "darkSoft": "#948879",
-                    "light": "#8e7a5c",
-                    "lightSoft": "#9e907c"
-                }
-            },
-            {
-                "key": "sideBarTitle.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#877a65",
-                    "darkSoft": "#948879",
-                    "light": "#8e7a5c",
-                    "lightSoft": "#9e907c"
                 }
             },
             {
@@ -4136,19 +2649,6 @@
                 }
             },
             {
-                "key": "tab.activeForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
                 "key": "tab.hoverBackground",
                 "bucket": "chrome-surface",
                 "bucketLabel": "Chrome Surface",
@@ -4159,32 +2659,6 @@
                     "darkSoft": "#332c26",
                     "light": "#e7ddcc",
                     "lightSoft": "#e0d7ca"
-                }
-            },
-            {
-                "key": "tab.inactiveForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#877a65",
-                    "darkSoft": "#948879",
-                    "light": "#8e7a5c",
-                    "lightSoft": "#9e907c"
-                }
-            },
-            {
-                "key": "tab.unfocusedActiveForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#a0937e",
-                    "darkSoft": "#aba193",
-                    "light": "#624a2c",
-                    "lightSoft": "#776758"
                 }
             },
             {
@@ -4396,19 +2870,6 @@
                 }
             },
             {
-                "key": "titleBar.activeForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#cec5ba",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
-            {
                 "key": "titleBar.inactiveBackground",
                 "bucket": "chrome-surface",
                 "bucketLabel": "Chrome Surface",
@@ -4419,19 +2880,6 @@
                     "darkSoft": "#1d1814",
                     "light": "#ddd0b8",
                     "lightSoft": "#d0c3ad"
-                }
-            },
-            {
-                "key": "titleBar.inactiveForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#877a65",
-                    "darkSoft": "#948879",
-                    "light": "#8e7a5c",
-                    "lightSoft": "#9e907c"
                 }
             },
             {

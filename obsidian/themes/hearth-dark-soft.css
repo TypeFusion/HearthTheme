@@ -2,7 +2,7 @@
 /* Variant: Hearth Dark Soft (Obsidian) */
 /* Source: themes/hearth-dark-soft.json */
 .theme-dark {
-  --background-modifier-active-hover: rgb(187 132 90 / 0.26);
+  --background-modifier-active-hover: #443d37;
   --background-modifier-border: #463e38;
   --background-modifier-border-focus: #bb845a3a;
   --background-modifier-border-hover: rgb(70 62 56 / 0.48);
@@ -11,13 +11,13 @@
   --background-modifier-error: rgb(168 105 88 / 0.2);
   --background-modifier-error-hover: rgb(168 105 88 / 0.3);
   --background-modifier-form-field: rgb(70 62 56 / 0.22);
-  --background-modifier-hover: #332d26;
+  --background-modifier-hover: #3f3833;
   --background-modifier-message: rgb(187 132 90 / 0.18);
   --background-modifier-success: rgb(156 156 134 / 0.24);
   --background-primary: #29211d;
   --background-primary-alt: #342c28;
   --background-secondary: #211a16;
-  --background-secondary-alt: #302824;
+  --background-secondary-alt: #524b45;
   --blockquote-border-color: rgb(123 121 101 / 0.46);
   --blockquote-color: #a59b8f;
   --code-background: rgb(57 49 44 / 0.38);
@@ -69,11 +69,11 @@
   --text-accent: #bb845a;
   --text-accent-hover: #be906b;
   --text-error: #b5634f;
-  --text-faint: #6d6359;
+  --text-faint: #746d65;
   --text-highlight-bg: rgb(187 132 90 / 0.34);
-  --text-muted: #a1978b;
+  --text-muted: #a8a096;
   --text-normal: #cec5ba;
-  --text-on-accent: #f5eee4;
+  --text-on-accent: #1b1713;
   --text-selection: #bb845a13;
   --text-success: #9d9f7c;
   --text-warning: #bb845a;

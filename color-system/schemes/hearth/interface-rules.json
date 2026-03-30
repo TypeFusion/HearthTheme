@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "description": "Abstract interface tones for HearthCode. These govern shell ink hierarchy, on-accent contrast, and navigation fills before any platform token mapping.",
+  "interfaces": {
+    "shellInk": {
+      "description": "Primary readable ink for active tabs, fields, and shell labels.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#d3c9b8",
+          "darkSoft": "#cec5ba",
+          "light": "#2f210e",
+          "lightSoft": "#4d4032"
+        }
+      }
+    },
+    "supportInk": {
+      "description": "Readable supporting shell ink for unfocused active items and general navigation copy.",
+      "source": {
+        "type": "interface",
+        "id": "shellInk"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "sidebar"
+          },
+          "tFromVariantKnob": "interfaceMix.supportInk"
+        }
+      }
+    },
+    "mutedInk": {
+      "description": "Secondary shell ink for inactive tabs, section titles, and quiet chrome labels.",
+      "source": {
+        "type": "interface",
+        "id": "shellInk"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "sidebar"
+          },
+          "tFromVariantKnob": "interfaceMix.mutedInk"
+        }
+      }
+    },
+    "subtleInk": {
+      "description": "Dormant shell ink for placeholders and inactive iconography.",
+      "source": {
+        "type": "interface",
+        "id": "mutedInk"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "sidebar"
+          },
+          "tFromVariantKnob": "interfaceMix.subtleInk"
+        }
+      }
+    },
+    "onAccentInk": {
+      "description": "Readable inverse ink placed on accent and badge fills.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#161411",
+          "darkSoft": "#1b1713",
+          "light": "#ffffff",
+          "lightSoft": "#ffffff"
+        }
+      }
+    },
+    "shellRaised": {
+      "description": "Raised shell substrate for secondary buttons and bounded form controls.",
+      "source": {
+        "type": "surface",
+        "id": "sidebar"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "interface",
+            "id": "shellInk"
+          },
+          "tFromVariantKnob": "interfaceMix.shellRaised"
+        }
+      }
+    },
+    "navActiveFill": {
+      "description": "Selected navigation fill for active lists and focused rows.",
+      "source": {
+        "type": "surface",
+        "id": "sidebar"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "interface",
+            "id": "shellInk"
+          },
+          "tFromVariantKnob": "interfaceMix.navActiveFill"
+        }
+      }
+    },
+    "navInactiveFill": {
+      "description": "Softer navigation fill for inactive selection states and supporting hover groups.",
+      "source": {
+        "type": "surface",
+        "id": "sidebar"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "interface",
+            "id": "shellInk"
+          },
+          "tFromVariantKnob": "interfaceMix.navInactiveFill"
+        }
+      }
+    }
+  }
+}

@@ -336,5 +336,63 @@
       "vscodeColor": "editorError.foreground",
       "includeInReport": true
     }
+  ],
+  "interfaces": [
+    {
+      "id": "shellInk",
+      "webToken": "shellInk",
+      "obsidianVar": "--hearth-shell-ink",
+      "vscodeColor": "tab.activeForeground",
+      "includeInReport": true
+    },
+    {
+      "id": "supportInk",
+      "webToken": "shellSupport",
+      "obsidianVar": "--text-muted",
+      "vscodeColor": "sideBar.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "mutedInk",
+      "webToken": "shellMuted",
+      "obsidianVar": "--hearth-shell-muted",
+      "vscodeColor": "tab.inactiveForeground",
+      "includeInReport": true
+    },
+    {
+      "id": "subtleInk",
+      "webToken": "shellSubtle",
+      "obsidianVar": "--text-faint",
+      "vscodeColor": "input.placeholderForeground",
+      "includeInReport": true
+    },
+    {
+      "id": "onAccentInk",
+      "webToken": "onAccent",
+      "obsidianVar": "--text-on-accent",
+      "vscodeColor": "button.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "shellRaised",
+      "webToken": "shellRaised",
+      "obsidianVar": "--background-secondary-alt",
+      "vscodeColor": "button.secondaryBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "navActiveFill",
+      "webToken": "navActiveFill",
+      "obsidianVar": "--background-modifier-active-hover",
+      "vscodeColor": "list.activeSelectionBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "navInactiveFill",
+      "webToken": "navInactiveFill",
+      "obsidianVar": "--background-modifier-hover",
+      "vscodeColor": "list.inactiveSelectionBackground",
+      "includeInReport": true
+    }
   ]
 }

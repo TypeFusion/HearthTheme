@@ -28,6 +28,10 @@ function main() {
     fail(`No feedback lineage generated for scheme "${model.scheme.id}"`)
   }
 
+  if (!lineage.interfaces || Object.keys(lineage.interfaces).length === 0) {
+    fail(`No interface lineage generated for scheme "${model.scheme.id}"`)
+  }
+
   console.log(`[PASS] Scheme smoke passed for ${model.scheme.id}.`)
 }
 

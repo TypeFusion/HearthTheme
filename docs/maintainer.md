@@ -19,6 +19,7 @@ This guide is about source layers, generation order, and release discipline.
 - `color-system/schemes/hearth/foundation.json`
 - `color-system/schemes/hearth/semantic-rules.json`
 - `color-system/schemes/hearth/surface-rules.json`
+- `color-system/schemes/hearth/interface-rules.json`
 - `color-system/schemes/hearth/interaction-rules.json`
 - `color-system/schemes/hearth/feedback-rules.json`
 - `color-system/schemes/hearth/variant-knobs.json`
@@ -70,13 +71,14 @@ Normal order of operations:
 3. foundation
 4. semantic rules
 5. surface rules
-6. interaction rules
-7. feedback rules
-8. variant knobs
-9. variant profiles
-10. adapters
-11. tuning
-11. migration anchors only if the change is truly platform-compatibility work
+6. interface rules
+7. interaction rules
+8. feedback rules
+9. variant knobs
+10. variant profiles
+11. adapters
+12. tuning
+13. migration anchors only if the change is truly platform-compatibility work
 
 Do not directly edit generated artifacts.
 
@@ -102,8 +104,9 @@ It is not a source file.
 - `adapters.json` is a platform contract file, not a design file.
 - `tuning.json` is a calibration file, not a palette-definition file.
 - `taxonomy.json` is the machine-readable abstract grouping layer; it should stay platform-free.
-- `surface-rules.json` and `interaction-rules.json` should prefer sparse anchors plus derivation, not full per-variant result tables unless a bounded escape hatch is truly necessary.
+- `surface-rules.json`, `interface-rules.json`, and `interaction-rules.json` should prefer sparse anchors plus derivation, not full per-variant result tables unless a bounded escape hatch is truly necessary.
 - Environment anchors like `canvas`, `ink`, and `sidebar` should stay rooted in foundation families whenever possible, so the rest of the environment layer can derive from one shared scheme language.
+- Interface anchors should express shell ink hierarchy, on-accent contrast, and navigation-state tone as abstract cross-product language, not as a copy of one platform's chrome keys.
 - Interaction anchors may derive from semantic roles when cursor, status, focus, or selection should inherit the same expressive family as the code language.
 - Feedback anchors should express note / info / success / warning / error as abstract cross-product semantics, not as platform-local error colors or borrowed code tokens.
 - If a repeated interaction state needs a durable cross-product identity, prefer adding a scheme-level tone such as `shell.lift` or `terracotta.presence` in foundation instead of leaving per-variant `output` escapes inside interaction rules.

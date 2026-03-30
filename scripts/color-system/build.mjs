@@ -3,6 +3,7 @@ import {
   COLOR_SYSTEM_ADAPTERS_PATH,
   COLOR_SYSTEM_FOUNDATION_PATH,
   COLOR_SYSTEM_FEEDBACK_RULES_PATH,
+  COLOR_SYSTEM_INTERFACE_RULES_PATH,
   COLOR_SYSTEM_INTERACTION_RULES_PATH,
   COLOR_SYSTEM_PHILOSOPHY_PATH,
   COLOR_SYSTEM_SCHEME_PATH,
@@ -20,6 +21,8 @@ import {
   loadFoundationPalette,
   loadFeedbackAdapters,
   loadFeedbackRules,
+  loadInterfaceAdapters,
+  loadInterfaceRules,
   loadInteractionAdapters,
   loadInteractionRules,
   loadRoleAdapters,
@@ -37,6 +40,14 @@ const EXPORTED_SITE_TOKEN_KEYS = [
   'fg',
   'lineBg',
   'lineNo',
+  'shellInk',
+  'shellSupport',
+  'shellMuted',
+  'shellSubtle',
+  'onAccent',
+  'shellRaised',
+  'navActiveFill',
+  'navInactiveFill',
   'note',
   'info',
   'success',
@@ -188,6 +199,7 @@ function resolveAbstractColorSource({
   foundation,
   resolveRole,
   resolveSurface,
+  resolveInterface,
   resolveInteraction,
   resolveFeedback,
   entryRef,
@@ -281,6 +293,26 @@ function resolveAbstractColorSource({
     }
   }
 
+  if (source.type === 'interface') {
+    const resolved = resolveInterface?.(source.id, variantId)
+    if (!resolved) {
+      throw new Error(`Missing referenced interface "${source.id}" while resolving ${entryRef}.${variantId}`)
+    }
+    return {
+      color: resolved.color,
+      chainRefs: resolved.chainRefs,
+      steps: [{
+        type: 'interface-ref',
+        ref: `interface-rules.interfaces.${source.id}.${variantId}`,
+        value: resolved.color,
+      }],
+      sourceType: 'interface',
+      sourceRef: source.id,
+      family: resolved.family,
+      tone: resolved.tone,
+    }
+  }
+
   if (source.type === 'interaction') {
     const resolved = resolveInteraction?.(source.id, variantId)
     if (!resolved) {
@@ -331,6 +363,7 @@ function applyAbstractDerive({
   variantId,
   resolveRole,
   resolveSurface,
+  resolveInterface,
   resolveInteraction,
   resolveFeedback,
   resolveVariantKnob,
@@ -364,6 +397,7 @@ function applyAbstractDerive({
       foundation,
       resolveRole,
       resolveSurface,
+      resolveInterface,
       resolveInteraction,
       resolveFeedback,
       entryRef: `${entryRef}.derive.mix.with`,
@@ -616,12 +650,126 @@ function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles,
   }
 }
 
-function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, resolvedSemantic, variantProfiles, variantKnobs, variants) {
+function buildResolvedInterfaceRules(rawInterfaceRules, foundation, surfaceRules, variantProfiles, variantKnobs, variants) {
+  const interfaces = {}
+  const resolving = new Set()
+
+  function resolveSurface(surfaceId, variantId) {
+    return surfaceRules.resolved?.[surfaceId]?.[variantId] ?? null
+  }
+
+  function resolveVariantKnob(knobRef, variantId) {
+    const [groupId, knobId] = String(knobRef || '').split('.')
+    if (!groupId || !knobId) return null
+    return variantKnobs?.[groupId]?.[knobId]?.[variantId] ?? null
+  }
+
+  function resolveInterface(interfaceId, variantId) {
+    const existing = interfaces[interfaceId]?.resolved?.[variantId]
+    if (existing) return existing
+    const definition = rawInterfaceRules.interfaces[interfaceId]
+    if (!definition) {
+      throw new Error(`Missing interface definition for "${interfaceId}"`)
+    }
+
+    const key = `${interfaceId}:${variantId}`
+    if (resolving.has(key)) {
+      throw new Error(`Interface derivation cycle detected: ${key}`)
+    }
+    resolving.add(key)
+
+    const variantOverride = definition.byVariant?.[variantId] || {}
+    const source = variantOverride.source || definition.source
+    const derive = mergeDerive(definition.derive, variantOverride.derive)
+    const entryRef = `interface-rules.interfaces.${interfaceId}`
+    const sourceResolution = resolveAbstractColorSource({
+      source,
+      variantId,
+      foundation,
+      resolveRole: null,
+      resolveSurface,
+      resolveInterface,
+      resolveInteraction: null,
+      resolveFeedback: null,
+      entryRef,
+    })
+    const steps = [...sourceResolution.steps]
+    const derived = applyAbstractDerive({
+      baseHex: sourceResolution.color,
+      derive,
+      foundation,
+      variantId,
+      resolveRole: null,
+      resolveSurface,
+      resolveInterface,
+      resolveInteraction: null,
+      resolveFeedback: null,
+      resolveVariantKnob,
+      entryRef,
+      steps,
+    })
+    steps.push({
+      type: 'variant-profile',
+      ref: `variant-profiles.variants.${variantId}`,
+    })
+
+    const result = {
+      interfaceId,
+      variantId,
+      description: definition.description,
+      color: derived.color,
+      sourceType: sourceResolution.sourceType,
+      sourceRef: sourceResolution.sourceRef,
+      family: sourceResolution.family,
+      tone: sourceResolution.tone,
+      usedEscapeHatch: Boolean(derive.output),
+      steps,
+      variantProfile: variantProfiles.variants[variantId],
+      chainRefs: uniqueRefs([
+        ...sourceResolution.chainRefs,
+        ...derived.chainRefs,
+        entryRef,
+        `variant-profiles.variants.${variantId}`,
+      ]),
+    }
+
+    if (!interfaces[interfaceId]) {
+      interfaces[interfaceId] = {
+        description: definition.description,
+        values: {},
+        resolved: {},
+      }
+    }
+    interfaces[interfaceId].values[variantId] = result.color
+    interfaces[interfaceId].resolved[variantId] = result
+    resolving.delete(key)
+    return result
+  }
+
+  for (const interfaceId of Object.keys(rawInterfaceRules.interfaces)) {
+    for (const variant of variants) {
+      resolveInterface(interfaceId, variant.id)
+    }
+  }
+
+  return {
+    schemaVersion: rawInterfaceRules.schemaVersion,
+    description: rawInterfaceRules.description,
+    definitions: rawInterfaceRules.interfaces,
+    interfaces,
+  }
+}
+
+function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, interfaceRules, resolvedSemantic, variantProfiles, variantKnobs, variants) {
   const interactions = {}
   const resolving = new Set()
 
   function resolveSurface(surfaceId, variantId) {
     return surfaceRules.resolved?.[surfaceId]?.[variantId] ?? null
+  }
+
+  function resolveInterface(interfaceId, variantId) {
+    return interfaceRules.interfaces?.[interfaceId]?.resolved?.[variantId] ?? null
   }
 
   function resolveRole(roleId, variantId) {
@@ -658,6 +806,7 @@ function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceR
       foundation,
       resolveRole,
       resolveSurface,
+      resolveInterface,
       resolveInteraction,
       resolveFeedback: null,
       entryRef,
@@ -670,6 +819,7 @@ function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceR
       variantId,
       resolveRole,
       resolveSurface,
+      resolveInterface,
       resolveInteraction,
       resolveFeedback: null,
       resolveVariantKnob,
@@ -728,7 +878,7 @@ function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceR
   }
 }
 
-function buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, interactionRules, resolvedSemantic, variantProfiles, variantKnobs, variants) {
+function buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, interfaceRules, interactionRules, resolvedSemantic, variantProfiles, variantKnobs, variants) {
   const feedbacks = {}
   const resolving = new Set()
 
@@ -738,6 +888,10 @@ function buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, 
 
   function resolveInteraction(interactionId, variantId) {
     return interactionRules.interactions?.[interactionId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveInterface(interfaceId, variantId) {
+    return interfaceRules.interfaces?.[interfaceId]?.resolved?.[variantId] ?? null
   }
 
   function resolveRole(roleId, variantId) {
@@ -774,6 +928,7 @@ function buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, 
       foundation,
       resolveRole,
       resolveSurface,
+      resolveInterface,
       resolveInteraction,
       resolveFeedback,
       entryRef,
@@ -786,6 +941,7 @@ function buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, 
       variantId,
       resolveRole,
       resolveSurface,
+      resolveInterface,
       resolveInteraction,
       resolveFeedback,
       resolveVariantKnob,
@@ -855,6 +1011,7 @@ function buildSemanticSnapshotDocument(palette) {
       taxonomy: COLOR_SYSTEM_TAXONOMY_PATH,
       foundation: COLOR_SYSTEM_FOUNDATION_PATH,
       surfaceRules: COLOR_SYSTEM_SURFACE_RULES_PATH,
+      interfaceRules: COLOR_SYSTEM_INTERFACE_RULES_PATH,
       interactionRules: COLOR_SYSTEM_INTERACTION_RULES_PATH,
       feedbackRules: COLOR_SYSTEM_FEEDBACK_RULES_PATH,
       semanticRules: COLOR_SYSTEM_SEMANTIC_RULES_PATH,
@@ -873,7 +1030,7 @@ function resolveWebTokenKey(roleDef) {
   return roleDef.webToken || roleDef.id
 }
 
-function buildBasePlatformMaps({ surfaceRules, interactionRules, feedbackRules, surfaceAdapters, interactionAdapters, feedbackAdapters, variants }) {
+function buildBasePlatformMaps({ surfaceRules, interfaceRules, interactionRules, feedbackRules, surfaceAdapters, interfaceAdapters, interactionAdapters, feedbackAdapters, variants }) {
   const tokenSets = {}
   const obsidian = {}
   const vscodeWorkbench = {}
@@ -887,6 +1044,16 @@ function buildBasePlatformMaps({ surfaceRules, interactionRules, feedbackRules, 
       const color = surfaceRules.surfaces[contract.id]?.[variant.id]
       if (!color) {
         throw new Error(`Missing surface color for "${contract.id}.${variant.id}"`)
+      }
+      if (contract.webToken) tokenSets[variant.id][contract.webToken] = color
+      if (contract.obsidianVar) obsidian[variant.id][contract.obsidianVar] = color
+      if (contract.vscodeColor) vscodeWorkbench[variant.id][contract.vscodeColor] = color
+    }
+
+    for (const contract of interfaceAdapters) {
+      const color = interfaceRules.interfaces[contract.id]?.values?.[variant.id]
+      if (!color) {
+        throw new Error(`Missing interface color for "${contract.id}.${variant.id}"`)
       }
       if (contract.webToken) tokenSets[variant.id][contract.webToken] = color
       if (contract.obsidianVar) obsidian[variant.id][contract.obsidianVar] = color
@@ -923,20 +1090,24 @@ function buildBasePlatformMaps({ surfaceRules, interactionRules, feedbackRules, 
 
 function buildPlatformTokenMaps({
   surfaceRules,
+  interfaceRules,
   interactionRules,
   feedbackRules,
   semanticPalette,
   roleAdapters,
   surfaceAdapters,
+  interfaceAdapters,
   interactionAdapters,
   feedbackAdapters,
   variants,
 }) {
   const baseMaps = buildBasePlatformMaps({
     surfaceRules,
+    interfaceRules,
     interactionRules,
     feedbackRules,
     surfaceAdapters,
+    interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
     variants,
@@ -1025,6 +1196,7 @@ function validateModel({
   taxonomy,
   foundation,
   surfaceRules,
+  interfaceRules,
   interactionRules,
   feedbackRules,
   semanticRules,
@@ -1032,6 +1204,7 @@ function validateModel({
   variants,
   adapters,
   surfaceAdapters,
+  interfaceAdapters,
   interactionAdapters,
   feedbackAdapters,
   semanticPalette,
@@ -1050,6 +1223,7 @@ function validateModel({
   const foundationFamilyIds = new Set(Object.keys(foundation.families))
   const semanticRoleIds = new Set(Object.keys(semanticRules.roles))
   const surfaceIds = new Set(Object.keys(surfaceRules.surfaces))
+  const interfaceIds = new Set(Object.keys(interfaceRules.interfaces))
   const interactionIds = new Set(Object.keys(interactionRules.interactions))
   const feedbackIds = new Set(Object.keys(feedbackRules.feedbacks))
 
@@ -1074,6 +1248,7 @@ function validateModel({
   validateGroupedCoverage(taxonomy.families, foundationFamilyIds, 'taxonomy.families')
   validateGroupedCoverage(taxonomy.roles, semanticRoleIds, 'taxonomy.roles')
   validateGroupedCoverage(taxonomy.surfaces, surfaceIds, 'taxonomy.surfaces')
+  validateGroupedCoverage(taxonomy.interfaces, interfaceIds, 'taxonomy.interfaces')
   validateGroupedCoverage(taxonomy.interactions, interactionIds, 'taxonomy.interactions')
   validateGroupedCoverage(taxonomy.feedback, feedbackIds, 'taxonomy.feedback')
   validateGroupedCoverage(taxonomy.variants, variantIds, 'taxonomy.variants')
@@ -1097,6 +1272,12 @@ function validateModel({
     }
   }
 
+  for (const interfaceId of Object.keys(interfaceRules.interfaces)) {
+    if (!interfaceAdapters.some((entry) => entry.id === interfaceId)) {
+      throw new Error(`Interface rule "${interfaceId}" is not represented in adapters.json interfaces`)
+    }
+  }
+
   for (const feedbackId of Object.keys(feedbackRules.feedbacks)) {
     if (!feedbackAdapters.some((entry) => entry.id === feedbackId)) {
       throw new Error(`Feedback rule "${feedbackId}" is not represented in adapters.json feedbacks`)
@@ -1110,6 +1291,11 @@ function validateModel({
     for (const surfaceAdapter of surfaceAdapters) {
       if (!surfaceRules.surfaces[surfaceAdapter.id]?.[variant.id]) {
         throw new Error(`Missing surface "${surfaceAdapter.id}" for variant "${variant.id}"`)
+      }
+    }
+    for (const interfaceAdapter of interfaceAdapters) {
+      if (!interfaceRules.interfaces[interfaceAdapter.id]?.values?.[variant.id]) {
+        throw new Error(`Missing interface "${interfaceAdapter.id}" for variant "${variant.id}"`)
       }
     }
     for (const interactionAdapter of interactionAdapters) {
@@ -1157,6 +1343,18 @@ function validateModel({
       }
     }
   }
+
+  for (const interfaceDef of interfaceAdapters) {
+    if (!interfaceRules.interfaces[interfaceDef.id]) {
+      throw new Error(`Missing interface rule for adapter "${interfaceDef.id}"`)
+    }
+    for (const variant of variantList) {
+      const resolved = interfaceRules.interfaces[interfaceDef.id]?.resolved?.[variant.id]
+      if (!resolved) {
+        throw new Error(`Missing resolved interface lineage for "${interfaceDef.id}" in variant "${variant.id}"`)
+      }
+    }
+  }
 }
 
 export function buildColorLanguageModel() {
@@ -1166,10 +1364,12 @@ export function buildColorLanguageModel() {
   const variantSpec = loadColorSystemVariants()
   const adapters = loadRoleAdapters()
   const surfaceAdapters = loadSurfaceAdapters()
+  const interfaceAdapters = loadInterfaceAdapters()
   const interactionAdapters = loadInteractionAdapters()
   const feedbackAdapters = loadFeedbackAdapters()
   const foundation = loadFoundationPalette()
   const rawSurfaceRules = loadSurfaceRules()
+  const rawInterfaceRules = loadInterfaceRules()
   const rawInteractionRules = loadInteractionRules()
   const rawFeedbackRules = loadFeedbackRules()
   const semanticRules = loadSemanticRules()
@@ -1177,16 +1377,19 @@ export function buildColorLanguageModel() {
   const variantProfiles = loadVariantProfiles()
   const { palette, resolved } = buildSemanticPalette(foundation, semanticRules, variantProfiles, variantSpec.variants)
   const surfaceRules = buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variantKnobs, variantSpec.variants)
-  const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
-  const feedbackRules = buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, interactionRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
+  const interfaceRules = buildResolvedInterfaceRules(rawInterfaceRules, foundation, surfaceRules, variantProfiles, variantKnobs, variantSpec.variants)
+  const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, interfaceRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
+  const feedbackRules = buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, interfaceRules, interactionRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
   const semanticSnapshot = buildSemanticSnapshotDocument(palette)
   const platformTokenMaps = buildPlatformTokenMaps({
     surfaceRules,
+    interfaceRules,
     interactionRules,
     feedbackRules,
     semanticPalette: palette,
     roleAdapters: adapters,
     surfaceAdapters,
+    interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
     variants: variantSpec.variants,
@@ -1200,6 +1403,7 @@ export function buildColorLanguageModel() {
       taxonomy: COLOR_SYSTEM_TAXONOMY_PATH,
       foundation: COLOR_SYSTEM_FOUNDATION_PATH,
       surfaceRules: COLOR_SYSTEM_SURFACE_RULES_PATH,
+      interfaceRules: COLOR_SYSTEM_INTERFACE_RULES_PATH,
       interactionRules: COLOR_SYSTEM_INTERACTION_RULES_PATH,
       feedbackRules: COLOR_SYSTEM_FEEDBACK_RULES_PATH,
       semanticRules: COLOR_SYSTEM_SEMANTIC_RULES_PATH,
@@ -1215,6 +1419,7 @@ export function buildColorLanguageModel() {
     taxonomy,
     foundation,
     surfaceRules,
+    interfaceRules,
     interactionRules,
     feedbackRules,
     semanticRules,
@@ -1223,11 +1428,13 @@ export function buildColorLanguageModel() {
     variants: variantSpec,
     adapters,
     surfaceAdapters,
+    interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
     platformContracts: {
       roles: adapters,
       surfaces: surfaceAdapters,
+      interfaces: interfaceAdapters,
       interactions: interactionAdapters,
       feedbacks: feedbackAdapters,
     },
