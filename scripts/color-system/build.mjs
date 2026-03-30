@@ -8,6 +8,7 @@ import {
   COLOR_SYSTEM_SEMANTIC_PATH,
   COLOR_SYSTEM_SEMANTIC_RULES_PATH,
   COLOR_SYSTEM_SURFACE_RULES_PATH,
+  COLOR_SYSTEM_TAXONOMY_PATH,
   COLOR_SYSTEM_TUNING_PATH,
   COLOR_SYSTEM_VARIANT_PROFILES_PATH,
   COLOR_SYSTEM_VARIANTS_PATH,
@@ -18,6 +19,7 @@ import {
   loadInteractionAdapters,
   loadInteractionRules,
   loadRoleAdapters,
+  loadSchemeTaxonomy,
   loadSemanticRules,
   loadSurfaceAdapters,
   loadSurfaceRules,
@@ -205,6 +207,7 @@ function buildSemanticSnapshotDocument(palette) {
       activeScheme: COLOR_SYSTEM_ACTIVE_SCHEME_PATH,
       scheme: COLOR_SYSTEM_SCHEME_PATH,
       philosophy: COLOR_SYSTEM_PHILOSOPHY_PATH,
+      taxonomy: COLOR_SYSTEM_TAXONOMY_PATH,
       foundation: COLOR_SYSTEM_FOUNDATION_PATH,
       surfaceRules: COLOR_SYSTEM_SURFACE_RULES_PATH,
       interactionRules: COLOR_SYSTEM_INTERACTION_RULES_PATH,
@@ -332,8 +335,33 @@ function buildPlatformTokenMaps({
   }
 }
 
+function validateGroupedCoverage(groups, expectedIds, label) {
+  const seen = new Map()
+  for (const [groupName, ids] of Object.entries(groups || {})) {
+    for (const id of ids) {
+      if (seen.has(id)) {
+        throw new Error(`${label}: "${id}" is assigned to both "${seen.get(id)}" and "${groupName}"`)
+      }
+      seen.set(id, groupName)
+    }
+  }
+
+  for (const expectedId of expectedIds) {
+    if (!seen.has(expectedId)) {
+      throw new Error(`${label}: missing "${expectedId}"`)
+    }
+  }
+
+  for (const id of seen.keys()) {
+    if (!expectedIds.has(id)) {
+      throw new Error(`${label}: unknown id "${id}"`)
+    }
+  }
+}
+
 function validateModel({
   scheme,
+  taxonomy,
   foundation,
   surfaceRules,
   interactionRules,
@@ -354,6 +382,36 @@ function validateModel({
   if (scheme.defaultVariant && !variantList.some((variant) => variant.id === scheme.defaultVariant)) {
     throw new Error(`Scheme defaultVariant "${scheme.defaultVariant}" does not exist in variants`)
   }
+
+  const variantIds = new Set(variantList.map((variant) => variant.id))
+  const foundationFamilyIds = new Set(Object.keys(foundation.families))
+  const semanticRoleIds = new Set(Object.keys(semanticRules.roles))
+  const surfaceIds = new Set(Object.keys(surfaceRules.surfaces))
+  const interactionIds = new Set(Object.keys(interactionRules.interactions))
+
+  for (const familyId of scheme.vocabulary) {
+    if (!foundationFamilyIds.has(familyId)) {
+      throw new Error(`Scheme vocabulary "${familyId}" does not exist in foundation.json`)
+    }
+  }
+
+  const variantPhilosophyKeys = new Set(Object.keys(scheme.variantPhilosophy || {}))
+  for (const variantId of variantIds) {
+    if (!variantPhilosophyKeys.has(variantId)) {
+      throw new Error(`Scheme variantPhilosophy is missing "${variantId}"`)
+    }
+  }
+  for (const variantId of variantPhilosophyKeys) {
+    if (!variantIds.has(variantId)) {
+      throw new Error(`Scheme variantPhilosophy contains unknown variant "${variantId}"`)
+    }
+  }
+
+  validateGroupedCoverage(taxonomy.families, foundationFamilyIds, 'taxonomy.families')
+  validateGroupedCoverage(taxonomy.roles, semanticRoleIds, 'taxonomy.roles')
+  validateGroupedCoverage(taxonomy.surfaces, surfaceIds, 'taxonomy.surfaces')
+  validateGroupedCoverage(taxonomy.interactions, interactionIds, 'taxonomy.interactions')
+  validateGroupedCoverage(taxonomy.variants, variantIds, 'taxonomy.variants')
 
   const adapterRoleIds = new Set(adapters.map((role) => role.id))
   for (const roleId of Object.keys(semanticRules.roles)) {
@@ -413,6 +471,7 @@ function validateModel({
 export function buildColorLanguageModel() {
   const activeScheme = loadActiveSchemeContext()
   const scheme = loadColorSchemeManifest()
+  const taxonomy = loadSchemeTaxonomy()
   const variantSpec = loadColorSystemVariants()
   const adapters = loadRoleAdapters()
   const surfaceAdapters = loadSurfaceAdapters()
@@ -439,6 +498,7 @@ export function buildColorLanguageModel() {
       activeScheme: COLOR_SYSTEM_ACTIVE_SCHEME_PATH,
       scheme: COLOR_SYSTEM_SCHEME_PATH,
       philosophy: COLOR_SYSTEM_PHILOSOPHY_PATH,
+      taxonomy: COLOR_SYSTEM_TAXONOMY_PATH,
       foundation: COLOR_SYSTEM_FOUNDATION_PATH,
       surfaceRules: COLOR_SYSTEM_SURFACE_RULES_PATH,
       interactionRules: COLOR_SYSTEM_INTERACTION_RULES_PATH,
@@ -451,6 +511,7 @@ export function buildColorLanguageModel() {
     },
     activeScheme,
     scheme,
+    taxonomy,
     foundation,
     surfaceRules,
     interactionRules,

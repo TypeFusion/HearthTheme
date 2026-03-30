@@ -2,6 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
 import { COLOR_SYSTEM_SEMANTIC_PATH, loadColorSystemTuning, loadColorSystemVariants, loadRoleAdapters } from './color-system.mjs'
 import { buildColorLanguageModel } from './color-system/build.mjs'
+import { syncVscodeChromeReferenceFiles } from './color-system/vscode-chrome.mjs'
 import {
   clamp,
   contrastRatio,
@@ -1484,6 +1485,7 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
 }
 
 export function generateThemeVariants() {
+  syncVscodeChromeReferenceFiles(COLOR_LANGUAGE_MODEL, VARIANT_SPEC)
   validateTemplateAvailability(DARK_THEME_SOURCE_PATH)
   validateTemplateAvailability(TEMPLATE_DARK_PATH)
 

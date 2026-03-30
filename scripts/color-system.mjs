@@ -9,6 +9,7 @@ export const COLOR_SYSTEM_VARIANTS_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/variant
 export const COLOR_SYSTEM_ADAPTERS_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/adapters.json`
 export const COLOR_SYSTEM_VARIANT_PROFILES_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/variant-profiles.json`
 export const COLOR_SYSTEM_TUNING_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/tuning.json`
+export const COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/vscode-chrome-contract.json`
 
 const HEX_RE = /^#[0-9a-f]{6}$/i
 const FLEX_HEX_RE = /^#[0-9a-f]{6}([0-9a-f]{2})?$/i
@@ -36,6 +37,7 @@ export const COLOR_SYSTEM_SCHEME_ID = ACTIVE_SCHEME_CONTEXT.schemeId
 export const COLOR_SYSTEM_ACTIVE_SCHEME_DIR = ACTIVE_SCHEME_CONTEXT.schemeDir
 export const COLOR_SYSTEM_SCHEME_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/scheme.json`
 export const COLOR_SYSTEM_PHILOSOPHY_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/philosophy.md`
+export const COLOR_SYSTEM_TAXONOMY_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/taxonomy.json`
 export const COLOR_SYSTEM_FOUNDATION_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/foundation.json`
 export const COLOR_SYSTEM_SURFACE_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/surface-rules.json`
 export const COLOR_SYSTEM_INTERACTION_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/interaction-rules.json`
@@ -71,6 +73,20 @@ function normalizeFlexibleHex(hex, label) {
   const value = hex.trim().toLowerCase()
   assert(FLEX_HEX_RE.test(value), `${label} must be a 6-digit or 8-digit hex color`)
   return value
+}
+
+function normalizeNamedIdGroups(value, label) {
+  assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
+  const groups = {}
+  for (const [groupNameRaw, groupItems] of Object.entries(value)) {
+    const groupName = String(groupNameRaw || '').trim()
+    assert(groupName, `${label} has invalid group id`)
+    assert(Array.isArray(groupItems), `${label}.${groupName} must be an array`)
+    const ids = groupItems.map((item) => String(item || '').trim()).filter(Boolean)
+    assert(ids.length > 0, `${label}.${groupName} must not be empty`)
+    groups[groupName] = [...new Set(ids)]
+  }
+  return groups
 }
 
 function normalizeRoleList(list, roleIds, label) {
@@ -292,6 +308,46 @@ export function loadInteractionAdapters() {
   return normalizePlatformContractList(data.interactions, `${COLOR_SYSTEM_ADAPTERS_PATH}: interactions`)
 }
 
+export function loadVscodeChromeContract() {
+  const data = readJson(COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH)
+  assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH} must be an object`)
+  assert(Array.isArray(data.bindings) && data.bindings.length > 0, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: bindings must be a non-empty array`)
+
+  const keys = new Set()
+  const bindings = data.bindings.map((binding, index) => {
+    assert(binding && typeof binding === 'object' && !Array.isArray(binding), `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: bindings[${index}] must be an object`)
+    const key = String(binding.key || '').trim()
+    assert(key, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: bindings[${index}].key is required`)
+    assert(!keys.has(key), `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: duplicate binding for "${key}"`)
+    keys.add(key)
+
+    const surface = binding.surface == null ? null : String(binding.surface).trim() || null
+    const interaction = binding.interaction == null ? null : String(binding.interaction).trim() || null
+    assert(Boolean(surface) !== Boolean(interaction), `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: "${key}" must define exactly one of surface or interaction`)
+
+    const out = {
+      key,
+      surface,
+      interaction,
+    }
+
+    if (binding.alphaScale !== undefined) {
+      out.alphaScale = normalizeNumber(binding.alphaScale, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: bindings[${index}].alphaScale`, { min: 0, max: 2 })
+    }
+    if (binding.alpha !== undefined) {
+      out.alpha = normalizeNumber(binding.alpha, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: bindings[${index}].alpha`, { min: 0, max: 1 })
+    }
+
+    return out
+  })
+
+  return {
+    schemaVersion: Number(data.schemaVersion || 1),
+    description: typeof data.description === 'string' ? data.description.trim() : '',
+    bindings,
+  }
+}
+
 export function loadSemanticPalette() {
   const variants = loadColorSystemVariants().variants
   const variantIds = variants.map((variant) => variant.id)
@@ -333,6 +389,7 @@ export function loadColorSchemeManifest() {
   assert(name, `${COLOR_SYSTEM_SCHEME_PATH}: name is required`)
   assert(headline, `${COLOR_SYSTEM_SCHEME_PATH}: headline is required`)
   assert(summary, `${COLOR_SYSTEM_SCHEME_PATH}: summary is required`)
+  assert(data.rolePhilosophy == null, `${COLOR_SYSTEM_SCHEME_PATH}: rolePhilosophy moved to taxonomy.json`)
 
   const toStringList = (value, label) => {
     if (value == null) return []
@@ -350,9 +407,6 @@ export function loadColorSchemeManifest() {
     mood: toStringList(data.mood, `${COLOR_SYSTEM_SCHEME_PATH}: mood`),
     audiences: toStringList(data.audiences, `${COLOR_SYSTEM_SCHEME_PATH}: audiences`),
     vocabulary: toStringList(data.vocabulary, `${COLOR_SYSTEM_SCHEME_PATH}: vocabulary`),
-    rolePhilosophy: data.rolePhilosophy && typeof data.rolePhilosophy === 'object' && !Array.isArray(data.rolePhilosophy)
-      ? data.rolePhilosophy
-      : {},
     variantPhilosophy: data.variantPhilosophy && typeof data.variantPhilosophy === 'object' && !Array.isArray(data.variantPhilosophy)
       ? data.variantPhilosophy
       : {},
@@ -360,6 +414,21 @@ export function loadColorSchemeManifest() {
       ? data.constraints
       : {},
     defaultVariant: String(data.defaultVariant || '').trim() || null,
+  }
+}
+
+export function loadSchemeTaxonomy() {
+  const data = readJson(COLOR_SYSTEM_TAXONOMY_PATH)
+  assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_TAXONOMY_PATH} must be an object`)
+
+  return {
+    schemaVersion: Number(data.schemaVersion || 1),
+    description: typeof data.description === 'string' ? data.description.trim() : '',
+    families: normalizeNamedIdGroups(data.families, `${COLOR_SYSTEM_TAXONOMY_PATH}: families`),
+    roles: normalizeNamedIdGroups(data.roles, `${COLOR_SYSTEM_TAXONOMY_PATH}: roles`),
+    surfaces: normalizeNamedIdGroups(data.surfaces, `${COLOR_SYSTEM_TAXONOMY_PATH}: surfaces`),
+    interactions: normalizeNamedIdGroups(data.interactions, `${COLOR_SYSTEM_TAXONOMY_PATH}: interactions`),
+    variants: normalizeNamedIdGroups(data.variants, `${COLOR_SYSTEM_TAXONOMY_PATH}: variants`),
   }
 }
 
@@ -583,7 +652,6 @@ export function loadVariantProfiles() {
       contrastTexture: String(entry.contrastTexture || '').trim(),
       environment: String(entry.environment || '').trim(),
       derivesFrom,
-      chromeBaseline: String(entry.chromeBaseline || '').trim(),
     }
     assert(profiles[variant.id].label, `${COLOR_SYSTEM_VARIANT_PROFILES_PATH}: variants.${variant.id}.label is required`)
     assert(profiles[variant.id].polarity === 'dark' || profiles[variant.id].polarity === 'light', `${COLOR_SYSTEM_VARIANT_PROFILES_PATH}: variants.${variant.id}.polarity must be "dark" or "light"`)

@@ -84,7 +84,7 @@ All palette changes must follow this order:
 
 1. Edit the highest valid authority:
    - `color-system/active-scheme.json` to switch the active scheme
-   - `color-system/schemes/hearth/scheme.json` and `philosophy.md` for public-facing scheme identity
+   - `color-system/schemes/hearth/scheme.json`, `philosophy.md`, and `taxonomy.json` for public-facing identity plus abstract grouping
    - `color-system/schemes/hearth/foundation.json` for named families
    - `color-system/schemes/hearth/semantic-rules.json` for role derivation
    - `color-system/schemes/hearth/surface-rules.json` for abstract surfaces
@@ -93,8 +93,8 @@ All palette changes must follow this order:
    - `color-system/framework/adapters.json` for platform contracts
    - `color-system/framework/variants.json` for output routing
 2. If compensation/chroma policy changes, update `color-system/framework/tuning.json` in the same PR.
-3. If this is a UI/chrome compatibility shift, update `color-system/hearth-dark.source.json`.
-4. If this is a deliberate derivation reset, update templates in `color-system/templates/*.base.json` in the same PR.
+3. If this is a UI/chrome compatibility shift, first update `color-system/framework/vscode-chrome-contract.json`; only edit `color-system/hearth-dark.source.json` directly if the token-scope baseline itself must change.
+4. If this is a deliberate derivation reset, update templates in `color-system/templates/*.base.json` in the same PR, but treat their `colors` blocks as sync-managed snapshots.
 5. Run `pnpm run sync` (this regenerates `color-system/semantic.json`, `themes/*.json`, and all downstream artifacts).
 6. Run `pnpm run check:sync` (must be clean right after sync).
 7. Run `pnpm run audit:generated-origin` (generated outputs must be backed by scheme/core/framework or generator changes).
@@ -111,14 +111,15 @@ One-shot alternative:
 
 - `color-system/active-scheme.json` selects the current scheme.
 - `color-system/schemes/hearth/scheme.json` and `philosophy.md` are the public scheme identity authority.
+- `color-system/schemes/hearth/taxonomy.json` is the machine-readable abstract grouping authority.
 - `color-system/schemes/hearth/foundation.json`, `semantic-rules.json`, `surface-rules.json`, and `interaction-rules.json` are the top-down color language authority.
 - `color-system/semantic.json` is a generated semantic snapshot, not a manual source file.
 - `color-system/framework/adapters.json` is the adapter contract authority.
 - `color-system/framework/variant-profiles.json` and `variants.json` are the shared variant framework authority.
 - `color-system/framework/tuning.json` is the algorithmic calibration authority.
-- `color-system/hearth-dark.source.json` is the UI/chrome migration anchor.
+- `color-system/hearth-dark.source.json` is the UI/token migration anchor; migrated workbench colors are synced from `color-system/framework/vscode-chrome-contract.json`.
 - `themes/hearth-dark.json`, `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` are regenerated artifacts.
-- `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline.
+- `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline; their workbench colors are sync-managed for migrated keys.
 - `src/data/tokens.ts` regenerated via sync script.
 - `src/styles/theme-vars.css` regenerated via sync script.
 - `reports/color-language-lineage.json` regenerated via sync script.

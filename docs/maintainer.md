@@ -12,6 +12,7 @@ This guide is about source layers, generation order, and release discipline.
 - `color-system/active-scheme.json`
 - `color-system/schemes/hearth/scheme.json`
 - `color-system/schemes/hearth/philosophy.md`
+- `color-system/schemes/hearth/taxonomy.json`
 
 ### Color Language Core
 
@@ -25,12 +26,16 @@ This guide is about source layers, generation order, and release discipline.
 - `color-system/framework/variant-profiles.json`
 - `color-system/framework/variants.json`
 - `color-system/framework/adapters.json`
+- `color-system/framework/vscode-chrome-contract.json`
 - `color-system/framework/tuning.json`
 
 ### Migration Anchors / Compatibility Baselines
 
 - `color-system/hearth-dark.source.json`
 - `color-system/templates/*.base.json`
+
+The `colors` sections in these files are sync-managed migration snapshots.
+They exist to keep the current VS Code derivation path stable while design intent moves upward into scheme/core/framework files.
 
 ### Generated Outputs
 
@@ -46,6 +51,7 @@ This guide is about source layers, generation order, and release discipline.
 - `docs/color-language-report.md`
 - `reports/color-language-lineage.json`
 - `reports/color-language-consistency.json`
+- `reports/vscode-chrome-residual.json`
 
 ### Release Metadata
 
@@ -58,14 +64,15 @@ This guide is about source layers, generation order, and release discipline.
 Normal order of operations:
 
 1. scheme manifest / philosophy
-2. foundation
-3. semantic rules
-4. surface rules
-5. interaction rules
-6. variant profiles
-7. adapters
-8. tuning
-9. migration anchors only if the change is truly platform-compatibility work
+2. taxonomy
+3. foundation
+4. semantic rules
+5. surface rules
+6. interaction rules
+7. variant profiles
+8. adapters
+9. tuning
+10. migration anchors only if the change is truly platform-compatibility work
 
 Do not directly edit generated artifacts.
 
@@ -77,19 +84,23 @@ It is not a source file.
 1. Update scheme/core/framework inputs.
 2. Run `pnpm run sync`.
 3. Run `pnpm run preview:generate` if preview assets are affected.
-4. Run `pnpm run check:sync`.
-5. Run `pnpm run check:preview`.
-6. Run `pnpm run audit:generated-origin`.
-7. Run `pnpm run audit:all`.
-8. Run `pnpm run build`.
-9. Commit source and generated outputs together.
+4. Run `pnpm run audit:source-layer`.
+5. Run `pnpm run check:sync`.
+6. Run `pnpm run check:preview`.
+7. Run `pnpm run audit:generated-origin`.
+8. Run `pnpm run audit:all`.
+9. Run `pnpm run build`.
+10. Commit source and generated outputs together.
 
 ## 4. Interpretation Rules
 
 - `adapters.json` is a platform contract file, not a design file.
 - `tuning.json` is a calibration file, not a palette-definition file.
+- `taxonomy.json` is the machine-readable abstract grouping layer; it should stay platform-free.
 - `hearth-dark.source.json` is a migration anchor, not the final philosophical authority.
+- `vscode-chrome-contract.json` owns migrated workbench color bindings; do not hand-tune those keys inside source/template snapshots.
 - lineage must be able to explain every generated downstream token.
+- the residual chrome report must explain which VS Code workbench keys still belong to abstract buckets vs temporary compatibility.
 
 If a change cannot be explained in lineage, the change is not in a good state.
 

@@ -54,6 +54,7 @@ Primary files:
 - `color-system/active-scheme.json`
 - `color-system/schemes/hearth/scheme.json`
 - `color-system/schemes/hearth/philosophy.md`
+- `color-system/schemes/hearth/taxonomy.json`
 
 This layer owns:
 
@@ -62,6 +63,7 @@ This layer owns:
 - mood
 - audience
 - vocabulary
+- abstract family / role / surface / interaction grouping
 - variant philosophy
 - non-platform constraints
 
@@ -106,9 +108,10 @@ This layer owns:
 - polarity
 - contrast texture
 - variant inheritance
-- output routing
+- climate intent
 
 This layer must not redefine role meaning.
+It must also stay platform-free; migration metadata belongs lower in the stack.
 
 ### 3.4 Platform Contracts + Calibration
 
@@ -120,6 +123,7 @@ Purpose:
 Primary files:
 
 - `color-system/framework/adapters.json`
+- `color-system/framework/vscode-chrome-contract.json`
 - `color-system/framework/tuning.json`
 - `color-system/hearth-dark.source.json`
 - `color-system/templates/*.base.json`
@@ -127,6 +131,7 @@ Primary files:
 Contracts:
 
 - adapters map abstract tokens into platform tokens
+- vscode chrome contract maps selected workbench colors back to abstract surfaces and interactions
 - tuning applies bounded calibration only
 - source/template files are migration anchors and compatibility baselines, not long-term design authority
 
@@ -157,9 +162,16 @@ Generated files include:
 - `docs/color-language-report.md`
 - `reports/color-language-consistency.json`
 - `reports/color-language-lineage.json`
+- `reports/vscode-chrome-residual.json`
 
 These files are deliverables.
 They are never hand-tuned sources of truth.
+
+The residual chrome report is especially important during migration:
+
+- it shows which workbench keys already come from abstract roles
+- it groups the remaining keys into buckets that can become future chrome tone roles
+- it keeps platform compatibility work visible instead of hidden inside snapshots
 
 ## 4. Directory Layout
 
@@ -181,6 +193,9 @@ Migration anchors:
 - `color-system/hearth-dark.source.json`
 - `color-system/templates/*`
 
+Their workbench `colors` blocks are now sync-managed snapshots for migrated keys.
+Token scope baselines remain in place temporarily while the platform migration continues.
+
 This layout allows future schemes to reuse the same framework without rewriting generators or audits.
 
 ## 5. Daily Workflow
@@ -190,21 +205,23 @@ The expected workflow is:
 1. choose the active scheme
 2. edit only scheme/core files unless the change is truly calibration
 3. run `pnpm run sync`
-4. run `pnpm run audit:all`
-5. run `pnpm run build`
-6. inspect previews, reports, and docs
-7. commit sources and generated outputs together
+4. run `pnpm run audit:source-layer`
+5. run `pnpm run audit:all`
+6. run `pnpm run build`
+7. inspect previews, reports, and docs
+8. commit sources and generated outputs together
 
 The normal edit order is:
 
 1. `scheme.json` / `philosophy.md` when the public story changes
-2. `foundation.json` for palette family changes
-3. `semantic-rules.json` for role meaning changes
-4. `surface-rules.json` for environment-layer changes
-5. `interaction-rules.json` for shared interaction behavior changes
-6. `variant-profiles.json` for climate behavior changes
-7. `adapters.json` for platform contract changes
-8. `tuning.json` only for bounded calibration
+2. `taxonomy.json` when the abstract grouping vocabulary changes
+3. `foundation.json` for palette family changes
+4. `semantic-rules.json` for role meaning changes
+5. `surface-rules.json` for environment-layer changes
+6. `interaction-rules.json` for shared interaction behavior changes
+7. `variant-profiles.json` for climate behavior changes
+8. `adapters.json` for platform contract changes
+9. `tuning.json` only for bounded calibration
 
 Direct edits to generated platform outputs are out of policy.
 
@@ -234,6 +251,11 @@ The long-term direction is:
 - scheme/core define intent
 - framework defines translation and calibration
 - generated artifacts reflect the result
+
+The near-term migration rule is:
+
+- move workbench chrome first
+- keep token scope baselines only as temporary compatibility anchors
 
 Platform files should gradually become outputs or bounded compatibility anchors, not hidden design authorities.
 

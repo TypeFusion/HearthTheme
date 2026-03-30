@@ -7,32 +7,28 @@
       "polarity": "dark",
       "contrastTexture": "default",
       "environment": "mixed-light daily work",
-      "derivesFrom": null,
-      "chromeBaseline": "source"
+      "derivesFrom": null
     },
     "darkSoft": {
       "label": "Hearth Dark Soft",
       "polarity": "dark",
       "contrastTexture": "soft",
       "environment": "low-stimulation night focus",
-      "derivesFrom": "dark",
-      "chromeBaseline": "template-derived"
+      "derivesFrom": "dark"
     },
     "light": {
       "label": "Hearth Light",
       "polarity": "light",
       "contrastTexture": "default",
       "environment": "document-dense daytime work",
-      "derivesFrom": "dark",
-      "chromeBaseline": "template-derived"
+      "derivesFrom": "dark"
     },
     "lightSoft": {
       "label": "Hearth Light Soft",
       "polarity": "light",
       "contrastTexture": "soft",
       "environment": "long-form daytime reading",
-      "derivesFrom": "light",
-      "chromeBaseline": "template-derived"
+      "derivesFrom": "light"
     }
   }
 }

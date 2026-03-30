@@ -5,6 +5,7 @@
         "activeScheme": "color-system/active-scheme.json",
         "scheme": "color-system/schemes/hearth/scheme.json",
         "philosophy": "color-system/schemes/hearth/philosophy.md",
+        "taxonomy": "color-system/schemes/hearth/taxonomy.json",
         "foundation": "color-system/schemes/hearth/foundation.json",
         "surfaceRules": "color-system/schemes/hearth/surface-rules.json",
         "interactionRules": "color-system/schemes/hearth/interaction-rules.json",

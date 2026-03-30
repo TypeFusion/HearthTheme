@@ -1,6 +1,8 @@
 import { execSync } from 'node:child_process'
 
 const SYNCED_PATHS = [
+  'color-system/hearth-dark.source.json',
+  'color-system/templates',
   'color-system/semantic.json',
   'themes',
   'public/themes',
@@ -14,6 +16,7 @@ const SYNCED_PATHS = [
   'src/styles/theme-vars.css',
   'docs/theme-baseline.md',
   'extension/package.json',
+  'reports/vscode-chrome-residual.json',
 ]
 
 function run(command, options = {}) {

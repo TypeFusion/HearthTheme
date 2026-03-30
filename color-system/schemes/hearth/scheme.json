@@ -23,11 +23,6 @@
     "ochre",
     "chalk"
   ],
-  "rolePhilosophy": {
-    "highlight": ["keyword", "cursor", "status"],
-    "anchors": ["function", "type", "panel"],
-    "support": ["comment", "variable", "sidebar", "border"]
-  },
   "variantPhilosophy": {
     "dark": "Warm default for mixed-light daily work.",
     "darkSoft": "Lower-stimulation night focus without losing structure.",
