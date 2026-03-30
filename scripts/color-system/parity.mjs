@@ -186,13 +186,28 @@ export function buildColorLanguageParity(model, artifactMaps) {
     targetCounts: interactionTargetCounts,
   })
 
+  const feedbackTargetCounts = buildParityTargetCounts(model.feedbackAdapters, {
+    web: (entry) => entry.webToken,
+    obsidian: (entry) => entry.obsidianVar,
+    vscode: (entry) => entry.vscodeColor,
+  })
+
+  const feedbackParity = buildCategoryParity({
+    entries: model.feedbackAdapters,
+    variants: model.variants.variants,
+    getPlatforms: buildContractPlatforms.bind(null, artifactMaps),
+    include: (entry) => entry.includeInReport !== false,
+    targetCounts: feedbackTargetCounts,
+  })
+
   const totalIssueCount =
     roleParity.summary.issueCount
     + surfaceParity.summary.issueCount
     + interactionParity.summary.issueCount
+    + feedbackParity.summary.issueCount
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     scheme: {
       id: model.scheme.id,
       name: model.scheme.name,
@@ -203,9 +218,11 @@ export function buildColorLanguageParity(model, artifactMaps) {
       roles: roleParity.summary,
       surfaces: surfaceParity.summary,
       interactions: interactionParity.summary,
+      feedbacks: feedbackParity.summary,
     },
     roles: roleParity.report,
     surfaces: surfaceParity.report,
     interactions: interactionParity.report,
+    feedbacks: feedbackParity.report,
   }
 }

@@ -299,5 +299,42 @@
       "vscodeColor": "tab.activeBorder",
       "includeInReport": false
     }
+  ],
+  "feedbacks": [
+    {
+      "id": "note",
+      "webToken": "note",
+      "obsidianVar": "--hearth-feedback-note",
+      "vscodeColor": null,
+      "includeInReport": true
+    },
+    {
+      "id": "info",
+      "webToken": "info",
+      "obsidianVar": "--hearth-feedback-info",
+      "vscodeColor": "editorInfo.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "success",
+      "webToken": "success",
+      "obsidianVar": "--text-success",
+      "vscodeColor": null,
+      "includeInReport": true
+    },
+    {
+      "id": "warning",
+      "webToken": "warning",
+      "obsidianVar": "--text-warning",
+      "vscodeColor": "editorWarning.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "error",
+      "webToken": "error",
+      "obsidianVar": "--text-error",
+      "vscodeColor": "editorError.foreground",
+      "includeInReport": true
+    }
   ]
 }

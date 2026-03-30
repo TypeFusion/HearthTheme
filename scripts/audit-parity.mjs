@@ -54,6 +54,7 @@ function main() {
   collectIssues(report.roles, 'roles', issues)
   collectIssues(report.surfaces, 'surfaces', issues)
   collectIssues(report.interactions, 'interactions', issues)
+  collectIssues(report.feedbacks, 'feedbacks', issues)
 
   if (issues.length > 0) {
     fail(`Cross-platform parity drift detected:\n- ${issues.slice(0, 12).join('\n- ')}`)

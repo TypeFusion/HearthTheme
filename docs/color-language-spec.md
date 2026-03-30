@@ -81,6 +81,7 @@ Primary files:
 - `color-system/schemes/hearth/semantic-rules.json`
 - `color-system/schemes/hearth/surface-rules.json`
 - `color-system/schemes/hearth/interaction-rules.json`
+- `color-system/schemes/hearth/feedback-rules.json`
 
 This layer owns:
 
@@ -88,6 +89,7 @@ This layer owns:
 - semantic role derivation
 - sparse surface anchors plus derived environment layers
 - sparse interaction anchors plus derived shared emphasis states
+- abstract feedback roles for validation, guidance, and outcome states
 
 This is the main design authority.
 
@@ -224,10 +226,11 @@ The normal edit order is:
 4. `semantic-rules.json` for role meaning changes
 5. `surface-rules.json` for environment-layer changes
 6. `interaction-rules.json` for shared interaction behavior changes
-7. `variant-profiles.json` for climate behavior changes
-8. `variant-knobs.json` for scheme-specific climate intensities
-9. `adapters.json` for platform contract changes
-10. `tuning.json` only for bounded calibration
+7. `feedback-rules.json` for cross-platform note / info / success / warning / error semantics
+8. `variant-profiles.json` for climate behavior changes
+9. `variant-knobs.json` for scheme-specific climate intensities
+10. `adapters.json` for platform contract changes
+11. `tuning.json` only for bounded calibration
 
 Direct edits to generated platform outputs are out of policy.
 
@@ -236,6 +239,7 @@ Within `surface-rules.json` and `interaction-rules.json`, prefer:
 - a few explicit anchors such as `canvas`, `ink`, `cursor`, or `status`
 - derived entries for dependent layers such as `panel`, `border`, or `lineEmphasis`
 - interaction anchors that inherit from semantic roles when the behavior should speak the same color language as code semantics
+- feedback roles that inherit from foundation families when the same state semantics should survive across editor, docs, and UI environments
 - scheme-level foundation tones such as `shell.lift` or `terracotta.presence` when a repeated cross-product state needs its own stable identity
 - scheme-level variant knobs when the interaction grammar stays the same but the climate-sensitive intensity changes by variant
 - scheme-level variant knobs when a surface relationship stays the same but the climate-sensitive mix ratio changes by variant

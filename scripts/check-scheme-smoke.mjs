@@ -24,6 +24,10 @@ function main() {
     fail(`No role lineage generated for scheme "${model.scheme.id}"`)
   }
 
+  if (!lineage.feedbacks || Object.keys(lineage.feedbacks).length === 0) {
+    fail(`No feedback lineage generated for scheme "${model.scheme.id}"`)
+  }
+
   console.log(`[PASS] Scheme smoke passed for ${model.scheme.id}.`)
 }
 

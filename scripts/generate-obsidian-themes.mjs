@@ -127,16 +127,21 @@ function buildVars(tokens, platformVars = {}) {
   const borderFocus = platformVars['--background-modifier-border-focus'] ?? alpha(accent, 0.46)
   const codeBackground = alpha(mixHex(tokens.border, tokens.bg, 0.45), 0.38)
   const linkUnresolved = mixHex(tokens.comment, tokens.keyword, 0.22)
+  const feedbackNote = platformVars['--hearth-feedback-note'] ?? tokens.property
+  const feedbackInfo = platformVars['--hearth-feedback-info'] ?? tokens.fn
+  const feedbackSuccess = platformVars['--text-success'] ?? tokens.string
+  const feedbackWarning = platformVars['--text-warning'] ?? tokens.number
+  const feedbackError = platformVars['--text-error'] ?? tokens.keyword
   const h1 = tokens.keyword
   const h2 = tokens.fn
   const h3 = tokens.property
   const h4 = tokens.string
   const h5 = tokens.number
   const h6 = mixHex(tokens.comment, tokens.fg, 0.4)
-  const calloutNote = tokens.property
-  const calloutTip = tokens.string
-  const calloutWarning = tokens.number
-  const calloutDanger = tokens.keyword
+  const calloutNote = feedbackNote
+  const calloutTip = feedbackSuccess
+  const calloutWarning = feedbackWarning
+  const calloutDanger = feedbackError
 
   return {
     '--background-primary': platformVars['--background-primary'] ?? tokens.bg,
@@ -161,9 +166,11 @@ function buildVars(tokens, platformVars = {}) {
     '--text-accent': accent,
     '--text-accent-hover': accentHover,
     '--text-on-accent': pickContrastText(accent),
-    '--text-success': tokens.string,
-    '--text-warning': tokens.number,
-    '--text-error': tokens.keyword,
+    '--text-success': feedbackSuccess,
+    '--text-warning': feedbackWarning,
+    '--text-error': feedbackError,
+    '--hearth-feedback-note': feedbackNote,
+    '--hearth-feedback-info': feedbackInfo,
     '--text-highlight-bg': alpha(tokens.selection, 0.34),
     '--text-selection': platformVars['--text-selection'] ?? alpha(tokens.selection, 0.42),
     '--interactive-normal': alpha(tokens.border, 0.2),

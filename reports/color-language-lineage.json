@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "sources": {
     "activeScheme": "color-system/active-scheme.json",
     "scheme": "color-system/schemes/hearth/scheme.json",
@@ -8,6 +8,7 @@
     "foundation": "color-system/schemes/hearth/foundation.json",
     "surfaceRules": "color-system/schemes/hearth/surface-rules.json",
     "interactionRules": "color-system/schemes/hearth/interaction-rules.json",
+    "feedbackRules": "color-system/schemes/hearth/feedback-rules.json",
     "semanticRules": "color-system/schemes/hearth/semantic-rules.json",
     "variantKnobs": "color-system/schemes/hearth/variant-knobs.json",
     "variantProfiles": "color-system/framework/variant-profiles.json",
@@ -195,6 +196,388 @@
             "light": "#7f3024",
             "lightSoft": "#8a4a3b"
           }
+        }
+      }
+    }
+  },
+  "feedbacks": {
+    "note": {
+      "source": {
+        "family": "olive",
+        "tone": "base"
+      },
+      "variants": {
+        "dark": {
+          "color": "#788058",
+          "family": "olive",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.olive.tones.base.dark",
+              "value": "#788058"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#7d7a5e",
+          "family": "olive",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.olive.tones.base.darkSoft",
+              "value": "#7d7a5e"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#586243",
+          "family": "olive",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.olive.tones.base.light",
+              "value": "#586243"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#666c4d",
+          "family": "olive",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.olive.tones.base.lightSoft",
+              "value": "#666c4d"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "info": {
+      "source": {
+        "family": "mineral",
+        "tone": "base"
+      },
+      "variants": {
+        "dark": {
+          "color": "#6f94a4",
+          "family": "mineral",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.mineral.tones.base.dark",
+              "value": "#6f94a4"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#648a9d",
+          "family": "mineral",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.mineral.tones.base.darkSoft",
+              "value": "#648a9d"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#4f7281",
+          "family": "mineral",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.mineral.tones.base.light",
+              "value": "#4f7281"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#67767d",
+          "family": "mineral",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.mineral.tones.base.lightSoft",
+              "value": "#67767d"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "success": {
+      "source": {
+        "family": "moss",
+        "tone": "base"
+      },
+      "variants": {
+        "dark": {
+          "color": "#98ab7d",
+          "family": "moss",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.moss.tones.base.dark",
+              "value": "#98ab7d"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#9d9f7c",
+          "family": "moss",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.moss.tones.base.darkSoft",
+              "value": "#9d9f7c"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#74815a",
+          "family": "moss",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.moss.tones.base.light",
+              "value": "#74815a"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#7b8870",
+          "family": "moss",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.moss.tones.base.lightSoft",
+              "value": "#7b8870"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "warning": {
+      "source": {
+        "family": "terracotta",
+        "tone": "base"
+      },
+      "variants": {
+        "dark": {
+          "color": "#cb844a",
+          "family": "terracotta",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.base.dark",
+              "value": "#cb844a"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#bb845a",
+          "family": "terracotta",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.base.darkSoft",
+              "value": "#bb845a"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#ba7239",
+          "family": "terracotta",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.base.light",
+              "value": "#ba7239"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#b77949",
+          "family": "terracotta",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.base.lightSoft",
+              "value": "#b77949"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "error": {
+      "source": {
+        "family": "ember",
+        "tone": "base"
+      },
+      "variants": {
+        "dark": {
+          "color": "#cc5a3f",
+          "family": "ember",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ember.tones.base.dark",
+              "value": "#cc5a3f"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#b5634f",
+          "family": "ember",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ember.tones.base.darkSoft",
+              "value": "#b5634f"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#b04935",
+          "family": "ember",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ember.tones.base.light",
+              "value": "#b04935"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#ac5a48",
+          "family": "ember",
+          "tone": "base",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ember.tones.base.lightSoft",
+              "value": "#ac5a48"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
         }
       }
     }
@@ -5256,6 +5639,942 @@
         "interaction-rules.interactions.cursor",
         "interaction-rules.interactions.tabEmphasis",
         "adapters.interactions.tabEmphasis"
+      ]
+    },
+    {
+      "id": "web-feedback:note:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.note",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#788058",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.dark",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:note:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--hearth-feedback-note",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#788058",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.dark",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "web-feedback:info:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.info",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#6f94a4",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.dark",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "vscode-feedback:info:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.editorInfo.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#6f94a4",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.dark",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:info:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--hearth-feedback-info",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#6f94a4",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.dark",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "web-feedback:success:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.success",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#98ab7d",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.dark",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:success:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--text-success",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#98ab7d",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.dark",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "web-feedback:warning:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.warning",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.dark",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "vscode-feedback:warning:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.editorWarning.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.dark",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:warning:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--text-warning",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.dark",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "web-feedback:error:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.error",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#cc5a3f",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.dark",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "vscode-feedback:error:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.editorError.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#cc5a3f",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.dark",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:error:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--text-error",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#cc5a3f",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.dark",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.dark",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "web-feedback:note:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.note",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#7d7a5e",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.darkSoft",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:note:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--hearth-feedback-note",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#7d7a5e",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.darkSoft",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "web-feedback:info:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.info",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#648a9d",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.darkSoft",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "vscode-feedback:info:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.editorInfo.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#648a9d",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.darkSoft",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:info:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--hearth-feedback-info",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#648a9d",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.darkSoft",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "web-feedback:success:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.success",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#9d9f7c",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.darkSoft",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:success:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--text-success",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#9d9f7c",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.darkSoft",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "web-feedback:warning:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.warning",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "vscode-feedback:warning:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.editorWarning.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:warning:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--text-warning",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "web-feedback:error:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.error",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#b5634f",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.darkSoft",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "vscode-feedback:error:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.editorError.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#b5634f",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.darkSoft",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:error:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--text-error",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#b5634f",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.darkSoft",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.darkSoft",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "web-feedback:note:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.note",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#586243",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.light",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:note:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--hearth-feedback-note",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#586243",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.light",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "web-feedback:info:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.info",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#4f7281",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.light",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "vscode-feedback:info:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.editorInfo.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#4f7281",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.light",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:info:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--hearth-feedback-info",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#4f7281",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.light",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "web-feedback:success:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.success",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#74815a",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.light",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:success:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--text-success",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#74815a",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.light",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "web-feedback:warning:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.warning",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba7239",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.light",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "vscode-feedback:warning:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.editorWarning.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba7239",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.light",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:warning:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--text-warning",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba7239",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.light",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "web-feedback:error:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.error",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#b04935",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.light",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "vscode-feedback:error:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.editorError.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#b04935",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.light",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:error:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--text-error",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#b04935",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.light",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.light",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "web-feedback:note:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.note",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#666c4d",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.lightSoft",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:note:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--hearth-feedback-note",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "note",
+      "familyId": "olive",
+      "resolvedColor": "#666c4d",
+      "chainRefs": [
+        "foundation.families.olive.tones.base.lightSoft",
+        "feedback-rules.feedbacks.note",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.note"
+      ]
+    },
+    {
+      "id": "web-feedback:info:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.info",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#67767d",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.lightSoft",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "vscode-feedback:info:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.editorInfo.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#67767d",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.lightSoft",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:info:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--hearth-feedback-info",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "info",
+      "familyId": "mineral",
+      "resolvedColor": "#67767d",
+      "chainRefs": [
+        "foundation.families.mineral.tones.base.lightSoft",
+        "feedback-rules.feedbacks.info",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.info"
+      ]
+    },
+    {
+      "id": "web-feedback:success:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.success",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#7b8870",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.lightSoft",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:success:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--text-success",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "success",
+      "familyId": "moss",
+      "resolvedColor": "#7b8870",
+      "chainRefs": [
+        "foundation.families.moss.tones.base.lightSoft",
+        "feedback-rules.feedbacks.success",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.success"
+      ]
+    },
+    {
+      "id": "web-feedback:warning:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.warning",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#b77949",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "vscode-feedback:warning:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.editorWarning.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#b77949",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:warning:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--text-warning",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "warning",
+      "familyId": "terracotta",
+      "resolvedColor": "#b77949",
+      "chainRefs": [
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "feedback-rules.feedbacks.warning",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.warning"
+      ]
+    },
+    {
+      "id": "web-feedback:error:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.error",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#ac5a48",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.lightSoft",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "vscode-feedback:error:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.editorError.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#ac5a48",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.lightSoft",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.error"
+      ]
+    },
+    {
+      "id": "obsidian-feedback:error:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--text-error",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "feedbackId": "error",
+      "familyId": "ember",
+      "resolvedColor": "#ac5a48",
+      "chainRefs": [
+        "foundation.families.ember.tones.base.lightSoft",
+        "feedback-rules.feedbacks.error",
+        "variant-profiles.variants.lightSoft",
+        "adapters.feedbacks.error"
       ]
     },
     {
@@ -11808,6 +13127,942 @@
           "adapters.interactions.tabEmphasis"
         ]
       },
+      "web-feedback:note:dark": {
+        "id": "web-feedback:note:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.note",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#788058",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.dark",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "obsidian-feedback:note:dark": {
+        "id": "obsidian-feedback:note:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--hearth-feedback-note",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#788058",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.dark",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "web-feedback:info:dark": {
+        "id": "web-feedback:info:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.info",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#6f94a4",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.dark",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "vscode-feedback:info:dark": {
+        "id": "vscode-feedback:info:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.editorInfo.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#6f94a4",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.dark",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "obsidian-feedback:info:dark": {
+        "id": "obsidian-feedback:info:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--hearth-feedback-info",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#6f94a4",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.dark",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "web-feedback:success:dark": {
+        "id": "web-feedback:success:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.success",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#98ab7d",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.dark",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "obsidian-feedback:success:dark": {
+        "id": "obsidian-feedback:success:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--text-success",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#98ab7d",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.dark",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "web-feedback:warning:dark": {
+        "id": "web-feedback:warning:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.warning",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.dark",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "vscode-feedback:warning:dark": {
+        "id": "vscode-feedback:warning:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.editorWarning.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.dark",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "obsidian-feedback:warning:dark": {
+        "id": "obsidian-feedback:warning:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--text-warning",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.dark",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "web-feedback:error:dark": {
+        "id": "web-feedback:error:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.error",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#cc5a3f",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.dark",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "vscode-feedback:error:dark": {
+        "id": "vscode-feedback:error:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.editorError.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#cc5a3f",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.dark",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "obsidian-feedback:error:dark": {
+        "id": "obsidian-feedback:error:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--text-error",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#cc5a3f",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.dark",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.dark",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "web-feedback:note:darkSoft": {
+        "id": "web-feedback:note:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.note",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#7d7a5e",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.darkSoft",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "obsidian-feedback:note:darkSoft": {
+        "id": "obsidian-feedback:note:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--hearth-feedback-note",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#7d7a5e",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.darkSoft",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "web-feedback:info:darkSoft": {
+        "id": "web-feedback:info:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.info",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#648a9d",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.darkSoft",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "vscode-feedback:info:darkSoft": {
+        "id": "vscode-feedback:info:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.editorInfo.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#648a9d",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.darkSoft",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "obsidian-feedback:info:darkSoft": {
+        "id": "obsidian-feedback:info:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--hearth-feedback-info",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#648a9d",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.darkSoft",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "web-feedback:success:darkSoft": {
+        "id": "web-feedback:success:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.success",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#9d9f7c",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.darkSoft",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "obsidian-feedback:success:darkSoft": {
+        "id": "obsidian-feedback:success:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--text-success",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#9d9f7c",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.darkSoft",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "web-feedback:warning:darkSoft": {
+        "id": "web-feedback:warning:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.warning",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "vscode-feedback:warning:darkSoft": {
+        "id": "vscode-feedback:warning:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.editorWarning.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "obsidian-feedback:warning:darkSoft": {
+        "id": "obsidian-feedback:warning:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--text-warning",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "web-feedback:error:darkSoft": {
+        "id": "web-feedback:error:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.error",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#b5634f",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.darkSoft",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "vscode-feedback:error:darkSoft": {
+        "id": "vscode-feedback:error:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.editorError.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#b5634f",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.darkSoft",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "obsidian-feedback:error:darkSoft": {
+        "id": "obsidian-feedback:error:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--text-error",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#b5634f",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.darkSoft",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.darkSoft",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "web-feedback:note:light": {
+        "id": "web-feedback:note:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.note",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#586243",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.light",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "obsidian-feedback:note:light": {
+        "id": "obsidian-feedback:note:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--hearth-feedback-note",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#586243",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.light",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "web-feedback:info:light": {
+        "id": "web-feedback:info:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.info",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#4f7281",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.light",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "vscode-feedback:info:light": {
+        "id": "vscode-feedback:info:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.editorInfo.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#4f7281",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.light",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "obsidian-feedback:info:light": {
+        "id": "obsidian-feedback:info:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--hearth-feedback-info",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#4f7281",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.light",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "web-feedback:success:light": {
+        "id": "web-feedback:success:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.success",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#74815a",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.light",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "obsidian-feedback:success:light": {
+        "id": "obsidian-feedback:success:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--text-success",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#74815a",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.light",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "web-feedback:warning:light": {
+        "id": "web-feedback:warning:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.warning",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba7239",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.light",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "vscode-feedback:warning:light": {
+        "id": "vscode-feedback:warning:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.editorWarning.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba7239",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.light",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "obsidian-feedback:warning:light": {
+        "id": "obsidian-feedback:warning:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--text-warning",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba7239",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.light",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "web-feedback:error:light": {
+        "id": "web-feedback:error:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.error",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#b04935",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.light",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "vscode-feedback:error:light": {
+        "id": "vscode-feedback:error:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.editorError.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#b04935",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.light",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "obsidian-feedback:error:light": {
+        "id": "obsidian-feedback:error:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--text-error",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#b04935",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.light",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.light",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "web-feedback:note:lightSoft": {
+        "id": "web-feedback:note:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.note",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#666c4d",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.lightSoft",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "obsidian-feedback:note:lightSoft": {
+        "id": "obsidian-feedback:note:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--hearth-feedback-note",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "note",
+        "familyId": "olive",
+        "resolvedColor": "#666c4d",
+        "chainRefs": [
+          "foundation.families.olive.tones.base.lightSoft",
+          "feedback-rules.feedbacks.note",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.note"
+        ]
+      },
+      "web-feedback:info:lightSoft": {
+        "id": "web-feedback:info:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.info",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#67767d",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.lightSoft",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "vscode-feedback:info:lightSoft": {
+        "id": "vscode-feedback:info:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.editorInfo.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#67767d",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.lightSoft",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "obsidian-feedback:info:lightSoft": {
+        "id": "obsidian-feedback:info:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--hearth-feedback-info",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "info",
+        "familyId": "mineral",
+        "resolvedColor": "#67767d",
+        "chainRefs": [
+          "foundation.families.mineral.tones.base.lightSoft",
+          "feedback-rules.feedbacks.info",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.info"
+        ]
+      },
+      "web-feedback:success:lightSoft": {
+        "id": "web-feedback:success:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.success",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#7b8870",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.lightSoft",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "obsidian-feedback:success:lightSoft": {
+        "id": "obsidian-feedback:success:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--text-success",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "success",
+        "familyId": "moss",
+        "resolvedColor": "#7b8870",
+        "chainRefs": [
+          "foundation.families.moss.tones.base.lightSoft",
+          "feedback-rules.feedbacks.success",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.success"
+        ]
+      },
+      "web-feedback:warning:lightSoft": {
+        "id": "web-feedback:warning:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.warning",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#b77949",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "vscode-feedback:warning:lightSoft": {
+        "id": "vscode-feedback:warning:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.editorWarning.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#b77949",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "obsidian-feedback:warning:lightSoft": {
+        "id": "obsidian-feedback:warning:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--text-warning",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "warning",
+        "familyId": "terracotta",
+        "resolvedColor": "#b77949",
+        "chainRefs": [
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "feedback-rules.feedbacks.warning",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.warning"
+        ]
+      },
+      "web-feedback:error:lightSoft": {
+        "id": "web-feedback:error:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.error",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#ac5a48",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.lightSoft",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "vscode-feedback:error:lightSoft": {
+        "id": "vscode-feedback:error:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.editorError.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#ac5a48",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.lightSoft",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.error"
+        ]
+      },
+      "obsidian-feedback:error:lightSoft": {
+        "id": "obsidian-feedback:error:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--text-error",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "feedbackId": "error",
+        "familyId": "ember",
+        "resolvedColor": "#ac5a48",
+        "chainRefs": [
+          "foundation.families.ember.tones.base.lightSoft",
+          "feedback-rules.feedbacks.error",
+          "variant-profiles.variants.lightSoft",
+          "adapters.feedbacks.error"
+        ]
+      },
       "semantic-snapshot:comment:dark": {
         "id": "semantic-snapshot:comment:dark",
         "path": "color-system/semantic.json",
@@ -15967,6 +18222,26 @@
         "web-interaction:selection:lightSoft",
         "web-interaction:cursor:lightSoft",
         "web-interaction:status:lightSoft",
+        "web-feedback:note:dark",
+        "web-feedback:info:dark",
+        "web-feedback:success:dark",
+        "web-feedback:warning:dark",
+        "web-feedback:error:dark",
+        "web-feedback:note:darkSoft",
+        "web-feedback:info:darkSoft",
+        "web-feedback:success:darkSoft",
+        "web-feedback:warning:darkSoft",
+        "web-feedback:error:darkSoft",
+        "web-feedback:note:light",
+        "web-feedback:info:light",
+        "web-feedback:success:light",
+        "web-feedback:warning:light",
+        "web-feedback:error:light",
+        "web-feedback:note:lightSoft",
+        "web-feedback:info:lightSoft",
+        "web-feedback:success:lightSoft",
+        "web-feedback:warning:lightSoft",
+        "web-feedback:error:lightSoft",
         "web-role:comment:dark",
         "web-role:comment:darkSoft",
         "web-role:comment:light",
@@ -16022,6 +18297,9 @@
         "vscode-interaction:lineEmphasis:dark",
         "vscode-interaction:listHover:dark",
         "vscode-interaction:tabEmphasis:dark",
+        "vscode-feedback:info:dark",
+        "vscode-feedback:warning:dark",
+        "vscode-feedback:error:dark",
         "vscode-textmate:comment:dark",
         "vscode-semantic:keyword:dark",
         "vscode-textmate:keyword:dark",
@@ -16054,6 +18332,11 @@
         "obsidian-interaction:focusRing:dark",
         "obsidian-interaction:lineEmphasis:dark",
         "obsidian-interaction:listHover:dark",
+        "obsidian-feedback:note:dark",
+        "obsidian-feedback:info:dark",
+        "obsidian-feedback:success:dark",
+        "obsidian-feedback:warning:dark",
+        "obsidian-feedback:error:dark",
         "obsidian-role:comment:dark",
         "obsidian-role:keyword:dark",
         "obsidian-role:operator:dark",
@@ -16081,6 +18364,9 @@
         "vscode-interaction:lineEmphasis:darkSoft",
         "vscode-interaction:listHover:darkSoft",
         "vscode-interaction:tabEmphasis:darkSoft",
+        "vscode-feedback:info:darkSoft",
+        "vscode-feedback:warning:darkSoft",
+        "vscode-feedback:error:darkSoft",
         "vscode-textmate:comment:darkSoft",
         "vscode-semantic:keyword:darkSoft",
         "vscode-textmate:keyword:darkSoft",
@@ -16113,6 +18399,11 @@
         "obsidian-interaction:focusRing:darkSoft",
         "obsidian-interaction:lineEmphasis:darkSoft",
         "obsidian-interaction:listHover:darkSoft",
+        "obsidian-feedback:note:darkSoft",
+        "obsidian-feedback:info:darkSoft",
+        "obsidian-feedback:success:darkSoft",
+        "obsidian-feedback:warning:darkSoft",
+        "obsidian-feedback:error:darkSoft",
         "obsidian-role:comment:darkSoft",
         "obsidian-role:keyword:darkSoft",
         "obsidian-role:operator:darkSoft",
@@ -16140,6 +18431,9 @@
         "vscode-interaction:lineEmphasis:light",
         "vscode-interaction:listHover:light",
         "vscode-interaction:tabEmphasis:light",
+        "vscode-feedback:info:light",
+        "vscode-feedback:warning:light",
+        "vscode-feedback:error:light",
         "vscode-textmate:comment:light",
         "vscode-semantic:keyword:light",
         "vscode-textmate:keyword:light",
@@ -16172,6 +18466,11 @@
         "obsidian-interaction:focusRing:light",
         "obsidian-interaction:lineEmphasis:light",
         "obsidian-interaction:listHover:light",
+        "obsidian-feedback:note:light",
+        "obsidian-feedback:info:light",
+        "obsidian-feedback:success:light",
+        "obsidian-feedback:warning:light",
+        "obsidian-feedback:error:light",
         "obsidian-role:comment:light",
         "obsidian-role:keyword:light",
         "obsidian-role:operator:light",
@@ -16199,6 +18498,9 @@
         "vscode-interaction:lineEmphasis:lightSoft",
         "vscode-interaction:listHover:lightSoft",
         "vscode-interaction:tabEmphasis:lightSoft",
+        "vscode-feedback:info:lightSoft",
+        "vscode-feedback:warning:lightSoft",
+        "vscode-feedback:error:lightSoft",
         "vscode-textmate:comment:lightSoft",
         "vscode-semantic:keyword:lightSoft",
         "vscode-textmate:keyword:lightSoft",
@@ -16231,6 +18533,11 @@
         "obsidian-interaction:focusRing:lightSoft",
         "obsidian-interaction:lineEmphasis:lightSoft",
         "obsidian-interaction:listHover:lightSoft",
+        "obsidian-feedback:note:lightSoft",
+        "obsidian-feedback:info:lightSoft",
+        "obsidian-feedback:success:lightSoft",
+        "obsidian-feedback:warning:lightSoft",
+        "obsidian-feedback:error:lightSoft",
         "obsidian-role:comment:lightSoft",
         "obsidian-role:keyword:lightSoft",
         "obsidian-role:operator:lightSoft",
@@ -16329,6 +18636,19 @@
         "vscode-interaction:listHover:dark",
         "obsidian-interaction:listHover:dark",
         "vscode-interaction:tabEmphasis:dark",
+        "web-feedback:note:dark",
+        "obsidian-feedback:note:dark",
+        "web-feedback:info:dark",
+        "vscode-feedback:info:dark",
+        "obsidian-feedback:info:dark",
+        "web-feedback:success:dark",
+        "obsidian-feedback:success:dark",
+        "web-feedback:warning:dark",
+        "vscode-feedback:warning:dark",
+        "obsidian-feedback:warning:dark",
+        "web-feedback:error:dark",
+        "vscode-feedback:error:dark",
+        "obsidian-feedback:error:dark",
         "semantic-snapshot:comment:dark",
         "web-role:comment:dark",
         "vscode-textmate:comment:dark",
@@ -16417,6 +18737,19 @@
         "vscode-interaction:listHover:darkSoft",
         "obsidian-interaction:listHover:darkSoft",
         "vscode-interaction:tabEmphasis:darkSoft",
+        "web-feedback:note:darkSoft",
+        "obsidian-feedback:note:darkSoft",
+        "web-feedback:info:darkSoft",
+        "vscode-feedback:info:darkSoft",
+        "obsidian-feedback:info:darkSoft",
+        "web-feedback:success:darkSoft",
+        "obsidian-feedback:success:darkSoft",
+        "web-feedback:warning:darkSoft",
+        "vscode-feedback:warning:darkSoft",
+        "obsidian-feedback:warning:darkSoft",
+        "web-feedback:error:darkSoft",
+        "vscode-feedback:error:darkSoft",
+        "obsidian-feedback:error:darkSoft",
         "semantic-snapshot:comment:darkSoft",
         "web-role:comment:darkSoft",
         "vscode-textmate:comment:darkSoft",
@@ -16505,6 +18838,19 @@
         "vscode-interaction:listHover:light",
         "obsidian-interaction:listHover:light",
         "vscode-interaction:tabEmphasis:light",
+        "web-feedback:note:light",
+        "obsidian-feedback:note:light",
+        "web-feedback:info:light",
+        "vscode-feedback:info:light",
+        "obsidian-feedback:info:light",
+        "web-feedback:success:light",
+        "obsidian-feedback:success:light",
+        "web-feedback:warning:light",
+        "vscode-feedback:warning:light",
+        "obsidian-feedback:warning:light",
+        "web-feedback:error:light",
+        "vscode-feedback:error:light",
+        "obsidian-feedback:error:light",
         "semantic-snapshot:comment:light",
         "web-role:comment:light",
         "vscode-textmate:comment:light",
@@ -16593,6 +18939,19 @@
         "vscode-interaction:listHover:lightSoft",
         "obsidian-interaction:listHover:lightSoft",
         "vscode-interaction:tabEmphasis:lightSoft",
+        "web-feedback:note:lightSoft",
+        "obsidian-feedback:note:lightSoft",
+        "web-feedback:info:lightSoft",
+        "vscode-feedback:info:lightSoft",
+        "obsidian-feedback:info:lightSoft",
+        "web-feedback:success:lightSoft",
+        "obsidian-feedback:success:lightSoft",
+        "web-feedback:warning:lightSoft",
+        "vscode-feedback:warning:lightSoft",
+        "obsidian-feedback:warning:lightSoft",
+        "web-feedback:error:lightSoft",
+        "vscode-feedback:error:lightSoft",
+        "obsidian-feedback:error:lightSoft",
         "semantic-snapshot:comment:lightSoft",
         "web-role:comment:lightSoft",
         "vscode-textmate:comment:lightSoft",
@@ -16891,6 +19250,70 @@
         "obsidian-role:tag:lightSoft"
       ]
     },
+    "byFeedback": {
+      "note": [
+        "web-feedback:note:dark",
+        "obsidian-feedback:note:dark",
+        "web-feedback:note:darkSoft",
+        "obsidian-feedback:note:darkSoft",
+        "web-feedback:note:light",
+        "obsidian-feedback:note:light",
+        "web-feedback:note:lightSoft",
+        "obsidian-feedback:note:lightSoft"
+      ],
+      "info": [
+        "web-feedback:info:dark",
+        "vscode-feedback:info:dark",
+        "obsidian-feedback:info:dark",
+        "web-feedback:info:darkSoft",
+        "vscode-feedback:info:darkSoft",
+        "obsidian-feedback:info:darkSoft",
+        "web-feedback:info:light",
+        "vscode-feedback:info:light",
+        "obsidian-feedback:info:light",
+        "web-feedback:info:lightSoft",
+        "vscode-feedback:info:lightSoft",
+        "obsidian-feedback:info:lightSoft"
+      ],
+      "success": [
+        "web-feedback:success:dark",
+        "obsidian-feedback:success:dark",
+        "web-feedback:success:darkSoft",
+        "obsidian-feedback:success:darkSoft",
+        "web-feedback:success:light",
+        "obsidian-feedback:success:light",
+        "web-feedback:success:lightSoft",
+        "obsidian-feedback:success:lightSoft"
+      ],
+      "warning": [
+        "web-feedback:warning:dark",
+        "vscode-feedback:warning:dark",
+        "obsidian-feedback:warning:dark",
+        "web-feedback:warning:darkSoft",
+        "vscode-feedback:warning:darkSoft",
+        "obsidian-feedback:warning:darkSoft",
+        "web-feedback:warning:light",
+        "vscode-feedback:warning:light",
+        "obsidian-feedback:warning:light",
+        "web-feedback:warning:lightSoft",
+        "vscode-feedback:warning:lightSoft",
+        "obsidian-feedback:warning:lightSoft"
+      ],
+      "error": [
+        "web-feedback:error:dark",
+        "vscode-feedback:error:dark",
+        "obsidian-feedback:error:dark",
+        "web-feedback:error:darkSoft",
+        "vscode-feedback:error:darkSoft",
+        "obsidian-feedback:error:darkSoft",
+        "web-feedback:error:light",
+        "vscode-feedback:error:light",
+        "obsidian-feedback:error:light",
+        "web-feedback:error:lightSoft",
+        "vscode-feedback:error:lightSoft",
+        "obsidian-feedback:error:lightSoft"
+      ]
+    },
     "byFamily": {
       "ground": [
         "web-surface:canvas:dark",
@@ -17027,6 +19450,18 @@
         "vscode-interaction:focusRing:lightSoft",
         "obsidian-interaction:focusRing:lightSoft",
         "vscode-interaction:tabEmphasis:lightSoft",
+        "web-feedback:warning:dark",
+        "vscode-feedback:warning:dark",
+        "obsidian-feedback:warning:dark",
+        "web-feedback:warning:darkSoft",
+        "vscode-feedback:warning:darkSoft",
+        "obsidian-feedback:warning:darkSoft",
+        "web-feedback:warning:light",
+        "vscode-feedback:warning:light",
+        "obsidian-feedback:warning:light",
+        "web-feedback:warning:lightSoft",
+        "vscode-feedback:warning:lightSoft",
+        "obsidian-feedback:warning:lightSoft",
         "semantic-snapshot:number:dark",
         "web-role:number:dark",
         "vscode-semantic:number:dark",
@@ -17048,25 +19483,109 @@
         "vscode-textmate:number:lightSoft",
         "obsidian-role:number:lightSoft"
       ],
-      "ash": [
-        "semantic-snapshot:comment:dark",
-        "web-role:comment:dark",
-        "vscode-textmate:comment:dark",
-        "obsidian-role:comment:dark",
-        "semantic-snapshot:comment:darkSoft",
-        "web-role:comment:darkSoft",
-        "vscode-textmate:comment:darkSoft",
-        "obsidian-role:comment:darkSoft",
-        "semantic-snapshot:comment:light",
-        "web-role:comment:light",
-        "vscode-textmate:comment:light",
-        "obsidian-role:comment:light",
-        "semantic-snapshot:comment:lightSoft",
-        "web-role:comment:lightSoft",
-        "vscode-textmate:comment:lightSoft",
-        "obsidian-role:comment:lightSoft"
+      "olive": [
+        "web-feedback:note:dark",
+        "obsidian-feedback:note:dark",
+        "web-feedback:note:darkSoft",
+        "obsidian-feedback:note:darkSoft",
+        "web-feedback:note:light",
+        "obsidian-feedback:note:light",
+        "web-feedback:note:lightSoft",
+        "obsidian-feedback:note:lightSoft",
+        "semantic-snapshot:property:dark",
+        "web-role:property:dark",
+        "vscode-semantic:property:dark",
+        "vscode-textmate:property:dark",
+        "obsidian-role:property:dark",
+        "semantic-snapshot:property:darkSoft",
+        "web-role:property:darkSoft",
+        "vscode-semantic:property:darkSoft",
+        "vscode-textmate:property:darkSoft",
+        "obsidian-role:property:darkSoft",
+        "semantic-snapshot:property:light",
+        "web-role:property:light",
+        "vscode-semantic:property:light",
+        "vscode-textmate:property:light",
+        "obsidian-role:property:light",
+        "semantic-snapshot:property:lightSoft",
+        "web-role:property:lightSoft",
+        "vscode-semantic:property:lightSoft",
+        "vscode-textmate:property:lightSoft",
+        "obsidian-role:property:lightSoft"
+      ],
+      "mineral": [
+        "web-feedback:info:dark",
+        "vscode-feedback:info:dark",
+        "obsidian-feedback:info:dark",
+        "web-feedback:info:darkSoft",
+        "vscode-feedback:info:darkSoft",
+        "obsidian-feedback:info:darkSoft",
+        "web-feedback:info:light",
+        "vscode-feedback:info:light",
+        "obsidian-feedback:info:light",
+        "web-feedback:info:lightSoft",
+        "vscode-feedback:info:lightSoft",
+        "obsidian-feedback:info:lightSoft",
+        "semantic-snapshot:function:dark",
+        "web-role:function:dark",
+        "vscode-semantic:function:dark",
+        "vscode-textmate:function:dark",
+        "obsidian-role:function:dark",
+        "semantic-snapshot:function:darkSoft",
+        "web-role:function:darkSoft",
+        "vscode-semantic:function:darkSoft",
+        "vscode-textmate:function:darkSoft",
+        "obsidian-role:function:darkSoft",
+        "semantic-snapshot:function:light",
+        "web-role:function:light",
+        "vscode-semantic:function:light",
+        "vscode-textmate:function:light",
+        "obsidian-role:function:light",
+        "semantic-snapshot:function:lightSoft",
+        "web-role:function:lightSoft",
+        "vscode-semantic:function:lightSoft",
+        "vscode-textmate:function:lightSoft",
+        "obsidian-role:function:lightSoft"
+      ],
+      "moss": [
+        "web-feedback:success:dark",
+        "obsidian-feedback:success:dark",
+        "web-feedback:success:darkSoft",
+        "obsidian-feedback:success:darkSoft",
+        "web-feedback:success:light",
+        "obsidian-feedback:success:light",
+        "web-feedback:success:lightSoft",
+        "obsidian-feedback:success:lightSoft",
+        "semantic-snapshot:string:dark",
+        "web-role:string:dark",
+        "vscode-textmate:string:dark",
+        "obsidian-role:string:dark",
+        "semantic-snapshot:string:darkSoft",
+        "web-role:string:darkSoft",
+        "vscode-textmate:string:darkSoft",
+        "obsidian-role:string:darkSoft",
+        "semantic-snapshot:string:light",
+        "web-role:string:light",
+        "vscode-textmate:string:light",
+        "obsidian-role:string:light",
+        "semantic-snapshot:string:lightSoft",
+        "web-role:string:lightSoft",
+        "vscode-textmate:string:lightSoft",
+        "obsidian-role:string:lightSoft"
       ],
       "ember": [
+        "web-feedback:error:dark",
+        "vscode-feedback:error:dark",
+        "obsidian-feedback:error:dark",
+        "web-feedback:error:darkSoft",
+        "vscode-feedback:error:darkSoft",
+        "obsidian-feedback:error:darkSoft",
+        "web-feedback:error:light",
+        "vscode-feedback:error:light",
+        "obsidian-feedback:error:light",
+        "web-feedback:error:lightSoft",
+        "vscode-feedback:error:lightSoft",
+        "obsidian-feedback:error:lightSoft",
         "semantic-snapshot:keyword:dark",
         "web-role:keyword:dark",
         "vscode-semantic:keyword:dark",
@@ -17088,6 +19607,24 @@
         "vscode-textmate:keyword:lightSoft",
         "obsidian-role:keyword:lightSoft"
       ],
+      "ash": [
+        "semantic-snapshot:comment:dark",
+        "web-role:comment:dark",
+        "vscode-textmate:comment:dark",
+        "obsidian-role:comment:dark",
+        "semantic-snapshot:comment:darkSoft",
+        "web-role:comment:darkSoft",
+        "vscode-textmate:comment:darkSoft",
+        "obsidian-role:comment:darkSoft",
+        "semantic-snapshot:comment:light",
+        "web-role:comment:light",
+        "vscode-textmate:comment:light",
+        "obsidian-role:comment:light",
+        "semantic-snapshot:comment:lightSoft",
+        "web-role:comment:lightSoft",
+        "vscode-textmate:comment:lightSoft",
+        "obsidian-role:comment:lightSoft"
+      ],
       "brass": [
         "semantic-snapshot:operator:dark",
         "web-role:operator:dark",
@@ -17105,28 +19642,6 @@
         "web-role:operator:lightSoft",
         "vscode-textmate:operator:lightSoft",
         "obsidian-role:operator:lightSoft"
-      ],
-      "mineral": [
-        "semantic-snapshot:function:dark",
-        "web-role:function:dark",
-        "vscode-semantic:function:dark",
-        "vscode-textmate:function:dark",
-        "obsidian-role:function:dark",
-        "semantic-snapshot:function:darkSoft",
-        "web-role:function:darkSoft",
-        "vscode-semantic:function:darkSoft",
-        "vscode-textmate:function:darkSoft",
-        "obsidian-role:function:darkSoft",
-        "semantic-snapshot:function:light",
-        "web-role:function:light",
-        "vscode-semantic:function:light",
-        "vscode-textmate:function:light",
-        "obsidian-role:function:light",
-        "semantic-snapshot:function:lightSoft",
-        "web-role:function:lightSoft",
-        "vscode-semantic:function:lightSoft",
-        "vscode-textmate:function:lightSoft",
-        "obsidian-role:function:lightSoft"
       ],
       "leather": [
         "semantic-snapshot:method:dark",
@@ -17149,46 +19664,6 @@
         "vscode-semantic:method:lightSoft",
         "vscode-textmate:method:lightSoft",
         "obsidian-role:method:lightSoft"
-      ],
-      "olive": [
-        "semantic-snapshot:property:dark",
-        "web-role:property:dark",
-        "vscode-semantic:property:dark",
-        "vscode-textmate:property:dark",
-        "obsidian-role:property:dark",
-        "semantic-snapshot:property:darkSoft",
-        "web-role:property:darkSoft",
-        "vscode-semantic:property:darkSoft",
-        "vscode-textmate:property:darkSoft",
-        "obsidian-role:property:darkSoft",
-        "semantic-snapshot:property:light",
-        "web-role:property:light",
-        "vscode-semantic:property:light",
-        "vscode-textmate:property:light",
-        "obsidian-role:property:light",
-        "semantic-snapshot:property:lightSoft",
-        "web-role:property:lightSoft",
-        "vscode-semantic:property:lightSoft",
-        "vscode-textmate:property:lightSoft",
-        "obsidian-role:property:lightSoft"
-      ],
-      "moss": [
-        "semantic-snapshot:string:dark",
-        "web-role:string:dark",
-        "vscode-textmate:string:dark",
-        "obsidian-role:string:dark",
-        "semantic-snapshot:string:darkSoft",
-        "web-role:string:darkSoft",
-        "vscode-textmate:string:darkSoft",
-        "obsidian-role:string:darkSoft",
-        "semantic-snapshot:string:light",
-        "web-role:string:light",
-        "vscode-textmate:string:light",
-        "obsidian-role:string:light",
-        "semantic-snapshot:string:lightSoft",
-        "web-role:string:lightSoft",
-        "vscode-textmate:string:lightSoft",
-        "obsidian-role:string:lightSoft"
       ],
       "ochre": [
         "semantic-snapshot:type:dark",

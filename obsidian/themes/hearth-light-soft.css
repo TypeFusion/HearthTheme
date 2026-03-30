@@ -37,14 +37,16 @@
   --h4-color: #7e8676;
   --h5-color: #b17d56;
   --h6-color: #716558;
-  --hearth-callout-danger-bg: rgb(163 96 80 / 0.14);
-  --hearth-callout-danger-border: rgb(163 96 80 / 0.56);
-  --hearth-callout-note-bg: rgb(103 107 83 / 0.12);
-  --hearth-callout-note-border: rgb(103 107 83 / 0.5);
-  --hearth-callout-tip-bg: rgb(126 134 118 / 0.12);
-  --hearth-callout-tip-border: rgb(126 134 118 / 0.5);
-  --hearth-callout-warning-bg: rgb(177 125 86 / 0.14);
-  --hearth-callout-warning-border: rgb(177 125 86 / 0.56);
+  --hearth-callout-danger-bg: rgb(172 90 72 / 0.14);
+  --hearth-callout-danger-border: rgb(172 90 72 / 0.56);
+  --hearth-callout-note-bg: rgb(102 108 77 / 0.12);
+  --hearth-callout-note-border: rgb(102 108 77 / 0.5);
+  --hearth-callout-tip-bg: rgb(123 136 112 / 0.12);
+  --hearth-callout-tip-border: rgb(123 136 112 / 0.5);
+  --hearth-callout-warning-bg: rgb(183 121 73 / 0.14);
+  --hearth-callout-warning-border: rgb(183 121 73 / 0.56);
+  --hearth-feedback-info: #67767d;
+  --hearth-feedback-note: #666c4d;
   --hearth-inline-code: #896548;
   --hr-color: rgb(192 180 164 / 0.7);
   --interactive-accent: #b77949;
@@ -66,15 +68,15 @@
   --tag-color-hover: #4d4032;
   --text-accent: #b77949;
   --text-accent-hover: #a46f45;
-  --text-error: #a36050;
+  --text-error: #ac5a48;
   --text-faint: #a29789;
   --text-highlight-bg: rgb(183 121 73 / 0.34);
   --text-muted: #73685a;
   --text-normal: #4d4032;
   --text-on-accent: #f5eee4;
   --text-selection: #b7794921;
-  --text-success: #7e8676;
-  --text-warning: #b17d56;
+  --text-success: #7b8870;
+  --text-warning: #b77949;
 }
 .theme-light .cm-s-obsidian span.cm-comment,
 .theme-light .markdown-source-view.mod-cm6 .cm-line .cm-comment {

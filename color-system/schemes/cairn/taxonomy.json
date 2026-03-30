@@ -21,6 +21,10 @@
     "persistent": ["cursor", "status", "tabEmphasis"],
     "contextual": ["selection", "focusRing", "lineEmphasis", "listHover"]
   },
+  "feedback": {
+    "guidance": ["note", "info"],
+    "outcome": ["success", "warning", "error"]
+  },
   "variants": {
     "core": ["dark", "light"],
     "soft": ["darkSoft", "lightSoft"]

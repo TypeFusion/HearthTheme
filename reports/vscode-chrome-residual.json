@@ -17,8 +17,8 @@
         ]
     },
     "summary": {
-        "migratedKeyCount": 44,
-        "residualKeyCount": 78,
+        "migratedKeyCount": 47,
+        "residualKeyCount": 75,
         "variantsCovered": [
             "dark",
             "darkSoft",
@@ -31,7 +31,7 @@
         "dark": {
             "sourcePath": "color-system/templates/hearth-dark.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 78,
+            "residualKeyCount": 75,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -50,12 +50,9 @@
                 "editorBracketHighlight.foreground3",
                 "editorBracketMatch.background",
                 "editorBracketMatch.border",
-                "editorError.foreground",
                 "editorIndentGuide.activeBackground1",
                 "editorIndentGuide.background1",
-                "editorInfo.foreground",
                 "editorLineNumber.activeForeground",
-                "editorWarning.foreground",
                 "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
@@ -194,9 +191,6 @@
                     "suggestion": "candidate feedback roles like error / warning / info / success",
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
                     "keys": [
-                        "editorError.foreground",
-                        "editorInfo.foreground",
-                        "editorWarning.foreground",
                         "gitDecoration.addedResourceForeground",
                         "gitDecoration.conflictingResourceForeground",
                         "gitDecoration.deletedResourceForeground",
@@ -204,7 +198,7 @@
                         "gitDecoration.modifiedResourceForeground",
                         "gitDecoration.untrackedResourceForeground"
                     ],
-                    "keyCount": 9
+                    "keyCount": 6
                 },
                 "selection-list-state": {
                     "label": "Selection and List State",
@@ -394,14 +388,6 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorError.foreground",
-                    "value": "#c96b58",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorIndentGuide.activeBackground1",
                     "value": "#655b4a",
                     "bucket": "editor-guides",
@@ -418,28 +404,12 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorInfo.foreground",
-                    "value": "#80a273",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#a3947c",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWarning.foreground",
-                    "value": "#b89543",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
                     "key": "editorWhitespace.foreground",
@@ -886,7 +856,7 @@
         "darkSoft": {
             "sourcePath": "color-system/templates/hearth-dark-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 78,
+            "residualKeyCount": 75,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -905,12 +875,9 @@
                 "editorBracketHighlight.foreground3",
                 "editorBracketMatch.background",
                 "editorBracketMatch.border",
-                "editorError.foreground",
                 "editorIndentGuide.activeBackground1",
                 "editorIndentGuide.background1",
-                "editorInfo.foreground",
                 "editorLineNumber.activeForeground",
-                "editorWarning.foreground",
                 "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
@@ -1049,9 +1016,6 @@
                     "suggestion": "candidate feedback roles like error / warning / info / success",
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
                     "keys": [
-                        "editorError.foreground",
-                        "editorInfo.foreground",
-                        "editorWarning.foreground",
                         "gitDecoration.addedResourceForeground",
                         "gitDecoration.conflictingResourceForeground",
                         "gitDecoration.deletedResourceForeground",
@@ -1059,7 +1023,7 @@
                         "gitDecoration.modifiedResourceForeground",
                         "gitDecoration.untrackedResourceForeground"
                     ],
-                    "keyCount": 9
+                    "keyCount": 6
                 },
                 "selection-list-state": {
                     "label": "Selection and List State",
@@ -1249,14 +1213,6 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorError.foreground",
-                    "value": "#c57462",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorIndentGuide.activeBackground1",
                     "value": "#6a6055",
                     "bucket": "editor-guides",
@@ -1273,28 +1229,12 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorInfo.foreground",
-                    "value": "#9d9268",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#a39587",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWarning.foreground",
-                    "value": "#b89549",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
                     "key": "editorWhitespace.foreground",
@@ -1741,7 +1681,7 @@
         "light": {
             "sourcePath": "color-system/templates/hearth-light.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 78,
+            "residualKeyCount": 75,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -1760,12 +1700,9 @@
                 "editorBracketHighlight.foreground3",
                 "editorBracketMatch.background",
                 "editorBracketMatch.border",
-                "editorError.foreground",
                 "editorIndentGuide.activeBackground1",
                 "editorIndentGuide.background1",
-                "editorInfo.foreground",
                 "editorLineNumber.activeForeground",
-                "editorWarning.foreground",
                 "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
@@ -1904,9 +1841,6 @@
                     "suggestion": "candidate feedback roles like error / warning / info / success",
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
                     "keys": [
-                        "editorError.foreground",
-                        "editorInfo.foreground",
-                        "editorWarning.foreground",
                         "gitDecoration.addedResourceForeground",
                         "gitDecoration.conflictingResourceForeground",
                         "gitDecoration.deletedResourceForeground",
@@ -1914,7 +1848,7 @@
                         "gitDecoration.modifiedResourceForeground",
                         "gitDecoration.untrackedResourceForeground"
                     ],
-                    "keyCount": 9
+                    "keyCount": 6
                 },
                 "selection-list-state": {
                     "label": "Selection and List State",
@@ -2104,14 +2038,6 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorError.foreground",
-                    "value": "#ad3518",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorIndentGuide.activeBackground1",
                     "value": "#b49d7b",
                     "bucket": "editor-guides",
@@ -2128,28 +2054,12 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorInfo.foreground",
-                    "value": "#2e6a2c",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#7e5e37",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWarning.foreground",
-                    "value": "#7f6531",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
                     "key": "editorWhitespace.foreground",
@@ -2596,7 +2506,7 @@
         "lightSoft": {
             "sourcePath": "color-system/templates/hearth-light-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 78,
+            "residualKeyCount": 75,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -2615,12 +2525,9 @@
                 "editorBracketHighlight.foreground3",
                 "editorBracketMatch.background",
                 "editorBracketMatch.border",
-                "editorError.foreground",
                 "editorIndentGuide.activeBackground1",
                 "editorIndentGuide.background1",
-                "editorInfo.foreground",
                 "editorLineNumber.activeForeground",
-                "editorWarning.foreground",
                 "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
@@ -2759,9 +2666,6 @@
                     "suggestion": "candidate feedback roles like error / warning / info / success",
                     "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
                     "keys": [
-                        "editorError.foreground",
-                        "editorInfo.foreground",
-                        "editorWarning.foreground",
                         "gitDecoration.addedResourceForeground",
                         "gitDecoration.conflictingResourceForeground",
                         "gitDecoration.deletedResourceForeground",
@@ -2769,7 +2673,7 @@
                         "gitDecoration.modifiedResourceForeground",
                         "gitDecoration.untrackedResourceForeground"
                     ],
-                    "keyCount": 9
+                    "keyCount": 6
                 },
                 "selection-list-state": {
                     "label": "Selection and List State",
@@ -2959,14 +2863,6 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorError.foreground",
-                    "value": "#ad3518",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorIndentGuide.activeBackground1",
                     "value": "#9d907e",
                     "bucket": "editor-guides",
@@ -2983,28 +2879,12 @@
                     "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
-                    "key": "editorInfo.foreground",
-                    "value": "#5e6f3d",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#8c7154",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWarning.foreground",
-                    "value": "#7f6531",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
                 },
                 {
                     "key": "editorWhitespace.foreground",
@@ -3532,9 +3412,6 @@
                 "suggestion": "candidate feedback roles like error / warning / info / success",
                 "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
                 "keys": [
-                    "editorError.foreground",
-                    "editorInfo.foreground",
-                    "editorWarning.foreground",
                     "gitDecoration.addedResourceForeground",
                     "gitDecoration.conflictingResourceForeground",
                     "gitDecoration.deletedResourceForeground",
@@ -3542,7 +3419,7 @@
                     "gitDecoration.modifiedResourceForeground",
                     "gitDecoration.untrackedResourceForeground"
                 ],
-                "keyCount": 9
+                "keyCount": 6
             },
             "selection-list-state": {
                 "label": "Selection and List State",
@@ -3817,19 +3694,6 @@
                 }
             },
             {
-                "key": "editorError.foreground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#c96b58",
-                    "darkSoft": "#c57462",
-                    "light": "#ad3518",
-                    "lightSoft": "#ad3518"
-                }
-            },
-            {
                 "key": "editorIndentGuide.activeBackground1",
                 "bucket": "editor-guides",
                 "bucketLabel": "Editor Guides and Brackets",
@@ -3856,19 +3720,6 @@
                 }
             },
             {
-                "key": "editorInfo.foreground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#80a273",
-                    "darkSoft": "#9d9268",
-                    "light": "#2e6a2c",
-                    "lightSoft": "#5e6f3d"
-                }
-            },
-            {
                 "key": "editorLineNumber.activeForeground",
                 "bucket": "chrome-ink",
                 "bucketLabel": "Chrome Ink",
@@ -3879,19 +3730,6 @@
                     "darkSoft": "#a39587",
                     "light": "#7e5e37",
                     "lightSoft": "#8c7154"
-                }
-            },
-            {
-                "key": "editorWarning.foreground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#b89543",
-                    "darkSoft": "#b89549",
-                    "light": "#7f6531",
-                    "lightSoft": "#7f6531"
                 }
             },
             {
