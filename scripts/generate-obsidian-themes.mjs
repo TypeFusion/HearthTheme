@@ -134,12 +134,17 @@ function buildVars(tokens, platformVars = {}) {
   const feedbackError = platformVars['--text-error'] ?? tokens.keyword
   const guide = platformVars['--hearth-guide'] ?? tokens.guide
   const guideActive = platformVars['--hearth-guide-active'] ?? tokens.guideActive
+  const guideInk = platformVars['--hearth-guide-ink'] ?? tokens.guideInk
   const whitespace = platformVars['--hearth-whitespace'] ?? tokens.whitespace
   const bracketWarm = platformVars['--hearth-bracket-warm'] ?? tokens.bracketWarm
   const bracketBright = platformVars['--hearth-bracket-bright'] ?? tokens.bracketBright
   const bracketCool = platformVars['--hearth-bracket-cool'] ?? tokens.bracketCool
   const bracketMatchFill = platformVars['--hearth-bracket-match-fill'] ?? tokens.bracketMatchFill
   const bracketMatchStroke = platformVars['--hearth-bracket-match-stroke'] ?? tokens.bracketMatchStroke
+  const shellBand = platformVars['--hearth-shell-band'] ?? tokens.shellBand
+  const accentHoverFill = platformVars['--hearth-accent-hover'] ?? tokens.accentHover
+  const onStatusInk = platformVars['--hearth-on-status'] ?? tokens.onStatus
+  const navActiveInk = platformVars['--hearth-nav-active-ink'] ?? tokens.navActiveInk
   const terminalBlack = platformVars['--hearth-terminal-black'] ?? tokens.terminalBlack
   const terminalRed = platformVars['--hearth-terminal-red'] ?? tokens.terminalRed
   const terminalGreen = platformVars['--hearth-terminal-green'] ?? tokens.terminalGreen
@@ -197,12 +202,17 @@ function buildVars(tokens, platformVars = {}) {
     '--hearth-feedback-info': feedbackInfo,
     '--hearth-guide': guide,
     '--hearth-guide-active': guideActive,
+    '--hearth-guide-ink': guideInk,
     '--hearth-whitespace': whitespace,
     '--hearth-bracket-warm': bracketWarm,
     '--hearth-bracket-bright': bracketBright,
     '--hearth-bracket-cool': bracketCool,
     '--hearth-bracket-match-fill': bracketMatchFill,
     '--hearth-bracket-match-stroke': bracketMatchStroke,
+    '--hearth-shell-band': shellBand,
+    '--hearth-accent-hover': accentHoverFill,
+    '--hearth-on-status': onStatusInk,
+    '--hearth-nav-active-ink': navActiveInk,
     '--hearth-terminal-black': terminalBlack,
     '--hearth-terminal-red': terminalRed,
     '--hearth-terminal-green': terminalGreen,

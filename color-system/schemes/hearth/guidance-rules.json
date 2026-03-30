@@ -87,6 +87,18 @@
       "derive": {
         "alphaFromVariantKnob": "guidanceAlpha.bracketMatchStroke"
       }
+    },
+    "guideInk": {
+      "description": "Readable guidance ink for the active line number and focused scaffold labels.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#a3947c",
+          "darkSoft": "#a39587",
+          "light": "#7e5e37",
+          "lightSoft": "#8c7154"
+        }
+      }
     }
   }
 }

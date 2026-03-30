@@ -99,20 +99,27 @@
       "supportInk",
       "mutedInk",
       "subtleInk",
-      "onAccentInk"
+      "onAccentInk",
+      "onStatusInk"
     ],
     "shellStates": [
-      "shellRaised"
+      "shellRaised",
+      "shellBand"
     ],
     "navigation": [
       "navActiveFill",
-      "navInactiveFill"
+      "navInactiveFill",
+      "navActiveInk"
+    ],
+    "accentStates": [
+      "accentHoverFill"
     ]
   },
   "guidance": {
     "scaffold": [
       "guide",
       "guideActive",
+      "guideInk",
       "whitespace"
     ],
     "brackets": [

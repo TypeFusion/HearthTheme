@@ -95,13 +95,25 @@ export function buildGeneratedPlatformTokenMaps(model) {
       const finalWorkbenchColor = contract.vscodeColor
         ? getWorkbenchColor(theme, contract.vscodeColor) ?? fallbackWorkbenchColor
         : fallbackWorkbenchColor
+      const fallbackObsidianColor = contract.obsidianVar
+        ? model.platformTokenMaps.obsidian?.[variantId]?.[contract.obsidianVar]
+        : null
 
       if (contract.vscodeColor && finalWorkbenchColor) {
         vscode.workbench[variantId][contract.vscodeColor] = finalWorkbenchColor
       }
 
+      const finalAbstractColor =
+        finalWorkbenchColor ??
+        fallbackObsidianColor ??
+        (contract.webToken ? model.platformTokenMaps.tokenSets?.[variantId]?.[contract.webToken] : null)
+
+      if (contract.obsidianVar && finalAbstractColor) {
+        obsidian[variantId][contract.obsidianVar] = finalAbstractColor
+      }
+
       if (contract.webToken) {
-        const finalTokenColor = finalWorkbenchColor ?? model.platformTokenMaps.tokenSets?.[variantId]?.[contract.webToken]
+        const finalTokenColor = finalAbstractColor
         if (!finalTokenColor) {
           throw new Error(`Missing generated platform token for "${contract.id}" in theme "${variantId}".`)
         }

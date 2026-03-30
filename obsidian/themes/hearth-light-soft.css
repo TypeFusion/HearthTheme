@@ -15,7 +15,7 @@
   --background-modifier-message: rgb(183 121 73 / 0.18);
   --background-modifier-success: rgb(126 134 118 / 0.24);
   --background-primary: #e3d7c6;
-  --background-primary-alt: #d6caba;
+  --background-primary-alt: #d6c9ba;
   --background-secondary: #d2c8b4;
   --background-secondary-alt: #c3b9a5;
   --blockquote-border-color: rgb(103 107 83 / 0.46);
@@ -37,6 +37,7 @@
   --h4-color: #7e8676;
   --h5-color: #b17d56;
   --h6-color: #716558;
+  --hearth-accent-hover: #b88653;
   --hearth-bracket-bright: #674100;
   --hearth-bracket-cool: #6f8358;
   --hearth-bracket-match-fill: #b7794916;
@@ -54,7 +55,11 @@
   --hearth-feedback-note: #666c4d;
   --hearth-guide: #c3b8a7;
   --hearth-guide-active: #9d907e;
+  --hearth-guide-ink: #82694f;
   --hearth-inline-code: #896548;
+  --hearth-nav-active-ink: #4d4032;
+  --hearth-on-status: #eee4d8;
+  --hearth-shell-band: #d8cfc3;
   --hearth-terminal-black: #3a3020;
   --hearth-terminal-blue: #5f6579;
   --hearth-terminal-bright-black: #8f7d67;

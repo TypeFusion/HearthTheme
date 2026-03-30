@@ -37,6 +37,7 @@
   --h4-color: #9c9c86;
   --h5-color: #b58866;
   --h6-color: #a49a8e;
+  --hearth-accent-hover: #b98858;
   --hearth-bracket-bright: #d8b07a;
   --hearth-bracket-cool: #9d956f;
   --hearth-bracket-match-fill: #bb845a12;
@@ -54,7 +55,11 @@
   --hearth-feedback-note: #7d7a5e;
   --hearth-guide: #59524b;
   --hearth-guide-active: #6a6055;
+  --hearth-guide-ink: #a39587;
   --hearth-inline-code: #bfa088;
+  --hearth-nav-active-ink: #dfd2be;
+  --hearth-on-status: #eee2cd;
+  --hearth-shell-band: #332d26;
   --hearth-terminal-black: #332d24;
   --hearth-terminal-blue: #788ea0;
   --hearth-terminal-bright-black: #72685a;

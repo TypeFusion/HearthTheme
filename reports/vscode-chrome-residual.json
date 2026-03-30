@@ -17,8 +17,8 @@
         ]
     },
     "summary": {
-        "migratedKeyCount": 99,
-        "residualKeyCount": 23,
+        "migratedKeyCount": 116,
+        "residualKeyCount": 6,
         "variantsCovered": [
             "dark",
             "darkSoft",
@@ -31,84 +31,16 @@
         "dark": {
             "sourcePath": "color-system/templates/hearth-dark.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 23,
+            "residualKeyCount": 6,
             "residualKeys": [
-                "activityBar.background",
-                "activityBar.border",
-                "button.hoverBackground",
-                "editorLineNumber.activeForeground",
-                "gitDecoration.addedResourceForeground",
-                "gitDecoration.conflictingResourceForeground",
-                "gitDecoration.deletedResourceForeground",
-                "gitDecoration.ignoredResourceForeground",
-                "gitDecoration.modifiedResourceForeground",
-                "gitDecoration.untrackedResourceForeground",
-                "list.activeSelectionForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBarSectionHeader.background",
-                "sideBarSectionHeader.border",
-                "statusBar.border",
                 "statusBar.debuggingBackground",
-                "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.hoverBackground",
-                "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
             "buckets": {
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                    "keys": [
-                        "activityBar.background",
-                        "activityBar.border",
-                        "button.hoverBackground",
-                        "sideBarSectionHeader.background",
-                        "sideBarSectionHeader.border",
-                        "statusBar.border",
-                        "statusBar.debuggingBackground",
-                        "statusBar.noFolderBackground",
-                        "tab.hoverBackground",
-                        "titleBar.inactiveBackground"
-                    ],
-                    "keyCount": 10
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "editorLineNumber.activeForeground",
-                        "statusBar.foreground"
-                    ],
-                    "keyCount": 2
-                },
-                "feedback-status": {
-                    "label": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                    "keys": [
-                        "gitDecoration.addedResourceForeground",
-                        "gitDecoration.conflictingResourceForeground",
-                        "gitDecoration.deletedResourceForeground",
-                        "gitDecoration.ignoredResourceForeground",
-                        "gitDecoration.modifiedResourceForeground",
-                        "gitDecoration.untrackedResourceForeground"
-                    ],
-                    "keyCount": 6
-                },
-                "selection-list-state": {
-                    "label": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                    "keys": [
-                        "list.activeSelectionForeground"
-                    ],
-                    "keyCount": 1
-                },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
                     "suggestion": "keep platform compatibility for now",
@@ -120,97 +52,19 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
+                },
+                "chrome-surface": {
+                    "label": "Chrome Surface",
+                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
+                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                    "keys": [
+                        "statusBar.debuggingBackground",
+                        "statusBar.noFolderBackground"
+                    ],
+                    "keyCount": 2
                 }
             },
             "entries": [
-                {
-                    "key": "activityBar.background",
-                    "value": "#191511",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "activityBar.border",
-                    "value": "#3a3328",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.hoverBackground",
-                    "value": "#d08a4c",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "editorLineNumber.activeForeground",
-                    "value": "#a3947c",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "gitDecoration.addedResourceForeground",
-                    "value": "#87ab70",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.conflictingResourceForeground",
-                    "value": "#d0653b",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.deletedResourceForeground",
-                    "value": "#c66a52",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.ignoredResourceForeground",
-                    "value": "#655c4f",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.modifiedResourceForeground",
-                    "value": "#b89543",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.untrackedResourceForeground",
-                    "value": "#87ab70",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "list.activeSelectionForeground",
-                    "value": "#e8ddca",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#655b4aaa",
@@ -236,30 +90,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBarSectionHeader.background",
-                    "value": "#26211c",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.border",
-                    "value": "#3a3328",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "statusBar.border",
-                    "value": "#3a3328",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
                     "key": "statusBar.debuggingBackground",
                     "value": "#5d3418",
                     "bucket": "chrome-surface",
@@ -268,32 +98,8 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "statusBar.foreground",
-                    "value": "#f2e7d1",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "statusBar.noFolderBackground",
                     "value": "#352f24",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.hoverBackground",
-                    "value": "#312b26",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveBackground",
-                    "value": "#191511",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
@@ -312,84 +118,16 @@
         "darkSoft": {
             "sourcePath": "color-system/templates/hearth-dark-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 23,
+            "residualKeyCount": 6,
             "residualKeys": [
-                "activityBar.background",
-                "activityBar.border",
-                "button.hoverBackground",
-                "editorLineNumber.activeForeground",
-                "gitDecoration.addedResourceForeground",
-                "gitDecoration.conflictingResourceForeground",
-                "gitDecoration.deletedResourceForeground",
-                "gitDecoration.ignoredResourceForeground",
-                "gitDecoration.modifiedResourceForeground",
-                "gitDecoration.untrackedResourceForeground",
-                "list.activeSelectionForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBarSectionHeader.background",
-                "sideBarSectionHeader.border",
-                "statusBar.border",
                 "statusBar.debuggingBackground",
-                "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.hoverBackground",
-                "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
             "buckets": {
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                    "keys": [
-                        "activityBar.background",
-                        "activityBar.border",
-                        "button.hoverBackground",
-                        "sideBarSectionHeader.background",
-                        "sideBarSectionHeader.border",
-                        "statusBar.border",
-                        "statusBar.debuggingBackground",
-                        "statusBar.noFolderBackground",
-                        "tab.hoverBackground",
-                        "titleBar.inactiveBackground"
-                    ],
-                    "keyCount": 10
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "editorLineNumber.activeForeground",
-                        "statusBar.foreground"
-                    ],
-                    "keyCount": 2
-                },
-                "feedback-status": {
-                    "label": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                    "keys": [
-                        "gitDecoration.addedResourceForeground",
-                        "gitDecoration.conflictingResourceForeground",
-                        "gitDecoration.deletedResourceForeground",
-                        "gitDecoration.ignoredResourceForeground",
-                        "gitDecoration.modifiedResourceForeground",
-                        "gitDecoration.untrackedResourceForeground"
-                    ],
-                    "keyCount": 6
-                },
-                "selection-list-state": {
-                    "label": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                    "keys": [
-                        "list.activeSelectionForeground"
-                    ],
-                    "keyCount": 1
-                },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
                     "suggestion": "keep platform compatibility for now",
@@ -401,97 +139,19 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
+                },
+                "chrome-surface": {
+                    "label": "Chrome Surface",
+                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
+                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                    "keys": [
+                        "statusBar.debuggingBackground",
+                        "statusBar.noFolderBackground"
+                    ],
+                    "keyCount": 2
                 }
             },
             "entries": [
-                {
-                    "key": "activityBar.background",
-                    "value": "#1e1915",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "activityBar.border",
-                    "value": "#4a4138",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.hoverBackground",
-                    "value": "#b98858",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "editorLineNumber.activeForeground",
-                    "value": "#a39587",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "gitDecoration.addedResourceForeground",
-                    "value": "#95a173",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.conflictingResourceForeground",
-                    "value": "#bd845f",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.deletedResourceForeground",
-                    "value": "#be7d6b",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.ignoredResourceForeground",
-                    "value": "#6e6558",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.modifiedResourceForeground",
-                    "value": "#ad9565",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.untrackedResourceForeground",
-                    "value": "#95a173",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "list.activeSelectionForeground",
-                    "value": "#dfd2be",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#645a4c88",
@@ -517,30 +177,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBarSectionHeader.background",
-                    "value": "#28221d",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.border",
-                    "value": "#4a4138",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "statusBar.border",
-                    "value": "#4a4138",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
                     "key": "statusBar.debuggingBackground",
                     "value": "#5d3e2a",
                     "bucket": "chrome-surface",
@@ -549,32 +185,8 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "statusBar.foreground",
-                    "value": "#eee2cd",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "statusBar.noFolderBackground",
                     "value": "#3e352d",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.hoverBackground",
-                    "value": "#332c26",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveBackground",
-                    "value": "#1d1814",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
@@ -593,84 +205,16 @@
         "light": {
             "sourcePath": "color-system/templates/hearth-light.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 23,
+            "residualKeyCount": 6,
             "residualKeys": [
-                "activityBar.background",
-                "activityBar.border",
-                "button.hoverBackground",
-                "editorLineNumber.activeForeground",
-                "gitDecoration.addedResourceForeground",
-                "gitDecoration.conflictingResourceForeground",
-                "gitDecoration.deletedResourceForeground",
-                "gitDecoration.ignoredResourceForeground",
-                "gitDecoration.modifiedResourceForeground",
-                "gitDecoration.untrackedResourceForeground",
-                "list.activeSelectionForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBarSectionHeader.background",
-                "sideBarSectionHeader.border",
-                "statusBar.border",
                 "statusBar.debuggingBackground",
-                "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.hoverBackground",
-                "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
             "buckets": {
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                    "keys": [
-                        "activityBar.background",
-                        "activityBar.border",
-                        "button.hoverBackground",
-                        "sideBarSectionHeader.background",
-                        "sideBarSectionHeader.border",
-                        "statusBar.border",
-                        "statusBar.debuggingBackground",
-                        "statusBar.noFolderBackground",
-                        "tab.hoverBackground",
-                        "titleBar.inactiveBackground"
-                    ],
-                    "keyCount": 10
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "editorLineNumber.activeForeground",
-                        "statusBar.foreground"
-                    ],
-                    "keyCount": 2
-                },
-                "feedback-status": {
-                    "label": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                    "keys": [
-                        "gitDecoration.addedResourceForeground",
-                        "gitDecoration.conflictingResourceForeground",
-                        "gitDecoration.deletedResourceForeground",
-                        "gitDecoration.ignoredResourceForeground",
-                        "gitDecoration.modifiedResourceForeground",
-                        "gitDecoration.untrackedResourceForeground"
-                    ],
-                    "keyCount": 6
-                },
-                "selection-list-state": {
-                    "label": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                    "keys": [
-                        "list.activeSelectionForeground"
-                    ],
-                    "keyCount": 1
-                },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
                     "suggestion": "keep platform compatibility for now",
@@ -682,97 +226,19 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
+                },
+                "chrome-surface": {
+                    "label": "Chrome Surface",
+                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
+                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                    "keys": [
+                        "statusBar.debuggingBackground",
+                        "statusBar.noFolderBackground"
+                    ],
+                    "keyCount": 2
                 }
             },
             "entries": [
-                {
-                    "key": "activityBar.background",
-                    "value": "#ddd0b8",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "activityBar.border",
-                    "value": "#d2c2a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.hoverBackground",
-                    "value": "#a86629",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "editorLineNumber.activeForeground",
-                    "value": "#7e5e37",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "gitDecoration.addedResourceForeground",
-                    "value": "#385820",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.conflictingResourceForeground",
-                    "value": "#b8742b",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.deletedResourceForeground",
-                    "value": "#903020",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.ignoredResourceForeground",
-                    "value": "#b49d7b",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.modifiedResourceForeground",
-                    "value": "#7e6414",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.untrackedResourceForeground",
-                    "value": "#385820",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "list.activeSelectionForeground",
-                    "value": "#2f210e",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#b49d7baa",
@@ -798,30 +264,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBarSectionHeader.background",
-                    "value": "#e7ddcc",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.border",
-                    "value": "#d2c2a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "statusBar.border",
-                    "value": "#d2c2a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
                     "key": "statusBar.debuggingBackground",
                     "value": "#7f4313",
                     "bucket": "chrome-surface",
@@ -830,32 +272,8 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "statusBar.foreground",
-                    "value": "#f9f1e6",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "statusBar.noFolderBackground",
                     "value": "#8f5b2e",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.hoverBackground",
-                    "value": "#e7ddcc",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveBackground",
-                    "value": "#ddd0b8",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
@@ -874,84 +292,16 @@
         "lightSoft": {
             "sourcePath": "color-system/templates/hearth-light-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 23,
+            "residualKeyCount": 6,
             "residualKeys": [
-                "activityBar.background",
-                "activityBar.border",
-                "button.hoverBackground",
-                "editorLineNumber.activeForeground",
-                "gitDecoration.addedResourceForeground",
-                "gitDecoration.conflictingResourceForeground",
-                "gitDecoration.deletedResourceForeground",
-                "gitDecoration.ignoredResourceForeground",
-                "gitDecoration.modifiedResourceForeground",
-                "gitDecoration.untrackedResourceForeground",
-                "list.activeSelectionForeground",
                 "scrollbarSlider.activeBackground",
                 "scrollbarSlider.background",
                 "scrollbarSlider.hoverBackground",
-                "sideBarSectionHeader.background",
-                "sideBarSectionHeader.border",
-                "statusBar.border",
                 "statusBar.debuggingBackground",
-                "statusBar.foreground",
                 "statusBar.noFolderBackground",
-                "tab.hoverBackground",
-                "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
             "buckets": {
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                    "keys": [
-                        "activityBar.background",
-                        "activityBar.border",
-                        "button.hoverBackground",
-                        "sideBarSectionHeader.background",
-                        "sideBarSectionHeader.border",
-                        "statusBar.border",
-                        "statusBar.debuggingBackground",
-                        "statusBar.noFolderBackground",
-                        "tab.hoverBackground",
-                        "titleBar.inactiveBackground"
-                    ],
-                    "keyCount": 10
-                },
-                "chrome-ink": {
-                    "label": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                    "keys": [
-                        "editorLineNumber.activeForeground",
-                        "statusBar.foreground"
-                    ],
-                    "keyCount": 2
-                },
-                "feedback-status": {
-                    "label": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                    "keys": [
-                        "gitDecoration.addedResourceForeground",
-                        "gitDecoration.conflictingResourceForeground",
-                        "gitDecoration.deletedResourceForeground",
-                        "gitDecoration.ignoredResourceForeground",
-                        "gitDecoration.modifiedResourceForeground",
-                        "gitDecoration.untrackedResourceForeground"
-                    ],
-                    "keyCount": 6
-                },
-                "selection-list-state": {
-                    "label": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                    "keys": [
-                        "list.activeSelectionForeground"
-                    ],
-                    "keyCount": 1
-                },
                 "scrollbar-shadow": {
                     "label": "Scrollbar and Shadow",
                     "suggestion": "keep platform compatibility for now",
@@ -963,97 +313,19 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
+                },
+                "chrome-surface": {
+                    "label": "Chrome Surface",
+                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
+                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                    "keys": [
+                        "statusBar.debuggingBackground",
+                        "statusBar.noFolderBackground"
+                    ],
+                    "keyCount": 2
                 }
             },
             "entries": [
-                {
-                    "key": "activityBar.background",
-                    "value": "#d0c3ad",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "activityBar.border",
-                    "value": "#c4b8a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "button.hoverBackground",
-                    "value": "#b88653",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "editorLineNumber.activeForeground",
-                    "value": "#8c7154",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "gitDecoration.addedResourceForeground",
-                    "value": "#61783f",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.conflictingResourceForeground",
-                    "value": "#b8742b",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.deletedResourceForeground",
-                    "value": "#903020",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.ignoredResourceForeground",
-                    "value": "#9f8b6d",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.modifiedResourceForeground",
-                    "value": "#7e6414",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "gitDecoration.untrackedResourceForeground",
-                    "value": "#61783f",
-                    "bucket": "feedback-status",
-                    "bucketLabel": "Feedback and Status",
-                    "suggestion": "candidate feedback roles like error / warning / info / success",
-                    "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership."
-                },
-                {
-                    "key": "list.activeSelectionForeground",
-                    "value": "#4d4032",
-                    "bucket": "selection-list-state",
-                    "bucketLabel": "Selection and List State",
-                    "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                    "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys."
-                },
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#b49d7baa",
@@ -1079,30 +351,6 @@
                     "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
                 },
                 {
-                    "key": "sideBarSectionHeader.background",
-                    "value": "#e0d7ca",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "sideBarSectionHeader.border",
-                    "value": "#c4b8a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "statusBar.border",
-                    "value": "#c4b8a5",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
                     "key": "statusBar.debuggingBackground",
                     "value": "#755845",
                     "bucket": "chrome-surface",
@@ -1111,32 +359,8 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "statusBar.foreground",
-                    "value": "#eee4d8",
-                    "bucket": "chrome-ink",
-                    "bucketLabel": "Chrome Ink",
-                    "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                    "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
                     "key": "statusBar.noFolderBackground",
                     "value": "#80634a",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "tab.hoverBackground",
-                    "value": "#e0d7ca",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
-                },
-                {
-                    "key": "titleBar.inactiveBackground",
-                    "value": "#d0c3ad",
                     "bucket": "chrome-surface",
                     "bucketLabel": "Chrome Surface",
                     "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
@@ -1155,57 +379,6 @@
     },
     "aggregate": {
         "buckets": {
-            "chrome-surface": {
-                "label": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "keys": [
-                    "activityBar.background",
-                    "activityBar.border",
-                    "button.hoverBackground",
-                    "sideBarSectionHeader.background",
-                    "sideBarSectionHeader.border",
-                    "statusBar.border",
-                    "statusBar.debuggingBackground",
-                    "statusBar.noFolderBackground",
-                    "tab.hoverBackground",
-                    "titleBar.inactiveBackground"
-                ],
-                "keyCount": 10
-            },
-            "chrome-ink": {
-                "label": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "keys": [
-                    "editorLineNumber.activeForeground",
-                    "statusBar.foreground"
-                ],
-                "keyCount": 2
-            },
-            "feedback-status": {
-                "label": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "keys": [
-                    "gitDecoration.addedResourceForeground",
-                    "gitDecoration.conflictingResourceForeground",
-                    "gitDecoration.deletedResourceForeground",
-                    "gitDecoration.ignoredResourceForeground",
-                    "gitDecoration.modifiedResourceForeground",
-                    "gitDecoration.untrackedResourceForeground"
-                ],
-                "keyCount": 6
-            },
-            "selection-list-state": {
-                "label": "Selection and List State",
-                "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                "keys": [
-                    "list.activeSelectionForeground"
-                ],
-                "keyCount": 1
-            },
             "scrollbar-shadow": {
                 "label": "Scrollbar and Shadow",
                 "suggestion": "keep platform compatibility for now",
@@ -1217,152 +390,19 @@
                     "widget.shadow"
                 ],
                 "keyCount": 4
+            },
+            "chrome-surface": {
+                "label": "Chrome Surface",
+                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
+                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                "keys": [
+                    "statusBar.debuggingBackground",
+                    "statusBar.noFolderBackground"
+                ],
+                "keyCount": 2
             }
         },
         "entries": [
-            {
-                "key": "activityBar.background",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#191511",
-                    "darkSoft": "#1e1915",
-                    "light": "#ddd0b8",
-                    "lightSoft": "#d0c3ad"
-                }
-            },
-            {
-                "key": "activityBar.border",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#3a3328",
-                    "darkSoft": "#4a4138",
-                    "light": "#d2c2a5",
-                    "lightSoft": "#c4b8a5"
-                }
-            },
-            {
-                "key": "button.hoverBackground",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#d08a4c",
-                    "darkSoft": "#b98858",
-                    "light": "#a86629",
-                    "lightSoft": "#b88653"
-                }
-            },
-            {
-                "key": "editorLineNumber.activeForeground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#a3947c",
-                    "darkSoft": "#a39587",
-                    "light": "#7e5e37",
-                    "lightSoft": "#8c7154"
-                }
-            },
-            {
-                "key": "gitDecoration.addedResourceForeground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#87ab70",
-                    "darkSoft": "#95a173",
-                    "light": "#385820",
-                    "lightSoft": "#61783f"
-                }
-            },
-            {
-                "key": "gitDecoration.conflictingResourceForeground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#d0653b",
-                    "darkSoft": "#bd845f",
-                    "light": "#b8742b",
-                    "lightSoft": "#b8742b"
-                }
-            },
-            {
-                "key": "gitDecoration.deletedResourceForeground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#c66a52",
-                    "darkSoft": "#be7d6b",
-                    "light": "#903020",
-                    "lightSoft": "#903020"
-                }
-            },
-            {
-                "key": "gitDecoration.ignoredResourceForeground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#655c4f",
-                    "darkSoft": "#6e6558",
-                    "light": "#b49d7b",
-                    "lightSoft": "#9f8b6d"
-                }
-            },
-            {
-                "key": "gitDecoration.modifiedResourceForeground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#b89543",
-                    "darkSoft": "#ad9565",
-                    "light": "#7e6414",
-                    "lightSoft": "#7e6414"
-                }
-            },
-            {
-                "key": "gitDecoration.untrackedResourceForeground",
-                "bucket": "feedback-status",
-                "bucketLabel": "Feedback and Status",
-                "suggestion": "candidate feedback roles like error / warning / info / success",
-                "rationale": "Validation, git, and attention colors should move through abstract feedback roles instead of platform-local key ownership.",
-                "variants": {
-                    "dark": "#87ab70",
-                    "darkSoft": "#95a173",
-                    "light": "#385820",
-                    "lightSoft": "#61783f"
-                }
-            },
-            {
-                "key": "list.activeSelectionForeground",
-                "bucket": "selection-list-state",
-                "bucketLabel": "Selection and List State",
-                "suggestion": "candidate navigation-state roles for active / inactive / focus list treatments",
-                "rationale": "List selection states are shared navigational behavior and should be expressed as abstract navigation roles, not raw VS Code keys.",
-                "variants": {
-                    "dark": "#e8ddca",
-                    "darkSoft": "#dfd2be",
-                    "light": "#2f210e",
-                    "lightSoft": "#4d4032"
-                }
-            },
             {
                 "key": "scrollbarSlider.activeBackground",
                 "bucket": "scrollbar-shadow",
@@ -1403,45 +443,6 @@
                 }
             },
             {
-                "key": "sideBarSectionHeader.background",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#26211c",
-                    "darkSoft": "#28221d",
-                    "light": "#e7ddcc",
-                    "lightSoft": "#e0d7ca"
-                }
-            },
-            {
-                "key": "sideBarSectionHeader.border",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#3a3328",
-                    "darkSoft": "#4a4138",
-                    "light": "#d2c2a5",
-                    "lightSoft": "#c4b8a5"
-                }
-            },
-            {
-                "key": "statusBar.border",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#3a3328",
-                    "darkSoft": "#4a4138",
-                    "light": "#d2c2a5",
-                    "lightSoft": "#c4b8a5"
-                }
-            },
-            {
                 "key": "statusBar.debuggingBackground",
                 "bucket": "chrome-surface",
                 "bucketLabel": "Chrome Surface",
@@ -1455,19 +456,6 @@
                 }
             },
             {
-                "key": "statusBar.foreground",
-                "bucket": "chrome-ink",
-                "bucketLabel": "Chrome Ink",
-                "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
-                "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms.",
-                "variants": {
-                    "dark": "#f2e7d1",
-                    "darkSoft": "#eee2cd",
-                    "light": "#f9f1e6",
-                    "lightSoft": "#eee4d8"
-                }
-            },
-            {
                 "key": "statusBar.noFolderBackground",
                 "bucket": "chrome-surface",
                 "bucketLabel": "Chrome Surface",
@@ -1478,32 +466,6 @@
                     "darkSoft": "#3e352d",
                     "light": "#8f5b2e",
                     "lightSoft": "#80634a"
-                }
-            },
-            {
-                "key": "tab.hoverBackground",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#312b26",
-                    "darkSoft": "#332c26",
-                    "light": "#e7ddcc",
-                    "lightSoft": "#e0d7ca"
-                }
-            },
-            {
-                "key": "titleBar.inactiveBackground",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
-                "variants": {
-                    "dark": "#191511",
-                    "darkSoft": "#1d1814",
-                    "light": "#ddd0b8",
-                    "lightSoft": "#d0c3ad"
                 }
             },
             {

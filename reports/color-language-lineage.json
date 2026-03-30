@@ -947,6 +947,82 @@
           ]
         }
       }
+    },
+    "guideInk": {
+      "source": {
+        "family": null,
+        "tone": null
+      },
+      "variants": {
+        "dark": {
+          "color": "#a3947c",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "guidance-rules.guidances.guideInk.source.values.dark",
+              "value": "#a3947c"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#a39587",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "guidance-rules.guidances.guideInk.source.values.darkSoft",
+              "value": "#a39587"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#7e5e37",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "guidance-rules.guidances.guideInk.source.values.light",
+              "value": "#7e5e37"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#8c7154",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "guidance-rules.guidances.guideInk.source.values.lightSoft",
+              "value": "#8c7154"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
     }
   },
   "terminals": {
@@ -3055,6 +3131,310 @@
               "with": "shellInk",
               "t": 0,
               "value": "#d2c8b4"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "shellBand": {
+      "source": {
+        "family": "shell",
+        "tone": "lift"
+      },
+      "variants": {
+        "dark": {
+          "color": "#2d2824",
+          "family": "shell",
+          "tone": "lift",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.dark",
+              "value": "#2d2824"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#332d26",
+          "family": "shell",
+          "tone": "lift",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.darkSoft",
+              "value": "#332d26"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#dfd6c7",
+          "family": "shell",
+          "tone": "lift",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.light",
+              "value": "#dfd6c7"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#d8cfc3",
+          "family": "shell",
+          "tone": "lift",
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.lightSoft",
+              "value": "#d8cfc3"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "accentHoverFill": {
+      "source": {
+        "family": null,
+        "tone": null
+      },
+      "variants": {
+        "dark": {
+          "color": "#d08a4c",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.accentHoverFill.source.values.dark",
+              "value": "#d08a4c"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#b98858",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.accentHoverFill.source.values.darkSoft",
+              "value": "#b98858"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#a86629",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.accentHoverFill.source.values.light",
+              "value": "#a86629"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#b88653",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.accentHoverFill.source.values.lightSoft",
+              "value": "#b88653"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "onStatusInk": {
+      "source": {
+        "family": null,
+        "tone": null
+      },
+      "variants": {
+        "dark": {
+          "color": "#f2e7d1",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.onStatusInk.source.values.dark",
+              "value": "#f2e7d1"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#eee2cd",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.onStatusInk.source.values.darkSoft",
+              "value": "#eee2cd"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#f9f1e6",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.onStatusInk.source.values.light",
+              "value": "#f9f1e6"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#eee4d8",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.onStatusInk.source.values.lightSoft",
+              "value": "#eee4d8"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
+    },
+    "navActiveInk": {
+      "source": {
+        "family": null,
+        "tone": null
+      },
+      "variants": {
+        "dark": {
+          "color": "#e8ddca",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.navActiveInk.source.values.dark",
+              "value": "#e8ddca"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#dfd2be",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.navActiveInk.source.values.darkSoft",
+              "value": "#dfd2be"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#2f210e",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.navActiveInk.source.values.light",
+              "value": "#2f210e"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#4d4032",
+          "family": null,
+          "tone": null,
+          "usedEscapeHatch": false,
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interface-rules.interfaces.navActiveInk.source.values.lightSoft",
+              "value": "#4d4032"
             },
             {
               "type": "variant-profile",
@@ -7197,7 +7577,7 @@
       "variant": "lightSoft",
       "roleId": null,
       "familyId": "ground",
-      "resolvedColor": "#d6caba",
+      "resolvedColor": "#d6c9ba",
       "chainRefs": [
         "foundation.families.ground.tones.base.lightSoft",
         "surface-rules.surfaces.canvas",
@@ -8440,7 +8820,7 @@
       "variant": "lightSoft",
       "roleId": null,
       "familyId": "ground",
-      "resolvedColor": "#d6caba",
+      "resolvedColor": "#d6c9ba",
       "chainRefs": [
         "foundation.families.ground.tones.base.lightSoft",
         "surface-rules.surfaces.canvas",
@@ -9017,6 +9397,222 @@
       ]
     },
     {
+      "id": "web-interface:shellBand:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.shellBand",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#2d2824",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.dark",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "vscode-interface:shellBand:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.sideBarSectionHeader.background",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#2d2824",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.dark",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "obsidian-interface:shellBand:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--hearth-shell-band",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#2d2824",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.dark",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "web-interface:accentHoverFill:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.accentHover",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#d08a4c",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.dark",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "vscode-interface:accentHoverFill:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.button.hoverBackground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#d08a4c",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.dark",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "obsidian-interface:accentHoverFill:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--hearth-accent-hover",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#d08a4c",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.dark",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "web-interface:onStatusInk:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.onStatus",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#f2e7d1",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.dark",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:onStatusInk:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.statusBar.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#f2e7d1",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.dark",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:onStatusInk:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--hearth-on-status",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#f2e7d1",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.dark",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "web-interface:navActiveInk:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.navActiveInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#e8ddca",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.dark",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:navActiveInk:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.list.activeSelectionForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#e8ddca",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.dark",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:navActiveInk:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--hearth-nav-active-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#e8ddca",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.dark",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.dark",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
       "id": "web-interface:shellInk:darkSoft",
       "path": "src/data/tokens.ts",
       "field": "tokens.darkSoft.shellInk",
@@ -9524,6 +10120,222 @@
         "variant-knobs.interfaceMix.navInactiveFill.darkSoft",
         "interface-rules.interfaces.navInactiveFill",
         "adapters.interfaces.navInactiveFill"
+      ]
+    },
+    {
+      "id": "web-interface:shellBand:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.shellBand",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#332d26",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.darkSoft",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "vscode-interface:shellBand:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.sideBarSectionHeader.background",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#332d26",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.darkSoft",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "obsidian-interface:shellBand:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--hearth-shell-band",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#332d26",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.darkSoft",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "web-interface:accentHoverFill:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.accentHover",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#b98858",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.darkSoft",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "vscode-interface:accentHoverFill:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.button.hoverBackground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#b98858",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.darkSoft",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "obsidian-interface:accentHoverFill:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--hearth-accent-hover",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#b98858",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.darkSoft",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "web-interface:onStatusInk:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.onStatus",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#eee2cd",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.darkSoft",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:onStatusInk:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.statusBar.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#eee2cd",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.darkSoft",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:onStatusInk:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--hearth-on-status",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#eee2cd",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.darkSoft",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "web-interface:navActiveInk:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.navActiveInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#dfd2be",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.darkSoft",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:navActiveInk:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.list.activeSelectionForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#dfd2be",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.darkSoft",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:navActiveInk:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--hearth-nav-active-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#dfd2be",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.darkSoft",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.interfaces.navActiveInk"
       ]
     },
     {
@@ -10037,6 +10849,222 @@
       ]
     },
     {
+      "id": "web-interface:shellBand:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.shellBand",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#dfd6c7",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.light",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "vscode-interface:shellBand:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.sideBarSectionHeader.background",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#dfd6c7",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.light",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "obsidian-interface:shellBand:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--hearth-shell-band",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#dfd6c7",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.light",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "web-interface:accentHoverFill:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.accentHover",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#a86629",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.light",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "vscode-interface:accentHoverFill:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.button.hoverBackground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#a86629",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.light",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "obsidian-interface:accentHoverFill:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--hearth-accent-hover",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#a86629",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.light",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "web-interface:onStatusInk:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.onStatus",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#f9f1e6",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.light",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:onStatusInk:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.statusBar.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#f9f1e6",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.light",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:onStatusInk:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--hearth-on-status",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#f9f1e6",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.light",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "web-interface:navActiveInk:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.navActiveInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#2f210e",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.light",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:navActiveInk:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.list.activeSelectionForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#2f210e",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.light",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:navActiveInk:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--hearth-nav-active-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#2f210e",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.light",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.light",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
       "id": "web-interface:shellInk:lightSoft",
       "path": "src/data/tokens.ts",
       "field": "tokens.lightSoft.shellInk",
@@ -10544,6 +11572,222 @@
         "variant-knobs.interfaceMix.navInactiveFill.lightSoft",
         "interface-rules.interfaces.navInactiveFill",
         "adapters.interfaces.navInactiveFill"
+      ]
+    },
+    {
+      "id": "web-interface:shellBand:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.shellBand",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#d8cfc3",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.lightSoft",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "vscode-interface:shellBand:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.sideBarSectionHeader.background",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#d8cfc3",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.lightSoft",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "obsidian-interface:shellBand:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--hearth-shell-band",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "shellBand",
+      "familyId": "shell",
+      "resolvedColor": "#d8cfc3",
+      "chainRefs": [
+        "foundation.families.shell.tones.lift.lightSoft",
+        "interface-rules.interfaces.shellBand",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.shellBand"
+      ]
+    },
+    {
+      "id": "web-interface:accentHoverFill:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.accentHover",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#b88653",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.lightSoft",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "vscode-interface:accentHoverFill:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.button.hoverBackground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#b88653",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.lightSoft",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "obsidian-interface:accentHoverFill:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--hearth-accent-hover",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "accentHoverFill",
+      "familyId": "interface:accentHoverFill",
+      "resolvedColor": "#b88653",
+      "chainRefs": [
+        "interface-rules.interfaces.accentHoverFill.source.values.lightSoft",
+        "interface-rules.interfaces.accentHoverFill",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.accentHoverFill"
+      ]
+    },
+    {
+      "id": "web-interface:onStatusInk:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.onStatus",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#eee4d8",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.lightSoft",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:onStatusInk:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.statusBar.foreground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#eee4d8",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.lightSoft",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:onStatusInk:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--hearth-on-status",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "onStatusInk",
+      "familyId": "interface:onStatusInk",
+      "resolvedColor": "#eee4d8",
+      "chainRefs": [
+        "interface-rules.interfaces.onStatusInk.source.values.lightSoft",
+        "interface-rules.interfaces.onStatusInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.onStatusInk"
+      ]
+    },
+    {
+      "id": "web-interface:navActiveInk:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.navActiveInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#4d4032",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.lightSoft",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "vscode-interface:navActiveInk:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.list.activeSelectionForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#4d4032",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.lightSoft",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.navActiveInk"
+      ]
+    },
+    {
+      "id": "obsidian-interface:navActiveInk:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--hearth-nav-active-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "interfaceId": "navActiveInk",
+      "familyId": "interface:navActiveInk",
+      "resolvedColor": "#4d4032",
+      "chainRefs": [
+        "interface-rules.interfaces.navActiveInk.source.values.lightSoft",
+        "interface-rules.interfaces.navActiveInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.interfaces.navActiveInk"
       ]
     },
     {
@@ -11081,6 +12325,60 @@
       ]
     },
     {
+      "id": "web-guidance:guideInk:dark",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.dark.guideInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "dark",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#a3947c",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.dark",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.dark",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
+      "id": "vscode-guidance:guideInk:dark",
+      "path": "themes/hearth-dark.json",
+      "field": "colors.editorLineNumber.activeForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "dark",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#a3947c",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.dark",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.dark",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
+      "id": "obsidian-guidance:guideInk:dark",
+      "path": "obsidian/themes/hearth-dark.css",
+      "field": "--hearth-guide-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "dark",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#a3947c",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.dark",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.dark",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
       "id": "web-guidance:guide:darkSoft",
       "path": "src/data/tokens.ts",
       "field": "tokens.darkSoft.guide",
@@ -11612,6 +12910,60 @@
         "variant-knobs.guidanceAlpha.bracketMatchStroke.darkSoft",
         "guidance-rules.guidances.bracketMatchStroke",
         "adapters.guidances.bracketMatchStroke"
+      ]
+    },
+    {
+      "id": "web-guidance:guideInk:darkSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.darkSoft.guideInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "darkSoft",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#a39587",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.darkSoft",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
+      "id": "vscode-guidance:guideInk:darkSoft",
+      "path": "themes/hearth-dark-soft.json",
+      "field": "colors.editorLineNumber.activeForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "darkSoft",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#a39587",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.darkSoft",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
+      "id": "obsidian-guidance:guideInk:darkSoft",
+      "path": "obsidian/themes/hearth-dark-soft.css",
+      "field": "--hearth-guide-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "darkSoft",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#a39587",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.darkSoft",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.darkSoft",
+        "adapters.guidances.guideInk"
       ]
     },
     {
@@ -12149,6 +13501,60 @@
       ]
     },
     {
+      "id": "web-guidance:guideInk:light",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.light.guideInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "light",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#7e5e37",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.light",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.light",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
+      "id": "vscode-guidance:guideInk:light",
+      "path": "themes/hearth-light.json",
+      "field": "colors.editorLineNumber.activeForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "light",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#7e5e37",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.light",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.light",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
+      "id": "obsidian-guidance:guideInk:light",
+      "path": "obsidian/themes/hearth-light.css",
+      "field": "--hearth-guide-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "light",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#7e5e37",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.light",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.light",
+        "adapters.guidances.guideInk"
+      ]
+    },
+    {
       "id": "web-guidance:guide:lightSoft",
       "path": "src/data/tokens.ts",
       "field": "tokens.lightSoft.guide",
@@ -12680,6 +14086,62 @@
         "variant-knobs.guidanceAlpha.bracketMatchStroke.lightSoft",
         "guidance-rules.guidances.bracketMatchStroke",
         "adapters.guidances.bracketMatchStroke"
+      ]
+    },
+    {
+      "id": "web-guidance:guideInk:lightSoft",
+      "path": "src/data/tokens.ts",
+      "field": "tokens.lightSoft.guideInk",
+      "artifactType": "webToken",
+      "adapter": "web",
+      "variant": "lightSoft",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#82694f",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.lightSoft",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.guidances.guideInk",
+        "scripts/generate-theme-variants.mjs#postprocess"
+      ]
+    },
+    {
+      "id": "vscode-guidance:guideInk:lightSoft",
+      "path": "themes/hearth-light-soft.json",
+      "field": "colors.editorLineNumber.activeForeground",
+      "artifactType": "vscodeWorkbench",
+      "adapter": "vscode",
+      "variant": "lightSoft",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#82694f",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.lightSoft",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.guidances.guideInk",
+        "scripts/generate-theme-variants.mjs#postprocess"
+      ]
+    },
+    {
+      "id": "obsidian-guidance:guideInk:lightSoft",
+      "path": "obsidian/themes/hearth-light-soft.css",
+      "field": "--hearth-guide-ink",
+      "artifactType": "obsidianVar",
+      "adapter": "obsidian",
+      "variant": "lightSoft",
+      "roleId": null,
+      "guidanceId": "guideInk",
+      "familyId": "guidance:guideInk",
+      "resolvedColor": "#82694f",
+      "chainRefs": [
+        "guidance-rules.guidances.guideInk.source.values.lightSoft",
+        "guidance-rules.guidances.guideInk",
+        "variant-profiles.variants.lightSoft",
+        "adapters.guidances.guideInk"
       ]
     },
     {
@@ -22315,7 +23777,7 @@
         "variant": "lightSoft",
         "roleId": null,
         "familyId": "ground",
-        "resolvedColor": "#d6caba",
+        "resolvedColor": "#d6c9ba",
         "chainRefs": [
           "foundation.families.ground.tones.base.lightSoft",
           "surface-rules.surfaces.canvas",
@@ -23558,7 +25020,7 @@
         "variant": "lightSoft",
         "roleId": null,
         "familyId": "ground",
-        "resolvedColor": "#d6caba",
+        "resolvedColor": "#d6c9ba",
         "chainRefs": [
           "foundation.families.ground.tones.base.lightSoft",
           "surface-rules.surfaces.canvas",
@@ -24134,6 +25596,222 @@
           "adapters.interfaces.navInactiveFill"
         ]
       },
+      "web-interface:shellBand:dark": {
+        "id": "web-interface:shellBand:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.shellBand",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#2d2824",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.dark",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "vscode-interface:shellBand:dark": {
+        "id": "vscode-interface:shellBand:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.sideBarSectionHeader.background",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#2d2824",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.dark",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "obsidian-interface:shellBand:dark": {
+        "id": "obsidian-interface:shellBand:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--hearth-shell-band",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#2d2824",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.dark",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "web-interface:accentHoverFill:dark": {
+        "id": "web-interface:accentHoverFill:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.accentHover",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#d08a4c",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.dark",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "vscode-interface:accentHoverFill:dark": {
+        "id": "vscode-interface:accentHoverFill:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.button.hoverBackground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#d08a4c",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.dark",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "obsidian-interface:accentHoverFill:dark": {
+        "id": "obsidian-interface:accentHoverFill:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--hearth-accent-hover",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#d08a4c",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.dark",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "web-interface:onStatusInk:dark": {
+        "id": "web-interface:onStatusInk:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.onStatus",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#f2e7d1",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.dark",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "vscode-interface:onStatusInk:dark": {
+        "id": "vscode-interface:onStatusInk:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.statusBar.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#f2e7d1",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.dark",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "obsidian-interface:onStatusInk:dark": {
+        "id": "obsidian-interface:onStatusInk:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--hearth-on-status",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#f2e7d1",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.dark",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "web-interface:navActiveInk:dark": {
+        "id": "web-interface:navActiveInk:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.navActiveInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#e8ddca",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.dark",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "vscode-interface:navActiveInk:dark": {
+        "id": "vscode-interface:navActiveInk:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.list.activeSelectionForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#e8ddca",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.dark",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "obsidian-interface:navActiveInk:dark": {
+        "id": "obsidian-interface:navActiveInk:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--hearth-nav-active-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#e8ddca",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.dark",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.dark",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
       "web-interface:shellInk:darkSoft": {
         "id": "web-interface:shellInk:darkSoft",
         "path": "src/data/tokens.ts",
@@ -24642,6 +26320,222 @@
           "variant-knobs.interfaceMix.navInactiveFill.darkSoft",
           "interface-rules.interfaces.navInactiveFill",
           "adapters.interfaces.navInactiveFill"
+        ]
+      },
+      "web-interface:shellBand:darkSoft": {
+        "id": "web-interface:shellBand:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.shellBand",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#332d26",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.darkSoft",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "vscode-interface:shellBand:darkSoft": {
+        "id": "vscode-interface:shellBand:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.sideBarSectionHeader.background",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#332d26",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.darkSoft",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "obsidian-interface:shellBand:darkSoft": {
+        "id": "obsidian-interface:shellBand:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--hearth-shell-band",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#332d26",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.darkSoft",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "web-interface:accentHoverFill:darkSoft": {
+        "id": "web-interface:accentHoverFill:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.accentHover",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#b98858",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.darkSoft",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "vscode-interface:accentHoverFill:darkSoft": {
+        "id": "vscode-interface:accentHoverFill:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.button.hoverBackground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#b98858",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.darkSoft",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "obsidian-interface:accentHoverFill:darkSoft": {
+        "id": "obsidian-interface:accentHoverFill:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--hearth-accent-hover",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#b98858",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.darkSoft",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "web-interface:onStatusInk:darkSoft": {
+        "id": "web-interface:onStatusInk:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.onStatus",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#eee2cd",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.darkSoft",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "vscode-interface:onStatusInk:darkSoft": {
+        "id": "vscode-interface:onStatusInk:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.statusBar.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#eee2cd",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.darkSoft",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "obsidian-interface:onStatusInk:darkSoft": {
+        "id": "obsidian-interface:onStatusInk:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--hearth-on-status",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#eee2cd",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.darkSoft",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "web-interface:navActiveInk:darkSoft": {
+        "id": "web-interface:navActiveInk:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.navActiveInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#dfd2be",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.darkSoft",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "vscode-interface:navActiveInk:darkSoft": {
+        "id": "vscode-interface:navActiveInk:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.list.activeSelectionForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#dfd2be",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.darkSoft",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "obsidian-interface:navActiveInk:darkSoft": {
+        "id": "obsidian-interface:navActiveInk:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--hearth-nav-active-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#dfd2be",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.darkSoft",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.interfaces.navActiveInk"
         ]
       },
       "web-interface:shellInk:light": {
@@ -25154,6 +27048,222 @@
           "adapters.interfaces.navInactiveFill"
         ]
       },
+      "web-interface:shellBand:light": {
+        "id": "web-interface:shellBand:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.shellBand",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#dfd6c7",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.light",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "vscode-interface:shellBand:light": {
+        "id": "vscode-interface:shellBand:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.sideBarSectionHeader.background",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#dfd6c7",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.light",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "obsidian-interface:shellBand:light": {
+        "id": "obsidian-interface:shellBand:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--hearth-shell-band",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#dfd6c7",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.light",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "web-interface:accentHoverFill:light": {
+        "id": "web-interface:accentHoverFill:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.accentHover",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#a86629",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.light",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "vscode-interface:accentHoverFill:light": {
+        "id": "vscode-interface:accentHoverFill:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.button.hoverBackground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#a86629",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.light",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "obsidian-interface:accentHoverFill:light": {
+        "id": "obsidian-interface:accentHoverFill:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--hearth-accent-hover",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#a86629",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.light",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "web-interface:onStatusInk:light": {
+        "id": "web-interface:onStatusInk:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.onStatus",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#f9f1e6",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.light",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "vscode-interface:onStatusInk:light": {
+        "id": "vscode-interface:onStatusInk:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.statusBar.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#f9f1e6",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.light",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "obsidian-interface:onStatusInk:light": {
+        "id": "obsidian-interface:onStatusInk:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--hearth-on-status",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#f9f1e6",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.light",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "web-interface:navActiveInk:light": {
+        "id": "web-interface:navActiveInk:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.navActiveInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#2f210e",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.light",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "vscode-interface:navActiveInk:light": {
+        "id": "vscode-interface:navActiveInk:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.list.activeSelectionForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#2f210e",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.light",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "obsidian-interface:navActiveInk:light": {
+        "id": "obsidian-interface:navActiveInk:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--hearth-nav-active-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#2f210e",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.light",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.light",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
       "web-interface:shellInk:lightSoft": {
         "id": "web-interface:shellInk:lightSoft",
         "path": "src/data/tokens.ts",
@@ -25662,6 +27772,222 @@
           "variant-knobs.interfaceMix.navInactiveFill.lightSoft",
           "interface-rules.interfaces.navInactiveFill",
           "adapters.interfaces.navInactiveFill"
+        ]
+      },
+      "web-interface:shellBand:lightSoft": {
+        "id": "web-interface:shellBand:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.shellBand",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#d8cfc3",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.lightSoft",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "vscode-interface:shellBand:lightSoft": {
+        "id": "vscode-interface:shellBand:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.sideBarSectionHeader.background",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#d8cfc3",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.lightSoft",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "obsidian-interface:shellBand:lightSoft": {
+        "id": "obsidian-interface:shellBand:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--hearth-shell-band",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "shellBand",
+        "familyId": "shell",
+        "resolvedColor": "#d8cfc3",
+        "chainRefs": [
+          "foundation.families.shell.tones.lift.lightSoft",
+          "interface-rules.interfaces.shellBand",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.shellBand"
+        ]
+      },
+      "web-interface:accentHoverFill:lightSoft": {
+        "id": "web-interface:accentHoverFill:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.accentHover",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#b88653",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.lightSoft",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "vscode-interface:accentHoverFill:lightSoft": {
+        "id": "vscode-interface:accentHoverFill:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.button.hoverBackground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#b88653",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.lightSoft",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "obsidian-interface:accentHoverFill:lightSoft": {
+        "id": "obsidian-interface:accentHoverFill:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--hearth-accent-hover",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "accentHoverFill",
+        "familyId": "interface:accentHoverFill",
+        "resolvedColor": "#b88653",
+        "chainRefs": [
+          "interface-rules.interfaces.accentHoverFill.source.values.lightSoft",
+          "interface-rules.interfaces.accentHoverFill",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.accentHoverFill"
+        ]
+      },
+      "web-interface:onStatusInk:lightSoft": {
+        "id": "web-interface:onStatusInk:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.onStatus",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#eee4d8",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.lightSoft",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "vscode-interface:onStatusInk:lightSoft": {
+        "id": "vscode-interface:onStatusInk:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.statusBar.foreground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#eee4d8",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.lightSoft",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "obsidian-interface:onStatusInk:lightSoft": {
+        "id": "obsidian-interface:onStatusInk:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--hearth-on-status",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "onStatusInk",
+        "familyId": "interface:onStatusInk",
+        "resolvedColor": "#eee4d8",
+        "chainRefs": [
+          "interface-rules.interfaces.onStatusInk.source.values.lightSoft",
+          "interface-rules.interfaces.onStatusInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.onStatusInk"
+        ]
+      },
+      "web-interface:navActiveInk:lightSoft": {
+        "id": "web-interface:navActiveInk:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.navActiveInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#4d4032",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.lightSoft",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "vscode-interface:navActiveInk:lightSoft": {
+        "id": "vscode-interface:navActiveInk:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.list.activeSelectionForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#4d4032",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.lightSoft",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.navActiveInk"
+        ]
+      },
+      "obsidian-interface:navActiveInk:lightSoft": {
+        "id": "obsidian-interface:navActiveInk:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--hearth-nav-active-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "interfaceId": "navActiveInk",
+        "familyId": "interface:navActiveInk",
+        "resolvedColor": "#4d4032",
+        "chainRefs": [
+          "interface-rules.interfaces.navActiveInk.source.values.lightSoft",
+          "interface-rules.interfaces.navActiveInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.interfaces.navActiveInk"
         ]
       },
       "web-guidance:guide:dark": {
@@ -26198,6 +28524,60 @@
           "adapters.guidances.bracketMatchStroke"
         ]
       },
+      "web-guidance:guideInk:dark": {
+        "id": "web-guidance:guideInk:dark",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.dark.guideInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "dark",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#a3947c",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.dark",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.dark",
+          "adapters.guidances.guideInk"
+        ]
+      },
+      "vscode-guidance:guideInk:dark": {
+        "id": "vscode-guidance:guideInk:dark",
+        "path": "themes/hearth-dark.json",
+        "field": "colors.editorLineNumber.activeForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "dark",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#a3947c",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.dark",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.dark",
+          "adapters.guidances.guideInk"
+        ]
+      },
+      "obsidian-guidance:guideInk:dark": {
+        "id": "obsidian-guidance:guideInk:dark",
+        "path": "obsidian/themes/hearth-dark.css",
+        "field": "--hearth-guide-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "dark",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#a3947c",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.dark",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.dark",
+          "adapters.guidances.guideInk"
+        ]
+      },
       "web-guidance:guide:darkSoft": {
         "id": "web-guidance:guide:darkSoft",
         "path": "src/data/tokens.ts",
@@ -26730,6 +29110,60 @@
           "variant-knobs.guidanceAlpha.bracketMatchStroke.darkSoft",
           "guidance-rules.guidances.bracketMatchStroke",
           "adapters.guidances.bracketMatchStroke"
+        ]
+      },
+      "web-guidance:guideInk:darkSoft": {
+        "id": "web-guidance:guideInk:darkSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.darkSoft.guideInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "darkSoft",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#a39587",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.darkSoft",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.guidances.guideInk"
+        ]
+      },
+      "vscode-guidance:guideInk:darkSoft": {
+        "id": "vscode-guidance:guideInk:darkSoft",
+        "path": "themes/hearth-dark-soft.json",
+        "field": "colors.editorLineNumber.activeForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "darkSoft",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#a39587",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.darkSoft",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.guidances.guideInk"
+        ]
+      },
+      "obsidian-guidance:guideInk:darkSoft": {
+        "id": "obsidian-guidance:guideInk:darkSoft",
+        "path": "obsidian/themes/hearth-dark-soft.css",
+        "field": "--hearth-guide-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "darkSoft",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#a39587",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.darkSoft",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.darkSoft",
+          "adapters.guidances.guideInk"
         ]
       },
       "web-guidance:guide:light": {
@@ -27266,6 +29700,60 @@
           "adapters.guidances.bracketMatchStroke"
         ]
       },
+      "web-guidance:guideInk:light": {
+        "id": "web-guidance:guideInk:light",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.light.guideInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "light",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#7e5e37",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.light",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.light",
+          "adapters.guidances.guideInk"
+        ]
+      },
+      "vscode-guidance:guideInk:light": {
+        "id": "vscode-guidance:guideInk:light",
+        "path": "themes/hearth-light.json",
+        "field": "colors.editorLineNumber.activeForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "light",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#7e5e37",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.light",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.light",
+          "adapters.guidances.guideInk"
+        ]
+      },
+      "obsidian-guidance:guideInk:light": {
+        "id": "obsidian-guidance:guideInk:light",
+        "path": "obsidian/themes/hearth-light.css",
+        "field": "--hearth-guide-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "light",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#7e5e37",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.light",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.light",
+          "adapters.guidances.guideInk"
+        ]
+      },
       "web-guidance:guide:lightSoft": {
         "id": "web-guidance:guide:lightSoft",
         "path": "src/data/tokens.ts",
@@ -27798,6 +30286,62 @@
           "variant-knobs.guidanceAlpha.bracketMatchStroke.lightSoft",
           "guidance-rules.guidances.bracketMatchStroke",
           "adapters.guidances.bracketMatchStroke"
+        ]
+      },
+      "web-guidance:guideInk:lightSoft": {
+        "id": "web-guidance:guideInk:lightSoft",
+        "path": "src/data/tokens.ts",
+        "field": "tokens.lightSoft.guideInk",
+        "artifactType": "webToken",
+        "adapter": "web",
+        "variant": "lightSoft",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#82694f",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.lightSoft",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.guidances.guideInk",
+          "scripts/generate-theme-variants.mjs#postprocess"
+        ]
+      },
+      "vscode-guidance:guideInk:lightSoft": {
+        "id": "vscode-guidance:guideInk:lightSoft",
+        "path": "themes/hearth-light-soft.json",
+        "field": "colors.editorLineNumber.activeForeground",
+        "artifactType": "vscodeWorkbench",
+        "adapter": "vscode",
+        "variant": "lightSoft",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#82694f",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.lightSoft",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.guidances.guideInk",
+          "scripts/generate-theme-variants.mjs#postprocess"
+        ]
+      },
+      "obsidian-guidance:guideInk:lightSoft": {
+        "id": "obsidian-guidance:guideInk:lightSoft",
+        "path": "obsidian/themes/hearth-light-soft.css",
+        "field": "--hearth-guide-ink",
+        "artifactType": "obsidianVar",
+        "adapter": "obsidian",
+        "variant": "lightSoft",
+        "roleId": null,
+        "guidanceId": "guideInk",
+        "familyId": "guidance:guideInk",
+        "resolvedColor": "#82694f",
+        "chainRefs": [
+          "guidance-rules.guidances.guideInk.source.values.lightSoft",
+          "guidance-rules.guidances.guideInk",
+          "variant-profiles.variants.lightSoft",
+          "adapters.guidances.guideInk"
         ]
       },
       "web-terminal:ansiBlack:dark": {
@@ -36359,6 +38903,10 @@
         "web-interface:shellRaised:dark",
         "web-interface:navActiveFill:dark",
         "web-interface:navInactiveFill:dark",
+        "web-interface:shellBand:dark",
+        "web-interface:accentHoverFill:dark",
+        "web-interface:onStatusInk:dark",
+        "web-interface:navActiveInk:dark",
         "web-interface:shellInk:darkSoft",
         "web-interface:supportInk:darkSoft",
         "web-interface:mutedInk:darkSoft",
@@ -36367,6 +38915,10 @@
         "web-interface:shellRaised:darkSoft",
         "web-interface:navActiveFill:darkSoft",
         "web-interface:navInactiveFill:darkSoft",
+        "web-interface:shellBand:darkSoft",
+        "web-interface:accentHoverFill:darkSoft",
+        "web-interface:onStatusInk:darkSoft",
+        "web-interface:navActiveInk:darkSoft",
         "web-interface:shellInk:light",
         "web-interface:supportInk:light",
         "web-interface:mutedInk:light",
@@ -36375,6 +38927,10 @@
         "web-interface:shellRaised:light",
         "web-interface:navActiveFill:light",
         "web-interface:navInactiveFill:light",
+        "web-interface:shellBand:light",
+        "web-interface:accentHoverFill:light",
+        "web-interface:onStatusInk:light",
+        "web-interface:navActiveInk:light",
         "web-interface:shellInk:lightSoft",
         "web-interface:supportInk:lightSoft",
         "web-interface:mutedInk:lightSoft",
@@ -36383,6 +38939,10 @@
         "web-interface:shellRaised:lightSoft",
         "web-interface:navActiveFill:lightSoft",
         "web-interface:navInactiveFill:lightSoft",
+        "web-interface:shellBand:lightSoft",
+        "web-interface:accentHoverFill:lightSoft",
+        "web-interface:onStatusInk:lightSoft",
+        "web-interface:navActiveInk:lightSoft",
         "web-guidance:guide:dark",
         "web-guidance:guideActive:dark",
         "web-guidance:whitespace:dark",
@@ -36391,6 +38951,7 @@
         "web-guidance:bracketCool:dark",
         "web-guidance:bracketMatchFill:dark",
         "web-guidance:bracketMatchStroke:dark",
+        "web-guidance:guideInk:dark",
         "web-guidance:guide:darkSoft",
         "web-guidance:guideActive:darkSoft",
         "web-guidance:whitespace:darkSoft",
@@ -36399,6 +38960,7 @@
         "web-guidance:bracketCool:darkSoft",
         "web-guidance:bracketMatchFill:darkSoft",
         "web-guidance:bracketMatchStroke:darkSoft",
+        "web-guidance:guideInk:darkSoft",
         "web-guidance:guide:light",
         "web-guidance:guideActive:light",
         "web-guidance:whitespace:light",
@@ -36407,6 +38969,7 @@
         "web-guidance:bracketCool:light",
         "web-guidance:bracketMatchFill:light",
         "web-guidance:bracketMatchStroke:light",
+        "web-guidance:guideInk:light",
         "web-guidance:guide:lightSoft",
         "web-guidance:guideActive:lightSoft",
         "web-guidance:whitespace:lightSoft",
@@ -36415,6 +38978,7 @@
         "web-guidance:bracketCool:lightSoft",
         "web-guidance:bracketMatchFill:lightSoft",
         "web-guidance:bracketMatchStroke:lightSoft",
+        "web-guidance:guideInk:lightSoft",
         "web-terminal:ansiBlack:dark",
         "web-terminal:ansiRed:dark",
         "web-terminal:ansiGreen:dark",
@@ -36562,6 +39126,10 @@
         "vscode-interface:shellRaised:dark",
         "vscode-interface:navActiveFill:dark",
         "vscode-interface:navInactiveFill:dark",
+        "vscode-interface:shellBand:dark",
+        "vscode-interface:accentHoverFill:dark",
+        "vscode-interface:onStatusInk:dark",
+        "vscode-interface:navActiveInk:dark",
         "vscode-guidance:guide:dark",
         "vscode-guidance:guideActive:dark",
         "vscode-guidance:whitespace:dark",
@@ -36570,6 +39138,7 @@
         "vscode-guidance:bracketCool:dark",
         "vscode-guidance:bracketMatchFill:dark",
         "vscode-guidance:bracketMatchStroke:dark",
+        "vscode-guidance:guideInk:dark",
         "vscode-terminal:ansiBlack:dark",
         "vscode-terminal:ansiRed:dark",
         "vscode-terminal:ansiGreen:dark",
@@ -36629,6 +39198,10 @@
         "obsidian-interface:shellRaised:dark",
         "obsidian-interface:navActiveFill:dark",
         "obsidian-interface:navInactiveFill:dark",
+        "obsidian-interface:shellBand:dark",
+        "obsidian-interface:accentHoverFill:dark",
+        "obsidian-interface:onStatusInk:dark",
+        "obsidian-interface:navActiveInk:dark",
         "obsidian-guidance:guide:dark",
         "obsidian-guidance:guideActive:dark",
         "obsidian-guidance:whitespace:dark",
@@ -36637,6 +39210,7 @@
         "obsidian-guidance:bracketCool:dark",
         "obsidian-guidance:bracketMatchFill:dark",
         "obsidian-guidance:bracketMatchStroke:dark",
+        "obsidian-guidance:guideInk:dark",
         "obsidian-terminal:ansiBlack:dark",
         "obsidian-terminal:ansiRed:dark",
         "obsidian-terminal:ansiGreen:dark",
@@ -36693,6 +39267,10 @@
         "vscode-interface:shellRaised:darkSoft",
         "vscode-interface:navActiveFill:darkSoft",
         "vscode-interface:navInactiveFill:darkSoft",
+        "vscode-interface:shellBand:darkSoft",
+        "vscode-interface:accentHoverFill:darkSoft",
+        "vscode-interface:onStatusInk:darkSoft",
+        "vscode-interface:navActiveInk:darkSoft",
         "vscode-guidance:guide:darkSoft",
         "vscode-guidance:guideActive:darkSoft",
         "vscode-guidance:whitespace:darkSoft",
@@ -36701,6 +39279,7 @@
         "vscode-guidance:bracketCool:darkSoft",
         "vscode-guidance:bracketMatchFill:darkSoft",
         "vscode-guidance:bracketMatchStroke:darkSoft",
+        "vscode-guidance:guideInk:darkSoft",
         "vscode-terminal:ansiBlack:darkSoft",
         "vscode-terminal:ansiRed:darkSoft",
         "vscode-terminal:ansiGreen:darkSoft",
@@ -36760,6 +39339,10 @@
         "obsidian-interface:shellRaised:darkSoft",
         "obsidian-interface:navActiveFill:darkSoft",
         "obsidian-interface:navInactiveFill:darkSoft",
+        "obsidian-interface:shellBand:darkSoft",
+        "obsidian-interface:accentHoverFill:darkSoft",
+        "obsidian-interface:onStatusInk:darkSoft",
+        "obsidian-interface:navActiveInk:darkSoft",
         "obsidian-guidance:guide:darkSoft",
         "obsidian-guidance:guideActive:darkSoft",
         "obsidian-guidance:whitespace:darkSoft",
@@ -36768,6 +39351,7 @@
         "obsidian-guidance:bracketCool:darkSoft",
         "obsidian-guidance:bracketMatchFill:darkSoft",
         "obsidian-guidance:bracketMatchStroke:darkSoft",
+        "obsidian-guidance:guideInk:darkSoft",
         "obsidian-terminal:ansiBlack:darkSoft",
         "obsidian-terminal:ansiRed:darkSoft",
         "obsidian-terminal:ansiGreen:darkSoft",
@@ -36824,6 +39408,10 @@
         "vscode-interface:shellRaised:light",
         "vscode-interface:navActiveFill:light",
         "vscode-interface:navInactiveFill:light",
+        "vscode-interface:shellBand:light",
+        "vscode-interface:accentHoverFill:light",
+        "vscode-interface:onStatusInk:light",
+        "vscode-interface:navActiveInk:light",
         "vscode-guidance:guide:light",
         "vscode-guidance:guideActive:light",
         "vscode-guidance:whitespace:light",
@@ -36832,6 +39420,7 @@
         "vscode-guidance:bracketCool:light",
         "vscode-guidance:bracketMatchFill:light",
         "vscode-guidance:bracketMatchStroke:light",
+        "vscode-guidance:guideInk:light",
         "vscode-terminal:ansiBlack:light",
         "vscode-terminal:ansiRed:light",
         "vscode-terminal:ansiGreen:light",
@@ -36891,6 +39480,10 @@
         "obsidian-interface:shellRaised:light",
         "obsidian-interface:navActiveFill:light",
         "obsidian-interface:navInactiveFill:light",
+        "obsidian-interface:shellBand:light",
+        "obsidian-interface:accentHoverFill:light",
+        "obsidian-interface:onStatusInk:light",
+        "obsidian-interface:navActiveInk:light",
         "obsidian-guidance:guide:light",
         "obsidian-guidance:guideActive:light",
         "obsidian-guidance:whitespace:light",
@@ -36899,6 +39492,7 @@
         "obsidian-guidance:bracketCool:light",
         "obsidian-guidance:bracketMatchFill:light",
         "obsidian-guidance:bracketMatchStroke:light",
+        "obsidian-guidance:guideInk:light",
         "obsidian-terminal:ansiBlack:light",
         "obsidian-terminal:ansiRed:light",
         "obsidian-terminal:ansiGreen:light",
@@ -36955,6 +39549,10 @@
         "vscode-interface:shellRaised:lightSoft",
         "vscode-interface:navActiveFill:lightSoft",
         "vscode-interface:navInactiveFill:lightSoft",
+        "vscode-interface:shellBand:lightSoft",
+        "vscode-interface:accentHoverFill:lightSoft",
+        "vscode-interface:onStatusInk:lightSoft",
+        "vscode-interface:navActiveInk:lightSoft",
         "vscode-guidance:guide:lightSoft",
         "vscode-guidance:guideActive:lightSoft",
         "vscode-guidance:whitespace:lightSoft",
@@ -36963,6 +39561,7 @@
         "vscode-guidance:bracketCool:lightSoft",
         "vscode-guidance:bracketMatchFill:lightSoft",
         "vscode-guidance:bracketMatchStroke:lightSoft",
+        "vscode-guidance:guideInk:lightSoft",
         "vscode-terminal:ansiBlack:lightSoft",
         "vscode-terminal:ansiRed:lightSoft",
         "vscode-terminal:ansiGreen:lightSoft",
@@ -37022,6 +39621,10 @@
         "obsidian-interface:shellRaised:lightSoft",
         "obsidian-interface:navActiveFill:lightSoft",
         "obsidian-interface:navInactiveFill:lightSoft",
+        "obsidian-interface:shellBand:lightSoft",
+        "obsidian-interface:accentHoverFill:lightSoft",
+        "obsidian-interface:onStatusInk:lightSoft",
+        "obsidian-interface:navActiveInk:lightSoft",
         "obsidian-guidance:guide:lightSoft",
         "obsidian-guidance:guideActive:lightSoft",
         "obsidian-guidance:whitespace:lightSoft",
@@ -37030,6 +39633,7 @@
         "obsidian-guidance:bracketCool:lightSoft",
         "obsidian-guidance:bracketMatchFill:lightSoft",
         "obsidian-guidance:bracketMatchStroke:lightSoft",
+        "obsidian-guidance:guideInk:lightSoft",
         "obsidian-terminal:ansiBlack:lightSoft",
         "obsidian-terminal:ansiRed:lightSoft",
         "obsidian-terminal:ansiGreen:lightSoft",
@@ -37173,6 +39777,18 @@
         "web-interface:navInactiveFill:dark",
         "vscode-interface:navInactiveFill:dark",
         "obsidian-interface:navInactiveFill:dark",
+        "web-interface:shellBand:dark",
+        "vscode-interface:shellBand:dark",
+        "obsidian-interface:shellBand:dark",
+        "web-interface:accentHoverFill:dark",
+        "vscode-interface:accentHoverFill:dark",
+        "obsidian-interface:accentHoverFill:dark",
+        "web-interface:onStatusInk:dark",
+        "vscode-interface:onStatusInk:dark",
+        "obsidian-interface:onStatusInk:dark",
+        "web-interface:navActiveInk:dark",
+        "vscode-interface:navActiveInk:dark",
+        "obsidian-interface:navActiveInk:dark",
         "web-guidance:guide:dark",
         "vscode-guidance:guide:dark",
         "obsidian-guidance:guide:dark",
@@ -37197,6 +39813,9 @@
         "web-guidance:bracketMatchStroke:dark",
         "vscode-guidance:bracketMatchStroke:dark",
         "obsidian-guidance:bracketMatchStroke:dark",
+        "web-guidance:guideInk:dark",
+        "vscode-guidance:guideInk:dark",
+        "obsidian-guidance:guideInk:dark",
         "web-terminal:ansiBlack:dark",
         "vscode-terminal:ansiBlack:dark",
         "obsidian-terminal:ansiBlack:dark",
@@ -37370,6 +39989,18 @@
         "web-interface:navInactiveFill:darkSoft",
         "vscode-interface:navInactiveFill:darkSoft",
         "obsidian-interface:navInactiveFill:darkSoft",
+        "web-interface:shellBand:darkSoft",
+        "vscode-interface:shellBand:darkSoft",
+        "obsidian-interface:shellBand:darkSoft",
+        "web-interface:accentHoverFill:darkSoft",
+        "vscode-interface:accentHoverFill:darkSoft",
+        "obsidian-interface:accentHoverFill:darkSoft",
+        "web-interface:onStatusInk:darkSoft",
+        "vscode-interface:onStatusInk:darkSoft",
+        "obsidian-interface:onStatusInk:darkSoft",
+        "web-interface:navActiveInk:darkSoft",
+        "vscode-interface:navActiveInk:darkSoft",
+        "obsidian-interface:navActiveInk:darkSoft",
         "web-guidance:guide:darkSoft",
         "vscode-guidance:guide:darkSoft",
         "obsidian-guidance:guide:darkSoft",
@@ -37394,6 +40025,9 @@
         "web-guidance:bracketMatchStroke:darkSoft",
         "vscode-guidance:bracketMatchStroke:darkSoft",
         "obsidian-guidance:bracketMatchStroke:darkSoft",
+        "web-guidance:guideInk:darkSoft",
+        "vscode-guidance:guideInk:darkSoft",
+        "obsidian-guidance:guideInk:darkSoft",
         "web-terminal:ansiBlack:darkSoft",
         "vscode-terminal:ansiBlack:darkSoft",
         "obsidian-terminal:ansiBlack:darkSoft",
@@ -37567,6 +40201,18 @@
         "web-interface:navInactiveFill:light",
         "vscode-interface:navInactiveFill:light",
         "obsidian-interface:navInactiveFill:light",
+        "web-interface:shellBand:light",
+        "vscode-interface:shellBand:light",
+        "obsidian-interface:shellBand:light",
+        "web-interface:accentHoverFill:light",
+        "vscode-interface:accentHoverFill:light",
+        "obsidian-interface:accentHoverFill:light",
+        "web-interface:onStatusInk:light",
+        "vscode-interface:onStatusInk:light",
+        "obsidian-interface:onStatusInk:light",
+        "web-interface:navActiveInk:light",
+        "vscode-interface:navActiveInk:light",
+        "obsidian-interface:navActiveInk:light",
         "web-guidance:guide:light",
         "vscode-guidance:guide:light",
         "obsidian-guidance:guide:light",
@@ -37591,6 +40237,9 @@
         "web-guidance:bracketMatchStroke:light",
         "vscode-guidance:bracketMatchStroke:light",
         "obsidian-guidance:bracketMatchStroke:light",
+        "web-guidance:guideInk:light",
+        "vscode-guidance:guideInk:light",
+        "obsidian-guidance:guideInk:light",
         "web-terminal:ansiBlack:light",
         "vscode-terminal:ansiBlack:light",
         "obsidian-terminal:ansiBlack:light",
@@ -37764,6 +40413,18 @@
         "web-interface:navInactiveFill:lightSoft",
         "vscode-interface:navInactiveFill:lightSoft",
         "obsidian-interface:navInactiveFill:lightSoft",
+        "web-interface:shellBand:lightSoft",
+        "vscode-interface:shellBand:lightSoft",
+        "obsidian-interface:shellBand:lightSoft",
+        "web-interface:accentHoverFill:lightSoft",
+        "vscode-interface:accentHoverFill:lightSoft",
+        "obsidian-interface:accentHoverFill:lightSoft",
+        "web-interface:onStatusInk:lightSoft",
+        "vscode-interface:onStatusInk:lightSoft",
+        "obsidian-interface:onStatusInk:lightSoft",
+        "web-interface:navActiveInk:lightSoft",
+        "vscode-interface:navActiveInk:lightSoft",
+        "obsidian-interface:navActiveInk:lightSoft",
         "web-guidance:guide:lightSoft",
         "vscode-guidance:guide:lightSoft",
         "obsidian-guidance:guide:lightSoft",
@@ -37788,6 +40449,9 @@
         "web-guidance:bracketMatchStroke:lightSoft",
         "vscode-guidance:bracketMatchStroke:lightSoft",
         "obsidian-guidance:bracketMatchStroke:lightSoft",
+        "web-guidance:guideInk:lightSoft",
+        "vscode-guidance:guideInk:lightSoft",
+        "obsidian-guidance:guideInk:lightSoft",
         "web-terminal:ansiBlack:lightSoft",
         "vscode-terminal:ansiBlack:lightSoft",
         "obsidian-terminal:ansiBlack:lightSoft",
@@ -38323,6 +40987,62 @@
         "web-interface:navInactiveFill:lightSoft",
         "vscode-interface:navInactiveFill:lightSoft",
         "obsidian-interface:navInactiveFill:lightSoft"
+      ],
+      "shellBand": [
+        "web-interface:shellBand:dark",
+        "vscode-interface:shellBand:dark",
+        "obsidian-interface:shellBand:dark",
+        "web-interface:shellBand:darkSoft",
+        "vscode-interface:shellBand:darkSoft",
+        "obsidian-interface:shellBand:darkSoft",
+        "web-interface:shellBand:light",
+        "vscode-interface:shellBand:light",
+        "obsidian-interface:shellBand:light",
+        "web-interface:shellBand:lightSoft",
+        "vscode-interface:shellBand:lightSoft",
+        "obsidian-interface:shellBand:lightSoft"
+      ],
+      "accentHoverFill": [
+        "web-interface:accentHoverFill:dark",
+        "vscode-interface:accentHoverFill:dark",
+        "obsidian-interface:accentHoverFill:dark",
+        "web-interface:accentHoverFill:darkSoft",
+        "vscode-interface:accentHoverFill:darkSoft",
+        "obsidian-interface:accentHoverFill:darkSoft",
+        "web-interface:accentHoverFill:light",
+        "vscode-interface:accentHoverFill:light",
+        "obsidian-interface:accentHoverFill:light",
+        "web-interface:accentHoverFill:lightSoft",
+        "vscode-interface:accentHoverFill:lightSoft",
+        "obsidian-interface:accentHoverFill:lightSoft"
+      ],
+      "onStatusInk": [
+        "web-interface:onStatusInk:dark",
+        "vscode-interface:onStatusInk:dark",
+        "obsidian-interface:onStatusInk:dark",
+        "web-interface:onStatusInk:darkSoft",
+        "vscode-interface:onStatusInk:darkSoft",
+        "obsidian-interface:onStatusInk:darkSoft",
+        "web-interface:onStatusInk:light",
+        "vscode-interface:onStatusInk:light",
+        "obsidian-interface:onStatusInk:light",
+        "web-interface:onStatusInk:lightSoft",
+        "vscode-interface:onStatusInk:lightSoft",
+        "obsidian-interface:onStatusInk:lightSoft"
+      ],
+      "navActiveInk": [
+        "web-interface:navActiveInk:dark",
+        "vscode-interface:navActiveInk:dark",
+        "obsidian-interface:navActiveInk:dark",
+        "web-interface:navActiveInk:darkSoft",
+        "vscode-interface:navActiveInk:darkSoft",
+        "obsidian-interface:navActiveInk:darkSoft",
+        "web-interface:navActiveInk:light",
+        "vscode-interface:navActiveInk:light",
+        "obsidian-interface:navActiveInk:light",
+        "web-interface:navActiveInk:lightSoft",
+        "vscode-interface:navActiveInk:lightSoft",
+        "obsidian-interface:navActiveInk:lightSoft"
       ]
     },
     "byGuidance": {
@@ -38437,6 +41157,20 @@
         "web-guidance:bracketMatchStroke:lightSoft",
         "vscode-guidance:bracketMatchStroke:lightSoft",
         "obsidian-guidance:bracketMatchStroke:lightSoft"
+      ],
+      "guideInk": [
+        "web-guidance:guideInk:dark",
+        "vscode-guidance:guideInk:dark",
+        "obsidian-guidance:guideInk:dark",
+        "web-guidance:guideInk:darkSoft",
+        "vscode-guidance:guideInk:darkSoft",
+        "obsidian-guidance:guideInk:darkSoft",
+        "web-guidance:guideInk:light",
+        "vscode-guidance:guideInk:light",
+        "obsidian-guidance:guideInk:light",
+        "web-guidance:guideInk:lightSoft",
+        "vscode-guidance:guideInk:lightSoft",
+        "obsidian-guidance:guideInk:lightSoft"
       ]
     },
     "byTerminal": {
@@ -38788,6 +41522,9 @@
         "web-interface:navInactiveFill:dark",
         "vscode-interface:navInactiveFill:dark",
         "obsidian-interface:navInactiveFill:dark",
+        "web-interface:shellBand:dark",
+        "vscode-interface:shellBand:dark",
+        "obsidian-interface:shellBand:dark",
         "web-interface:shellRaised:darkSoft",
         "vscode-interface:shellRaised:darkSoft",
         "obsidian-interface:shellRaised:darkSoft",
@@ -38797,6 +41534,9 @@
         "web-interface:navInactiveFill:darkSoft",
         "vscode-interface:navInactiveFill:darkSoft",
         "obsidian-interface:navInactiveFill:darkSoft",
+        "web-interface:shellBand:darkSoft",
+        "vscode-interface:shellBand:darkSoft",
+        "obsidian-interface:shellBand:darkSoft",
         "web-interface:shellRaised:light",
         "vscode-interface:shellRaised:light",
         "obsidian-interface:shellRaised:light",
@@ -38806,6 +41546,9 @@
         "web-interface:navInactiveFill:light",
         "vscode-interface:navInactiveFill:light",
         "obsidian-interface:navInactiveFill:light",
+        "web-interface:shellBand:light",
+        "vscode-interface:shellBand:light",
+        "obsidian-interface:shellBand:light",
         "web-interface:shellRaised:lightSoft",
         "vscode-interface:shellRaised:lightSoft",
         "obsidian-interface:shellRaised:lightSoft",
@@ -38814,7 +41557,10 @@
         "obsidian-interface:navActiveFill:lightSoft",
         "web-interface:navInactiveFill:lightSoft",
         "vscode-interface:navInactiveFill:lightSoft",
-        "obsidian-interface:navInactiveFill:lightSoft"
+        "obsidian-interface:navInactiveFill:lightSoft",
+        "web-interface:shellBand:lightSoft",
+        "vscode-interface:shellBand:lightSoft",
+        "obsidian-interface:shellBand:lightSoft"
       ],
       "terracotta": [
         "web-interaction:selection:dark",
@@ -39000,6 +41746,48 @@
         "vscode-interface:onAccentInk:lightSoft",
         "obsidian-interface:onAccentInk:lightSoft"
       ],
+      "interface:accentHoverFill": [
+        "web-interface:accentHoverFill:dark",
+        "vscode-interface:accentHoverFill:dark",
+        "obsidian-interface:accentHoverFill:dark",
+        "web-interface:accentHoverFill:darkSoft",
+        "vscode-interface:accentHoverFill:darkSoft",
+        "obsidian-interface:accentHoverFill:darkSoft",
+        "web-interface:accentHoverFill:light",
+        "vscode-interface:accentHoverFill:light",
+        "obsidian-interface:accentHoverFill:light",
+        "web-interface:accentHoverFill:lightSoft",
+        "vscode-interface:accentHoverFill:lightSoft",
+        "obsidian-interface:accentHoverFill:lightSoft"
+      ],
+      "interface:onStatusInk": [
+        "web-interface:onStatusInk:dark",
+        "vscode-interface:onStatusInk:dark",
+        "obsidian-interface:onStatusInk:dark",
+        "web-interface:onStatusInk:darkSoft",
+        "vscode-interface:onStatusInk:darkSoft",
+        "obsidian-interface:onStatusInk:darkSoft",
+        "web-interface:onStatusInk:light",
+        "vscode-interface:onStatusInk:light",
+        "obsidian-interface:onStatusInk:light",
+        "web-interface:onStatusInk:lightSoft",
+        "vscode-interface:onStatusInk:lightSoft",
+        "obsidian-interface:onStatusInk:lightSoft"
+      ],
+      "interface:navActiveInk": [
+        "web-interface:navActiveInk:dark",
+        "vscode-interface:navActiveInk:dark",
+        "obsidian-interface:navActiveInk:dark",
+        "web-interface:navActiveInk:darkSoft",
+        "vscode-interface:navActiveInk:darkSoft",
+        "obsidian-interface:navActiveInk:darkSoft",
+        "web-interface:navActiveInk:light",
+        "vscode-interface:navActiveInk:light",
+        "obsidian-interface:navActiveInk:light",
+        "web-interface:navActiveInk:lightSoft",
+        "vscode-interface:navActiveInk:lightSoft",
+        "obsidian-interface:navActiveInk:lightSoft"
+      ],
       "guidance:guideActive": [
         "web-guidance:guideActive:dark",
         "vscode-guidance:guideActive:dark",
@@ -39041,6 +41829,20 @@
         "web-guidance:bracketCool:lightSoft",
         "vscode-guidance:bracketCool:lightSoft",
         "obsidian-guidance:bracketCool:lightSoft"
+      ],
+      "guidance:guideInk": [
+        "web-guidance:guideInk:dark",
+        "vscode-guidance:guideInk:dark",
+        "obsidian-guidance:guideInk:dark",
+        "web-guidance:guideInk:darkSoft",
+        "vscode-guidance:guideInk:darkSoft",
+        "obsidian-guidance:guideInk:darkSoft",
+        "web-guidance:guideInk:light",
+        "vscode-guidance:guideInk:light",
+        "obsidian-guidance:guideInk:light",
+        "web-guidance:guideInk:lightSoft",
+        "vscode-guidance:guideInk:lightSoft",
+        "obsidian-guidance:guideInk:lightSoft"
       ],
       "terminal:ansiBlack": [
         "web-terminal:ansiBlack:dark",

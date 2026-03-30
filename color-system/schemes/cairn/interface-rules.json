@@ -121,6 +121,50 @@
           "tFromVariantKnob": "interfaceMix.navInactiveFill"
         }
       }
+    },
+    "shellBand": {
+      "description": "Intermediate shell band for section headers and grouped chrome strata.",
+      "source": {
+        "type": "foundation",
+        "family": "shell",
+        "tone": "lift"
+      }
+    },
+    "accentHoverFill": {
+      "description": "Hover-stage accent fill for buttons and raised controls.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#c18d62",
+          "darkSoft": "#b48d70",
+          "light": "#9f6c42",
+          "lightSoft": "#ad7d59"
+        }
+      }
+    },
+    "onStatusInk": {
+      "description": "Readable ink placed on persistent status surfaces.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#efe6db",
+          "darkSoft": "#e8dfd5",
+          "light": "#faf1e8",
+          "lightSoft": "#eee4db"
+        }
+      }
+    },
+    "navActiveInk": {
+      "description": "Readable ink placed on active navigation fills.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#e3d9cd",
+          "darkSoft": "#ddd2c7",
+          "light": "#31271f",
+          "lightSoft": "#4b4139"
+        }
+      }
     }
   }
 }

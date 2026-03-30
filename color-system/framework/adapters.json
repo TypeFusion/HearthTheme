@@ -393,6 +393,34 @@
       "obsidianVar": "--background-modifier-hover",
       "vscodeColor": "list.inactiveSelectionBackground",
       "includeInReport": true
+    },
+    {
+      "id": "shellBand",
+      "webToken": "shellBand",
+      "obsidianVar": "--hearth-shell-band",
+      "vscodeColor": "sideBarSectionHeader.background",
+      "includeInReport": true
+    },
+    {
+      "id": "accentHoverFill",
+      "webToken": "accentHover",
+      "obsidianVar": "--hearth-accent-hover",
+      "vscodeColor": "button.hoverBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "onStatusInk",
+      "webToken": "onStatus",
+      "obsidianVar": "--hearth-on-status",
+      "vscodeColor": "statusBar.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "navActiveInk",
+      "webToken": "navActiveInk",
+      "obsidianVar": "--hearth-nav-active-ink",
+      "vscodeColor": "list.activeSelectionForeground",
+      "includeInReport": true
     }
   ],
   "guidances": [
@@ -450,6 +478,13 @@
       "webToken": "bracketMatchStroke",
       "obsidianVar": "--hearth-bracket-match-stroke",
       "vscodeColor": "editorBracketMatch.border",
+      "includeInReport": true
+    },
+    {
+      "id": "guideInk",
+      "webToken": "guideInk",
+      "obsidianVar": "--hearth-guide-ink",
+      "vscodeColor": "editorLineNumber.activeForeground",
       "includeInReport": true
     }
   ],

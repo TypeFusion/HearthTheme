@@ -405,6 +405,74 @@
     {
       "key": "terminal.ansiBrightWhite",
       "terminal": "ansiBrightWhite"
+    },
+    {
+      "key": "activityBar.background",
+      "surface": "sidebar"
+    },
+    {
+      "key": "activityBar.border",
+      "surface": "border"
+    },
+    {
+      "key": "button.hoverBackground",
+      "interface": "accentHoverFill"
+    },
+    {
+      "key": "editorLineNumber.activeForeground",
+      "guidance": "guideInk"
+    },
+    {
+      "key": "gitDecoration.addedResourceForeground",
+      "feedback": "success"
+    },
+    {
+      "key": "gitDecoration.conflictingResourceForeground",
+      "feedback": "error"
+    },
+    {
+      "key": "gitDecoration.deletedResourceForeground",
+      "feedback": "error"
+    },
+    {
+      "key": "gitDecoration.ignoredResourceForeground",
+      "interface": "subtleInk"
+    },
+    {
+      "key": "gitDecoration.modifiedResourceForeground",
+      "feedback": "warning"
+    },
+    {
+      "key": "gitDecoration.untrackedResourceForeground",
+      "feedback": "success"
+    },
+    {
+      "key": "list.activeSelectionForeground",
+      "interface": "navActiveInk"
+    },
+    {
+      "key": "sideBarSectionHeader.background",
+      "interface": "shellBand"
+    },
+    {
+      "key": "sideBarSectionHeader.border",
+      "surface": "border"
+    },
+    {
+      "key": "statusBar.border",
+      "surface": "border"
+    },
+    {
+      "key": "statusBar.foreground",
+      "interface": "onStatusInk"
+    },
+    {
+      "key": "tab.hoverBackground",
+      "interaction": "listHover"
+    },
+    {
+      "key": "titleBar.inactiveBackground",
+      "surface": "sidebar"
     }
   ]
 }
