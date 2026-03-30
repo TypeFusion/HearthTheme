@@ -108,5 +108,19 @@
       "navActiveFill",
       "navInactiveFill"
     ]
+  },
+  "guidance": {
+    "scaffold": [
+      "guide",
+      "guideActive",
+      "whitespace"
+    ],
+    "brackets": [
+      "bracketWarm",
+      "bracketBright",
+      "bracketCool",
+      "bracketMatchFill",
+      "bracketMatchStroke"
+    ]
   }
 }

@@ -10,6 +10,7 @@ const REQUIRED_FILES = [
   'foundation.json',
   'semantic-rules.json',
   'surface-rules.json',
+  'guidance-rules.json',
   'interface-rules.json',
   'interaction-rules.json',
   'feedback-rules.json',

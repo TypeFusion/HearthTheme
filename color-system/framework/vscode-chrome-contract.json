@@ -309,6 +309,38 @@
     {
       "key": "titleBar.inactiveForeground",
       "interface": "mutedInk"
+    },
+    {
+      "key": "editorBracketHighlight.foreground1",
+      "guidance": "bracketWarm"
+    },
+    {
+      "key": "editorBracketHighlight.foreground2",
+      "guidance": "bracketBright"
+    },
+    {
+      "key": "editorBracketHighlight.foreground3",
+      "guidance": "bracketCool"
+    },
+    {
+      "key": "editorBracketMatch.background",
+      "guidance": "bracketMatchFill"
+    },
+    {
+      "key": "editorBracketMatch.border",
+      "guidance": "bracketMatchStroke"
+    },
+    {
+      "key": "editorIndentGuide.activeBackground1",
+      "guidance": "guideActive"
+    },
+    {
+      "key": "editorIndentGuide.background1",
+      "guidance": "guide"
+    },
+    {
+      "key": "editorWhitespace.foreground",
+      "guidance": "whitespace"
     }
   ]
 }

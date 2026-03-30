@@ -72,5 +72,27 @@
       "light": 0.041,
       "lightSoft": 0
     }
+  },
+  "guidanceMix": {
+    "guide": {
+      "dark": 0.64,
+      "darkSoft": 0.64,
+      "light": 0.37,
+      "lightSoft": 0.44
+    }
+  },
+  "guidanceAlpha": {
+    "bracketMatchFill": {
+      "dark": 0.094,
+      "darkSoft": 0.071,
+      "light": 0.086,
+      "lightSoft": 0.086
+    },
+    "bracketMatchStroke": {
+      "dark": 0.322,
+      "darkSoft": 0.243,
+      "light": 0.275,
+      "lightSoft": 0.275
+    }
   }
 }

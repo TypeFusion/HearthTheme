@@ -37,6 +37,11 @@
   --h4-color: #9aa984;
   --h5-color: #cd854b;
   --h6-color: #9a8f80;
+  --hearth-bracket-bright: #e1ba73;
+  --hearth-bracket-cool: #8dbb75;
+  --hearth-bracket-match-fill: #cb844a18;
+  --hearth-bracket-match-stroke: #cb844a52;
+  --hearth-bracket-warm: #cb844a;
   --hearth-callout-danger-bg: rgb(204 90 63 / 0.14);
   --hearth-callout-danger-border: rgb(204 90 63 / 0.56);
   --hearth-callout-note-bg: rgb(120 128 88 / 0.12);
@@ -47,7 +52,10 @@
   --hearth-callout-warning-border: rgb(203 132 74 / 0.56);
   --hearth-feedback-info: #6f94a4;
   --hearth-feedback-note: #788058;
+  --hearth-guide: #4a453e;
+  --hearth-guide-active: #655b4a;
   --hearth-inline-code: #cfa077;
+  --hearth-whitespace: #4a453e;
   --hr-color: rgb(53 48 43 / 0.7);
   --interactive-accent: #cb844a;
   --interactive-accent-hover: #cc905e;
@@ -398,6 +406,11 @@
   --h4-color: #768061;
   --h5-color: #bd7338;
   --h6-color: #645543;
+  --hearth-bracket-bright: #674100;
+  --hearth-bracket-cool: #2f6f2d;
+  --hearth-bracket-match-fill: #ba723916;
+  --hearth-bracket-match-stroke: #ba723946;
+  --hearth-bracket-warm: #ba7239;
   --hearth-callout-danger-bg: rgb(176 73 53 / 0.14);
   --hearth-callout-danger-border: rgb(176 73 53 / 0.56);
   --hearth-callout-note-bg: rgb(88 98 67 / 0.12);
@@ -408,7 +421,10 @@
   --hearth-callout-warning-border: rgb(186 114 57 / 0.56);
   --hearth-feedback-info: #4f7281;
   --hearth-feedback-note: #586243;
+  --hearth-guide: #d1c6b5;
+  --hearth-guide-active: #b49d7b;
   --hearth-inline-code: #825128;
+  --hearth-whitespace: #d1c6b5;
   --hr-color: rgb(201 190 175 / 0.7);
   --interactive-accent: #ba7239;
   --interactive-accent-hover: #a06331;

@@ -43,6 +43,7 @@ export const COLOR_SYSTEM_PHILOSOPHY_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/p
 export const COLOR_SYSTEM_TAXONOMY_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/taxonomy.json`
 export const COLOR_SYSTEM_FOUNDATION_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/foundation.json`
 export const COLOR_SYSTEM_SURFACE_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/surface-rules.json`
+export const COLOR_SYSTEM_GUIDANCE_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/guidance-rules.json`
 export const COLOR_SYSTEM_INTERFACE_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/interface-rules.json`
 export const COLOR_SYSTEM_INTERACTION_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/interaction-rules.json`
 export const COLOR_SYSTEM_FEEDBACK_RULES_PATH = `${COLOR_SYSTEM_ACTIVE_SCHEME_DIR}/feedback-rules.json`
@@ -314,6 +315,12 @@ export function loadInterfaceAdapters() {
   return normalizePlatformContractList(data.interfaces, `${COLOR_SYSTEM_ADAPTERS_PATH}: interfaces`)
 }
 
+export function loadGuidanceAdapters() {
+  const data = readJson(COLOR_SYSTEM_ADAPTERS_PATH)
+  assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_ADAPTERS_PATH} must be an object`)
+  return normalizePlatformContractList(data.guidances, `${COLOR_SYSTEM_ADAPTERS_PATH}: guidances`)
+}
+
 export function loadInteractionAdapters() {
   const data = readJson(COLOR_SYSTEM_ADAPTERS_PATH)
   assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_ADAPTERS_PATH} must be an object`)
@@ -341,15 +348,17 @@ export function loadVscodeChromeContract() {
 
     const surface = binding.surface == null ? null : String(binding.surface).trim() || null
     const interfaceId = binding.interface == null ? null : String(binding.interface).trim() || null
+    const guidance = binding.guidance == null ? null : String(binding.guidance).trim() || null
     const interaction = binding.interaction == null ? null : String(binding.interaction).trim() || null
     const feedback = binding.feedback == null ? null : String(binding.feedback).trim() || null
-    const bindingKinds = [surface, interfaceId, interaction, feedback].filter(Boolean)
-    assert(bindingKinds.length === 1, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: "${key}" must define exactly one of surface, interface, interaction, or feedback`)
+    const bindingKinds = [surface, interfaceId, guidance, interaction, feedback].filter(Boolean)
+    assert(bindingKinds.length === 1, `${COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH}: "${key}" must define exactly one of surface, interface, guidance, interaction, or feedback`)
 
     const out = {
       key,
       surface,
       interface: interfaceId,
+      guidance,
       interaction,
       feedback,
     }
@@ -451,6 +460,7 @@ export function loadSchemeTaxonomy() {
     roles: normalizeNamedIdGroups(data.roles, `${COLOR_SYSTEM_TAXONOMY_PATH}: roles`),
     surfaces: normalizeNamedIdGroups(data.surfaces, `${COLOR_SYSTEM_TAXONOMY_PATH}: surfaces`),
     interfaces: normalizeNamedIdGroups(data.interfaces, `${COLOR_SYSTEM_TAXONOMY_PATH}: interfaces`),
+    guidance: normalizeNamedIdGroups(data.guidance, `${COLOR_SYSTEM_TAXONOMY_PATH}: guidance`),
     interactions: normalizeNamedIdGroups(data.interactions, `${COLOR_SYSTEM_TAXONOMY_PATH}: interactions`),
     feedback: normalizeNamedIdGroups(data.feedback, `${COLOR_SYSTEM_TAXONOMY_PATH}: feedback`),
     variants: normalizeNamedIdGroups(data.variants, `${COLOR_SYSTEM_TAXONOMY_PATH}: variants`),
@@ -506,7 +516,7 @@ function normalizeSurfaceValueMap(valuesByVariant, label, variantIds) {
   return out
 }
 
-function normalizeAbstractColorSource(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null) {
+function normalizeAbstractColorSource(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null, guidanceIds = null) {
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
   const type = String(value.type || '').trim()
   assert(type, `${label}.type is required`)
@@ -552,12 +562,20 @@ function normalizeAbstractColorSource(value, families, label, variantIds, allowe
     return { type, id }
   }
 
+  if (type === 'guidance') {
+    const id = String(value.id || '').trim()
+    assert(id, `${label}.id is required`)
+    assert(guidanceIds instanceof Set && guidanceIds.size > 0, `${label}.type "guidance" is not supported in this layer`)
+    assert(guidanceIds.has(id), `${label}.id "${id}" does not exist in guidance-rules.json`)
+    return { type, id }
+  }
+
   const id = String(value.id || '').trim()
   assert(id, `${label}.id is required`)
   return { type, id }
 }
 
-function normalizeAbstractColorDerive(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null) {
+function normalizeAbstractColorDerive(value, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null, guidanceIds = null) {
   if (value == null) return {}
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
   const out = {}
@@ -565,7 +583,7 @@ function normalizeAbstractColorDerive(value, families, label, variantIds, allowe
   if (value.mix != null) {
     assert(value.mix && typeof value.mix === 'object' && !Array.isArray(value.mix), `${label}.mix must be an object`)
     out.mix = {
-      with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
+      with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds, guidanceIds),
     }
     if (value.mix.t !== undefined) {
       out.mix.t = normalizeNumber(value.mix.t, `${label}.mix.t`, { min: 0, max: 1 })
@@ -614,7 +632,7 @@ function isLegacyVariantMap(entry, variantIds) {
   return variantIds.every((variantId) => entry[variantId] !== undefined)
 }
 
-function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null) {
+function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedKinds, roleIds = null, feedbackIds = null, interfaceIds = null, guidanceIds = null) {
   assert(entry && typeof entry === 'object' && !Array.isArray(entry), `${label} must be an object`)
 
   const sourceInput = isLegacyVariantMap(entry, variantIds)
@@ -630,16 +648,16 @@ function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedK
     assert(variantEntry && typeof variantEntry === 'object' && !Array.isArray(variantEntry), `${label}.byVariant.${variantId} must be an object`)
     byVariant[variantId] = {
       source: variantEntry.source
-        ? normalizeAbstractColorSource(variantEntry.source, families, `${label}.byVariant.${variantId}.source`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds)
+        ? normalizeAbstractColorSource(variantEntry.source, families, `${label}.byVariant.${variantId}.source`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds, guidanceIds)
         : null,
-      derive: normalizeAbstractColorDerive(variantEntry.derive, families, `${label}.byVariant.${variantId}.derive`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
+      derive: normalizeAbstractColorDerive(variantEntry.derive, families, `${label}.byVariant.${variantId}.derive`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds, guidanceIds),
     }
   }
 
   return {
     description: typeof entry.description === 'string' ? entry.description.trim() : '',
-    source: normalizeAbstractColorSource(sourceInput, families, `${label}.source`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
-    derive: normalizeAbstractColorDerive(entry.derive, families, `${label}.derive`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds),
+    source: normalizeAbstractColorSource(sourceInput, families, `${label}.source`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds, guidanceIds),
+    derive: normalizeAbstractColorDerive(entry.derive, families, `${label}.derive`, variantIds, allowedKinds, roleIds, feedbackIds, interfaceIds, guidanceIds),
     byVariant,
   }
 }
@@ -703,6 +721,46 @@ export function loadInterfaceRules() {
     schemaVersion: Number(data.schemaVersion || 1),
     description: typeof data.description === 'string' ? data.description.trim() : '',
     interfaces,
+  }
+}
+
+export function loadGuidanceRules() {
+  const foundation = loadFoundationPalette()
+  const semanticRules = loadSemanticRules()
+  const interfaceRules = loadInterfaceRules()
+  const feedbackRules = loadFeedbackRules()
+  const variants = loadColorSystemVariants().variants
+  const variantIds = variants.map((variant) => variant.id)
+  const data = readJson(COLOR_SYSTEM_GUIDANCE_RULES_PATH)
+  assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_GUIDANCE_RULES_PATH} must be an object`)
+  assert(data.guidances && typeof data.guidances === 'object' && !Array.isArray(data.guidances), `${COLOR_SYSTEM_GUIDANCE_RULES_PATH}: guidances must be an object`)
+
+  const roleIds = new Set(Object.keys(semanticRules.roles))
+  const feedbackIds = new Set(Object.keys(feedbackRules.feedbacks))
+  const interfaceIds = new Set(Object.keys(interfaceRules.interfaces))
+  const guidanceIds = new Set(Object.keys(data.guidances))
+  const guidances = {}
+  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction', 'role', 'feedback', 'interface', 'guidance'])
+  for (const [guidanceIdRaw, entry] of Object.entries(data.guidances)) {
+    const guidanceId = String(guidanceIdRaw || '').trim()
+    assert(guidanceId, `${COLOR_SYSTEM_GUIDANCE_RULES_PATH}: invalid guidance id`)
+    guidances[guidanceId] = normalizeDerivedColorEntry(
+      entry,
+      foundation.families,
+      `${COLOR_SYSTEM_GUIDANCE_RULES_PATH}: guidances.${guidanceId}`,
+      variantIds,
+      allowedKinds,
+      roleIds,
+      feedbackIds,
+      interfaceIds,
+      guidanceIds
+    )
+  }
+
+  return {
+    schemaVersion: Number(data.schemaVersion || 1),
+    description: typeof data.description === 'string' ? data.description.trim() : '',
+    guidances,
   }
 }
 

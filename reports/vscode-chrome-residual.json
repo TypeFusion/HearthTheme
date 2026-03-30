@@ -17,8 +17,8 @@
         ]
     },
     "summary": {
-        "migratedKeyCount": 75,
-        "residualKeyCount": 47,
+        "migratedKeyCount": 83,
+        "residualKeyCount": 39,
         "variantsCovered": [
             "dark",
             "darkSoft",
@@ -31,20 +31,12 @@
         "dark": {
             "sourcePath": "color-system/templates/hearth-dark.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 47,
+            "residualKeyCount": 39,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
                 "button.hoverBackground",
-                "editorBracketHighlight.foreground1",
-                "editorBracketHighlight.foreground2",
-                "editorBracketHighlight.foreground3",
-                "editorBracketMatch.background",
-                "editorBracketMatch.border",
-                "editorIndentGuide.activeBackground1",
-                "editorIndentGuide.background1",
                 "editorLineNumber.activeForeground",
-                "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
                 "gitDecoration.deletedResourceForeground",
@@ -99,22 +91,6 @@
                         "titleBar.inactiveBackground"
                     ],
                     "keyCount": 10
-                },
-                "editor-guides": {
-                    "label": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                    "keys": [
-                        "editorBracketHighlight.foreground1",
-                        "editorBracketHighlight.foreground2",
-                        "editorBracketHighlight.foreground3",
-                        "editorBracketMatch.background",
-                        "editorBracketMatch.border",
-                        "editorIndentGuide.activeBackground1",
-                        "editorIndentGuide.background1",
-                        "editorWhitespace.foreground"
-                    ],
-                    "keyCount": 8
                 },
                 "chrome-ink": {
                     "label": "Chrome Ink",
@@ -212,76 +188,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "editorBracketHighlight.foreground1",
-                    "value": "#c27a38",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground2",
-                    "value": "#e1ba73",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground3",
-                    "value": "#8dbb75",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.background",
-                    "value": "#c27a3818",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.border",
-                    "value": "#c27a3852",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.activeBackground1",
-                    "value": "#655b4a",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.background1",
-                    "value": "#4a4338",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#a3947c",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWhitespace.foreground",
-                    "value": "#4a4338",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
                     "key": "gitDecoration.addedResourceForeground",
@@ -568,20 +480,12 @@
         "darkSoft": {
             "sourcePath": "color-system/templates/hearth-dark-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 47,
+            "residualKeyCount": 39,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
                 "button.hoverBackground",
-                "editorBracketHighlight.foreground1",
-                "editorBracketHighlight.foreground2",
-                "editorBracketHighlight.foreground3",
-                "editorBracketMatch.background",
-                "editorBracketMatch.border",
-                "editorIndentGuide.activeBackground1",
-                "editorIndentGuide.background1",
                 "editorLineNumber.activeForeground",
-                "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
                 "gitDecoration.deletedResourceForeground",
@@ -636,22 +540,6 @@
                         "titleBar.inactiveBackground"
                     ],
                     "keyCount": 10
-                },
-                "editor-guides": {
-                    "label": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                    "keys": [
-                        "editorBracketHighlight.foreground1",
-                        "editorBracketHighlight.foreground2",
-                        "editorBracketHighlight.foreground3",
-                        "editorBracketMatch.background",
-                        "editorBracketMatch.border",
-                        "editorIndentGuide.activeBackground1",
-                        "editorIndentGuide.background1",
-                        "editorWhitespace.foreground"
-                    ],
-                    "keyCount": 8
                 },
                 "chrome-ink": {
                     "label": "Chrome Ink",
@@ -749,76 +637,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "editorBracketHighlight.foreground1",
-                    "value": "#b07c4d",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground2",
-                    "value": "#d8b07a",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground3",
-                    "value": "#9d956f",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.background",
-                    "value": "#ae7b4b12",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.border",
-                    "value": "#ae7b4b3e",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.activeBackground1",
-                    "value": "#6a6055",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.background1",
-                    "value": "#59524a",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#a39587",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWhitespace.foreground",
-                    "value": "#59524a",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
                     "key": "gitDecoration.addedResourceForeground",
@@ -1105,20 +929,12 @@
         "light": {
             "sourcePath": "color-system/templates/hearth-light.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 47,
+            "residualKeyCount": 39,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
                 "button.hoverBackground",
-                "editorBracketHighlight.foreground1",
-                "editorBracketHighlight.foreground2",
-                "editorBracketHighlight.foreground3",
-                "editorBracketMatch.background",
-                "editorBracketMatch.border",
-                "editorIndentGuide.activeBackground1",
-                "editorIndentGuide.background1",
                 "editorLineNumber.activeForeground",
-                "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
                 "gitDecoration.deletedResourceForeground",
@@ -1173,22 +989,6 @@
                         "titleBar.inactiveBackground"
                     ],
                     "keyCount": 10
-                },
-                "editor-guides": {
-                    "label": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                    "keys": [
-                        "editorBracketHighlight.foreground1",
-                        "editorBracketHighlight.foreground2",
-                        "editorBracketHighlight.foreground3",
-                        "editorBracketMatch.background",
-                        "editorBracketMatch.border",
-                        "editorIndentGuide.activeBackground1",
-                        "editorIndentGuide.background1",
-                        "editorWhitespace.foreground"
-                    ],
-                    "keyCount": 8
                 },
                 "chrome-ink": {
                     "label": "Chrome Ink",
@@ -1286,76 +1086,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "editorBracketHighlight.foreground1",
-                    "value": "#b8742b",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground2",
-                    "value": "#674100",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground3",
-                    "value": "#2f6f2d",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.background",
-                    "value": "#b8742b16",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.border",
-                    "value": "#b8742b46",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.activeBackground1",
-                    "value": "#b49d7b",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.background1",
-                    "value": "#d4c6ac",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#7e5e37",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWhitespace.foreground",
-                    "value": "#d4c6ac",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
                     "key": "gitDecoration.addedResourceForeground",
@@ -1642,20 +1378,12 @@
         "lightSoft": {
             "sourcePath": "color-system/templates/hearth-light-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 47,
+            "residualKeyCount": 39,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
                 "button.hoverBackground",
-                "editorBracketHighlight.foreground1",
-                "editorBracketHighlight.foreground2",
-                "editorBracketHighlight.foreground3",
-                "editorBracketMatch.background",
-                "editorBracketMatch.border",
-                "editorIndentGuide.activeBackground1",
-                "editorIndentGuide.background1",
                 "editorLineNumber.activeForeground",
-                "editorWhitespace.foreground",
                 "gitDecoration.addedResourceForeground",
                 "gitDecoration.conflictingResourceForeground",
                 "gitDecoration.deletedResourceForeground",
@@ -1710,22 +1438,6 @@
                         "titleBar.inactiveBackground"
                     ],
                     "keyCount": 10
-                },
-                "editor-guides": {
-                    "label": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                    "keys": [
-                        "editorBracketHighlight.foreground1",
-                        "editorBracketHighlight.foreground2",
-                        "editorBracketHighlight.foreground3",
-                        "editorBracketMatch.background",
-                        "editorBracketMatch.border",
-                        "editorIndentGuide.activeBackground1",
-                        "editorIndentGuide.background1",
-                        "editorWhitespace.foreground"
-                    ],
-                    "keyCount": 8
                 },
                 "chrome-ink": {
                     "label": "Chrome Ink",
@@ -1823,76 +1535,12 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "editorBracketHighlight.foreground1",
-                    "value": "#b07a48",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground2",
-                    "value": "#674100",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketHighlight.foreground3",
-                    "value": "#6f8358",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.background",
-                    "value": "#b07a4816",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorBracketMatch.border",
-                    "value": "#b07a4846",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.activeBackground1",
-                    "value": "#9d907e",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
-                    "key": "editorIndentGuide.background1",
-                    "value": "#c2b7a8",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
-                },
-                {
                     "key": "editorLineNumber.activeForeground",
                     "value": "#8c7154",
                     "bucket": "chrome-ink",
                     "bucketLabel": "Chrome Ink",
                     "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
                     "rationale": "Foreground and supporting text hierarchy in the shell should become reusable tone roles before adding more platforms."
-                },
-                {
-                    "key": "editorWhitespace.foreground",
-                    "value": "#c2b7a8",
-                    "bucket": "editor-guides",
-                    "bucketLabel": "Editor Guides and Brackets",
-                    "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                    "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles."
                 },
                 {
                     "key": "gitDecoration.addedResourceForeground",
@@ -2197,22 +1845,6 @@
                 ],
                 "keyCount": 10
             },
-            "editor-guides": {
-                "label": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "keys": [
-                    "editorBracketHighlight.foreground1",
-                    "editorBracketHighlight.foreground2",
-                    "editorBracketHighlight.foreground3",
-                    "editorBracketMatch.background",
-                    "editorBracketMatch.border",
-                    "editorIndentGuide.activeBackground1",
-                    "editorIndentGuide.background1",
-                    "editorWhitespace.foreground"
-                ],
-                "keyCount": 8
-            },
             "chrome-ink": {
                 "label": "Chrome Ink",
                 "suggestion": "candidate chrome tone roles like shellInk / mutedInk / subtleInk",
@@ -2324,97 +1956,6 @@
                 }
             },
             {
-                "key": "editorBracketHighlight.foreground1",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#c27a38",
-                    "darkSoft": "#b07c4d",
-                    "light": "#b8742b",
-                    "lightSoft": "#b07a48"
-                }
-            },
-            {
-                "key": "editorBracketHighlight.foreground2",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#e1ba73",
-                    "darkSoft": "#d8b07a",
-                    "light": "#674100",
-                    "lightSoft": "#674100"
-                }
-            },
-            {
-                "key": "editorBracketHighlight.foreground3",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#8dbb75",
-                    "darkSoft": "#9d956f",
-                    "light": "#2f6f2d",
-                    "lightSoft": "#6f8358"
-                }
-            },
-            {
-                "key": "editorBracketMatch.background",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#c27a3818",
-                    "darkSoft": "#ae7b4b12",
-                    "light": "#b8742b16",
-                    "lightSoft": "#b07a4816"
-                }
-            },
-            {
-                "key": "editorBracketMatch.border",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#c27a3852",
-                    "darkSoft": "#ae7b4b3e",
-                    "light": "#b8742b46",
-                    "lightSoft": "#b07a4846"
-                }
-            },
-            {
-                "key": "editorIndentGuide.activeBackground1",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#655b4a",
-                    "darkSoft": "#6a6055",
-                    "light": "#b49d7b",
-                    "lightSoft": "#9d907e"
-                }
-            },
-            {
-                "key": "editorIndentGuide.background1",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#4a4338",
-                    "darkSoft": "#59524a",
-                    "light": "#d4c6ac",
-                    "lightSoft": "#c2b7a8"
-                }
-            },
-            {
                 "key": "editorLineNumber.activeForeground",
                 "bucket": "chrome-ink",
                 "bucketLabel": "Chrome Ink",
@@ -2425,19 +1966,6 @@
                     "darkSoft": "#a39587",
                     "light": "#7e5e37",
                     "lightSoft": "#8c7154"
-                }
-            },
-            {
-                "key": "editorWhitespace.foreground",
-                "bucket": "editor-guides",
-                "bucketLabel": "Editor Guides and Brackets",
-                "suggestion": "candidate interaction or chrome tone roles for guidance / scaffolding",
-                "rationale": "Indent guides, whitespace, and bracket emphasis are reusable structural cues but need their own abstract guidance roles.",
-                "variants": {
-                    "dark": "#4a4338",
-                    "darkSoft": "#59524a",
-                    "light": "#d4c6ac",
-                    "lightSoft": "#c2b7a8"
                 }
             },
             {

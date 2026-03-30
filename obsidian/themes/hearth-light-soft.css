@@ -37,6 +37,11 @@
   --h4-color: #7e8676;
   --h5-color: #b17d56;
   --h6-color: #716558;
+  --hearth-bracket-bright: #674100;
+  --hearth-bracket-cool: #6f8358;
+  --hearth-bracket-match-fill: #b7794916;
+  --hearth-bracket-match-stroke: #b7794946;
+  --hearth-bracket-warm: #b77949;
   --hearth-callout-danger-bg: rgb(172 90 72 / 0.14);
   --hearth-callout-danger-border: rgb(172 90 72 / 0.56);
   --hearth-callout-note-bg: rgb(102 108 77 / 0.12);
@@ -47,7 +52,10 @@
   --hearth-callout-warning-border: rgb(183 121 73 / 0.56);
   --hearth-feedback-info: #67767d;
   --hearth-feedback-note: #666c4d;
+  --hearth-guide: #c3b8a7;
+  --hearth-guide-active: #9d907e;
   --hearth-inline-code: #896548;
+  --hearth-whitespace: #c3b8a7;
   --hr-color: rgb(192 180 164 / 0.7);
   --interactive-accent: #b77949;
   --interactive-accent-hover: #a46f45;

@@ -394,5 +394,63 @@
       "vscodeColor": "list.inactiveSelectionBackground",
       "includeInReport": true
     }
+  ],
+  "guidances": [
+    {
+      "id": "guide",
+      "webToken": "guide",
+      "obsidianVar": "--hearth-guide",
+      "vscodeColor": "editorIndentGuide.background1",
+      "includeInReport": true
+    },
+    {
+      "id": "guideActive",
+      "webToken": "guideActive",
+      "obsidianVar": "--hearth-guide-active",
+      "vscodeColor": "editorIndentGuide.activeBackground1",
+      "includeInReport": true
+    },
+    {
+      "id": "whitespace",
+      "webToken": "whitespace",
+      "obsidianVar": "--hearth-whitespace",
+      "vscodeColor": "editorWhitespace.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketWarm",
+      "webToken": "bracketWarm",
+      "obsidianVar": "--hearth-bracket-warm",
+      "vscodeColor": "editorBracketHighlight.foreground1",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketBright",
+      "webToken": "bracketBright",
+      "obsidianVar": "--hearth-bracket-bright",
+      "vscodeColor": "editorBracketHighlight.foreground2",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketCool",
+      "webToken": "bracketCool",
+      "obsidianVar": "--hearth-bracket-cool",
+      "vscodeColor": "editorBracketHighlight.foreground3",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketMatchFill",
+      "webToken": "bracketMatchFill",
+      "obsidianVar": "--hearth-bracket-match-fill",
+      "vscodeColor": "editorBracketMatch.background",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketMatchStroke",
+      "webToken": "bracketMatchStroke",
+      "obsidianVar": "--hearth-bracket-match-stroke",
+      "vscodeColor": "editorBracketMatch.border",
+      "includeInReport": true
+    }
   ]
 }

@@ -82,6 +82,15 @@ function main() {
     }
   }
 
+  const expectedGuidances = new Set(model.guidanceAdapters.map((entry) => entry.id))
+  for (const guidanceId of expectedGuidances) {
+    assert(report.guidances?.[guidanceId], `${REPORT_PATH}: missing guidance lineage for "${guidanceId}"`)
+    for (const variant of model.variants.variants) {
+      const variantEntry = report.guidances[guidanceId].variants?.[variant.id]
+      assert(variantEntry, `${REPORT_PATH}: missing variant lineage for guidance "${guidanceId}" / "${variant.id}"`)
+    }
+  }
+
   console.log('[PASS] Lineage audit passed.')
 }
 

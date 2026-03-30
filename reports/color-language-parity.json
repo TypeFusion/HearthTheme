@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "scheme": {
     "id": "hearth",
     "name": "HearthCode"
@@ -18,6 +18,11 @@
     "surfaces": {
       "checked": 24,
       "withComparisons": 24,
+      "issueCount": 0
+    },
+    "guidances": {
+      "checked": 32,
+      "withComparisons": 32,
       "issueCount": 0
     },
     "interfaces": {
@@ -3860,6 +3865,1616 @@
               "colors": [
                 "#c0b4a4",
                 "#c0b4a4"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    }
+  },
+  "guidances": {
+    "guide": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#4a453e",
+            "obsidian": "#4a453e",
+            "vscode": "#4a453e"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#4a453e",
+                "#4a453e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#4a453e",
+                "#4a453e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#4a453e",
+                "#4a453e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#59524b",
+            "obsidian": "#59524b",
+            "vscode": "#59524b"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#59524b",
+                "#59524b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#59524b",
+                "#59524b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#59524b",
+                "#59524b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#d1c6b5",
+            "obsidian": "#d1c6b5",
+            "vscode": "#d1c6b5"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#d1c6b5",
+                "#d1c6b5"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#d1c6b5",
+                "#d1c6b5"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#d1c6b5",
+                "#d1c6b5"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#c3b8a7",
+            "obsidian": "#c3b8a7",
+            "vscode": "#c3b8a7"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#c3b8a7",
+                "#c3b8a7"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#c3b8a7",
+                "#c3b8a7"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#c3b8a7",
+                "#c3b8a7"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    },
+    "guideActive": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#655b4a",
+            "obsidian": "#655b4a",
+            "vscode": "#655b4a"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#655b4a",
+                "#655b4a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#655b4a",
+                "#655b4a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#655b4a",
+                "#655b4a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#6a6055",
+            "obsidian": "#6a6055",
+            "vscode": "#6a6055"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#6a6055",
+                "#6a6055"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#6a6055",
+                "#6a6055"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#6a6055",
+                "#6a6055"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#b49d7b",
+            "obsidian": "#b49d7b",
+            "vscode": "#b49d7b"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#b49d7b",
+                "#b49d7b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#b49d7b",
+                "#b49d7b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#b49d7b",
+                "#b49d7b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#9d907e",
+            "obsidian": "#9d907e",
+            "vscode": "#9d907e"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#9d907e",
+                "#9d907e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#9d907e",
+                "#9d907e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#9d907e",
+                "#9d907e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    },
+    "whitespace": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#4a453e",
+            "obsidian": "#4a453e",
+            "vscode": "#4a453e"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#4a453e",
+                "#4a453e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#4a453e",
+                "#4a453e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#4a453e",
+                "#4a453e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#59524b",
+            "obsidian": "#59524b",
+            "vscode": "#59524b"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#59524b",
+                "#59524b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#59524b",
+                "#59524b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#59524b",
+                "#59524b"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#d1c6b5",
+            "obsidian": "#d1c6b5",
+            "vscode": "#d1c6b5"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#d1c6b5",
+                "#d1c6b5"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#d1c6b5",
+                "#d1c6b5"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#d1c6b5",
+                "#d1c6b5"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#c3b8a7",
+            "obsidian": "#c3b8a7",
+            "vscode": "#c3b8a7"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#c3b8a7",
+                "#c3b8a7"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#c3b8a7",
+                "#c3b8a7"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#c3b8a7",
+                "#c3b8a7"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    },
+    "bracketWarm": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#cb844a",
+            "obsidian": "#cb844a",
+            "vscode": "#cb844a"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#cb844a",
+                "#cb844a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#cb844a",
+                "#cb844a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#cb844a",
+                "#cb844a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#bb845a",
+            "obsidian": "#bb845a",
+            "vscode": "#bb845a"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#bb845a",
+                "#bb845a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#bb845a",
+                "#bb845a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#bb845a",
+                "#bb845a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#ba7239",
+            "obsidian": "#ba7239",
+            "vscode": "#ba7239"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#ba7239",
+                "#ba7239"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#ba7239",
+                "#ba7239"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#ba7239",
+                "#ba7239"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#b77949",
+            "obsidian": "#b77949",
+            "vscode": "#b77949"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#b77949",
+                "#b77949"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#b77949",
+                "#b77949"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#b77949",
+                "#b77949"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    },
+    "bracketBright": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#e1ba73",
+            "obsidian": "#e1ba73",
+            "vscode": "#e1ba73"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#e1ba73",
+                "#e1ba73"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#e1ba73",
+                "#e1ba73"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#e1ba73",
+                "#e1ba73"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#d8b07a",
+            "obsidian": "#d8b07a",
+            "vscode": "#d8b07a"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#d8b07a",
+                "#d8b07a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#d8b07a",
+                "#d8b07a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#d8b07a",
+                "#d8b07a"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#674100",
+            "obsidian": "#674100",
+            "vscode": "#674100"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#674100",
+                "#674100"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#674100",
+                "#674100"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#674100",
+                "#674100"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#674100",
+            "obsidian": "#674100",
+            "vscode": "#674100"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#674100",
+                "#674100"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#674100",
+                "#674100"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#674100",
+                "#674100"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    },
+    "bracketCool": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#8dbb75",
+            "obsidian": "#8dbb75",
+            "vscode": "#8dbb75"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#8dbb75",
+                "#8dbb75"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#8dbb75",
+                "#8dbb75"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#8dbb75",
+                "#8dbb75"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#9d956f",
+            "obsidian": "#9d956f",
+            "vscode": "#9d956f"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#9d956f",
+                "#9d956f"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#9d956f",
+                "#9d956f"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#9d956f",
+                "#9d956f"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#2f6f2d",
+            "obsidian": "#2f6f2d",
+            "vscode": "#2f6f2d"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#2f6f2d",
+                "#2f6f2d"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#2f6f2d",
+                "#2f6f2d"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#2f6f2d",
+                "#2f6f2d"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#6f8358",
+            "obsidian": "#6f8358",
+            "vscode": "#6f8358"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#6f8358",
+                "#6f8358"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#6f8358",
+                "#6f8358"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#6f8358",
+                "#6f8358"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    },
+    "bracketMatchFill": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#cb844a18",
+            "obsidian": "#cb844a18",
+            "vscode": "#cb844a18"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#cb844a18",
+                "#cb844a18"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#cb844a18",
+                "#cb844a18"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#cb844a18",
+                "#cb844a18"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#bb845a12",
+            "obsidian": "#bb845a12",
+            "vscode": "#bb845a12"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#bb845a12",
+                "#bb845a12"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#bb845a12",
+                "#bb845a12"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#bb845a12",
+                "#bb845a12"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#ba723916",
+            "obsidian": "#ba723916",
+            "vscode": "#ba723916"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#ba723916",
+                "#ba723916"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#ba723916",
+                "#ba723916"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#ba723916",
+                "#ba723916"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#b7794916",
+            "obsidian": "#b7794916",
+            "vscode": "#b7794916"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#b7794916",
+                "#b7794916"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#b7794916",
+                "#b7794916"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#b7794916",
+                "#b7794916"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        }
+      }
+    },
+    "bracketMatchStroke": {
+      "description": null,
+      "variants": {
+        "dark": {
+          "platforms": {
+            "web": "#cb844a52",
+            "obsidian": "#cb844a52",
+            "vscode": "#cb844a52"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#cb844a52",
+                "#cb844a52"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#cb844a52",
+                "#cb844a52"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#cb844a52",
+                "#cb844a52"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "darkSoft": {
+          "platforms": {
+            "web": "#bb845a3e",
+            "obsidian": "#bb845a3e",
+            "vscode": "#bb845a3e"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#bb845a3e",
+                "#bb845a3e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#bb845a3e",
+                "#bb845a3e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#bb845a3e",
+                "#bb845a3e"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "light": {
+          "platforms": {
+            "web": "#ba723946",
+            "obsidian": "#ba723946",
+            "vscode": "#ba723946"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#ba723946",
+                "#ba723946"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#ba723946",
+                "#ba723946"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#ba723946",
+                "#ba723946"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            }
+          ],
+          "maxDeltaE": 0,
+          "maxAlphaDelta": 0,
+          "issues": [],
+          "omittedPlatforms": []
+        },
+        "lightSoft": {
+          "platforms": {
+            "web": "#b7794946",
+            "obsidian": "#b7794946",
+            "vscode": "#b7794946"
+          },
+          "comparisons": [
+            {
+              "pair": [
+                "web",
+                "obsidian"
+              ],
+              "colors": [
+                "#b7794946",
+                "#b7794946"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "web",
+                "vscode"
+              ],
+              "colors": [
+                "#b7794946",
+                "#b7794946"
+              ],
+              "deltaE": 0,
+              "alphaDelta": 0
+            },
+            {
+              "pair": [
+                "obsidian",
+                "vscode"
+              ],
+              "colors": [
+                "#b7794946",
+                "#b7794946"
               ],
               "deltaE": 0,
               "alphaDelta": 0

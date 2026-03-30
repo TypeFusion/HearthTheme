@@ -3,6 +3,7 @@ import {
   COLOR_SYSTEM_ADAPTERS_PATH,
   COLOR_SYSTEM_FOUNDATION_PATH,
   COLOR_SYSTEM_FEEDBACK_RULES_PATH,
+  COLOR_SYSTEM_GUIDANCE_RULES_PATH,
   COLOR_SYSTEM_INTERFACE_RULES_PATH,
   COLOR_SYSTEM_INTERACTION_RULES_PATH,
   COLOR_SYSTEM_PHILOSOPHY_PATH,
@@ -21,6 +22,8 @@ import {
   loadFoundationPalette,
   loadFeedbackAdapters,
   loadFeedbackRules,
+  loadGuidanceAdapters,
+  loadGuidanceRules,
   loadInterfaceAdapters,
   loadInterfaceRules,
   loadInteractionAdapters,
@@ -48,6 +51,14 @@ const EXPORTED_SITE_TOKEN_KEYS = [
   'shellRaised',
   'navActiveFill',
   'navInactiveFill',
+  'guide',
+  'guideActive',
+  'whitespace',
+  'bracketWarm',
+  'bracketBright',
+  'bracketCool',
+  'bracketMatchFill',
+  'bracketMatchStroke',
   'note',
   'info',
   'success',
@@ -200,6 +211,7 @@ function resolveAbstractColorSource({
   resolveRole,
   resolveSurface,
   resolveInterface,
+  resolveGuidance,
   resolveInteraction,
   resolveFeedback,
   entryRef,
@@ -313,6 +325,26 @@ function resolveAbstractColorSource({
     }
   }
 
+  if (source.type === 'guidance') {
+    const resolved = resolveGuidance?.(source.id, variantId)
+    if (!resolved) {
+      throw new Error(`Missing referenced guidance "${source.id}" while resolving ${entryRef}.${variantId}`)
+    }
+    return {
+      color: resolved.color,
+      chainRefs: resolved.chainRefs,
+      steps: [{
+        type: 'guidance-ref',
+        ref: `guidance-rules.guidances.${source.id}.values.${variantId}`,
+        value: resolved.color,
+      }],
+      sourceType: 'guidance',
+      sourceRef: source.id,
+      family: resolved.family,
+      tone: resolved.tone,
+    }
+  }
+
   if (source.type === 'interaction') {
     const resolved = resolveInteraction?.(source.id, variantId)
     if (!resolved) {
@@ -364,6 +396,7 @@ function applyAbstractDerive({
   resolveRole,
   resolveSurface,
   resolveInterface,
+  resolveGuidance,
   resolveInteraction,
   resolveFeedback,
   resolveVariantKnob,
@@ -398,6 +431,7 @@ function applyAbstractDerive({
       resolveRole,
       resolveSurface,
       resolveInterface,
+      resolveGuidance,
       resolveInteraction,
       resolveFeedback,
       entryRef: `${entryRef}.derive.mix.with`,
@@ -1000,6 +1034,134 @@ function buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, 
   }
 }
 
+function buildResolvedGuidanceRules(rawGuidanceRules, foundation, surfaceRules, interfaceRules, interactionRules, feedbackRules, resolvedSemantic, variantProfiles, variantKnobs, variants) {
+  const guidances = {}
+  const resolving = new Set()
+
+  function resolveSurface(surfaceId, variantId) {
+    return surfaceRules.resolved?.[surfaceId]?.[variantId] ?? null
+  }
+
+  function resolveInterface(interfaceId, variantId) {
+    return interfaceRules.interfaces?.[interfaceId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveInteraction(interactionId, variantId) {
+    return interactionRules.interactions?.[interactionId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveFeedback(feedbackId, variantId) {
+    return feedbackRules.feedbacks?.[feedbackId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveRole(roleId, variantId) {
+    return resolvedSemantic?.[roleId]?.[variantId] ?? null
+  }
+
+  function resolveVariantKnob(knobRef, variantId) {
+    const [groupId, knobId] = String(knobRef || '').split('.')
+    if (!groupId || !knobId) return null
+    return variantKnobs?.[groupId]?.[knobId]?.[variantId] ?? null
+  }
+
+  function resolveGuidance(guidanceId, variantId) {
+    const existing = guidances[guidanceId]?.resolved?.[variantId]
+    if (existing) return existing
+    const definition = rawGuidanceRules.guidances[guidanceId]
+    if (!definition) {
+      throw new Error(`Missing guidance definition for "${guidanceId}"`)
+    }
+
+    const key = `${guidanceId}:${variantId}`
+    if (resolving.has(key)) {
+      throw new Error(`Guidance derivation cycle detected: ${key}`)
+    }
+    resolving.add(key)
+
+    const variantOverride = definition.byVariant?.[variantId] || {}
+    const source = variantOverride.source || definition.source
+    const derive = mergeDerive(definition.derive, variantOverride.derive)
+    const entryRef = `guidance-rules.guidances.${guidanceId}`
+    const sourceResolution = resolveAbstractColorSource({
+      source,
+      variantId,
+      foundation,
+      resolveRole,
+      resolveSurface,
+      resolveInterface,
+      resolveGuidance,
+      resolveInteraction,
+      resolveFeedback,
+      entryRef,
+    })
+    const steps = [...sourceResolution.steps]
+    const derived = applyAbstractDerive({
+      baseHex: sourceResolution.color,
+      derive,
+      foundation,
+      variantId,
+      resolveRole,
+      resolveSurface,
+      resolveInterface,
+      resolveGuidance,
+      resolveInteraction,
+      resolveFeedback,
+      resolveVariantKnob,
+      entryRef,
+      steps,
+    })
+    steps.push({
+      type: 'variant-profile',
+      ref: `variant-profiles.variants.${variantId}`,
+    })
+
+    const result = {
+      guidanceId,
+      variantId,
+      description: definition.description,
+      color: derived.color,
+      sourceType: sourceResolution.sourceType,
+      sourceRef: sourceResolution.sourceRef,
+      family: sourceResolution.family,
+      tone: sourceResolution.tone,
+      usedEscapeHatch: Boolean(derive.output),
+      steps,
+      variantProfile: variantProfiles.variants[variantId],
+      chainRefs: uniqueRefs([
+        ...sourceResolution.chainRefs,
+        ...derived.chainRefs,
+        entryRef,
+        `variant-profiles.variants.${variantId}`,
+      ]),
+    }
+
+    if (!guidances[guidanceId]) {
+      guidances[guidanceId] = {
+        description: definition.description,
+        values: {},
+        resolved: {},
+      }
+    }
+    guidances[guidanceId].values[variantId] = result.color
+    guidances[guidanceId].resolved[variantId] = result
+    resolving.delete(key)
+    return result
+  }
+
+  for (const guidanceId of Object.keys(rawGuidanceRules.guidances)) {
+    for (const variant of variants) {
+      resolveGuidance(guidanceId, variant.id)
+    }
+  }
+
+  return {
+    schemaVersion: rawGuidanceRules.schemaVersion,
+    description: rawGuidanceRules.description,
+    definitions: rawGuidanceRules.guidances,
+    guidances,
+  }
+}
+
 function buildSemanticSnapshotDocument(palette) {
   return {
     schemaVersion: 3,
@@ -1030,7 +1192,7 @@ function resolveWebTokenKey(roleDef) {
   return roleDef.webToken || roleDef.id
 }
 
-function buildBasePlatformMaps({ surfaceRules, interfaceRules, interactionRules, feedbackRules, surfaceAdapters, interfaceAdapters, interactionAdapters, feedbackAdapters, variants }) {
+function buildBasePlatformMaps({ surfaceRules, guidanceRules, interfaceRules, interactionRules, feedbackRules, surfaceAdapters, guidanceAdapters, interfaceAdapters, interactionAdapters, feedbackAdapters, variants }) {
   const tokenSets = {}
   const obsidian = {}
   const vscodeWorkbench = {}
@@ -1044,6 +1206,16 @@ function buildBasePlatformMaps({ surfaceRules, interfaceRules, interactionRules,
       const color = surfaceRules.surfaces[contract.id]?.[variant.id]
       if (!color) {
         throw new Error(`Missing surface color for "${contract.id}.${variant.id}"`)
+      }
+      if (contract.webToken) tokenSets[variant.id][contract.webToken] = color
+      if (contract.obsidianVar) obsidian[variant.id][contract.obsidianVar] = color
+      if (contract.vscodeColor) vscodeWorkbench[variant.id][contract.vscodeColor] = color
+    }
+
+    for (const contract of guidanceAdapters) {
+      const color = guidanceRules.guidances[contract.id]?.values?.[variant.id]
+      if (!color) {
+        throw new Error(`Missing guidance color for "${contract.id}.${variant.id}"`)
       }
       if (contract.webToken) tokenSets[variant.id][contract.webToken] = color
       if (contract.obsidianVar) obsidian[variant.id][contract.obsidianVar] = color
@@ -1090,12 +1262,14 @@ function buildBasePlatformMaps({ surfaceRules, interfaceRules, interactionRules,
 
 function buildPlatformTokenMaps({
   surfaceRules,
+  guidanceRules,
   interfaceRules,
   interactionRules,
   feedbackRules,
   semanticPalette,
   roleAdapters,
   surfaceAdapters,
+  guidanceAdapters,
   interfaceAdapters,
   interactionAdapters,
   feedbackAdapters,
@@ -1103,10 +1277,12 @@ function buildPlatformTokenMaps({
 }) {
   const baseMaps = buildBasePlatformMaps({
     surfaceRules,
+    guidanceRules,
     interfaceRules,
     interactionRules,
     feedbackRules,
     surfaceAdapters,
+    guidanceAdapters,
     interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
@@ -1196,6 +1372,7 @@ function validateModel({
   taxonomy,
   foundation,
   surfaceRules,
+  guidanceRules,
   interfaceRules,
   interactionRules,
   feedbackRules,
@@ -1204,6 +1381,7 @@ function validateModel({
   variants,
   adapters,
   surfaceAdapters,
+  guidanceAdapters,
   interfaceAdapters,
   interactionAdapters,
   feedbackAdapters,
@@ -1223,6 +1401,7 @@ function validateModel({
   const foundationFamilyIds = new Set(Object.keys(foundation.families))
   const semanticRoleIds = new Set(Object.keys(semanticRules.roles))
   const surfaceIds = new Set(Object.keys(surfaceRules.surfaces))
+  const guidanceIds = new Set(Object.keys(guidanceRules.guidances))
   const interfaceIds = new Set(Object.keys(interfaceRules.interfaces))
   const interactionIds = new Set(Object.keys(interactionRules.interactions))
   const feedbackIds = new Set(Object.keys(feedbackRules.feedbacks))
@@ -1248,6 +1427,7 @@ function validateModel({
   validateGroupedCoverage(taxonomy.families, foundationFamilyIds, 'taxonomy.families')
   validateGroupedCoverage(taxonomy.roles, semanticRoleIds, 'taxonomy.roles')
   validateGroupedCoverage(taxonomy.surfaces, surfaceIds, 'taxonomy.surfaces')
+  validateGroupedCoverage(taxonomy.guidance, guidanceIds, 'taxonomy.guidance')
   validateGroupedCoverage(taxonomy.interfaces, interfaceIds, 'taxonomy.interfaces')
   validateGroupedCoverage(taxonomy.interactions, interactionIds, 'taxonomy.interactions')
   validateGroupedCoverage(taxonomy.feedback, feedbackIds, 'taxonomy.feedback')
@@ -1263,6 +1443,12 @@ function validateModel({
   for (const surfaceId of Object.keys(surfaceRules.surfaces)) {
     if (!surfaceAdapters.some((entry) => entry.id === surfaceId)) {
       throw new Error(`Surface rule "${surfaceId}" is not represented in adapters.json surfaces`)
+    }
+  }
+
+  for (const guidanceId of Object.keys(guidanceRules.guidances)) {
+    if (!guidanceAdapters.some((entry) => entry.id === guidanceId)) {
+      throw new Error(`Guidance rule "${guidanceId}" is not represented in adapters.json guidances`)
     }
   }
 
@@ -1291,6 +1477,11 @@ function validateModel({
     for (const surfaceAdapter of surfaceAdapters) {
       if (!surfaceRules.surfaces[surfaceAdapter.id]?.[variant.id]) {
         throw new Error(`Missing surface "${surfaceAdapter.id}" for variant "${variant.id}"`)
+      }
+    }
+    for (const guidanceAdapter of guidanceAdapters) {
+      if (!guidanceRules.guidances[guidanceAdapter.id]?.values?.[variant.id]) {
+        throw new Error(`Missing guidance "${guidanceAdapter.id}" for variant "${variant.id}"`)
       }
     }
     for (const interfaceAdapter of interfaceAdapters) {
@@ -1344,6 +1535,18 @@ function validateModel({
     }
   }
 
+  for (const guidanceDef of guidanceAdapters) {
+    if (!guidanceRules.guidances[guidanceDef.id]) {
+      throw new Error(`Missing guidance rule for adapter "${guidanceDef.id}"`)
+    }
+    for (const variant of variantList) {
+      const resolved = guidanceRules.guidances[guidanceDef.id]?.resolved?.[variant.id]
+      if (!resolved) {
+        throw new Error(`Missing resolved guidance lineage for "${guidanceDef.id}" in variant "${variant.id}"`)
+      }
+    }
+  }
+
   for (const interfaceDef of interfaceAdapters) {
     if (!interfaceRules.interfaces[interfaceDef.id]) {
       throw new Error(`Missing interface rule for adapter "${interfaceDef.id}"`)
@@ -1364,11 +1567,13 @@ export function buildColorLanguageModel() {
   const variantSpec = loadColorSystemVariants()
   const adapters = loadRoleAdapters()
   const surfaceAdapters = loadSurfaceAdapters()
+  const guidanceAdapters = loadGuidanceAdapters()
   const interfaceAdapters = loadInterfaceAdapters()
   const interactionAdapters = loadInteractionAdapters()
   const feedbackAdapters = loadFeedbackAdapters()
   const foundation = loadFoundationPalette()
   const rawSurfaceRules = loadSurfaceRules()
+  const rawGuidanceRules = loadGuidanceRules()
   const rawInterfaceRules = loadInterfaceRules()
   const rawInteractionRules = loadInteractionRules()
   const rawFeedbackRules = loadFeedbackRules()
@@ -1380,15 +1585,18 @@ export function buildColorLanguageModel() {
   const interfaceRules = buildResolvedInterfaceRules(rawInterfaceRules, foundation, surfaceRules, variantProfiles, variantKnobs, variantSpec.variants)
   const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, interfaceRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
   const feedbackRules = buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, interfaceRules, interactionRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
+  const guidanceRules = buildResolvedGuidanceRules(rawGuidanceRules, foundation, surfaceRules, interfaceRules, interactionRules, feedbackRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
   const semanticSnapshot = buildSemanticSnapshotDocument(palette)
   const platformTokenMaps = buildPlatformTokenMaps({
     surfaceRules,
+    guidanceRules,
     interfaceRules,
     interactionRules,
     feedbackRules,
     semanticPalette: palette,
     roleAdapters: adapters,
     surfaceAdapters,
+    guidanceAdapters,
     interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
@@ -1403,6 +1611,7 @@ export function buildColorLanguageModel() {
       taxonomy: COLOR_SYSTEM_TAXONOMY_PATH,
       foundation: COLOR_SYSTEM_FOUNDATION_PATH,
       surfaceRules: COLOR_SYSTEM_SURFACE_RULES_PATH,
+      guidanceRules: COLOR_SYSTEM_GUIDANCE_RULES_PATH,
       interfaceRules: COLOR_SYSTEM_INTERFACE_RULES_PATH,
       interactionRules: COLOR_SYSTEM_INTERACTION_RULES_PATH,
       feedbackRules: COLOR_SYSTEM_FEEDBACK_RULES_PATH,
@@ -1419,6 +1628,7 @@ export function buildColorLanguageModel() {
     taxonomy,
     foundation,
     surfaceRules,
+    guidanceRules,
     interfaceRules,
     interactionRules,
     feedbackRules,
@@ -1428,12 +1638,14 @@ export function buildColorLanguageModel() {
     variants: variantSpec,
     adapters,
     surfaceAdapters,
+    guidanceAdapters,
     interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
     platformContracts: {
       roles: adapters,
       surfaces: surfaceAdapters,
+      guidances: guidanceAdapters,
       interfaces: interfaceAdapters,
       interactions: interactionAdapters,
       feedbacks: feedbackAdapters,

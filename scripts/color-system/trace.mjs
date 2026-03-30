@@ -29,6 +29,10 @@ function pushIndexed(indexes, entry) {
     if (!indexes.byInterface[entry.interfaceId]) indexes.byInterface[entry.interfaceId] = []
     indexes.byInterface[entry.interfaceId].push(entry.id)
   }
+  if (entry.guidanceId) {
+    if (!indexes.byGuidance[entry.guidanceId]) indexes.byGuidance[entry.guidanceId] = []
+    indexes.byGuidance[entry.guidanceId].push(entry.id)
+  }
   if (entry.familyId) {
     if (!indexes.byFamily[entry.familyId]) indexes.byFamily[entry.familyId] = []
     indexes.byFamily[entry.familyId].push(entry.id)
@@ -248,6 +252,78 @@ function buildInterfaceEntries(model, artifactMaps, indexes) {
   return entries
 }
 
+function buildGuidanceEntries(model, artifactMaps, indexes) {
+  const entries = []
+  const siteKeys = new Set(getExportedSiteTokenKeys())
+
+  for (const variant of model.variants.variants) {
+    for (const contract of model.guidanceAdapters) {
+      const resolved = model.guidanceRules.guidances[contract.id].resolved[variant.id]
+      const resolvedColor = resolved.color
+      const sourceId = resolved.family || `guidance:${contract.id}`
+
+      if (contract.webToken && siteKeys.has(contract.webToken)) {
+        const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
+        const entry = {
+          id: `web-guidance:${contract.id}:${variant.id}`,
+          path: 'src/data/tokens.ts',
+          field: `tokens.${variant.id}.${contract.webToken}`,
+          artifactType: 'webToken',
+          adapter: 'web',
+          variant: variant.id,
+          roleId: null,
+          guidanceId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.guidances.${contract.id}`], resolvedColor, outputColor),
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+
+      if (contract.vscodeColor) {
+        const outputColor = artifactMaps.vscode?.workbench?.[variant.id]?.[contract.vscodeColor] ?? model.platformTokenMaps.vscode.workbench[variant.id][contract.vscodeColor]
+        const entry = {
+          id: `vscode-guidance:${contract.id}:${variant.id}`,
+          path: variant.outputPath,
+          field: `colors.${contract.vscodeColor}`,
+          artifactType: 'vscodeWorkbench',
+          adapter: 'vscode',
+          variant: variant.id,
+          roleId: null,
+          guidanceId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.guidances.${contract.id}`], resolvedColor, outputColor),
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+
+      if (contract.obsidianVar) {
+        const outputColor = artifactMaps.obsidian?.[variant.id]?.[contract.obsidianVar] ?? model.platformTokenMaps.obsidian[variant.id][contract.obsidianVar]
+        const entry = {
+          id: `obsidian-guidance:${contract.id}:${variant.id}`,
+          path: OBSIDIAN_THEME_PATHS[variant.id],
+          field: contract.obsidianVar,
+          artifactType: 'obsidianVar',
+          adapter: 'obsidian',
+          variant: variant.id,
+          roleId: null,
+          guidanceId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: [...resolved.chainRefs, `adapters.guidances.${contract.id}`],
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+    }
+  }
+
+  return entries
+}
+
 function buildFeedbackEntries(model, artifactMaps, indexes) {
   const entries = []
   const siteKeys = new Set(getExportedSiteTokenKeys())
@@ -444,6 +520,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     byRole: {},
     byFeedback: {},
     byInterface: {},
+    byGuidance: {},
     byFamily: {},
   }
 
@@ -451,6 +528,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     ...buildSurfaceEntries(model, artifactMaps, indexes),
     ...buildInteractionEntries(model, artifactMaps, indexes),
     ...buildInterfaceEntries(model, artifactMaps, indexes),
+    ...buildGuidanceEntries(model, artifactMaps, indexes),
     ...buildFeedbackEntries(model, artifactMaps, indexes),
     ...buildRoleEntries(model, artifactMaps, indexes),
   ]
@@ -527,8 +605,32 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     }
   }
 
+  const guidances = {}
+  for (const [guidanceId, entry] of Object.entries(model.guidanceRules.guidances)) {
+    const firstVariantId = Object.keys(entry.resolved)[0]
+    const first = entry.resolved[firstVariantId]
+    guidances[guidanceId] = {
+      source: {
+        family: first.family,
+        tone: first.tone,
+      },
+      variants: Object.fromEntries(
+        Object.entries(entry.resolved).map(([variantId, resolved]) => [
+          variantId,
+          {
+            color: resolved.color,
+            family: resolved.family,
+            tone: resolved.tone,
+            usedEscapeHatch: resolved.usedEscapeHatch,
+            steps: resolved.steps,
+          },
+        ])
+      ),
+    }
+  }
+
   return {
-    schemaVersion: 5,
+    schemaVersion: 6,
     sources: model.sources,
     scheme: {
       id: model.scheme.id,
@@ -548,6 +650,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
         ])
       ),
     },
+    guidances,
     interfaces,
     feedbacks,
     surfaceRules: Object.fromEntries(

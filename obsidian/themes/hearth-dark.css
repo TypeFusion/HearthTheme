@@ -37,6 +37,11 @@
   --h4-color: #9aa984;
   --h5-color: #cd854b;
   --h6-color: #9a8f80;
+  --hearth-bracket-bright: #e1ba73;
+  --hearth-bracket-cool: #8dbb75;
+  --hearth-bracket-match-fill: #cb844a18;
+  --hearth-bracket-match-stroke: #cb844a52;
+  --hearth-bracket-warm: #cb844a;
   --hearth-callout-danger-bg: rgb(204 90 63 / 0.14);
   --hearth-callout-danger-border: rgb(204 90 63 / 0.56);
   --hearth-callout-note-bg: rgb(120 128 88 / 0.12);
@@ -47,7 +52,10 @@
   --hearth-callout-warning-border: rgb(203 132 74 / 0.56);
   --hearth-feedback-info: #6f94a4;
   --hearth-feedback-note: #788058;
+  --hearth-guide: #4a453e;
+  --hearth-guide-active: #655b4a;
   --hearth-inline-code: #cfa077;
+  --hearth-whitespace: #4a453e;
   --hr-color: rgb(53 48 43 / 0.7);
   --interactive-accent: #cb844a;
   --interactive-accent-hover: #cc905e;

@@ -32,6 +32,10 @@ function main() {
     fail(`No interface lineage generated for scheme "${model.scheme.id}"`)
   }
 
+  if (!lineage.guidances || Object.keys(lineage.guidances).length === 0) {
+    fail(`No guidance lineage generated for scheme "${model.scheme.id}"`)
+  }
+
   console.log(`[PASS] Scheme smoke passed for ${model.scheme.id}.`)
 }
 

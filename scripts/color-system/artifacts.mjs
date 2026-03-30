@@ -2,6 +2,7 @@ import { readFileSync } from 'fs'
 import {
   loadFeedbackAdapters,
   getThemeOutputFiles,
+  loadGuidanceAdapters,
   loadInterfaceAdapters,
   loadInteractionAdapters,
   loadRoleAdapters,
@@ -12,6 +13,7 @@ import { getExportedSiteTokenKeys } from './build.mjs'
 const THEME_FILES = getThemeOutputFiles()
 const ROLE_ADAPTERS = loadRoleAdapters()
 const SURFACE_ADAPTERS = loadSurfaceAdapters()
+const GUIDANCE_ADAPTERS = loadGuidanceAdapters()
 const INTERFACE_ADAPTERS = loadInterfaceAdapters()
 const INTERACTION_ADAPTERS = loadInteractionAdapters()
 const FEEDBACK_ADAPTERS = loadFeedbackAdapters()
@@ -84,7 +86,7 @@ export function buildGeneratedPlatformTokenMaps(model) {
     vscode.textmate[variantId] = {}
     vscode.workbench[variantId] = { ...(model.platformTokenMaps.vscode?.workbench?.[variantId] || {}) }
 
-    for (const contract of [...SURFACE_ADAPTERS, ...INTERFACE_ADAPTERS, ...INTERACTION_ADAPTERS, ...FEEDBACK_ADAPTERS]) {
+    for (const contract of [...SURFACE_ADAPTERS, ...GUIDANCE_ADAPTERS, ...INTERFACE_ADAPTERS, ...INTERACTION_ADAPTERS, ...FEEDBACK_ADAPTERS]) {
       const fallbackWorkbenchColor = contract.vscodeColor
         ? model.platformTokenMaps.vscode?.workbench?.[variantId]?.[contract.vscodeColor]
         : null

@@ -132,6 +132,14 @@ function buildVars(tokens, platformVars = {}) {
   const feedbackSuccess = platformVars['--text-success'] ?? tokens.string
   const feedbackWarning = platformVars['--text-warning'] ?? tokens.number
   const feedbackError = platformVars['--text-error'] ?? tokens.keyword
+  const guide = platformVars['--hearth-guide'] ?? tokens.guide
+  const guideActive = platformVars['--hearth-guide-active'] ?? tokens.guideActive
+  const whitespace = platformVars['--hearth-whitespace'] ?? tokens.whitespace
+  const bracketWarm = platformVars['--hearth-bracket-warm'] ?? tokens.bracketWarm
+  const bracketBright = platformVars['--hearth-bracket-bright'] ?? tokens.bracketBright
+  const bracketCool = platformVars['--hearth-bracket-cool'] ?? tokens.bracketCool
+  const bracketMatchFill = platformVars['--hearth-bracket-match-fill'] ?? tokens.bracketMatchFill
+  const bracketMatchStroke = platformVars['--hearth-bracket-match-stroke'] ?? tokens.bracketMatchStroke
   const h1 = tokens.keyword
   const h2 = tokens.fn
   const h3 = tokens.property
@@ -171,6 +179,14 @@ function buildVars(tokens, platformVars = {}) {
     '--text-error': feedbackError,
     '--hearth-feedback-note': feedbackNote,
     '--hearth-feedback-info': feedbackInfo,
+    '--hearth-guide': guide,
+    '--hearth-guide-active': guideActive,
+    '--hearth-whitespace': whitespace,
+    '--hearth-bracket-warm': bracketWarm,
+    '--hearth-bracket-bright': bracketBright,
+    '--hearth-bracket-cool': bracketCool,
+    '--hearth-bracket-match-fill': bracketMatchFill,
+    '--hearth-bracket-match-stroke': bracketMatchStroke,
     '--text-highlight-bg': alpha(tokens.selection, 0.34),
     '--text-selection': platformVars['--text-selection'] ?? alpha(tokens.selection, 0.42),
     '--interactive-normal': alpha(tokens.border, 0.2),

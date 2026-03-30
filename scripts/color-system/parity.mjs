@@ -172,6 +172,20 @@ export function buildColorLanguageParity(model, artifactMaps) {
     targetCounts: surfaceTargetCounts,
   })
 
+  const guidanceTargetCounts = buildParityTargetCounts(model.guidanceAdapters, {
+    web: (entry) => entry.webToken,
+    obsidian: (entry) => entry.obsidianVar,
+    vscode: (entry) => entry.vscodeColor,
+  })
+
+  const guidanceParity = buildCategoryParity({
+    entries: model.guidanceAdapters,
+    variants: model.variants.variants,
+    getPlatforms: buildContractPlatforms.bind(null, artifactMaps),
+    include: (entry) => entry.includeInReport !== false,
+    targetCounts: guidanceTargetCounts,
+  })
+
   const interfaceTargetCounts = buildParityTargetCounts(model.interfaceAdapters, {
     web: (entry) => entry.webToken,
     obsidian: (entry) => entry.obsidianVar,
@@ -217,12 +231,13 @@ export function buildColorLanguageParity(model, artifactMaps) {
   const totalIssueCount =
     roleParity.summary.issueCount
     + surfaceParity.summary.issueCount
+    + guidanceParity.summary.issueCount
     + interfaceParity.summary.issueCount
     + interactionParity.summary.issueCount
     + feedbackParity.summary.issueCount
 
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     scheme: {
       id: model.scheme.id,
       name: model.scheme.name,
@@ -232,12 +247,14 @@ export function buildColorLanguageParity(model, artifactMaps) {
       issueCount: totalIssueCount,
       roles: roleParity.summary,
       surfaces: surfaceParity.summary,
+      guidances: guidanceParity.summary,
       interfaces: interfaceParity.summary,
       interactions: interactionParity.summary,
       feedbacks: feedbackParity.summary,
     },
     roles: roleParity.report,
     surfaces: surfaceParity.report,
+    guidances: guidanceParity.report,
     interfaces: interfaceParity.report,
     interactions: interactionParity.report,
     feedbacks: feedbackParity.report,
