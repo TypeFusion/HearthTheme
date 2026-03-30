@@ -32,6 +32,7 @@ This guide is about source layers, generation order, and release discipline.
 - `color-system/framework/variants.json`
 - `color-system/framework/adapters.json`
 - `color-system/framework/vscode-chrome-contract.json`
+- `color-system/framework/compatibility-boundaries.json`
 - `color-system/framework/tuning.json`
 
 ### Migration Anchors / Compatibility Baselines
@@ -95,13 +96,14 @@ It is not a source file.
 2. Run `pnpm run sync`.
 3. Run `pnpm run preview:generate` if preview assets are affected.
 4. Run `pnpm run audit:source-layer`.
-5. Run `pnpm run check:schemes`.
-6. Run `pnpm run check:sync`.
-7. Run `pnpm run check:preview`.
-8. Run `pnpm run audit:generated-origin`.
-9. Run `pnpm run audit:all`.
-10. Run `pnpm run build`.
-11. Commit source and generated outputs together.
+5. Run `pnpm run audit:compatibility`.
+6. Run `pnpm run check:schemes`.
+7. Run `pnpm run check:sync`.
+8. Run `pnpm run check:preview`.
+9. Run `pnpm run audit:generated-origin`.
+10. Run `pnpm run audit:all`.
+11. Run `pnpm run build`.
+12. Commit source and generated outputs together.
 
 ## 4. Interpretation Rules
 
@@ -120,6 +122,9 @@ It is not a source file.
 - If a surface relationship stays the same but its climate-sensitive mix ratio changes, prefer `variant-knobs.json` over duplicating per-variant `mix.t` blocks inside surface rules.
 - `check:schemes` is the registry guardrail; it proves every scheme can build its abstract model and lineage without changing generators.
 - `audit:parity` keeps the final VS Code / Obsidian / web outputs aligned, so cross-terminal expression drift is caught before release.
+- `compatibility-boundaries.json` is where bounded host/rendering exceptions live; it must stay free of design values.
+- The residual chrome report must either map a key to an abstract bucket or to a declared compatibility boundary with rationale.
+- New residual keys are not acceptable by default; add them only when the cross-product abstraction is genuinely not worth the complexity yet, and explain that tradeoff in `compatibility-boundaries.json`.
 - `hearth-dark.source.json` is a migration anchor, not the final philosophical authority.
 - `vscode-chrome-contract.json` owns migrated workbench color bindings; do not hand-tune those keys inside source/template snapshots.
 - lineage must be able to explain every generated downstream token.

@@ -1,8 +1,14 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH, loadVscodeChromeContract } from '../color-system.mjs'
+import {
+  COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH,
+  COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH,
+  loadCompatibilityBoundaries,
+  loadVscodeChromeContract,
+} from '../color-system.mjs'
 import { hexToRgba, normalizeHex, rgbaToHex } from '../color-utils.mjs'
 
 const VSCODE_CHROME_CONTRACT = loadVscodeChromeContract()
+const COMPATIBILITY_BOUNDARIES = loadCompatibilityBoundaries()
 const VSCODE_CHROME_RESIDUAL_REPORT_PATH = 'reports/vscode-chrome-residual.json'
 
 const RESIDUAL_BUCKETS = [
@@ -86,6 +92,23 @@ const RESIDUAL_BUCKETS = [
     },
   },
 ]
+
+function buildCompatibilityBoundaryIndex(groups) {
+  const index = new Map()
+  for (const [groupId, group] of Object.entries(groups)) {
+    for (const key of group.keys) {
+      index.set(key, {
+        groupId,
+        label: group.label,
+        suggestion: group.suggestion,
+        rationale: group.rationale,
+      })
+    }
+  }
+  return index
+}
+
+const COMPATIBILITY_BOUNDARY_INDEX = buildCompatibilityBoundaryIndex(COMPATIBILITY_BOUNDARIES.vscodeChromeResidual.groups)
 
 function resolveBindingBaseColor(binding, model, variantId) {
   if (binding.surface) {
@@ -175,6 +198,18 @@ function writeJsonIfChanged(path, data) {
 }
 
 function classifyResidualKey(key) {
+  const compatibilityBoundary = COMPATIBILITY_BOUNDARY_INDEX.get(key)
+  if (compatibilityBoundary) {
+    return {
+      bucket: `compatibility.${compatibilityBoundary.groupId}`,
+      bucketLabel: compatibilityBoundary.label,
+      suggestion: compatibilityBoundary.suggestion,
+      rationale: compatibilityBoundary.rationale,
+      compatibilityBoundary: true,
+      compatibilityGroup: compatibilityBoundary.groupId,
+    }
+  }
+
   for (const bucket of RESIDUAL_BUCKETS) {
     if (bucket.match(key)) {
       return {
@@ -182,6 +217,8 @@ function classifyResidualKey(key) {
         bucketLabel: bucket.label,
         suggestion: bucket.suggestion,
         rationale: bucket.rationale,
+        compatibilityBoundary: false,
+        compatibilityGroup: null,
       }
     }
   }
@@ -190,6 +227,8 @@ function classifyResidualKey(key) {
     bucketLabel: 'Platform Compatibility',
     suggestion: 'keep as bounded platform compatibility until a stable abstract role appears',
     rationale: 'This key does not yet fit a shared abstraction cleanly and should stay explicit until a stronger cross-platform pattern emerges.',
+    compatibilityBoundary: false,
+    compatibilityGroup: null,
   }
 }
 
@@ -201,6 +240,8 @@ function buildResidualBucketSummary(residualEntries) {
         label: entry.bucketLabel,
         suggestion: entry.suggestion,
         rationale: entry.rationale,
+        compatibilityBoundary: Boolean(entry.compatibilityBoundary),
+        compatibilityGroup: entry.compatibilityGroup ?? null,
         keys: [],
         keyCount: 0,
       }
@@ -270,6 +311,8 @@ function buildVscodeChromeResidualReport(model, variantSpec) {
           bucketLabel: entry.bucketLabel,
           suggestion: entry.suggestion,
           rationale: entry.rationale,
+          compatibilityBoundary: Boolean(entry.compatibilityBoundary),
+          compatibilityGroup: entry.compatibilityGroup ?? null,
           variants: {},
         })
       }
@@ -295,6 +338,7 @@ function buildVscodeChromeResidualReport(model, variantSpec) {
       interactionRules: model.sources.interactionRules,
       variants: model.sources.variants,
       vscodeChromeContract: COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH,
+      compatibilityBoundaries: COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH,
       sourceSnapshot: variantSpec.baseSourcePath,
       templateSnapshots: [
         variantSpec.baseTemplatePath,
@@ -304,8 +348,9 @@ function buildVscodeChromeResidualReport(model, variantSpec) {
     summary: {
       migratedKeyCount: migratedKeys.size,
       residualKeyCount: aggregateEntries.length,
+      compatibilityBoundaryKeyCount: aggregateEntries.filter((entry) => entry.compatibilityBoundary).length,
       variantsCovered: Object.keys(variants),
-      migrationThesis: 'Migrate high-signal workbench chrome first, then replace residual buckets with abstract chrome tone roles or bounded compatibility exceptions.',
+      migrationThesis: 'Migrate high-signal workbench chrome first, then either replace residual buckets with abstract tone roles or declare bounded compatibility exceptions explicitly.',
     },
     variants,
     aggregate: {

@@ -8,6 +8,7 @@
         "interactionRules": "color-system/schemes/hearth/interaction-rules.json",
         "variants": "color-system/framework/variants.json",
         "vscodeChromeContract": "color-system/framework/vscode-chrome-contract.json",
+        "compatibilityBoundaries": "color-system/framework/compatibility-boundaries.json",
         "sourceSnapshot": "color-system/hearth-dark.source.json",
         "templateSnapshots": [
             "color-system/templates/hearth-dark.base.json",
@@ -19,13 +20,14 @@
     "summary": {
         "migratedKeyCount": 116,
         "residualKeyCount": 6,
+        "compatibilityBoundaryKeyCount": 6,
         "variantsCovered": [
             "dark",
             "darkSoft",
             "light",
             "lightSoft"
         ],
-        "migrationThesis": "Migrate high-signal workbench chrome first, then replace residual buckets with abstract chrome tone roles or bounded compatibility exceptions."
+        "migrationThesis": "Migrate high-signal workbench chrome first, then either replace residual buckets with abstract tone roles or declare bounded compatibility exceptions explicitly."
     },
     "variants": {
         "dark": {
@@ -41,10 +43,12 @@
                 "widget.shadow"
             ],
             "buckets": {
-                "scrollbar-shadow": {
-                    "label": "Scrollbar and Shadow",
+                "compatibility.rendererPolish": {
+                    "label": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish",
                     "keys": [
                         "scrollbarSlider.activeBackground",
                         "scrollbarSlider.background",
@@ -53,10 +57,12 @@
                     ],
                     "keyCount": 4
                 },
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                "compatibility.hostStatusModes": {
+                    "label": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes",
                     "keys": [
                         "statusBar.debuggingBackground",
                         "statusBar.noFolderBackground"
@@ -68,50 +74,62 @@
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#655b4aaa",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.background",
                     "value": "#4a433866",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.hoverBackground",
                     "value": "#4a433899",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "statusBar.debuggingBackground",
                     "value": "#5d3418",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "statusBar.noFolderBackground",
                     "value": "#352f24",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "widget.shadow",
                     "value": "#00000066",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 }
             ]
         },
@@ -128,10 +146,12 @@
                 "widget.shadow"
             ],
             "buckets": {
-                "scrollbar-shadow": {
-                    "label": "Scrollbar and Shadow",
+                "compatibility.rendererPolish": {
+                    "label": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish",
                     "keys": [
                         "scrollbarSlider.activeBackground",
                         "scrollbarSlider.background",
@@ -140,10 +160,12 @@
                     ],
                     "keyCount": 4
                 },
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                "compatibility.hostStatusModes": {
+                    "label": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes",
                     "keys": [
                         "statusBar.debuggingBackground",
                         "statusBar.noFolderBackground"
@@ -155,50 +177,62 @@
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#645a4c88",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.background",
                     "value": "#4d473d4c",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.hoverBackground",
                     "value": "#4d473d70",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "statusBar.debuggingBackground",
                     "value": "#5d3e2a",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "statusBar.noFolderBackground",
                     "value": "#3e352d",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "widget.shadow",
                     "value": "#00000050",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 }
             ]
         },
@@ -215,10 +249,12 @@
                 "widget.shadow"
             ],
             "buckets": {
-                "scrollbar-shadow": {
-                    "label": "Scrollbar and Shadow",
+                "compatibility.rendererPolish": {
+                    "label": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish",
                     "keys": [
                         "scrollbarSlider.activeBackground",
                         "scrollbarSlider.background",
@@ -227,10 +263,12 @@
                     ],
                     "keyCount": 4
                 },
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                "compatibility.hostStatusModes": {
+                    "label": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes",
                     "keys": [
                         "statusBar.debuggingBackground",
                         "statusBar.noFolderBackground"
@@ -242,50 +280,62 @@
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#b49d7baa",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.background",
                     "value": "#d2c2a566",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.hoverBackground",
                     "value": "#d2c2a599",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "statusBar.debuggingBackground",
                     "value": "#7f4313",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "statusBar.noFolderBackground",
                     "value": "#8f5b2e",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "widget.shadow",
                     "value": "#00000033",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 }
             ]
         },
@@ -302,10 +352,12 @@
                 "widget.shadow"
             ],
             "buckets": {
-                "scrollbar-shadow": {
-                    "label": "Scrollbar and Shadow",
+                "compatibility.rendererPolish": {
+                    "label": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish",
                     "keys": [
                         "scrollbarSlider.activeBackground",
                         "scrollbarSlider.background",
@@ -314,10 +366,12 @@
                     ],
                     "keyCount": 4
                 },
-                "chrome-surface": {
-                    "label": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                "compatibility.hostStatusModes": {
+                    "label": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes",
                     "keys": [
                         "statusBar.debuggingBackground",
                         "statusBar.noFolderBackground"
@@ -329,60 +383,74 @@
                 {
                     "key": "scrollbarSlider.activeBackground",
                     "value": "#b49d7baa",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.background",
                     "value": "#d2c2a566",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "scrollbarSlider.hoverBackground",
                     "value": "#d2c2a599",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 },
                 {
                     "key": "statusBar.debuggingBackground",
                     "value": "#755845",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "statusBar.noFolderBackground",
                     "value": "#80634a",
-                    "bucket": "chrome-surface",
-                    "bucketLabel": "Chrome Surface",
-                    "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                    "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
+                    "bucket": "compatibility.hostStatusModes",
+                    "bucketLabel": "Host Status Modes",
+                    "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                    "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "hostStatusModes"
                 },
                 {
                     "key": "widget.shadow",
                     "value": "#00000033",
-                    "bucket": "scrollbar-shadow",
-                    "bucketLabel": "Scrollbar and Shadow",
+                    "bucket": "compatibility.rendererPolish",
+                    "bucketLabel": "Renderer Polish",
                     "suggestion": "keep platform compatibility for now",
-                    "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values."
+                    "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                    "compatibilityBoundary": true,
+                    "compatibilityGroup": "rendererPolish"
                 }
             ]
         }
     },
     "aggregate": {
         "buckets": {
-            "scrollbar-shadow": {
-                "label": "Scrollbar and Shadow",
+            "compatibility.rendererPolish": {
+                "label": "Renderer Polish",
                 "suggestion": "keep platform compatibility for now",
-                "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "rendererPolish",
                 "keys": [
                     "scrollbarSlider.activeBackground",
                     "scrollbarSlider.background",
@@ -391,10 +459,12 @@
                 ],
                 "keyCount": 4
             },
-            "chrome-surface": {
-                "label": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+            "compatibility.hostStatusModes": {
+                "label": "Host Status Modes",
+                "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "hostStatusModes",
                 "keys": [
                     "statusBar.debuggingBackground",
                     "statusBar.noFolderBackground"
@@ -405,10 +475,12 @@
         "entries": [
             {
                 "key": "scrollbarSlider.activeBackground",
-                "bucket": "scrollbar-shadow",
-                "bucketLabel": "Scrollbar and Shadow",
+                "bucket": "compatibility.rendererPolish",
+                "bucketLabel": "Renderer Polish",
                 "suggestion": "keep platform compatibility for now",
-                "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "rendererPolish",
                 "variants": {
                     "dark": "#655b4aaa",
                     "darkSoft": "#645a4c88",
@@ -418,10 +490,12 @@
             },
             {
                 "key": "scrollbarSlider.background",
-                "bucket": "scrollbar-shadow",
-                "bucketLabel": "Scrollbar and Shadow",
+                "bucket": "compatibility.rendererPolish",
+                "bucketLabel": "Renderer Polish",
                 "suggestion": "keep platform compatibility for now",
-                "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "rendererPolish",
                 "variants": {
                     "dark": "#4a433866",
                     "darkSoft": "#4d473d4c",
@@ -431,10 +505,12 @@
             },
             {
                 "key": "scrollbarSlider.hoverBackground",
-                "bucket": "scrollbar-shadow",
-                "bucketLabel": "Scrollbar and Shadow",
+                "bucket": "compatibility.rendererPolish",
+                "bucketLabel": "Renderer Polish",
                 "suggestion": "keep platform compatibility for now",
-                "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "rendererPolish",
                 "variants": {
                     "dark": "#4a433899",
                     "darkSoft": "#4d473d70",
@@ -444,10 +520,12 @@
             },
             {
                 "key": "statusBar.debuggingBackground",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                "bucket": "compatibility.hostStatusModes",
+                "bucketLabel": "Host Status Modes",
+                "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "hostStatusModes",
                 "variants": {
                     "dark": "#5d3418",
                     "darkSoft": "#5d3e2a",
@@ -457,10 +535,12 @@
             },
             {
                 "key": "statusBar.noFolderBackground",
-                "bucket": "chrome-surface",
-                "bucketLabel": "Chrome Surface",
-                "suggestion": "candidate chrome tone roles like shell / shellRaised / shellInset",
-                "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration.",
+                "bucket": "compatibility.hostStatusModes",
+                "bucketLabel": "Host Status Modes",
+                "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "hostStatusModes",
                 "variants": {
                     "dark": "#352f24",
                     "darkSoft": "#3e352d",
@@ -470,10 +550,12 @@
             },
             {
                 "key": "widget.shadow",
-                "bucket": "scrollbar-shadow",
-                "bucketLabel": "Scrollbar and Shadow",
+                "bucket": "compatibility.rendererPolish",
+                "bucketLabel": "Renderer Polish",
                 "suggestion": "keep platform compatibility for now",
-                "rationale": "Scrollbars and drop shadows are renderer-specific polish details and can remain as bounded platform compatibility values.",
+                "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                "compatibilityBoundary": true,
+                "compatibilityGroup": "rendererPolish",
                 "variants": {
                     "dark": "#00000066",
                     "darkSoft": "#00000050",

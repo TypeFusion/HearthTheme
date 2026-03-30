@@ -1,0 +1,28 @@
+{
+    "schemaVersion": 1,
+    "description": "Bounded platform compatibility exceptions that intentionally remain outside abstract tone roles.",
+    "vscodeChromeResidual": {
+        "groups": {
+            "hostStatusModes": {
+                "label": "Host Status Modes",
+                "suggestion": "keep as bounded host-mode compatibility until a true cross-product status-shell language is needed",
+                "rationale": "These status bar backgrounds describe VS Code host modes, not reusable cross-product color-language states.",
+                "keys": [
+                    "statusBar.debuggingBackground",
+                    "statusBar.noFolderBackground"
+                ]
+            },
+            "rendererPolish": {
+                "label": "Renderer Polish",
+                "suggestion": "keep platform compatibility for now",
+                "rationale": "Scrollbars and widget shadows are renderer-specific polish details and should remain bounded compatibility exceptions.",
+                "keys": [
+                    "scrollbarSlider.background",
+                    "scrollbarSlider.hoverBackground",
+                    "scrollbarSlider.activeBackground",
+                    "widget.shadow"
+                ]
+            }
+        }
+    }
+}

@@ -134,6 +134,7 @@ Primary files:
 
 - `color-system/framework/adapters.json`
 - `color-system/framework/vscode-chrome-contract.json`
+- `color-system/framework/compatibility-boundaries.json`
 - `color-system/framework/tuning.json`
 - `color-system/hearth-dark.source.json`
 - `color-system/templates/*.base.json`
@@ -142,6 +143,7 @@ Contracts:
 
 - adapters map abstract tokens into platform tokens
 - vscode chrome contract maps selected workbench colors back to abstract surfaces and interactions
+- compatibility boundaries declare the bounded host-specific exceptions that intentionally remain outside abstract tone roles
 - tuning applies bounded calibration only
 - source/template files are migration anchors and compatibility baselines, not long-term design authority
 
@@ -149,6 +151,7 @@ Rules:
 
 - adapters must not own design colors
 - tuning must not own design philosophy
+- compatibility boundaries must not own design colors; they only explain why a few host-specific outputs remain explicit
 - any calibration drift must stay traceable
 
 ### 3.5 Generated Artifacts + Lineage
@@ -180,7 +183,7 @@ They are never hand-tuned sources of truth.
 The residual chrome report is especially important during migration:
 
 - it shows which workbench keys already come from abstract roles
-- it groups the remaining keys into buckets that can become future chrome tone roles
+- it distinguishes between future abstraction candidates and declared compatibility boundaries
 - it keeps platform compatibility work visible instead of hidden inside snapshots
 
 ## 4. Directory Layout
@@ -216,13 +219,14 @@ The expected workflow is:
 2. edit only scheme/core files unless the change is truly calibration
 3. run `pnpm run sync`
 4. run `pnpm run audit:source-layer`
-5. run `pnpm run check:schemes`
-6. run `pnpm run audit:all`
-7. run `pnpm run build`
-8. inspect previews, reports, and docs
-9. commit sources and generated outputs together
+5. run `pnpm run audit:compatibility`
+6. run `pnpm run check:schemes`
+7. run `pnpm run audit:all`
+8. run `pnpm run build`
+9. inspect previews, reports, and docs
+10. commit sources and generated outputs together
 
-Key guardrails in that loop are `audit:source-layer`, `audit:lineage`, `audit:parity`, and `check:schemes`.
+Key guardrails in that loop are `audit:source-layer`, `audit:compatibility`, `audit:lineage`, `audit:parity`, and `check:schemes`.
 
 The normal edit order is:
 

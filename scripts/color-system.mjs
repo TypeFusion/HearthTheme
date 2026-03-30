@@ -10,6 +10,7 @@ export const COLOR_SYSTEM_ADAPTERS_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/adapter
 export const COLOR_SYSTEM_VARIANT_PROFILES_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/variant-profiles.json`
 export const COLOR_SYSTEM_TUNING_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/tuning.json`
 export const COLOR_SYSTEM_VSCODE_CHROME_CONTRACT_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/vscode-chrome-contract.json`
+export const COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH = `${COLOR_SYSTEM_FRAMEWORK_DIR}/compatibility-boundaries.json`
 
 const HEX_RE = /^#[0-9a-f]{6}$/i
 const FLEX_HEX_RE = /^#[0-9a-f]{6}([0-9a-f]{2})?$/i
@@ -386,6 +387,52 @@ export function loadVscodeChromeContract() {
     schemaVersion: Number(data.schemaVersion || 1),
     description: typeof data.description === 'string' ? data.description.trim() : '',
     bindings,
+  }
+}
+
+export function loadCompatibilityBoundaries() {
+  const data = readJson(COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH)
+  assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH} must be an object`)
+
+  const rawGroups = data.vscodeChromeResidual?.groups
+  assert(rawGroups && typeof rawGroups === 'object' && !Array.isArray(rawGroups), `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: vscodeChromeResidual.groups must be an object`)
+
+  const seenKeys = new Set()
+  const groups = {}
+  for (const [groupIdRaw, group] of Object.entries(rawGroups)) {
+    const groupId = String(groupIdRaw || '').trim()
+    assert(groupId, `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: invalid group id`)
+    assert(group && typeof group === 'object' && !Array.isArray(group), `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: group "${groupId}" must be an object`)
+    const label = String(group.label || '').trim()
+    const suggestion = String(group.suggestion || '').trim()
+    const rationale = String(group.rationale || '').trim()
+    assert(label, `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: group "${groupId}" requires label`)
+    assert(suggestion, `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: group "${groupId}" requires suggestion`)
+    assert(rationale, `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: group "${groupId}" requires rationale`)
+    assert(Array.isArray(group.keys) && group.keys.length > 0, `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: group "${groupId}" requires a non-empty keys array`)
+
+    const keys = group.keys.map((key, index) => {
+      const value = String(key || '').trim()
+      assert(value, `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: group "${groupId}" has invalid key at index ${index}`)
+      assert(!seenKeys.has(value), `${COLOR_SYSTEM_COMPATIBILITY_BOUNDARIES_PATH}: duplicate compatibility key "${value}"`)
+      seenKeys.add(value)
+      return value
+    })
+
+    groups[groupId] = {
+      label,
+      suggestion,
+      rationale,
+      keys,
+    }
+  }
+
+  return {
+    schemaVersion: Number(data.schemaVersion || 1),
+    description: typeof data.description === 'string' ? data.description.trim() : '',
+    vscodeChromeResidual: {
+      groups,
+    },
   }
 }
 
