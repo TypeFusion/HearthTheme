@@ -3,20 +3,20 @@
 /* Source: themes/hearth-light.json */
 .theme-light {
   --background-modifier-active-hover: rgb(198 132 49 / 0.26);
-  --background-modifier-border: rgb(206 190 164 / 0.72);
-  --background-modifier-border-focus: rgb(198 132 49 / 0.46);
+  --background-modifier-border: #cebea4;
+  --background-modifier-border-focus: #c581334a;
   --background-modifier-border-hover: rgb(206 190 164 / 0.48);
   --background-modifier-box-shadow: rgb(233 222 208 / 0.6);
   --background-modifier-cover: rgb(233 222 208 / 0.72);
   --background-modifier-error: rgb(179 73 53 / 0.2);
   --background-modifier-error-hover: rgb(179 73 53 / 0.3);
   --background-modifier-form-field: rgb(206 190 164 / 0.22);
-  --background-modifier-hover: rgb(206 190 164 / 0.28);
+  --background-modifier-hover: #dfd6c7;
   --background-modifier-message: rgb(198 132 49 / 0.18);
   --background-modifier-success: rgb(118 128 97 / 0.24);
   --background-primary: #e9ded0;
   --background-primary-alt: #dccfbc;
-  --background-secondary: #e3d9c7;
+  --background-secondary: #ddd3bd;
   --background-secondary-alt: #e1d5c4;
   --blockquote-border-color: rgb(88 96 71 / 0.46);
   --blockquote-color: #625341;
@@ -49,7 +49,7 @@
   --hr-color: rgb(206 190 164 / 0.7);
   --interactive-accent: #c68431;
   --interactive-accent-hover: #aa722b;
-  --interactive-hover: rgb(206 190 164 / 0.3);
+  --interactive-hover: #dfd6c7;
   --interactive-normal: rgb(206 190 164 / 0.2);
   --link-color: #c68431;
   --link-color-hover: #aa722b;
@@ -72,7 +72,7 @@
   --text-muted: #675946;
   --text-normal: #2a1e0f;
   --text-on-accent: #f5eee4;
-  --text-selection: rgb(207 135 64 / 0.42);
+  --text-selection: #cf874021;
   --text-success: #768061;
   --text-warning: #bd7338;
 }

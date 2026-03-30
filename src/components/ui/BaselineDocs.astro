@@ -13,6 +13,14 @@ const s = tokens.darkSoft;
 const l = tokens.light;
 const ls = tokens.lightSoft;
 const changelogUrl = "https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md";
+const docsRootUrl = "https://github.com/hearth-code/HearthTheme/blob/main/docs";
+const repoRootUrl = "https://github.com/hearth-code/HearthTheme/blob/main";
+const philosophyUrl = `${repoRootUrl}/color-system/schemes/hearth/philosophy.md`;
+const schemeUrl = `${repoRootUrl}/color-system/schemes/hearth/scheme.json`;
+const specUrl = `${docsRootUrl}/color-language-spec.md`;
+const baselineUrl = `${docsRootUrl}/theme-baseline.md`;
+const tuningUrl = `${docsRootUrl}/color-system-tuning.md`;
+const reportUrl = `${docsRootUrl}/color-language-report.md`;
 const CHANGELOG_VISIBLE_RELEASES = 6;
 const CHANGELOG_VISIBLE_CHANGES = 2;
 
@@ -78,6 +86,10 @@ const copy = {
 		budgetMetric: "Metric",
 		budgetTarget: "Target",
 		snapshotTitle: "Current Snapshot",
+		stackTitle: "Documentation Stack",
+		stackSubtitle:
+			"Use the philosophy for community-facing intent, the spec for architecture, the baseline for release truth, the tuning guide for calibration edits, and the report for generated consistency output.",
+		openDoc: "Open source file",
 		changelogTitle: "Change History",
 		changelogSubtitle: "Only the latest releases are shown here for quick scanning.",
 		changelogFullLink: "View full changelog",
@@ -98,6 +110,32 @@ const copy = {
 			variable: "Coffee-neutral information carriers",
 			comment: "Quiet guidance layer",
 		},
+		stackCards: {
+			philosophy: {
+				title: "Scheme Philosophy",
+				body: "The public-facing story: naming, mood, vocabulary, and what this color language is trying to preserve.",
+			},
+			scheme: {
+				title: "Scheme Manifest",
+				body: "The machine-readable scheme header that powers docs, previews, and release metadata.",
+			},
+			spec: {
+				title: "System Spec",
+				body: "The top-down philosophy: principles, platform translation rules, and change workflow.",
+			},
+			baseline: {
+				title: "Baseline Snapshot",
+				body: "The release-aligned semantic matrix, readability budget, and current audit snapshot.",
+			},
+			tuning: {
+				title: "Tuning Reference",
+				body: "The editing map for compensation rules, separation budgets, and derived site assets.",
+			},
+			report: {
+				title: "Consistency Report",
+				body: "The generated output report for current release consistency and cross-surface drift review.",
+			},
+		},
 	},
 	zh: {
 		eyebrow: "色彩语言治理",
@@ -117,6 +155,10 @@ const copy = {
 		budgetMetric: "指标",
 		budgetTarget: "目标",
 		snapshotTitle: "当前快照",
+		stackTitle: "文档栈",
+		stackSubtitle:
+			"对外叙事看色彩哲学，结构原则看主规范，当前发布真值看基线，校准参数看 tuning，生成一致性结果看报告。",
+		openDoc: "打开源文档",
 		changelogTitle: "变更历史",
 		changelogSubtitle: "页面仅展示最新版本摘要，便于快速浏览。",
 		changelogFullLink: "查看完整变更日志",
@@ -136,6 +178,32 @@ const copy = {
 			type: "暗黄赭结构符号",
 			variable: "咖啡中性信息承载",
 			comment: "安静引导层",
+		},
+		stackCards: {
+			philosophy: {
+				title: "方案哲学",
+				body: "面向社区传播的那一层：命名、气质、词汇和这套色彩语言真正要守住的东西。",
+			},
+			scheme: {
+				title: "方案清单",
+				body: "面向机器读取的方案头信息，用于驱动文档、预览图与发布元数据。",
+			},
+			spec: {
+				title: "系统规范",
+				body: "自上而下的哲学说明：原则、平台翻译规则与变更工作流。",
+			},
+			baseline: {
+				title: "基线快照",
+				body: "与当前发布对齐的语义矩阵、可读性预算与审计快照。",
+			},
+			tuning: {
+				title: "Tuning 参考",
+				body: "补偿规则、分离预算与站点派生资产的编辑地图。",
+			},
+			report: {
+				title: "一致性报告",
+				body: "当前发布的生成结果报告，用于检查跨载体漂移与一致性。",
+			},
 		},
 	},
 	ja: {
@@ -157,6 +225,10 @@ const copy = {
 		budgetMetric: "指標",
 		budgetTarget: "目標",
 		snapshotTitle: "現在のスナップショット",
+		stackTitle: "ドキュメント構成",
+		stackSubtitle:
+			"対外的な語りは哲学文書、構造原則は仕様書、現行リリースの真値はベースライン、補正パラメータは tuning、生成結果は整合レポートを見る運用です。",
+		openDoc: "ソース文書を開く",
 		changelogTitle: "変更履歴",
 		changelogSubtitle: "このページでは最新リリース要約のみを表示します。",
 		changelogFullLink: "完全な変更履歴を見る",
@@ -176,6 +248,32 @@ const copy = {
 			type: "ダークオーカーの構造記号",
 			variable: "コーヒーニュートラルの情報キャリア",
 			comment: "静かなガイダンス層",
+		},
+		stackCards: {
+			philosophy: {
+				title: "スキーム哲学",
+				body: "コミュニティ向けの物語層。命名、雰囲気、語彙、そしてこのカラー言語が守るべき核を示します。",
+			},
+			scheme: {
+				title: "スキーム定義",
+				body: "ドキュメント、プレビュー、リリース情報を支える機械可読のスキームヘッダーです。",
+			},
+			spec: {
+				title: "システム仕様",
+				body: "トップダウンの思想、原則、プラットフォーム翻訳規則、変更ワークフロー。",
+			},
+			baseline: {
+				title: "ベースライン",
+				body: "現行リリースに揃えたセマンティック行列、可読性バジェット、監査スナップショット。",
+			},
+			tuning: {
+				title: "Tuning 参照",
+				body: "補正規則、分離バジェット、派生サイト資産を編集するための参照。",
+			},
+			report: {
+				title: "整合レポート",
+				body: "現行リリースの生成結果を確認し、面間ドリフトを点検するためのレポート。",
+			},
 		},
 	},
 } as const;
@@ -256,6 +354,15 @@ const snapshot = {
 	lightOperator: contrastRatio(l.operator, l.bg),
 	lightSoftOperator: contrastRatio(ls.operator, ls.bg),
 };
+
+const stackCards = [
+	{ href: philosophyUrl, title: c.stackCards.philosophy.title, body: c.stackCards.philosophy.body },
+	{ href: specUrl, title: c.stackCards.spec.title, body: c.stackCards.spec.body },
+	{ href: schemeUrl, title: c.stackCards.scheme.title, body: c.stackCards.scheme.body },
+	{ href: baselineUrl, title: c.stackCards.baseline.title, body: c.stackCards.baseline.body },
+	{ href: tuningUrl, title: c.stackCards.tuning.title, body: c.stackCards.tuning.body },
+	{ href: reportUrl, title: c.stackCards.report.title, body: c.stackCards.report.body },
+];
 ---
 
 <section class="hearth-section hearth-section-y" data-reveal>
@@ -273,6 +380,29 @@ const snapshot = {
 			<section class="hearth-surface hearth-card p-6 sm:p-8">
 				<h2 class="font-ui font-semibold tracking-[-0.014em] text-[1.82rem] hearth-doc-heading mb-5">{c.intentTitle}</h2>
 				<p class="hearth-copy hearth-doc-body leading-relaxed text-[1.02rem]">{c.intent}</p>
+			</section>
+
+			<section class="hearth-surface hearth-card p-6 sm:p-8">
+				<div class="mb-6">
+					<h2 class="font-ui font-semibold tracking-[-0.014em] text-[1.82rem] hearth-doc-heading mb-3">{c.stackTitle}</h2>
+					<p class="hearth-copy hearth-doc-body text-[1rem] leading-relaxed">{c.stackSubtitle}</p>
+				</div>
+				<div class="grid gap-4 md:grid-cols-2">
+					{
+						stackCards.map((card) => (
+							<a
+								href={card.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="hearth-surface hearth-surface-soft hearth-card border hearth-doc-divider bg-[var(--hearth-surface-soft-bg)] p-5 transition-colors duration-200 hover:bg-[var(--hearth-grid-line-soft)]"
+							>
+								<p class="hearth-doc-heading font-ui font-semibold tracking-[-0.014em] text-[1.18rem] mb-2">{card.title}</p>
+								<p class="hearth-copy hearth-doc-note text-[0.97rem] leading-relaxed mb-4">{card.body}</p>
+								<span class="hearth-footer-link text-[0.78rem]">{c.openDoc}</span>
+							</a>
+						))
+					}
+				</div>
 			</section>
 
 			<section class="hearth-surface hearth-card p-6 sm:p-8">

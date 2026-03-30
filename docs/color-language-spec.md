@@ -1,97 +1,251 @@
 # HearthCode Color Language Spec
 
-This document defines HearthCode as a cross-platform color language system.
+HearthCode is a color-language system, not just a single platform theme.
 
-## 1. Product Boundary
+The public story should stay simple:
 
-HearthCode is not a single platform theme package.
-It is a semantic color language that is adapted to multiple surfaces:
+- one scheme
+- one philosophy
+- four tuned climates
+- the same recognizable personality across VS Code, Obsidian, and the website
 
-- VS Code / Open VSX extension theme payload
-- Obsidian app-theme payload
-- Website and docs presentation surfaces
+The internal system exists to make that public promise reliable.
 
-Platform files are delivery artifacts. Semantic role mapping is the source-of-truth.
-Authoring source files live under `color-system/`.
+## 1. System Thesis
 
-Current source files:
+HearthCode starts from palette philosophy first, then turns that philosophy into machine-readable contracts, then turns those contracts into generated platform artifacts.
 
-- `color-system/semantic.json` (role -> variant palette values)
-- `color-system/adapters.json` (role -> TextMate / semantic / Obsidian / web mappings)
-- `color-system/variants.json` (variant registry + output wiring)
-- `color-system/tuning.json` (algorithmic compensation + soft chroma budgets)
-- `color-system/hearth-dark.source.json` (UI/chrome baseline source)
+The goal is not pixel identity.
 
-Tuning key quick reference:
+The goal is **expressive parity**:
 
-- `docs/color-system-tuning.md`
+- the same thermal feel
+- the same semantic hierarchy
+- the same emphasis priorities
+- the same variant climates
+- the same public-facing identity
 
-## 2. Token Architecture
+A user should be able to move between products and still feel that the same color language is speaking.
 
-HearthCode uses four token layers:
+## 2. Five-Layer Architecture
 
-1. `Core Tokens`
-- Perceptual anchors: background, foreground, border, accent, status.
+HearthCode is organized as a five-layer single-direction pipeline:
 
-2. `Semantic Tokens`
-- Meaning roles: `keyword`, `function`, `type`, `variable`, `property`, `string`, `number`, `comment`, `operator`, `tag`.
+1. Philosophy / Scheme Manifest
+2. Color Language Core
+3. Variant System
+4. Platform Contracts + Calibration
+5. Generated Artifacts + Lineage
 
-3. `Platform Alias Tokens`
-- Platform-specific variable keys that map to the semantic roles.
-- Examples:
-  - VS Code semantic keys (for example `function`, `type`, `property`)
-  - Obsidian CSS variables (for example `--code-function`, `--code-important`, `--code-property`)
-  - Web token aliases (for example `fn`, `type`, `variable`)
+The layers should only flow downward. Generated artifacts never become design authority.
 
-4. `Output Artifacts`
-- Generated, publishable files:
-  - `themes/*.json`
-  - `extension/themes/*.json`
-  - `obsidian/themes/*.css`
-  - `obsidian/app-theme/theme.css`
-  - `src/data/tokens.ts`
+## 3. Layer Contracts
 
-## 3. Semantic Contract
+### 3.1 Philosophy / Scheme Manifest
 
-Each semantic role must satisfy:
+Purpose:
 
-- **Role stability**: meaning remains consistent across all variants.
-- **Cross-theme continuity**: dark/light pair drift should stay controlled for stable roles; light variants may use polarity compensation on selected roles (for example `function`) when readability gains are measurable.
-- **Readability floor**: foreground/background contrast and role separability remain above guardrails.
-- **Adapter parity**: VS Code TextMate roles and semantic token roles should remain aligned.
+- define what the scheme is
+- define how it should be described to humans
+- define constraints that stay above any single platform
 
-## 4. Variants
+Primary files:
 
-HearthCode variants:
+- `color-system/active-scheme.json`
+- `color-system/schemes/hearth/scheme.json`
+- `color-system/schemes/hearth/philosophy.md`
 
-- `dark`
-- `darkSoft`
-- `light`
-- `lightSoft`
+This layer owns:
 
-All variants share one semantic hierarchy with different contrast texture and environment tuning.
+- naming
+- positioning
+- mood
+- audience
+- vocabulary
+- variant philosophy
+- non-platform constraints
 
-## 5. Change Policy
+This layer must not contain VS Code / Obsidian / website token fields.
 
-When changing colors:
+### 3.2 Color Language Core
 
-1. Change semantic role colors in `color-system/semantic.json`.
-2. If role mapping changes, update `color-system/adapters.json` in the same change set.
-3. If variant registration/paths change, update `color-system/variants.json`.
-4. If compensation/chroma policy changes, update `color-system/tuning.json` (use `docs/color-system-tuning.md` as key reference).
-5. If UI/chrome baseline shifts, update `color-system/hearth-dark.source.json`.
-6. If the derivation baseline itself changes, update `color-system/templates/*.base.json` in the same change set.
-7. Regenerate platform artifacts via `pnpm run sync`.
-8. Review generated consistency report:
-  - `docs/color-language-report.md`
-  - `reports/color-language-consistency.json`
-8. Run full audits (`pnpm run audit:all`) before release.
+Purpose:
 
-## 6. Release Narrative
+- define the abstract color language before platform mapping
 
-Release notes should separate:
+Primary files:
 
-- `Color Language Changes` (semantic-level decisions)
-- `Platform Adapter Changes` (distribution/runtime adaptation)
+- `color-system/schemes/hearth/foundation.json`
+- `color-system/schemes/hearth/semantic-rules.json`
+- `color-system/schemes/hearth/surface-rules.json`
+- `color-system/schemes/hearth/interaction-rules.json`
 
-This keeps HearthCode positioned as a color-language product rather than a single theme package.
+This layer owns:
+
+- named families
+- semantic role derivation
+- surface anchors
+- interaction primitives
+
+This is the main design authority.
+
+### 3.3 Variant System
+
+Purpose:
+
+- define how climate changes across `dark`, `darkSoft`, `light`, and `lightSoft`
+- keep role meaning stable while changing contrast texture and atmosphere
+
+Primary files:
+
+- `color-system/framework/variant-profiles.json`
+- `color-system/framework/variants.json`
+
+This layer owns:
+
+- polarity
+- contrast texture
+- variant inheritance
+- output routing
+
+This layer must not redefine role meaning.
+
+### 3.4 Platform Contracts + Calibration
+
+Purpose:
+
+- translate abstract roles / surfaces / interactions into platform fields
+- compensate for platform-specific readability and compatibility constraints
+
+Primary files:
+
+- `color-system/framework/adapters.json`
+- `color-system/framework/tuning.json`
+- `color-system/hearth-dark.source.json`
+- `color-system/templates/*.base.json`
+
+Contracts:
+
+- adapters map abstract tokens into platform tokens
+- tuning applies bounded calibration only
+- source/template files are migration anchors and compatibility baselines, not long-term design authority
+
+Rules:
+
+- adapters must not own design colors
+- tuning must not own design philosophy
+- any calibration drift must stay traceable
+
+### 3.5 Generated Artifacts + Lineage
+
+Purpose:
+
+- produce publishable platform outputs
+- expose the exact chain from scheme -> role -> variant -> adapter -> artifact
+
+Generated files include:
+
+- `color-system/semantic.json`
+- `themes/*.json`
+- `public/themes/*.json`
+- `extension/themes/*.json`
+- `obsidian/themes/*.css`
+- `obsidian/app-theme/theme.css`
+- `src/data/tokens.ts`
+- `src/styles/theme-vars.css`
+- `docs/theme-baseline.md`
+- `docs/color-language-report.md`
+- `reports/color-language-consistency.json`
+- `reports/color-language-lineage.json`
+
+These files are deliverables.
+They are never hand-tuned sources of truth.
+
+## 4. Directory Layout
+
+Shared framework:
+
+- `color-system/framework/*`
+
+Active scheme:
+
+- `color-system/schemes/hearth/*`
+- `color-system/active-scheme.json`
+
+Generated compatibility snapshot:
+
+- `color-system/semantic.json`
+
+Migration anchors:
+
+- `color-system/hearth-dark.source.json`
+- `color-system/templates/*`
+
+This layout allows future schemes to reuse the same framework without rewriting generators or audits.
+
+## 5. Daily Workflow
+
+The expected workflow is:
+
+1. choose the active scheme
+2. edit only scheme/core files unless the change is truly calibration
+3. run `pnpm run sync`
+4. run `pnpm run audit:all`
+5. run `pnpm run build`
+6. inspect previews, reports, and docs
+7. commit sources and generated outputs together
+
+The normal edit order is:
+
+1. `scheme.json` / `philosophy.md` when the public story changes
+2. `foundation.json` for palette family changes
+3. `semantic-rules.json` for role meaning changes
+4. `surface-rules.json` for environment-layer changes
+5. `interaction-rules.json` for shared interaction behavior changes
+6. `variant-profiles.json` for climate behavior changes
+7. `adapters.json` for platform contract changes
+8. `tuning.json` only for bounded calibration
+
+Direct edits to generated platform outputs are out of policy.
+
+## 6. Multi-Scheme Expansion
+
+Future styles should be added by creating a new scheme directory, not by forking the framework.
+
+Recommended flow:
+
+1. add `color-system/schemes/<schemeId>/`
+2. write `philosophy.md` and `scheme.json`
+3. define `foundation / semantic / surface / interaction`
+4. switch `active-scheme.json`
+5. run the same `sync / audit / build` commands
+6. review previews and lineage
+
+This keeps generators, audits, and delivery tooling shared.
+
+## 7. Migration Principle
+
+During migration, VS Code dark remains a compatibility anchor because it protects current outputs from drifting.
+
+But it is not the long-term design source.
+
+The long-term direction is:
+
+- scheme/core define intent
+- framework defines translation and calibration
+- generated artifacts reflect the result
+
+Platform files should gradually become outputs or bounded compatibility anchors, not hidden design authorities.
+
+## 8. Success Criteria
+
+The architecture is working when all of the following are true:
+
+- a family tone change propagates across all products
+- a role change updates every terminal consistently
+- an interaction primitive change updates shared emphasis behavior
+- public previews stay aligned with shipped artifacts
+- lineage can explain any downstream token
+- new schemes can be added without rewriting the pipeline
+
+If those conditions hold, HearthCode is behaving like a real cross-product color philosophy rather than a collection of manually synchronized themes.

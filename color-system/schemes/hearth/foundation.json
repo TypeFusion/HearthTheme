@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "description": "Top-level palette families for HearthCode. These define the warm-neutral vocabulary before surfaces, interactions, or platform mappings.",
+  "families": {
+    "ash": {
+      "description": "Quiet guidance neutrals for comments and soft supporting ink.",
+      "tones": {
+        "base": {
+          "dark": "#756958",
+          "darkSoft": "#8a7c6b",
+          "light": "#8b7962",
+          "lightSoft": "#8b7d6d"
+        }
+      }
+    },
+    "ember": {
+      "description": "Warm control-flow anchor with brick-red pressure.",
+      "tones": {
+        "base": {
+          "dark": "#cc5a3f",
+          "darkSoft": "#b5634f",
+          "light": "#b04935",
+          "lightSoft": "#ac5a48"
+        }
+      }
+    },
+    "brass": {
+      "description": "Low-noise connective symbols and operators.",
+      "tones": {
+        "base": {
+          "dark": "#a98e5d",
+          "darkSoft": "#977c62",
+          "light": "#6f5838",
+          "lightSoft": "#7f6950"
+        }
+      }
+    },
+    "mineral": {
+      "description": "Cool structural anchor used sparingly to balance the warm field.",
+      "tones": {
+        "base": {
+          "dark": "#6f94a4",
+          "darkSoft": "#648a9d",
+          "light": "#4f7281",
+          "lightSoft": "#67767d"
+        }
+      }
+    },
+    "leather": {
+      "description": "Secondary action warmth for methods and callable side-notes.",
+      "tones": {
+        "base": {
+          "dark": "#ad6a45",
+          "darkSoft": "#946953",
+          "light": "#986143",
+          "lightSoft": "#8c644e"
+        }
+      }
+    },
+    "olive": {
+      "description": "Muted structural green for properties and member access.",
+      "tones": {
+        "base": {
+          "dark": "#788058",
+          "darkSoft": "#7d7a5e",
+          "light": "#586243",
+          "lightSoft": "#666c4d"
+        }
+      }
+    },
+    "moss": {
+      "description": "Calm literal band for strings and reading rhythm.",
+      "tones": {
+        "base": {
+          "dark": "#98ab7d",
+          "darkSoft": "#9d9f7c",
+          "light": "#74815a",
+          "lightSoft": "#7b8870"
+        }
+      }
+    },
+    "terracotta": {
+      "description": "Numeric warmth for constants and measured emphasis.",
+      "tones": {
+        "base": {
+          "dark": "#cb844a",
+          "darkSoft": "#bb845a",
+          "light": "#ba7239",
+          "lightSoft": "#b77949"
+        }
+      }
+    },
+    "ochre": {
+      "description": "Dry structure hue for types and classification signals.",
+      "tones": {
+        "base": {
+          "dark": "#99904c",
+          "darkSoft": "#9f9260",
+          "light": "#7c6e33",
+          "lightSoft": "#898055"
+        }
+      }
+    },
+    "chalk": {
+      "description": "Readable carrier neutrals for variables and parameters.",
+      "tones": {
+        "base": {
+          "dark": "#c9bdaa",
+          "darkSoft": "#c5b9ad",
+          "light": "#563d2a",
+          "lightSoft": "#675343"
+        },
+        "parameter": {
+          "dark": "#c0b5a3",
+          "darkSoft": "#beb3a6",
+          "light": "#543d2b",
+          "lightSoft": "#6d5a49"
+        }
+      }
+    },
+    "cedar": {
+      "description": "Warm tag and markup accent that stays close to ember without collapsing into it.",
+      "tones": {
+        "base": {
+          "dark": "#af513b",
+          "darkSoft": "#ad5c49",
+          "light": "#7f3024",
+          "lightSoft": "#8a4a3b"
+        }
+      }
+    }
+  }
+}

@@ -2,13 +2,13 @@
   "schemaVersion": 2,
   "generator": "scripts/generate-preview-images.mjs",
   "renderer": "promo-color-board-v4",
-  "promoSpecSha256": "f99d6ae2655083ba5bc2383883bdeee8061cd15ffe0561191f2d56389c7c6e43",
+  "promoSpecSha256": "f3816965dfa34db025f4df22d58268ccbe542faaabc0d9a7a13ce74642d5d1f4",
   "canvas": {
     "width": 1600,
     "height": 900
   },
   "contrastImage": {
-    "inputSha256": "ec01a597bafed30f9274484a8b9b6b0ade049c460fad3289193a9ee1767f551f",
+    "inputSha256": "cd093cc650d93310009b5dcb9486757f1c25e594740553674ae2cc566fbae562",
     "outputs": [
       "extension/images/preview-contrast-v2.png",
       "public/previews/preview-contrast-v2.png"

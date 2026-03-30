@@ -1,19 +1,25 @@
 import { execSync } from 'node:child_process'
 
 const GENERATED_PATH_RULES = [
+  { type: 'exact', value: 'color-system/semantic.json' },
   { type: 'prefix', value: 'themes/' },
   { type: 'prefix', value: 'public/themes/' },
   { type: 'prefix', value: 'extension/themes/' },
   { type: 'prefix', value: 'obsidian/themes/' },
   { type: 'prefix', value: 'obsidian/app-theme/' },
   { type: 'exact', value: 'docs/color-language-report.md' },
+  { type: 'exact', value: 'reports/color-language-lineage.json' },
   { type: 'exact', value: 'reports/color-language-consistency.json' },
   { type: 'exact', value: 'src/data/tokens.ts' },
   { type: 'exact', value: 'src/styles/theme-vars.css' },
 ]
 
 const SOURCE_OF_TRUTH_RULES = [
-  { type: 'prefix', value: 'color-system/' },
+  { type: 'exact', value: 'color-system/active-scheme.json' },
+  { type: 'prefix', value: 'color-system/framework/' },
+  { type: 'prefix', value: 'color-system/schemes/' },
+  { type: 'exact', value: 'color-system/hearth-dark.source.json' },
+  { type: 'prefix', value: 'color-system/templates/' },
   { type: 'prefix', value: 'releases/' },
   { type: 'prefix', value: 'scripts/' },
 ]
@@ -200,11 +206,13 @@ function main() {
 
   if (!hasSourceChange) {
     console.error('[FAIL] Generated-origin audit failed.')
-    console.error('Generated outputs changed without changes in color-system/ or scripts/:')
+    console.error('Generated outputs changed without changes in top-down color sources or scripts/:')
     for (const file of generatedChanged) {
       console.error(`  - ${file}`)
     }
-    console.error('Please modify color-system sources (color-system/) or generators (scripts/) in the same change set.')
+    console.error(
+      'Please modify active scheme / scheme core / framework calibration / templates or generators (scripts/) in the same change set.'
+    )
     process.exit(1)
   }
 

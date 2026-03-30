@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "roles": [
     {
       "id": "comment",
@@ -202,6 +202,102 @@
       "obsidianVar": "--code-tag",
       "webToken": null,
       "includeInReport": true
+    }
+  ],
+  "description": "Platform contracts map abstract roles, surfaces, and interactions into VS Code, Obsidian, and website tokens without owning design values.",
+  "surfaces": [
+    {
+      "id": "canvas",
+      "webToken": "bg",
+      "obsidianVar": "--background-primary",
+      "vscodeColor": "editor.background",
+      "includeInReport": true
+    },
+    {
+      "id": "ink",
+      "webToken": "fg",
+      "obsidianVar": "--text-normal",
+      "vscodeColor": "editor.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "panel",
+      "webToken": "lineBg",
+      "obsidianVar": "--background-primary-alt",
+      "vscodeColor": "editor.lineHighlightBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "gutter",
+      "webToken": "lineNo",
+      "obsidianVar": null,
+      "vscodeColor": "editorLineNumber.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "sidebar",
+      "webToken": "sidebar",
+      "obsidianVar": "--background-secondary",
+      "vscodeColor": "sideBar.background",
+      "includeInReport": true
+    },
+    {
+      "id": "border",
+      "webToken": "border",
+      "obsidianVar": "--background-modifier-border",
+      "vscodeColor": "sideBar.border",
+      "includeInReport": true
+    }
+  ],
+  "interactions": [
+    {
+      "id": "selection",
+      "webToken": "selection",
+      "obsidianVar": "--text-selection",
+      "vscodeColor": "editor.selectionBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "cursor",
+      "webToken": "cursor",
+      "obsidianVar": "--interactive-accent",
+      "vscodeColor": "editorCursor.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "status",
+      "webToken": "status",
+      "obsidianVar": null,
+      "vscodeColor": "statusBar.background",
+      "includeInReport": true
+    },
+    {
+      "id": "focusRing",
+      "webToken": null,
+      "obsidianVar": "--background-modifier-border-focus",
+      "vscodeColor": "focusBorder",
+      "includeInReport": true
+    },
+    {
+      "id": "lineEmphasis",
+      "webToken": null,
+      "obsidianVar": "--background-primary-alt",
+      "vscodeColor": "editor.lineHighlightBackground",
+      "includeInReport": false
+    },
+    {
+      "id": "listHover",
+      "webToken": null,
+      "obsidianVar": "--interactive-hover",
+      "vscodeColor": "list.hoverBackground",
+      "includeInReport": false
+    },
+    {
+      "id": "tabEmphasis",
+      "webToken": null,
+      "obsidianVar": null,
+      "vscodeColor": "tab.activeBorder",
+      "includeInReport": false
     }
   ]
 }

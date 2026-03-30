@@ -1,8 +1,10 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import { buildColorLanguageModel } from './color-system/build.mjs'
+import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { getThemeOutputFiles, loadColorSystemTuning } from './color-system.mjs'
+import { contrastRatio, hexToRgb, normalizeHex } from './color-utils.mjs'
 
-const THEME_FILES = getThemeOutputFiles()
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
 const SITE_DOCS_PROFILE = COLOR_SYSTEM_TUNING.siteDocsProfile
 const SITE_ASSET_MAPPING = COLOR_SYSTEM_TUNING.siteAssetMapping
@@ -10,6 +12,7 @@ const SITE_ASSET_MAPPING = COLOR_SYSTEM_TUNING.siteAssetMapping
 const EXTENSION_PACKAGE_PATH = 'extension/package.json'
 const DOCS_BASELINE_PATH = 'docs/theme-baseline.md'
 const THEME_VARS_CSS_PATH = 'src/styles/theme-vars.css'
+const THEME_FILES = getThemeOutputFiles()
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'))
@@ -23,27 +26,6 @@ function writeIfChanged(path, content) {
   }
   writeFileSync(path, content)
   return true
-}
-
-function normalizeHex(hex) {
-  if (typeof hex !== 'string') return null
-  const value = hex.trim().toLowerCase()
-  if (/^#[0-9a-f]{3}$/.test(value)) {
-    return `#${value[1]}${value[1]}${value[2]}${value[2]}${value[3]}${value[3]}`
-  }
-  if (/^#[0-9a-f]{6}$/.test(value)) return value
-  return null
-}
-
-function hexToRgb(hex) {
-  const normalized = normalizeHex(hex)
-  if (!normalized) throw new Error(`Invalid hex: ${hex}`)
-  const raw = normalized.slice(1)
-  return [
-    Number.parseInt(raw.slice(0, 2), 16),
-    Number.parseInt(raw.slice(2, 4), 16),
-    Number.parseInt(raw.slice(4, 6), 16),
-  ]
 }
 
 function toHexByte(value) {
@@ -71,75 +53,17 @@ function alpha(hex, value) {
   return `rgb(${r} ${g} ${b} / ${v})`
 }
 
-function getToken(theme, scopes) {
-  for (const scope of scopes) {
-    const hit = (theme.tokenColors || []).find((entry) => (
-      Array.isArray(entry.scope) ? entry.scope.includes(scope) : entry.scope === scope
-    ))
-    if (hit?.settings?.foreground) return normalizeHex(hit.settings.foreground)
-  }
-  return null
-}
-
-function extractThemeTokens(theme) {
-  return {
-    bg: normalizeHex(theme.colors?.['editor.background']),
-    fg: normalizeHex(theme.colors?.['editor.foreground']),
-    lineBg: normalizeHex(theme.colors?.['editor.lineHighlightBackground']),
-    lineNo: normalizeHex(theme.colors?.['editorLineNumber.foreground']),
-    status: normalizeHex(theme.colors?.['statusBar.background']),
-    sidebar: normalizeHex(theme.colors?.['sideBar.background']),
-    border: normalizeHex(theme.colors?.['sideBar.border']),
-    keyword: getToken(theme, ['keyword']),
-    fn: getToken(theme, ['entity.name.function']),
-    method: getToken(theme, [
-      'meta.function-call entity.name.function',
-      'meta.method-call entity.name.function',
-      'meta.function-call.js entity.name.function.js',
-      'meta.method-call.js entity.name.function.js',
-      'meta.function-call.ts entity.name.function.ts',
-      'meta.method-call.ts entity.name.function.ts',
-      'meta.function-call.py entity.name.function.py',
-      'meta.method-call.py entity.name.function.py',
-    ]),
-    property: getToken(theme, ['entity.name.function.member', 'variable.other.property', 'meta.property-name']),
-    string: getToken(theme, ['string']),
-    number: getToken(theme, ['constant.numeric']),
-    type: getToken(theme, ['entity.name.type']),
-    variable: getToken(theme, ['variable']),
-    operator: getToken(theme, ['keyword.operator']),
-    comment: getToken(theme, ['comment']),
-  }
-}
-
-function assertTokenSet(id, tokenSet) {
-  for (const [key, value] of Object.entries(tokenSet)) {
-    if (!value) {
-      throw new Error(`Missing required token "${id}.${key}" while generating site assets.`)
-    }
-  }
-}
-
-function toLinear(channel) {
-  const c = channel / 255
-  return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-}
-
-function luminance(hex) {
-  const [r, g, b] = hexToRgb(hex).map(toLinear)
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
-}
-
-function contrastRatio(a, b) {
-  const l1 = luminance(a)
-  const l2 = luminance(b)
-  const hi = Math.max(l1, l2)
-  const lo = Math.min(l1, l2)
-  return (hi + 0.05) / (lo + 0.05)
-}
-
 function fixed(value) {
   return Number(value).toFixed(1)
+}
+
+function todayInTokyo() {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Tokyo',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date())
 }
 
 function resolveSiteToken(tokens, variantId, key) {
@@ -152,6 +76,50 @@ function resolveSiteToken(tokens, variantId, key) {
     throw new Error(`Missing site docs token "${variantId}.${key}" in generated tokens.`)
   }
   return value
+}
+
+function getTokenColor(theme, scope) {
+  for (const entry of theme.tokenColors || []) {
+    const scopes = Array.isArray(entry.scope) ? entry.scope : [entry.scope]
+    if (!scopes.includes(scope)) continue
+    const color = normalizeHex(entry.settings?.foreground)
+    if (color) return color
+  }
+  return null
+}
+
+function getThemeTokenSet(theme) {
+  return {
+    bg: normalizeHex(theme.colors?.['editor.background']),
+    fg: normalizeHex(theme.colors?.['editor.foreground']),
+    keyword: getTokenColor(theme, 'keyword'),
+    operator: getTokenColor(theme, 'keyword.operator'),
+    fn: getTokenColor(theme, 'entity.name.function'),
+    method:
+      getTokenColor(theme, 'meta.function-call entity.name.function')
+      ?? getTokenColor(theme, 'meta.method-call entity.name.function')
+      ?? getTokenColor(theme, 'meta.function-call.js entity.name.function.js')
+      ?? getTokenColor(theme, 'meta.method-call.js entity.name.function.js')
+      ?? getTokenColor(theme, 'meta.function-call.ts entity.name.function.ts')
+      ?? getTokenColor(theme, 'meta.method-call.ts entity.name.function.ts')
+      ?? getTokenColor(theme, 'meta.function-call.py entity.name.function.py')
+      ?? getTokenColor(theme, 'meta.method-call.py entity.name.function.py'),
+    property:
+      getTokenColor(theme, 'entity.name.function.member')
+      ?? getTokenColor(theme, 'variable.other.property')
+      ?? getTokenColor(theme, 'meta.property-name'),
+    string: getTokenColor(theme, 'string'),
+    number: getTokenColor(theme, 'constant.numeric'),
+    type: getTokenColor(theme, 'entity.name.type'),
+    variable: getTokenColor(theme, 'variable'),
+    comment: getTokenColor(theme, 'comment'),
+  }
+}
+
+function loadDocsBaselineTokens() {
+  return Object.fromEntries(
+    Object.entries(THEME_FILES).map(([variantId, path]) => [variantId, getThemeTokenSet(readJson(path))])
+  )
 }
 
 function resolveSiteAssetColorRef(ref, tokens, mapping, cache, stack) {
@@ -288,9 +256,10 @@ function buildSnapshotLines(tokens) {
   return lines.join('\n')
 }
 
-function syncDocsBaseline(tokens) {
+function syncDocsBaseline() {
   const markdown = readFileSync(DOCS_BASELINE_PATH, 'utf8').replace(/\r\n/g, '\n')
-  const today = new Date().toISOString().slice(0, 10)
+  const today = todayInTokyo()
+  const tokens = loadDocsBaselineTokens()
   const matrix = buildSemanticMatrixTable(tokens)
   const snapshot = buildSnapshotLines(tokens)
 
@@ -310,25 +279,16 @@ function syncDocsBaseline(tokens) {
 }
 
 export function generateSiteAssets() {
-  const themes = Object.fromEntries(
-    Object.entries(THEME_FILES).map(([id, file]) => [id, readJson(file)])
-  )
-
-  const tokens = Object.fromEntries(
-    Object.entries(themes).map(([id, theme]) => [id, extractThemeTokens(theme)])
-  )
-
-  for (const [id, tokenSet] of Object.entries(tokens)) {
-    assertTokenSet(id, tokenSet)
-  }
-
+  const model = buildColorLanguageModel()
+  const generatedPlatformMaps = buildGeneratedPlatformTokenMaps(model)
+  const tokens = generatedPlatformMaps.web
   const vars = buildSiteVars(tokens)
   const css = renderThemeVarsCss(vars)
 
   const results = {
     themeVars: writeIfChanged(THEME_VARS_CSS_PATH, css),
     extensionPackage: syncExtensionPackage(tokens),
-    docsBaseline: syncDocsBaseline(tokens),
+    docsBaseline: syncDocsBaseline(),
   }
 
   console.log(`${results.themeVars ? '✓ updated' : '- unchanged'} ${THEME_VARS_CSS_PATH}`)

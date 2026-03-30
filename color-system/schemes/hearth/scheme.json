@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "hearth",
+  "name": "HearthCode",
+  "headline": "Warm-neutral code color language",
+  "summary": "A warm, low-glare color philosophy for code interfaces and reading surfaces.",
+  "positioning": "One palette philosophy translated across editors, documents, and web surfaces.",
+  "mood": [
+    "warm-neutral",
+    "low-glare",
+    "focused",
+    "quietly expressive"
+  ],
+  "audiences": [
+    "code-first editing",
+    "long-form reading",
+    "narrative product surfaces"
+  ],
+  "vocabulary": [
+    "ember",
+    "mineral",
+    "moss",
+    "ochre",
+    "chalk"
+  ],
+  "rolePhilosophy": {
+    "highlight": ["keyword", "cursor", "status"],
+    "anchors": ["function", "type", "panel"],
+    "support": ["comment", "variable", "sidebar", "border"]
+  },
+  "variantPhilosophy": {
+    "dark": "Warm default for mixed-light daily work.",
+    "darkSoft": "Lower-stimulation night focus without losing structure.",
+    "light": "Paper-tone daylight for document-dense work.",
+    "lightSoft": "Gentle long-form light with calmer daytime contrast."
+  },
+  "constraints": {
+    "thermalBaseline": "warm-neutral",
+    "allowCoolAnchor": "bounded mineral accents only",
+    "avoid": [
+      "pure black",
+      "pure white",
+      "neon saturation",
+      "platform-specific hue drift"
+    ]
+  },
+  "defaultVariant": "dark"
+}

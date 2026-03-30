@@ -1,12 +1,14 @@
 import { execSync } from 'node:child_process'
 
 const SYNCED_PATHS = [
+  'color-system/semantic.json',
   'themes',
   'public/themes',
   'extension/themes',
   'obsidian/themes',
   'obsidian/app-theme',
   'docs/color-language-report.md',
+  'reports/color-language-lineage.json',
   'reports/color-language-consistency.json',
   'src/data/tokens.ts',
   'src/styles/theme-vars.css',

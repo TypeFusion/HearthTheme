@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "description": "Variant climate profiles. These describe intent and contrast texture, not platform mappings.",
+  "variants": {
+    "dark": {
+      "label": "Hearth Dark",
+      "polarity": "dark",
+      "contrastTexture": "default",
+      "environment": "mixed-light daily work",
+      "derivesFrom": null,
+      "chromeBaseline": "source"
+    },
+    "darkSoft": {
+      "label": "Hearth Dark Soft",
+      "polarity": "dark",
+      "contrastTexture": "soft",
+      "environment": "low-stimulation night focus",
+      "derivesFrom": "dark",
+      "chromeBaseline": "template-derived"
+    },
+    "light": {
+      "label": "Hearth Light",
+      "polarity": "light",
+      "contrastTexture": "default",
+      "environment": "document-dense daytime work",
+      "derivesFrom": "dark",
+      "chromeBaseline": "template-derived"
+    },
+    "lightSoft": {
+      "label": "Hearth Light Soft",
+      "polarity": "light",
+      "contrastTexture": "soft",
+      "environment": "long-form daytime reading",
+      "derivesFrom": "light",
+      "chromeBaseline": "template-derived"
+    }
+  }
+}

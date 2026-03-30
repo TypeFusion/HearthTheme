@@ -790,7 +790,7 @@ function validateWarmAnchorContract(tokens) {
 
   for (const [variantId, roleBands] of Object.entries(coolHueByVariant)) {
     if (Object.keys(roleBands || {}).length > 0) {
-      addIssue(`color-system/tuning.json: roleSignalProfile.coolHueBandByVariant must be empty in warm-only mode (found entries in "${variantId}")`)
+      addIssue(`color-system/framework/tuning.json: roleSignalProfile.coolHueBandByVariant must be empty in warm-only mode (found entries in "${variantId}")`)
     }
   }
 
@@ -816,7 +816,7 @@ function validateWarmAnchorContract(tokens) {
   walkSite(siteDerived, ['siteAssetMapping', 'derivedColors'])
   walkSite(siteGroups, ['siteAssetMapping', 'groups'])
   for (const hit of hitPaths) {
-    addIssue(`color-system/tuning.json: site mapping must not reference @coolAnchor (${hit})`)
+        addIssue(`color-system/framework/tuning.json: site mapping must not reference @coolAnchor (${hit})`)
   }
 
   const variantToTokenSet = {
@@ -842,24 +842,24 @@ function validateWarmAnchorContract(tokens) {
     if (!tokenSet) continue
     const warmBandRoleProfile = resolveVariantRoleProfile(warmHueByVariant, variantId)
     if (Object.keys(warmBandRoleProfile).length === 0) {
-      addIssue(`color-system/tuning.json: roleSignalProfile.warmHueBandByVariant missing profile for variant "${variantId}"`)
+      addIssue(`color-system/framework/tuning.json: roleSignalProfile.warmHueBandByVariant missing profile for variant "${variantId}"`)
       continue
     }
     for (const roleId of Object.keys(roleTokenKey)) {
       if (!warmBandRoleProfile[roleId]) {
-        addIssue(`color-system/tuning.json: roleSignalProfile.warmHueBandByVariant missing "${roleId}" for variant "${variantId}"`)
+        addIssue(`color-system/framework/tuning.json: roleSignalProfile.warmHueBandByVariant missing "${roleId}" for variant "${variantId}"`)
       }
     }
   }
 
   if (!warmGamutGuard) {
-    addIssue('color-system/tuning.json: roleSignalProfile.warmGamutGuard is required in warm-only mode')
+    addIssue('color-system/framework/tuning.json: roleSignalProfile.warmGamutGuard is required in warm-only mode')
     return
   }
 
   const guardedRoles = new Set(Array.isArray(warmGamutGuard.roles) ? warmGamutGuard.roles : [])
   if (guardedRoles.size === 0) {
-    addIssue('color-system/tuning.json: roleSignalProfile.warmGamutGuard.roles must declare at least one guarded role')
+    addIssue('color-system/framework/tuning.json: roleSignalProfile.warmGamutGuard.roles must declare at least one guarded role')
     return
   }
 

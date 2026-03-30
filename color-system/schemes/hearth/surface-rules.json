@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "description": "Abstract surface anchors for HearthCode. These define environment layers before any platform contract is applied.",
+  "surfaces": {
+    "canvas": {
+      "dark": "#211d1a",
+      "darkSoft": "#29211d",
+      "light": "#e9ded0",
+      "lightSoft": "#e3d7c6"
+    },
+    "ink": {
+      "dark": "#d3c9b8",
+      "darkSoft": "#cec5ba",
+      "light": "#2a1e0f",
+      "lightSoft": "#4d4032"
+    },
+    "panel": {
+      "dark": "#2b2722",
+      "darkSoft": "#332e28",
+      "light": "#dccfbc",
+      "lightSoft": "#d4cabd"
+    },
+    "gutter": {
+      "dark": "#655c4f",
+      "darkSoft": "#766d63",
+      "light": "#b49d7b",
+      "lightSoft": "#9d907e"
+    },
+    "sidebar": {
+      "dark": "#1a1714",
+      "darkSoft": "#211a16",
+      "light": "#ddd3bd",
+      "lightSoft": "#d2c8b4"
+    },
+    "border": {
+      "dark": "#373027",
+      "darkSoft": "#473e37",
+      "light": "#cebea4",
+      "lightSoft": "#c0b4a4"
+    }
+  }
+}

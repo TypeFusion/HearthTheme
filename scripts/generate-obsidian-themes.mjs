@@ -1,7 +1,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import { buildColorLanguageModel } from './color-system/build.mjs'
+import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { getThemeOutputFiles } from './color-system.mjs'
 
+const COLOR_LANGUAGE_MODEL = buildColorLanguageModel()
 export const THEME_FILES = getThemeOutputFiles()
 
 export const VARIANT_META = {
@@ -28,10 +31,6 @@ export const VARIANT_META = {
 }
 
 const OUTPUT_DIR = 'obsidian/themes'
-
-function readJson(path) {
-  return JSON.parse(readFileSync(path, 'utf8'))
-}
 
 export function writeIfChanged(path, content) {
   if (existsSync(path)) {
@@ -110,42 +109,6 @@ function pickContrastText(backgroundHex) {
   return relativeLuminance(backgroundHex) > 0.34 ? darkText : lightText
 }
 
-function getToken(theme, scopes) {
-  for (const scope of scopes) {
-    const hit = (theme.tokenColors || []).find((entry) => (
-      Array.isArray(entry.scope) ? entry.scope.includes(scope) : entry.scope === scope
-    ))
-    if (hit?.settings?.foreground) {
-      const value = normalizeHex(hit.settings.foreground)
-      if (value) return value
-    }
-  }
-  return null
-}
-
-function extractThemeTokens(theme) {
-  return {
-    bg: normalizeHex(theme.colors?.['editor.background']),
-    fg: normalizeHex(theme.colors?.['editor.foreground']),
-    lineBg: normalizeHex(theme.colors?.['editor.lineHighlightBackground']),
-    lineNo: normalizeHex(theme.colors?.['editorLineNumber.foreground']),
-    sidebar: normalizeHex(theme.colors?.['sideBar.background']),
-    border: normalizeHex(theme.colors?.['sideBar.border']),
-    selection: normalizeHex(theme.colors?.['editor.selectionBackground']),
-    cursor: normalizeHex(theme.colors?.['editorCursor.foreground']),
-    keyword: getToken(theme, ['keyword']),
-    operator: getToken(theme, ['keyword.operator']),
-    fn: getToken(theme, ['entity.name.function']),
-    string: getToken(theme, ['string']),
-    number: getToken(theme, ['constant.numeric']),
-    type: getToken(theme, ['entity.name.type']),
-    variable: getToken(theme, ['variable']),
-    property: getToken(theme, ['variable.other.property', 'meta.object-literal.key']),
-    comment: getToken(theme, ['comment']),
-    tag: getToken(theme, ['entity.name.tag']),
-  }
-}
-
 function assertTokenSet(id, tokenSet) {
   for (const [key, value] of Object.entries(tokenSet)) {
     if (!value) {
@@ -154,14 +117,14 @@ function assertTokenSet(id, tokenSet) {
   }
 }
 
-function buildVars(tokens) {
+function buildVars(tokens, platformVars = {}) {
   const accent = tokens.cursor
   const accentHover = mixHex(accent, tokens.fg, 0.18)
   const accentSoft = alpha(accent, 0.18)
-  const bgSecondary = mixHex(tokens.sidebar, tokens.bg, 0.5)
+  const bgSecondary = platformVars['--background-secondary'] ?? mixHex(tokens.sidebar, tokens.bg, 0.5)
   const bgSecondaryAlt = mixHex(tokens.lineBg, tokens.bg, 0.4)
   const borderHover = alpha(tokens.border, 0.48)
-  const borderFocus = alpha(accent, 0.46)
+  const borderFocus = platformVars['--background-modifier-border-focus'] ?? alpha(accent, 0.46)
   const codeBackground = alpha(mixHex(tokens.border, tokens.bg, 0.45), 0.38)
   const linkUnresolved = mixHex(tokens.comment, tokens.keyword, 0.22)
   const h1 = tokens.keyword
@@ -176,15 +139,15 @@ function buildVars(tokens) {
   const calloutDanger = tokens.keyword
 
   return {
-    '--background-primary': tokens.bg,
-    '--background-primary-alt': tokens.lineBg,
+    '--background-primary': platformVars['--background-primary'] ?? tokens.bg,
+    '--background-primary-alt': platformVars['--background-primary-alt'] ?? tokens.lineBg,
     '--background-secondary': bgSecondary,
     '--background-secondary-alt': bgSecondaryAlt,
-    '--background-modifier-border': alpha(tokens.border, 0.72),
+    '--background-modifier-border': platformVars['--background-modifier-border'] ?? alpha(tokens.border, 0.72),
     '--background-modifier-border-hover': borderHover,
     '--background-modifier-border-focus': borderFocus,
     '--background-modifier-form-field': alpha(tokens.border, 0.22),
-    '--background-modifier-hover': alpha(tokens.border, 0.28),
+    '--background-modifier-hover': platformVars['--interactive-hover'] ?? alpha(tokens.border, 0.28),
     '--background-modifier-active-hover': alpha(accent, 0.26),
     '--background-modifier-box-shadow': alpha(tokens.bg, 0.6),
     '--background-modifier-success': alpha(tokens.string, 0.24),
@@ -192,7 +155,7 @@ function buildVars(tokens) {
     '--background-modifier-error-hover': alpha(tokens.keyword, 0.3),
     '--background-modifier-message': accentSoft,
     '--background-modifier-cover': alpha(tokens.bg, 0.72),
-    '--text-normal': tokens.fg,
+    '--text-normal': platformVars['--text-normal'] ?? tokens.fg,
     '--text-muted': mixHex(tokens.comment, tokens.fg, 0.36),
     '--text-faint': mixHex(tokens.comment, tokens.bg, 0.28),
     '--text-accent': accent,
@@ -202,10 +165,10 @@ function buildVars(tokens) {
     '--text-warning': tokens.number,
     '--text-error': tokens.keyword,
     '--text-highlight-bg': alpha(tokens.selection, 0.34),
-    '--text-selection': alpha(tokens.selection, 0.42),
+    '--text-selection': platformVars['--text-selection'] ?? alpha(tokens.selection, 0.42),
     '--interactive-normal': alpha(tokens.border, 0.2),
-    '--interactive-hover': alpha(tokens.border, 0.3),
-    '--interactive-accent': accent,
+    '--interactive-hover': platformVars['--interactive-hover'] ?? alpha(tokens.border, 0.3),
+    '--interactive-accent': platformVars['--interactive-accent'] ?? accent,
     '--interactive-accent-hover': accentHover,
     '--scrollbar-bg': alpha(tokens.bg, 0.24),
     '--scrollbar-thumb-bg': alpha(tokens.border, 0.5),
@@ -571,25 +534,25 @@ function renderThemeCss(meta, themePath, vars) {
   return `${header.join('\n')}${renderVars(meta.modeClass, vars)}${renderSyntaxSelectors(meta.modeClass)}${renderMarkdownSelectors(meta.modeClass)}${renderCalloutSelectors(meta.modeClass)}${renderUiSelectors(meta.modeClass)}`
 }
 
-export function buildVariantCssById(id) {
+export function buildVariantCssById(id, generatedPlatformMaps = buildGeneratedPlatformTokenMaps(COLOR_LANGUAGE_MODEL)) {
   const path = THEME_FILES[id]
   const meta = VARIANT_META[id]
   if (!path || !meta) throw new Error(`Unknown Obsidian variant id: ${id}`)
 
-  const theme = readJson(path)
-  const tokens = extractThemeTokens(theme)
+  const tokens = generatedPlatformMaps.tokenSets[id]
   assertTokenSet(id, tokens)
-  const vars = buildVars(tokens)
+  const vars = buildVars(tokens, generatedPlatformMaps.obsidian?.[id] || {})
   return renderThemeCss(meta, path, vars)
 }
 
 export function generateObsidianThemes() {
   mkdirSync(OUTPUT_DIR, { recursive: true })
+  const generatedPlatformMaps = buildGeneratedPlatformTokenMaps(COLOR_LANGUAGE_MODEL)
 
   let changed = 0
   for (const id of Object.keys(THEME_FILES)) {
     const meta = VARIANT_META[id]
-    const css = buildVariantCssById(id)
+    const css = buildVariantCssById(id, generatedPlatformMaps)
     const outPath = `${OUTPUT_DIR}/${meta.cssFile}`
     const didChange = writeIfChanged(outPath, css)
     if (didChange) changed += 1

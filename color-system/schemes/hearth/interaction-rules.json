@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "description": "Abstract interaction primitives for HearthCode. These define selection, cursor, focus, hover, and emphasis states before platform calibration.",
+  "interactions": {
+    "selection": {
+      "description": "Primary text-selection wash.",
+      "values": {
+        "dark": "#cf87402f",
+        "darkSoft": "#c48e5f13",
+        "light": "#cf874021",
+        "lightSoft": "#c68d5c21"
+      }
+    },
+    "cursor": {
+      "description": "Primary live cursor and accent signal.",
+      "values": {
+        "dark": "#d08a3e",
+        "darkSoft": "#bd8c54",
+        "light": "#c68431",
+        "lightSoft": "#be8a4f"
+      }
+    },
+    "status": {
+      "description": "Persistent emphasis band used for status presence and release accents.",
+      "values": {
+        "dark": "#864a22",
+        "darkSoft": "#875231",
+        "light": "#b55616",
+        "lightSoft": "#ae774d"
+      }
+    },
+    "focusRing": {
+      "description": "Focusable edge signal used for ring and border emphasis.",
+      "values": {
+        "dark": "#cf874052",
+        "darkSoft": "#ba88533a",
+        "light": "#c581334a",
+        "lightSoft": "#bd87504a"
+      }
+    },
+    "lineEmphasis": {
+      "description": "Current-line substrate emphasis without becoming a spotlight.",
+      "values": {
+        "dark": "#2b2722",
+        "darkSoft": "#332e28",
+        "light": "#dccfbc",
+        "lightSoft": "#d4cabd"
+      }
+    },
+    "listHover": {
+      "description": "Hover substrate for navigational lists and tabs.",
+      "values": {
+        "dark": "#2d2824",
+        "darkSoft": "#332d26",
+        "light": "#dfd6c7",
+        "lightSoft": "#d8cfc3"
+      }
+    },
+    "tabEmphasis": {
+      "description": "Active-tab and active-panel accent edge.",
+      "values": {
+        "dark": "#cf8740",
+        "darkSoft": "#bc8955",
+        "light": "#c58133",
+        "lightSoft": "#bd8750"
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import sharp from "sharp";
+import { loadColorSchemeManifest } from "./color-system.mjs";
 
 const WIDTH = 1600;
 const HEIGHT = 900;
@@ -53,6 +54,7 @@ const PROMO_ROLE_SWATCHES = [
   { label: "function", role: "function", sample: "renderTheme()" },
   { label: "string", role: "string", sample: '"embers"' },
 ];
+const SCHEME = loadColorSchemeManifest();
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -392,9 +394,9 @@ function renderPromoBoardSvg({ themes }) {
       <rect x="0" y="0" width="${WIDTH}" height="${HEIGHT}" fill="url(#${gradientId})" />
       <rect x="42" y="204" width="1516" height="300" rx="30" fill="#241d18" stroke="${withAlpha("#cf8740", 0.12)}" />
       <rect x="42" y="544" width="1516" height="300" rx="30" fill="#e8dcc8" stroke="${withAlpha("#ccb89a", 0.44)}" />
-      <text x="56" y="64" fill="#efe4d0" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">HEARTHCODE</text>
-      <text x="56" y="92" fill="#efe4d0" font-size="41" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">Four tuned variants, one warm-neutral voice</text>
-      <text x="56" y="138" fill="#b9a68f" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" dominant-baseline="text-before-edge">Ember reds, mineral blues, moss greens.</text>
+      <text x="56" y="64" fill="#efe4d0" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(SCHEME.name.toUpperCase())}</text>
+      <text x="56" y="92" fill="#efe4d0" font-size="41" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(SCHEME.headline)}</text>
+      <text x="56" y="138" fill="#b9a68f" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" dominant-baseline="text-before-edge">${escapeXml(SCHEME.vocabulary.slice(0, 3).join(", ") + ".")}</text>
       <text x="56" y="176" fill="#a89275" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.12em" dominant-baseline="text-before-edge">DARK FAMILY</text>
       <text x="56" y="516" fill="#8b7556" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.12em" dominant-baseline="text-before-edge">LIGHT FAMILY</text>
       ${renderedCards}
@@ -437,6 +439,12 @@ async function run() {
 
   const promoSpecSha256 = sha256(JSON.stringify({
     renderer: PREVIEW_RENDERER,
+    scheme: {
+      id: SCHEME.id,
+      name: SCHEME.name,
+      headline: SCHEME.headline,
+      vocabulary: SCHEME.vocabulary,
+    },
     roles: PROMO_ROLE_SWATCHES,
     canvas: { width: WIDTH, height: HEIGHT },
   }));
@@ -454,6 +462,12 @@ async function run() {
           id: meta.id,
           theme: meta.theme,
         })),
+        scheme: {
+          id: SCHEME.id,
+          name: SCHEME.name,
+          headline: SCHEME.headline,
+          vocabulary: SCHEME.vocabulary,
+        },
         promoSpecSha256,
         hero: true,
         canvas: { width: WIDTH, height: HEIGHT },
