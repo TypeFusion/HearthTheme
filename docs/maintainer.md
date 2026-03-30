@@ -20,6 +20,7 @@ This guide is about source layers, generation order, and release discipline.
 - `color-system/schemes/hearth/semantic-rules.json`
 - `color-system/schemes/hearth/surface-rules.json`
 - `color-system/schemes/hearth/guidance-rules.json`
+- `color-system/schemes/hearth/terminal-rules.json`
 - `color-system/schemes/hearth/interface-rules.json`
 - `color-system/schemes/hearth/interaction-rules.json`
 - `color-system/schemes/hearth/feedback-rules.json`
@@ -73,14 +74,15 @@ Normal order of operations:
 4. semantic rules
 5. surface rules
 6. guidance rules
-7. interface rules
-8. interaction rules
-9. feedback rules
-10. variant knobs
-11. variant profiles
-12. adapters
-13. tuning
-14. migration anchors only if the change is truly platform-compatibility work
+7. terminal rules
+8. interface rules
+9. interaction rules
+10. feedback rules
+11. variant knobs
+12. variant profiles
+13. adapters
+14. tuning
+15. migration anchors only if the change is truly platform-compatibility work
 
 Do not directly edit generated artifacts.
 
@@ -106,9 +108,10 @@ It is not a source file.
 - `adapters.json` is a platform contract file, not a design file.
 - `tuning.json` is a calibration file, not a palette-definition file.
 - `taxonomy.json` is the machine-readable abstract grouping layer; it should stay platform-free.
-- `surface-rules.json`, `guidance-rules.json`, `interface-rules.json`, and `interaction-rules.json` should prefer sparse anchors plus derivation, not full per-variant result tables unless a bounded escape hatch is truly necessary.
+- `surface-rules.json`, `guidance-rules.json`, `terminal-rules.json`, `interface-rules.json`, and `interaction-rules.json` should prefer sparse anchors plus derivation, not full per-variant result tables unless a bounded escape hatch is truly necessary.
 - Environment anchors like `canvas`, `ink`, and `sidebar` should stay rooted in foundation families whenever possible, so the rest of the environment layer can derive from one shared scheme language.
 - Guidance anchors should express scaffold, whitespace, and bracket language as cross-product structure cues, not as VS Code-only leftovers.
+- Terminal anchors should express cross-terminal ANSI semantics as part of the scheme language, not as a platform-local afterthought or a hand-tuned terminal table living in one product.
 - Interface anchors should express shell ink hierarchy, on-accent contrast, and navigation-state tone as abstract cross-product language, not as a copy of one platform's chrome keys.
 - Interaction anchors may derive from semantic roles when cursor, status, focus, or selection should inherit the same expressive family as the code language.
 - Feedback anchors should express note / info / success / warning / error as abstract cross-product semantics, not as platform-local error colors or borrowed code tokens.

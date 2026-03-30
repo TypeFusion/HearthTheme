@@ -122,5 +122,27 @@
       "bracketMatchFill",
       "bracketMatchStroke"
     ]
+  },
+  "terminals": {
+    "base": [
+      "ansiBlack",
+      "ansiRed",
+      "ansiGreen",
+      "ansiYellow",
+      "ansiBlue",
+      "ansiMagenta",
+      "ansiCyan",
+      "ansiWhite"
+    ],
+    "bright": [
+      "ansiBrightBlack",
+      "ansiBrightRed",
+      "ansiBrightGreen",
+      "ansiBrightYellow",
+      "ansiBrightBlue",
+      "ansiBrightMagenta",
+      "ansiBrightCyan",
+      "ansiBrightWhite"
+    ]
   }
 }

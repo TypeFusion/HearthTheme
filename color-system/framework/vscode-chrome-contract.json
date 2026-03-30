@@ -341,6 +341,70 @@
     {
       "key": "editorWhitespace.foreground",
       "guidance": "whitespace"
+    },
+    {
+      "key": "terminal.ansiBlack",
+      "terminal": "ansiBlack"
+    },
+    {
+      "key": "terminal.ansiRed",
+      "terminal": "ansiRed"
+    },
+    {
+      "key": "terminal.ansiGreen",
+      "terminal": "ansiGreen"
+    },
+    {
+      "key": "terminal.ansiYellow",
+      "terminal": "ansiYellow"
+    },
+    {
+      "key": "terminal.ansiBlue",
+      "terminal": "ansiBlue"
+    },
+    {
+      "key": "terminal.ansiMagenta",
+      "terminal": "ansiMagenta"
+    },
+    {
+      "key": "terminal.ansiCyan",
+      "terminal": "ansiCyan"
+    },
+    {
+      "key": "terminal.ansiWhite",
+      "terminal": "ansiWhite"
+    },
+    {
+      "key": "terminal.ansiBrightBlack",
+      "terminal": "ansiBrightBlack"
+    },
+    {
+      "key": "terminal.ansiBrightRed",
+      "terminal": "ansiBrightRed"
+    },
+    {
+      "key": "terminal.ansiBrightGreen",
+      "terminal": "ansiBrightGreen"
+    },
+    {
+      "key": "terminal.ansiBrightYellow",
+      "terminal": "ansiBrightYellow"
+    },
+    {
+      "key": "terminal.ansiBrightBlue",
+      "terminal": "ansiBrightBlue"
+    },
+    {
+      "key": "terminal.ansiBrightMagenta",
+      "terminal": "ansiBrightMagenta"
+    },
+    {
+      "key": "terminal.ansiBrightCyan",
+      "terminal": "ansiBrightCyan"
+    },
+    {
+      "key": "terminal.ansiBrightWhite",
+      "terminal": "ansiBrightWhite"
     }
   ]
 }

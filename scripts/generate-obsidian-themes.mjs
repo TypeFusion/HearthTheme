@@ -140,6 +140,22 @@ function buildVars(tokens, platformVars = {}) {
   const bracketCool = platformVars['--hearth-bracket-cool'] ?? tokens.bracketCool
   const bracketMatchFill = platformVars['--hearth-bracket-match-fill'] ?? tokens.bracketMatchFill
   const bracketMatchStroke = platformVars['--hearth-bracket-match-stroke'] ?? tokens.bracketMatchStroke
+  const terminalBlack = platformVars['--hearth-terminal-black'] ?? tokens.terminalBlack
+  const terminalRed = platformVars['--hearth-terminal-red'] ?? tokens.terminalRed
+  const terminalGreen = platformVars['--hearth-terminal-green'] ?? tokens.terminalGreen
+  const terminalYellow = platformVars['--hearth-terminal-yellow'] ?? tokens.terminalYellow
+  const terminalBlue = platformVars['--hearth-terminal-blue'] ?? tokens.terminalBlue
+  const terminalMagenta = platformVars['--hearth-terminal-magenta'] ?? tokens.terminalMagenta
+  const terminalCyan = platformVars['--hearth-terminal-cyan'] ?? tokens.terminalCyan
+  const terminalWhite = platformVars['--hearth-terminal-white'] ?? tokens.terminalWhite
+  const terminalBrightBlack = platformVars['--hearth-terminal-bright-black'] ?? tokens.terminalBrightBlack
+  const terminalBrightRed = platformVars['--hearth-terminal-bright-red'] ?? tokens.terminalBrightRed
+  const terminalBrightGreen = platformVars['--hearth-terminal-bright-green'] ?? tokens.terminalBrightGreen
+  const terminalBrightYellow = platformVars['--hearth-terminal-bright-yellow'] ?? tokens.terminalBrightYellow
+  const terminalBrightBlue = platformVars['--hearth-terminal-bright-blue'] ?? tokens.terminalBrightBlue
+  const terminalBrightMagenta = platformVars['--hearth-terminal-bright-magenta'] ?? tokens.terminalBrightMagenta
+  const terminalBrightCyan = platformVars['--hearth-terminal-bright-cyan'] ?? tokens.terminalBrightCyan
+  const terminalBrightWhite = platformVars['--hearth-terminal-bright-white'] ?? tokens.terminalBrightWhite
   const h1 = tokens.keyword
   const h2 = tokens.fn
   const h3 = tokens.property
@@ -187,6 +203,22 @@ function buildVars(tokens, platformVars = {}) {
     '--hearth-bracket-cool': bracketCool,
     '--hearth-bracket-match-fill': bracketMatchFill,
     '--hearth-bracket-match-stroke': bracketMatchStroke,
+    '--hearth-terminal-black': terminalBlack,
+    '--hearth-terminal-red': terminalRed,
+    '--hearth-terminal-green': terminalGreen,
+    '--hearth-terminal-yellow': terminalYellow,
+    '--hearth-terminal-blue': terminalBlue,
+    '--hearth-terminal-magenta': terminalMagenta,
+    '--hearth-terminal-cyan': terminalCyan,
+    '--hearth-terminal-white': terminalWhite,
+    '--hearth-terminal-bright-black': terminalBrightBlack,
+    '--hearth-terminal-bright-red': terminalBrightRed,
+    '--hearth-terminal-bright-green': terminalBrightGreen,
+    '--hearth-terminal-bright-yellow': terminalBrightYellow,
+    '--hearth-terminal-bright-blue': terminalBrightBlue,
+    '--hearth-terminal-bright-magenta': terminalBrightMagenta,
+    '--hearth-terminal-bright-cyan': terminalBrightCyan,
+    '--hearth-terminal-bright-white': terminalBrightWhite,
     '--text-highlight-bg': alpha(tokens.selection, 0.34),
     '--text-selection': platformVars['--text-selection'] ?? alpha(tokens.selection, 0.42),
     '--interactive-normal': alpha(tokens.border, 0.2),

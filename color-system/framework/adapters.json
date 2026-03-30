@@ -452,5 +452,119 @@
       "vscodeColor": "editorBracketMatch.border",
       "includeInReport": true
     }
+  ],
+  "terminals": [
+    {
+      "id": "ansiBlack",
+      "webToken": "terminalBlack",
+      "obsidianVar": "--hearth-terminal-black",
+      "vscodeColor": "terminal.ansiBlack",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiRed",
+      "webToken": "terminalRed",
+      "obsidianVar": "--hearth-terminal-red",
+      "vscodeColor": "terminal.ansiRed",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiGreen",
+      "webToken": "terminalGreen",
+      "obsidianVar": "--hearth-terminal-green",
+      "vscodeColor": "terminal.ansiGreen",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiYellow",
+      "webToken": "terminalYellow",
+      "obsidianVar": "--hearth-terminal-yellow",
+      "vscodeColor": "terminal.ansiYellow",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBlue",
+      "webToken": "terminalBlue",
+      "obsidianVar": "--hearth-terminal-blue",
+      "vscodeColor": "terminal.ansiBlue",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiMagenta",
+      "webToken": "terminalMagenta",
+      "obsidianVar": "--hearth-terminal-magenta",
+      "vscodeColor": "terminal.ansiMagenta",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiCyan",
+      "webToken": "terminalCyan",
+      "obsidianVar": "--hearth-terminal-cyan",
+      "vscodeColor": "terminal.ansiCyan",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiWhite",
+      "webToken": "terminalWhite",
+      "obsidianVar": "--hearth-terminal-white",
+      "vscodeColor": "terminal.ansiWhite",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightBlack",
+      "webToken": "terminalBrightBlack",
+      "obsidianVar": "--hearth-terminal-bright-black",
+      "vscodeColor": "terminal.ansiBrightBlack",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightRed",
+      "webToken": "terminalBrightRed",
+      "obsidianVar": "--hearth-terminal-bright-red",
+      "vscodeColor": "terminal.ansiBrightRed",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightGreen",
+      "webToken": "terminalBrightGreen",
+      "obsidianVar": "--hearth-terminal-bright-green",
+      "vscodeColor": "terminal.ansiBrightGreen",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightYellow",
+      "webToken": "terminalBrightYellow",
+      "obsidianVar": "--hearth-terminal-bright-yellow",
+      "vscodeColor": "terminal.ansiBrightYellow",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightBlue",
+      "webToken": "terminalBrightBlue",
+      "obsidianVar": "--hearth-terminal-bright-blue",
+      "vscodeColor": "terminal.ansiBrightBlue",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightMagenta",
+      "webToken": "terminalBrightMagenta",
+      "obsidianVar": "--hearth-terminal-bright-magenta",
+      "vscodeColor": "terminal.ansiBrightMagenta",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightCyan",
+      "webToken": "terminalBrightCyan",
+      "obsidianVar": "--hearth-terminal-bright-cyan",
+      "vscodeColor": "terminal.ansiBrightCyan",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightWhite",
+      "webToken": "terminalBrightWhite",
+      "obsidianVar": "--hearth-terminal-bright-white",
+      "vscodeColor": "terminal.ansiBrightWhite",
+      "includeInReport": true
+    }
   ]
 }

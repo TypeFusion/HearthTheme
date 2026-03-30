@@ -91,6 +91,15 @@ function main() {
     }
   }
 
+  const expectedTerminals = new Set(model.terminalAdapters.map((entry) => entry.id))
+  for (const terminalId of expectedTerminals) {
+    assert(report.terminals?.[terminalId], `${REPORT_PATH}: missing terminal lineage for "${terminalId}"`)
+    for (const variant of model.variants.variants) {
+      const variantEntry = report.terminals[terminalId].variants?.[variant.id]
+      assert(variantEntry, `${REPORT_PATH}: missing variant lineage for terminal "${terminalId}" / "${variant.id}"`)
+    }
+  }
+
   console.log('[PASS] Lineage audit passed.')
 }
 

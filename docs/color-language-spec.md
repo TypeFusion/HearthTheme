@@ -81,6 +81,7 @@ Primary files:
 - `color-system/schemes/hearth/semantic-rules.json`
 - `color-system/schemes/hearth/surface-rules.json`
 - `color-system/schemes/hearth/guidance-rules.json`
+- `color-system/schemes/hearth/terminal-rules.json`
 - `color-system/schemes/hearth/interface-rules.json`
 - `color-system/schemes/hearth/interaction-rules.json`
 - `color-system/schemes/hearth/feedback-rules.json`
@@ -91,6 +92,7 @@ This layer owns:
 - semantic role derivation
 - sparse surface anchors plus derived environment layers
 - sparse guidance anchors plus derived scaffolding and bracket cues
+- abstract terminal palette semantics that can map into ANSI-like outputs without making VS Code the authority
 - sparse interface anchors plus derived shell tone hierarchy and navigation states
 - sparse interaction anchors plus derived shared emphasis states
 - abstract feedback roles for validation, guidance, and outcome states
@@ -230,13 +232,14 @@ The normal edit order is:
 4. `semantic-rules.json` for role meaning changes
 5. `surface-rules.json` for environment-layer changes
 6. `guidance-rules.json` for scaffold, whitespace, and bracket-language changes
-7. `interface-rules.json` for shell ink hierarchy, on-accent contrast, and navigation-state tone changes
-8. `interaction-rules.json` for shared interaction behavior changes
-9. `feedback-rules.json` for cross-platform note / info / success / warning / error semantics
-10. `variant-profiles.json` for climate behavior changes
-11. `variant-knobs.json` for scheme-specific climate intensities
-12. `adapters.json` for platform contract changes
-13. `tuning.json` only for bounded calibration
+7. `terminal-rules.json` for cross-terminal terminal palette semantics
+8. `interface-rules.json` for shell ink hierarchy, on-accent contrast, and navigation-state tone changes
+9. `interaction-rules.json` for shared interaction behavior changes
+10. `feedback-rules.json` for cross-platform note / info / success / warning / error semantics
+11. `variant-profiles.json` for climate behavior changes
+12. `variant-knobs.json` for scheme-specific climate intensities
+13. `adapters.json` for platform contract changes
+14. `tuning.json` only for bounded calibration
 
 Direct edits to generated platform outputs are out of policy.
 

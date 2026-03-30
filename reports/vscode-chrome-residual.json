@@ -17,8 +17,8 @@
         ]
     },
     "summary": {
-        "migratedKeyCount": 83,
-        "residualKeyCount": 39,
+        "migratedKeyCount": 99,
+        "residualKeyCount": 23,
         "variantsCovered": [
             "dark",
             "darkSoft",
@@ -31,7 +31,7 @@
         "dark": {
             "sourcePath": "color-system/templates/hearth-dark.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 39,
+            "residualKeyCount": 23,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -54,22 +54,6 @@
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
                 "tab.hoverBackground",
-                "terminal.ansiBlack",
-                "terminal.ansiBlue",
-                "terminal.ansiBrightBlack",
-                "terminal.ansiBrightBlue",
-                "terminal.ansiBrightCyan",
-                "terminal.ansiBrightGreen",
-                "terminal.ansiBrightMagenta",
-                "terminal.ansiBrightRed",
-                "terminal.ansiBrightWhite",
-                "terminal.ansiBrightYellow",
-                "terminal.ansiCyan",
-                "terminal.ansiGreen",
-                "terminal.ansiMagenta",
-                "terminal.ansiRed",
-                "terminal.ansiWhite",
-                "terminal.ansiYellow",
                 "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
@@ -136,30 +120,6 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
-                },
-                "terminal-ansi": {
-                    "label": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                    "keys": [
-                        "terminal.ansiBlack",
-                        "terminal.ansiBlue",
-                        "terminal.ansiBrightBlack",
-                        "terminal.ansiBrightBlue",
-                        "terminal.ansiBrightCyan",
-                        "terminal.ansiBrightGreen",
-                        "terminal.ansiBrightMagenta",
-                        "terminal.ansiBrightRed",
-                        "terminal.ansiBrightWhite",
-                        "terminal.ansiBrightYellow",
-                        "terminal.ansiCyan",
-                        "terminal.ansiGreen",
-                        "terminal.ansiMagenta",
-                        "terminal.ansiRed",
-                        "terminal.ansiWhite",
-                        "terminal.ansiYellow"
-                    ],
-                    "keyCount": 16
                 }
             },
             "entries": [
@@ -332,134 +292,6 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "terminal.ansiBlack",
-                    "value": "#2f2921",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBlue",
-                    "value": "#6f8ca4",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlack",
-                    "value": "#655c4f",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlue",
-                    "value": "#86a4bc",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightCyan",
-                    "value": "#8cb9b3",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightGreen",
-                    "value": "#96b986",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightMagenta",
-                    "value": "#c5a080",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightRed",
-                    "value": "#d37962",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightWhite",
-                    "value": "#e8ddca",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightYellow",
-                    "value": "#c7a95b",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiCyan",
-                    "value": "#79a8a2",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiGreen",
-                    "value": "#87ab70",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiMagenta",
-                    "value": "#b38b6a",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiRed",
-                    "value": "#c66a52",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiWhite",
-                    "value": "#d3c9b8",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiYellow",
-                    "value": "#b89543",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#191511",
                     "bucket": "chrome-surface",
@@ -480,7 +312,7 @@
         "darkSoft": {
             "sourcePath": "color-system/templates/hearth-dark-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 39,
+            "residualKeyCount": 23,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -503,22 +335,6 @@
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
                 "tab.hoverBackground",
-                "terminal.ansiBlack",
-                "terminal.ansiBlue",
-                "terminal.ansiBrightBlack",
-                "terminal.ansiBrightBlue",
-                "terminal.ansiBrightCyan",
-                "terminal.ansiBrightGreen",
-                "terminal.ansiBrightMagenta",
-                "terminal.ansiBrightRed",
-                "terminal.ansiBrightWhite",
-                "terminal.ansiBrightYellow",
-                "terminal.ansiCyan",
-                "terminal.ansiGreen",
-                "terminal.ansiMagenta",
-                "terminal.ansiRed",
-                "terminal.ansiWhite",
-                "terminal.ansiYellow",
                 "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
@@ -585,30 +401,6 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
-                },
-                "terminal-ansi": {
-                    "label": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                    "keys": [
-                        "terminal.ansiBlack",
-                        "terminal.ansiBlue",
-                        "terminal.ansiBrightBlack",
-                        "terminal.ansiBrightBlue",
-                        "terminal.ansiBrightCyan",
-                        "terminal.ansiBrightGreen",
-                        "terminal.ansiBrightMagenta",
-                        "terminal.ansiBrightRed",
-                        "terminal.ansiBrightWhite",
-                        "terminal.ansiBrightYellow",
-                        "terminal.ansiCyan",
-                        "terminal.ansiGreen",
-                        "terminal.ansiMagenta",
-                        "terminal.ansiRed",
-                        "terminal.ansiWhite",
-                        "terminal.ansiYellow"
-                    ],
-                    "keyCount": 16
                 }
             },
             "entries": [
@@ -781,134 +573,6 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "terminal.ansiBlack",
-                    "value": "#332d24",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBlue",
-                    "value": "#788ea0",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlack",
-                    "value": "#72685a",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlue",
-                    "value": "#889db0",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightCyan",
-                    "value": "#9ab09a",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightGreen",
-                    "value": "#a6b184",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightMagenta",
-                    "value": "#c0a086",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightRed",
-                    "value": "#c88876",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightWhite",
-                    "value": "#dfd2be",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightYellow",
-                    "value": "#c2aa6c",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiCyan",
-                    "value": "#8ea694",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiGreen",
-                    "value": "#97a475",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiMagenta",
-                    "value": "#b08f74",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiRed",
-                    "value": "#c07b69",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiWhite",
-                    "value": "#d0c4b2",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiYellow",
-                    "value": "#ae9563",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#1d1814",
                     "bucket": "chrome-surface",
@@ -929,7 +593,7 @@
         "light": {
             "sourcePath": "color-system/templates/hearth-light.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 39,
+            "residualKeyCount": 23,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -952,22 +616,6 @@
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
                 "tab.hoverBackground",
-                "terminal.ansiBlack",
-                "terminal.ansiBlue",
-                "terminal.ansiBrightBlack",
-                "terminal.ansiBrightBlue",
-                "terminal.ansiBrightCyan",
-                "terminal.ansiBrightGreen",
-                "terminal.ansiBrightMagenta",
-                "terminal.ansiBrightRed",
-                "terminal.ansiBrightWhite",
-                "terminal.ansiBrightYellow",
-                "terminal.ansiCyan",
-                "terminal.ansiGreen",
-                "terminal.ansiMagenta",
-                "terminal.ansiRed",
-                "terminal.ansiWhite",
-                "terminal.ansiYellow",
                 "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
@@ -1034,30 +682,6 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
-                },
-                "terminal-ansi": {
-                    "label": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                    "keys": [
-                        "terminal.ansiBlack",
-                        "terminal.ansiBlue",
-                        "terminal.ansiBrightBlack",
-                        "terminal.ansiBrightBlue",
-                        "terminal.ansiBrightCyan",
-                        "terminal.ansiBrightGreen",
-                        "terminal.ansiBrightMagenta",
-                        "terminal.ansiBrightRed",
-                        "terminal.ansiBrightWhite",
-                        "terminal.ansiBrightYellow",
-                        "terminal.ansiCyan",
-                        "terminal.ansiGreen",
-                        "terminal.ansiMagenta",
-                        "terminal.ansiRed",
-                        "terminal.ansiWhite",
-                        "terminal.ansiYellow"
-                    ],
-                    "keyCount": 16
                 }
             },
             "entries": [
@@ -1230,134 +854,6 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "terminal.ansiBlack",
-                    "value": "#3a3020",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBlue",
-                    "value": "#2a5070",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlack",
-                    "value": "#7f6d53",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlue",
-                    "value": "#3a6080",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightCyan",
-                    "value": "#3a7060",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightGreen",
-                    "value": "#3b7f38",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightMagenta",
-                    "value": "#885428",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightRed",
-                    "value": "#be4a2a",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightWhite",
-                    "value": "#2f210e",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightYellow",
-                    "value": "#927a3e",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiCyan",
-                    "value": "#2a6050",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiGreen",
-                    "value": "#2e6a2c",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiMagenta",
-                    "value": "#784418",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiRed",
-                    "value": "#ad3518",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiWhite",
-                    "value": "#624a2c",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiYellow",
-                    "value": "#7f6531",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#ddd0b8",
                     "bucket": "chrome-surface",
@@ -1378,7 +874,7 @@
         "lightSoft": {
             "sourcePath": "color-system/templates/hearth-light-soft.base.json",
             "sourceKind": "template-snapshot",
-            "residualKeyCount": 39,
+            "residualKeyCount": 23,
             "residualKeys": [
                 "activityBar.background",
                 "activityBar.border",
@@ -1401,22 +897,6 @@
                 "statusBar.foreground",
                 "statusBar.noFolderBackground",
                 "tab.hoverBackground",
-                "terminal.ansiBlack",
-                "terminal.ansiBlue",
-                "terminal.ansiBrightBlack",
-                "terminal.ansiBrightBlue",
-                "terminal.ansiBrightCyan",
-                "terminal.ansiBrightGreen",
-                "terminal.ansiBrightMagenta",
-                "terminal.ansiBrightRed",
-                "terminal.ansiBrightWhite",
-                "terminal.ansiBrightYellow",
-                "terminal.ansiCyan",
-                "terminal.ansiGreen",
-                "terminal.ansiMagenta",
-                "terminal.ansiRed",
-                "terminal.ansiWhite",
-                "terminal.ansiYellow",
                 "titleBar.inactiveBackground",
                 "widget.shadow"
             ],
@@ -1483,30 +963,6 @@
                         "widget.shadow"
                     ],
                     "keyCount": 4
-                },
-                "terminal-ansi": {
-                    "label": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                    "keys": [
-                        "terminal.ansiBlack",
-                        "terminal.ansiBlue",
-                        "terminal.ansiBrightBlack",
-                        "terminal.ansiBrightBlue",
-                        "terminal.ansiBrightCyan",
-                        "terminal.ansiBrightGreen",
-                        "terminal.ansiBrightMagenta",
-                        "terminal.ansiBrightRed",
-                        "terminal.ansiBrightWhite",
-                        "terminal.ansiBrightYellow",
-                        "terminal.ansiCyan",
-                        "terminal.ansiGreen",
-                        "terminal.ansiMagenta",
-                        "terminal.ansiRed",
-                        "terminal.ansiWhite",
-                        "terminal.ansiYellow"
-                    ],
-                    "keyCount": 16
                 }
             },
             "entries": [
@@ -1679,134 +1135,6 @@
                     "rationale": "Residual shell backgrounds and borders still express platform-local elevation and should be grouped before further migration."
                 },
                 {
-                    "key": "terminal.ansiBlack",
-                    "value": "#3a3020",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBlue",
-                    "value": "#5f6579",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlack",
-                    "value": "#8f7d67",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightBlue",
-                    "value": "#73798e",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightCyan",
-                    "value": "#78865f",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightGreen",
-                    "value": "#6f8851",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightMagenta",
-                    "value": "#885428",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightRed",
-                    "value": "#be4a2a",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightWhite",
-                    "value": "#4b3a27",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiBrightYellow",
-                    "value": "#927a3e",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiCyan",
-                    "value": "#657451",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiGreen",
-                    "value": "#5c7343",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiMagenta",
-                    "value": "#784418",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiRed",
-                    "value": "#ad3518",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiWhite",
-                    "value": "#745e42",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
-                    "key": "terminal.ansiYellow",
-                    "value": "#7f6531",
-                    "bucket": "terminal-ansi",
-                    "bucketLabel": "Terminal ANSI",
-                    "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                    "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists."
-                },
-                {
                     "key": "titleBar.inactiveBackground",
                     "value": "#d0c3ad",
                     "bucket": "chrome-surface",
@@ -1889,30 +1217,6 @@
                     "widget.shadow"
                 ],
                 "keyCount": 4
-            },
-            "terminal-ansi": {
-                "label": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "keys": [
-                    "terminal.ansiBlack",
-                    "terminal.ansiBlue",
-                    "terminal.ansiBrightBlack",
-                    "terminal.ansiBrightBlue",
-                    "terminal.ansiBrightCyan",
-                    "terminal.ansiBrightGreen",
-                    "terminal.ansiBrightMagenta",
-                    "terminal.ansiBrightRed",
-                    "terminal.ansiBrightWhite",
-                    "terminal.ansiBrightYellow",
-                    "terminal.ansiCyan",
-                    "terminal.ansiGreen",
-                    "terminal.ansiMagenta",
-                    "terminal.ansiRed",
-                    "terminal.ansiWhite",
-                    "terminal.ansiYellow"
-                ],
-                "keyCount": 16
             }
         },
         "entries": [
@@ -2187,214 +1491,6 @@
                     "darkSoft": "#332c26",
                     "light": "#e7ddcc",
                     "lightSoft": "#e0d7ca"
-                }
-            },
-            {
-                "key": "terminal.ansiBlack",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#2f2921",
-                    "darkSoft": "#332d24",
-                    "light": "#3a3020",
-                    "lightSoft": "#3a3020"
-                }
-            },
-            {
-                "key": "terminal.ansiBlue",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#6f8ca4",
-                    "darkSoft": "#788ea0",
-                    "light": "#2a5070",
-                    "lightSoft": "#5f6579"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightBlack",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#655c4f",
-                    "darkSoft": "#72685a",
-                    "light": "#7f6d53",
-                    "lightSoft": "#8f7d67"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightBlue",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#86a4bc",
-                    "darkSoft": "#889db0",
-                    "light": "#3a6080",
-                    "lightSoft": "#73798e"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightCyan",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#8cb9b3",
-                    "darkSoft": "#9ab09a",
-                    "light": "#3a7060",
-                    "lightSoft": "#78865f"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightGreen",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#96b986",
-                    "darkSoft": "#a6b184",
-                    "light": "#3b7f38",
-                    "lightSoft": "#6f8851"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightMagenta",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#c5a080",
-                    "darkSoft": "#c0a086",
-                    "light": "#885428",
-                    "lightSoft": "#885428"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightRed",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#d37962",
-                    "darkSoft": "#c88876",
-                    "light": "#be4a2a",
-                    "lightSoft": "#be4a2a"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightWhite",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#e8ddca",
-                    "darkSoft": "#dfd2be",
-                    "light": "#2f210e",
-                    "lightSoft": "#4b3a27"
-                }
-            },
-            {
-                "key": "terminal.ansiBrightYellow",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#c7a95b",
-                    "darkSoft": "#c2aa6c",
-                    "light": "#927a3e",
-                    "lightSoft": "#927a3e"
-                }
-            },
-            {
-                "key": "terminal.ansiCyan",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#79a8a2",
-                    "darkSoft": "#8ea694",
-                    "light": "#2a6050",
-                    "lightSoft": "#657451"
-                }
-            },
-            {
-                "key": "terminal.ansiGreen",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#87ab70",
-                    "darkSoft": "#97a475",
-                    "light": "#2e6a2c",
-                    "lightSoft": "#5c7343"
-                }
-            },
-            {
-                "key": "terminal.ansiMagenta",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#b38b6a",
-                    "darkSoft": "#b08f74",
-                    "light": "#784418",
-                    "lightSoft": "#784418"
-                }
-            },
-            {
-                "key": "terminal.ansiRed",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#c66a52",
-                    "darkSoft": "#c07b69",
-                    "light": "#ad3518",
-                    "lightSoft": "#ad3518"
-                }
-            },
-            {
-                "key": "terminal.ansiWhite",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#d3c9b8",
-                    "darkSoft": "#d0c4b2",
-                    "light": "#624a2c",
-                    "lightSoft": "#745e42"
-                }
-            },
-            {
-                "key": "terminal.ansiYellow",
-                "bucket": "terminal-ansi",
-                "bucketLabel": "Terminal ANSI",
-                "suggestion": "keep platform-specific for now, later map through terminal semantic roles",
-                "rationale": "ANSI slots are terminal-specific compatibility outputs and should migrate only after a terminal semantics layer exists.",
-                "variants": {
-                    "dark": "#b89543",
-                    "darkSoft": "#ae9563",
-                    "light": "#7f6531",
-                    "lightSoft": "#7f6531"
                 }
             },
             {

@@ -33,6 +33,10 @@ function pushIndexed(indexes, entry) {
     if (!indexes.byGuidance[entry.guidanceId]) indexes.byGuidance[entry.guidanceId] = []
     indexes.byGuidance[entry.guidanceId].push(entry.id)
   }
+  if (entry.terminalId) {
+    if (!indexes.byTerminal[entry.terminalId]) indexes.byTerminal[entry.terminalId] = []
+    indexes.byTerminal[entry.terminalId].push(entry.id)
+  }
   if (entry.familyId) {
     if (!indexes.byFamily[entry.familyId]) indexes.byFamily[entry.familyId] = []
     indexes.byFamily[entry.familyId].push(entry.id)
@@ -324,6 +328,78 @@ function buildGuidanceEntries(model, artifactMaps, indexes) {
   return entries
 }
 
+function buildTerminalEntries(model, artifactMaps, indexes) {
+  const entries = []
+  const siteKeys = new Set(getExportedSiteTokenKeys())
+
+  for (const variant of model.variants.variants) {
+    for (const contract of model.terminalAdapters) {
+      const resolved = model.terminalRules.terminals[contract.id].resolved[variant.id]
+      const resolvedColor = resolved.color
+      const sourceId = resolved.family || `terminal:${contract.id}`
+
+      if (contract.webToken && siteKeys.has(contract.webToken)) {
+        const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
+        const entry = {
+          id: `web-terminal:${contract.id}:${variant.id}`,
+          path: 'src/data/tokens.ts',
+          field: `tokens.${variant.id}.${contract.webToken}`,
+          artifactType: 'webToken',
+          adapter: 'web',
+          variant: variant.id,
+          roleId: null,
+          terminalId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.terminals.${contract.id}`], resolvedColor, outputColor),
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+
+      if (contract.vscodeColor) {
+        const outputColor = artifactMaps.vscode?.workbench?.[variant.id]?.[contract.vscodeColor] ?? model.platformTokenMaps.vscode.workbench[variant.id][contract.vscodeColor]
+        const entry = {
+          id: `vscode-terminal:${contract.id}:${variant.id}`,
+          path: variant.outputPath,
+          field: `colors.${contract.vscodeColor}`,
+          artifactType: 'vscodeWorkbench',
+          adapter: 'vscode',
+          variant: variant.id,
+          roleId: null,
+          terminalId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.terminals.${contract.id}`], resolvedColor, outputColor),
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+
+      if (contract.obsidianVar) {
+        const outputColor = artifactMaps.obsidian?.[variant.id]?.[contract.obsidianVar] ?? model.platformTokenMaps.obsidian[variant.id][contract.obsidianVar]
+        const entry = {
+          id: `obsidian-terminal:${contract.id}:${variant.id}`,
+          path: OBSIDIAN_THEME_PATHS[variant.id],
+          field: contract.obsidianVar,
+          artifactType: 'obsidianVar',
+          adapter: 'obsidian',
+          variant: variant.id,
+          roleId: null,
+          terminalId: contract.id,
+          familyId: sourceId,
+          resolvedColor: outputColor,
+          chainRefs: [...resolved.chainRefs, `adapters.terminals.${contract.id}`],
+        }
+        entries.push(entry)
+        pushIndexed(indexes, entry)
+      }
+    }
+  }
+
+  return entries
+}
+
 function buildFeedbackEntries(model, artifactMaps, indexes) {
   const entries = []
   const siteKeys = new Set(getExportedSiteTokenKeys())
@@ -521,6 +597,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     byFeedback: {},
     byInterface: {},
     byGuidance: {},
+    byTerminal: {},
     byFamily: {},
   }
 
@@ -529,6 +606,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     ...buildInteractionEntries(model, artifactMaps, indexes),
     ...buildInterfaceEntries(model, artifactMaps, indexes),
     ...buildGuidanceEntries(model, artifactMaps, indexes),
+    ...buildTerminalEntries(model, artifactMaps, indexes),
     ...buildFeedbackEntries(model, artifactMaps, indexes),
     ...buildRoleEntries(model, artifactMaps, indexes),
   ]
@@ -629,8 +707,32 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
     }
   }
 
+  const terminals = {}
+  for (const [terminalId, entry] of Object.entries(model.terminalRules.terminals)) {
+    const firstVariantId = Object.keys(entry.resolved)[0]
+    const first = entry.resolved[firstVariantId]
+    terminals[terminalId] = {
+      source: {
+        family: first.family,
+        tone: first.tone,
+      },
+      variants: Object.fromEntries(
+        Object.entries(entry.resolved).map(([variantId, resolved]) => [
+          variantId,
+          {
+            color: resolved.color,
+            family: resolved.family,
+            tone: resolved.tone,
+            usedEscapeHatch: resolved.usedEscapeHatch,
+            steps: resolved.steps,
+          },
+        ])
+      ),
+    }
+  }
+
   return {
-    schemaVersion: 6,
+    schemaVersion: 7,
     sources: model.sources,
     scheme: {
       id: model.scheme.id,
@@ -651,6 +753,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
       ),
     },
     guidances,
+    terminals,
     interfaces,
     feedbacks,
     surfaceRules: Object.fromEntries(

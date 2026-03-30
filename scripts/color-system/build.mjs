@@ -12,6 +12,7 @@ import {
   COLOR_SYSTEM_SEMANTIC_RULES_PATH,
   COLOR_SYSTEM_SURFACE_RULES_PATH,
   COLOR_SYSTEM_TAXONOMY_PATH,
+  COLOR_SYSTEM_TERMINAL_RULES_PATH,
   COLOR_SYSTEM_TUNING_PATH,
   COLOR_SYSTEM_VARIANT_KNOBS_PATH,
   COLOR_SYSTEM_VARIANT_PROFILES_PATH,
@@ -33,6 +34,8 @@ import {
   loadSemanticRules,
   loadSurfaceAdapters,
   loadSurfaceRules,
+  loadTerminalAdapters,
+  loadTerminalRules,
   loadVariantKnobs,
   loadVariantProfiles,
 } from '../color-system.mjs'
@@ -59,6 +62,22 @@ const EXPORTED_SITE_TOKEN_KEYS = [
   'bracketCool',
   'bracketMatchFill',
   'bracketMatchStroke',
+  'terminalBlack',
+  'terminalRed',
+  'terminalGreen',
+  'terminalYellow',
+  'terminalBlue',
+  'terminalMagenta',
+  'terminalCyan',
+  'terminalWhite',
+  'terminalBrightBlack',
+  'terminalBrightRed',
+  'terminalBrightGreen',
+  'terminalBrightYellow',
+  'terminalBrightBlue',
+  'terminalBrightMagenta',
+  'terminalBrightCyan',
+  'terminalBrightWhite',
   'note',
   'info',
   'success',
@@ -212,6 +231,7 @@ function resolveAbstractColorSource({
   resolveSurface,
   resolveInterface,
   resolveGuidance,
+  resolveTerminal,
   resolveInteraction,
   resolveFeedback,
   entryRef,
@@ -345,6 +365,26 @@ function resolveAbstractColorSource({
     }
   }
 
+  if (source.type === 'terminal') {
+    const resolved = resolveTerminal?.(source.id, variantId)
+    if (!resolved) {
+      throw new Error(`Missing referenced terminal "${source.id}" while resolving ${entryRef}.${variantId}`)
+    }
+    return {
+      color: resolved.color,
+      chainRefs: resolved.chainRefs,
+      steps: [{
+        type: 'terminal-ref',
+        ref: `terminal-rules.terminals.${source.id}.values.${variantId}`,
+        value: resolved.color,
+      }],
+      sourceType: 'terminal',
+      sourceRef: source.id,
+      family: resolved.family,
+      tone: resolved.tone,
+    }
+  }
+
   if (source.type === 'interaction') {
     const resolved = resolveInteraction?.(source.id, variantId)
     if (!resolved) {
@@ -397,6 +437,7 @@ function applyAbstractDerive({
   resolveSurface,
   resolveInterface,
   resolveGuidance,
+  resolveTerminal,
   resolveInteraction,
   resolveFeedback,
   resolveVariantKnob,
@@ -432,6 +473,7 @@ function applyAbstractDerive({
       resolveSurface,
       resolveInterface,
       resolveGuidance,
+      resolveTerminal,
       resolveInteraction,
       resolveFeedback,
       entryRef: `${entryRef}.derive.mix.with`,
@@ -1162,6 +1204,140 @@ function buildResolvedGuidanceRules(rawGuidanceRules, foundation, surfaceRules, 
   }
 }
 
+function buildResolvedTerminalRules(rawTerminalRules, foundation, surfaceRules, interfaceRules, interactionRules, feedbackRules, guidanceRules, resolvedSemantic, variantProfiles, variantKnobs, variants) {
+  const terminals = {}
+  const resolving = new Set()
+
+  function resolveSurface(surfaceId, variantId) {
+    return surfaceRules.resolved?.[surfaceId]?.[variantId] ?? null
+  }
+
+  function resolveInterface(interfaceId, variantId) {
+    return interfaceRules.interfaces?.[interfaceId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveGuidance(guidanceId, variantId) {
+    return guidanceRules.guidances?.[guidanceId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveInteraction(interactionId, variantId) {
+    return interactionRules.interactions?.[interactionId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveFeedback(feedbackId, variantId) {
+    return feedbackRules.feedbacks?.[feedbackId]?.resolved?.[variantId] ?? null
+  }
+
+  function resolveRole(roleId, variantId) {
+    return resolvedSemantic?.[roleId]?.[variantId] ?? null
+  }
+
+  function resolveVariantKnob(knobRef, variantId) {
+    const [groupId, knobId] = String(knobRef || '').split('.')
+    if (!groupId || !knobId) return null
+    return variantKnobs?.[groupId]?.[knobId]?.[variantId] ?? null
+  }
+
+  function resolveTerminal(terminalId, variantId) {
+    const existing = terminals[terminalId]?.resolved?.[variantId]
+    if (existing) return existing
+    const definition = rawTerminalRules.terminals[terminalId]
+    if (!definition) {
+      throw new Error(`Missing terminal definition for "${terminalId}"`)
+    }
+
+    const key = `${terminalId}:${variantId}`
+    if (resolving.has(key)) {
+      throw new Error(`Terminal derivation cycle detected: ${key}`)
+    }
+    resolving.add(key)
+
+    const variantOverride = definition.byVariant?.[variantId] || {}
+    const source = variantOverride.source || definition.source
+    const derive = mergeDerive(definition.derive, variantOverride.derive)
+    const entryRef = `terminal-rules.terminals.${terminalId}`
+    const sourceResolution = resolveAbstractColorSource({
+      source,
+      variantId,
+      foundation,
+      resolveRole,
+      resolveSurface,
+      resolveInterface,
+      resolveGuidance,
+      resolveTerminal,
+      resolveInteraction,
+      resolveFeedback,
+      entryRef,
+    })
+    const steps = [...sourceResolution.steps]
+    const derived = applyAbstractDerive({
+      baseHex: sourceResolution.color,
+      derive,
+      foundation,
+      variantId,
+      resolveRole,
+      resolveSurface,
+      resolveInterface,
+      resolveGuidance,
+      resolveTerminal,
+      resolveInteraction,
+      resolveFeedback,
+      resolveVariantKnob,
+      entryRef,
+      steps,
+    })
+    steps.push({
+      type: 'variant-profile',
+      ref: `variant-profiles.variants.${variantId}`,
+    })
+
+    const result = {
+      terminalId,
+      variantId,
+      description: definition.description,
+      color: derived.color,
+      sourceType: sourceResolution.sourceType,
+      sourceRef: sourceResolution.sourceRef,
+      family: sourceResolution.family,
+      tone: sourceResolution.tone,
+      usedEscapeHatch: Boolean(derive.output),
+      steps,
+      variantProfile: variantProfiles.variants[variantId],
+      chainRefs: uniqueRefs([
+        ...sourceResolution.chainRefs,
+        ...derived.chainRefs,
+        entryRef,
+        `variant-profiles.variants.${variantId}`,
+      ]),
+    }
+
+    if (!terminals[terminalId]) {
+      terminals[terminalId] = {
+        description: definition.description,
+        values: {},
+        resolved: {},
+      }
+    }
+    terminals[terminalId].values[variantId] = result.color
+    terminals[terminalId].resolved[variantId] = result
+    resolving.delete(key)
+    return result
+  }
+
+  for (const terminalId of Object.keys(rawTerminalRules.terminals)) {
+    for (const variant of variants) {
+      resolveTerminal(terminalId, variant.id)
+    }
+  }
+
+  return {
+    schemaVersion: rawTerminalRules.schemaVersion,
+    description: rawTerminalRules.description,
+    definitions: rawTerminalRules.terminals,
+    terminals,
+  }
+}
+
 function buildSemanticSnapshotDocument(palette) {
   return {
     schemaVersion: 3,
@@ -1173,6 +1349,7 @@ function buildSemanticSnapshotDocument(palette) {
       taxonomy: COLOR_SYSTEM_TAXONOMY_PATH,
       foundation: COLOR_SYSTEM_FOUNDATION_PATH,
       surfaceRules: COLOR_SYSTEM_SURFACE_RULES_PATH,
+      terminalRules: COLOR_SYSTEM_TERMINAL_RULES_PATH,
       interfaceRules: COLOR_SYSTEM_INTERFACE_RULES_PATH,
       interactionRules: COLOR_SYSTEM_INTERACTION_RULES_PATH,
       feedbackRules: COLOR_SYSTEM_FEEDBACK_RULES_PATH,
@@ -1192,7 +1369,7 @@ function resolveWebTokenKey(roleDef) {
   return roleDef.webToken || roleDef.id
 }
 
-function buildBasePlatformMaps({ surfaceRules, guidanceRules, interfaceRules, interactionRules, feedbackRules, surfaceAdapters, guidanceAdapters, interfaceAdapters, interactionAdapters, feedbackAdapters, variants }) {
+function buildBasePlatformMaps({ surfaceRules, guidanceRules, terminalRules, interfaceRules, interactionRules, feedbackRules, surfaceAdapters, guidanceAdapters, terminalAdapters, interfaceAdapters, interactionAdapters, feedbackAdapters, variants }) {
   const tokenSets = {}
   const obsidian = {}
   const vscodeWorkbench = {}
@@ -1216,6 +1393,16 @@ function buildBasePlatformMaps({ surfaceRules, guidanceRules, interfaceRules, in
       const color = guidanceRules.guidances[contract.id]?.values?.[variant.id]
       if (!color) {
         throw new Error(`Missing guidance color for "${contract.id}.${variant.id}"`)
+      }
+      if (contract.webToken) tokenSets[variant.id][contract.webToken] = color
+      if (contract.obsidianVar) obsidian[variant.id][contract.obsidianVar] = color
+      if (contract.vscodeColor) vscodeWorkbench[variant.id][contract.vscodeColor] = color
+    }
+
+    for (const contract of terminalAdapters) {
+      const color = terminalRules.terminals[contract.id]?.values?.[variant.id]
+      if (!color) {
+        throw new Error(`Missing terminal color for "${contract.id}.${variant.id}"`)
       }
       if (contract.webToken) tokenSets[variant.id][contract.webToken] = color
       if (contract.obsidianVar) obsidian[variant.id][contract.obsidianVar] = color
@@ -1263,6 +1450,7 @@ function buildBasePlatformMaps({ surfaceRules, guidanceRules, interfaceRules, in
 function buildPlatformTokenMaps({
   surfaceRules,
   guidanceRules,
+  terminalRules,
   interfaceRules,
   interactionRules,
   feedbackRules,
@@ -1270,6 +1458,7 @@ function buildPlatformTokenMaps({
   roleAdapters,
   surfaceAdapters,
   guidanceAdapters,
+  terminalAdapters,
   interfaceAdapters,
   interactionAdapters,
   feedbackAdapters,
@@ -1278,11 +1467,13 @@ function buildPlatformTokenMaps({
   const baseMaps = buildBasePlatformMaps({
     surfaceRules,
     guidanceRules,
+    terminalRules,
     interfaceRules,
     interactionRules,
     feedbackRules,
     surfaceAdapters,
     guidanceAdapters,
+    terminalAdapters,
     interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
@@ -1373,6 +1564,7 @@ function validateModel({
   foundation,
   surfaceRules,
   guidanceRules,
+  terminalRules,
   interfaceRules,
   interactionRules,
   feedbackRules,
@@ -1382,6 +1574,7 @@ function validateModel({
   adapters,
   surfaceAdapters,
   guidanceAdapters,
+  terminalAdapters,
   interfaceAdapters,
   interactionAdapters,
   feedbackAdapters,
@@ -1402,6 +1595,7 @@ function validateModel({
   const semanticRoleIds = new Set(Object.keys(semanticRules.roles))
   const surfaceIds = new Set(Object.keys(surfaceRules.surfaces))
   const guidanceIds = new Set(Object.keys(guidanceRules.guidances))
+  const terminalIds = new Set(Object.keys(terminalRules.terminals))
   const interfaceIds = new Set(Object.keys(interfaceRules.interfaces))
   const interactionIds = new Set(Object.keys(interactionRules.interactions))
   const feedbackIds = new Set(Object.keys(feedbackRules.feedbacks))
@@ -1428,6 +1622,7 @@ function validateModel({
   validateGroupedCoverage(taxonomy.roles, semanticRoleIds, 'taxonomy.roles')
   validateGroupedCoverage(taxonomy.surfaces, surfaceIds, 'taxonomy.surfaces')
   validateGroupedCoverage(taxonomy.guidance, guidanceIds, 'taxonomy.guidance')
+  validateGroupedCoverage(taxonomy.terminals, terminalIds, 'taxonomy.terminals')
   validateGroupedCoverage(taxonomy.interfaces, interfaceIds, 'taxonomy.interfaces')
   validateGroupedCoverage(taxonomy.interactions, interactionIds, 'taxonomy.interactions')
   validateGroupedCoverage(taxonomy.feedback, feedbackIds, 'taxonomy.feedback')
@@ -1449,6 +1644,12 @@ function validateModel({
   for (const guidanceId of Object.keys(guidanceRules.guidances)) {
     if (!guidanceAdapters.some((entry) => entry.id === guidanceId)) {
       throw new Error(`Guidance rule "${guidanceId}" is not represented in adapters.json guidances`)
+    }
+  }
+
+  for (const terminalId of Object.keys(terminalRules.terminals)) {
+    if (!terminalAdapters.some((entry) => entry.id === terminalId)) {
+      throw new Error(`Terminal rule "${terminalId}" is not represented in adapters.json terminals`)
     }
   }
 
@@ -1482,6 +1683,11 @@ function validateModel({
     for (const guidanceAdapter of guidanceAdapters) {
       if (!guidanceRules.guidances[guidanceAdapter.id]?.values?.[variant.id]) {
         throw new Error(`Missing guidance "${guidanceAdapter.id}" for variant "${variant.id}"`)
+      }
+    }
+    for (const terminalAdapter of terminalAdapters) {
+      if (!terminalRules.terminals[terminalAdapter.id]?.values?.[variant.id]) {
+        throw new Error(`Missing terminal "${terminalAdapter.id}" for variant "${variant.id}"`)
       }
     }
     for (const interfaceAdapter of interfaceAdapters) {
@@ -1547,6 +1753,18 @@ function validateModel({
     }
   }
 
+  for (const terminalDef of terminalAdapters) {
+    if (!terminalRules.terminals[terminalDef.id]) {
+      throw new Error(`Missing terminal rule for adapter "${terminalDef.id}"`)
+    }
+    for (const variant of variantList) {
+      const resolved = terminalRules.terminals[terminalDef.id]?.resolved?.[variant.id]
+      if (!resolved) {
+        throw new Error(`Missing resolved terminal lineage for "${terminalDef.id}" in variant "${variant.id}"`)
+      }
+    }
+  }
+
   for (const interfaceDef of interfaceAdapters) {
     if (!interfaceRules.interfaces[interfaceDef.id]) {
       throw new Error(`Missing interface rule for adapter "${interfaceDef.id}"`)
@@ -1568,12 +1786,14 @@ export function buildColorLanguageModel() {
   const adapters = loadRoleAdapters()
   const surfaceAdapters = loadSurfaceAdapters()
   const guidanceAdapters = loadGuidanceAdapters()
+  const terminalAdapters = loadTerminalAdapters()
   const interfaceAdapters = loadInterfaceAdapters()
   const interactionAdapters = loadInteractionAdapters()
   const feedbackAdapters = loadFeedbackAdapters()
   const foundation = loadFoundationPalette()
   const rawSurfaceRules = loadSurfaceRules()
   const rawGuidanceRules = loadGuidanceRules()
+  const rawTerminalRules = loadTerminalRules()
   const rawInterfaceRules = loadInterfaceRules()
   const rawInteractionRules = loadInteractionRules()
   const rawFeedbackRules = loadFeedbackRules()
@@ -1586,10 +1806,12 @@ export function buildColorLanguageModel() {
   const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, interfaceRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
   const feedbackRules = buildResolvedFeedbackRules(rawFeedbackRules, foundation, surfaceRules, interfaceRules, interactionRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
   const guidanceRules = buildResolvedGuidanceRules(rawGuidanceRules, foundation, surfaceRules, interfaceRules, interactionRules, feedbackRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
+  const terminalRules = buildResolvedTerminalRules(rawTerminalRules, foundation, surfaceRules, interfaceRules, interactionRules, feedbackRules, guidanceRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
   const semanticSnapshot = buildSemanticSnapshotDocument(palette)
   const platformTokenMaps = buildPlatformTokenMaps({
     surfaceRules,
     guidanceRules,
+    terminalRules,
     interfaceRules,
     interactionRules,
     feedbackRules,
@@ -1597,6 +1819,7 @@ export function buildColorLanguageModel() {
     roleAdapters: adapters,
     surfaceAdapters,
     guidanceAdapters,
+    terminalAdapters,
     interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
@@ -1612,6 +1835,7 @@ export function buildColorLanguageModel() {
       foundation: COLOR_SYSTEM_FOUNDATION_PATH,
       surfaceRules: COLOR_SYSTEM_SURFACE_RULES_PATH,
       guidanceRules: COLOR_SYSTEM_GUIDANCE_RULES_PATH,
+      terminalRules: COLOR_SYSTEM_TERMINAL_RULES_PATH,
       interfaceRules: COLOR_SYSTEM_INTERFACE_RULES_PATH,
       interactionRules: COLOR_SYSTEM_INTERACTION_RULES_PATH,
       feedbackRules: COLOR_SYSTEM_FEEDBACK_RULES_PATH,
@@ -1629,6 +1853,7 @@ export function buildColorLanguageModel() {
     foundation,
     surfaceRules,
     guidanceRules,
+    terminalRules,
     interfaceRules,
     interactionRules,
     feedbackRules,
@@ -1639,6 +1864,7 @@ export function buildColorLanguageModel() {
     adapters,
     surfaceAdapters,
     guidanceAdapters,
+    terminalAdapters,
     interfaceAdapters,
     interactionAdapters,
     feedbackAdapters,
@@ -1646,6 +1872,7 @@ export function buildColorLanguageModel() {
       roles: adapters,
       surfaces: surfaceAdapters,
       guidances: guidanceAdapters,
+      terminals: terminalAdapters,
       interfaces: interfaceAdapters,
       interactions: interactionAdapters,
       feedbacks: feedbackAdapters,

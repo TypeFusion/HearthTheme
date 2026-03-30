@@ -186,6 +186,20 @@ export function buildColorLanguageParity(model, artifactMaps) {
     targetCounts: guidanceTargetCounts,
   })
 
+  const terminalTargetCounts = buildParityTargetCounts(model.terminalAdapters, {
+    web: (entry) => entry.webToken,
+    obsidian: (entry) => entry.obsidianVar,
+    vscode: (entry) => entry.vscodeColor,
+  })
+
+  const terminalParity = buildCategoryParity({
+    entries: model.terminalAdapters,
+    variants: model.variants.variants,
+    getPlatforms: buildContractPlatforms.bind(null, artifactMaps),
+    include: (entry) => entry.includeInReport !== false,
+    targetCounts: terminalTargetCounts,
+  })
+
   const interfaceTargetCounts = buildParityTargetCounts(model.interfaceAdapters, {
     web: (entry) => entry.webToken,
     obsidian: (entry) => entry.obsidianVar,
@@ -232,12 +246,13 @@ export function buildColorLanguageParity(model, artifactMaps) {
     roleParity.summary.issueCount
     + surfaceParity.summary.issueCount
     + guidanceParity.summary.issueCount
+    + terminalParity.summary.issueCount
     + interfaceParity.summary.issueCount
     + interactionParity.summary.issueCount
     + feedbackParity.summary.issueCount
 
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     scheme: {
       id: model.scheme.id,
       name: model.scheme.name,
@@ -248,6 +263,7 @@ export function buildColorLanguageParity(model, artifactMaps) {
       roles: roleParity.summary,
       surfaces: surfaceParity.summary,
       guidances: guidanceParity.summary,
+      terminals: terminalParity.summary,
       interfaces: interfaceParity.summary,
       interactions: interactionParity.summary,
       feedbacks: feedbackParity.summary,
@@ -255,6 +271,7 @@ export function buildColorLanguageParity(model, artifactMaps) {
     roles: roleParity.report,
     surfaces: surfaceParity.report,
     guidances: guidanceParity.report,
+    terminals: terminalParity.report,
     interfaces: interfaceParity.report,
     interactions: interactionParity.report,
     feedbacks: feedbackParity.report,

@@ -36,6 +36,10 @@ function main() {
     fail(`No guidance lineage generated for scheme "${model.scheme.id}"`)
   }
 
+  if (!lineage.terminals || Object.keys(lineage.terminals).length === 0) {
+    fail(`No terminal lineage generated for scheme "${model.scheme.id}"`)
+  }
+
   console.log(`[PASS] Scheme smoke passed for ${model.scheme.id}.`)
 }
 

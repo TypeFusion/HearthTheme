@@ -11,6 +11,7 @@ const REQUIRED_FILES = [
   'semantic-rules.json',
   'surface-rules.json',
   'guidance-rules.json',
+  'terminal-rules.json',
   'interface-rules.json',
   'interaction-rules.json',
   'feedback-rules.json',

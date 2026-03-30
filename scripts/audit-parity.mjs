@@ -54,6 +54,7 @@ function main() {
   collectIssues(report.roles, 'roles', issues)
   collectIssues(report.surfaces, 'surfaces', issues)
   collectIssues(report.guidances, 'guidances', issues)
+  collectIssues(report.terminals, 'terminals', issues)
   collectIssues(report.interfaces, 'interfaces', issues)
   collectIssues(report.interactions, 'interactions', issues)
   collectIssues(report.feedbacks, 'feedbacks', issues)
