@@ -54,6 +54,12 @@
             "darkSoft": "#211a16",
             "light": "#ddd3bd",
             "lightSoft": "#d2c8b4"
+          },
+          "lift": {
+            "dark": "#2d2824",
+            "darkSoft": "#332d26",
+            "light": "#dfd6c7",
+            "lightSoft": "#d8cfc3"
           }
         }
       },
@@ -142,6 +148,12 @@
             "darkSoft": "#bb845a",
             "light": "#ba7239",
             "lightSoft": "#b77949"
+          },
+          "presence": {
+            "dark": "#864a22",
+            "darkSoft": "#875231",
+            "light": "#b55616",
+            "lightSoft": "#ae774d"
           }
         }
       },
@@ -1132,24 +1144,18 @@
       "variants": {
         "dark": {
           "color": "#864a22",
-          "sourceType": "interaction",
-          "sourceRef": "cursor",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.terracotta.tones.presence.dark",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.terracotta.tones.base.dark",
-            "semantic-rules.roles.number",
-            "variant-profiles.variants.dark",
-            "interaction-rules.interactions.cursor",
-            "interaction-rules.interactions.status"
+            "foundation.families.terracotta.tones.presence.dark",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.dark"
           ],
           "steps": [
             {
-              "type": "interaction-ref",
-              "ref": "interaction-rules.interactions.cursor.values.dark",
-              "value": "#cb844a"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.presence.dark",
               "value": "#864a22"
             },
             {
@@ -1160,24 +1166,18 @@
         },
         "darkSoft": {
           "color": "#875231",
-          "sourceType": "interaction",
-          "sourceRef": "cursor",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.terracotta.tones.presence.darkSoft",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.terracotta.tones.base.darkSoft",
-            "semantic-rules.roles.number",
-            "variant-profiles.variants.darkSoft",
-            "interaction-rules.interactions.cursor",
-            "interaction-rules.interactions.status"
+            "foundation.families.terracotta.tones.presence.darkSoft",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.darkSoft"
           ],
           "steps": [
             {
-              "type": "interaction-ref",
-              "ref": "interaction-rules.interactions.cursor.values.darkSoft",
-              "value": "#bb845a"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.presence.darkSoft",
               "value": "#875231"
             },
             {
@@ -1188,24 +1188,18 @@
         },
         "light": {
           "color": "#b55616",
-          "sourceType": "interaction",
-          "sourceRef": "cursor",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.terracotta.tones.presence.light",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.terracotta.tones.base.light",
-            "semantic-rules.roles.number",
-            "variant-profiles.variants.light",
-            "interaction-rules.interactions.cursor",
-            "interaction-rules.interactions.status"
+            "foundation.families.terracotta.tones.presence.light",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.light"
           ],
           "steps": [
             {
-              "type": "interaction-ref",
-              "ref": "interaction-rules.interactions.cursor.values.light",
-              "value": "#ba7239"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.presence.light",
               "value": "#b55616"
             },
             {
@@ -1216,24 +1210,18 @@
         },
         "lightSoft": {
           "color": "#ae774d",
-          "sourceType": "interaction",
-          "sourceRef": "cursor",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.terracotta.tones.presence.lightSoft",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.terracotta.tones.base.lightSoft",
-            "semantic-rules.roles.number",
-            "variant-profiles.variants.lightSoft",
-            "interaction-rules.interactions.cursor",
-            "interaction-rules.interactions.status"
+            "foundation.families.terracotta.tones.presence.lightSoft",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.lightSoft"
           ],
           "steps": [
             {
-              "type": "interaction-ref",
-              "ref": "interaction-rules.interactions.cursor.values.lightSoft",
-              "value": "#b77949"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.terracotta.tones.presence.lightSoft",
               "value": "#ae774d"
             },
             {
@@ -1497,26 +1485,18 @@
       "variants": {
         "dark": {
           "color": "#2d2824",
-          "sourceType": "surface",
-          "sourceRef": "panel",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.lift.dark",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.ground.tones.base.dark",
-            "surface-rules.surfaces.canvas",
-            "variant-profiles.variants.dark",
-            "foundation.families.carrier.tones.base.dark",
-            "surface-rules.surfaces.ink",
-            "surface-rules.surfaces.panel",
-            "interaction-rules.interactions.listHover"
+            "foundation.families.shell.tones.lift.dark",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.dark"
           ],
           "steps": [
             {
-              "type": "surface-ref",
-              "ref": "surface-rules.surfaces.panel.dark",
-              "value": "#2b2723"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.dark",
               "value": "#2d2824"
             },
             {
@@ -1527,26 +1507,18 @@
         },
         "darkSoft": {
           "color": "#332d26",
-          "sourceType": "surface",
-          "sourceRef": "panel",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.lift.darkSoft",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.ground.tones.base.darkSoft",
-            "surface-rules.surfaces.canvas",
-            "variant-profiles.variants.darkSoft",
-            "foundation.families.carrier.tones.base.darkSoft",
-            "surface-rules.surfaces.ink",
-            "surface-rules.surfaces.panel",
-            "interaction-rules.interactions.listHover"
+            "foundation.families.shell.tones.lift.darkSoft",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.darkSoft"
           ],
           "steps": [
             {
-              "type": "surface-ref",
-              "ref": "surface-rules.surfaces.panel.darkSoft",
-              "value": "#342c28"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.darkSoft",
               "value": "#332d26"
             },
             {
@@ -1557,26 +1529,18 @@
         },
         "light": {
           "color": "#dfd6c7",
-          "sourceType": "surface",
-          "sourceRef": "panel",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.lift.light",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.ground.tones.base.light",
-            "surface-rules.surfaces.canvas",
-            "variant-profiles.variants.light",
-            "foundation.families.carrier.tones.base.light",
-            "surface-rules.surfaces.ink",
-            "surface-rules.surfaces.panel",
-            "interaction-rules.interactions.listHover"
+            "foundation.families.shell.tones.lift.light",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.light"
           ],
           "steps": [
             {
-              "type": "surface-ref",
-              "ref": "surface-rules.surfaces.panel.light",
-              "value": "#dacfc1"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.light",
               "value": "#dfd6c7"
             },
             {
@@ -1587,26 +1551,18 @@
         },
         "lightSoft": {
           "color": "#d8cfc3",
-          "sourceType": "surface",
-          "sourceRef": "panel",
-          "usedEscapeHatch": true,
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.lift.lightSoft",
+          "usedEscapeHatch": false,
           "chainRefs": [
-            "foundation.families.ground.tones.base.lightSoft",
-            "surface-rules.surfaces.canvas",
-            "variant-profiles.variants.lightSoft",
-            "foundation.families.carrier.tones.base.lightSoft",
-            "surface-rules.surfaces.ink",
-            "surface-rules.surfaces.panel",
-            "interaction-rules.interactions.listHover"
+            "foundation.families.shell.tones.lift.lightSoft",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.lightSoft"
           ],
           "steps": [
             {
-              "type": "surface-ref",
-              "ref": "surface-rules.surfaces.panel.lightSoft",
-              "value": "#d6caba"
-            },
-            {
-              "type": "escape-hatch",
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.lift.lightSoft",
               "value": "#d8cfc3"
             },
             {
@@ -4106,11 +4062,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#864a22",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.dark",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.dark",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.dark",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.dark",
         "adapters.interactions.status"
       ]
     },
@@ -4125,11 +4079,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#864a22",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.dark",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.dark",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.dark",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.dark",
         "adapters.interactions.status"
       ]
     },
@@ -4221,16 +4173,12 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#2d2824",
       "chainRefs": [
-        "foundation.families.ground.tones.base.dark",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.dark",
-        "foundation.families.carrier.tones.base.dark",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.dark",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.dark",
         "adapters.interactions.listHover"
       ]
     },
@@ -4242,16 +4190,12 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#2d2824",
       "chainRefs": [
-        "foundation.families.ground.tones.base.dark",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.dark",
-        "foundation.families.carrier.tones.base.dark",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.dark",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.dark",
         "adapters.interactions.listHover"
       ]
     },
@@ -4396,11 +4340,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#875231",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.darkSoft",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.darkSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.darkSoft",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.darkSoft",
         "adapters.interactions.status"
       ]
     },
@@ -4415,11 +4357,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#875231",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.darkSoft",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.darkSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.darkSoft",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.darkSoft",
         "adapters.interactions.status"
       ]
     },
@@ -4511,16 +4451,12 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#332d26",
       "chainRefs": [
-        "foundation.families.ground.tones.base.darkSoft",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.darkSoft",
-        "foundation.families.carrier.tones.base.darkSoft",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.darkSoft",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.darkSoft",
         "adapters.interactions.listHover"
       ]
     },
@@ -4532,16 +4468,12 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#332d26",
       "chainRefs": [
-        "foundation.families.ground.tones.base.darkSoft",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.darkSoft",
-        "foundation.families.carrier.tones.base.darkSoft",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.darkSoft",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.darkSoft",
         "adapters.interactions.listHover"
       ]
     },
@@ -4686,11 +4618,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#b55616",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.light",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.light",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.light",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.light",
         "adapters.interactions.status"
       ]
     },
@@ -4705,11 +4635,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#b55616",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.light",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.light",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.light",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.light",
         "adapters.interactions.status"
       ]
     },
@@ -4801,16 +4729,12 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#dfd6c7",
       "chainRefs": [
-        "foundation.families.ground.tones.base.light",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.light",
-        "foundation.families.carrier.tones.base.light",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.light",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.light",
         "adapters.interactions.listHover"
       ]
     },
@@ -4822,16 +4746,12 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#dfd6c7",
       "chainRefs": [
-        "foundation.families.ground.tones.base.light",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.light",
-        "foundation.families.carrier.tones.base.light",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.light",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.light",
         "adapters.interactions.listHover"
       ]
     },
@@ -4976,11 +4896,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#ae774d",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.lightSoft",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.lightSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.lightSoft",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.lightSoft",
         "adapters.interactions.status"
       ]
     },
@@ -4995,11 +4913,9 @@
       "familyId": "terracotta",
       "resolvedColor": "#ae774d",
       "chainRefs": [
-        "foundation.families.terracotta.tones.base.lightSoft",
-        "semantic-rules.roles.number",
-        "variant-profiles.variants.lightSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.presence.lightSoft",
         "interaction-rules.interactions.status",
+        "variant-profiles.variants.lightSoft",
         "adapters.interactions.status"
       ]
     },
@@ -5092,16 +5008,12 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#d8cfc3",
       "chainRefs": [
-        "foundation.families.ground.tones.base.lightSoft",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.lightSoft",
-        "foundation.families.carrier.tones.base.lightSoft",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.lightSoft",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.lightSoft",
         "adapters.interactions.listHover"
       ]
     },
@@ -5113,16 +5025,12 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "ground",
+      "familyId": "shell",
       "resolvedColor": "#d8cfc3",
       "chainRefs": [
-        "foundation.families.ground.tones.base.lightSoft",
-        "surface-rules.surfaces.canvas",
-        "variant-profiles.variants.lightSoft",
-        "foundation.families.carrier.tones.base.lightSoft",
-        "surface-rules.surfaces.ink",
-        "surface-rules.surfaces.panel",
+        "foundation.families.shell.tones.lift.lightSoft",
         "interaction-rules.interactions.listHover",
+        "variant-profiles.variants.lightSoft",
         "adapters.interactions.listHover"
       ]
     },
@@ -10644,11 +10552,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#864a22",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.dark",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.dark",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.dark",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.dark",
           "adapters.interactions.status"
         ]
       },
@@ -10663,11 +10569,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#864a22",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.dark",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.dark",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.dark",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.dark",
           "adapters.interactions.status"
         ]
       },
@@ -10759,16 +10663,12 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#2d2824",
         "chainRefs": [
-          "foundation.families.ground.tones.base.dark",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.dark",
-          "foundation.families.carrier.tones.base.dark",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.dark",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.dark",
           "adapters.interactions.listHover"
         ]
       },
@@ -10780,16 +10680,12 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#2d2824",
         "chainRefs": [
-          "foundation.families.ground.tones.base.dark",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.dark",
-          "foundation.families.carrier.tones.base.dark",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.dark",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.dark",
           "adapters.interactions.listHover"
         ]
       },
@@ -10934,11 +10830,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#875231",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.darkSoft",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.darkSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.darkSoft",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.darkSoft",
           "adapters.interactions.status"
         ]
       },
@@ -10953,11 +10847,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#875231",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.darkSoft",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.darkSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.darkSoft",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.darkSoft",
           "adapters.interactions.status"
         ]
       },
@@ -11049,16 +10941,12 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#332d26",
         "chainRefs": [
-          "foundation.families.ground.tones.base.darkSoft",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.darkSoft",
-          "foundation.families.carrier.tones.base.darkSoft",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.darkSoft",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.darkSoft",
           "adapters.interactions.listHover"
         ]
       },
@@ -11070,16 +10958,12 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#332d26",
         "chainRefs": [
-          "foundation.families.ground.tones.base.darkSoft",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.darkSoft",
-          "foundation.families.carrier.tones.base.darkSoft",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.darkSoft",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.darkSoft",
           "adapters.interactions.listHover"
         ]
       },
@@ -11224,11 +11108,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#b55616",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.light",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.light",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.light",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.light",
           "adapters.interactions.status"
         ]
       },
@@ -11243,11 +11125,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#b55616",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.light",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.light",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.light",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.light",
           "adapters.interactions.status"
         ]
       },
@@ -11339,16 +11219,12 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#dfd6c7",
         "chainRefs": [
-          "foundation.families.ground.tones.base.light",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.light",
-          "foundation.families.carrier.tones.base.light",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.light",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.light",
           "adapters.interactions.listHover"
         ]
       },
@@ -11360,16 +11236,12 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#dfd6c7",
         "chainRefs": [
-          "foundation.families.ground.tones.base.light",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.light",
-          "foundation.families.carrier.tones.base.light",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.light",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.light",
           "adapters.interactions.listHover"
         ]
       },
@@ -11514,11 +11386,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#ae774d",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.lightSoft",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.lightSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.lightSoft",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.lightSoft",
           "adapters.interactions.status"
         ]
       },
@@ -11533,11 +11403,9 @@
         "familyId": "terracotta",
         "resolvedColor": "#ae774d",
         "chainRefs": [
-          "foundation.families.terracotta.tones.base.lightSoft",
-          "semantic-rules.roles.number",
-          "variant-profiles.variants.lightSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.presence.lightSoft",
           "interaction-rules.interactions.status",
+          "variant-profiles.variants.lightSoft",
           "adapters.interactions.status"
         ]
       },
@@ -11630,16 +11498,12 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#d8cfc3",
         "chainRefs": [
-          "foundation.families.ground.tones.base.lightSoft",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.lightSoft",
-          "foundation.families.carrier.tones.base.lightSoft",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.lightSoft",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.lightSoft",
           "adapters.interactions.listHover"
         ]
       },
@@ -11651,16 +11515,12 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "ground",
+        "familyId": "shell",
         "resolvedColor": "#d8cfc3",
         "chainRefs": [
-          "foundation.families.ground.tones.base.lightSoft",
-          "surface-rules.surfaces.canvas",
-          "variant-profiles.variants.lightSoft",
-          "foundation.families.carrier.tones.base.lightSoft",
-          "surface-rules.surfaces.ink",
-          "surface-rules.surfaces.panel",
+          "foundation.families.shell.tones.lift.lightSoft",
           "interaction-rules.interactions.listHover",
+          "variant-profiles.variants.lightSoft",
           "adapters.interactions.listHover"
         ]
       },
@@ -16814,20 +16674,12 @@
         "obsidian-surface:border:lightSoft",
         "vscode-interaction:lineEmphasis:dark",
         "obsidian-interaction:lineEmphasis:dark",
-        "vscode-interaction:listHover:dark",
-        "obsidian-interaction:listHover:dark",
         "vscode-interaction:lineEmphasis:darkSoft",
         "obsidian-interaction:lineEmphasis:darkSoft",
-        "vscode-interaction:listHover:darkSoft",
-        "obsidian-interaction:listHover:darkSoft",
         "vscode-interaction:lineEmphasis:light",
         "obsidian-interaction:lineEmphasis:light",
-        "vscode-interaction:listHover:light",
-        "obsidian-interaction:listHover:light",
         "vscode-interaction:lineEmphasis:lightSoft",
-        "obsidian-interaction:lineEmphasis:lightSoft",
-        "vscode-interaction:listHover:lightSoft",
-        "obsidian-interaction:listHover:lightSoft"
+        "obsidian-interaction:lineEmphasis:lightSoft"
       ],
       "carrier": [
         "web-surface:ink:dark",
@@ -16855,7 +16707,15 @@
         "obsidian-surface:sidebar:light",
         "web-surface:sidebar:lightSoft",
         "vscode-surface:sidebar:lightSoft",
-        "obsidian-surface:sidebar:lightSoft"
+        "obsidian-surface:sidebar:lightSoft",
+        "vscode-interaction:listHover:dark",
+        "obsidian-interaction:listHover:dark",
+        "vscode-interaction:listHover:darkSoft",
+        "obsidian-interaction:listHover:darkSoft",
+        "vscode-interaction:listHover:light",
+        "obsidian-interaction:listHover:light",
+        "vscode-interaction:listHover:lightSoft",
+        "obsidian-interaction:listHover:lightSoft"
       ],
       "terracotta": [
         "web-interaction:selection:dark",

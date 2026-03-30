@@ -41,30 +41,9 @@
     "status": {
       "description": "Persistent emphasis band used for status presence and release accents.",
       "source": {
-        "type": "interaction",
-        "id": "cursor"
-      },
-      "byVariant": {
-        "dark": {
-          "derive": {
-            "output": "#864a22"
-          }
-        },
-        "darkSoft": {
-          "derive": {
-            "output": "#875231"
-          }
-        },
-        "light": {
-          "derive": {
-            "output": "#b55616"
-          }
-        },
-        "lightSoft": {
-          "derive": {
-            "output": "#ae774d"
-          }
-        }
+        "type": "foundation",
+        "family": "terracotta",
+        "tone": "presence"
       }
     },
     "focusRing": {
@@ -106,30 +85,9 @@
     "listHover": {
       "description": "Hover substrate for navigational lists and tabs.",
       "source": {
-        "type": "surface",
-        "id": "panel"
-      },
-      "byVariant": {
-        "dark": {
-          "derive": {
-            "output": "#2d2824"
-          }
-        },
-        "darkSoft": {
-          "derive": {
-            "output": "#332d26"
-          }
-        },
-        "light": {
-          "derive": {
-            "output": "#dfd6c7"
-          }
-        },
-        "lightSoft": {
-          "derive": {
-            "output": "#d8cfc3"
-          }
-        }
+        "type": "foundation",
+        "family": "shell",
+        "tone": "lift"
       }
     },
     "tabEmphasis": {

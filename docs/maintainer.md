@@ -101,6 +101,7 @@ It is not a source file.
 - `surface-rules.json` and `interaction-rules.json` should prefer sparse anchors plus derivation, not full per-variant result tables unless a bounded escape hatch is truly necessary.
 - Environment anchors like `canvas`, `ink`, and `sidebar` should stay rooted in foundation families whenever possible, so the rest of the environment layer can derive from one shared scheme language.
 - Interaction anchors may derive from semantic roles when cursor, status, focus, or selection should inherit the same expressive family as the code language.
+- If a repeated interaction state needs a durable cross-product identity, prefer adding a scheme-level tone such as `shell.lift` or `terracotta.presence` in foundation instead of leaving per-variant `output` escapes inside interaction rules.
 - `check:schemes` is the registry guardrail; it proves every scheme can build its abstract model and lineage without changing generators.
 - `audit:parity` keeps the final VS Code / Obsidian / web outputs aligned, so cross-terminal expression drift is caught before release.
 - `hearth-dark.source.json` is a migration anchor, not the final philosophical authority.

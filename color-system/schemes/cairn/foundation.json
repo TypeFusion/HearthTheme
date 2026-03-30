@@ -32,6 +32,12 @@
           "darkSoft": "#1f1d1a",
           "light": "#ddd5ca",
           "lightSoft": "#d0c9be"
+        },
+        "lift": {
+          "dark": "#2a2724",
+          "darkSoft": "#312d29",
+          "light": "#ddd5cc",
+          "lightSoft": "#d4cdc5"
         }
       }
     },
@@ -120,6 +126,12 @@
           "darkSoft": "#b17e5a",
           "light": "#ae7245",
           "lightSoft": "#ad7a55"
+        },
+        "presence": {
+          "dark": "#7e5638",
+          "darkSoft": "#7a5a44",
+          "light": "#a86b39",
+          "lightSoft": "#a77759"
         }
       }
     },

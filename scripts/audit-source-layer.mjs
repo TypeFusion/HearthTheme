@@ -33,6 +33,11 @@ const NO_DESIGN_HEX_PATHS = [
   COLOR_SYSTEM_TUNING_PATH,
 ]
 
+const NO_OUTPUT_ESCAPE_PATHS = [
+  COLOR_SYSTEM_SURFACE_RULES_PATH,
+  COLOR_SYSTEM_INTERACTION_RULES_PATH,
+]
+
 const FORBIDDEN_TOP_LAYER_KEYS = new Set([
   'bindings',
   'chromeBaseline',
@@ -106,6 +111,15 @@ function auditNoDesignHex(path) {
   })
 }
 
+function auditNoOutputEscape(path) {
+  const data = readJson(path)
+  walkJson(data, ({ key, path: keyPath }) => {
+    if (key === 'output') {
+      fail(`${path}: surface/interaction rules must not use derive.output escape hatches at ${keyPath}`)
+    }
+  })
+}
+
 function main() {
   buildColorLanguageModel()
 
@@ -115,6 +129,10 @@ function main() {
 
   for (const path of NO_DESIGN_HEX_PATHS) {
     auditNoDesignHex(path)
+  }
+
+  for (const path of NO_OUTPUT_ESCAPE_PATHS) {
+    auditNoOutputEscape(path)
   }
 
   console.log('[PASS] Source-layer audit passed.')

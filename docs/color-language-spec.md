@@ -233,6 +233,7 @@ Within `surface-rules.json` and `interaction-rules.json`, prefer:
 - a few explicit anchors such as `canvas`, `ink`, `cursor`, or `status`
 - derived entries for dependent layers such as `panel`, `border`, or `lineEmphasis`
 - interaction anchors that inherit from semantic roles when the behavior should speak the same color language as code semantics
+- scheme-level foundation tones such as `shell.lift` or `terracotta.presence` when a repeated cross-product state needs its own stable identity
 
 That keeps the top layer expressive without turning it back into a flat result table.
 Environment anchors like `canvas`, `ink`, and `sidebar` should ideally resolve from foundation families first, so downstream surfaces and interactions inherit one shared scheme-level environment language.
