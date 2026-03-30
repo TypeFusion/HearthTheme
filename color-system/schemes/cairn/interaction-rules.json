@@ -4,38 +4,96 @@
   "interactions": {
     "selection": {
       "description": "Primary text-selection wash.",
-      "values": {
-        "dark": "#b9794a2c",
-        "darkSoft": "#ac7b5918",
-        "light": "#b06a3621",
-        "lightSoft": "#b17a5221"
+      "source": {
+        "type": "interaction",
+        "id": "cursor"
+      },
+      "byVariant": {
+        "dark": {
+          "derive": {
+            "alpha": 0.173
+          }
+        },
+        "darkSoft": {
+          "derive": {
+            "alpha": 0.094
+          }
+        },
+        "light": {
+          "derive": {
+            "alpha": 0.129
+          }
+        },
+        "lightSoft": {
+          "derive": {
+            "alpha": 0.129
+          }
+        }
       }
     },
     "cursor": {
       "description": "Primary live cursor and accent signal.",
-      "values": {
-        "dark": "#c08347",
-        "darkSoft": "#b18457",
-        "light": "#b8743a",
-        "lightSoft": "#b68257"
+      "source": {
+        "type": "role",
+        "id": "number"
       }
     },
     "status": {
       "description": "Persistent emphasis band used for status presence and release accents.",
-      "values": {
-        "dark": "#7e5638",
-        "darkSoft": "#7a5a44",
-        "light": "#a86b39",
-        "lightSoft": "#a77759"
+      "source": {
+        "type": "interaction",
+        "id": "cursor"
+      },
+      "byVariant": {
+        "dark": {
+          "derive": {
+            "output": "#7e5638"
+          }
+        },
+        "darkSoft": {
+          "derive": {
+            "output": "#7a5a44"
+          }
+        },
+        "light": {
+          "derive": {
+            "output": "#a86b39"
+          }
+        },
+        "lightSoft": {
+          "derive": {
+            "output": "#a77759"
+          }
+        }
       }
     },
     "focusRing": {
       "description": "Focusable edge signal used for ring and border emphasis.",
-      "values": {
-        "dark": "#be83564d",
-        "darkSoft": "#b0845b3a",
-        "light": "#b6743d45",
-        "lightSoft": "#b07b5548"
+      "source": {
+        "type": "interaction",
+        "id": "cursor"
+      },
+      "byVariant": {
+        "dark": {
+          "derive": {
+            "alpha": 0.302
+          }
+        },
+        "darkSoft": {
+          "derive": {
+            "alpha": 0.227
+          }
+        },
+        "light": {
+          "derive": {
+            "alpha": 0.271
+          }
+        },
+        "lightSoft": {
+          "derive": {
+            "alpha": 0.282
+          }
+        }
       }
     },
     "lineEmphasis": {
@@ -47,20 +105,38 @@
     },
     "listHover": {
       "description": "Hover substrate for navigational lists and tabs.",
-      "values": {
-        "dark": "#2a2724",
-        "darkSoft": "#312d29",
-        "light": "#ddd5cc",
-        "lightSoft": "#d4cdc5"
+      "source": {
+        "type": "surface",
+        "id": "panel"
+      },
+      "byVariant": {
+        "dark": {
+          "derive": {
+            "output": "#2a2724"
+          }
+        },
+        "darkSoft": {
+          "derive": {
+            "output": "#312d29"
+          }
+        },
+        "light": {
+          "derive": {
+            "output": "#ddd5cc"
+          }
+        },
+        "lightSoft": {
+          "derive": {
+            "output": "#d4cdc5"
+          }
+        }
       }
     },
     "tabEmphasis": {
       "description": "Active-tab and active-panel accent edge.",
-      "values": {
-        "dark": "#c08548",
-        "darkSoft": "#b5875a",
-        "light": "#b7763d",
-        "lightSoft": "#b38057"
+      "source": {
+        "type": "interaction",
+        "id": "cursor"
       }
     }
   }

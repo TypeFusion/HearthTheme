@@ -2,9 +2,9 @@
 /* Variant: Hearth Light Soft (Obsidian) */
 /* Source: themes/hearth-light-soft.json */
 .theme-light {
-  --background-modifier-active-hover: rgb(190 138 79 / 0.26);
+  --background-modifier-active-hover: rgb(183 121 73 / 0.26);
   --background-modifier-border: #c0b4a4;
-  --background-modifier-border-focus: #bd87504a;
+  --background-modifier-border-focus: #b779494a;
   --background-modifier-border-hover: rgb(192 180 164 / 0.48);
   --background-modifier-box-shadow: rgb(227 215 198 / 0.6);
   --background-modifier-cover: rgb(227 215 198 / 0.72);
@@ -12,7 +12,7 @@
   --background-modifier-error-hover: rgb(163 96 80 / 0.3);
   --background-modifier-form-field: rgb(192 180 164 / 0.22);
   --background-modifier-hover: #d8cfc3;
-  --background-modifier-message: rgb(190 138 79 / 0.18);
+  --background-modifier-message: rgb(183 121 73 / 0.18);
   --background-modifier-success: rgb(126 134 118 / 0.24);
   --background-primary: #e3d7c6;
   --background-primary-alt: #d6caba;
@@ -47,12 +47,12 @@
   --hearth-callout-warning-border: rgb(177 125 86 / 0.56);
   --hearth-inline-code: #896548;
   --hr-color: rgb(192 180 164 / 0.7);
-  --interactive-accent: #be8a4f;
-  --interactive-accent-hover: #aa7d4a;
+  --interactive-accent: #b77949;
+  --interactive-accent-hover: #a46f45;
   --interactive-hover: #d8cfc3;
   --interactive-normal: rgb(192 180 164 / 0.2);
-  --link-color: #be8a4f;
-  --link-color-hover: #aa7d4a;
+  --link-color: #b77949;
+  --link-color-hover: #a46f45;
   --link-unresolved-color: #8f776a;
   --list-marker-color: #8e6849;
   --scrollbar-active-thumb-bg: rgb(192 180 164 / 0.72);
@@ -64,15 +64,15 @@
   --tag-background-hover: rgb(138 130 91 / 0.22);
   --tag-color: #8a825b;
   --tag-color-hover: #4d4032;
-  --text-accent: #be8a4f;
-  --text-accent-hover: #aa7d4a;
+  --text-accent: #b77949;
+  --text-accent-hover: #a46f45;
   --text-error: #a36050;
   --text-faint: #a29789;
-  --text-highlight-bg: rgb(198 141 92 / 0.34);
+  --text-highlight-bg: rgb(183 121 73 / 0.34);
   --text-muted: #73685a;
   --text-normal: #4d4032;
   --text-on-accent: #f5eee4;
-  --text-selection: #c68d5c21;
+  --text-selection: #b7794921;
   --text-success: #7e8676;
   --text-warning: #b17d56;
 }

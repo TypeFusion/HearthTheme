@@ -484,7 +484,7 @@ function normalizeSurfaceValueMap(valuesByVariant, label, variantIds) {
   return out
 }
 
-function normalizeAbstractColorSource(value, families, label, variantIds, allowedKinds) {
+function normalizeAbstractColorSource(value, families, label, variantIds, allowedKinds, roleIds = null) {
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
   const type = String(value.type || '').trim()
   assert(type, `${label}.type is required`)
@@ -506,12 +506,20 @@ function normalizeAbstractColorSource(value, families, label, variantIds, allowe
     return { type, family, tone }
   }
 
+  if (type === 'role') {
+    const id = String(value.id || '').trim()
+    assert(id, `${label}.id is required`)
+    assert(roleIds instanceof Set && roleIds.size > 0, `${label}.type "role" is not supported in this layer`)
+    assert(roleIds.has(id), `${label}.id "${id}" does not exist in semantic-rules.json`)
+    return { type, id }
+  }
+
   const id = String(value.id || '').trim()
   assert(id, `${label}.id is required`)
   return { type, id }
 }
 
-function normalizeAbstractColorDerive(value, families, label, variantIds, allowedKinds) {
+function normalizeAbstractColorDerive(value, families, label, variantIds, allowedKinds, roleIds = null) {
   if (value == null) return {}
   assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
   const out = {}
@@ -519,7 +527,7 @@ function normalizeAbstractColorDerive(value, families, label, variantIds, allowe
   if (value.mix != null) {
     assert(value.mix && typeof value.mix === 'object' && !Array.isArray(value.mix), `${label}.mix must be an object`)
     out.mix = {
-      with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds),
+      with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds, roleIds),
       t: normalizeNumber(value.mix.t, `${label}.mix.t`, { min: 0, max: 1 }),
     }
   }
@@ -553,7 +561,7 @@ function isLegacyVariantMap(entry, variantIds) {
   return variantIds.every((variantId) => entry[variantId] !== undefined)
 }
 
-function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedKinds) {
+function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedKinds, roleIds = null) {
   assert(entry && typeof entry === 'object' && !Array.isArray(entry), `${label} must be an object`)
 
   const sourceInput = isLegacyVariantMap(entry, variantIds)
@@ -569,16 +577,16 @@ function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedK
     assert(variantEntry && typeof variantEntry === 'object' && !Array.isArray(variantEntry), `${label}.byVariant.${variantId} must be an object`)
     byVariant[variantId] = {
       source: variantEntry.source
-        ? normalizeAbstractColorSource(variantEntry.source, families, `${label}.byVariant.${variantId}.source`, variantIds, allowedKinds)
+        ? normalizeAbstractColorSource(variantEntry.source, families, `${label}.byVariant.${variantId}.source`, variantIds, allowedKinds, roleIds)
         : null,
-      derive: normalizeAbstractColorDerive(variantEntry.derive, families, `${label}.byVariant.${variantId}.derive`, variantIds, allowedKinds),
+      derive: normalizeAbstractColorDerive(variantEntry.derive, families, `${label}.byVariant.${variantId}.derive`, variantIds, allowedKinds, roleIds),
     }
   }
 
   return {
     description: typeof entry.description === 'string' ? entry.description.trim() : '',
-    source: normalizeAbstractColorSource(sourceInput, families, `${label}.source`, variantIds, allowedKinds),
-    derive: normalizeAbstractColorDerive(entry.derive, families, `${label}.derive`, variantIds, allowedKinds),
+    source: normalizeAbstractColorSource(sourceInput, families, `${label}.source`, variantIds, allowedKinds, roleIds),
+    derive: normalizeAbstractColorDerive(entry.derive, families, `${label}.derive`, variantIds, allowedKinds, roleIds),
     byVariant,
   }
 }
@@ -614,6 +622,7 @@ export function loadSurfaceRules() {
 
 export function loadInteractionRules() {
   const foundation = loadFoundationPalette()
+  const semanticRules = loadSemanticRules()
   const variants = loadColorSystemVariants().variants
   const variantIds = variants.map((variant) => variant.id)
   const data = readJson(COLOR_SYSTEM_INTERACTION_RULES_PATH)
@@ -621,7 +630,8 @@ export function loadInteractionRules() {
   assert(data.interactions && typeof data.interactions === 'object' && !Array.isArray(data.interactions), `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions must be an object`)
 
   const interactions = {}
-  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction'])
+  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction', 'role'])
+  const roleIds = new Set(Object.keys(semanticRules.roles))
   for (const [interactionIdRaw, entry] of Object.entries(data.interactions)) {
     const interactionId = String(interactionIdRaw || '').trim()
     assert(interactionId, `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: invalid interaction id`)
@@ -630,7 +640,8 @@ export function loadInteractionRules() {
       foundation.families,
       `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions.${interactionId}`,
       variantIds,
-      allowedKinds
+      allowedKinds,
+      roleIds
     )
   }
 

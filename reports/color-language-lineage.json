@@ -891,30 +891,31 @@
     }
   },
   "interactionRules": {
-    "selection": {
-      "description": "Primary text-selection wash.",
+    "cursor": {
+      "description": "Primary live cursor and accent signal.",
       "values": {
-        "dark": "#cf87402f",
-        "darkSoft": "#c48e5f13",
-        "light": "#cf874021",
-        "lightSoft": "#c68d5c21"
+        "dark": "#cb844a",
+        "darkSoft": "#bb845a",
+        "light": "#ba7239",
+        "lightSoft": "#b77949"
       },
       "variants": {
         "dark": {
-          "color": "#cf87402f",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.selection.source.values.dark",
+          "color": "#cb844a",
+          "sourceType": "role",
+          "sourceRef": "number",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.selection.source.values.dark",
-            "interaction-rules.interactions.selection",
-            "variant-profiles.variants.dark"
+            "foundation.families.terracotta.tones.base.dark",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.dark",
+            "interaction-rules.interactions.cursor"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.selection.source.values.dark",
-              "value": "#cf87402f"
+              "type": "role-ref",
+              "ref": "semantic-rules.roles.number",
+              "value": "#cb844a"
             },
             {
               "type": "variant-profile",
@@ -923,20 +924,21 @@
           ]
         },
         "darkSoft": {
-          "color": "#c48e5f13",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.selection.source.values.darkSoft",
+          "color": "#bb845a",
+          "sourceType": "role",
+          "sourceRef": "number",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.selection.source.values.darkSoft",
-            "interaction-rules.interactions.selection",
-            "variant-profiles.variants.darkSoft"
+            "foundation.families.terracotta.tones.base.darkSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.darkSoft",
+            "interaction-rules.interactions.cursor"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.selection.source.values.darkSoft",
-              "value": "#c48e5f13"
+              "type": "role-ref",
+              "ref": "semantic-rules.roles.number",
+              "value": "#bb845a"
             },
             {
               "type": "variant-profile",
@@ -945,20 +947,21 @@
           ]
         },
         "light": {
-          "color": "#cf874021",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.selection.source.values.light",
+          "color": "#ba7239",
+          "sourceType": "role",
+          "sourceRef": "number",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.selection.source.values.light",
-            "interaction-rules.interactions.selection",
-            "variant-profiles.variants.light"
+            "foundation.families.terracotta.tones.base.light",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.light",
+            "interaction-rules.interactions.cursor"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.selection.source.values.light",
-              "value": "#cf874021"
+              "type": "role-ref",
+              "ref": "semantic-rules.roles.number",
+              "value": "#ba7239"
             },
             {
               "type": "variant-profile",
@@ -967,20 +970,21 @@
           ]
         },
         "lightSoft": {
-          "color": "#c68d5c21",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.selection.source.values.lightSoft",
+          "color": "#b77949",
+          "sourceType": "role",
+          "sourceRef": "number",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.selection.source.values.lightSoft",
-            "interaction-rules.interactions.selection",
-            "variant-profiles.variants.lightSoft"
+            "foundation.families.terracotta.tones.base.lightSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.lightSoft",
+            "interaction-rules.interactions.cursor"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.selection.source.values.lightSoft",
-              "value": "#c68d5c21"
+              "type": "role-ref",
+              "ref": "semantic-rules.roles.number",
+              "value": "#b77949"
             },
             {
               "type": "variant-profile",
@@ -990,30 +994,37 @@
         }
       }
     },
-    "cursor": {
-      "description": "Primary live cursor and accent signal.",
+    "selection": {
+      "description": "Primary text-selection wash.",
       "values": {
-        "dark": "#d08a3e",
-        "darkSoft": "#bd8c54",
-        "light": "#c68431",
-        "lightSoft": "#be8a4f"
+        "dark": "#cb844a2f",
+        "darkSoft": "#bb845a13",
+        "light": "#ba723921",
+        "lightSoft": "#b7794921"
       },
       "variants": {
         "dark": {
-          "color": "#d08a3e",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.cursor.source.values.dark",
+          "color": "#cb844a2f",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.cursor.source.values.dark",
+            "foundation.families.terracotta.tones.base.dark",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.dark",
             "interaction-rules.interactions.cursor",
-            "variant-profiles.variants.dark"
+            "interaction-rules.interactions.selection"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.cursor.source.values.dark",
-              "value": "#d08a3e"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.dark",
+              "value": "#cb844a"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.184,
+              "value": "#cb844a2f"
             },
             {
               "type": "variant-profile",
@@ -1022,20 +1033,27 @@
           ]
         },
         "darkSoft": {
-          "color": "#bd8c54",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.cursor.source.values.darkSoft",
+          "color": "#bb845a13",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.cursor.source.values.darkSoft",
+            "foundation.families.terracotta.tones.base.darkSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.darkSoft",
             "interaction-rules.interactions.cursor",
-            "variant-profiles.variants.darkSoft"
+            "interaction-rules.interactions.selection"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.cursor.source.values.darkSoft",
-              "value": "#bd8c54"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.darkSoft",
+              "value": "#bb845a"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.075,
+              "value": "#bb845a13"
             },
             {
               "type": "variant-profile",
@@ -1044,20 +1062,27 @@
           ]
         },
         "light": {
-          "color": "#c68431",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.cursor.source.values.light",
+          "color": "#ba723921",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.cursor.source.values.light",
+            "foundation.families.terracotta.tones.base.light",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.light",
             "interaction-rules.interactions.cursor",
-            "variant-profiles.variants.light"
+            "interaction-rules.interactions.selection"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.cursor.source.values.light",
-              "value": "#c68431"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.light",
+              "value": "#ba7239"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.129,
+              "value": "#ba723921"
             },
             {
               "type": "variant-profile",
@@ -1066,20 +1091,27 @@
           ]
         },
         "lightSoft": {
-          "color": "#be8a4f",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.cursor.source.values.lightSoft",
+          "color": "#b7794921",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.cursor.source.values.lightSoft",
+            "foundation.families.terracotta.tones.base.lightSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.lightSoft",
             "interaction-rules.interactions.cursor",
-            "variant-profiles.variants.lightSoft"
+            "interaction-rules.interactions.selection"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.cursor.source.values.lightSoft",
-              "value": "#be8a4f"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.lightSoft",
+              "value": "#b77949"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.129,
+              "value": "#b7794921"
             },
             {
               "type": "variant-profile",
@@ -1100,18 +1132,24 @@
       "variants": {
         "dark": {
           "color": "#864a22",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.status.source.values.dark",
-          "usedEscapeHatch": false,
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.status.source.values.dark",
-            "interaction-rules.interactions.status",
-            "variant-profiles.variants.dark"
+            "foundation.families.terracotta.tones.base.dark",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.dark",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.status"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.status.source.values.dark",
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.dark",
+              "value": "#cb844a"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#864a22"
             },
             {
@@ -1122,18 +1160,24 @@
         },
         "darkSoft": {
           "color": "#875231",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.status.source.values.darkSoft",
-          "usedEscapeHatch": false,
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.status.source.values.darkSoft",
-            "interaction-rules.interactions.status",
-            "variant-profiles.variants.darkSoft"
+            "foundation.families.terracotta.tones.base.darkSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.darkSoft",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.status"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.status.source.values.darkSoft",
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.darkSoft",
+              "value": "#bb845a"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#875231"
             },
             {
@@ -1144,18 +1188,24 @@
         },
         "light": {
           "color": "#b55616",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.status.source.values.light",
-          "usedEscapeHatch": false,
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.status.source.values.light",
-            "interaction-rules.interactions.status",
-            "variant-profiles.variants.light"
+            "foundation.families.terracotta.tones.base.light",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.light",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.status"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.status.source.values.light",
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.light",
+              "value": "#ba7239"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#b55616"
             },
             {
@@ -1166,18 +1216,24 @@
         },
         "lightSoft": {
           "color": "#ae774d",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.status.source.values.lightSoft",
-          "usedEscapeHatch": false,
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.status.source.values.lightSoft",
-            "interaction-rules.interactions.status",
-            "variant-profiles.variants.lightSoft"
+            "foundation.families.terracotta.tones.base.lightSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.lightSoft",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.status"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.status.source.values.lightSoft",
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.lightSoft",
+              "value": "#b77949"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#ae774d"
             },
             {
@@ -1191,27 +1247,34 @@
     "focusRing": {
       "description": "Focusable edge signal used for ring and border emphasis.",
       "values": {
-        "dark": "#cf874052",
-        "darkSoft": "#ba88533a",
-        "light": "#c581334a",
-        "lightSoft": "#bd87504a"
+        "dark": "#cb844a52",
+        "darkSoft": "#bb845a3a",
+        "light": "#ba72394a",
+        "lightSoft": "#b779494a"
       },
       "variants": {
         "dark": {
-          "color": "#cf874052",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.focusRing.source.values.dark",
+          "color": "#cb844a52",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.focusRing.source.values.dark",
-            "interaction-rules.interactions.focusRing",
-            "variant-profiles.variants.dark"
+            "foundation.families.terracotta.tones.base.dark",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.dark",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.focusRing"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.focusRing.source.values.dark",
-              "value": "#cf874052"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.dark",
+              "value": "#cb844a"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.321,
+              "value": "#cb844a52"
             },
             {
               "type": "variant-profile",
@@ -1220,20 +1283,27 @@
           ]
         },
         "darkSoft": {
-          "color": "#ba88533a",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.focusRing.source.values.darkSoft",
+          "color": "#bb845a3a",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.focusRing.source.values.darkSoft",
-            "interaction-rules.interactions.focusRing",
-            "variant-profiles.variants.darkSoft"
+            "foundation.families.terracotta.tones.base.darkSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.darkSoft",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.focusRing"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.focusRing.source.values.darkSoft",
-              "value": "#ba88533a"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.darkSoft",
+              "value": "#bb845a"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.227,
+              "value": "#bb845a3a"
             },
             {
               "type": "variant-profile",
@@ -1242,20 +1312,27 @@
           ]
         },
         "light": {
-          "color": "#c581334a",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.focusRing.source.values.light",
+          "color": "#ba72394a",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.focusRing.source.values.light",
-            "interaction-rules.interactions.focusRing",
-            "variant-profiles.variants.light"
+            "foundation.families.terracotta.tones.base.light",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.light",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.focusRing"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.focusRing.source.values.light",
-              "value": "#c581334a"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.light",
+              "value": "#ba7239"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.29,
+              "value": "#ba72394a"
             },
             {
               "type": "variant-profile",
@@ -1264,20 +1341,27 @@
           ]
         },
         "lightSoft": {
-          "color": "#bd87504a",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.focusRing.source.values.lightSoft",
+          "color": "#b779494a",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.focusRing.source.values.lightSoft",
-            "interaction-rules.interactions.focusRing",
-            "variant-profiles.variants.lightSoft"
+            "foundation.families.terracotta.tones.base.lightSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.lightSoft",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.focusRing"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.focusRing.source.values.lightSoft",
-              "value": "#bd87504a"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.lightSoft",
+              "value": "#b77949"
+            },
+            {
+              "type": "alpha",
+              "alpha": 0.29,
+              "value": "#b779494a"
             },
             {
               "type": "variant-profile",
@@ -1413,18 +1497,26 @@
       "variants": {
         "dark": {
           "color": "#2d2824",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.listHover.source.values.dark",
-          "usedEscapeHatch": false,
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.listHover.source.values.dark",
-            "interaction-rules.interactions.listHover",
-            "variant-profiles.variants.dark"
+            "foundation.families.ground.tones.base.dark",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.dark",
+            "foundation.families.carrier.tones.base.dark",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.listHover"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.listHover.source.values.dark",
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.dark",
+              "value": "#2b2723"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#2d2824"
             },
             {
@@ -1435,18 +1527,26 @@
         },
         "darkSoft": {
           "color": "#332d26",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.listHover.source.values.darkSoft",
-          "usedEscapeHatch": false,
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.listHover.source.values.darkSoft",
-            "interaction-rules.interactions.listHover",
-            "variant-profiles.variants.darkSoft"
+            "foundation.families.ground.tones.base.darkSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.darkSoft",
+            "foundation.families.carrier.tones.base.darkSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.listHover"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.listHover.source.values.darkSoft",
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.darkSoft",
+              "value": "#342c28"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#332d26"
             },
             {
@@ -1457,18 +1557,26 @@
         },
         "light": {
           "color": "#dfd6c7",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.listHover.source.values.light",
-          "usedEscapeHatch": false,
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.listHover.source.values.light",
-            "interaction-rules.interactions.listHover",
-            "variant-profiles.variants.light"
+            "foundation.families.ground.tones.base.light",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.light",
+            "foundation.families.carrier.tones.base.light",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.listHover"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.listHover.source.values.light",
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.light",
+              "value": "#dacfc1"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#dfd6c7"
             },
             {
@@ -1479,18 +1587,26 @@
         },
         "lightSoft": {
           "color": "#d8cfc3",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.listHover.source.values.lightSoft",
-          "usedEscapeHatch": false,
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": true,
           "chainRefs": [
-            "interaction-rules.interactions.listHover.source.values.lightSoft",
-            "interaction-rules.interactions.listHover",
-            "variant-profiles.variants.lightSoft"
+            "foundation.families.ground.tones.base.lightSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.lightSoft",
+            "foundation.families.carrier.tones.base.lightSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.listHover"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.listHover.source.values.lightSoft",
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.lightSoft",
+              "value": "#d6caba"
+            },
+            {
+              "type": "escape-hatch",
               "value": "#d8cfc3"
             },
             {
@@ -1504,27 +1620,29 @@
     "tabEmphasis": {
       "description": "Active-tab and active-panel accent edge.",
       "values": {
-        "dark": "#cf8740",
-        "darkSoft": "#bc8955",
-        "light": "#c58133",
-        "lightSoft": "#bd8750"
+        "dark": "#cb844a",
+        "darkSoft": "#bb845a",
+        "light": "#ba7239",
+        "lightSoft": "#b77949"
       },
       "variants": {
         "dark": {
-          "color": "#cf8740",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.dark",
+          "color": "#cb844a",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.tabEmphasis.source.values.dark",
-            "interaction-rules.interactions.tabEmphasis",
-            "variant-profiles.variants.dark"
+            "foundation.families.terracotta.tones.base.dark",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.dark",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.tabEmphasis"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.tabEmphasis.source.values.dark",
-              "value": "#cf8740"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.dark",
+              "value": "#cb844a"
             },
             {
               "type": "variant-profile",
@@ -1533,20 +1651,22 @@
           ]
         },
         "darkSoft": {
-          "color": "#bc8955",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
+          "color": "#bb845a",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
-            "interaction-rules.interactions.tabEmphasis",
-            "variant-profiles.variants.darkSoft"
+            "foundation.families.terracotta.tones.base.darkSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.darkSoft",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.tabEmphasis"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
-              "value": "#bc8955"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.darkSoft",
+              "value": "#bb845a"
             },
             {
               "type": "variant-profile",
@@ -1555,20 +1675,22 @@
           ]
         },
         "light": {
-          "color": "#c58133",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.light",
+          "color": "#ba7239",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.tabEmphasis.source.values.light",
-            "interaction-rules.interactions.tabEmphasis",
-            "variant-profiles.variants.light"
+            "foundation.families.terracotta.tones.base.light",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.light",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.tabEmphasis"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.tabEmphasis.source.values.light",
-              "value": "#c58133"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.light",
+              "value": "#ba7239"
             },
             {
               "type": "variant-profile",
@@ -1577,20 +1699,22 @@
           ]
         },
         "lightSoft": {
-          "color": "#bd8750",
-          "sourceType": "literal",
-          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
+          "color": "#b77949",
+          "sourceType": "interaction",
+          "sourceRef": "cursor",
           "usedEscapeHatch": false,
           "chainRefs": [
-            "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
-            "interaction-rules.interactions.tabEmphasis",
-            "variant-profiles.variants.lightSoft"
+            "foundation.families.terracotta.tones.base.lightSoft",
+            "semantic-rules.roles.number",
+            "variant-profiles.variants.lightSoft",
+            "interaction-rules.interactions.cursor",
+            "interaction-rules.interactions.tabEmphasis"
           ],
           "steps": [
             {
-              "type": "literal",
-              "ref": "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
-              "value": "#bd8750"
+              "type": "interaction-ref",
+              "ref": "interaction-rules.interactions.cursor.values.lightSoft",
+              "value": "#b77949"
             },
             {
               "type": "variant-profile",
@@ -3868,12 +3992,14 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#cf87402f",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a2f",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.dark",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -3885,12 +4011,14 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#cf87402f",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a2f",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.dark",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -3902,12 +4030,14 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#cf87402f",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a2f",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.dark",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -3919,12 +4049,13 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#d08a3e",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.dark",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -3936,12 +4067,13 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#d08a3e",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.dark",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -3953,12 +4085,13 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#d08a3e",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.dark",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -3970,12 +4103,14 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#864a22",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.dark",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -3987,12 +4122,14 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#864a22",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.dark",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -4004,12 +4141,14 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#cf874052",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a52",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.dark",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4021,12 +4160,14 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#cf874052",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a52",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.dark",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4080,12 +4221,16 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#2d2824",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.dark",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4097,12 +4242,16 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#2d2824",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.dark",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4114,12 +4263,14 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:tabEmphasis",
-      "resolvedColor": "#cf8740",
+      "familyId": "terracotta",
+      "resolvedColor": "#cb844a",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.source.values.dark",
-        "interaction-rules.interactions.tabEmphasis",
+        "foundation.families.terracotta.tones.base.dark",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.dark",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.tabEmphasis",
         "adapters.interactions.tabEmphasis"
       ]
     },
@@ -4131,12 +4282,14 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#c48e5f13",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a13",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.darkSoft",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4148,12 +4301,14 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#c48e5f13",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a13",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.darkSoft",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4165,12 +4320,14 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#c48e5f13",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a13",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.darkSoft",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4182,12 +4339,13 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#bd8c54",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.darkSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4199,12 +4357,13 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#bd8c54",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.darkSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4216,12 +4375,13 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#bd8c54",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.darkSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4233,12 +4393,14 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#875231",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.darkSoft",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -4250,12 +4412,14 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#875231",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.darkSoft",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -4267,12 +4431,14 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#ba88533a",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a3a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.darkSoft",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4284,12 +4450,14 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#ba88533a",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a3a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.darkSoft",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4343,12 +4511,16 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#332d26",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.darkSoft",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4360,12 +4532,16 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#332d26",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.darkSoft",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4377,12 +4553,14 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:tabEmphasis",
-      "resolvedColor": "#bc8955",
+      "familyId": "terracotta",
+      "resolvedColor": "#bb845a",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
-        "interaction-rules.interactions.tabEmphasis",
+        "foundation.families.terracotta.tones.base.darkSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.darkSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.tabEmphasis",
         "adapters.interactions.tabEmphasis"
       ]
     },
@@ -4394,12 +4572,14 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#cf874021",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba723921",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.light",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4411,12 +4591,14 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#cf874021",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba723921",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.light",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4428,12 +4610,14 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#cf874021",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba723921",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.light",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4445,12 +4629,13 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#c68431",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba7239",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.light",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4462,12 +4647,13 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#c68431",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba7239",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.light",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4479,12 +4665,13 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#c68431",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba7239",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.light",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4496,12 +4683,14 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#b55616",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.light",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -4513,12 +4702,14 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#b55616",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.light",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -4530,12 +4721,14 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#c581334a",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba72394a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.light",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4547,12 +4740,14 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#c581334a",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba72394a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.light",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4606,12 +4801,16 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#dfd6c7",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.light",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4623,12 +4822,16 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#dfd6c7",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.light",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4640,12 +4843,14 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:tabEmphasis",
-      "resolvedColor": "#c58133",
+      "familyId": "terracotta",
+      "resolvedColor": "#ba7239",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.source.values.light",
-        "interaction-rules.interactions.tabEmphasis",
+        "foundation.families.terracotta.tones.base.light",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.light",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.tabEmphasis",
         "adapters.interactions.tabEmphasis"
       ]
     },
@@ -4657,12 +4862,14 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#c68d5c21",
+      "familyId": "terracotta",
+      "resolvedColor": "#b7794921",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.lightSoft",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4674,12 +4881,14 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#c68d5c21",
+      "familyId": "terracotta",
+      "resolvedColor": "#b7794921",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.lightSoft",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4691,12 +4900,14 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:selection",
-      "resolvedColor": "#c68d5c21",
+      "familyId": "terracotta",
+      "resolvedColor": "#b7794921",
       "chainRefs": [
-        "interaction-rules.interactions.selection.source.values.lightSoft",
-        "interaction-rules.interactions.selection",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.selection",
         "adapters.interactions.selection"
       ]
     },
@@ -4708,12 +4919,13 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#be8a4f",
+      "familyId": "terracotta",
+      "resolvedColor": "#b77949",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.lightSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4725,12 +4937,13 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#be8a4f",
+      "familyId": "terracotta",
+      "resolvedColor": "#b77949",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.lightSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4742,12 +4955,13 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:cursor",
-      "resolvedColor": "#be8a4f",
+      "familyId": "terracotta",
+      "resolvedColor": "#b77949",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.source.values.lightSoft",
-        "interaction-rules.interactions.cursor",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
         "adapters.interactions.cursor"
       ]
     },
@@ -4759,12 +4973,14 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#ae774d",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.lightSoft",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -4776,12 +4992,14 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:status",
+      "familyId": "terracotta",
       "resolvedColor": "#ae774d",
       "chainRefs": [
-        "interaction-rules.interactions.status.source.values.lightSoft",
-        "interaction-rules.interactions.status",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.status",
         "adapters.interactions.status"
       ]
     },
@@ -4793,12 +5011,14 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#bd87504a",
+      "familyId": "terracotta",
+      "resolvedColor": "#b779494a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.lightSoft",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4810,12 +5030,14 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:focusRing",
-      "resolvedColor": "#bd87504a",
+      "familyId": "terracotta",
+      "resolvedColor": "#b779494a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.source.values.lightSoft",
-        "interaction-rules.interactions.focusRing",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.focusRing",
         "adapters.interactions.focusRing"
       ]
     },
@@ -4870,12 +5092,16 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#d8cfc3",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.lightSoft",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4887,12 +5113,16 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:listHover",
+      "familyId": "ground",
       "resolvedColor": "#d8cfc3",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.source.values.lightSoft",
-        "interaction-rules.interactions.listHover",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.listHover",
         "adapters.interactions.listHover"
       ]
     },
@@ -4904,12 +5134,14 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:tabEmphasis",
-      "resolvedColor": "#bd8750",
+      "familyId": "terracotta",
+      "resolvedColor": "#b77949",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
-        "interaction-rules.interactions.tabEmphasis",
+        "foundation.families.terracotta.tones.base.lightSoft",
+        "semantic-rules.roles.number",
         "variant-profiles.variants.lightSoft",
+        "interaction-rules.interactions.cursor",
+        "interaction-rules.interactions.tabEmphasis",
         "adapters.interactions.tabEmphasis"
       ]
     },
@@ -10298,12 +10530,14 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#cf87402f",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a2f",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.dark",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10315,12 +10549,14 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#cf87402f",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a2f",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.dark",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10332,12 +10568,14 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#cf87402f",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a2f",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.dark",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10349,12 +10587,13 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#d08a3e",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.dark",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10366,12 +10605,13 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#d08a3e",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.dark",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10383,12 +10623,13 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#d08a3e",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.dark",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10400,12 +10641,14 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#864a22",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.dark",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -10417,12 +10660,14 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#864a22",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.dark",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -10434,12 +10679,14 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#cf874052",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a52",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.dark",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -10451,12 +10698,14 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#cf874052",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a52",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.dark",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -10510,12 +10759,16 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#2d2824",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.dark",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -10527,12 +10780,16 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#2d2824",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.dark",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -10544,12 +10801,14 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:tabEmphasis",
-        "resolvedColor": "#cf8740",
+        "familyId": "terracotta",
+        "resolvedColor": "#cb844a",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.source.values.dark",
-          "interaction-rules.interactions.tabEmphasis",
+          "foundation.families.terracotta.tones.base.dark",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.dark",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.tabEmphasis",
           "adapters.interactions.tabEmphasis"
         ]
       },
@@ -10561,12 +10820,14 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#c48e5f13",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a13",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.darkSoft",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10578,12 +10839,14 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#c48e5f13",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a13",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.darkSoft",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10595,12 +10858,14 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#c48e5f13",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a13",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.darkSoft",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10612,12 +10877,13 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#bd8c54",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.darkSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10629,12 +10895,13 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#bd8c54",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.darkSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10646,12 +10913,13 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#bd8c54",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.darkSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10663,12 +10931,14 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#875231",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.darkSoft",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -10680,12 +10950,14 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#875231",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.darkSoft",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -10697,12 +10969,14 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#ba88533a",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a3a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.darkSoft",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -10714,12 +10988,14 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#ba88533a",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a3a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.darkSoft",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -10773,12 +11049,16 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#332d26",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.darkSoft",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -10790,12 +11070,16 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#332d26",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.darkSoft",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -10807,12 +11091,14 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:tabEmphasis",
-        "resolvedColor": "#bc8955",
+        "familyId": "terracotta",
+        "resolvedColor": "#bb845a",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
-          "interaction-rules.interactions.tabEmphasis",
+          "foundation.families.terracotta.tones.base.darkSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.darkSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.tabEmphasis",
           "adapters.interactions.tabEmphasis"
         ]
       },
@@ -10824,12 +11110,14 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#cf874021",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba723921",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.light",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10841,12 +11129,14 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#cf874021",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba723921",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.light",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10858,12 +11148,14 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#cf874021",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba723921",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.light",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -10875,12 +11167,13 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#c68431",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba7239",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.light",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10892,12 +11185,13 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#c68431",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba7239",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.light",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10909,12 +11203,13 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#c68431",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba7239",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.light",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -10926,12 +11221,14 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#b55616",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.light",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -10943,12 +11240,14 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#b55616",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.light",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -10960,12 +11259,14 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#c581334a",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba72394a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.light",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -10977,12 +11278,14 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#c581334a",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba72394a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.light",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -11036,12 +11339,16 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#dfd6c7",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.light",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -11053,12 +11360,16 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#dfd6c7",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.light",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -11070,12 +11381,14 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:tabEmphasis",
-        "resolvedColor": "#c58133",
+        "familyId": "terracotta",
+        "resolvedColor": "#ba7239",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.source.values.light",
-          "interaction-rules.interactions.tabEmphasis",
+          "foundation.families.terracotta.tones.base.light",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.light",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.tabEmphasis",
           "adapters.interactions.tabEmphasis"
         ]
       },
@@ -11087,12 +11400,14 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#c68d5c21",
+        "familyId": "terracotta",
+        "resolvedColor": "#b7794921",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.lightSoft",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -11104,12 +11419,14 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#c68d5c21",
+        "familyId": "terracotta",
+        "resolvedColor": "#b7794921",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.lightSoft",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -11121,12 +11438,14 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:selection",
-        "resolvedColor": "#c68d5c21",
+        "familyId": "terracotta",
+        "resolvedColor": "#b7794921",
         "chainRefs": [
-          "interaction-rules.interactions.selection.source.values.lightSoft",
-          "interaction-rules.interactions.selection",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.selection",
           "adapters.interactions.selection"
         ]
       },
@@ -11138,12 +11457,13 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#be8a4f",
+        "familyId": "terracotta",
+        "resolvedColor": "#b77949",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.lightSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -11155,12 +11475,13 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#be8a4f",
+        "familyId": "terracotta",
+        "resolvedColor": "#b77949",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.lightSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -11172,12 +11493,13 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:cursor",
-        "resolvedColor": "#be8a4f",
+        "familyId": "terracotta",
+        "resolvedColor": "#b77949",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.source.values.lightSoft",
-          "interaction-rules.interactions.cursor",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
           "adapters.interactions.cursor"
         ]
       },
@@ -11189,12 +11511,14 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#ae774d",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.lightSoft",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -11206,12 +11530,14 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:status",
+        "familyId": "terracotta",
         "resolvedColor": "#ae774d",
         "chainRefs": [
-          "interaction-rules.interactions.status.source.values.lightSoft",
-          "interaction-rules.interactions.status",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.status",
           "adapters.interactions.status"
         ]
       },
@@ -11223,12 +11549,14 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#bd87504a",
+        "familyId": "terracotta",
+        "resolvedColor": "#b779494a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.lightSoft",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -11240,12 +11568,14 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:focusRing",
-        "resolvedColor": "#bd87504a",
+        "familyId": "terracotta",
+        "resolvedColor": "#b779494a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.source.values.lightSoft",
-          "interaction-rules.interactions.focusRing",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.focusRing",
           "adapters.interactions.focusRing"
         ]
       },
@@ -11300,12 +11630,16 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#d8cfc3",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.lightSoft",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -11317,12 +11651,16 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:listHover",
+        "familyId": "ground",
         "resolvedColor": "#d8cfc3",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.source.values.lightSoft",
-          "interaction-rules.interactions.listHover",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.listHover",
           "adapters.interactions.listHover"
         ]
       },
@@ -11334,12 +11672,14 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:tabEmphasis",
-        "resolvedColor": "#bd8750",
+        "familyId": "terracotta",
+        "resolvedColor": "#b77949",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
-          "interaction-rules.interactions.tabEmphasis",
+          "foundation.families.terracotta.tones.base.lightSoft",
+          "semantic-rules.roles.number",
           "variant-profiles.variants.lightSoft",
+          "interaction-rules.interactions.cursor",
+          "interaction-rules.interactions.tabEmphasis",
           "adapters.interactions.tabEmphasis"
         ]
       },
@@ -16474,12 +16814,20 @@
         "obsidian-surface:border:lightSoft",
         "vscode-interaction:lineEmphasis:dark",
         "obsidian-interaction:lineEmphasis:dark",
+        "vscode-interaction:listHover:dark",
+        "obsidian-interaction:listHover:dark",
         "vscode-interaction:lineEmphasis:darkSoft",
         "obsidian-interaction:lineEmphasis:darkSoft",
+        "vscode-interaction:listHover:darkSoft",
+        "obsidian-interaction:listHover:darkSoft",
         "vscode-interaction:lineEmphasis:light",
         "obsidian-interaction:lineEmphasis:light",
+        "vscode-interaction:listHover:light",
+        "obsidian-interaction:listHover:light",
         "vscode-interaction:lineEmphasis:lightSoft",
-        "obsidian-interaction:lineEmphasis:lightSoft"
+        "obsidian-interaction:lineEmphasis:lightSoft",
+        "vscode-interaction:listHover:lightSoft",
+        "obsidian-interaction:listHover:lightSoft"
       ],
       "carrier": [
         "web-surface:ink:dark",
@@ -16509,69 +16857,71 @@
         "vscode-surface:sidebar:lightSoft",
         "obsidian-surface:sidebar:lightSoft"
       ],
-      "interaction:selection": [
+      "terracotta": [
         "web-interaction:selection:dark",
         "vscode-interaction:selection:dark",
         "obsidian-interaction:selection:dark",
-        "web-interaction:selection:darkSoft",
-        "vscode-interaction:selection:darkSoft",
-        "obsidian-interaction:selection:darkSoft",
-        "web-interaction:selection:light",
-        "vscode-interaction:selection:light",
-        "obsidian-interaction:selection:light",
-        "web-interaction:selection:lightSoft",
-        "vscode-interaction:selection:lightSoft",
-        "obsidian-interaction:selection:lightSoft"
-      ],
-      "interaction:cursor": [
         "web-interaction:cursor:dark",
         "vscode-interaction:cursor:dark",
         "obsidian-interaction:cursor:dark",
+        "web-interaction:status:dark",
+        "vscode-interaction:status:dark",
+        "vscode-interaction:focusRing:dark",
+        "obsidian-interaction:focusRing:dark",
+        "vscode-interaction:tabEmphasis:dark",
+        "web-interaction:selection:darkSoft",
+        "vscode-interaction:selection:darkSoft",
+        "obsidian-interaction:selection:darkSoft",
         "web-interaction:cursor:darkSoft",
         "vscode-interaction:cursor:darkSoft",
         "obsidian-interaction:cursor:darkSoft",
+        "web-interaction:status:darkSoft",
+        "vscode-interaction:status:darkSoft",
+        "vscode-interaction:focusRing:darkSoft",
+        "obsidian-interaction:focusRing:darkSoft",
+        "vscode-interaction:tabEmphasis:darkSoft",
+        "web-interaction:selection:light",
+        "vscode-interaction:selection:light",
+        "obsidian-interaction:selection:light",
         "web-interaction:cursor:light",
         "vscode-interaction:cursor:light",
         "obsidian-interaction:cursor:light",
-        "web-interaction:cursor:lightSoft",
-        "vscode-interaction:cursor:lightSoft",
-        "obsidian-interaction:cursor:lightSoft"
-      ],
-      "interaction:status": [
-        "web-interaction:status:dark",
-        "vscode-interaction:status:dark",
-        "web-interaction:status:darkSoft",
-        "vscode-interaction:status:darkSoft",
         "web-interaction:status:light",
         "vscode-interaction:status:light",
-        "web-interaction:status:lightSoft",
-        "vscode-interaction:status:lightSoft"
-      ],
-      "interaction:focusRing": [
-        "vscode-interaction:focusRing:dark",
-        "obsidian-interaction:focusRing:dark",
-        "vscode-interaction:focusRing:darkSoft",
-        "obsidian-interaction:focusRing:darkSoft",
         "vscode-interaction:focusRing:light",
         "obsidian-interaction:focusRing:light",
-        "vscode-interaction:focusRing:lightSoft",
-        "obsidian-interaction:focusRing:lightSoft"
-      ],
-      "interaction:listHover": [
-        "vscode-interaction:listHover:dark",
-        "obsidian-interaction:listHover:dark",
-        "vscode-interaction:listHover:darkSoft",
-        "obsidian-interaction:listHover:darkSoft",
-        "vscode-interaction:listHover:light",
-        "obsidian-interaction:listHover:light",
-        "vscode-interaction:listHover:lightSoft",
-        "obsidian-interaction:listHover:lightSoft"
-      ],
-      "interaction:tabEmphasis": [
-        "vscode-interaction:tabEmphasis:dark",
-        "vscode-interaction:tabEmphasis:darkSoft",
         "vscode-interaction:tabEmphasis:light",
-        "vscode-interaction:tabEmphasis:lightSoft"
+        "web-interaction:selection:lightSoft",
+        "vscode-interaction:selection:lightSoft",
+        "obsidian-interaction:selection:lightSoft",
+        "web-interaction:cursor:lightSoft",
+        "vscode-interaction:cursor:lightSoft",
+        "obsidian-interaction:cursor:lightSoft",
+        "web-interaction:status:lightSoft",
+        "vscode-interaction:status:lightSoft",
+        "vscode-interaction:focusRing:lightSoft",
+        "obsidian-interaction:focusRing:lightSoft",
+        "vscode-interaction:tabEmphasis:lightSoft",
+        "semantic-snapshot:number:dark",
+        "web-role:number:dark",
+        "vscode-semantic:number:dark",
+        "vscode-textmate:number:dark",
+        "obsidian-role:number:dark",
+        "semantic-snapshot:number:darkSoft",
+        "web-role:number:darkSoft",
+        "vscode-semantic:number:darkSoft",
+        "vscode-textmate:number:darkSoft",
+        "obsidian-role:number:darkSoft",
+        "semantic-snapshot:number:light",
+        "web-role:number:light",
+        "vscode-semantic:number:light",
+        "vscode-textmate:number:light",
+        "obsidian-role:number:light",
+        "semantic-snapshot:number:lightSoft",
+        "web-role:number:lightSoft",
+        "vscode-semantic:number:lightSoft",
+        "vscode-textmate:number:lightSoft",
+        "obsidian-role:number:lightSoft"
       ],
       "ash": [
         "semantic-snapshot:comment:dark",
@@ -16714,28 +17064,6 @@
         "web-role:string:lightSoft",
         "vscode-textmate:string:lightSoft",
         "obsidian-role:string:lightSoft"
-      ],
-      "terracotta": [
-        "semantic-snapshot:number:dark",
-        "web-role:number:dark",
-        "vscode-semantic:number:dark",
-        "vscode-textmate:number:dark",
-        "obsidian-role:number:dark",
-        "semantic-snapshot:number:darkSoft",
-        "web-role:number:darkSoft",
-        "vscode-semantic:number:darkSoft",
-        "vscode-textmate:number:darkSoft",
-        "obsidian-role:number:darkSoft",
-        "semantic-snapshot:number:light",
-        "web-role:number:light",
-        "vscode-semantic:number:light",
-        "vscode-textmate:number:light",
-        "obsidian-role:number:light",
-        "semantic-snapshot:number:lightSoft",
-        "web-role:number:lightSoft",
-        "vscode-semantic:number:lightSoft",
-        "vscode-textmate:number:lightSoft",
-        "obsidian-role:number:lightSoft"
       ],
       "ochre": [
         "semantic-snapshot:type:dark",

@@ -176,6 +176,7 @@ function resolveAbstractColorSource({
   source,
   variantId,
   foundation,
+  resolveRole,
   resolveSurface,
   resolveInteraction,
   entryRef,
@@ -222,6 +223,30 @@ function resolveAbstractColorSource({
       sourceRef: ref,
       family: source.family,
       tone: source.tone,
+    }
+  }
+
+  if (source.type === 'role') {
+    const resolved = resolveRole?.(source.id, variantId)
+    if (!resolved) {
+      throw new Error(`Missing referenced role "${source.id}" while resolving ${entryRef}.${variantId}`)
+    }
+    return {
+      color: resolved.color,
+      chainRefs: [
+        `foundation.families.${resolved.family}.tones.${resolved.tone}.${variantId}`,
+        `semantic-rules.roles.${source.id}`,
+        `variant-profiles.variants.${variantId}`,
+      ],
+      steps: [{
+        type: 'role-ref',
+        ref: `semantic-rules.roles.${source.id}`,
+        value: resolved.color,
+      }],
+      sourceType: 'role',
+      sourceRef: source.id,
+      family: resolved.family,
+      tone: resolved.tone,
     }
   }
 
@@ -273,6 +298,7 @@ function applyAbstractDerive({
   derive,
   foundation,
   variantId,
+  resolveRole,
   resolveSurface,
   resolveInteraction,
   entryRef,
@@ -297,6 +323,7 @@ function applyAbstractDerive({
       source: derive.mix.with,
       variantId,
       foundation,
+      resolveRole,
       resolveSurface,
       resolveInteraction,
       entryRef: `${entryRef}.derive.mix.with`,
@@ -446,6 +473,7 @@ function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles,
       source,
       variantId,
       foundation,
+      resolveRole: null,
       resolveSurface,
       resolveInteraction: null,
       entryRef,
@@ -456,6 +484,7 @@ function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles,
       derive,
       foundation,
       variantId,
+      resolveRole: null,
       resolveSurface,
       resolveInteraction: null,
       entryRef,
@@ -509,12 +538,16 @@ function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles,
   }
 }
 
-function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, variantProfiles, variants) {
+function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, resolvedSemantic, variantProfiles, variants) {
   const interactions = {}
   const resolving = new Set()
 
   function resolveSurface(surfaceId, variantId) {
     return surfaceRules.resolved?.[surfaceId]?.[variantId] ?? null
+  }
+
+  function resolveRole(roleId, variantId) {
+    return resolvedSemantic?.[roleId]?.[variantId] ?? null
   }
 
   function resolveInteraction(interactionId, variantId) {
@@ -539,6 +572,7 @@ function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceR
       source,
       variantId,
       foundation,
+      resolveRole,
       resolveSurface,
       resolveInteraction,
       entryRef,
@@ -549,6 +583,7 @@ function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceR
       derive,
       foundation,
       variantId,
+      resolveRole,
       resolveSurface,
       resolveInteraction,
       entryRef,
@@ -888,9 +923,9 @@ export function buildColorLanguageModel() {
   const rawInteractionRules = loadInteractionRules()
   const semanticRules = loadSemanticRules()
   const variantProfiles = loadVariantProfiles()
-  const surfaceRules = buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variantSpec.variants)
-  const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, variantProfiles, variantSpec.variants)
   const { palette, resolved } = buildSemanticPalette(foundation, semanticRules, variantProfiles, variantSpec.variants)
+  const surfaceRules = buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variantSpec.variants)
+  const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, resolved, variantProfiles, variantSpec.variants)
   const semanticSnapshot = buildSemanticSnapshotDocument(palette)
   const platformTokenMaps = buildPlatformTokenMaps({
     surfaceRules,

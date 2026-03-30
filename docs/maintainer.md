@@ -100,6 +100,7 @@ It is not a source file.
 - `taxonomy.json` is the machine-readable abstract grouping layer; it should stay platform-free.
 - `surface-rules.json` and `interaction-rules.json` should prefer sparse anchors plus derivation, not full per-variant result tables unless a bounded escape hatch is truly necessary.
 - Environment anchors like `canvas`, `ink`, and `sidebar` should stay rooted in foundation families whenever possible, so the rest of the environment layer can derive from one shared scheme language.
+- Interaction anchors may derive from semantic roles when cursor, status, focus, or selection should inherit the same expressive family as the code language.
 - `check:schemes` is the registry guardrail; it proves every scheme can build its abstract model and lineage without changing generators.
 - `audit:parity` keeps the final VS Code / Obsidian / web outputs aligned, so cross-terminal expression drift is caught before release.
 - `hearth-dark.source.json` is a migration anchor, not the final philosophical authority.

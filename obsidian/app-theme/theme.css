@@ -2,9 +2,9 @@
 /* Theme: HearthCode */
 
 .theme-dark {
-  --background-modifier-active-hover: rgb(208 138 62 / 0.26);
+  --background-modifier-active-hover: rgb(203 132 74 / 0.26);
   --background-modifier-border: #35302b;
-  --background-modifier-border-focus: #cf874052;
+  --background-modifier-border-focus: #cb844a52;
   --background-modifier-border-hover: rgb(53 48 43 / 0.48);
   --background-modifier-box-shadow: rgb(33 29 26 / 0.6);
   --background-modifier-cover: rgb(33 29 26 / 0.72);
@@ -12,7 +12,7 @@
   --background-modifier-error-hover: rgb(206 91 63 / 0.3);
   --background-modifier-form-field: rgb(53 48 43 / 0.22);
   --background-modifier-hover: #2d2824;
-  --background-modifier-message: rgb(208 138 62 / 0.18);
+  --background-modifier-message: rgb(203 132 74 / 0.18);
   --background-modifier-success: rgb(154 169 132 / 0.24);
   --background-primary: #211d1a;
   --background-primary-alt: #2b2723;
@@ -47,12 +47,12 @@
   --hearth-callout-warning-border: rgb(205 133 75 / 0.56);
   --hearth-inline-code: #cfa077;
   --hr-color: rgb(53 48 43 / 0.7);
-  --interactive-accent: #d08a3e;
-  --interactive-accent-hover: #d19554;
+  --interactive-accent: #cb844a;
+  --interactive-accent-hover: #cc905e;
   --interactive-hover: #2d2824;
   --interactive-normal: rgb(53 48 43 / 0.2);
-  --link-color: #d08a3e;
-  --link-color-hover: #d19554;
+  --link-color: #cb844a;
+  --link-color-hover: #cc905e;
   --link-unresolved-color: #886654;
   --list-marker-color: #cf9d71;
   --scrollbar-active-thumb-bg: rgb(53 48 43 / 0.72);
@@ -64,15 +64,15 @@
   --tag-background-hover: rgb(155 146 74 / 0.22);
   --tag-color: #9b924a;
   --tag-color-hover: #d3c9b8;
-  --text-accent: #d08a3e;
-  --text-accent-hover: #d19554;
+  --text-accent: #cb844a;
+  --text-accent-hover: #cc905e;
   --text-error: #ce5b3f;
   --text-faint: #5d5448;
-  --text-highlight-bg: rgb(207 135 64 / 0.34);
+  --text-highlight-bg: rgb(203 132 74 / 0.34);
   --text-muted: #968c7c;
   --text-normal: #d3c9b8;
   --text-on-accent: #f5eee4;
-  --text-selection: #cf87402f;
+  --text-selection: #cb844a2f;
   --text-success: #9aa984;
   --text-warning: #cd854b;
 }
@@ -361,9 +361,9 @@
 }
 
 .theme-light {
-  --background-modifier-active-hover: rgb(198 132 49 / 0.26);
+  --background-modifier-active-hover: rgb(186 114 57 / 0.26);
   --background-modifier-border: #c9beaf;
-  --background-modifier-border-focus: #c581334a;
+  --background-modifier-border-focus: #ba72394a;
   --background-modifier-border-hover: rgb(201 190 175 / 0.48);
   --background-modifier-box-shadow: rgb(233 222 208 / 0.6);
   --background-modifier-cover: rgb(233 222 208 / 0.72);
@@ -371,7 +371,7 @@
   --background-modifier-error-hover: rgb(179 73 53 / 0.3);
   --background-modifier-form-field: rgb(201 190 175 / 0.22);
   --background-modifier-hover: #dfd6c7;
-  --background-modifier-message: rgb(198 132 49 / 0.18);
+  --background-modifier-message: rgb(186 114 57 / 0.18);
   --background-modifier-success: rgb(118 128 97 / 0.24);
   --background-primary: #e9ded0;
   --background-primary-alt: #dacfc1;
@@ -406,12 +406,12 @@
   --hearth-callout-warning-border: rgb(189 115 56 / 0.56);
   --hearth-inline-code: #825128;
   --hr-color: rgb(201 190 175 / 0.7);
-  --interactive-accent: #c68431;
-  --interactive-accent-hover: #aa722b;
+  --interactive-accent: #ba7239;
+  --interactive-accent-hover: #a06331;
   --interactive-hover: #dfd6c7;
   --interactive-normal: rgb(201 190 175 / 0.2);
-  --link-color: #c68431;
-  --link-color-hover: #aa722b;
+  --link-color: #ba7239;
+  --link-color-hover: #a06331;
   --link-unresolved-color: #936f5a;
   --list-marker-color: #8a552a;
   --scrollbar-active-thumb-bg: rgb(201 190 175 / 0.72);
@@ -423,15 +423,15 @@
   --tag-background-hover: rgb(127 112 48 / 0.22);
   --tag-color: #7f7030;
   --tag-color-hover: #2a1e0f;
-  --text-accent: #c68431;
-  --text-accent-hover: #aa722b;
+  --text-accent: #ba7239;
+  --text-accent-hover: #a06331;
   --text-error: #b34935;
   --text-faint: #a59683;
-  --text-highlight-bg: rgb(207 135 64 / 0.34);
+  --text-highlight-bg: rgb(186 114 57 / 0.34);
   --text-muted: #675946;
   --text-normal: #2a1e0f;
   --text-on-accent: #f5eee4;
-  --text-selection: #cf874021;
+  --text-selection: #ba723921;
   --text-success: #768061;
   --text-warning: #bd7338;
 }
