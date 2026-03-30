@@ -529,8 +529,17 @@ function normalizeAbstractColorDerive(value, families, label, variantIds, allowe
     assert(value.mix && typeof value.mix === 'object' && !Array.isArray(value.mix), `${label}.mix must be an object`)
     out.mix = {
       with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds, roleIds),
-      t: normalizeNumber(value.mix.t, `${label}.mix.t`, { min: 0, max: 1 }),
     }
+    if (value.mix.t !== undefined) {
+      out.mix.t = normalizeNumber(value.mix.t, `${label}.mix.t`, { min: 0, max: 1 })
+    }
+    if (value.mix.tFromVariantKnob !== undefined) {
+      const knobRef = String(value.mix.tFromVariantKnob || '').trim()
+      assert(knobRef, `${label}.mix.tFromVariantKnob must be a non-empty string`)
+      out.mix.tFromVariantKnob = knobRef
+    }
+    assert(out.mix.t !== undefined || out.mix.tFromVariantKnob, `${label}.mix must define either t or tFromVariantKnob`)
+    assert(!(out.mix.t !== undefined && out.mix.tFromVariantKnob), `${label}.mix must not define both t and tFromVariantKnob`)
   }
   if (value.lightnessShift !== undefined) {
     out.lightnessShift = normalizeNumber(value.lightnessShift, `${label}.lightnessShift`, { min: -1, max: 1 })
@@ -805,32 +814,35 @@ export function loadVariantKnobs() {
   const variantIds = new Set(variants.map((variant) => variant.id))
   const data = readJson(COLOR_SYSTEM_VARIANT_KNOBS_PATH)
   assert(data && typeof data === 'object' && !Array.isArray(data), `${COLOR_SYSTEM_VARIANT_KNOBS_PATH} must be an object`)
-
-  const interactionAlpha = {}
-  const rawInteractionAlpha = data.interactionAlpha ?? {}
-  assert(rawInteractionAlpha && typeof rawInteractionAlpha === 'object' && !Array.isArray(rawInteractionAlpha), `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: interactionAlpha must be an object`)
-
-  for (const [knobNameRaw, valueByVariant] of Object.entries(rawInteractionAlpha)) {
-    const knobName = String(knobNameRaw || '').trim()
-    assert(knobName, `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: interactionAlpha has invalid knob id`)
-    assert(valueByVariant && typeof valueByVariant === 'object' && !Array.isArray(valueByVariant), `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: interactionAlpha.${knobName} must be an object`)
-    interactionAlpha[knobName] = {}
-    for (const variant of variants) {
-      interactionAlpha[knobName][variant.id] = normalizeNumber(
-        valueByVariant[variant.id],
-        `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: interactionAlpha.${knobName}.${variant.id}`,
-        { min: 0, max: 1 }
-      )
-    }
-    for (const variantId of Object.keys(valueByVariant)) {
-      assert(variantIds.has(variantId), `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: interactionAlpha.${knobName} has unknown variant "${variantId}"`)
+  const groups = {}
+  for (const [groupNameRaw, rawGroup] of Object.entries(data)) {
+    if (groupNameRaw === 'schemaVersion' || groupNameRaw === 'description') continue
+    const groupName = String(groupNameRaw || '').trim()
+    assert(groupName, `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: invalid knob group id`)
+    assert(rawGroup && typeof rawGroup === 'object' && !Array.isArray(rawGroup), `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: ${groupName} must be an object`)
+    groups[groupName] = {}
+    for (const [knobNameRaw, valueByVariant] of Object.entries(rawGroup)) {
+      const knobName = String(knobNameRaw || '').trim()
+      assert(knobName, `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: ${groupName} has invalid knob id`)
+      assert(valueByVariant && typeof valueByVariant === 'object' && !Array.isArray(valueByVariant), `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: ${groupName}.${knobName} must be an object`)
+      groups[groupName][knobName] = {}
+      for (const variant of variants) {
+        groups[groupName][knobName][variant.id] = normalizeNumber(
+          valueByVariant[variant.id],
+          `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: ${groupName}.${knobName}.${variant.id}`,
+          { min: 0, max: 1 }
+        )
+      }
+      for (const variantId of Object.keys(valueByVariant)) {
+        assert(variantIds.has(variantId), `${COLOR_SYSTEM_VARIANT_KNOBS_PATH}: ${groupName}.${knobName} has unknown variant "${variantId}"`)
+      }
     }
   }
 
   return {
     schemaVersion: Number(data.schemaVersion || 1),
     description: typeof data.description === 'string' ? data.description.trim() : '',
-    interactionAlpha,
+    ...groups,
   }
 }
 

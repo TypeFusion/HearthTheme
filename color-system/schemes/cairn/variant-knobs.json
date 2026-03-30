@@ -14,5 +14,25 @@
       "light": 0.271,
       "lightSoft": 0.282
     }
+  },
+  "surfaceMix": {
+    "panelLift": {
+      "dark": 0.05,
+      "darkSoft": 0.053,
+      "light": 0.063,
+      "lightSoft": 0.077
+    },
+    "gutterBand": {
+      "dark": 0.396,
+      "darkSoft": 0.467,
+      "light": 0.337,
+      "lightSoft": 0.477
+    },
+    "borderBand": {
+      "dark": 0.12,
+      "darkSoft": 0.172,
+      "light": 0.164,
+      "lightSoft": 0.214
+    }
   }
 }

@@ -24,50 +24,13 @@
         "type": "surface",
         "id": "canvas"
       },
-      "byVariant": {
-        "dark": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.05
-            }
-          }
-        },
-        "darkSoft": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.053
-            }
-          }
-        },
-        "light": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.063
-            }
-          }
-        },
-        "lightSoft": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.077
-            }
-          }
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "ink"
+          },
+          "tFromVariantKnob": "surfaceMix.panelLift"
         }
       }
     },
@@ -77,50 +40,13 @@
         "type": "surface",
         "id": "canvas"
       },
-      "byVariant": {
-        "dark": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.396
-            }
-          }
-        },
-        "darkSoft": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.467
-            }
-          }
-        },
-        "light": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.337
-            }
-          }
-        },
-        "lightSoft": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.477
-            }
-          }
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "ink"
+          },
+          "tFromVariantKnob": "surfaceMix.gutterBand"
         }
       }
     },
@@ -138,50 +64,13 @@
         "type": "surface",
         "id": "canvas"
       },
-      "byVariant": {
-        "dark": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.12
-            }
-          }
-        },
-        "darkSoft": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.172
-            }
-          }
-        },
-        "light": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.164
-            }
-          }
-        },
-        "lightSoft": {
-          "derive": {
-            "mix": {
-              "with": {
-                "type": "surface",
-                "id": "ink"
-              },
-              "t": 0.214
-            }
-          }
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "ink"
+          },
+          "tFromVariantKnob": "surfaceMix.borderBand"
         }
       }
     }

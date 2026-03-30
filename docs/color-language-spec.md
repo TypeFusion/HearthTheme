@@ -238,6 +238,7 @@ Within `surface-rules.json` and `interaction-rules.json`, prefer:
 - interaction anchors that inherit from semantic roles when the behavior should speak the same color language as code semantics
 - scheme-level foundation tones such as `shell.lift` or `terracotta.presence` when a repeated cross-product state needs its own stable identity
 - scheme-level variant knobs when the interaction grammar stays the same but the climate-sensitive intensity changes by variant
+- scheme-level variant knobs when a surface relationship stays the same but the climate-sensitive mix ratio changes by variant
 
 That keeps the top layer expressive without turning it back into a flat result table.
 Environment anchors like `canvas`, `ink`, and `sidebar` should ideally resolve from foundation families first, so downstream surfaces and interactions inherit one shared scheme-level environment language.

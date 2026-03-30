@@ -322,6 +322,12 @@ function applyAbstractDerive({
   const chainRefs = []
 
   if (derive.mix) {
+    const mixRatio = derive.mix.tFromVariantKnob
+      ? resolveVariantKnob?.(derive.mix.tFromVariantKnob, variantId)
+      : derive.mix.t
+    if (mixRatio == null) {
+      throw new Error(`Missing mix ratio while resolving ${entryRef}.${variantId}`)
+    }
     const mixTarget = resolveAbstractColorSource({
       source: derive.mix.with,
       variantId,
@@ -331,13 +337,22 @@ function applyAbstractDerive({
       resolveInteraction,
       entryRef: `${entryRef}.derive.mix.with`,
     })
-    const mixed = mixHex(toOpaqueHex(current), toOpaqueHex(mixTarget.color), derive.mix.t)
+    const mixed = mixHex(toOpaqueHex(current), toOpaqueHex(mixTarget.color), mixRatio)
     current = normalizeHex(mixed)
     chainRefs.push(...mixTarget.chainRefs)
+    if (derive.mix.tFromVariantKnob) {
+      chainRefs.push(`variant-knobs.${derive.mix.tFromVariantKnob}.${variantId}`)
+      steps.push({
+        type: 'variant-knob',
+        ref: `variant-knobs.${derive.mix.tFromVariantKnob}.${variantId}`,
+        property: 'mix.t',
+        value: mixRatio,
+      })
+    }
     steps.push({
       type: 'mix',
       with: mixTarget.sourceRef,
-      t: derive.mix.t,
+      t: mixRatio,
       value: current,
     })
   }
@@ -470,10 +485,16 @@ function buildSemanticPalette(foundation, rules, variantProfiles, variants) {
   return { palette, resolved }
 }
 
-function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variants) {
+function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variantKnobs, variants) {
   const surfaces = {}
   const resolved = {}
   const resolving = new Set()
+
+  function resolveVariantKnob(knobRef, variantId) {
+    const [groupId, knobId] = String(knobRef || '').split('.')
+    if (!groupId || !knobId) return null
+    return variantKnobs?.[groupId]?.[knobId]?.[variantId] ?? null
+  }
 
   function resolveSurface(surfaceId, variantId) {
     if (resolved[surfaceId]?.[variantId]) return resolved[surfaceId][variantId]
@@ -510,7 +531,7 @@ function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles,
       resolveRole: null,
       resolveSurface,
       resolveInteraction: null,
-      resolveVariantKnob: null,
+      resolveVariantKnob,
       entryRef,
       steps,
     })
@@ -957,7 +978,7 @@ export function buildColorLanguageModel() {
   const variantKnobs = loadVariantKnobs()
   const variantProfiles = loadVariantProfiles()
   const { palette, resolved } = buildSemanticPalette(foundation, semanticRules, variantProfiles, variantSpec.variants)
-  const surfaceRules = buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variantSpec.variants)
+  const surfaceRules = buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variantKnobs, variantSpec.variants)
   const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, resolved, variantProfiles, variantKnobs, variantSpec.variants)
   const semanticSnapshot = buildSemanticSnapshotDocument(palette)
   const platformTokenMaps = buildPlatformTokenMaps({

@@ -418,6 +418,7 @@
             "variant-profiles.variants.dark",
             "foundation.families.carrier.tones.base.dark",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.dark",
             "surface-rules.surfaces.panel"
           ],
           "steps": [
@@ -425,6 +426,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.dark",
               "value": "#211d1a"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.panelLift.dark",
+              "property": "mix.t",
+              "value": 0.056
             },
             {
               "type": "mix",
@@ -449,6 +456,7 @@
             "variant-profiles.variants.darkSoft",
             "foundation.families.carrier.tones.base.darkSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.darkSoft",
             "surface-rules.surfaces.panel"
           ],
           "steps": [
@@ -456,6 +464,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.darkSoft",
               "value": "#29211d"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.panelLift.darkSoft",
+              "property": "mix.t",
+              "value": 0.067
             },
             {
               "type": "mix",
@@ -480,6 +494,7 @@
             "variant-profiles.variants.light",
             "foundation.families.carrier.tones.base.light",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.light",
             "surface-rules.surfaces.panel"
           ],
           "steps": [
@@ -487,6 +502,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.light",
               "value": "#e9ded0"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.panelLift.light",
+              "property": "mix.t",
+              "value": 0.076
             },
             {
               "type": "mix",
@@ -511,6 +532,7 @@
             "variant-profiles.variants.lightSoft",
             "foundation.families.carrier.tones.base.lightSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.lightSoft",
             "surface-rules.surfaces.panel"
           ],
           "steps": [
@@ -518,6 +540,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.lightSoft",
               "value": "#e3d7c6"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.panelLift.lightSoft",
+              "property": "mix.t",
+              "value": 0.084
             },
             {
               "type": "mix",
@@ -553,6 +581,7 @@
             "variant-profiles.variants.dark",
             "foundation.families.carrier.tones.base.dark",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.gutterBand.dark",
             "surface-rules.surfaces.gutter"
           ],
           "steps": [
@@ -560,6 +589,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.dark",
               "value": "#211d1a"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.gutterBand.dark",
+              "property": "mix.t",
+              "value": 0.368
             },
             {
               "type": "mix",
@@ -584,6 +619,7 @@
             "variant-profiles.variants.darkSoft",
             "foundation.families.carrier.tones.base.darkSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.gutterBand.darkSoft",
             "surface-rules.surfaces.gutter"
           ],
           "steps": [
@@ -591,6 +627,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.darkSoft",
               "value": "#29211d"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.gutterBand.darkSoft",
+              "property": "mix.t",
+              "value": 0.461
             },
             {
               "type": "mix",
@@ -615,6 +657,7 @@
             "variant-profiles.variants.light",
             "foundation.families.carrier.tones.base.light",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.gutterBand.light",
             "surface-rules.surfaces.gutter"
           ],
           "steps": [
@@ -622,6 +665,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.light",
               "value": "#e9ded0"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.gutterBand.light",
+              "property": "mix.t",
+              "value": 0.336
             },
             {
               "type": "mix",
@@ -646,6 +695,7 @@
             "variant-profiles.variants.lightSoft",
             "foundation.families.carrier.tones.base.lightSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.gutterBand.lightSoft",
             "surface-rules.surfaces.gutter"
           ],
           "steps": [
@@ -653,6 +703,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.lightSoft",
               "value": "#e3d7c6"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.gutterBand.lightSoft",
+              "property": "mix.t",
+              "value": 0.47
             },
             {
               "type": "mix",
@@ -787,6 +843,7 @@
             "variant-profiles.variants.dark",
             "foundation.families.carrier.tones.base.dark",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.borderBand.dark",
             "surface-rules.surfaces.border"
           ],
           "steps": [
@@ -794,6 +851,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.dark",
               "value": "#211d1a"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.borderBand.dark",
+              "property": "mix.t",
+              "value": 0.11
             },
             {
               "type": "mix",
@@ -818,6 +881,7 @@
             "variant-profiles.variants.darkSoft",
             "foundation.families.carrier.tones.base.darkSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.borderBand.darkSoft",
             "surface-rules.surfaces.border"
           ],
           "steps": [
@@ -825,6 +889,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.darkSoft",
               "value": "#29211d"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.borderBand.darkSoft",
+              "property": "mix.t",
+              "value": 0.174
             },
             {
               "type": "mix",
@@ -849,6 +919,7 @@
             "variant-profiles.variants.light",
             "foundation.families.carrier.tones.base.light",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.borderBand.light",
             "surface-rules.surfaces.border"
           ],
           "steps": [
@@ -856,6 +927,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.light",
               "value": "#e9ded0"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.borderBand.light",
+              "property": "mix.t",
+              "value": 0.169
             },
             {
               "type": "mix",
@@ -880,6 +957,7 @@
             "variant-profiles.variants.lightSoft",
             "foundation.families.carrier.tones.base.lightSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.borderBand.lightSoft",
             "surface-rules.surfaces.border"
           ],
           "steps": [
@@ -887,6 +965,12 @@
               "type": "surface-ref",
               "ref": "surface-rules.surfaces.canvas.lightSoft",
               "value": "#e3d7c6"
+            },
+            {
+              "type": "variant-knob",
+              "ref": "variant-knobs.surfaceMix.borderBand.lightSoft",
+              "property": "mix.t",
+              "value": 0.231
             },
             {
               "type": "mix",
@@ -1436,6 +1520,7 @@
             "variant-profiles.variants.dark",
             "foundation.families.carrier.tones.base.dark",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.dark",
             "surface-rules.surfaces.panel",
             "interaction-rules.interactions.lineEmphasis"
           ],
@@ -1462,6 +1547,7 @@
             "variant-profiles.variants.darkSoft",
             "foundation.families.carrier.tones.base.darkSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.darkSoft",
             "surface-rules.surfaces.panel",
             "interaction-rules.interactions.lineEmphasis"
           ],
@@ -1488,6 +1574,7 @@
             "variant-profiles.variants.light",
             "foundation.families.carrier.tones.base.light",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.light",
             "surface-rules.surfaces.panel",
             "interaction-rules.interactions.lineEmphasis"
           ],
@@ -1514,6 +1601,7 @@
             "variant-profiles.variants.lightSoft",
             "foundation.families.carrier.tones.base.lightSoft",
             "surface-rules.surfaces.ink",
+            "variant-knobs.surfaceMix.panelLift.lightSoft",
             "surface-rules.surfaces.panel",
             "interaction-rules.interactions.lineEmphasis"
           ],
@@ -2861,6 +2949,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.dark",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -2881,6 +2970,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.dark",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -2901,6 +2991,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.dark",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -2921,6 +3012,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.dark",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -2941,6 +3033,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.dark",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -3012,6 +3105,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.dark",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3032,6 +3126,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.dark",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3052,6 +3147,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.dark",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3174,6 +3270,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.darkSoft",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -3194,6 +3291,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.darkSoft",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -3214,6 +3312,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.darkSoft",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -3234,6 +3333,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.darkSoft",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -3254,6 +3354,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.darkSoft",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -3325,6 +3426,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.darkSoft",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3345,6 +3447,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.darkSoft",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3365,6 +3468,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.darkSoft",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3487,6 +3591,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.light",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -3507,6 +3612,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.light",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -3527,6 +3633,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.light",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -3547,6 +3654,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.light",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -3567,6 +3675,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.light",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -3638,6 +3747,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.light",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3658,6 +3768,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.light",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3678,6 +3789,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.light",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3800,6 +3912,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.lightSoft",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel",
         "scripts/generate-theme-variants.mjs#postprocess"
@@ -3821,6 +3934,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.lightSoft",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel",
         "scripts/generate-theme-variants.mjs#postprocess"
@@ -3842,6 +3956,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.lightSoft",
         "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
@@ -3862,6 +3977,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.lightSoft",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -3882,6 +3998,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.gutterBand.lightSoft",
         "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
@@ -3953,6 +4070,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.lightSoft",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3973,6 +4091,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.lightSoft",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -3993,6 +4112,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.borderBand.lightSoft",
         "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
@@ -4201,6 +4321,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.dark",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
@@ -4222,6 +4343,7 @@
         "variant-profiles.variants.dark",
         "foundation.families.carrier.tones.base.dark",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.dark",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
@@ -4484,6 +4606,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.darkSoft",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
@@ -4505,6 +4628,7 @@
         "variant-profiles.variants.darkSoft",
         "foundation.families.carrier.tones.base.darkSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.darkSoft",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
@@ -4767,6 +4891,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.light",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
@@ -4788,6 +4913,7 @@
         "variant-profiles.variants.light",
         "foundation.families.carrier.tones.base.light",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.light",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
@@ -5050,6 +5176,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.lightSoft",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis",
@@ -5072,6 +5199,7 @@
         "variant-profiles.variants.lightSoft",
         "foundation.families.carrier.tones.base.lightSoft",
         "surface-rules.surfaces.ink",
+        "variant-knobs.surfaceMix.panelLift.lightSoft",
         "surface-rules.surfaces.panel",
         "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
@@ -9371,6 +9499,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.dark",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -9391,6 +9520,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.dark",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -9411,6 +9541,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.dark",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -9431,6 +9562,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.dark",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -9451,6 +9583,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.dark",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -9522,6 +9655,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.dark",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -9542,6 +9676,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.dark",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -9562,6 +9697,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.dark",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -9684,6 +9820,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.darkSoft",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -9704,6 +9841,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.darkSoft",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -9724,6 +9862,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.darkSoft",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -9744,6 +9883,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.darkSoft",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -9764,6 +9904,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.darkSoft",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -9835,6 +9976,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.darkSoft",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -9855,6 +9997,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.darkSoft",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -9875,6 +10018,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.darkSoft",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -9997,6 +10141,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.light",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -10017,6 +10162,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.light",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -10037,6 +10183,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.light",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -10057,6 +10204,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.light",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -10077,6 +10225,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.light",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -10148,6 +10297,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.light",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -10168,6 +10318,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.light",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -10188,6 +10339,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.light",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -10310,6 +10462,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.lightSoft",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel",
           "scripts/generate-theme-variants.mjs#postprocess"
@@ -10331,6 +10484,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.lightSoft",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel",
           "scripts/generate-theme-variants.mjs#postprocess"
@@ -10352,6 +10506,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.lightSoft",
           "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
@@ -10372,6 +10527,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.lightSoft",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -10392,6 +10548,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.gutterBand.lightSoft",
           "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
@@ -10463,6 +10620,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.lightSoft",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -10483,6 +10641,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.lightSoft",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -10503,6 +10662,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.borderBand.lightSoft",
           "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
@@ -10711,6 +10871,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.dark",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
@@ -10732,6 +10893,7 @@
           "variant-profiles.variants.dark",
           "foundation.families.carrier.tones.base.dark",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.dark",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
@@ -10994,6 +11156,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.darkSoft",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
@@ -11015,6 +11178,7 @@
           "variant-profiles.variants.darkSoft",
           "foundation.families.carrier.tones.base.darkSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.darkSoft",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
@@ -11277,6 +11441,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.light",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
@@ -11298,6 +11463,7 @@
           "variant-profiles.variants.light",
           "foundation.families.carrier.tones.base.light",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.light",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
@@ -11560,6 +11726,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.lightSoft",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis",
@@ -11582,6 +11749,7 @@
           "variant-profiles.variants.lightSoft",
           "foundation.families.carrier.tones.base.lightSoft",
           "surface-rules.surfaces.ink",
+          "variant-knobs.surfaceMix.panelLift.lightSoft",
           "surface-rules.surfaces.panel",
           "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
