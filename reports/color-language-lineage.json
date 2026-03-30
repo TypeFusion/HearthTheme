@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "sources": {
     "activeScheme": "color-system/active-scheme.json",
     "scheme": "color-system/schemes/hearth/scheme.json",
@@ -24,6 +24,39 @@
   },
   "foundation": {
     "families": {
+      "ground": {
+        "description": "Primary environment ground for the canvas field across all variants.",
+        "tones": {
+          "base": {
+            "dark": "#211d1a",
+            "darkSoft": "#29211d",
+            "light": "#e9ded0",
+            "lightSoft": "#e3d7c6"
+          }
+        }
+      },
+      "carrier": {
+        "description": "Readable carrier environment used as the long-session ink anchor.",
+        "tones": {
+          "base": {
+            "dark": "#d3c9b8",
+            "darkSoft": "#cec5ba",
+            "light": "#2a1e0f",
+            "lightSoft": "#4d4032"
+          }
+        }
+      },
+      "shell": {
+        "description": "Sheltering chrome shell for navigation, rails, and supportive UI housing.",
+        "tones": {
+          "base": {
+            "dark": "#1a1714",
+            "darkSoft": "#211a16",
+            "light": "#ddd3bd",
+            "lightSoft": "#d2c8b4"
+          }
+        }
+      },
       "ash": {
         "description": "Quiet guidance neutrals for comments and soft supporting ink.",
         "tones": {
@@ -155,40 +188,706 @@
   },
   "surfaceRules": {
     "canvas": {
-      "dark": "#211d1a",
-      "darkSoft": "#29211d",
-      "light": "#e9ded0",
-      "lightSoft": "#e3d7c6"
+      "description": "Primary atmospheric canvas anchor.",
+      "values": {
+        "dark": "#211d1a",
+        "darkSoft": "#29211d",
+        "light": "#e9ded0",
+        "lightSoft": "#e3d7c6"
+      },
+      "variants": {
+        "dark": {
+          "color": "#211d1a",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.ground.tones.base.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.dark",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ground.tones.base.dark",
+              "value": "#211d1a"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#29211d",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.ground.tones.base.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.darkSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ground.tones.base.darkSoft",
+              "value": "#29211d"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#e9ded0",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.ground.tones.base.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.light",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ground.tones.base.light",
+              "value": "#e9ded0"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#e3d7c6",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.ground.tones.base.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.lightSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.ground.tones.base.lightSoft",
+              "value": "#e3d7c6"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
     },
     "ink": {
-      "dark": "#d3c9b8",
-      "darkSoft": "#cec5ba",
-      "light": "#2a1e0f",
-      "lightSoft": "#4d4032"
+      "description": "Readable carrier ink anchor for long sessions.",
+      "values": {
+        "dark": "#d3c9b8",
+        "darkSoft": "#cec5ba",
+        "light": "#2a1e0f",
+        "lightSoft": "#4d4032"
+      },
+      "variants": {
+        "dark": {
+          "color": "#d3c9b8",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.carrier.tones.base.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.carrier.tones.base.dark",
+            "surface-rules.surfaces.ink",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.carrier.tones.base.dark",
+              "value": "#d3c9b8"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#cec5ba",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.carrier.tones.base.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.carrier.tones.base.darkSoft",
+            "surface-rules.surfaces.ink",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.carrier.tones.base.darkSoft",
+              "value": "#cec5ba"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#2a1e0f",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.carrier.tones.base.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.carrier.tones.base.light",
+            "surface-rules.surfaces.ink",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.carrier.tones.base.light",
+              "value": "#2a1e0f"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#4d4032",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.carrier.tones.base.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.carrier.tones.base.lightSoft",
+            "surface-rules.surfaces.ink",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.carrier.tones.base.lightSoft",
+              "value": "#4d4032"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
     },
     "panel": {
-      "dark": "#2b2722",
-      "darkSoft": "#332e28",
-      "light": "#dccfbc",
-      "lightSoft": "#d4cabd"
+      "description": "Raised document substrate mixed up from canvas toward ink.",
+      "values": {
+        "dark": "#2b2723",
+        "darkSoft": "#342c28",
+        "light": "#dacfc1",
+        "lightSoft": "#d6caba"
+      },
+      "variants": {
+        "dark": {
+          "color": "#2b2723",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.dark",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.dark",
+            "foundation.families.carrier.tones.base.dark",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.dark",
+              "value": "#211d1a"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.056,
+              "value": "#2b2723"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#342c28",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.darkSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.darkSoft",
+            "foundation.families.carrier.tones.base.darkSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.darkSoft",
+              "value": "#29211d"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.067,
+              "value": "#342c28"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#dacfc1",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.light",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.light",
+            "foundation.families.carrier.tones.base.light",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.light",
+              "value": "#e9ded0"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.076,
+              "value": "#dacfc1"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#d6caba",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.lightSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.lightSoft",
+            "foundation.families.carrier.tones.base.lightSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.lightSoft",
+              "value": "#e3d7c6"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.084,
+              "value": "#d6caba"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
     },
     "gutter": {
-      "dark": "#655c4f",
-      "darkSoft": "#766d63",
-      "light": "#b49d7b",
-      "lightSoft": "#9d907e"
+      "description": "Quiet numeric gutter derived as a mid-band between canvas and ink.",
+      "values": {
+        "dark": "#635c54",
+        "darkSoft": "#756d65",
+        "light": "#a99d8f",
+        "lightSoft": "#9d9080"
+      },
+      "variants": {
+        "dark": {
+          "color": "#635c54",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.dark",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.dark",
+            "foundation.families.carrier.tones.base.dark",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.gutter"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.dark",
+              "value": "#211d1a"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.368,
+              "value": "#635c54"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#756d65",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.darkSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.darkSoft",
+            "foundation.families.carrier.tones.base.darkSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.gutter"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.darkSoft",
+              "value": "#29211d"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.461,
+              "value": "#756d65"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#a99d8f",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.light",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.light",
+            "foundation.families.carrier.tones.base.light",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.gutter"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.light",
+              "value": "#e9ded0"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.336,
+              "value": "#a99d8f"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#9d9080",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.lightSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.lightSoft",
+            "foundation.families.carrier.tones.base.lightSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.gutter"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.lightSoft",
+              "value": "#e3d7c6"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.47,
+              "value": "#9d9080"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
     },
     "sidebar": {
-      "dark": "#1a1714",
-      "darkSoft": "#211a16",
-      "light": "#ddd3bd",
-      "lightSoft": "#d2c8b4"
+      "description": "Sheltering shell anchor for navigation and chrome.",
+      "values": {
+        "dark": "#1a1714",
+        "darkSoft": "#211a16",
+        "light": "#ddd3bd",
+        "lightSoft": "#d2c8b4"
+      },
+      "variants": {
+        "dark": {
+          "color": "#1a1714",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.base.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.shell.tones.base.dark",
+            "surface-rules.surfaces.sidebar",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.base.dark",
+              "value": "#1a1714"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#211a16",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.base.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.shell.tones.base.darkSoft",
+            "surface-rules.surfaces.sidebar",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.base.darkSoft",
+              "value": "#211a16"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#ddd3bd",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.base.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.shell.tones.base.light",
+            "surface-rules.surfaces.sidebar",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.base.light",
+              "value": "#ddd3bd"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#d2c8b4",
+          "sourceType": "foundation",
+          "sourceRef": "foundation.families.shell.tones.base.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.shell.tones.base.lightSoft",
+            "surface-rules.surfaces.sidebar",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "foundation",
+              "ref": "foundation.families.shell.tones.base.lightSoft",
+              "value": "#d2c8b4"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
     },
     "border": {
-      "dark": "#373027",
-      "darkSoft": "#473e37",
-      "light": "#cebea4",
-      "lightSoft": "#c0b4a4"
+      "description": "Structural edge derived from the same canvas-ink band, but kept quieter than gutter.",
+      "values": {
+        "dark": "#35302b",
+        "darkSoft": "#463e38",
+        "light": "#c9beaf",
+        "lightSoft": "#c0b4a4"
+      },
+      "variants": {
+        "dark": {
+          "color": "#35302b",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.dark",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.dark",
+            "foundation.families.carrier.tones.base.dark",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.border"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.dark",
+              "value": "#211d1a"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.11,
+              "value": "#35302b"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#463e38",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.darkSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.darkSoft",
+            "foundation.families.carrier.tones.base.darkSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.border"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.darkSoft",
+              "value": "#29211d"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.174,
+              "value": "#463e38"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#c9beaf",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.light",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.light",
+            "foundation.families.carrier.tones.base.light",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.border"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.light",
+              "value": "#e9ded0"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.169,
+              "value": "#c9beaf"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#c0b4a4",
+          "sourceType": "surface",
+          "sourceRef": "canvas",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.lightSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.lightSoft",
+            "foundation.families.carrier.tones.base.lightSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.border"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.canvas.lightSoft",
+              "value": "#e3d7c6"
+            },
+            {
+              "type": "mix",
+              "with": "ink",
+              "t": 0.231,
+              "value": "#c0b4a4"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
+      }
     }
   },
   "interactionRules": {
@@ -199,6 +898,96 @@
         "darkSoft": "#c48e5f13",
         "light": "#cf874021",
         "lightSoft": "#c68d5c21"
+      },
+      "variants": {
+        "dark": {
+          "color": "#cf87402f",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.selection.source.values.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.selection.source.values.dark",
+            "interaction-rules.interactions.selection",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.selection.source.values.dark",
+              "value": "#cf87402f"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#c48e5f13",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.selection.source.values.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.selection.source.values.darkSoft",
+            "interaction-rules.interactions.selection",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.selection.source.values.darkSoft",
+              "value": "#c48e5f13"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#cf874021",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.selection.source.values.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.selection.source.values.light",
+            "interaction-rules.interactions.selection",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.selection.source.values.light",
+              "value": "#cf874021"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#c68d5c21",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.selection.source.values.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.selection.source.values.lightSoft",
+            "interaction-rules.interactions.selection",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.selection.source.values.lightSoft",
+              "value": "#c68d5c21"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
       }
     },
     "cursor": {
@@ -208,6 +997,96 @@
         "darkSoft": "#bd8c54",
         "light": "#c68431",
         "lightSoft": "#be8a4f"
+      },
+      "variants": {
+        "dark": {
+          "color": "#d08a3e",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.cursor.source.values.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.cursor.source.values.dark",
+            "interaction-rules.interactions.cursor",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.cursor.source.values.dark",
+              "value": "#d08a3e"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#bd8c54",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.cursor.source.values.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.cursor.source.values.darkSoft",
+            "interaction-rules.interactions.cursor",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.cursor.source.values.darkSoft",
+              "value": "#bd8c54"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#c68431",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.cursor.source.values.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.cursor.source.values.light",
+            "interaction-rules.interactions.cursor",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.cursor.source.values.light",
+              "value": "#c68431"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#be8a4f",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.cursor.source.values.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.cursor.source.values.lightSoft",
+            "interaction-rules.interactions.cursor",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.cursor.source.values.lightSoft",
+              "value": "#be8a4f"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
       }
     },
     "status": {
@@ -217,6 +1096,96 @@
         "darkSoft": "#875231",
         "light": "#b55616",
         "lightSoft": "#ae774d"
+      },
+      "variants": {
+        "dark": {
+          "color": "#864a22",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.status.source.values.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.status.source.values.dark",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.status.source.values.dark",
+              "value": "#864a22"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#875231",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.status.source.values.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.status.source.values.darkSoft",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.status.source.values.darkSoft",
+              "value": "#875231"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#b55616",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.status.source.values.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.status.source.values.light",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.status.source.values.light",
+              "value": "#b55616"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#ae774d",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.status.source.values.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.status.source.values.lightSoft",
+            "interaction-rules.interactions.status",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.status.source.values.lightSoft",
+              "value": "#ae774d"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
       }
     },
     "focusRing": {
@@ -226,15 +1195,211 @@
         "darkSoft": "#ba88533a",
         "light": "#c581334a",
         "lightSoft": "#bd87504a"
+      },
+      "variants": {
+        "dark": {
+          "color": "#cf874052",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.focusRing.source.values.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.focusRing.source.values.dark",
+            "interaction-rules.interactions.focusRing",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.focusRing.source.values.dark",
+              "value": "#cf874052"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#ba88533a",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.focusRing.source.values.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.focusRing.source.values.darkSoft",
+            "interaction-rules.interactions.focusRing",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.focusRing.source.values.darkSoft",
+              "value": "#ba88533a"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#c581334a",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.focusRing.source.values.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.focusRing.source.values.light",
+            "interaction-rules.interactions.focusRing",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.focusRing.source.values.light",
+              "value": "#c581334a"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#bd87504a",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.focusRing.source.values.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.focusRing.source.values.lightSoft",
+            "interaction-rules.interactions.focusRing",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.focusRing.source.values.lightSoft",
+              "value": "#bd87504a"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
       }
     },
     "lineEmphasis": {
       "description": "Current-line substrate emphasis without becoming a spotlight.",
       "values": {
-        "dark": "#2b2722",
-        "darkSoft": "#332e28",
-        "light": "#dccfbc",
-        "lightSoft": "#d4cabd"
+        "dark": "#2b2723",
+        "darkSoft": "#342c28",
+        "light": "#dacfc1",
+        "lightSoft": "#d6caba"
+      },
+      "variants": {
+        "dark": {
+          "color": "#2b2723",
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.dark",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.dark",
+            "foundation.families.carrier.tones.base.dark",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.lineEmphasis"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.dark",
+              "value": "#2b2723"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#342c28",
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.darkSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.darkSoft",
+            "foundation.families.carrier.tones.base.darkSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.lineEmphasis"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.darkSoft",
+              "value": "#342c28"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#dacfc1",
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.light",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.light",
+            "foundation.families.carrier.tones.base.light",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.lineEmphasis"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.light",
+              "value": "#dacfc1"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#d6caba",
+          "sourceType": "surface",
+          "sourceRef": "panel",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "foundation.families.ground.tones.base.lightSoft",
+            "surface-rules.surfaces.canvas",
+            "variant-profiles.variants.lightSoft",
+            "foundation.families.carrier.tones.base.lightSoft",
+            "surface-rules.surfaces.ink",
+            "surface-rules.surfaces.panel",
+            "interaction-rules.interactions.lineEmphasis"
+          ],
+          "steps": [
+            {
+              "type": "surface-ref",
+              "ref": "surface-rules.surfaces.panel.lightSoft",
+              "value": "#d6caba"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
       }
     },
     "listHover": {
@@ -244,6 +1409,96 @@
         "darkSoft": "#332d26",
         "light": "#dfd6c7",
         "lightSoft": "#d8cfc3"
+      },
+      "variants": {
+        "dark": {
+          "color": "#2d2824",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.listHover.source.values.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.listHover.source.values.dark",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.listHover.source.values.dark",
+              "value": "#2d2824"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#332d26",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.listHover.source.values.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.listHover.source.values.darkSoft",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.listHover.source.values.darkSoft",
+              "value": "#332d26"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#dfd6c7",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.listHover.source.values.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.listHover.source.values.light",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.listHover.source.values.light",
+              "value": "#dfd6c7"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#d8cfc3",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.listHover.source.values.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.listHover.source.values.lightSoft",
+            "interaction-rules.interactions.listHover",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.listHover.source.values.lightSoft",
+              "value": "#d8cfc3"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
       }
     },
     "tabEmphasis": {
@@ -253,6 +1508,96 @@
         "darkSoft": "#bc8955",
         "light": "#c58133",
         "lightSoft": "#bd8750"
+      },
+      "variants": {
+        "dark": {
+          "color": "#cf8740",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.dark",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.tabEmphasis.source.values.dark",
+            "interaction-rules.interactions.tabEmphasis",
+            "variant-profiles.variants.dark"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.tabEmphasis.source.values.dark",
+              "value": "#cf8740"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.dark"
+            }
+          ]
+        },
+        "darkSoft": {
+          "color": "#bc8955",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
+            "interaction-rules.interactions.tabEmphasis",
+            "variant-profiles.variants.darkSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
+              "value": "#bc8955"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.darkSoft"
+            }
+          ]
+        },
+        "light": {
+          "color": "#c58133",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.light",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.tabEmphasis.source.values.light",
+            "interaction-rules.interactions.tabEmphasis",
+            "variant-profiles.variants.light"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.tabEmphasis.source.values.light",
+              "value": "#c58133"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.light"
+            }
+          ]
+        },
+        "lightSoft": {
+          "color": "#bd8750",
+          "sourceType": "literal",
+          "sourceRef": "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
+          "usedEscapeHatch": false,
+          "chainRefs": [
+            "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
+            "interaction-rules.interactions.tabEmphasis",
+            "variant-profiles.variants.lightSoft"
+          ],
+          "steps": [
+            {
+              "type": "literal",
+              "ref": "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
+              "value": "#bd8750"
+            },
+            {
+              "type": "variant-profile",
+              "ref": "variant-profiles.variants.lightSoft"
+            }
+          ]
+        }
       }
     }
   },
@@ -1269,10 +2614,11 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#211d1a",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
         "adapters.surfaces.canvas"
       ]
@@ -1285,10 +2631,11 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#211d1a",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
         "adapters.surfaces.canvas"
       ]
@@ -1301,10 +2648,11 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#211d1a",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
         "adapters.surfaces.canvas"
       ]
@@ -1317,10 +2665,11 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#d3c9b8",
       "chainRefs": [
-        "surface-rules.surfaces.ink.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.dark",
         "adapters.surfaces.ink"
       ]
@@ -1333,10 +2682,11 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#d3c9b8",
       "chainRefs": [
-        "surface-rules.surfaces.ink.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.dark",
         "adapters.surfaces.ink"
       ]
@@ -1349,10 +2699,11 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#d3c9b8",
       "chainRefs": [
-        "surface-rules.surfaces.ink.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.dark",
         "adapters.surfaces.ink"
       ]
@@ -1365,11 +2716,15 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#2b2722",
+      "familyId": "ground",
+      "resolvedColor": "#2b2723",
       "chainRefs": [
-        "surface-rules.surfaces.panel.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1381,11 +2736,15 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#2b2722",
+      "familyId": "ground",
+      "resolvedColor": "#2b2723",
       "chainRefs": [
-        "surface-rules.surfaces.panel.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1397,11 +2756,15 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#2b2722",
+      "familyId": "ground",
+      "resolvedColor": "#2b2723",
       "chainRefs": [
-        "surface-rules.surfaces.panel.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1413,11 +2776,15 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#655c4f",
+      "familyId": "ground",
+      "resolvedColor": "#635c54",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -1429,11 +2796,15 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#655c4f",
+      "familyId": "ground",
+      "resolvedColor": "#635c54",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -1445,10 +2816,11 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#1a1714",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.dark",
+        "foundation.families.shell.tones.base.dark",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.dark",
         "adapters.surfaces.sidebar"
       ]
@@ -1461,10 +2833,11 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#1a1714",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.dark",
+        "foundation.families.shell.tones.base.dark",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.dark",
         "adapters.surfaces.sidebar"
       ]
@@ -1477,10 +2850,11 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#1a1714",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.dark",
+        "foundation.families.shell.tones.base.dark",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.dark",
         "adapters.surfaces.sidebar"
       ]
@@ -1493,11 +2867,15 @@
       "adapter": "web",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#373027",
+      "familyId": "ground",
+      "resolvedColor": "#35302b",
       "chainRefs": [
-        "surface-rules.surfaces.border.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -1509,11 +2887,15 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#373027",
+      "familyId": "ground",
+      "resolvedColor": "#35302b",
       "chainRefs": [
-        "surface-rules.surfaces.border.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -1525,11 +2907,15 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#373027",
+      "familyId": "ground",
+      "resolvedColor": "#35302b",
       "chainRefs": [
-        "surface-rules.surfaces.border.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -1541,10 +2927,11 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#29211d",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.canvas"
       ]
@@ -1557,10 +2944,11 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#29211d",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.canvas"
       ]
@@ -1573,10 +2961,11 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#29211d",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.canvas"
       ]
@@ -1589,10 +2978,11 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#cec5ba",
       "chainRefs": [
-        "surface-rules.surfaces.ink.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.ink"
       ]
@@ -1605,10 +2995,11 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#cec5ba",
       "chainRefs": [
-        "surface-rules.surfaces.ink.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.ink"
       ]
@@ -1621,10 +3012,11 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#cec5ba",
       "chainRefs": [
-        "surface-rules.surfaces.ink.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.ink"
       ]
@@ -1637,11 +3029,15 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#332e28",
+      "familyId": "ground",
+      "resolvedColor": "#342c28",
       "chainRefs": [
-        "surface-rules.surfaces.panel.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1653,11 +3049,15 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#332e28",
+      "familyId": "ground",
+      "resolvedColor": "#342c28",
       "chainRefs": [
-        "surface-rules.surfaces.panel.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1669,11 +3069,15 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#332e28",
+      "familyId": "ground",
+      "resolvedColor": "#342c28",
       "chainRefs": [
-        "surface-rules.surfaces.panel.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1685,11 +3089,15 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#766d63",
+      "familyId": "ground",
+      "resolvedColor": "#756d65",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -1701,11 +3109,15 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#766d63",
+      "familyId": "ground",
+      "resolvedColor": "#756d65",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -1717,10 +3129,11 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#211a16",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.darkSoft",
+        "foundation.families.shell.tones.base.darkSoft",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.sidebar"
       ]
@@ -1733,10 +3146,11 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#211a16",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.darkSoft",
+        "foundation.families.shell.tones.base.darkSoft",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.sidebar"
       ]
@@ -1749,10 +3163,11 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#211a16",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.darkSoft",
+        "foundation.families.shell.tones.base.darkSoft",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.darkSoft",
         "adapters.surfaces.sidebar"
       ]
@@ -1765,11 +3180,15 @@
       "adapter": "web",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#473e37",
+      "familyId": "ground",
+      "resolvedColor": "#463e38",
       "chainRefs": [
-        "surface-rules.surfaces.border.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -1781,11 +3200,15 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#473e37",
+      "familyId": "ground",
+      "resolvedColor": "#463e38",
       "chainRefs": [
-        "surface-rules.surfaces.border.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -1797,11 +3220,15 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#473e37",
+      "familyId": "ground",
+      "resolvedColor": "#463e38",
       "chainRefs": [
-        "surface-rules.surfaces.border.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -1813,10 +3240,11 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#e9ded0",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
         "adapters.surfaces.canvas"
       ]
@@ -1829,10 +3257,11 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#e9ded0",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
         "adapters.surfaces.canvas"
       ]
@@ -1845,10 +3274,11 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#e9ded0",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
         "adapters.surfaces.canvas"
       ]
@@ -1861,10 +3291,11 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#2a1e0f",
       "chainRefs": [
-        "surface-rules.surfaces.ink.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.light",
         "adapters.surfaces.ink"
       ]
@@ -1877,10 +3308,11 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#2a1e0f",
       "chainRefs": [
-        "surface-rules.surfaces.ink.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.light",
         "adapters.surfaces.ink"
       ]
@@ -1893,10 +3325,11 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#2a1e0f",
       "chainRefs": [
-        "surface-rules.surfaces.ink.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.light",
         "adapters.surfaces.ink"
       ]
@@ -1909,11 +3342,15 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#dccfbc",
+      "familyId": "ground",
+      "resolvedColor": "#dacfc1",
       "chainRefs": [
-        "surface-rules.surfaces.panel.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1925,11 +3362,15 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#dccfbc",
+      "familyId": "ground",
+      "resolvedColor": "#dacfc1",
       "chainRefs": [
-        "surface-rules.surfaces.panel.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1941,11 +3382,15 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#dccfbc",
+      "familyId": "ground",
+      "resolvedColor": "#dacfc1",
       "chainRefs": [
-        "surface-rules.surfaces.panel.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -1957,11 +3402,15 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#b49d7b",
+      "familyId": "ground",
+      "resolvedColor": "#a99d8f",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -1973,11 +3422,15 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#b49d7b",
+      "familyId": "ground",
+      "resolvedColor": "#a99d8f",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -1989,10 +3442,11 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#ddd3bd",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.light",
+        "foundation.families.shell.tones.base.light",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.light",
         "adapters.surfaces.sidebar"
       ]
@@ -2005,10 +3459,11 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#ddd3bd",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.light",
+        "foundation.families.shell.tones.base.light",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.light",
         "adapters.surfaces.sidebar"
       ]
@@ -2021,10 +3476,11 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#ddd3bd",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.light",
+        "foundation.families.shell.tones.base.light",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.light",
         "adapters.surfaces.sidebar"
       ]
@@ -2037,11 +3493,15 @@
       "adapter": "web",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#cebea4",
+      "familyId": "ground",
+      "resolvedColor": "#c9beaf",
       "chainRefs": [
-        "surface-rules.surfaces.border.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -2053,11 +3513,15 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#cebea4",
+      "familyId": "ground",
+      "resolvedColor": "#c9beaf",
       "chainRefs": [
-        "surface-rules.surfaces.border.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -2069,11 +3533,15 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "surface:border",
-      "resolvedColor": "#cebea4",
+      "familyId": "ground",
+      "resolvedColor": "#c9beaf",
       "chainRefs": [
-        "surface-rules.surfaces.border.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -2085,10 +3553,11 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#e3d7c6",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.canvas"
       ]
@@ -2101,10 +3570,11 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#e3d7c6",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.canvas"
       ]
@@ -2117,10 +3587,11 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:canvas",
+      "familyId": "ground",
       "resolvedColor": "#e3d7c6",
       "chainRefs": [
-        "surface-rules.surfaces.canvas.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.canvas"
       ]
@@ -2133,10 +3604,11 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#4d4032",
       "chainRefs": [
-        "surface-rules.surfaces.ink.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.ink"
       ]
@@ -2149,10 +3621,11 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#4d4032",
       "chainRefs": [
-        "surface-rules.surfaces.ink.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.ink"
       ]
@@ -2165,10 +3638,11 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:ink",
+      "familyId": "carrier",
       "resolvedColor": "#4d4032",
       "chainRefs": [
-        "surface-rules.surfaces.ink.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.ink"
       ]
@@ -2181,12 +3655,17 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#d4cabd",
+      "familyId": "ground",
+      "resolvedColor": "#d6c9ba",
       "chainRefs": [
-        "surface-rules.surfaces.panel.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
-        "adapters.surfaces.panel"
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "adapters.surfaces.panel",
+        "scripts/generate-theme-variants.mjs#postprocess"
       ]
     },
     {
@@ -2197,12 +3676,17 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#d4cabd",
+      "familyId": "ground",
+      "resolvedColor": "#d6c9ba",
       "chainRefs": [
-        "surface-rules.surfaces.panel.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
-        "adapters.surfaces.panel"
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "adapters.surfaces.panel",
+        "scripts/generate-theme-variants.mjs#postprocess"
       ]
     },
     {
@@ -2213,11 +3697,15 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:panel",
-      "resolvedColor": "#d4cabd",
+      "familyId": "ground",
+      "resolvedColor": "#d6caba",
       "chainRefs": [
-        "surface-rules.surfaces.panel.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
         "adapters.surfaces.panel"
       ]
     },
@@ -2229,11 +3717,15 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#9d907e",
+      "familyId": "ground",
+      "resolvedColor": "#9d9080",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -2245,11 +3737,15 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:gutter",
-      "resolvedColor": "#9d907e",
+      "familyId": "ground",
+      "resolvedColor": "#9d9080",
       "chainRefs": [
-        "surface-rules.surfaces.gutter.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.gutter",
         "adapters.surfaces.gutter"
       ]
     },
@@ -2261,10 +3757,11 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#d2c8b4",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.lightSoft",
+        "foundation.families.shell.tones.base.lightSoft",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.sidebar"
       ]
@@ -2277,10 +3774,11 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#d2c8b4",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.lightSoft",
+        "foundation.families.shell.tones.base.lightSoft",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.sidebar"
       ]
@@ -2293,10 +3791,11 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:sidebar",
+      "familyId": "shell",
       "resolvedColor": "#d2c8b4",
       "chainRefs": [
-        "surface-rules.surfaces.sidebar.lightSoft",
+        "foundation.families.shell.tones.base.lightSoft",
+        "surface-rules.surfaces.sidebar",
         "variant-profiles.variants.lightSoft",
         "adapters.surfaces.sidebar"
       ]
@@ -2309,11 +3808,15 @@
       "adapter": "web",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:border",
+      "familyId": "ground",
       "resolvedColor": "#c0b4a4",
       "chainRefs": [
-        "surface-rules.surfaces.border.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -2325,11 +3828,15 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:border",
+      "familyId": "ground",
       "resolvedColor": "#c0b4a4",
       "chainRefs": [
-        "surface-rules.surfaces.border.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -2341,11 +3848,15 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "surface:border",
+      "familyId": "ground",
       "resolvedColor": "#c0b4a4",
       "chainRefs": [
-        "surface-rules.surfaces.border.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.border",
         "adapters.surfaces.border"
       ]
     },
@@ -2360,7 +3871,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#cf87402f",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.dark",
+        "interaction-rules.interactions.selection.source.values.dark",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.dark",
         "adapters.interactions.selection"
       ]
@@ -2376,7 +3888,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#cf87402f",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.dark",
+        "interaction-rules.interactions.selection.source.values.dark",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.dark",
         "adapters.interactions.selection"
       ]
@@ -2392,7 +3905,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#cf87402f",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.dark",
+        "interaction-rules.interactions.selection.source.values.dark",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.dark",
         "adapters.interactions.selection"
       ]
@@ -2408,7 +3922,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#d08a3e",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.dark",
+        "interaction-rules.interactions.cursor.source.values.dark",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.dark",
         "adapters.interactions.cursor"
       ]
@@ -2424,7 +3939,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#d08a3e",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.dark",
+        "interaction-rules.interactions.cursor.source.values.dark",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.dark",
         "adapters.interactions.cursor"
       ]
@@ -2440,7 +3956,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#d08a3e",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.dark",
+        "interaction-rules.interactions.cursor.source.values.dark",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.dark",
         "adapters.interactions.cursor"
       ]
@@ -2456,7 +3973,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#864a22",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.dark",
+        "interaction-rules.interactions.status.source.values.dark",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.dark",
         "adapters.interactions.status"
       ]
@@ -2472,7 +3990,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#864a22",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.dark",
+        "interaction-rules.interactions.status.source.values.dark",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.dark",
         "adapters.interactions.status"
       ]
@@ -2488,7 +4007,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#cf874052",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.dark",
+        "interaction-rules.interactions.focusRing.source.values.dark",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.dark",
         "adapters.interactions.focusRing"
       ]
@@ -2504,7 +4024,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#cf874052",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.dark",
+        "interaction-rules.interactions.focusRing.source.values.dark",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.dark",
         "adapters.interactions.focusRing"
       ]
@@ -2517,11 +4038,16 @@
       "adapter": "vscode",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#2b2722",
+      "familyId": "ground",
+      "resolvedColor": "#2b2723",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
       ]
     },
@@ -2533,11 +4059,16 @@
       "adapter": "obsidian",
       "variant": "dark",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#2b2722",
+      "familyId": "ground",
+      "resolvedColor": "#2b2723",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.dark",
+        "foundation.families.ground.tones.base.dark",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.dark",
+        "foundation.families.carrier.tones.base.dark",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
       ]
     },
@@ -2552,7 +4083,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#2d2824",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.dark",
+        "interaction-rules.interactions.listHover.source.values.dark",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.dark",
         "adapters.interactions.listHover"
       ]
@@ -2568,7 +4100,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#2d2824",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.dark",
+        "interaction-rules.interactions.listHover.source.values.dark",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.dark",
         "adapters.interactions.listHover"
       ]
@@ -2584,7 +4117,8 @@
       "familyId": "interaction:tabEmphasis",
       "resolvedColor": "#cf8740",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.values.dark",
+        "interaction-rules.interactions.tabEmphasis.source.values.dark",
+        "interaction-rules.interactions.tabEmphasis",
         "variant-profiles.variants.dark",
         "adapters.interactions.tabEmphasis"
       ]
@@ -2600,7 +4134,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#c48e5f13",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.darkSoft",
+        "interaction-rules.interactions.selection.source.values.darkSoft",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.selection"
       ]
@@ -2616,7 +4151,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#c48e5f13",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.darkSoft",
+        "interaction-rules.interactions.selection.source.values.darkSoft",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.selection"
       ]
@@ -2632,7 +4168,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#c48e5f13",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.darkSoft",
+        "interaction-rules.interactions.selection.source.values.darkSoft",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.selection"
       ]
@@ -2648,7 +4185,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#bd8c54",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.darkSoft",
+        "interaction-rules.interactions.cursor.source.values.darkSoft",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.cursor"
       ]
@@ -2664,7 +4202,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#bd8c54",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.darkSoft",
+        "interaction-rules.interactions.cursor.source.values.darkSoft",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.cursor"
       ]
@@ -2680,7 +4219,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#bd8c54",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.darkSoft",
+        "interaction-rules.interactions.cursor.source.values.darkSoft",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.cursor"
       ]
@@ -2696,7 +4236,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#875231",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.darkSoft",
+        "interaction-rules.interactions.status.source.values.darkSoft",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.status"
       ]
@@ -2712,7 +4253,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#875231",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.darkSoft",
+        "interaction-rules.interactions.status.source.values.darkSoft",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.status"
       ]
@@ -2728,7 +4270,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#ba88533a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.darkSoft",
+        "interaction-rules.interactions.focusRing.source.values.darkSoft",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.focusRing"
       ]
@@ -2744,7 +4287,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#ba88533a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.darkSoft",
+        "interaction-rules.interactions.focusRing.source.values.darkSoft",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.focusRing"
       ]
@@ -2757,11 +4301,16 @@
       "adapter": "vscode",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#332e28",
+      "familyId": "ground",
+      "resolvedColor": "#342c28",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
       ]
     },
@@ -2773,11 +4322,16 @@
       "adapter": "obsidian",
       "variant": "darkSoft",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#332e28",
+      "familyId": "ground",
+      "resolvedColor": "#342c28",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.darkSoft",
+        "foundation.families.ground.tones.base.darkSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.darkSoft",
+        "foundation.families.carrier.tones.base.darkSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
       ]
     },
@@ -2792,7 +4346,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#332d26",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.darkSoft",
+        "interaction-rules.interactions.listHover.source.values.darkSoft",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.listHover"
       ]
@@ -2808,7 +4363,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#332d26",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.darkSoft",
+        "interaction-rules.interactions.listHover.source.values.darkSoft",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.listHover"
       ]
@@ -2824,7 +4380,8 @@
       "familyId": "interaction:tabEmphasis",
       "resolvedColor": "#bc8955",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.values.darkSoft",
+        "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
+        "interaction-rules.interactions.tabEmphasis",
         "variant-profiles.variants.darkSoft",
         "adapters.interactions.tabEmphasis"
       ]
@@ -2840,7 +4397,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#cf874021",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.light",
+        "interaction-rules.interactions.selection.source.values.light",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.light",
         "adapters.interactions.selection"
       ]
@@ -2856,7 +4414,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#cf874021",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.light",
+        "interaction-rules.interactions.selection.source.values.light",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.light",
         "adapters.interactions.selection"
       ]
@@ -2872,7 +4431,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#cf874021",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.light",
+        "interaction-rules.interactions.selection.source.values.light",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.light",
         "adapters.interactions.selection"
       ]
@@ -2888,7 +4448,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#c68431",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.light",
+        "interaction-rules.interactions.cursor.source.values.light",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.light",
         "adapters.interactions.cursor"
       ]
@@ -2904,7 +4465,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#c68431",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.light",
+        "interaction-rules.interactions.cursor.source.values.light",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.light",
         "adapters.interactions.cursor"
       ]
@@ -2920,7 +4482,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#c68431",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.light",
+        "interaction-rules.interactions.cursor.source.values.light",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.light",
         "adapters.interactions.cursor"
       ]
@@ -2936,7 +4499,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#b55616",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.light",
+        "interaction-rules.interactions.status.source.values.light",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.light",
         "adapters.interactions.status"
       ]
@@ -2952,7 +4516,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#b55616",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.light",
+        "interaction-rules.interactions.status.source.values.light",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.light",
         "adapters.interactions.status"
       ]
@@ -2968,7 +4533,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#c581334a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.light",
+        "interaction-rules.interactions.focusRing.source.values.light",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.light",
         "adapters.interactions.focusRing"
       ]
@@ -2984,7 +4550,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#c581334a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.light",
+        "interaction-rules.interactions.focusRing.source.values.light",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.light",
         "adapters.interactions.focusRing"
       ]
@@ -2997,11 +4564,16 @@
       "adapter": "vscode",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#dccfbc",
+      "familyId": "ground",
+      "resolvedColor": "#dacfc1",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
       ]
     },
@@ -3013,11 +4585,16 @@
       "adapter": "obsidian",
       "variant": "light",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#dccfbc",
+      "familyId": "ground",
+      "resolvedColor": "#dacfc1",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.light",
+        "foundation.families.ground.tones.base.light",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.light",
+        "foundation.families.carrier.tones.base.light",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
       ]
     },
@@ -3032,7 +4609,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#dfd6c7",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.light",
+        "interaction-rules.interactions.listHover.source.values.light",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.light",
         "adapters.interactions.listHover"
       ]
@@ -3048,7 +4626,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#dfd6c7",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.light",
+        "interaction-rules.interactions.listHover.source.values.light",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.light",
         "adapters.interactions.listHover"
       ]
@@ -3064,7 +4643,8 @@
       "familyId": "interaction:tabEmphasis",
       "resolvedColor": "#c58133",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.values.light",
+        "interaction-rules.interactions.tabEmphasis.source.values.light",
+        "interaction-rules.interactions.tabEmphasis",
         "variant-profiles.variants.light",
         "adapters.interactions.tabEmphasis"
       ]
@@ -3080,7 +4660,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#c68d5c21",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.lightSoft",
+        "interaction-rules.interactions.selection.source.values.lightSoft",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.selection"
       ]
@@ -3096,7 +4677,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#c68d5c21",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.lightSoft",
+        "interaction-rules.interactions.selection.source.values.lightSoft",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.selection"
       ]
@@ -3112,7 +4694,8 @@
       "familyId": "interaction:selection",
       "resolvedColor": "#c68d5c21",
       "chainRefs": [
-        "interaction-rules.interactions.selection.values.lightSoft",
+        "interaction-rules.interactions.selection.source.values.lightSoft",
+        "interaction-rules.interactions.selection",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.selection"
       ]
@@ -3128,7 +4711,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#be8a4f",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.lightSoft",
+        "interaction-rules.interactions.cursor.source.values.lightSoft",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.cursor"
       ]
@@ -3144,7 +4728,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#be8a4f",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.lightSoft",
+        "interaction-rules.interactions.cursor.source.values.lightSoft",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.cursor"
       ]
@@ -3160,7 +4745,8 @@
       "familyId": "interaction:cursor",
       "resolvedColor": "#be8a4f",
       "chainRefs": [
-        "interaction-rules.interactions.cursor.values.lightSoft",
+        "interaction-rules.interactions.cursor.source.values.lightSoft",
+        "interaction-rules.interactions.cursor",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.cursor"
       ]
@@ -3176,7 +4762,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#ae774d",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.lightSoft",
+        "interaction-rules.interactions.status.source.values.lightSoft",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.status"
       ]
@@ -3192,7 +4779,8 @@
       "familyId": "interaction:status",
       "resolvedColor": "#ae774d",
       "chainRefs": [
-        "interaction-rules.interactions.status.values.lightSoft",
+        "interaction-rules.interactions.status.source.values.lightSoft",
+        "interaction-rules.interactions.status",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.status"
       ]
@@ -3208,7 +4796,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#bd87504a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.lightSoft",
+        "interaction-rules.interactions.focusRing.source.values.lightSoft",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.focusRing"
       ]
@@ -3224,7 +4813,8 @@
       "familyId": "interaction:focusRing",
       "resolvedColor": "#bd87504a",
       "chainRefs": [
-        "interaction-rules.interactions.focusRing.values.lightSoft",
+        "interaction-rules.interactions.focusRing.source.values.lightSoft",
+        "interaction-rules.interactions.focusRing",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.focusRing"
       ]
@@ -3237,12 +4827,18 @@
       "adapter": "vscode",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#d4cabd",
+      "familyId": "ground",
+      "resolvedColor": "#d6c9ba",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
-        "adapters.interactions.lineEmphasis"
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
+        "adapters.interactions.lineEmphasis",
+        "scripts/generate-theme-variants.mjs#postprocess"
       ]
     },
     {
@@ -3253,11 +4849,16 @@
       "adapter": "obsidian",
       "variant": "lightSoft",
       "roleId": null,
-      "familyId": "interaction:lineEmphasis",
-      "resolvedColor": "#d4cabd",
+      "familyId": "ground",
+      "resolvedColor": "#d6caba",
       "chainRefs": [
-        "interaction-rules.interactions.lineEmphasis.values.lightSoft",
+        "foundation.families.ground.tones.base.lightSoft",
+        "surface-rules.surfaces.canvas",
         "variant-profiles.variants.lightSoft",
+        "foundation.families.carrier.tones.base.lightSoft",
+        "surface-rules.surfaces.ink",
+        "surface-rules.surfaces.panel",
+        "interaction-rules.interactions.lineEmphasis",
         "adapters.interactions.lineEmphasis"
       ]
     },
@@ -3272,7 +4873,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#d8cfc3",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.lightSoft",
+        "interaction-rules.interactions.listHover.source.values.lightSoft",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.listHover"
       ]
@@ -3288,7 +4890,8 @@
       "familyId": "interaction:listHover",
       "resolvedColor": "#d8cfc3",
       "chainRefs": [
-        "interaction-rules.interactions.listHover.values.lightSoft",
+        "interaction-rules.interactions.listHover.source.values.lightSoft",
+        "interaction-rules.interactions.listHover",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.listHover"
       ]
@@ -3304,7 +4907,8 @@
       "familyId": "interaction:tabEmphasis",
       "resolvedColor": "#bd8750",
       "chainRefs": [
-        "interaction-rules.interactions.tabEmphasis.values.lightSoft",
+        "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
+        "interaction-rules.interactions.tabEmphasis",
         "variant-profiles.variants.lightSoft",
         "adapters.interactions.tabEmphasis"
       ]
@@ -7440,10 +9044,11 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#211d1a",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
           "adapters.surfaces.canvas"
         ]
@@ -7456,10 +9061,11 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#211d1a",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
           "adapters.surfaces.canvas"
         ]
@@ -7472,10 +9078,11 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#211d1a",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
           "adapters.surfaces.canvas"
         ]
@@ -7488,10 +9095,11 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#d3c9b8",
         "chainRefs": [
-          "surface-rules.surfaces.ink.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.dark",
           "adapters.surfaces.ink"
         ]
@@ -7504,10 +9112,11 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#d3c9b8",
         "chainRefs": [
-          "surface-rules.surfaces.ink.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.dark",
           "adapters.surfaces.ink"
         ]
@@ -7520,10 +9129,11 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#d3c9b8",
         "chainRefs": [
-          "surface-rules.surfaces.ink.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.dark",
           "adapters.surfaces.ink"
         ]
@@ -7536,11 +9146,15 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#2b2722",
+        "familyId": "ground",
+        "resolvedColor": "#2b2723",
         "chainRefs": [
-          "surface-rules.surfaces.panel.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -7552,11 +9166,15 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#2b2722",
+        "familyId": "ground",
+        "resolvedColor": "#2b2723",
         "chainRefs": [
-          "surface-rules.surfaces.panel.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -7568,11 +9186,15 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#2b2722",
+        "familyId": "ground",
+        "resolvedColor": "#2b2723",
         "chainRefs": [
-          "surface-rules.surfaces.panel.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -7584,11 +9206,15 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#655c4f",
+        "familyId": "ground",
+        "resolvedColor": "#635c54",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -7600,11 +9226,15 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#655c4f",
+        "familyId": "ground",
+        "resolvedColor": "#635c54",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -7616,10 +9246,11 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#1a1714",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.dark",
+          "foundation.families.shell.tones.base.dark",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.dark",
           "adapters.surfaces.sidebar"
         ]
@@ -7632,10 +9263,11 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#1a1714",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.dark",
+          "foundation.families.shell.tones.base.dark",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.dark",
           "adapters.surfaces.sidebar"
         ]
@@ -7648,10 +9280,11 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#1a1714",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.dark",
+          "foundation.families.shell.tones.base.dark",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.dark",
           "adapters.surfaces.sidebar"
         ]
@@ -7664,11 +9297,15 @@
         "adapter": "web",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#373027",
+        "familyId": "ground",
+        "resolvedColor": "#35302b",
         "chainRefs": [
-          "surface-rules.surfaces.border.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -7680,11 +9317,15 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#373027",
+        "familyId": "ground",
+        "resolvedColor": "#35302b",
         "chainRefs": [
-          "surface-rules.surfaces.border.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -7696,11 +9337,15 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#373027",
+        "familyId": "ground",
+        "resolvedColor": "#35302b",
         "chainRefs": [
-          "surface-rules.surfaces.border.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -7712,10 +9357,11 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#29211d",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.canvas"
         ]
@@ -7728,10 +9374,11 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#29211d",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.canvas"
         ]
@@ -7744,10 +9391,11 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#29211d",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.canvas"
         ]
@@ -7760,10 +9408,11 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#cec5ba",
         "chainRefs": [
-          "surface-rules.surfaces.ink.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.ink"
         ]
@@ -7776,10 +9425,11 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#cec5ba",
         "chainRefs": [
-          "surface-rules.surfaces.ink.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.ink"
         ]
@@ -7792,10 +9442,11 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#cec5ba",
         "chainRefs": [
-          "surface-rules.surfaces.ink.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.ink"
         ]
@@ -7808,11 +9459,15 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#332e28",
+        "familyId": "ground",
+        "resolvedColor": "#342c28",
         "chainRefs": [
-          "surface-rules.surfaces.panel.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -7824,11 +9479,15 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#332e28",
+        "familyId": "ground",
+        "resolvedColor": "#342c28",
         "chainRefs": [
-          "surface-rules.surfaces.panel.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -7840,11 +9499,15 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#332e28",
+        "familyId": "ground",
+        "resolvedColor": "#342c28",
         "chainRefs": [
-          "surface-rules.surfaces.panel.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -7856,11 +9519,15 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#766d63",
+        "familyId": "ground",
+        "resolvedColor": "#756d65",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -7872,11 +9539,15 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#766d63",
+        "familyId": "ground",
+        "resolvedColor": "#756d65",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -7888,10 +9559,11 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#211a16",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.darkSoft",
+          "foundation.families.shell.tones.base.darkSoft",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.sidebar"
         ]
@@ -7904,10 +9576,11 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#211a16",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.darkSoft",
+          "foundation.families.shell.tones.base.darkSoft",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.sidebar"
         ]
@@ -7920,10 +9593,11 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#211a16",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.darkSoft",
+          "foundation.families.shell.tones.base.darkSoft",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.darkSoft",
           "adapters.surfaces.sidebar"
         ]
@@ -7936,11 +9610,15 @@
         "adapter": "web",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#473e37",
+        "familyId": "ground",
+        "resolvedColor": "#463e38",
         "chainRefs": [
-          "surface-rules.surfaces.border.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -7952,11 +9630,15 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#473e37",
+        "familyId": "ground",
+        "resolvedColor": "#463e38",
         "chainRefs": [
-          "surface-rules.surfaces.border.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -7968,11 +9650,15 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#473e37",
+        "familyId": "ground",
+        "resolvedColor": "#463e38",
         "chainRefs": [
-          "surface-rules.surfaces.border.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -7984,10 +9670,11 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#e9ded0",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
           "adapters.surfaces.canvas"
         ]
@@ -8000,10 +9687,11 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#e9ded0",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
           "adapters.surfaces.canvas"
         ]
@@ -8016,10 +9704,11 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#e9ded0",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
           "adapters.surfaces.canvas"
         ]
@@ -8032,10 +9721,11 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#2a1e0f",
         "chainRefs": [
-          "surface-rules.surfaces.ink.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.light",
           "adapters.surfaces.ink"
         ]
@@ -8048,10 +9738,11 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#2a1e0f",
         "chainRefs": [
-          "surface-rules.surfaces.ink.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.light",
           "adapters.surfaces.ink"
         ]
@@ -8064,10 +9755,11 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#2a1e0f",
         "chainRefs": [
-          "surface-rules.surfaces.ink.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.light",
           "adapters.surfaces.ink"
         ]
@@ -8080,11 +9772,15 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#dccfbc",
+        "familyId": "ground",
+        "resolvedColor": "#dacfc1",
         "chainRefs": [
-          "surface-rules.surfaces.panel.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -8096,11 +9792,15 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#dccfbc",
+        "familyId": "ground",
+        "resolvedColor": "#dacfc1",
         "chainRefs": [
-          "surface-rules.surfaces.panel.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -8112,11 +9812,15 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#dccfbc",
+        "familyId": "ground",
+        "resolvedColor": "#dacfc1",
         "chainRefs": [
-          "surface-rules.surfaces.panel.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -8128,11 +9832,15 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#b49d7b",
+        "familyId": "ground",
+        "resolvedColor": "#a99d8f",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -8144,11 +9852,15 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#b49d7b",
+        "familyId": "ground",
+        "resolvedColor": "#a99d8f",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -8160,10 +9872,11 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#ddd3bd",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.light",
+          "foundation.families.shell.tones.base.light",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.light",
           "adapters.surfaces.sidebar"
         ]
@@ -8176,10 +9889,11 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#ddd3bd",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.light",
+          "foundation.families.shell.tones.base.light",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.light",
           "adapters.surfaces.sidebar"
         ]
@@ -8192,10 +9906,11 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#ddd3bd",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.light",
+          "foundation.families.shell.tones.base.light",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.light",
           "adapters.surfaces.sidebar"
         ]
@@ -8208,11 +9923,15 @@
         "adapter": "web",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#cebea4",
+        "familyId": "ground",
+        "resolvedColor": "#c9beaf",
         "chainRefs": [
-          "surface-rules.surfaces.border.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -8224,11 +9943,15 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#cebea4",
+        "familyId": "ground",
+        "resolvedColor": "#c9beaf",
         "chainRefs": [
-          "surface-rules.surfaces.border.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -8240,11 +9963,15 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "surface:border",
-        "resolvedColor": "#cebea4",
+        "familyId": "ground",
+        "resolvedColor": "#c9beaf",
         "chainRefs": [
-          "surface-rules.surfaces.border.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -8256,10 +9983,11 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#e3d7c6",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.canvas"
         ]
@@ -8272,10 +10000,11 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#e3d7c6",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.canvas"
         ]
@@ -8288,10 +10017,11 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:canvas",
+        "familyId": "ground",
         "resolvedColor": "#e3d7c6",
         "chainRefs": [
-          "surface-rules.surfaces.canvas.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.canvas"
         ]
@@ -8304,10 +10034,11 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#4d4032",
         "chainRefs": [
-          "surface-rules.surfaces.ink.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.ink"
         ]
@@ -8320,10 +10051,11 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#4d4032",
         "chainRefs": [
-          "surface-rules.surfaces.ink.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.ink"
         ]
@@ -8336,10 +10068,11 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:ink",
+        "familyId": "carrier",
         "resolvedColor": "#4d4032",
         "chainRefs": [
-          "surface-rules.surfaces.ink.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.ink"
         ]
@@ -8352,12 +10085,17 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#d4cabd",
+        "familyId": "ground",
+        "resolvedColor": "#d6c9ba",
         "chainRefs": [
-          "surface-rules.surfaces.panel.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
-          "adapters.surfaces.panel"
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "adapters.surfaces.panel",
+          "scripts/generate-theme-variants.mjs#postprocess"
         ]
       },
       "vscode-surface:panel:lightSoft": {
@@ -8368,12 +10106,17 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#d4cabd",
+        "familyId": "ground",
+        "resolvedColor": "#d6c9ba",
         "chainRefs": [
-          "surface-rules.surfaces.panel.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
-          "adapters.surfaces.panel"
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "adapters.surfaces.panel",
+          "scripts/generate-theme-variants.mjs#postprocess"
         ]
       },
       "obsidian-surface:panel:lightSoft": {
@@ -8384,11 +10127,15 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:panel",
-        "resolvedColor": "#d4cabd",
+        "familyId": "ground",
+        "resolvedColor": "#d6caba",
         "chainRefs": [
-          "surface-rules.surfaces.panel.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
           "adapters.surfaces.panel"
         ]
       },
@@ -8400,11 +10147,15 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#9d907e",
+        "familyId": "ground",
+        "resolvedColor": "#9d9080",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -8416,11 +10167,15 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:gutter",
-        "resolvedColor": "#9d907e",
+        "familyId": "ground",
+        "resolvedColor": "#9d9080",
         "chainRefs": [
-          "surface-rules.surfaces.gutter.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.gutter",
           "adapters.surfaces.gutter"
         ]
       },
@@ -8432,10 +10187,11 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#d2c8b4",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.lightSoft",
+          "foundation.families.shell.tones.base.lightSoft",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.sidebar"
         ]
@@ -8448,10 +10204,11 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#d2c8b4",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.lightSoft",
+          "foundation.families.shell.tones.base.lightSoft",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.sidebar"
         ]
@@ -8464,10 +10221,11 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:sidebar",
+        "familyId": "shell",
         "resolvedColor": "#d2c8b4",
         "chainRefs": [
-          "surface-rules.surfaces.sidebar.lightSoft",
+          "foundation.families.shell.tones.base.lightSoft",
+          "surface-rules.surfaces.sidebar",
           "variant-profiles.variants.lightSoft",
           "adapters.surfaces.sidebar"
         ]
@@ -8480,11 +10238,15 @@
         "adapter": "web",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:border",
+        "familyId": "ground",
         "resolvedColor": "#c0b4a4",
         "chainRefs": [
-          "surface-rules.surfaces.border.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -8496,11 +10258,15 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:border",
+        "familyId": "ground",
         "resolvedColor": "#c0b4a4",
         "chainRefs": [
-          "surface-rules.surfaces.border.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -8512,11 +10278,15 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "surface:border",
+        "familyId": "ground",
         "resolvedColor": "#c0b4a4",
         "chainRefs": [
-          "surface-rules.surfaces.border.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.border",
           "adapters.surfaces.border"
         ]
       },
@@ -8531,7 +10301,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#cf87402f",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.dark",
+          "interaction-rules.interactions.selection.source.values.dark",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.dark",
           "adapters.interactions.selection"
         ]
@@ -8547,7 +10318,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#cf87402f",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.dark",
+          "interaction-rules.interactions.selection.source.values.dark",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.dark",
           "adapters.interactions.selection"
         ]
@@ -8563,7 +10335,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#cf87402f",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.dark",
+          "interaction-rules.interactions.selection.source.values.dark",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.dark",
           "adapters.interactions.selection"
         ]
@@ -8579,7 +10352,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#d08a3e",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.dark",
+          "interaction-rules.interactions.cursor.source.values.dark",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.dark",
           "adapters.interactions.cursor"
         ]
@@ -8595,7 +10369,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#d08a3e",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.dark",
+          "interaction-rules.interactions.cursor.source.values.dark",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.dark",
           "adapters.interactions.cursor"
         ]
@@ -8611,7 +10386,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#d08a3e",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.dark",
+          "interaction-rules.interactions.cursor.source.values.dark",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.dark",
           "adapters.interactions.cursor"
         ]
@@ -8627,7 +10403,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#864a22",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.dark",
+          "interaction-rules.interactions.status.source.values.dark",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.dark",
           "adapters.interactions.status"
         ]
@@ -8643,7 +10420,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#864a22",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.dark",
+          "interaction-rules.interactions.status.source.values.dark",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.dark",
           "adapters.interactions.status"
         ]
@@ -8659,7 +10437,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#cf874052",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.dark",
+          "interaction-rules.interactions.focusRing.source.values.dark",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.dark",
           "adapters.interactions.focusRing"
         ]
@@ -8675,7 +10454,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#cf874052",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.dark",
+          "interaction-rules.interactions.focusRing.source.values.dark",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.dark",
           "adapters.interactions.focusRing"
         ]
@@ -8688,11 +10468,16 @@
         "adapter": "vscode",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#2b2722",
+        "familyId": "ground",
+        "resolvedColor": "#2b2723",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
         ]
       },
@@ -8704,11 +10489,16 @@
         "adapter": "obsidian",
         "variant": "dark",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#2b2722",
+        "familyId": "ground",
+        "resolvedColor": "#2b2723",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.dark",
+          "foundation.families.ground.tones.base.dark",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.dark",
+          "foundation.families.carrier.tones.base.dark",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
         ]
       },
@@ -8723,7 +10513,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#2d2824",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.dark",
+          "interaction-rules.interactions.listHover.source.values.dark",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.dark",
           "adapters.interactions.listHover"
         ]
@@ -8739,7 +10530,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#2d2824",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.dark",
+          "interaction-rules.interactions.listHover.source.values.dark",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.dark",
           "adapters.interactions.listHover"
         ]
@@ -8755,7 +10547,8 @@
         "familyId": "interaction:tabEmphasis",
         "resolvedColor": "#cf8740",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.values.dark",
+          "interaction-rules.interactions.tabEmphasis.source.values.dark",
+          "interaction-rules.interactions.tabEmphasis",
           "variant-profiles.variants.dark",
           "adapters.interactions.tabEmphasis"
         ]
@@ -8771,7 +10564,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#c48e5f13",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.darkSoft",
+          "interaction-rules.interactions.selection.source.values.darkSoft",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.selection"
         ]
@@ -8787,7 +10581,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#c48e5f13",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.darkSoft",
+          "interaction-rules.interactions.selection.source.values.darkSoft",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.selection"
         ]
@@ -8803,7 +10598,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#c48e5f13",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.darkSoft",
+          "interaction-rules.interactions.selection.source.values.darkSoft",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.selection"
         ]
@@ -8819,7 +10615,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#bd8c54",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.darkSoft",
+          "interaction-rules.interactions.cursor.source.values.darkSoft",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.cursor"
         ]
@@ -8835,7 +10632,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#bd8c54",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.darkSoft",
+          "interaction-rules.interactions.cursor.source.values.darkSoft",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.cursor"
         ]
@@ -8851,7 +10649,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#bd8c54",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.darkSoft",
+          "interaction-rules.interactions.cursor.source.values.darkSoft",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.cursor"
         ]
@@ -8867,7 +10666,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#875231",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.darkSoft",
+          "interaction-rules.interactions.status.source.values.darkSoft",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.status"
         ]
@@ -8883,7 +10683,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#875231",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.darkSoft",
+          "interaction-rules.interactions.status.source.values.darkSoft",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.status"
         ]
@@ -8899,7 +10700,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#ba88533a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.darkSoft",
+          "interaction-rules.interactions.focusRing.source.values.darkSoft",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.focusRing"
         ]
@@ -8915,7 +10717,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#ba88533a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.darkSoft",
+          "interaction-rules.interactions.focusRing.source.values.darkSoft",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.focusRing"
         ]
@@ -8928,11 +10731,16 @@
         "adapter": "vscode",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#332e28",
+        "familyId": "ground",
+        "resolvedColor": "#342c28",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
         ]
       },
@@ -8944,11 +10752,16 @@
         "adapter": "obsidian",
         "variant": "darkSoft",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#332e28",
+        "familyId": "ground",
+        "resolvedColor": "#342c28",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.darkSoft",
+          "foundation.families.ground.tones.base.darkSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.darkSoft",
+          "foundation.families.carrier.tones.base.darkSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
         ]
       },
@@ -8963,7 +10776,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#332d26",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.darkSoft",
+          "interaction-rules.interactions.listHover.source.values.darkSoft",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.listHover"
         ]
@@ -8979,7 +10793,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#332d26",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.darkSoft",
+          "interaction-rules.interactions.listHover.source.values.darkSoft",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.listHover"
         ]
@@ -8995,7 +10810,8 @@
         "familyId": "interaction:tabEmphasis",
         "resolvedColor": "#bc8955",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.values.darkSoft",
+          "interaction-rules.interactions.tabEmphasis.source.values.darkSoft",
+          "interaction-rules.interactions.tabEmphasis",
           "variant-profiles.variants.darkSoft",
           "adapters.interactions.tabEmphasis"
         ]
@@ -9011,7 +10827,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#cf874021",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.light",
+          "interaction-rules.interactions.selection.source.values.light",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.light",
           "adapters.interactions.selection"
         ]
@@ -9027,7 +10844,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#cf874021",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.light",
+          "interaction-rules.interactions.selection.source.values.light",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.light",
           "adapters.interactions.selection"
         ]
@@ -9043,7 +10861,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#cf874021",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.light",
+          "interaction-rules.interactions.selection.source.values.light",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.light",
           "adapters.interactions.selection"
         ]
@@ -9059,7 +10878,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#c68431",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.light",
+          "interaction-rules.interactions.cursor.source.values.light",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.light",
           "adapters.interactions.cursor"
         ]
@@ -9075,7 +10895,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#c68431",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.light",
+          "interaction-rules.interactions.cursor.source.values.light",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.light",
           "adapters.interactions.cursor"
         ]
@@ -9091,7 +10912,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#c68431",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.light",
+          "interaction-rules.interactions.cursor.source.values.light",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.light",
           "adapters.interactions.cursor"
         ]
@@ -9107,7 +10929,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#b55616",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.light",
+          "interaction-rules.interactions.status.source.values.light",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.light",
           "adapters.interactions.status"
         ]
@@ -9123,7 +10946,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#b55616",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.light",
+          "interaction-rules.interactions.status.source.values.light",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.light",
           "adapters.interactions.status"
         ]
@@ -9139,7 +10963,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#c581334a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.light",
+          "interaction-rules.interactions.focusRing.source.values.light",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.light",
           "adapters.interactions.focusRing"
         ]
@@ -9155,7 +10980,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#c581334a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.light",
+          "interaction-rules.interactions.focusRing.source.values.light",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.light",
           "adapters.interactions.focusRing"
         ]
@@ -9168,11 +10994,16 @@
         "adapter": "vscode",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#dccfbc",
+        "familyId": "ground",
+        "resolvedColor": "#dacfc1",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
         ]
       },
@@ -9184,11 +11015,16 @@
         "adapter": "obsidian",
         "variant": "light",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#dccfbc",
+        "familyId": "ground",
+        "resolvedColor": "#dacfc1",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.light",
+          "foundation.families.ground.tones.base.light",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.light",
+          "foundation.families.carrier.tones.base.light",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
         ]
       },
@@ -9203,7 +11039,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#dfd6c7",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.light",
+          "interaction-rules.interactions.listHover.source.values.light",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.light",
           "adapters.interactions.listHover"
         ]
@@ -9219,7 +11056,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#dfd6c7",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.light",
+          "interaction-rules.interactions.listHover.source.values.light",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.light",
           "adapters.interactions.listHover"
         ]
@@ -9235,7 +11073,8 @@
         "familyId": "interaction:tabEmphasis",
         "resolvedColor": "#c58133",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.values.light",
+          "interaction-rules.interactions.tabEmphasis.source.values.light",
+          "interaction-rules.interactions.tabEmphasis",
           "variant-profiles.variants.light",
           "adapters.interactions.tabEmphasis"
         ]
@@ -9251,7 +11090,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#c68d5c21",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.lightSoft",
+          "interaction-rules.interactions.selection.source.values.lightSoft",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.selection"
         ]
@@ -9267,7 +11107,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#c68d5c21",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.lightSoft",
+          "interaction-rules.interactions.selection.source.values.lightSoft",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.selection"
         ]
@@ -9283,7 +11124,8 @@
         "familyId": "interaction:selection",
         "resolvedColor": "#c68d5c21",
         "chainRefs": [
-          "interaction-rules.interactions.selection.values.lightSoft",
+          "interaction-rules.interactions.selection.source.values.lightSoft",
+          "interaction-rules.interactions.selection",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.selection"
         ]
@@ -9299,7 +11141,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#be8a4f",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.lightSoft",
+          "interaction-rules.interactions.cursor.source.values.lightSoft",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.cursor"
         ]
@@ -9315,7 +11158,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#be8a4f",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.lightSoft",
+          "interaction-rules.interactions.cursor.source.values.lightSoft",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.cursor"
         ]
@@ -9331,7 +11175,8 @@
         "familyId": "interaction:cursor",
         "resolvedColor": "#be8a4f",
         "chainRefs": [
-          "interaction-rules.interactions.cursor.values.lightSoft",
+          "interaction-rules.interactions.cursor.source.values.lightSoft",
+          "interaction-rules.interactions.cursor",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.cursor"
         ]
@@ -9347,7 +11192,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#ae774d",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.lightSoft",
+          "interaction-rules.interactions.status.source.values.lightSoft",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.status"
         ]
@@ -9363,7 +11209,8 @@
         "familyId": "interaction:status",
         "resolvedColor": "#ae774d",
         "chainRefs": [
-          "interaction-rules.interactions.status.values.lightSoft",
+          "interaction-rules.interactions.status.source.values.lightSoft",
+          "interaction-rules.interactions.status",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.status"
         ]
@@ -9379,7 +11226,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#bd87504a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.lightSoft",
+          "interaction-rules.interactions.focusRing.source.values.lightSoft",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.focusRing"
         ]
@@ -9395,7 +11243,8 @@
         "familyId": "interaction:focusRing",
         "resolvedColor": "#bd87504a",
         "chainRefs": [
-          "interaction-rules.interactions.focusRing.values.lightSoft",
+          "interaction-rules.interactions.focusRing.source.values.lightSoft",
+          "interaction-rules.interactions.focusRing",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.focusRing"
         ]
@@ -9408,12 +11257,18 @@
         "adapter": "vscode",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#d4cabd",
+        "familyId": "ground",
+        "resolvedColor": "#d6c9ba",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
-          "adapters.interactions.lineEmphasis"
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
+          "adapters.interactions.lineEmphasis",
+          "scripts/generate-theme-variants.mjs#postprocess"
         ]
       },
       "obsidian-interaction:lineEmphasis:lightSoft": {
@@ -9424,11 +11279,16 @@
         "adapter": "obsidian",
         "variant": "lightSoft",
         "roleId": null,
-        "familyId": "interaction:lineEmphasis",
-        "resolvedColor": "#d4cabd",
+        "familyId": "ground",
+        "resolvedColor": "#d6caba",
         "chainRefs": [
-          "interaction-rules.interactions.lineEmphasis.values.lightSoft",
+          "foundation.families.ground.tones.base.lightSoft",
+          "surface-rules.surfaces.canvas",
           "variant-profiles.variants.lightSoft",
+          "foundation.families.carrier.tones.base.lightSoft",
+          "surface-rules.surfaces.ink",
+          "surface-rules.surfaces.panel",
+          "interaction-rules.interactions.lineEmphasis",
           "adapters.interactions.lineEmphasis"
         ]
       },
@@ -9443,7 +11303,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#d8cfc3",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.lightSoft",
+          "interaction-rules.interactions.listHover.source.values.lightSoft",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.listHover"
         ]
@@ -9459,7 +11320,8 @@
         "familyId": "interaction:listHover",
         "resolvedColor": "#d8cfc3",
         "chainRefs": [
-          "interaction-rules.interactions.listHover.values.lightSoft",
+          "interaction-rules.interactions.listHover.source.values.lightSoft",
+          "interaction-rules.interactions.listHover",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.listHover"
         ]
@@ -9475,7 +11337,8 @@
         "familyId": "interaction:tabEmphasis",
         "resolvedColor": "#bd8750",
         "chainRefs": [
-          "interaction-rules.interactions.tabEmphasis.values.lightSoft",
+          "interaction-rules.interactions.tabEmphasis.source.values.lightSoft",
+          "interaction-rules.interactions.tabEmphasis",
           "variant-profiles.variants.lightSoft",
           "adapters.interactions.tabEmphasis"
         ]
@@ -14564,21 +16427,61 @@
       ]
     },
     "byFamily": {
-      "surface:canvas": [
+      "ground": [
         "web-surface:canvas:dark",
         "vscode-surface:canvas:dark",
         "obsidian-surface:canvas:dark",
+        "web-surface:panel:dark",
+        "vscode-surface:panel:dark",
+        "obsidian-surface:panel:dark",
+        "web-surface:gutter:dark",
+        "vscode-surface:gutter:dark",
+        "web-surface:border:dark",
+        "vscode-surface:border:dark",
+        "obsidian-surface:border:dark",
         "web-surface:canvas:darkSoft",
         "vscode-surface:canvas:darkSoft",
         "obsidian-surface:canvas:darkSoft",
+        "web-surface:panel:darkSoft",
+        "vscode-surface:panel:darkSoft",
+        "obsidian-surface:panel:darkSoft",
+        "web-surface:gutter:darkSoft",
+        "vscode-surface:gutter:darkSoft",
+        "web-surface:border:darkSoft",
+        "vscode-surface:border:darkSoft",
+        "obsidian-surface:border:darkSoft",
         "web-surface:canvas:light",
         "vscode-surface:canvas:light",
         "obsidian-surface:canvas:light",
+        "web-surface:panel:light",
+        "vscode-surface:panel:light",
+        "obsidian-surface:panel:light",
+        "web-surface:gutter:light",
+        "vscode-surface:gutter:light",
+        "web-surface:border:light",
+        "vscode-surface:border:light",
+        "obsidian-surface:border:light",
         "web-surface:canvas:lightSoft",
         "vscode-surface:canvas:lightSoft",
-        "obsidian-surface:canvas:lightSoft"
+        "obsidian-surface:canvas:lightSoft",
+        "web-surface:panel:lightSoft",
+        "vscode-surface:panel:lightSoft",
+        "obsidian-surface:panel:lightSoft",
+        "web-surface:gutter:lightSoft",
+        "vscode-surface:gutter:lightSoft",
+        "web-surface:border:lightSoft",
+        "vscode-surface:border:lightSoft",
+        "obsidian-surface:border:lightSoft",
+        "vscode-interaction:lineEmphasis:dark",
+        "obsidian-interaction:lineEmphasis:dark",
+        "vscode-interaction:lineEmphasis:darkSoft",
+        "obsidian-interaction:lineEmphasis:darkSoft",
+        "vscode-interaction:lineEmphasis:light",
+        "obsidian-interaction:lineEmphasis:light",
+        "vscode-interaction:lineEmphasis:lightSoft",
+        "obsidian-interaction:lineEmphasis:lightSoft"
       ],
-      "surface:ink": [
+      "carrier": [
         "web-surface:ink:dark",
         "vscode-surface:ink:dark",
         "obsidian-surface:ink:dark",
@@ -14592,31 +16495,7 @@
         "vscode-surface:ink:lightSoft",
         "obsidian-surface:ink:lightSoft"
       ],
-      "surface:panel": [
-        "web-surface:panel:dark",
-        "vscode-surface:panel:dark",
-        "obsidian-surface:panel:dark",
-        "web-surface:panel:darkSoft",
-        "vscode-surface:panel:darkSoft",
-        "obsidian-surface:panel:darkSoft",
-        "web-surface:panel:light",
-        "vscode-surface:panel:light",
-        "obsidian-surface:panel:light",
-        "web-surface:panel:lightSoft",
-        "vscode-surface:panel:lightSoft",
-        "obsidian-surface:panel:lightSoft"
-      ],
-      "surface:gutter": [
-        "web-surface:gutter:dark",
-        "vscode-surface:gutter:dark",
-        "web-surface:gutter:darkSoft",
-        "vscode-surface:gutter:darkSoft",
-        "web-surface:gutter:light",
-        "vscode-surface:gutter:light",
-        "web-surface:gutter:lightSoft",
-        "vscode-surface:gutter:lightSoft"
-      ],
-      "surface:sidebar": [
+      "shell": [
         "web-surface:sidebar:dark",
         "vscode-surface:sidebar:dark",
         "obsidian-surface:sidebar:dark",
@@ -14629,20 +16508,6 @@
         "web-surface:sidebar:lightSoft",
         "vscode-surface:sidebar:lightSoft",
         "obsidian-surface:sidebar:lightSoft"
-      ],
-      "surface:border": [
-        "web-surface:border:dark",
-        "vscode-surface:border:dark",
-        "obsidian-surface:border:dark",
-        "web-surface:border:darkSoft",
-        "vscode-surface:border:darkSoft",
-        "obsidian-surface:border:darkSoft",
-        "web-surface:border:light",
-        "vscode-surface:border:light",
-        "obsidian-surface:border:light",
-        "web-surface:border:lightSoft",
-        "vscode-surface:border:lightSoft",
-        "obsidian-surface:border:lightSoft"
       ],
       "interaction:selection": [
         "web-interaction:selection:dark",
@@ -14691,16 +16556,6 @@
         "obsidian-interaction:focusRing:light",
         "vscode-interaction:focusRing:lightSoft",
         "obsidian-interaction:focusRing:lightSoft"
-      ],
-      "interaction:lineEmphasis": [
-        "vscode-interaction:lineEmphasis:dark",
-        "obsidian-interaction:lineEmphasis:dark",
-        "vscode-interaction:lineEmphasis:darkSoft",
-        "obsidian-interaction:lineEmphasis:darkSoft",
-        "vscode-interaction:lineEmphasis:light",
-        "obsidian-interaction:lineEmphasis:light",
-        "vscode-interaction:lineEmphasis:lightSoft",
-        "obsidian-interaction:lineEmphasis:lightSoft"
       ],
       "interaction:listHover": [
         "vscode-interaction:listHover:dark",

@@ -86,8 +86,8 @@ This layer owns:
 
 - named families
 - semantic role derivation
-- surface anchors
-- interaction primitives
+- sparse surface anchors plus derived environment layers
+- sparse interaction anchors plus derived shared emphasis states
 
 This is the main design authority.
 
@@ -212,6 +212,8 @@ The expected workflow is:
 8. inspect previews, reports, and docs
 9. commit sources and generated outputs together
 
+Key guardrails in that loop are `audit:source-layer`, `audit:lineage`, `audit:parity`, and `check:schemes`.
+
 The normal edit order is:
 
 1. `scheme.json` / `philosophy.md` when the public story changes
@@ -225,6 +227,14 @@ The normal edit order is:
 9. `tuning.json` only for bounded calibration
 
 Direct edits to generated platform outputs are out of policy.
+
+Within `surface-rules.json` and `interaction-rules.json`, prefer:
+
+- a few explicit anchors such as `canvas`, `ink`, `cursor`, or `status`
+- derived entries for dependent layers such as `panel`, `border`, or `lineEmphasis`
+
+That keeps the top layer expressive without turning it back into a flat result table.
+Environment anchors like `canvas`, `ink`, and `sidebar` should ideally resolve from foundation families first, so downstream surfaces and interactions inherit one shared scheme-level environment language.
 
 ## 6. Multi-Scheme Expansion
 

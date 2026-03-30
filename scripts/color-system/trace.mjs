@@ -37,12 +37,9 @@ function buildSurfaceEntries(model, artifactMaps, indexes) {
 
   for (const variant of model.variants.variants) {
     for (const contract of model.surfaceAdapters) {
-      const baseChain = [
-        `surface-rules.surfaces.${contract.id}.${variant.id}`,
-        `variant-profiles.variants.${variant.id}`,
-      ]
-      const resolvedColor = model.surfaceRules.surfaces[contract.id][variant.id]
-      const sourceId = `surface:${contract.id}`
+      const resolved = model.surfaceRules.resolved[contract.id][variant.id]
+      const resolvedColor = resolved.color
+      const sourceId = resolved.family || `surface:${contract.id}`
 
       if (contract.webToken) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
@@ -56,7 +53,7 @@ function buildSurfaceEntries(model, artifactMaps, indexes) {
           roleId: null,
           familyId: sourceId,
           resolvedColor: outputColor,
-          chainRefs: buildArtifactChain([...baseChain, `adapters.surfaces.${contract.id}`], resolvedColor, outputColor),
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.surfaces.${contract.id}`], resolvedColor, outputColor),
         }
         entries.push(entry)
         pushIndexed(indexes, entry)
@@ -74,7 +71,7 @@ function buildSurfaceEntries(model, artifactMaps, indexes) {
           roleId: null,
           familyId: sourceId,
           resolvedColor: outputColor,
-          chainRefs: buildArtifactChain([...baseChain, `adapters.surfaces.${contract.id}`], resolvedColor, outputColor),
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.surfaces.${contract.id}`], resolvedColor, outputColor),
         }
         entries.push(entry)
         pushIndexed(indexes, entry)
@@ -92,7 +89,7 @@ function buildSurfaceEntries(model, artifactMaps, indexes) {
           roleId: null,
           familyId: sourceId,
           resolvedColor: outputColor,
-          chainRefs: [...baseChain, `adapters.surfaces.${contract.id}`],
+          chainRefs: [...resolved.chainRefs, `adapters.surfaces.${contract.id}`],
         }
         entries.push(entry)
         pushIndexed(indexes, entry)
@@ -108,12 +105,9 @@ function buildInteractionEntries(model, artifactMaps, indexes) {
 
   for (const variant of model.variants.variants) {
     for (const contract of model.interactionAdapters) {
-      const baseChain = [
-        `interaction-rules.interactions.${contract.id}.values.${variant.id}`,
-        `variant-profiles.variants.${variant.id}`,
-      ]
-      const resolvedColor = model.interactionRules.interactions[contract.id].values[variant.id]
-      const sourceId = `interaction:${contract.id}`
+      const resolved = model.interactionRules.interactions[contract.id].resolved[variant.id]
+      const resolvedColor = resolved.color
+      const sourceId = resolved.family || `interaction:${contract.id}`
 
       if (contract.webToken) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
@@ -127,7 +121,7 @@ function buildInteractionEntries(model, artifactMaps, indexes) {
           roleId: null,
           familyId: sourceId,
           resolvedColor: outputColor,
-          chainRefs: buildArtifactChain([...baseChain, `adapters.interactions.${contract.id}`], resolvedColor, outputColor),
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.interactions.${contract.id}`], resolvedColor, outputColor),
         }
         entries.push(entry)
         pushIndexed(indexes, entry)
@@ -145,7 +139,7 @@ function buildInteractionEntries(model, artifactMaps, indexes) {
           roleId: null,
           familyId: sourceId,
           resolvedColor: outputColor,
-          chainRefs: buildArtifactChain([...baseChain, `adapters.interactions.${contract.id}`], resolvedColor, outputColor),
+          chainRefs: buildArtifactChain([...resolved.chainRefs, `adapters.interactions.${contract.id}`], resolvedColor, outputColor),
         }
         entries.push(entry)
         pushIndexed(indexes, entry)
@@ -163,7 +157,7 @@ function buildInteractionEntries(model, artifactMaps, indexes) {
           roleId: null,
           familyId: sourceId,
           resolvedColor: outputColor,
-          chainRefs: [...baseChain, `adapters.interactions.${contract.id}`],
+          chainRefs: [...resolved.chainRefs, `adapters.interactions.${contract.id}`],
         }
         entries.push(entry)
         pushIndexed(indexes, entry)
@@ -330,7 +324,7 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
   }
 
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     sources: model.sources,
     scheme: {
       id: model.scheme.id,
@@ -350,13 +344,47 @@ export function buildColorLanguageLineage(model, artifactMaps = model.platformTo
         ])
       ),
     },
-    surfaceRules: model.surfaceRules.surfaces,
+    surfaceRules: Object.fromEntries(
+      Object.entries(model.surfaceRules.surfaces).map(([surfaceId, values]) => [
+        surfaceId,
+        {
+          description: model.surfaceRules.definitions[surfaceId]?.description || '',
+          values,
+          variants: Object.fromEntries(
+            Object.entries(model.surfaceRules.resolved[surfaceId]).map(([variantId, entry]) => [
+              variantId,
+              {
+                color: entry.color,
+                sourceType: entry.sourceType,
+                sourceRef: entry.sourceRef,
+                usedEscapeHatch: entry.usedEscapeHatch,
+                chainRefs: entry.chainRefs,
+                steps: entry.steps,
+              },
+            ])
+          ),
+        },
+      ])
+    ),
     interactionRules: Object.fromEntries(
       Object.entries(model.interactionRules.interactions).map(([interactionId, entry]) => [
         interactionId,
         {
           description: entry.description,
           values: entry.values,
+          variants: Object.fromEntries(
+            Object.entries(entry.resolved).map(([variantId, resolved]) => [
+              variantId,
+              {
+                color: resolved.color,
+                sourceType: resolved.sourceType,
+                sourceRef: resolved.sourceRef,
+                usedEscapeHatch: resolved.usedEscapeHatch,
+                chainRefs: resolved.chainRefs,
+                steps: resolved.steps,
+              },
+            ])
+          ),
         },
       ])
     ),

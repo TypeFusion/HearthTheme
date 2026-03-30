@@ -2,7 +2,7 @@
 :root {
   --hearth-badge-aa: #cb926c;
   --hearth-badge-aaa: #a8b392;
-  --hearth-badge-dec-border: #322b24;
+  --hearth-badge-dec-border: #302b27;
   --hearth-badge-dec-text: #584f44;
   --hearth-bg: #211d1a;
   --hearth-bg-ambient-bottom: rgb(108 80 53 / 0.18);
@@ -31,7 +31,7 @@
   --hearth-btn-tertiary-hover-border: rgb(196 161 124 / 0.45);
   --hearth-colorsystem-row-border: rgb(233 222 208 / 0.07);
   --hearth-doc-body: #9c9181;
-  --hearth-doc-border: #322c24;
+  --hearth-doc-border: #312c27;
   --hearth-doc-bullet: #a29787;
   --hearth-doc-date: #918777;
   --hearth-doc-heading: #d7cdbc;
@@ -84,7 +84,7 @@
   --hearth-preview-stage-grad-end: rgb(28 25 22 / 0.1);
   --hearth-preview-stage-grad-start: rgb(233 222 208 / 0.02);
   --hearth-preview-strip-border-dark: rgb(233 222 208 / 0.08);
-  --hearth-preview-strip-border-light: rgb(103 75 51 / 0.18);
+  --hearth-preview-strip-border-light: rgb(102 75 53 / 0.18);
   --hearth-preview-switch-active-bg: rgb(187 132 87 / 0.28);
   --hearth-preview-switch-active-ring: rgb(165 131 93 / 0.26);
   --hearth-preview-switch-border: rgb(188 151 112 / 0.22);

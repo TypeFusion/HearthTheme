@@ -1,42 +1,189 @@
 {
-  "schemaVersion": 1,
-  "description": "Abstract surface anchors for CairnCode. These define environment layers before any platform contract is applied.",
+  "schemaVersion": 2,
+  "description": "Abstract surface anchors for CairnCode. Anchor values stay sparse; surrounding layers derive from them before any platform contract is applied.",
   "surfaces": {
     "canvas": {
-      "dark": "#1d1c1b",
-      "darkSoft": "#252321",
-      "light": "#e6ded4",
-      "lightSoft": "#ddd6ce"
+      "description": "Primary atmospheric canvas anchor.",
+      "source": {
+        "type": "foundation",
+        "family": "ground",
+        "tone": "base"
+      }
     },
     "ink": {
-      "dark": "#d1c9c0",
-      "darkSoft": "#cbc4bc",
-      "light": "#2d241d",
-      "lightSoft": "#463d36"
+      "description": "Readable carrier ink anchor for long sessions.",
+      "source": {
+        "type": "foundation",
+        "family": "carrier",
+        "tone": "base"
+      }
     },
     "panel": {
-      "dark": "#272523",
-      "darkSoft": "#2f2c29",
-      "light": "#dad2c7",
-      "lightSoft": "#d1cbc1"
+      "description": "Raised document substrate mixed up from canvas toward ink.",
+      "source": {
+        "type": "surface",
+        "id": "canvas"
+      },
+      "byVariant": {
+        "dark": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.05
+            }
+          }
+        },
+        "darkSoft": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.053
+            }
+          }
+        },
+        "light": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.063
+            }
+          }
+        },
+        "lightSoft": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.077
+            }
+          }
+        }
+      }
     },
     "gutter": {
-      "dark": "#67615a",
-      "darkSoft": "#746e67",
-      "light": "#ac9f8f",
-      "lightSoft": "#988d80"
+      "description": "Quiet numeric gutter derived as a mid-band between canvas and ink.",
+      "source": {
+        "type": "surface",
+        "id": "canvas"
+      },
+      "byVariant": {
+        "dark": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.396
+            }
+          }
+        },
+        "darkSoft": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.467
+            }
+          }
+        },
+        "light": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.337
+            }
+          }
+        },
+        "lightSoft": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.477
+            }
+          }
+        }
+      }
     },
     "sidebar": {
-      "dark": "#181715",
-      "darkSoft": "#1f1d1a",
-      "light": "#ddd5ca",
-      "lightSoft": "#d0c9be"
+      "description": "Sheltering shell anchor for navigation and chrome.",
+      "source": {
+        "type": "foundation",
+        "family": "shell",
+        "tone": "base"
+      }
     },
     "border": {
-      "dark": "#34312d",
-      "darkSoft": "#433f3a",
-      "light": "#cbbfb1",
-      "lightSoft": "#bfb5aa"
+      "description": "Structural edge derived from the same canvas-ink band, but kept quieter than gutter.",
+      "source": {
+        "type": "surface",
+        "id": "canvas"
+      },
+      "byVariant": {
+        "dark": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.12
+            }
+          }
+        },
+        "darkSoft": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.172
+            }
+          }
+        },
+        "light": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.164
+            }
+          }
+        },
+        "lightSoft": {
+          "derive": {
+            "mix": {
+              "with": {
+                "type": "surface",
+                "id": "ink"
+              },
+              "t": 0.214
+            }
+          }
+        }
+      }
     }
   }
 }

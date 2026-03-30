@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "description": "Abstract interaction primitives for HearthCode. These define selection, cursor, focus, hover, and emphasis states before platform calibration.",
+  "schemaVersion": 2,
+  "description": "Abstract interaction primitives for HearthCode. Anchors stay few; reusable emphasis states derive from them before platform calibration.",
   "interactions": {
     "selection": {
       "description": "Primary text-selection wash.",
@@ -40,11 +40,9 @@
     },
     "lineEmphasis": {
       "description": "Current-line substrate emphasis without becoming a spotlight.",
-      "values": {
-        "dark": "#2b2722",
-        "darkSoft": "#332e28",
-        "light": "#dccfbc",
-        "lightSoft": "#d4cabd"
+      "source": {
+        "type": "surface",
+        "id": "panel"
       }
     },
     "listHover": {

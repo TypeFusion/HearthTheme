@@ -484,7 +484,107 @@ function normalizeSurfaceValueMap(valuesByVariant, label, variantIds) {
   return out
 }
 
+function normalizeAbstractColorSource(value, families, label, variantIds, allowedKinds) {
+  assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
+  const type = String(value.type || '').trim()
+  assert(type, `${label}.type is required`)
+  assert(allowedKinds.has(type), `${label}.type "${type}" is not allowed here`)
+
+  if (type === 'literal') {
+    return {
+      type,
+      values: normalizeSurfaceValueMap(value.values, `${label}.values`, variantIds),
+    }
+  }
+
+  if (type === 'foundation') {
+    const family = String(value.family || '').trim()
+    const tone = String(value.tone || 'base').trim()
+    assert(family, `${label}.family is required`)
+    assert(families[family], `${label}.family "${family}" does not exist in foundation.json`)
+    assert(families[family].tones[tone], `${label}.tone "${tone}" does not exist in foundation.json for family "${family}"`)
+    return { type, family, tone }
+  }
+
+  const id = String(value.id || '').trim()
+  assert(id, `${label}.id is required`)
+  return { type, id }
+}
+
+function normalizeAbstractColorDerive(value, families, label, variantIds, allowedKinds) {
+  if (value == null) return {}
+  assert(value && typeof value === 'object' && !Array.isArray(value), `${label} must be an object`)
+  const out = {}
+
+  if (value.mix != null) {
+    assert(value.mix && typeof value.mix === 'object' && !Array.isArray(value.mix), `${label}.mix must be an object`)
+    out.mix = {
+      with: normalizeAbstractColorSource(value.mix.with, families, `${label}.mix.with`, variantIds, allowedKinds),
+      t: normalizeNumber(value.mix.t, `${label}.mix.t`, { min: 0, max: 1 }),
+    }
+  }
+  if (value.lightnessShift !== undefined) {
+    out.lightnessShift = normalizeNumber(value.lightnessShift, `${label}.lightnessShift`, { min: -1, max: 1 })
+  }
+  if (value.saturationScale !== undefined) {
+    out.saturationScale = normalizeNumber(value.saturationScale, `${label}.saturationScale`, { min: 0, max: 4 })
+  }
+  if (value.hueShift !== undefined) {
+    out.hueShift = normalizeNumber(value.hueShift, `${label}.hueShift`, { min: -180, max: 180 })
+  }
+  if (value.alpha !== undefined) {
+    out.alpha = normalizeNumber(value.alpha, `${label}.alpha`, { min: 0, max: 1 })
+  }
+  if (value.clampHue != null) {
+    assert(value.clampHue && typeof value.clampHue === 'object' && !Array.isArray(value.clampHue), `${label}.clampHue must be an object`)
+    const min = normalizeNumber(value.clampHue.min, `${label}.clampHue.min`, { min: 0, max: 360 })
+    const max = normalizeNumber(value.clampHue.max, `${label}.clampHue.max`, { min: 0, max: 360 })
+    out.clampHue = { min, max }
+  }
+  if (value.output !== undefined) {
+    out.output = normalizeFlexibleHex(value.output, `${label}.output`)
+  }
+
+  return out
+}
+
+function isLegacyVariantMap(entry, variantIds) {
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return false
+  return variantIds.every((variantId) => entry[variantId] !== undefined)
+}
+
+function normalizeDerivedColorEntry(entry, families, label, variantIds, allowedKinds) {
+  assert(entry && typeof entry === 'object' && !Array.isArray(entry), `${label} must be an object`)
+
+  const sourceInput = isLegacyVariantMap(entry, variantIds)
+    ? { type: 'literal', values: entry }
+    : (entry.source ?? (entry.values ? { type: 'literal', values: entry.values } : null))
+
+  assert(sourceInput, `${label} must define either source or values`)
+  const byVariant = {}
+  const rawByVariant = entry.byVariant ?? {}
+  assert(rawByVariant && typeof rawByVariant === 'object' && !Array.isArray(rawByVariant), `${label}.byVariant must be an object`)
+  for (const [variantId, variantEntry] of Object.entries(rawByVariant)) {
+    assert(variantIds.includes(variantId), `${label}.byVariant has unknown variant "${variantId}"`)
+    assert(variantEntry && typeof variantEntry === 'object' && !Array.isArray(variantEntry), `${label}.byVariant.${variantId} must be an object`)
+    byVariant[variantId] = {
+      source: variantEntry.source
+        ? normalizeAbstractColorSource(variantEntry.source, families, `${label}.byVariant.${variantId}.source`, variantIds, allowedKinds)
+        : null,
+      derive: normalizeAbstractColorDerive(variantEntry.derive, families, `${label}.byVariant.${variantId}.derive`, variantIds, allowedKinds),
+    }
+  }
+
+  return {
+    description: typeof entry.description === 'string' ? entry.description.trim() : '',
+    source: normalizeAbstractColorSource(sourceInput, families, `${label}.source`, variantIds, allowedKinds),
+    derive: normalizeAbstractColorDerive(entry.derive, families, `${label}.derive`, variantIds, allowedKinds),
+    byVariant,
+  }
+}
+
 export function loadSurfaceRules() {
+  const foundation = loadFoundationPalette()
   const variants = loadColorSystemVariants().variants
   const variantIds = variants.map((variant) => variant.id)
   const data = readJson(COLOR_SYSTEM_SURFACE_RULES_PATH)
@@ -492,20 +592,28 @@ export function loadSurfaceRules() {
   assert(data.surfaces && typeof data.surfaces === 'object' && !Array.isArray(data.surfaces), `${COLOR_SYSTEM_SURFACE_RULES_PATH}: surfaces must be an object`)
 
   const surfaces = {}
-  for (const [surfaceIdRaw, valuesByVariant] of Object.entries(data.surfaces)) {
+  const allowedKinds = new Set(['literal', 'foundation', 'surface'])
+  for (const [surfaceIdRaw, entry] of Object.entries(data.surfaces)) {
     const surfaceId = String(surfaceIdRaw || '').trim()
     assert(surfaceId, `${COLOR_SYSTEM_SURFACE_RULES_PATH}: invalid surface id`)
-    surfaces[surfaceId] = normalizeSurfaceValueMap(valuesByVariant, `${COLOR_SYSTEM_SURFACE_RULES_PATH}: surfaces.${surfaceId}`, variantIds)
+    surfaces[surfaceId] = normalizeDerivedColorEntry(
+      entry,
+      foundation.families,
+      `${COLOR_SYSTEM_SURFACE_RULES_PATH}: surfaces.${surfaceId}`,
+      variantIds,
+      allowedKinds
+    )
   }
 
   return {
-    schemaVersion: Number(data.schemaVersion || 1),
+    schemaVersion: Number(data.schemaVersion || 2),
     description: typeof data.description === 'string' ? data.description.trim() : '',
     surfaces,
   }
 }
 
 export function loadInteractionRules() {
+  const foundation = loadFoundationPalette()
   const variants = loadColorSystemVariants().variants
   const variantIds = variants.map((variant) => variant.id)
   const data = readJson(COLOR_SYSTEM_INTERACTION_RULES_PATH)
@@ -513,18 +621,21 @@ export function loadInteractionRules() {
   assert(data.interactions && typeof data.interactions === 'object' && !Array.isArray(data.interactions), `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions must be an object`)
 
   const interactions = {}
+  const allowedKinds = new Set(['literal', 'foundation', 'surface', 'interaction'])
   for (const [interactionIdRaw, entry] of Object.entries(data.interactions)) {
     const interactionId = String(interactionIdRaw || '').trim()
     assert(interactionId, `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: invalid interaction id`)
-    assert(entry && typeof entry === 'object' && !Array.isArray(entry), `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions.${interactionId} must be an object`)
-    interactions[interactionId] = {
-      description: typeof entry.description === 'string' ? entry.description.trim() : '',
-      values: normalizeSurfaceValueMap(entry.values, `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions.${interactionId}.values`, variantIds),
-    }
+    interactions[interactionId] = normalizeDerivedColorEntry(
+      entry,
+      foundation.families,
+      `${COLOR_SYSTEM_INTERACTION_RULES_PATH}: interactions.${interactionId}`,
+      variantIds,
+      allowedKinds
+    )
   }
 
   return {
-    schemaVersion: Number(data.schemaVersion || 1),
+    schemaVersion: Number(data.schemaVersion || 2),
     description: typeof data.description === 'string' ? data.description.trim() : '',
     interactions,
   }

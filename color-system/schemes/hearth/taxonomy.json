@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "description": "Machine-readable abstract taxonomy for HearthCode. This groups families, semantic roles, surfaces, interactions, and variants without referencing any platform token names.",
   "families": {
+    "environment": ["ground", "carrier", "shell"],
     "signalWarmth": ["ember", "cedar", "terracotta"],
     "structuralWarmth": ["brass", "leather", "ochre"],
     "coolAnchor": ["mineral"],

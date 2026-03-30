@@ -2,6 +2,39 @@
   "schemaVersion": 1,
   "description": "Top-level palette families for CairnCode. These define a stone-neutral vocabulary before surfaces, interactions, or platform mappings.",
   "families": {
+    "ground": {
+      "description": "Primary environment ground for the canvas field across all variants.",
+      "tones": {
+        "base": {
+          "dark": "#1d1c1b",
+          "darkSoft": "#252321",
+          "light": "#e6ded4",
+          "lightSoft": "#ddd6ce"
+        }
+      }
+    },
+    "carrier": {
+      "description": "Readable carrier environment used as the long-session ink anchor.",
+      "tones": {
+        "base": {
+          "dark": "#d1c9c0",
+          "darkSoft": "#cbc4bc",
+          "light": "#2d241d",
+          "lightSoft": "#463d36"
+        }
+      }
+    },
+    "shell": {
+      "description": "Sheltering chrome shell for navigation, rails, and supportive UI housing.",
+      "tones": {
+        "base": {
+          "dark": "#181715",
+          "darkSoft": "#1f1d1a",
+          "light": "#ddd5ca",
+          "lightSoft": "#d0c9be"
+        }
+      }
+    },
     "soot": {
       "description": "Quiet guidance neutrals for comments and supporting ink.",
       "tones": {

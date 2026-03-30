@@ -4,6 +4,7 @@ import { buildColorLanguageModel, getExportedSiteTokenKeys } from './color-syste
 import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { generateThemeVariants } from './generate-theme-variants.mjs'
 import { generateColorLanguageLineage } from './generate-color-language-lineage.mjs'
+import { generateColorLanguageParity } from './generate-color-language-parity.mjs'
 import { generateSiteAssets } from './generate-site-assets.mjs'
 import { generateObsidianThemes } from './generate-obsidian-themes.mjs'
 import { generateObsidianAppTheme } from './generate-obsidian-app-theme.mjs'
@@ -63,14 +64,17 @@ console.log(`${tokensChanged ? '✓ generated' : '- unchanged'} ${TOKENS_TS_PATH
 // 3. 生成 lineage 报告，保证任意下游 token 可反查
 generateColorLanguageLineage()
 
-// 4. 生成站点与文档派生产物（CSS vars / docs baseline / extension metadata）
+// 4. 生成 parity 报告，确保同一颜色语言在各终端保持表现一致
+generateColorLanguageParity()
+
+// 5. 生成站点与文档派生产物（CSS vars / docs baseline / extension metadata）
 generateSiteAssets()
 
-// 5. 生成 Obsidian 主题产物（基于同一 color language model）
+// 6. 生成 Obsidian 主题产物（基于同一 color language model）
 generateObsidianThemes()
 
-// 6. 生成 Obsidian 社区主题标准产物（manifest/theme.css/versions/screenshot）
+// 7. 生成 Obsidian 社区主题标准产物（manifest/theme.css/versions/screenshot）
 await generateObsidianAppTheme()
 
-// 7. 生成色彩语言一致性报告（供文档与 CI 使用）
+// 8. 生成色彩语言一致性报告（供文档与 CI 使用）
 generateColorLanguageReport()

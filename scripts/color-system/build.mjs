@@ -25,7 +25,7 @@ import {
   loadSurfaceRules,
   loadVariantProfiles,
 } from '../color-system.mjs'
-import { clamp, hslToHex, hueDistance, mixHex, normalizeHex, rgbToHsl } from '../color-utils.mjs'
+import { clamp, hexToRgba, hslToHex, hueDistance, mixHex, normalizeHex, rgbToHsl, rgbaToHex } from '../color-utils.mjs'
 
 const EXPORTED_SITE_TOKEN_KEYS = [
   'bg',
@@ -141,6 +141,227 @@ function applyDerive(baseHex, derive, foundation, variantId, steps) {
   return current
 }
 
+function uniqueRefs(items) {
+  const seen = new Set()
+  const out = []
+  for (const item of items) {
+    if (!item || seen.has(item)) continue
+    seen.add(item)
+    out.push(item)
+  }
+  return out
+}
+
+function toOpaqueHex(hex) {
+  const normalized = normalizeHex(hex)
+  if (!normalized) return null
+  return normalized.length === 9 ? normalized.slice(0, 7) : normalized
+}
+
+function applyAlpha(hex, alpha) {
+  const rgba = hexToRgba(hex)
+  if (!rgba) {
+    throw new Error(`Cannot apply alpha to invalid color: ${String(hex)}`)
+  }
+  return rgbaToHex({
+    r: rgba.r,
+    g: rgba.g,
+    b: rgba.b,
+    a: Math.round(clamp(alpha, 0, 1) * 255),
+    hasAlpha: true,
+  })
+}
+
+function resolveAbstractColorSource({
+  source,
+  variantId,
+  foundation,
+  resolveSurface,
+  resolveInteraction,
+  entryRef,
+}) {
+  if (!source || typeof source !== 'object') {
+    throw new Error(`Missing abstract color source for ${entryRef}.${variantId}`)
+  }
+
+  if (source.type === 'literal') {
+    const value = normalizeHex(source.values?.[variantId])
+    if (!value) {
+      throw new Error(`Missing literal color for ${entryRef}.${variantId}`)
+    }
+    return {
+      color: value,
+      chainRefs: [`${entryRef}.source.values.${variantId}`],
+      steps: [{
+        type: 'literal',
+        ref: `${entryRef}.source.values.${variantId}`,
+        value,
+      }],
+      sourceType: 'literal',
+      sourceRef: `${entryRef}.source.values.${variantId}`,
+      family: null,
+      tone: null,
+    }
+  }
+
+  if (source.type === 'foundation') {
+    const value = resolveFamilyToneHex(foundation, source, variantId)
+    if (!value) {
+      throw new Error(`Missing foundation tone for ${entryRef} via ${source.family}.${source.tone}.${variantId}`)
+    }
+    const ref = `foundation.families.${source.family}.tones.${source.tone}.${variantId}`
+    return {
+      color: value,
+      chainRefs: [ref],
+      steps: [{
+        type: 'foundation',
+        ref,
+        value,
+      }],
+      sourceType: 'foundation',
+      sourceRef: ref,
+      family: source.family,
+      tone: source.tone,
+    }
+  }
+
+  if (source.type === 'surface') {
+    const resolved = resolveSurface?.(source.id, variantId)
+    if (!resolved) {
+      throw new Error(`Missing referenced surface "${source.id}" while resolving ${entryRef}.${variantId}`)
+    }
+    return {
+      color: resolved.color,
+      chainRefs: resolved.chainRefs,
+      steps: [{
+        type: 'surface-ref',
+        ref: `surface-rules.surfaces.${source.id}.${variantId}`,
+        value: resolved.color,
+      }],
+      sourceType: 'surface',
+      sourceRef: source.id,
+      family: resolved.family,
+      tone: resolved.tone,
+    }
+  }
+
+  if (source.type === 'interaction') {
+    const resolved = resolveInteraction?.(source.id, variantId)
+    if (!resolved) {
+      throw new Error(`Missing referenced interaction "${source.id}" while resolving ${entryRef}.${variantId}`)
+    }
+    return {
+      color: resolved.color,
+      chainRefs: resolved.chainRefs,
+      steps: [{
+        type: 'interaction-ref',
+        ref: `interaction-rules.interactions.${source.id}.values.${variantId}`,
+        value: resolved.color,
+      }],
+      sourceType: 'interaction',
+      sourceRef: source.id,
+      family: resolved.family,
+      tone: resolved.tone,
+    }
+  }
+
+  throw new Error(`Unsupported abstract color source type "${String(source.type)}" for ${entryRef}`)
+}
+
+function applyAbstractDerive({
+  baseHex,
+  derive,
+  foundation,
+  variantId,
+  resolveSurface,
+  resolveInteraction,
+  entryRef,
+  steps,
+}) {
+  let current = normalizeHex(baseHex)
+  if (!current) {
+    throw new Error(`Cannot derive abstract color from invalid base color: ${String(baseHex)}`)
+  }
+
+  if (!derive || typeof derive !== 'object') {
+    return {
+      color: current,
+      chainRefs: [],
+    }
+  }
+
+  const chainRefs = []
+
+  if (derive.mix) {
+    const mixTarget = resolveAbstractColorSource({
+      source: derive.mix.with,
+      variantId,
+      foundation,
+      resolveSurface,
+      resolveInteraction,
+      entryRef: `${entryRef}.derive.mix.with`,
+    })
+    const mixed = mixHex(toOpaqueHex(current), toOpaqueHex(mixTarget.color), derive.mix.t)
+    current = normalizeHex(mixed)
+    chainRefs.push(...mixTarget.chainRefs)
+    steps.push({
+      type: 'mix',
+      with: mixTarget.sourceRef,
+      t: derive.mix.t,
+      value: current,
+    })
+  }
+
+  if (
+    derive.hueShift !== undefined ||
+    derive.saturationScale !== undefined ||
+    derive.lightnessShift !== undefined ||
+    derive.clampHue
+  ) {
+    const hsl = rgbToHsl(current)
+    if (!hsl) {
+      throw new Error(`Cannot convert ${current} to HSL while applying abstract derivation`)
+    }
+    const shifted = {
+      h: derive.hueShift !== undefined ? shiftHue(hsl.h, derive.hueShift) : hsl.h,
+      s: derive.saturationScale !== undefined ? clamp(hsl.s * derive.saturationScale, 0, 1) : hsl.s,
+      l: derive.lightnessShift !== undefined ? clamp(hsl.l + derive.lightnessShift, 0, 1) : hsl.l,
+    }
+    shifted.h = clampHueToRange(shifted.h, derive.clampHue)
+    current = hslToHex(shifted)
+    steps.push({
+      type: 'hsl-adjust',
+      hueShift: derive.hueShift ?? 0,
+      saturationScale: derive.saturationScale ?? 1,
+      lightnessShift: derive.lightnessShift ?? 0,
+      clampHue: derive.clampHue ?? null,
+      value: current,
+    })
+  }
+
+  if (derive.alpha !== undefined) {
+    current = applyAlpha(current, derive.alpha)
+    steps.push({
+      type: 'alpha',
+      alpha: derive.alpha,
+      value: current,
+    })
+  }
+
+  if (derive.output) {
+    current = normalizeHex(derive.output)
+    steps.push({
+      type: 'escape-hatch',
+      value: current,
+    })
+  }
+
+  return {
+    color: current,
+    chainRefs,
+  }
+}
+
 function buildSemanticRoleResolution({ foundation, rules, variantProfiles, roleId, variantId }) {
   const rule = rules.roles[roleId]
   if (!rule) throw new Error(`Missing semantic rule for role "${roleId}"`)
@@ -197,6 +418,192 @@ function buildSemanticPalette(foundation, rules, variantProfiles, variants) {
   }
 
   return { palette, resolved }
+}
+
+function buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variants) {
+  const surfaces = {}
+  const resolved = {}
+  const resolving = new Set()
+
+  function resolveSurface(surfaceId, variantId) {
+    if (resolved[surfaceId]?.[variantId]) return resolved[surfaceId][variantId]
+    const definition = rawSurfaceRules.surfaces[surfaceId]
+    if (!definition) {
+      throw new Error(`Missing surface definition for "${surfaceId}"`)
+    }
+
+    const key = `${surfaceId}:${variantId}`
+    if (resolving.has(key)) {
+      throw new Error(`Surface derivation cycle detected: ${key}`)
+    }
+    resolving.add(key)
+
+    const variantOverride = definition.byVariant?.[variantId] || {}
+    const source = variantOverride.source || definition.source
+    const derive = mergeDerive(definition.derive, variantOverride.derive)
+    const entryRef = `surface-rules.surfaces.${surfaceId}`
+    const sourceResolution = resolveAbstractColorSource({
+      source,
+      variantId,
+      foundation,
+      resolveSurface,
+      resolveInteraction: null,
+      entryRef,
+    })
+    const steps = [...sourceResolution.steps]
+    const derived = applyAbstractDerive({
+      baseHex: sourceResolution.color,
+      derive,
+      foundation,
+      variantId,
+      resolveSurface,
+      resolveInteraction: null,
+      entryRef,
+      steps,
+    })
+    steps.push({
+      type: 'variant-profile',
+      ref: `variant-profiles.variants.${variantId}`,
+    })
+
+    const result = {
+      surfaceId,
+      variantId,
+      description: definition.description,
+      color: derived.color,
+      sourceType: sourceResolution.sourceType,
+      sourceRef: sourceResolution.sourceRef,
+      family: sourceResolution.family,
+      tone: sourceResolution.tone,
+      usedEscapeHatch: Boolean(derive.output),
+      steps,
+      variantProfile: variantProfiles.variants[variantId],
+      chainRefs: uniqueRefs([
+        ...sourceResolution.chainRefs,
+        ...derived.chainRefs,
+        entryRef,
+        `variant-profiles.variants.${variantId}`,
+      ]),
+    }
+
+    if (!surfaces[surfaceId]) surfaces[surfaceId] = {}
+    surfaces[surfaceId][variantId] = result.color
+    if (!resolved[surfaceId]) resolved[surfaceId] = {}
+    resolved[surfaceId][variantId] = result
+    resolving.delete(key)
+    return result
+  }
+
+  for (const surfaceId of Object.keys(rawSurfaceRules.surfaces)) {
+    for (const variant of variants) {
+      resolveSurface(surfaceId, variant.id)
+    }
+  }
+
+  return {
+    schemaVersion: rawSurfaceRules.schemaVersion,
+    description: rawSurfaceRules.description,
+    definitions: rawSurfaceRules.surfaces,
+    surfaces,
+    resolved,
+  }
+}
+
+function buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, variantProfiles, variants) {
+  const interactions = {}
+  const resolving = new Set()
+
+  function resolveSurface(surfaceId, variantId) {
+    return surfaceRules.resolved?.[surfaceId]?.[variantId] ?? null
+  }
+
+  function resolveInteraction(interactionId, variantId) {
+    const existing = interactions[interactionId]?.resolved?.[variantId]
+    if (existing) return existing
+    const definition = rawInteractionRules.interactions[interactionId]
+    if (!definition) {
+      throw new Error(`Missing interaction definition for "${interactionId}"`)
+    }
+
+    const key = `${interactionId}:${variantId}`
+    if (resolving.has(key)) {
+      throw new Error(`Interaction derivation cycle detected: ${key}`)
+    }
+    resolving.add(key)
+
+    const variantOverride = definition.byVariant?.[variantId] || {}
+    const source = variantOverride.source || definition.source
+    const derive = mergeDerive(definition.derive, variantOverride.derive)
+    const entryRef = `interaction-rules.interactions.${interactionId}`
+    const sourceResolution = resolveAbstractColorSource({
+      source,
+      variantId,
+      foundation,
+      resolveSurface,
+      resolveInteraction,
+      entryRef,
+    })
+    const steps = [...sourceResolution.steps]
+    const derived = applyAbstractDerive({
+      baseHex: sourceResolution.color,
+      derive,
+      foundation,
+      variantId,
+      resolveSurface,
+      resolveInteraction,
+      entryRef,
+      steps,
+    })
+    steps.push({
+      type: 'variant-profile',
+      ref: `variant-profiles.variants.${variantId}`,
+    })
+
+    const result = {
+      interactionId,
+      variantId,
+      description: definition.description,
+      color: derived.color,
+      sourceType: sourceResolution.sourceType,
+      sourceRef: sourceResolution.sourceRef,
+      family: sourceResolution.family,
+      tone: sourceResolution.tone,
+      usedEscapeHatch: Boolean(derive.output),
+      steps,
+      variantProfile: variantProfiles.variants[variantId],
+      chainRefs: uniqueRefs([
+        ...sourceResolution.chainRefs,
+        ...derived.chainRefs,
+        entryRef,
+        `variant-profiles.variants.${variantId}`,
+      ]),
+    }
+
+    if (!interactions[interactionId]) {
+      interactions[interactionId] = {
+        description: definition.description,
+        values: {},
+        resolved: {},
+      }
+    }
+    interactions[interactionId].values[variantId] = result.color
+    interactions[interactionId].resolved[variantId] = result
+    resolving.delete(key)
+    return result
+  }
+
+  for (const interactionId of Object.keys(rawInteractionRules.interactions)) {
+    for (const variant of variants) {
+      resolveInteraction(interactionId, variant.id)
+    }
+  }
+
+  return {
+    schemaVersion: rawInteractionRules.schemaVersion,
+    description: rawInteractionRules.description,
+    definitions: rawInteractionRules.interactions,
+    interactions,
+  }
 }
 
 function buildSemanticSnapshotDocument(palette) {
@@ -477,10 +884,12 @@ export function buildColorLanguageModel() {
   const surfaceAdapters = loadSurfaceAdapters()
   const interactionAdapters = loadInteractionAdapters()
   const foundation = loadFoundationPalette()
-  const surfaceRules = loadSurfaceRules()
-  const interactionRules = loadInteractionRules()
+  const rawSurfaceRules = loadSurfaceRules()
+  const rawInteractionRules = loadInteractionRules()
   const semanticRules = loadSemanticRules()
   const variantProfiles = loadVariantProfiles()
+  const surfaceRules = buildResolvedSurfaceRules(rawSurfaceRules, foundation, variantProfiles, variantSpec.variants)
+  const interactionRules = buildResolvedInteractionRules(rawInteractionRules, foundation, surfaceRules, variantProfiles, variantSpec.variants)
   const { palette, resolved } = buildSemanticPalette(foundation, semanticRules, variantProfiles, variantSpec.variants)
   const semanticSnapshot = buildSemanticSnapshotDocument(palette)
   const platformTokenMaps = buildPlatformTokenMaps({
