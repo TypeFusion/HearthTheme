@@ -36,7 +36,7 @@ export const productData = {
     }
   },
   "release": {
-    "version": "1.1.3"
+    "version": "1.1.4"
   },
   "extension": {
     "itemName": "hearth-code.hearth-theme",
