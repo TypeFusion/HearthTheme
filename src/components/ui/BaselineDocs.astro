@@ -44,7 +44,9 @@ function parseExtensionChangelog(markdown: string): ExtensionReleaseRow[] {
 
 		const [, version, date = ""] = headerMatch;
 		const bullets = [...section.matchAll(/^- (.+)$/gm)].map((match) => match[1].trim()).filter(Boolean);
-		if (bullets.length === 0) continue;
+		if (bullets.length === 0) {
+			throw new Error(`Release ${version} is missing bullet entries in extension/CHANGELOG.md.`);
+		}
 
 		const [summary, ...rest] = bullets;
 		rows.push({
@@ -55,16 +57,23 @@ function parseExtensionChangelog(markdown: string): ExtensionReleaseRow[] {
 		});
 	}
 
+	if (rows.length === 0) {
+		throw new Error("No parseable release entries found in extension/CHANGELOG.md.");
+	}
+
 	return rows;
 }
 
 function readExtensionChangelogRows(): ExtensionReleaseRow[] {
+	const changelogPath = new URL("../../../extension/CHANGELOG.md", import.meta.url);
+
 	try {
-		const changelogPath = new URL("../../../extension/CHANGELOG.md", import.meta.url);
 		const content = readFileSync(changelogPath, "utf8");
 		return parseExtensionChangelog(content);
-	} catch {
-		return [];
+	} catch (error) {
+		throw new Error(
+			`Baseline docs failed to load release history from ${changelogPath.pathname}: ${error instanceof Error ? error.message : String(error)}`,
+		);
 	}
 }
 

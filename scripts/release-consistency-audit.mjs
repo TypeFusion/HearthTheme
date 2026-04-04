@@ -39,6 +39,32 @@ function topReleaseSection(markdown) {
   return sections.find((section) => /^##\s+\d+\.\d+\.\d+/m.test(section)) ?? null
 }
 
+function parseChangelogRows(markdown) {
+  const rows = []
+  const normalized = String(markdown ?? '').replace(/\r\n/g, '\n')
+  const sections = normalized.split(/\n(?=##\s+)/g)
+
+  for (const section of sections) {
+    const headerMatch = section.match(/^##\s+(\d+\.\d+\.\d+)(?:\s*-\s*(\d{4}-\d{2}-\d{2}))?/m)
+    if (!headerMatch) continue
+
+    const [, version, date = ''] = headerMatch
+    const bullets = [...section.matchAll(/^- (.+)$/gm)].map((match) => match[1].trim()).filter(Boolean)
+    if (bullets.length === 0) {
+      throw new Error(`extension/CHANGELOG.md release ${version} is missing bullet entries.`)
+    }
+
+    const [summary, ...changes] = bullets
+    rows.push({ version, date, summary, changes })
+  }
+
+  if (rows.length === 0) {
+    throw new Error('extension/CHANGELOG.md does not contain any parseable release sections.')
+  }
+
+  return rows
+}
+
 function sameJson(left, right) {
   return JSON.stringify(left) === JSON.stringify(right)
 }
@@ -56,6 +82,11 @@ try {
   const siteProductSource = readText(SITE_PRODUCT_DATA)
   const changelogVersion = firstChangelogVersion(changelogText)
   const topSection = topReleaseSection(changelogText)
+  try {
+    parseChangelogRows(changelogText)
+  } catch (error) {
+    findings.push(error instanceof Error ? error.message : String(error))
+  }
 
   if (!pkg.version) {
     findings.push('extension/package.json is missing `version`.')

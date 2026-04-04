@@ -22,6 +22,7 @@ const DOCS_BASELINE = 'docs/theme-baseline.md'
 const BASELINE_DOCS_COMPONENT = 'src/components/ui/BaselineDocs.astro'
 const PROOF_SECTION_COMPONENT = 'src/components/ui/ProofSection.astro'
 const CODE_PREVIEW_COMPONENT = 'src/components/code/CodePreview.astro'
+const CODE_PREVIEW_SOURCE = 'src/lib/codePreview.ts'
 const THEME_AUDIT_SCRIPT = 'scripts/theme-audit.mjs'
 const SITE_THEME_VARS = 'src/styles/theme-vars.css'
 const SOURCE_COLOR_SCAN_PATHS = ['src/components', 'src/layouts', 'src/styles']
@@ -583,27 +584,36 @@ function validateSiteParameterClaims() {
 
 function validateCodePreviewSourceOfTruth() {
   const codePreview = readText(CODE_PREVIEW_COMPONENT)
-  if (!codePreview) return
+  const codePreviewSource = readText(CODE_PREVIEW_SOURCE)
+  if (!codePreview || !codePreviewSource) return
+
+  if (!codePreview.includes("from '../../lib/codePreview'")) {
+    addIssue(`${CODE_PREVIEW_COMPONENT}: should read preview payload state from ${CODE_PREVIEW_SOURCE}`)
+  }
 
   const requiredThemeRefs = [
-    '../../../themes/hearth-dark.json',
-    '../../../themes/hearth-dark-soft.json',
-    '../../../themes/hearth-light.json',
-    '../../../themes/hearth-light-soft.json',
+    '../../themes/hearth-dark.json',
+    '../../themes/hearth-dark-soft.json',
+    '../../themes/hearth-light.json',
+    '../../themes/hearth-light-soft.json',
   ]
 
   for (const ref of requiredThemeRefs) {
-    if (!codePreview.includes(ref)) {
-      addIssue(`${CODE_PREVIEW_COMPONENT}: missing real theme source reference "${ref}"`)
+    if (!codePreviewSource.includes(ref)) {
+      addIssue(`${CODE_PREVIEW_SOURCE}: missing real theme source reference "${ref}"`)
     }
   }
 
-  if (!codePreview.includes("readFileSync(new URL(")) {
-    addIssue(`${CODE_PREVIEW_COMPONENT}: should load theme JSON via readFileSync + URL source path`)
+  if (!codePreviewSource.includes("readFileSync(new URL(")) {
+    addIssue(`${CODE_PREVIEW_SOURCE}: should load theme JSON via readFileSync + URL source path`)
   }
 
-  if (codePreview.includes("import { tokens } from '../../data/tokens'")) {
-    addIssue(`${CODE_PREVIEW_COMPONENT}: should not use generated token snapshot as preview theme source`)
+  if (
+    codePreview.includes("import { tokens } from '../../data/tokens'")
+    || codePreviewSource.includes("from '../data/tokens'")
+    || codePreviewSource.includes("from '../../data/tokens'")
+  ) {
+    addIssue(`${CODE_PREVIEW_SOURCE}: should not use generated token snapshot as preview theme source`)
   }
 }
 
