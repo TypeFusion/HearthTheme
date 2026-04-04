@@ -1,11 +1,20 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
 import {
+  COLOR_SYSTEM_ACTIVE_SCHEME_PATH,
   COLOR_SYSTEM_ADAPTERS_PATH,
+  COLOR_SYSTEM_FOUNDATION_PATH,
+  COLOR_SYSTEM_INTERACTION_RULES_PATH,
+  COLOR_SYSTEM_SCHEME_PATH,
   COLOR_SYSTEM_SEMANTIC_PATH,
+  COLOR_SYSTEM_SEMANTIC_RULES_PATH,
+  COLOR_SYSTEM_SURFACE_RULES_PATH,
+  COLOR_SYSTEM_TAXONOMY_PATH,
   COLOR_SYSTEM_TUNING_PATH,
+  COLOR_SYSTEM_VARIANT_PROFILES_PATH,
   COLOR_SYSTEM_VARIANTS_PATH,
   getThemeOutputFiles,
+  loadColorSchemeManifest,
   loadColorSystemTuning,
   loadRoleAdapters,
 } from './color-system.mjs'
@@ -23,6 +32,7 @@ const ROLE_ADAPTERS = loadRoleAdapters()
 const ROLE_SPECS = ROLE_ADAPTERS.filter((role) => role.includeInReport)
 const ROLE_INDEX = new Map(ROLE_ADAPTERS.map((role) => [role.id, role]))
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
+const SCHEME = loadColorSchemeManifest()
 
 const OUTPUT_JSON = 'reports/color-language-consistency.json'
 const OUTPUT_MARKDOWN = 'docs/color-language-report.md'
@@ -229,9 +239,28 @@ function buildReportObject(roleRows, lightPolarityRows) {
   return {
     schemaVersion: 1,
     sourceOfTruth: {
-      colorSystem: [COLOR_SYSTEM_VARIANTS_PATH, COLOR_SYSTEM_ADAPTERS_PATH, COLOR_SYSTEM_SEMANTIC_PATH, COLOR_SYSTEM_TUNING_PATH],
+      activeScheme: COLOR_SYSTEM_ACTIVE_SCHEME_PATH,
+      scheme: COLOR_SYSTEM_SCHEME_PATH,
+      colorSystem: [
+        COLOR_SYSTEM_FOUNDATION_PATH,
+        COLOR_SYSTEM_SURFACE_RULES_PATH,
+        COLOR_SYSTEM_INTERACTION_RULES_PATH,
+        COLOR_SYSTEM_SEMANTIC_RULES_PATH,
+        COLOR_SYSTEM_TAXONOMY_PATH,
+        COLOR_SYSTEM_VARIANT_PROFILES_PATH,
+        COLOR_SYSTEM_VARIANTS_PATH,
+        COLOR_SYSTEM_ADAPTERS_PATH,
+        COLOR_SYSTEM_TUNING_PATH,
+      ],
+      semanticSnapshot: COLOR_SYSTEM_SEMANTIC_PATH,
       generatedThemes: Object.values(THEME_FILES),
       generator: 'scripts/generate-theme-variants.mjs',
+    },
+    scheme: {
+      id: SCHEME.id,
+      name: SCHEME.name,
+      headline: SCHEME.headline,
+      summary: SCHEME.summary,
     },
     adapterContract,
     roles: roleRows,

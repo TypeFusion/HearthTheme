@@ -1,7 +1,14 @@
 ---
-import { readFileSync } from 'node:fs'
 import { t, type Lang } from '../../i18n/utils'
-import { codeToHtml } from 'shiki'
+import {
+  DEFAULT_PREVIEW_FILE,
+  DEFAULT_PREVIEW_THEME,
+  getPreviewRootStyle,
+  previewTabs,
+  previewThemeStateByKey,
+  previewThemeTabs,
+  renderPreviewState,
+} from '../../lib/codePreview'
 
 interface Props {
   lang: Lang
@@ -10,375 +17,49 @@ interface Props {
 
 const { lang, compact = false } = Astro.props
 
-type ThemeKey = 'dark' | 'soft' | 'light' | 'lightSoft'
-
-type PreviewTheme = {
-  name: string
-  type: 'dark' | 'light'
-  colors: Record<string, string>
-  tokenColors: Array<{
-    scope?: string | string[]
-    settings?: { foreground?: string }
-  }>
-}
-
-type PreviewThemeState = {
-  label: string
-  panelBg: string
-  stripBg: string
-  stripColor: string
-  stripBorder: string
-  toolbarBg: string
-  toolbarBorder: string
-  tabColor: string
-  tabHoverColor: string
-  tabActiveColor: string
-  switchColor: string
-  switchHoverColor: string
-  switchActiveColor: string
-  paper: boolean
-}
-
-function loadTheme(relativePath: string, name: string, type: 'dark' | 'light'): PreviewTheme {
-  const raw = JSON.parse(readFileSync(new URL(relativePath, import.meta.url), 'utf8'))
-  return {
-    ...raw,
-    name,
-    type,
-  } as PreviewTheme
-}
-
-function getTokenColor(theme: PreviewTheme, scopes: string[]): string | null {
-  for (const entry of theme.tokenColors || []) {
-    const entryScopes = Array.isArray(entry.scope) ? entry.scope : [entry.scope]
-    if (!entryScopes.some((scope) => scopes.includes(String(scope || '')))) continue
-    if (entry.settings?.foreground) return entry.settings.foreground
-  }
-  return null
-}
-
-function requireThemeColor(value: string | undefined, key: string): string {
-  if (!value) {
-    throw new Error(`CodePreview: missing required theme color "${key}"`)
-  }
-  return value
-}
-
-function getPanelPalette(theme: PreviewTheme) {
-  const bg = requireThemeColor(theme.colors?.['editor.background'], 'editor.background')
-  const fg = requireThemeColor(theme.colors?.['editor.foreground'], 'editor.foreground')
-  const sidebar = theme.colors?.['sideBar.background'] || bg
-  const comment = getTokenColor(theme, ['comment'])
-    || fg
-    || theme.colors?.['editorLineNumber.foreground']
-    || sidebar
-  const variable = getTokenColor(theme, ['variable', 'variable.other.readwrite'])
-    || fg
-    || comment
-  return { bg, fg, sidebar, comment, variable }
-}
-
 function escapeJsonForScript(value: unknown): string {
   return JSON.stringify(value).replace(/</g, '\\u003c')
 }
 
-const HearthDark = loadTheme('../../../themes/hearth-dark.json', 'Hearth Dark', 'dark')
-const HearthDarkSoft = loadTheme('../../../themes/hearth-dark-soft.json', 'Hearth Dark Soft', 'dark')
-const HearthLight = loadTheme('../../../themes/hearth-light.json', 'Hearth Light', 'light')
-const HearthLightSoft = loadTheme('../../../themes/hearth-light-soft.json', 'Hearth Light Soft', 'light')
-
-const d = getPanelPalette(HearthDark)
-const s = getPanelPalette(HearthDarkSoft)
-const l = getPanelPalette(HearthLight)
-const ls = getPanelPalette(HearthLightSoft)
-
-const samples = {
-  ts: `// async data fetching with full type safety
-import { createContext, useContext } from 'react'
-
-interface ApiResponse<T> {
-  data: T
-  status: number
-  ok: boolean
-}
-
-async function request<T>(
-  url: string,
-  options?: RequestInit
-): Promise<ApiResponse<T>> {
-  const res = await fetch(url, options)
-  const data = await res.json() as T
-  return { data, status: res.status, ok: res.ok }
-}
-
-const BASE = 'https://api.hearthcode.dev'
-const TIMEOUT = 5_000`,
-
-  py: `# dataclass-based connection pool
-from dataclasses import dataclass, field
-from typing import Optional, ClassVar
-import asyncio
-
-@dataclass
-class Connection:
-    host: str
-    port: int = 5432
-    timeout: float = 30.0
-
-class Pool:
-    MAX: ClassVar[int] = 20
-
-    def __init__(self, dsn: str):
-        self.dsn = dsn
-        self._pool: list[Connection] = []
-
-    async def acquire(self) -> Optional[Connection]:
-        if not self._pool:
-            return None
-        return self._pool.pop()`,
-
-  go: `// HTTP server with graceful shutdown
-package main
-
-import (
-  "context"
-  "net/http"
-  "time"
-)
-
-type Server struct {
-  addr    string
-  timeout time.Duration
-  mux     *http.ServeMux
-}
-
-func New(addr string) *Server {
-  return &Server{
-    addr:    addr,
-    timeout: 10 * time.Second,
-    mux:     http.NewServeMux(),
-  }
-}`,
-
-  rs: `// typed parser with Result and Option
-use std::collections::HashMap;
-
-#[derive(Debug, Clone)]
-struct Config {
-    host: String,
-    port: u16,
-}
-
-fn load_config(env: &HashMap<String, String>) -> Result<Config, String> {
-    let host = env.get("HOST").cloned().unwrap_or_else(|| "127.0.0.1".into());
-    let port = env
-        .get("PORT")
-        .and_then(|v| v.parse::<u16>().ok())
-        .unwrap_or(8080);
-    Ok(Config { host, port })
-}`,
-
-  java: `// immutable service model with records
-import java.time.Duration;
-import java.util.List;
-
-public final class HearthService {
-  private final String endpoint;
-  private final Duration timeout;
-
-  public HearthService(String endpoint) {
-    this.endpoint = endpoint;
-    this.timeout = Duration.ofSeconds(5);
-  }
-
-  public record Result<T>(T data, int status) {}
-}`,
-
-  bash: `#!/usr/bin/env bash
-set -euo pipefail
-
-APP_NAME="hearth"
-BUILD_DIR="./dist"
-
-echo "[\${APP_NAME}] cleaning old build"
-rm -rf "\${BUILD_DIR}"
-
-echo "[\${APP_NAME}] building site"
-npm run build
-`,
-
-  html: `<!-- Hearth UI component -->
-<style>
-  :root {
-    --HearthCode: var(--hearth-ember);
-    --bg: var(--hearth-bg);
-  }
-  .card {
-    background: var(--bg);
-    border: 1px solid var(--HearthCode);
-    border-radius: 8px;
-    padding: 1.5rem;
-  }
-</style>
-
-<div class="card">
-  <h2>HearthCode</h2>
-  <p>Code by Hearthlight</p>
-</div>`,
-}
-
-const langMap: Record<string, string> = {
-  ts: 'typescript',
-  py: 'python',
-  go: 'go',
-  rs: 'rust',
-  java: 'java',
-  bash: 'bash',
-  html: 'html',
-}
-
-const rendered: Record<string, Record<ThemeKey, string>> = {}
-for (const [key, code] of Object.entries(samples)) {
-  const [dark, soft, light, lightSoft] = await Promise.all([
-    codeToHtml(code, { lang: langMap[key], theme: HearthDark }),
-    codeToHtml(code, { lang: langMap[key], theme: HearthDarkSoft }),
-    codeToHtml(code, { lang: langMap[key], theme: HearthLight }),
-    codeToHtml(code, { lang: langMap[key], theme: HearthLightSoft }),
-  ])
-  rendered[key] = { dark, soft, light, lightSoft }
-}
-
-const tabs = [
-  { key: 'ts', label: 'index.ts' },
-  { key: 'py', label: 'main.py' },
-  { key: 'go', label: 'server.go' },
-  { key: 'rs', label: 'main.rs' },
-  { key: 'java', label: 'App.java' },
-  { key: 'bash', label: 'build.sh' },
-  { key: 'html', label: 'index.html' },
-]
-
-const previewThemeStateByKey: Record<ThemeKey, PreviewThemeState> = {
-  dark: {
-    label: 'Hearth Dark',
-    panelBg: d.bg,
-    stripBg: d.sidebar,
-    stripColor: d.comment,
-    stripBorder: 'var(--hearth-preview-strip-border-dark)',
-    toolbarBg: d.sidebar,
-    toolbarBorder: 'var(--hearth-preview-strip-border-dark)',
-    tabColor: d.comment,
-    tabHoverColor: d.variable,
-    tabActiveColor: d.fg,
-    switchColor: d.comment,
-    switchHoverColor: d.variable,
-    switchActiveColor: d.fg,
-    paper: false,
-  },
-  soft: {
-    label: 'Hearth Dark Soft',
-    panelBg: s.bg,
-    stripBg: s.sidebar,
-    stripColor: s.comment,
-    stripBorder: 'var(--hearth-preview-strip-border-dark)',
-    toolbarBg: s.sidebar,
-    toolbarBorder: 'var(--hearth-preview-strip-border-dark)',
-    tabColor: s.comment,
-    tabHoverColor: s.variable,
-    tabActiveColor: s.fg,
-    switchColor: s.comment,
-    switchHoverColor: s.variable,
-    switchActiveColor: s.fg,
-    paper: false,
-  },
-  light: {
-    label: 'Hearth Light',
-    panelBg: l.bg,
-    stripBg: l.sidebar,
-    stripColor: l.comment,
-    stripBorder: 'var(--hearth-preview-strip-border-light)',
-    toolbarBg: l.sidebar,
-    toolbarBorder: 'var(--hearth-preview-strip-border-light)',
-    tabColor: l.comment,
-    tabHoverColor: l.variable,
-    tabActiveColor: l.variable,
-    switchColor: l.comment,
-    switchHoverColor: l.variable,
-    switchActiveColor: l.variable,
-    paper: true,
-  },
-  lightSoft: {
-    label: 'Hearth Light Soft',
-    panelBg: ls.bg,
-    stripBg: ls.sidebar,
-    stripColor: ls.comment,
-    stripBorder: 'var(--hearth-preview-strip-border-light)',
-    toolbarBg: ls.sidebar,
-    toolbarBorder: 'var(--hearth-preview-strip-border-light)',
-    tabColor: ls.comment,
-    tabHoverColor: ls.variable,
-    tabActiveColor: ls.variable,
-    switchColor: ls.comment,
-    switchHoverColor: ls.variable,
-    switchActiveColor: ls.variable,
-    paper: true,
-  },
-}
-
-const previewRootStyle = [
-  `--preview-toolbar-bg: ${previewThemeStateByKey.dark.toolbarBg}`,
-  `--preview-toolbar-border: ${previewThemeStateByKey.dark.toolbarBorder}`,
-  `--preview-tab-color: ${previewThemeStateByKey.dark.tabColor}`,
-  `--preview-tab-hover-color: ${previewThemeStateByKey.dark.tabHoverColor}`,
-  `--preview-tab-active-color: ${previewThemeStateByKey.dark.tabActiveColor}`,
-  `--preview-switch-color: ${previewThemeStateByKey.dark.switchColor}`,
-  `--preview-switch-hover-color: ${previewThemeStateByKey.dark.switchHoverColor}`,
-  `--preview-switch-active-color: ${previewThemeStateByKey.dark.switchActiveColor}`,
-  `--preview-panel-bg: ${previewThemeStateByKey.dark.panelBg}`,
-  `--preview-strip-bg: ${previewThemeStateByKey.dark.stripBg}`,
-  `--preview-strip-color: ${previewThemeStateByKey.dark.stripColor}`,
-  `--preview-strip-border-color: ${previewThemeStateByKey.dark.stripBorder}`,
-].join('; ')
-
+const previewRootStyle = getPreviewRootStyle()
 const previewThemeJson = escapeJsonForScript(previewThemeStateByKey)
-const renderedJson = escapeJsonForScript(rendered)
+const initialPreviewHtml = await renderPreviewState(DEFAULT_PREVIEW_FILE, DEFAULT_PREVIEW_THEME)
+const previewDataEndpoint = '/code-preview-data.json'
 ---
 
 {
   compact ? (
-    <div class="code-preview-root" data-code-preview data-auto-carousel="true" style={previewRootStyle}>
-      <script type="application/json" data-preview-rendered set:html={renderedJson}></script>
+    <div class="code-preview-root" data-code-preview data-auto-carousel="true" data-preview-endpoint={previewDataEndpoint} style={previewRootStyle}>
       <script type="application/json" data-preview-themes set:html={previewThemeJson}></script>
 
       <div class="preview-stage preview-stage--compact overflow-hidden">
         <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3">
           <div class="flex overflow-x-auto whitespace-nowrap gap-2" data-preview-tabs>
-            {tabs.map(({ key, label }) => (
+            {previewTabs.map(({ key, label }) => (
               <button
                 type="button"
                 data-file-tab={key}
-                class={`preview-tab hearth-tab font-ui text-[12px] sm:text-[12.5px] px-3 sm:px-3.5 py-2 ${key === 'ts' ? 'is-active' : ''}`}
+                class={`preview-tab hearth-tab font-ui text-[12px] sm:text-[12.5px] px-3 sm:px-3.5 py-2 ${key === DEFAULT_PREVIEW_FILE ? 'is-active' : ''}`}
               >
                 {label}
               </button>
             ))}
           </div>
           <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border p-1">
-            <button type="button" data-theme-tab="dark" class="theme-tab is-active">Dark</button>
-            <button type="button" data-theme-tab="soft" class="theme-tab">Dark Soft</button>
-            <button type="button" data-theme-tab="light" class="theme-tab">Light</button>
-            <button type="button" data-theme-tab="lightSoft" class="theme-tab">Light Soft</button>
+            {previewThemeTabs.map(({ key, label }) => (
+              <button type="button" data-theme-tab={key} class={`theme-tab ${key === DEFAULT_PREVIEW_THEME ? 'is-active' : ''}`}>{label}</button>
+            ))}
           </div>
         </div>
 
         <div class="preview-display preview-theme-panel" data-preview-display>
           <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5" data-preview-theme-label>
-            Hearth Dark
+            {previewThemeStateByKey[DEFAULT_PREVIEW_THEME].label}
           </div>
           <div
             class="preview-content overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
             data-preview-content
-            set:html={rendered.ts.dark}
+            set:html={initialPreviewHtml}
           />
         </div>
       </div>
@@ -393,38 +74,36 @@ const renderedJson = escapeJsonForScript(rendered)
           </p>
         </div>
 
-        <div class="code-preview-root preview-stage overflow-hidden" data-code-preview style={previewRootStyle}>
-          <script type="application/json" data-preview-rendered set:html={renderedJson}></script>
+        <div class="code-preview-root preview-stage overflow-hidden" data-code-preview data-preview-endpoint={previewDataEndpoint} style={previewRootStyle}>
           <script type="application/json" data-preview-themes set:html={previewThemeJson}></script>
 
           <div class="preview-toolbar px-2.5 sm:px-3 py-2.5 sm:py-3">
             <div class="flex overflow-x-auto whitespace-nowrap gap-2" data-preview-tabs>
-              {tabs.map(({ key, label }) => (
+              {previewTabs.map(({ key, label }) => (
                 <button
                   type="button"
                   data-file-tab={key}
-                  class={`preview-tab hearth-tab font-ui text-[12px] sm:text-[12.5px] px-3 sm:px-3.5 py-2 ${key === 'ts' ? 'is-active' : ''}`}
+                  class={`preview-tab hearth-tab font-ui text-[12px] sm:text-[12.5px] px-3 sm:px-3.5 py-2 ${key === DEFAULT_PREVIEW_FILE ? 'is-active' : ''}`}
                 >
                   {label}
                 </button>
               ))}
             </div>
             <div class="theme-switch mt-2 sm:mt-2.5 inline-flex gap-1 rounded-full border p-1">
-              <button type="button" data-theme-tab="dark" class="theme-tab is-active">Dark</button>
-              <button type="button" data-theme-tab="soft" class="theme-tab">Dark Soft</button>
-              <button type="button" data-theme-tab="light" class="theme-tab">Light</button>
-              <button type="button" data-theme-tab="lightSoft" class="theme-tab">Light Soft</button>
+              {previewThemeTabs.map(({ key, label }) => (
+                <button type="button" data-theme-tab={key} class={`theme-tab ${key === DEFAULT_PREVIEW_THEME ? 'is-active' : ''}`}>{label}</button>
+              ))}
             </div>
           </div>
 
           <div class="preview-display preview-theme-panel" data-preview-display>
             <div class="theme-strip font-ui text-[10px] tracking-[0.09em] uppercase px-4 py-2.5" data-preview-theme-label>
-              Hearth Dark
+              {previewThemeStateByKey[DEFAULT_PREVIEW_THEME].label}
             </div>
             <div
               class="preview-content overflow-hidden text-[13px] leading-relaxed p-4 sm:p-5 shiki-wrap"
               data-preview-content
-              set:html={rendered.ts.dark}
+              set:html={initialPreviewHtml}
             />
           </div>
         </div>
@@ -746,16 +425,8 @@ const renderedJson = escapeJsonForScript(rendered)
     const previewDisplay = root.querySelector<HTMLElement>('[data-preview-display]')
     const previewContent = root.querySelector<HTMLElement>('[data-preview-content]')
     const themeLabel = root.querySelector<HTMLElement>('[data-preview-theme-label]')
-    const renderedScript = root.querySelector<HTMLScriptElement>('[data-preview-rendered]')
     const themeScript = root.querySelector<HTMLScriptElement>('[data-preview-themes]')
-
-    const renderedMap = (() => {
-      try {
-        return JSON.parse(renderedScript?.textContent || '{}') as Record<string, Record<string, string>>
-      } catch {
-        return {}
-      }
-    })()
+    const dataEndpoint = root.dataset.previewEndpoint || '/code-preview-data.json'
 
     const themeStateMap = (() => {
       try {
@@ -772,7 +443,13 @@ const renderedJson = escapeJsonForScript(rendered)
     let currentFile = fileOrder[0] ?? 'ts'
     let currentTheme = themeOrder[0] ?? 'dark'
     let currentRenderKey = `${currentFile}:${currentTheme}`
+    let renderedMap: Record<string, Record<string, string>> = {}
+    let hasFullPreviewData = false
+    let previewDataPromise: Promise<Record<string, Record<string, string>>> | null = null
     let lastInteractionAt = 0
+    const warmupTimer = window.setTimeout(() => {
+      void ensureRenderedMap()
+    }, 1200)
     let fileTimer: number | undefined
     let themeTimer: number | undefined
 
@@ -780,8 +457,41 @@ const renderedJson = escapeJsonForScript(rendered)
     const FILE_INTERVAL_MS = 6800
     const THEME_INTERVAL_MS = 17000
 
+    if (previewContent?.innerHTML) {
+      renderedMap[currentFile] = {
+        [currentTheme]: previewContent.innerHTML,
+      }
+    }
+
     const markInteraction = () => {
       lastInteractionAt = Date.now()
+    }
+
+    const ensureRenderedMap = async () => {
+      if (hasFullPreviewData) return renderedMap
+      if (!previewDataPromise) {
+        previewDataPromise = fetch(dataEndpoint, {
+          headers: { accept: 'application/json' },
+        })
+          .then(async response => {
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`)
+            }
+            const payload = await response.json() as { rendered?: Record<string, Record<string, string>> }
+            if (!payload?.rendered) {
+              throw new Error('Missing rendered preview payload.')
+            }
+            renderedMap = payload.rendered
+            hasFullPreviewData = true
+            return renderedMap
+          })
+          .catch(error => {
+            previewDataPromise = null
+            console.error('CodePreview: failed to load preview payload.', error)
+            return renderedMap
+          })
+      }
+      return previewDataPromise
     }
 
     const triggerRefresh = (el: HTMLElement | null, animate = true) => {
@@ -793,14 +503,27 @@ const renderedJson = escapeJsonForScript(rendered)
       })
     }
 
-    const renderActive = (animate = true) => {
-      const nextRenderKey = `${currentFile}:${currentTheme}`
-      const nextHtml = renderedMap?.[currentFile]?.[currentTheme]
-      if (previewContent && nextHtml && currentRenderKey !== nextRenderKey) {
+    const renderActive = async (animate = true) => {
+      const targetFile = currentFile
+      const targetTheme = currentTheme
+      let nextHtml = renderedMap?.[targetFile]?.[targetTheme]
+
+      if (!nextHtml) {
+        await ensureRenderedMap()
+        nextHtml = renderedMap?.[targetFile]?.[targetTheme]
+      }
+
+      if (!nextHtml || targetFile !== currentFile || targetTheme !== currentTheme) {
+        return false
+      }
+
+      const nextRenderKey = `${targetFile}:${targetTheme}`
+      if (previewContent && currentRenderKey !== nextRenderKey) {
         previewContent.innerHTML = nextHtml
       }
       currentRenderKey = nextRenderKey
       triggerRefresh(previewContent, animate)
+      return true
     }
 
     const applyThemeUi = (themeKey: string) => {
@@ -828,27 +551,44 @@ const renderedJson = escapeJsonForScript(rendered)
       }
     }
 
-    const setTheme = (themeKey: string | null, animate = true) => {
-      if (!themeKey) return
-      currentTheme = themeKey
-      applyThemeUi(themeKey)
-
+    const syncThemeTabs = () => {
       themeTabs.forEach(tab => {
-        tab.classList.toggle('is-active', tab.dataset.themeTab === themeKey)
+        tab.classList.toggle('is-active', tab.dataset.themeTab === currentTheme)
       })
-
-      renderActive(animate)
     }
 
-    const setFile = (fileKey: string | null, animate = true) => {
-      if (!fileKey) return
-      currentFile = fileKey
-
+    const syncFileTabs = () => {
       fileTabs.forEach(tab => {
-        tab.classList.toggle('is-active', tab.dataset.fileTab === fileKey)
+        tab.classList.toggle('is-active', tab.dataset.fileTab === currentFile)
       })
+    }
 
-      renderActive(animate)
+    const setTheme = async (themeKey: string | null, animate = true) => {
+      if (!themeKey) return
+      const previousTheme = currentTheme
+      currentTheme = themeKey
+      applyThemeUi(themeKey)
+      syncThemeTabs()
+
+      const didRender = await renderActive(animate)
+      if (!didRender && currentTheme === themeKey) {
+        currentTheme = previousTheme
+        applyThemeUi(previousTheme)
+        syncThemeTabs()
+      }
+    }
+
+    const setFile = async (fileKey: string | null, animate = true) => {
+      if (!fileKey) return
+      const previousFile = currentFile
+      currentFile = fileKey
+      syncFileTabs()
+
+      const didRender = await renderActive(animate)
+      if (!didRender && currentFile === fileKey) {
+        currentFile = previousFile
+        syncFileTabs()
+      }
     }
 
     const nextFrom = (items: string[], current: string) => {
@@ -865,27 +605,27 @@ const renderedJson = escapeJsonForScript(rendered)
       fileTimer = window.setInterval(() => {
         if (Date.now() - lastInteractionAt < INTERACTION_PAUSE_MS) return
         const nextFile = nextFrom(fileOrder, currentFile)
-        setFile(nextFile, true)
+        void setFile(nextFile, true)
       }, FILE_INTERVAL_MS)
 
       themeTimer = window.setInterval(() => {
         if (Date.now() - lastInteractionAt < INTERACTION_PAUSE_MS) return
         const nextTheme = nextFrom(themeOrder, currentTheme)
-        setTheme(nextTheme, true)
+        void setTheme(nextTheme, true)
       }, THEME_INTERVAL_MS)
     }
 
     fileTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         markInteraction()
-        setFile(tab.dataset.fileTab ?? null, true)
+        void setFile(tab.dataset.fileTab ?? null, true)
       })
     })
 
     themeTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         markInteraction()
-        setTheme(tab.dataset.themeTab ?? null, true)
+        void setTheme(tab.dataset.themeTab ?? null, true)
       })
     })
 
@@ -893,10 +633,12 @@ const renderedJson = escapeJsonForScript(rendered)
     root.addEventListener('focusin', markInteraction, { passive: true })
 
     applyThemeUi(currentTheme)
-    setFile(currentFile, false)
+    syncFileTabs()
+    syncThemeTabs()
     setupAutoCarousel()
 
     window.addEventListener('beforeunload', () => {
+      window.clearTimeout(warmupTimer)
       if (fileTimer) window.clearInterval(fileTimer)
       if (themeTimer) window.clearInterval(themeTimer)
     })

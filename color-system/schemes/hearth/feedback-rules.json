@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "description": "Abstract feedback roles for HearthCode. These states carry validation, guidance, and outcome semantics across platforms without borrowing ownership from any single terminal.",
+  "feedbacks": {
+    "note": {
+      "description": "Calm contextual note and low-pressure explanatory signal.",
+      "source": {
+        "type": "foundation",
+        "family": "olive",
+        "tone": "base"
+      }
+    },
+    "info": {
+      "description": "Cool informational signal for guidance and neutral notices.",
+      "source": {
+        "type": "foundation",
+        "family": "mineral",
+        "tone": "base"
+      }
+    },
+    "success": {
+      "description": "Affirming completion and healthy-state signal.",
+      "source": {
+        "type": "foundation",
+        "family": "moss",
+        "tone": "base"
+      }
+    },
+    "warning": {
+      "description": "Measured caution signal that stays warm without collapsing into danger.",
+      "source": {
+        "type": "foundation",
+        "family": "terracotta",
+        "tone": "base"
+      }
+    },
+    "error": {
+      "description": "High-urgency failure signal with ember pressure.",
+      "source": {
+        "type": "foundation",
+        "family": "ember",
+        "tone": "base"
+      }
+    }
+  }
+}

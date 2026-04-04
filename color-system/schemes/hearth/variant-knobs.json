@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "description": "Scheme-level variant knobs for HearthCode. These hold climate-sensitive intensities without turning interaction rules back into per-variant result tables.",
+  "interactionAlpha": {
+    "selection": {
+      "dark": 0.184,
+      "darkSoft": 0.075,
+      "light": 0.129,
+      "lightSoft": 0.129
+    },
+    "focusRing": {
+      "dark": 0.321,
+      "darkSoft": 0.227,
+      "light": 0.29,
+      "lightSoft": 0.29
+    }
+  },
+  "surfaceMix": {
+    "panelLift": {
+      "dark": 0.056,
+      "darkSoft": 0.067,
+      "light": 0.076,
+      "lightSoft": 0.084
+    },
+    "gutterBand": {
+      "dark": 0.368,
+      "darkSoft": 0.461,
+      "light": 0.336,
+      "lightSoft": 0.47
+    },
+    "borderBand": {
+      "dark": 0.11,
+      "darkSoft": 0.174,
+      "light": 0.169,
+      "lightSoft": 0.231
+    }
+  },
+  "interfaceMix": {
+    "supportInk": {
+      "dark": 0.311,
+      "darkSoft": 0.217,
+      "light": 0.232,
+      "lightSoft": 0.298
+    },
+    "mutedInk": {
+      "dark": 0.454,
+      "darkSoft": 0.363,
+      "light": 0.497,
+      "lightSoft": 0.589
+    },
+    "subtleInk": {
+      "dark": 0.296,
+      "darkSoft": 0.243,
+      "light": 0.398,
+      "lightSoft": 0.005
+    },
+    "shellRaised": {
+      "dark": 0.242,
+      "darkSoft": 0.285,
+      "light": 0.098,
+      "lightSoft": 0.113
+    },
+    "navActiveFill": {
+      "dark": 0.195,
+      "darkSoft": 0.204,
+      "light": 0.015,
+      "lightSoft": 0.012
+    },
+    "navInactiveFill": {
+      "dark": 0.134,
+      "darkSoft": 0.175,
+      "light": 0.041,
+      "lightSoft": 0
+    }
+  },
+  "guidanceMix": {
+    "guide": {
+      "dark": 0.64,
+      "darkSoft": 0.64,
+      "light": 0.37,
+      "lightSoft": 0.44
+    }
+  },
+  "guidanceAlpha": {
+    "bracketMatchFill": {
+      "dark": 0.094,
+      "darkSoft": 0.071,
+      "light": 0.086,
+      "lightSoft": 0.086
+    },
+    "bracketMatchStroke": {
+      "dark": 0.322,
+      "darkSoft": 0.243,
+      "light": 0.275,
+      "lightSoft": 0.275
+    }
+  }
+}

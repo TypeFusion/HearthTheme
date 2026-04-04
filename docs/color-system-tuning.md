@@ -1,8 +1,8 @@
 # HearthCode Color System Tuning Reference
 
-This document is a quick reference for editing `color-system/tuning.json`.
+This document is a quick reference for editing `color-system/framework/tuning.json`.
 
-`tuning.json` is the single source for:
+`tuning.json` is the calibration source for:
 
 - light-variant compensation behavior
 - global separation/readability optimization controls
@@ -67,7 +67,7 @@ Internally, loader logic flattens all groups into one unique var map for generat
 
 ## 3. Safe Edit Workflow
 
-1. Edit only `color-system/tuning.json`.
+1. Edit only `color-system/framework/tuning.json`.
 2. Run `pnpm run sync`.
 3. Run `pnpm run check:sync`.
 4. Run `pnpm run check:preview`.

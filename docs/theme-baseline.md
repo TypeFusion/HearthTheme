@@ -1,6 +1,6 @@
 # Hearth Theme Baseline
 
-Updated: 2026-03-29
+Updated: 2026-03-30
 
 ## 1) Design Intent
 
@@ -11,7 +11,7 @@ Hearth uses one warm semantic language across four variants:
 - Light mode (`Hearth Light`): parchment base, walnut ink text, yellow-led warmth with brick-red accents; tuned for daytime office and document-dense reading.
 - Light Soft (`Hearth Light Soft`): same light-mode semantics with calmer daytime contrast; tuned for long daytime sessions.
 
-Role parity is mandatory: syntax roles keep the same meaning across all variants. This line runs warm-only (no cool anchor), and tuning is mainly via lightness/chroma with role-weighted exposure balancing, with bounded hue compensation when readability requires it.
+Role parity is mandatory: syntax roles keep the same meaning across all variants. This line stays warm-neutral with a bounded mineral cool anchor, and calibration is mainly handled through lightness/chroma control, role-weighted exposure balancing, and bounded hue compensation when readability requires it.
 
 ## 2) Semantic Color Matrix
 
@@ -82,19 +82,26 @@ Theme releases must keep both layers aligned:
 
 All palette changes must follow this order:
 
-1. Edit semantic role palette: `color-system/semantic.json`.
-2. If role mapping changes, update `color-system/adapters.json` in the same PR.
-3. If variant registration/path rules change, update `color-system/variants.json`.
-4. If compensation/chroma policy changes, update `color-system/tuning.json` in the same PR.
-5. If this is a UI/chrome baseline shift, update `color-system/hearth-dark.source.json`.
-6. If this is a deliberate derivation reset, update templates in `color-system/templates/*.base.json` in the same PR.
-7. Run `pnpm run sync` (this regenerates `themes/*.json` and all downstream artifacts).
-8. Run `pnpm run check:sync` (must be clean right after sync).
-9. Run `pnpm run audit:generated-origin` (generated outputs must be backed by changes in `color-system/` or `scripts/`).
-10. Run `pnpm run audit:all` (`theme + copy + claims + generated-origin + cjk + release`).
-11. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
-12. If thresholds or governance changed, update this document and audit scripts in the same PR.
-13. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
+1. Edit the highest valid authority:
+   - `color-system/active-scheme.json` to switch the active scheme
+   - `color-system/schemes/hearth/scheme.json`, `philosophy.md`, and `taxonomy.json` for public-facing identity plus abstract grouping
+   - `color-system/schemes/hearth/foundation.json` for named families
+   - `color-system/schemes/hearth/semantic-rules.json` for role derivation
+   - `color-system/schemes/hearth/surface-rules.json` for abstract surfaces
+   - `color-system/schemes/hearth/interaction-rules.json` for shared interaction primitives
+   - `color-system/framework/variant-profiles.json` for climate strategy
+   - `color-system/framework/adapters.json` for platform contracts
+   - `color-system/framework/variants.json` for output routing
+2. If compensation/chroma policy changes, update `color-system/framework/tuning.json` in the same PR.
+3. If this is a UI/chrome compatibility shift, first update `color-system/framework/vscode-chrome-contract.json`; only edit `color-system/hearth-dark.source.json` directly if the token-scope baseline itself must change.
+4. If this is a deliberate derivation reset, update templates in `color-system/templates/*.base.json` in the same PR, but treat their `colors` blocks as sync-managed snapshots.
+5. Run `pnpm run sync` (this regenerates `color-system/semantic.json`, `themes/*.json`, and all downstream artifacts).
+6. Run `pnpm run check:sync` (must be clean right after sync).
+7. Run `pnpm run audit:generated-origin` (generated outputs must be backed by scheme/core/framework or generator changes).
+8. Run `pnpm run audit:all` (`theme + lineage + obsidian + copy + claims + generated-origin + cjk + release`).
+9. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
+10. If thresholds or governance changed, update this document and audit scripts in the same PR.
+11. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
 
 One-shot alternative:
 
@@ -102,19 +109,25 @@ One-shot alternative:
 
 ## 6) PR Acceptance Checklist
 
-- `color-system/semantic.json` is the semantic color authority.
-- `color-system/adapters.json` is the adapter contract authority.
-- `color-system/variants.json` is the variant/output routing authority.
-- `color-system/tuning.json` is the algorithmic compensation authority.
-- `color-system/hearth-dark.source.json` is the UI/chrome baseline source.
+- `color-system/active-scheme.json` selects the current scheme.
+- `color-system/schemes/hearth/scheme.json` and `philosophy.md` are the public scheme identity authority.
+- `color-system/schemes/hearth/taxonomy.json` is the machine-readable abstract grouping authority.
+- `color-system/schemes/hearth/foundation.json`, `semantic-rules.json`, `surface-rules.json`, and `interaction-rules.json` are the top-down color language authority.
+- `color-system/semantic.json` is a generated semantic snapshot, not a manual source file.
+- `color-system/framework/adapters.json` is the adapter contract authority.
+- `color-system/framework/variant-profiles.json` and `variants.json` are the shared variant framework authority.
+- `color-system/framework/tuning.json` is the algorithmic calibration authority.
+- `color-system/hearth-dark.source.json` is the UI/token migration anchor; migrated workbench colors are synced from `color-system/framework/vscode-chrome-contract.json`.
 - `themes/hearth-dark.json`, `themes/hearth-dark-soft.json`, `themes/hearth-light.json`, and `themes/hearth-light-soft.json` are regenerated artifacts.
-- `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline.
+- `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline; their workbench colors are sync-managed for migrated keys.
 - `src/data/tokens.ts` regenerated via sync script.
 - `src/styles/theme-vars.css` regenerated via sync script.
+- `reports/color-language-lineage.json` regenerated via sync script.
 - `extension/package.json` `galleryBanner.color` matches `themes/hearth-dark.json` background.
 - `docs/theme-baseline.md` semantic matrix + snapshot lines are in sync with current themes.
 - `pnpm run check:sync` passes (no generated drift after sync).
 - `pnpm run audit:generated-origin` passes (generated outputs are source-linked).
+- `pnpm run audit:lineage` passes (every downstream token can be traced back to upstream families/rules).
 - `pnpm run audit:theme` passes without blocking issues.
 - `pnpm run audit:copy` passes (variant count + color copy + README metrics parity).
 - `pnpm run audit:copy` also enforces "no hardcoded color literals" in site source files.

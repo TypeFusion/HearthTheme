@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "description": "Semantic role derivation rules. Roles resolve from foundation families and optional transforms. Direct output overrides are reserved for exceptional cases only.",
+  "roles": {
+    "comment": {
+      "source": { "family": "ash", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": false, "allowEscapeHatch": false }
+    },
+    "keyword": {
+      "source": { "family": "ember", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
+    },
+    "operator": {
+      "source": { "family": "brass", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
+    },
+    "function": {
+      "source": { "family": "mineral", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
+    },
+    "method": {
+      "source": { "family": "leather", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
+    },
+    "property": {
+      "source": { "family": "olive", "tone": "base" },
+      "flags": { "nearForeground": true, "contrastCritical": true, "allowEscapeHatch": false }
+    },
+    "string": {
+      "source": { "family": "moss", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": false, "allowEscapeHatch": false }
+    },
+    "number": {
+      "source": { "family": "terracotta", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
+    },
+    "type": {
+      "source": { "family": "ochre", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
+    },
+    "variable": {
+      "source": { "family": "chalk", "tone": "base" },
+      "flags": { "nearForeground": true, "contrastCritical": false, "allowEscapeHatch": false }
+    },
+    "parameter": {
+      "source": { "family": "chalk", "tone": "parameter" },
+      "flags": { "nearForeground": true, "contrastCritical": false, "allowEscapeHatch": false }
+    },
+    "tag": {
+      "source": { "family": "cedar", "tone": "base" },
+      "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
+    }
+  }
+}

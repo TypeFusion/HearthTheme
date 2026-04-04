@@ -1,0 +1,478 @@
+{
+  "schemaVersion": 1,
+  "description": "Migrated VS Code workbench chrome bindings sourced from abstract surfaces and interaction primitives. These bindings cover the highest-signal platform colors while token scope baselines remain temporary migration anchors.",
+  "bindings": [
+    {
+      "key": "editor.background",
+      "surface": "canvas"
+    },
+    {
+      "key": "editor.foreground",
+      "surface": "ink"
+    },
+    {
+      "key": "editor.lineHighlightBackground",
+      "interaction": "lineEmphasis"
+    },
+    {
+      "key": "editor.selectionBackground",
+      "interaction": "selection"
+    },
+    {
+      "key": "editor.selectionHighlightBackground",
+      "interaction": "selection",
+      "alphaScale": 0.5
+    },
+    {
+      "key": "editor.wordHighlightBackground",
+      "interaction": "selection",
+      "alphaScale": 0.62
+    },
+    {
+      "key": "editorError.foreground",
+      "feedback": "error"
+    },
+    {
+      "key": "editorWarning.foreground",
+      "feedback": "warning"
+    },
+    {
+      "key": "editorInfo.foreground",
+      "feedback": "info"
+    },
+    {
+      "key": "editor.findMatchBackground",
+      "interaction": "tabEmphasis",
+      "alpha": 0.21
+    },
+    {
+      "key": "editor.findMatchHighlightBackground",
+      "interaction": "tabEmphasis",
+      "alpha": 0.1
+    },
+    {
+      "key": "editorLineNumber.foreground",
+      "surface": "gutter"
+    },
+    {
+      "key": "editorCursor.foreground",
+      "interaction": "cursor"
+    },
+    {
+      "key": "editorCursor.background",
+      "surface": "canvas"
+    },
+    {
+      "key": "sideBar.background",
+      "surface": "sidebar"
+    },
+    {
+      "key": "sideBar.border",
+      "surface": "border"
+    },
+    {
+      "key": "activityBarBadge.background",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "statusBar.background",
+      "interaction": "status"
+    },
+    {
+      "key": "statusBarItem.hoverBackground",
+      "interaction": "tabEmphasis",
+      "alpha": 0.15
+    },
+    {
+      "key": "statusBarItem.activeBackground",
+      "interaction": "tabEmphasis",
+      "alpha": 0.2
+    },
+    {
+      "key": "titleBar.activeBackground",
+      "surface": "sidebar"
+    },
+    {
+      "key": "titleBar.border",
+      "surface": "border"
+    },
+    {
+      "key": "tab.activeBackground",
+      "surface": "canvas"
+    },
+    {
+      "key": "tab.activeBorder",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "tab.inactiveBackground",
+      "surface": "sidebar"
+    },
+    {
+      "key": "tab.border",
+      "surface": "border"
+    },
+    {
+      "key": "editorGroupHeader.tabsBackground",
+      "surface": "sidebar"
+    },
+    {
+      "key": "editorGroupHeader.tabsBorder",
+      "surface": "border"
+    },
+    {
+      "key": "panel.background",
+      "surface": "sidebar"
+    },
+    {
+      "key": "panel.border",
+      "surface": "border"
+    },
+    {
+      "key": "panelTitle.activeBorder",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "terminal.background",
+      "surface": "canvas"
+    },
+    {
+      "key": "terminal.foreground",
+      "surface": "ink"
+    },
+    {
+      "key": "terminalCursor.foreground",
+      "interaction": "cursor"
+    },
+    {
+      "key": "input.background",
+      "surface": "panel"
+    },
+    {
+      "key": "inputOption.activeBorder",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "inputOption.activeBackground",
+      "interaction": "selection",
+      "alphaScale": 0.46
+    },
+    {
+      "key": "dropdown.background",
+      "surface": "panel"
+    },
+    {
+      "key": "button.background",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "list.hoverBackground",
+      "interaction": "listHover"
+    },
+    {
+      "key": "list.highlightForeground",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "badge.background",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "progressBar.background",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "focusBorder",
+      "interaction": "focusRing"
+    },
+    {
+      "key": "selection.background",
+      "interaction": "selection",
+      "alphaScale": 1
+    },
+    {
+      "key": "notifications.background",
+      "surface": "panel"
+    },
+    {
+      "key": "notificationLink.foreground",
+      "interaction": "tabEmphasis"
+    },
+    {
+      "key": "activityBar.foreground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "activityBar.inactiveForeground",
+      "interface": "subtleInk"
+    },
+    {
+      "key": "activityBarBadge.foreground",
+      "interface": "onAccentInk"
+    },
+    {
+      "key": "badge.foreground",
+      "interface": "onAccentInk"
+    },
+    {
+      "key": "button.foreground",
+      "interface": "onAccentInk"
+    },
+    {
+      "key": "button.secondaryBackground",
+      "interface": "shellRaised"
+    },
+    {
+      "key": "button.secondaryForeground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "dropdown.border",
+      "interface": "shellRaised"
+    },
+    {
+      "key": "dropdown.foreground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "input.border",
+      "interface": "shellRaised"
+    },
+    {
+      "key": "input.foreground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "input.placeholderForeground",
+      "interface": "subtleInk"
+    },
+    {
+      "key": "list.activeSelectionBackground",
+      "interface": "navActiveFill"
+    },
+    {
+      "key": "list.focusBackground",
+      "interface": "navActiveFill"
+    },
+    {
+      "key": "list.hoverForeground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "list.inactiveSelectionBackground",
+      "interface": "navInactiveFill"
+    },
+    {
+      "key": "notifications.foreground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "notifications.border",
+      "interface": "shellRaised"
+    },
+    {
+      "key": "panelTitle.activeForeground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "panelTitle.inactiveForeground",
+      "interface": "mutedInk"
+    },
+    {
+      "key": "sideBar.foreground",
+      "interface": "supportInk"
+    },
+    {
+      "key": "sideBarSectionHeader.foreground",
+      "interface": "mutedInk"
+    },
+    {
+      "key": "sideBarTitle.foreground",
+      "interface": "mutedInk"
+    },
+    {
+      "key": "tab.activeForeground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "tab.inactiveForeground",
+      "interface": "mutedInk"
+    },
+    {
+      "key": "tab.unfocusedActiveForeground",
+      "interface": "supportInk"
+    },
+    {
+      "key": "titleBar.activeForeground",
+      "interface": "shellInk"
+    },
+    {
+      "key": "titleBar.inactiveForeground",
+      "interface": "mutedInk"
+    },
+    {
+      "key": "editorBracketHighlight.foreground1",
+      "guidance": "bracketWarm"
+    },
+    {
+      "key": "editorBracketHighlight.foreground2",
+      "guidance": "bracketBright"
+    },
+    {
+      "key": "editorBracketHighlight.foreground3",
+      "guidance": "bracketCool"
+    },
+    {
+      "key": "editorBracketMatch.background",
+      "guidance": "bracketMatchFill"
+    },
+    {
+      "key": "editorBracketMatch.border",
+      "guidance": "bracketMatchStroke"
+    },
+    {
+      "key": "editorIndentGuide.activeBackground1",
+      "guidance": "guideActive"
+    },
+    {
+      "key": "editorIndentGuide.background1",
+      "guidance": "guide"
+    },
+    {
+      "key": "editorWhitespace.foreground",
+      "guidance": "whitespace"
+    },
+    {
+      "key": "terminal.ansiBlack",
+      "terminal": "ansiBlack"
+    },
+    {
+      "key": "terminal.ansiRed",
+      "terminal": "ansiRed"
+    },
+    {
+      "key": "terminal.ansiGreen",
+      "terminal": "ansiGreen"
+    },
+    {
+      "key": "terminal.ansiYellow",
+      "terminal": "ansiYellow"
+    },
+    {
+      "key": "terminal.ansiBlue",
+      "terminal": "ansiBlue"
+    },
+    {
+      "key": "terminal.ansiMagenta",
+      "terminal": "ansiMagenta"
+    },
+    {
+      "key": "terminal.ansiCyan",
+      "terminal": "ansiCyan"
+    },
+    {
+      "key": "terminal.ansiWhite",
+      "terminal": "ansiWhite"
+    },
+    {
+      "key": "terminal.ansiBrightBlack",
+      "terminal": "ansiBrightBlack"
+    },
+    {
+      "key": "terminal.ansiBrightRed",
+      "terminal": "ansiBrightRed"
+    },
+    {
+      "key": "terminal.ansiBrightGreen",
+      "terminal": "ansiBrightGreen"
+    },
+    {
+      "key": "terminal.ansiBrightYellow",
+      "terminal": "ansiBrightYellow"
+    },
+    {
+      "key": "terminal.ansiBrightBlue",
+      "terminal": "ansiBrightBlue"
+    },
+    {
+      "key": "terminal.ansiBrightMagenta",
+      "terminal": "ansiBrightMagenta"
+    },
+    {
+      "key": "terminal.ansiBrightCyan",
+      "terminal": "ansiBrightCyan"
+    },
+    {
+      "key": "terminal.ansiBrightWhite",
+      "terminal": "ansiBrightWhite"
+    },
+    {
+      "key": "activityBar.background",
+      "surface": "sidebar"
+    },
+    {
+      "key": "activityBar.border",
+      "surface": "border"
+    },
+    {
+      "key": "button.hoverBackground",
+      "interface": "accentHoverFill"
+    },
+    {
+      "key": "editorLineNumber.activeForeground",
+      "guidance": "guideInk"
+    },
+    {
+      "key": "gitDecoration.addedResourceForeground",
+      "feedback": "success"
+    },
+    {
+      "key": "gitDecoration.conflictingResourceForeground",
+      "feedback": "error"
+    },
+    {
+      "key": "gitDecoration.deletedResourceForeground",
+      "feedback": "error"
+    },
+    {
+      "key": "gitDecoration.ignoredResourceForeground",
+      "interface": "subtleInk"
+    },
+    {
+      "key": "gitDecoration.modifiedResourceForeground",
+      "feedback": "warning"
+    },
+    {
+      "key": "gitDecoration.untrackedResourceForeground",
+      "feedback": "success"
+    },
+    {
+      "key": "list.activeSelectionForeground",
+      "interface": "navActiveInk"
+    },
+    {
+      "key": "sideBarSectionHeader.background",
+      "interface": "shellBand"
+    },
+    {
+      "key": "sideBarSectionHeader.border",
+      "surface": "border"
+    },
+    {
+      "key": "statusBar.border",
+      "surface": "border"
+    },
+    {
+      "key": "statusBar.foreground",
+      "interface": "onStatusInk"
+    },
+    {
+      "key": "tab.hoverBackground",
+      "interaction": "listHover"
+    },
+    {
+      "key": "titleBar.inactiveBackground",
+      "surface": "sidebar"
+    }
+  ]
+}

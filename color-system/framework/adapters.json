@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 2,
+  "roles": [
+    {
+      "id": "comment",
+      "scopes": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "semanticKeys": [],
+      "vscodeSemantic": null,
+      "obsidianVar": "--code-comment",
+      "webToken": "comment",
+      "includeInReport": true
+    },
+    {
+      "id": "keyword",
+      "scopes": [
+        "keyword",
+        "keyword.control",
+        "storage.type",
+        "storage.modifier"
+      ],
+      "semanticKeys": [
+        "keyword"
+      ],
+      "vscodeSemantic": "keyword",
+      "obsidianVar": "--code-keyword",
+      "webToken": "keyword",
+      "includeInReport": true
+    },
+    {
+      "id": "operator",
+      "scopes": [
+        "keyword.operator",
+        "keyword.operator.assignment"
+      ],
+      "semanticKeys": [],
+      "vscodeSemantic": null,
+      "obsidianVar": "--code-operator",
+      "webToken": "operator",
+      "includeInReport": true
+    },
+    {
+      "id": "function",
+      "scopes": [
+        "entity.name.function",
+        "support.function",
+        "meta.function-call.generic"
+      ],
+      "semanticKeys": [
+        "function"
+      ],
+      "vscodeSemantic": "function",
+      "obsidianVar": "--code-function",
+      "webToken": "fn",
+      "includeInReport": true
+    },
+    {
+      "id": "method",
+      "scopes": [
+        "meta.function-call entity.name.function",
+        "meta.function-call.js entity.name.function.js",
+        "meta.function-call.ts entity.name.function.ts",
+        "meta.function-call.py entity.name.function.py",
+        "meta.function-call.python entity.name.function.python",
+        "meta.function-call.go entity.name.function.go",
+        "meta.function-call.rust entity.name.function.rust",
+        "meta.method-call entity.name.function",
+        "meta.method-call.js entity.name.function.js",
+        "meta.method-call.ts entity.name.function.ts",
+        "meta.method-call.py entity.name.function.py",
+        "meta.method-call.python entity.name.function.python",
+        "meta.method-call.go entity.name.function.go",
+        "meta.method-call.rust entity.name.function.rust"
+      ],
+      "semanticKeys": [
+        "method",
+        "function.defaultLibrary",
+        "method.defaultLibrary"
+      ],
+      "vscodeSemantic": "method",
+      "obsidianVar": "--code-function",
+      "webToken": null,
+      "includeInReport": true
+    },
+    {
+      "id": "property",
+      "scopes": [
+        "entity.name.function.member",
+        "entity.name.function.member.python",
+        "entity.name.function.member.go",
+        "entity.name.function.member.rust",
+        "variable.other.property",
+        "variable.other.member",
+        "meta.property-name",
+        "support.type.property-name"
+      ],
+      "semanticKeys": [
+        "property"
+      ],
+      "vscodeSemantic": "property",
+      "obsidianVar": "--code-property",
+      "webToken": null,
+      "includeInReport": true
+    },
+    {
+      "id": "string",
+      "scopes": [
+        "string",
+        "string.quoted",
+        "string.template",
+        "string.regexp"
+      ],
+      "semanticKeys": [],
+      "vscodeSemantic": null,
+      "obsidianVar": "--code-string",
+      "webToken": "string",
+      "includeInReport": true
+    },
+    {
+      "id": "number",
+      "scopes": [
+        "constant.numeric",
+        "constant.language.boolean",
+        "constant.language.null",
+        "constant.language.undefined",
+        "constant.other.color",
+        "support.constant"
+      ],
+      "semanticKeys": [
+        "enumMember"
+      ],
+      "vscodeSemantic": "enumMember",
+      "obsidianVar": "--code-value",
+      "webToken": "number",
+      "includeInReport": true
+    },
+    {
+      "id": "type",
+      "scopes": [
+        "entity.name.type",
+        "entity.name.class",
+        "storage.type.java",
+        "storage.type.primitive.java",
+        "entity.name.struct.rust",
+        "entity.name.type.class",
+        "support.type",
+        "support.type.builtin",
+        "support.class"
+      ],
+      "semanticKeys": [
+        "class",
+        "interface",
+        "type",
+        "type.defaultLibrary",
+        "typeParameter",
+        "enum"
+      ],
+      "vscodeSemantic": "type",
+      "obsidianVar": "--code-important",
+      "webToken": "type",
+      "includeInReport": true
+    },
+    {
+      "id": "variable",
+      "scopes": [
+        "variable",
+        "variable.other.readwrite",
+        "variable.other.constant"
+      ],
+      "semanticKeys": [
+        "variable"
+      ],
+      "vscodeSemantic": "variable",
+      "obsidianVar": "--code-normal",
+      "webToken": "variable",
+      "includeInReport": true
+    },
+    {
+      "id": "parameter",
+      "scopes": [
+        "variable.parameter"
+      ],
+      "semanticKeys": [
+        "parameter"
+      ],
+      "vscodeSemantic": "parameter",
+      "obsidianVar": "--code-normal",
+      "webToken": null,
+      "includeInReport": false,
+      "requireTokenCoverage": false
+    },
+    {
+      "id": "tag",
+      "scopes": [
+        "entity.name.tag",
+        "punctuation.definition.tag"
+      ],
+      "semanticKeys": [],
+      "vscodeSemantic": null,
+      "obsidianVar": "--code-tag",
+      "webToken": null,
+      "includeInReport": true
+    }
+  ],
+  "description": "Platform contracts map abstract roles, surfaces, and interactions into VS Code, Obsidian, and website tokens without owning design values.",
+  "surfaces": [
+    {
+      "id": "canvas",
+      "webToken": "bg",
+      "obsidianVar": "--background-primary",
+      "vscodeColor": "editor.background",
+      "includeInReport": true
+    },
+    {
+      "id": "ink",
+      "webToken": "fg",
+      "obsidianVar": "--text-normal",
+      "vscodeColor": "editor.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "panel",
+      "webToken": "lineBg",
+      "obsidianVar": "--background-primary-alt",
+      "vscodeColor": "editor.lineHighlightBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "gutter",
+      "webToken": "lineNo",
+      "obsidianVar": null,
+      "vscodeColor": "editorLineNumber.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "sidebar",
+      "webToken": "sidebar",
+      "obsidianVar": "--background-secondary",
+      "vscodeColor": "sideBar.background",
+      "includeInReport": true
+    },
+    {
+      "id": "border",
+      "webToken": "border",
+      "obsidianVar": "--background-modifier-border",
+      "vscodeColor": "sideBar.border",
+      "includeInReport": true
+    }
+  ],
+  "interactions": [
+    {
+      "id": "selection",
+      "webToken": "selection",
+      "obsidianVar": "--text-selection",
+      "vscodeColor": "editor.selectionBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "cursor",
+      "webToken": "cursor",
+      "obsidianVar": "--interactive-accent",
+      "vscodeColor": "editorCursor.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "status",
+      "webToken": "status",
+      "obsidianVar": null,
+      "vscodeColor": "statusBar.background",
+      "includeInReport": true
+    },
+    {
+      "id": "focusRing",
+      "webToken": null,
+      "obsidianVar": "--background-modifier-border-focus",
+      "vscodeColor": "focusBorder",
+      "includeInReport": true
+    },
+    {
+      "id": "lineEmphasis",
+      "webToken": null,
+      "obsidianVar": "--background-primary-alt",
+      "vscodeColor": "editor.lineHighlightBackground",
+      "includeInReport": false
+    },
+    {
+      "id": "listHover",
+      "webToken": null,
+      "obsidianVar": "--interactive-hover",
+      "vscodeColor": "list.hoverBackground",
+      "includeInReport": false
+    },
+    {
+      "id": "tabEmphasis",
+      "webToken": null,
+      "obsidianVar": null,
+      "vscodeColor": "tab.activeBorder",
+      "includeInReport": false
+    }
+  ],
+  "feedbacks": [
+    {
+      "id": "note",
+      "webToken": "note",
+      "obsidianVar": "--hearth-feedback-note",
+      "vscodeColor": null,
+      "includeInReport": true
+    },
+    {
+      "id": "info",
+      "webToken": "info",
+      "obsidianVar": "--hearth-feedback-info",
+      "vscodeColor": "editorInfo.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "success",
+      "webToken": "success",
+      "obsidianVar": "--text-success",
+      "vscodeColor": null,
+      "includeInReport": true
+    },
+    {
+      "id": "warning",
+      "webToken": "warning",
+      "obsidianVar": "--text-warning",
+      "vscodeColor": "editorWarning.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "error",
+      "webToken": "error",
+      "obsidianVar": "--text-error",
+      "vscodeColor": "editorError.foreground",
+      "includeInReport": true
+    }
+  ],
+  "interfaces": [
+    {
+      "id": "shellInk",
+      "webToken": "shellInk",
+      "obsidianVar": "--hearth-shell-ink",
+      "vscodeColor": "tab.activeForeground",
+      "includeInReport": true
+    },
+    {
+      "id": "supportInk",
+      "webToken": "shellSupport",
+      "obsidianVar": "--text-muted",
+      "vscodeColor": "sideBar.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "mutedInk",
+      "webToken": "shellMuted",
+      "obsidianVar": "--hearth-shell-muted",
+      "vscodeColor": "tab.inactiveForeground",
+      "includeInReport": true
+    },
+    {
+      "id": "subtleInk",
+      "webToken": "shellSubtle",
+      "obsidianVar": "--text-faint",
+      "vscodeColor": "input.placeholderForeground",
+      "includeInReport": true
+    },
+    {
+      "id": "onAccentInk",
+      "webToken": "onAccent",
+      "obsidianVar": "--text-on-accent",
+      "vscodeColor": "button.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "shellRaised",
+      "webToken": "shellRaised",
+      "obsidianVar": "--background-secondary-alt",
+      "vscodeColor": "button.secondaryBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "navActiveFill",
+      "webToken": "navActiveFill",
+      "obsidianVar": "--background-modifier-active-hover",
+      "vscodeColor": "list.activeSelectionBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "navInactiveFill",
+      "webToken": "navInactiveFill",
+      "obsidianVar": "--background-modifier-hover",
+      "vscodeColor": "list.inactiveSelectionBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "shellBand",
+      "webToken": "shellBand",
+      "obsidianVar": "--hearth-shell-band",
+      "vscodeColor": "sideBarSectionHeader.background",
+      "includeInReport": true
+    },
+    {
+      "id": "accentHoverFill",
+      "webToken": "accentHover",
+      "obsidianVar": "--hearth-accent-hover",
+      "vscodeColor": "button.hoverBackground",
+      "includeInReport": true
+    },
+    {
+      "id": "onStatusInk",
+      "webToken": "onStatus",
+      "obsidianVar": "--hearth-on-status",
+      "vscodeColor": "statusBar.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "navActiveInk",
+      "webToken": "navActiveInk",
+      "obsidianVar": "--hearth-nav-active-ink",
+      "vscodeColor": "list.activeSelectionForeground",
+      "includeInReport": true
+    }
+  ],
+  "guidances": [
+    {
+      "id": "guide",
+      "webToken": "guide",
+      "obsidianVar": "--hearth-guide",
+      "vscodeColor": "editorIndentGuide.background1",
+      "includeInReport": true
+    },
+    {
+      "id": "guideActive",
+      "webToken": "guideActive",
+      "obsidianVar": "--hearth-guide-active",
+      "vscodeColor": "editorIndentGuide.activeBackground1",
+      "includeInReport": true
+    },
+    {
+      "id": "whitespace",
+      "webToken": "whitespace",
+      "obsidianVar": "--hearth-whitespace",
+      "vscodeColor": "editorWhitespace.foreground",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketWarm",
+      "webToken": "bracketWarm",
+      "obsidianVar": "--hearth-bracket-warm",
+      "vscodeColor": "editorBracketHighlight.foreground1",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketBright",
+      "webToken": "bracketBright",
+      "obsidianVar": "--hearth-bracket-bright",
+      "vscodeColor": "editorBracketHighlight.foreground2",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketCool",
+      "webToken": "bracketCool",
+      "obsidianVar": "--hearth-bracket-cool",
+      "vscodeColor": "editorBracketHighlight.foreground3",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketMatchFill",
+      "webToken": "bracketMatchFill",
+      "obsidianVar": "--hearth-bracket-match-fill",
+      "vscodeColor": "editorBracketMatch.background",
+      "includeInReport": true
+    },
+    {
+      "id": "bracketMatchStroke",
+      "webToken": "bracketMatchStroke",
+      "obsidianVar": "--hearth-bracket-match-stroke",
+      "vscodeColor": "editorBracketMatch.border",
+      "includeInReport": true
+    },
+    {
+      "id": "guideInk",
+      "webToken": "guideInk",
+      "obsidianVar": "--hearth-guide-ink",
+      "vscodeColor": "editorLineNumber.activeForeground",
+      "includeInReport": true
+    }
+  ],
+  "terminals": [
+    {
+      "id": "ansiBlack",
+      "webToken": "terminalBlack",
+      "obsidianVar": "--hearth-terminal-black",
+      "vscodeColor": "terminal.ansiBlack",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiRed",
+      "webToken": "terminalRed",
+      "obsidianVar": "--hearth-terminal-red",
+      "vscodeColor": "terminal.ansiRed",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiGreen",
+      "webToken": "terminalGreen",
+      "obsidianVar": "--hearth-terminal-green",
+      "vscodeColor": "terminal.ansiGreen",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiYellow",
+      "webToken": "terminalYellow",
+      "obsidianVar": "--hearth-terminal-yellow",
+      "vscodeColor": "terminal.ansiYellow",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBlue",
+      "webToken": "terminalBlue",
+      "obsidianVar": "--hearth-terminal-blue",
+      "vscodeColor": "terminal.ansiBlue",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiMagenta",
+      "webToken": "terminalMagenta",
+      "obsidianVar": "--hearth-terminal-magenta",
+      "vscodeColor": "terminal.ansiMagenta",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiCyan",
+      "webToken": "terminalCyan",
+      "obsidianVar": "--hearth-terminal-cyan",
+      "vscodeColor": "terminal.ansiCyan",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiWhite",
+      "webToken": "terminalWhite",
+      "obsidianVar": "--hearth-terminal-white",
+      "vscodeColor": "terminal.ansiWhite",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightBlack",
+      "webToken": "terminalBrightBlack",
+      "obsidianVar": "--hearth-terminal-bright-black",
+      "vscodeColor": "terminal.ansiBrightBlack",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightRed",
+      "webToken": "terminalBrightRed",
+      "obsidianVar": "--hearth-terminal-bright-red",
+      "vscodeColor": "terminal.ansiBrightRed",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightGreen",
+      "webToken": "terminalBrightGreen",
+      "obsidianVar": "--hearth-terminal-bright-green",
+      "vscodeColor": "terminal.ansiBrightGreen",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightYellow",
+      "webToken": "terminalBrightYellow",
+      "obsidianVar": "--hearth-terminal-bright-yellow",
+      "vscodeColor": "terminal.ansiBrightYellow",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightBlue",
+      "webToken": "terminalBrightBlue",
+      "obsidianVar": "--hearth-terminal-bright-blue",
+      "vscodeColor": "terminal.ansiBrightBlue",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightMagenta",
+      "webToken": "terminalBrightMagenta",
+      "obsidianVar": "--hearth-terminal-bright-magenta",
+      "vscodeColor": "terminal.ansiBrightMagenta",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightCyan",
+      "webToken": "terminalBrightCyan",
+      "obsidianVar": "--hearth-terminal-bright-cyan",
+      "vscodeColor": "terminal.ansiBrightCyan",
+      "includeInReport": true
+    },
+    {
+      "id": "ansiBrightWhite",
+      "webToken": "terminalBrightWhite",
+      "obsidianVar": "--hearth-terminal-bright-white",
+      "vscodeColor": "terminal.ansiBrightWhite",
+      "includeInReport": true
+    }
+  ]
+}

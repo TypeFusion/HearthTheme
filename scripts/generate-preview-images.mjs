@@ -2,36 +2,22 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import sharp from "sharp";
+import { loadColorProductManifest, loadColorProductPreviewConfig, loadColorSchemeManifest, loadColorSystemVariants } from "./color-system.mjs";
 
 const WIDTH = 1600;
 const HEIGHT = 900;
 const OUTPUT_DIR = join("extension", "images");
 const WEBSITE_OUTPUT_DIR = join("public", "previews");
 const MANIFEST_PATH = join("reports", "preview-manifest.json");
-const PREVIEW_RENDERER = "promo-color-board-v4";
+const PREVIEW_RENDERER = "promo-color-board-v5";
 
-const THEME_META = [
-  {
-    id: "dark",
-    name: "Hearth Dark",
-    file: join("themes", "hearth-dark.json"),
-  },
-  {
-    id: "darkSoft",
-    name: "Hearth Dark Soft",
-    file: join("themes", "hearth-dark-soft.json"),
-  },
-  {
-    id: "light",
-    name: "Hearth Light",
-    file: join("themes", "hearth-light.json"),
-  },
-  {
-    id: "lightSoft",
-    name: "Hearth Light Soft",
-    file: join("themes", "hearth-light-soft.json"),
-  },
-];
+const PRODUCT = loadColorProductManifest();
+const PREVIEW = loadColorProductPreviewConfig();
+const THEME_META = loadColorSystemVariants().variants.map((variant) => ({
+  id: variant.id,
+  name: PREVIEW.variantNames[variant.id] || variant.name,
+  file: variant.outputPath,
+}));
 const CONTRAST_OUTPUTS = [
   join(OUTPUT_DIR, "preview-contrast-v2.png"),
   join(WEBSITE_OUTPUT_DIR, "preview-contrast-v2.png"),
@@ -53,6 +39,7 @@ const PROMO_ROLE_SWATCHES = [
   { label: "function", role: "function", sample: "renderTheme()" },
   { label: "string", role: "string", sample: '"embers"' },
 ];
+const SCHEME = loadColorSchemeManifest();
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -267,137 +254,364 @@ function roleColor(theme, role) {
   return resolvePreviewStyle(theme, role).color;
 }
 
-function renderPromoHeroVariant({ theme, heading, variantId, x, y, width, height }) {
+function fontWeightForStyle(style, fallback = 600) {
+  return style?.fontStyle?.includes("bold") ? 700 : fallback;
+}
+
+function textStyleAttrs(style, fallbackWeight = 600) {
+  const attrs = [`fill="${style.color}"`, `font-weight="${fontWeightForStyle(style, fallbackWeight)}"`];
+  if (style?.fontStyle?.includes("italic")) attrs.push(`font-style="italic"`);
+  return attrs.join(" ");
+}
+
+function renderCodeLine({ theme, segments, x, y, fontSize = 18 }) {
+  let cursor = 0;
+  const charWidth = fontSize * 0.6;
+
+  const parts = segments.map((segment) => {
+    const style = resolvePreviewStyle(theme, segment.role || "plain");
+    const text = String(segment.text || "");
+    const part = `<tspan x="${x + cursor * charWidth}" y="${y}" ${textStyleAttrs(style, 550)}>${escapeXml(text)}</tspan>`;
+    cursor += text.length;
+    return part;
+  });
+
+  return `
+    <text font-size="${fontSize}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" dominant-baseline="text-before-edge">
+      ${parts.join("")}
+    </text>
+  `;
+}
+
+function renderFeaturePill({ x, y, label, fill, stroke, textColor }) {
+  const width = Math.max(124, label.length * 10.8 + 32);
+  return `
+    <g>
+      <rect x="${x}" y="${y}" width="${width}" height="38" rx="19" fill="${fill}" stroke="${stroke}" stroke-width="1" />
+      <text x="${x + 16}" y="${y + 11}" fill="${textColor}" font-size="15" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(label)}</text>
+    </g>
+  `;
+}
+
+function renderWrappedText({
+  text,
+  x,
+  y,
+  maxWidth,
+  lineHeight,
+  fontSize,
+  fill,
+  fontFamily,
+  fontWeight,
+}) {
+  const words = String(text || "").split(/\s+/).filter(Boolean);
+  const averageCharWidth = fontSize * 0.54;
+  const maxChars = Math.max(12, Math.floor(maxWidth / averageCharWidth));
+  const lines = [];
+  let current = "";
+
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length <= maxChars) {
+      current = next;
+      continue;
+    }
+
+    if (current) lines.push(current);
+    current = word;
+  }
+
+  if (current) lines.push(current);
+
+  return `
+    <text x="${x}" y="${y}" fill="${fill}" font-size="${fontSize}" font-family="${fontFamily}"${fontWeight ? ` font-weight="${fontWeight}"` : ""} dominant-baseline="text-before-edge">
+      ${lines
+        .map((line, index) => `<tspan x="${x}" y="${y + index * lineHeight}">${escapeXml(line)}</tspan>`)
+        .join("")}
+    </text>
+  `;
+}
+
+function renderHeroShowcase({ theme, x, y, width, height }) {
   const bg = themeColor(theme, "editor.background", "#211d1a");
   const fg = themeColor(theme, "editor.foreground", "#d3c9b8");
-  const muted = themeColor(theme, "sideBarTitle.foreground", "#877a65");
-  const border = themeColor(theme, "tab.border", "#373027");
-  const accent = themeColor(theme, "tab.activeBorder", "#cf8740");
-  const sidebar = themeColor(theme, "sideBar.background", bg);
-  const panel = themeColor(theme, "panel.background", sidebar);
-  const status = themeColor(theme, "statusBar.background", accent);
-  const canvas = themeColor(theme, "editor.background", bg);
-  const isLight = variantId.startsWith("light");
-  const keyword = PROMO_ROLE_SWATCHES[0];
-  const fn = PROMO_ROLE_SWATCHES[1];
-  const string = PROMO_ROLE_SWATCHES[2];
-  const cardBg = mixHex(bg, isLight ? "#ffffff" : "#000000", isLight ? 0.045 : 0.065);
-  const cardBorder = mixHex(border, fg, isLight ? 0.18 : 0.1);
-  const plateBg = mixHex(bg, isLight ? "#ffffff" : fg, isLight ? 0.11 : 0.055);
-  const plateBorder = mixHex(border, fg, isLight ? 0.26 : 0.14);
-  const surfaceText = isLight ? mixHex(bg, "#000000", 0.36) : mixHex(fg, "#ffffff", 0.2);
+  const sidebar = themeColor(theme, "sideBar.background", mixHex(bg, "#000000", 0.18));
+  const activity = themeColor(theme, "activityBar.background", mixHex(sidebar, "#000000", 0.14));
+  const panel = themeColor(theme, "editorGroupHeader.tabsBackground", mixHex(bg, "#000000", 0.08));
+  const border = mixHex(themeColor(theme, "tab.border", "#35302b"), fg, 0.12);
+  const focus = roleColor(theme, "function");
+  const accent = themeColor(theme, "statusBar.background", roleColor(theme, "keyword"));
+  const cardFill = mixHex(bg, "#000000", 0.12);
+  const codeBg = mixHex(bg, "#000000", 0.04);
+  const tabActive = mixHex(bg, fg, 0.08);
+  const tabMuted = mixHex(fg, bg, 0.7);
+  const gutterText = mixHex(fg, bg, 0.58);
+  const lines = [
+    [{ role: "comment", text: "// low-glare warmth with clear structure" }],
+    [{ role: "keyword", text: "type " }, { role: "type", text: "Palette" }, { role: "plain", text: " = {" }],
+    [{ role: "plain", text: "  " }, { role: "property", text: "keyword" }, { role: "plain", text: ": " }, { role: "string", text: "\"ember\"" }, { role: "plain", text: "," }],
+    [{ role: "plain", text: "  " }, { role: "property", text: "callable" }, { role: "plain", text: ": " }, { role: "function", text: "renderTheme" }, { role: "plain", text: "(" }, { role: "string", text: "\"hearth\"" }, { role: "plain", text: ")," }],
+    [{ role: "keyword", text: "const " }, { role: "variable", text: "theme" }, { role: "plain", text: " = " }, { role: "function", text: "buildTheme" }, { role: "plain", text: "(" }, { role: "string", text: "\"hearth\"" }, { role: "plain", text: ");" }],
+  ];
 
-  const pad = 24;
-  const contentY = y + 68;
-  const contentH = height - 92;
-  const stageX = x + pad;
-  const stageY = contentY;
-  const stageW = 232;
-  const stageH = contentH;
-  const gridX = stageX + stageW + 18;
-  const gridY = contentY;
-  const gridW = width - (gridX - x) - pad;
-  const keywordH = 82;
-  const lowerGap = 12;
-  const lowerY = gridY + keywordH + lowerGap;
-  const lowerH = contentH - keywordH - lowerGap;
-  const lowerW = (gridW - 12) / 2;
+  const codeStartX = x + 126;
+  const codeStartY = y + 142;
+  const lineHeight = 29;
+  const footerY = y + height - 70;
+  const footerX = x + 118;
+  const footerWidth = width - 166;
 
-  const renderRoleTile = ({ role, tileX, tileY, tileW, tileH, sample }) => {
-    const swatchColor = roleColor(theme, role);
-    const tileFill = mixHex(bg, swatchColor, isLight ? 0.14 : variantId.includes("Soft") ? 0.16 : 0.18);
-    const tileBorder = mixHex(swatchColor, cardBg, isLight ? 0.4 : 0.3);
+  const renderedLines = lines
+    .map((segments, index) => {
+      const lineY = codeStartY + index * lineHeight;
+      return `
+        <text x="${x + 82}" y="${lineY}" fill="${gutterText}" font-size="14" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace" dominant-baseline="text-before-edge">${index + 1}</text>
+        ${renderCodeLine({ theme, segments, x: codeStartX, y: lineY, fontSize: 19 })}
+      `;
+    })
+    .join("");
+
+  const signatureChips = PROMO_ROLE_SWATCHES.map((entry, index) => {
+    const swatch = roleColor(theme, entry.role);
+    const chipX = x + 126 + index * 172;
+    const chipY = footerY + 6;
     return `
       <g>
-        <rect x="${tileX}" y="${tileY}" width="${tileW}" height="${tileH}" rx="18" fill="${tileFill}" stroke="${tileBorder}" stroke-width="1.2" />
-        <rect x="${tileX + 16}" y="${tileY + 14}" width="22" height="6" rx="3" fill="${swatchColor}" />
-        <text x="${tileX + 16}" y="${tileY + tileH - 38}" fill="${swatchColor}" font-size="${tileW > 300 ? 18 : 16.5}" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace" dominant-baseline="text-before-edge">${escapeXml(sample)}</text>
+        <rect x="${chipX}" y="${chipY}" width="154" height="36" rx="18" fill="${withAlpha(swatch, 0.14)}" stroke="${withAlpha(swatch, 0.35)}" />
+        <circle cx="${chipX + 18}" cy="${chipY + 18}" r="5" fill="${swatch}" />
+        <text x="${chipX + 32}" y="${chipY + 10}" fill="${swatch}" font-size="14" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(entry.sample)}</text>
       </g>
     `;
-  };
+  }).join("");
 
   return `
     <g>
-      <rect x="${x + 8}" y="${y + 12}" width="${width}" height="${height}" rx="28" fill="${withAlpha("#000000", 0.14)}" />
-      <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="26" fill="${cardBg}" stroke="${cardBorder}" stroke-width="1.2" />
-      <text x="${x + pad}" y="${y + 28}" fill="${fg}" font-size="20" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(heading)}</text>
+      <rect x="${x + 12}" y="${y + 16}" width="${width}" height="${height}" rx="30" fill="${withAlpha("#000000", 0.18)}" />
+      <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="28" fill="${cardFill}" stroke="${border}" stroke-width="1.2" />
+      <rect x="${x + 24}" y="${y + 24}" width="${width - 48}" height="52" rx="18" fill="${panel}" />
+      <circle cx="${x + 48}" cy="${y + 50}" r="6" fill="${withAlpha(roleColor(theme, "keyword"), 0.9)}" />
+      <circle cx="${x + 68}" cy="${y + 50}" r="6" fill="${withAlpha(roleColor(theme, "string"), 0.85)}" />
+      <circle cx="${x + 88}" cy="${y + 50}" r="6" fill="${withAlpha(roleColor(theme, "function"), 0.9)}" />
+      <rect x="${x + 116}" y="${y + 36}" width="148" height="28" rx="14" fill="${tabActive}" />
+      <rect x="${x + 278}" y="${y + 36}" width="126" height="28" rx="14" fill="${withAlpha("#ffffff", 0.04)}" />
+      <text x="${x + 136}" y="${y + 43}" fill="${fg}" font-size="15" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">Hearth Dark</text>
+      <text x="${x + 296}" y="${y + 43}" fill="${tabMuted}" font-size="15" font-family="'Segoe UI', 'Noto Sans', sans-serif" dominant-baseline="text-before-edge">palette.ts</text>
 
+      <rect x="${x + 24}" y="${y + 92}" width="60" height="${height - 124}" rx="20" fill="${activity}" />
+      <rect x="${x + 36}" y="${y + 116}" width="36" height="8" rx="4" fill="${withAlpha(fg, 0.6)}" />
+      <rect x="${x + 36}" y="${y + 140}" width="24" height="8" rx="4" fill="${withAlpha(roleColor(theme, "function"), 0.9)}" />
+      <rect x="${x + 36}" y="${y + 164}" width="28" height="8" rx="4" fill="${withAlpha(roleColor(theme, "keyword"), 0.85)}" />
+      <rect x="${x + 36}" y="${y + 188}" width="22" height="8" rx="4" fill="${withAlpha(roleColor(theme, "string"), 0.85)}" />
+
+      <rect x="${x + 100}" y="${y + 92}" width="${width - 124}" height="${height - 124}" rx="22" fill="${codeBg}" stroke="${withAlpha(fg, 0.08)}" />
+      <rect x="${x + 100}" y="${y + 92}" width="${width - 124}" height="40" rx="22" fill="${mixHex(codeBg, fg, 0.03)}" />
+      <text x="${x + 126}" y="${y + 104}" fill="${mixHex(fg, bg, 0.4)}" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.16em" dominant-baseline="text-before-edge">DEFAULT VARIANT</text>
+      <text x="${x + width - 200}" y="${y + 104}" fill="${focus}" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.12em" dominant-baseline="text-before-edge">DENIM CALLABLE ANCHORS</text>
+
+      ${renderedLines}
+      <rect x="${footerX}" y="${footerY}" width="${footerWidth}" height="48" rx="24" fill="${mixHex(codeBg, fg, 0.04)}" stroke="${withAlpha(fg, 0.08)}" />
+      ${signatureChips}
+      <rect x="${x + width - 168}" y="${footerY + 10}" width="120" height="28" rx="14" fill="${withAlpha(accent, 0.24)}" />
+      <text x="${x + width - 144}" y="${footerY + 18}" fill="${accent}" font-size="13" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">low glare</text>
+    </g>
+  `;
+}
+
+function renderTraitsCard({ theme, x, y, width, height }) {
+  const bg = themeColor(theme, "editor.background", "#211d1a");
+  const fg = themeColor(theme, "editor.foreground", "#d3c9b8");
+  const cardBg = mixHex(bg, "#000000", 0.08);
+  const border = mixHex(themeColor(theme, "tab.border", "#35302b"), fg, 0.12);
+  const muted = mixHex(fg, bg, 0.46);
+  const rows = [
+    {
+      title: "Warm neutrals",
+      body: "Soot-dark and parchment-light surfaces stay calm before accents.",
+      color: mixHex(bg, fg, 0.78),
+    },
+    {
+      title: "Ember keywords",
+      body: "Control flow stays warm and visible, never neon.",
+      color: roleColor(theme, "keyword"),
+    },
+    {
+      title: "Denim callables",
+      body: "Functions get a cool anchor that keeps the palette memorable.",
+      color: roleColor(theme, "function"),
+    },
+  ];
+
+  const renderedRows = rows.map((row, index) => {
+    const rowY = y + 56 + index * 54;
+    return `
       <g>
-        <rect x="${stageX}" y="${stageY}" width="${stageW}" height="${stageH}" rx="22" fill="${plateBg}" stroke="${plateBorder}" stroke-width="1.2" />
-        <rect x="${stageX + 14}" y="${stageY + 14}" width="74" height="${stageH - 28}" rx="18" fill="${canvas}" />
-        <rect x="${stageX + 102}" y="${stageY + 14}" width="${stageW - 116}" height="118" rx="16" fill="${panel}" />
-        <rect x="${stageX + 102}" y="${stageY + stageH - 46}" width="${stageW - 116}" height="32" rx="16" fill="${status}" />
-        <rect x="${stageX + 120}" y="${stageY + 34}" width="${stageW - 152}" height="4" rx="2" fill="${surfaceText}" />
-        <rect x="${stageX + 120}" y="${stageY + 50}" width="${stageW - 172}" height="4" rx="2" fill="${surfaceText}" />
+        <rect x="${x + 22}" y="${rowY + 6}" width="10" height="10" rx="5" fill="${row.color}" />
+        <text x="${x + 48}" y="${rowY}" fill="${fg}" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(row.title)}</text>
+        ${renderWrappedText({
+          text: row.body,
+          x: x + 48,
+          y: rowY + 24,
+          maxWidth: width - 78,
+          lineHeight: 18,
+          fontSize: 14,
+          fill: muted,
+          fontFamily: "'Segoe UI', 'Noto Sans', sans-serif",
+        })}
       </g>
+    `;
+  }).join("");
 
-      ${renderRoleTile({
-        role: keyword.role,
-        tileX: gridX,
-        tileY: gridY,
-        tileW: gridW,
-        tileH: keywordH,
-        sample: keyword.sample,
+  return `
+    <g>
+      <rect x="${x + 10}" y="${y + 14}" width="${width}" height="${height}" rx="28" fill="${withAlpha("#000000", 0.12)}" />
+      <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="26" fill="${cardBg}" stroke="${border}" stroke-width="1.2" />
+      <text x="${x + 22}" y="${y + 20}" fill="${withAlpha(roleColor(theme, "keyword"), 0.9)}" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.14em" dominant-baseline="text-before-edge">WHAT YOU NOTICE FIRST</text>
+      ${renderedRows}
+    </g>
+  `;
+}
+
+function renderVariantSummaryCard({ themes, x, y, width, height }) {
+  const darkTheme = themes.find((theme) => theme.id === "dark")?.theme;
+  const bg = darkTheme ? themeColor(darkTheme, "editor.background", "#211d1a") : "#211d1a";
+  const fg = darkTheme ? themeColor(darkTheme, "editor.foreground", "#d3c9b8") : "#d3c9b8";
+  const border = mixHex(themeColor(darkTheme || {}, "tab.border", "#35302b"), fg, 0.12);
+  const cardBg = mixHex(bg, "#000000", 0.06);
+  const muted = mixHex(fg, bg, 0.46);
+  const swatchWidth = 116;
+  const swatchGap = 12;
+  const swatchY = y + 80;
+  const swatches = themes.map((meta, index) => {
+    const swatchX = x + 22 + index * (swatchWidth + swatchGap);
+    const swatchBg = themeColor(meta.theme, "editor.background", "#211d1a");
+    const swatchFg = themeColor(meta.theme, "editor.foreground", "#d3c9b8");
+    const swatchAccent = roleColor(meta.theme, "keyword");
+    return `
+      <g>
+        <rect x="${swatchX}" y="${swatchY}" width="${swatchWidth}" height="70" rx="18" fill="${swatchBg}" stroke="${mixHex(swatchBg, swatchFg, 0.22)}" />
+        <rect x="${swatchX + 14}" y="${swatchY + 14}" width="28" height="6" rx="3" fill="${swatchAccent}" />
+        <rect x="${swatchX + 14}" y="${swatchY + 28}" width="42" height="6" rx="3" fill="${roleColor(meta.theme, "function")}" />
+        <text x="${swatchX + 14}" y="${swatchY + 48}" fill="${swatchFg}" font-size="13.5" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(meta.name.replace("Hearth ", ""))}</text>
+      </g>
+    `;
+  }).join("");
+
+  return `
+    <g>
+      <rect x="${x + 10}" y="${y + 14}" width="${width}" height="${height}" rx="28" fill="${withAlpha("#000000", 0.12)}" />
+      <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="26" fill="${cardBg}" stroke="${border}" stroke-width="1.2" />
+      <text x="${x + 22}" y="${y + 20}" fill="${withAlpha(roleColor(darkTheme || {}, "string"), 0.9)}" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.14em" dominant-baseline="text-before-edge">FOUR TUNED ATMOSPHERES</text>
+      ${renderWrappedText({
+        text: "Same hierarchy, tuned for mixed light, night work, and daylight.",
+        x: x + 22,
+        y: y + 40,
+        maxWidth: width - 44,
+        lineHeight: 15,
+        fontSize: 12.5,
+        fill: muted,
+        fontFamily: "'Segoe UI', 'Noto Sans', sans-serif",
       })}
-      ${renderRoleTile({
-        role: fn.role,
-        tileX: gridX,
-        tileY: lowerY,
-        tileW: lowerW,
-        tileH: lowerH,
-        sample: fn.sample,
-      })}
-      ${renderRoleTile({
-        role: string.role,
-        tileX: gridX + lowerW + 12,
-        tileY: lowerY,
-        tileW: lowerW,
-        tileH: lowerH,
-        sample: string.sample,
-      })}
+      ${swatches}
+    </g>
+  `;
+}
+
+function renderVariantMiniCard({ meta, x, y, width, height }) {
+  const bg = themeColor(meta.theme, "editor.background", "#211d1a");
+  const fg = themeColor(meta.theme, "editor.foreground", "#d3c9b8");
+  const border = mixHex(themeColor(meta.theme, "tab.border", "#35302b"), fg, meta.id.startsWith("light") ? 0.24 : 0.14);
+  const cardBg = mixHex(bg, meta.id.startsWith("light") ? "#ffffff" : "#000000", meta.id.startsWith("light") ? 0.04 : 0.08);
+  const muted = mixHex(fg, bg, 0.46);
+  const keyword = roleColor(meta.theme, "keyword");
+  const callable = roleColor(meta.theme, "function");
+  const string = roleColor(meta.theme, "string");
+  const note = SCHEME.variantPhilosophy?.[meta.id] || "";
+  const sample = renderCodeLine({
+    theme: meta.theme,
+    x: x + 22,
+    y: y + 102,
+    fontSize: 16,
+    segments: [
+      { role: "keyword", text: "if " },
+      { role: "plain", text: "ready " },
+      { role: "function", text: "renderTheme" },
+      { role: "plain", text: "(" },
+      { role: "string", text: "\"hearth\"" },
+      { role: "plain", text: ")" },
+    ],
+  });
+
+  return `
+    <g>
+      <rect x="${x + 8}" y="${y + 12}" width="${width}" height="${height}" rx="26" fill="${withAlpha("#000000", 0.12)}" />
+      <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="24" fill="${cardBg}" stroke="${border}" stroke-width="1.2" />
+      <text x="${x + 22}" y="${y + 20}" fill="${fg}" font-size="19" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(meta.name)}</text>
+      <text x="${x + 22}" y="${y + 48}" fill="${muted}" font-size="13.5" font-family="'Segoe UI', 'Noto Sans', sans-serif" dominant-baseline="text-before-edge">${escapeXml(note)}</text>
+      <rect x="${x + 22}" y="${y + 82}" width="${width - 44}" height="54" rx="16" fill="${mixHex(bg, fg, meta.id.startsWith("light") ? 0.08 : 0.05)}" />
+      ${sample}
+      <rect x="${x + 22}" y="${y + height - 46}" width="14" height="14" rx="7" fill="${keyword}" />
+      <text x="${x + 44}" y="${y + height - 47}" fill="${keyword}" font-size="12.5" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">keyword</text>
+      <rect x="${x + 126}" y="${y + height - 46}" width="14" height="14" rx="7" fill="${callable}" />
+      <text x="${x + 148}" y="${y + height - 47}" fill="${callable}" font-size="12.5" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">function</text>
+      <rect x="${x + 238}" y="${y + height - 46}" width="14" height="14" rx="7" fill="${string}" />
+      <text x="${x + 260}" y="${y + height - 47}" fill="${string}" font-size="12.5" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">string</text>
     </g>
   `;
 }
 
 function renderPromoBoardSvg({ themes }) {
   const gradientId = "promo-board-bg";
-  const cards = [
-    { meta: themes.find((theme) => theme.id === "dark"), x: 56, y: 204 },
-    { meta: themes.find((theme) => theme.id === "darkSoft"), x: 816, y: 204 },
-    { meta: themes.find((theme) => theme.id === "light"), x: 56, y: 544 },
-    { meta: themes.find((theme) => theme.id === "lightSoft"), x: 816, y: 544 },
+  const glowId = "promo-board-glow";
+  const defaultThemeMeta = themes.find((theme) => theme.id === "dark") || themes[0];
+  const featurePills = [
+    { label: "warm neutral", fill: withAlpha("#cf8740", 0.16), stroke: withAlpha("#cf8740", 0.38), textColor: "#f2dfc6" },
+    { label: "low glare", fill: withAlpha("#d3c9b8", 0.08), stroke: withAlpha("#d3c9b8", 0.18), textColor: "#eadcc7" },
+    { label: "blue callable anchors", fill: withAlpha(roleColor(defaultThemeMeta.theme, "function"), 0.18), stroke: withAlpha(roleColor(defaultThemeMeta.theme, "function"), 0.34), textColor: "#d7e4ea" },
   ];
 
-  const renderedCards = cards
-    .filter((entry) => entry.meta)
-      .map(({ meta, x, y }) => renderPromoHeroVariant({
-      theme: meta.theme,
-      heading: meta.name,
-      variantId: meta.id,
-      x,
-      y,
-      width: 728,
-      height: 300,
-    }))
-    .join("");
+  let pillX = 56;
+  const renderedPills = featurePills.map((pill) => {
+    const width = Math.max(124, pill.label.length * 10.8 + 32);
+    const rendered = renderFeaturePill({ x: pillX, y: 176, ...pill });
+    pillX += width + 12;
+    return rendered;
+  }).join("");
+
+  const bottomCards = themes.map((meta, index) => renderVariantMiniCard({
+    meta,
+    x: 42 + index * (367 + 16),
+    y: 646,
+    width: 367,
+    height: 198,
+  })).join("");
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
       <defs>
         <linearGradient id="${gradientId}" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#1a1714" />
+          <stop offset="0%" stop-color="#17130f" />
+          <stop offset="55%" stop-color="#241b15" />
           <stop offset="100%" stop-color="#2b221c" />
         </linearGradient>
+        <radialGradient id="${glowId}" cx="0.2" cy="0.15" r="0.9">
+          <stop offset="0%" stop-color="${withAlpha("#cf8740", 0.36)}" />
+          <stop offset="32%" stop-color="${withAlpha(roleColor(defaultThemeMeta.theme, "function"), 0.18)}" />
+          <stop offset="100%" stop-color="${withAlpha("#000000", 0)}" />
+        </radialGradient>
       </defs>
       <rect x="0" y="0" width="${WIDTH}" height="${HEIGHT}" fill="url(#${gradientId})" />
-      <rect x="42" y="204" width="1516" height="300" rx="30" fill="#241d18" stroke="${withAlpha("#cf8740", 0.12)}" />
-      <rect x="42" y="544" width="1516" height="300" rx="30" fill="#e8dcc8" stroke="${withAlpha("#ccb89a", 0.44)}" />
-      <text x="56" y="64" fill="#efe4d0" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">HEARTHCODE</text>
-      <text x="56" y="92" fill="#efe4d0" font-size="41" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">Four tuned variants, one warm-neutral voice</text>
-      <text x="56" y="138" fill="#b9a68f" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" dominant-baseline="text-before-edge">Ember reds, mineral blues, moss greens.</text>
-      <text x="56" y="176" fill="#a89275" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.12em" dominant-baseline="text-before-edge">DARK FAMILY</text>
-      <text x="56" y="516" fill="#8b7556" font-size="12" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.12em" dominant-baseline="text-before-edge">LIGHT FAMILY</text>
-      ${renderedCards}
+      <rect x="0" y="0" width="${WIDTH}" height="${HEIGHT}" fill="url(#${glowId})" />
+      <rect x="42" y="232" width="930" height="352" rx="30" fill="${withAlpha("#0b0908", 0.14)}" />
+      <rect x="996" y="232" width="562" height="228" rx="30" fill="${withAlpha("#0b0908", 0.14)}" />
+      <rect x="996" y="466" width="562" height="160" rx="30" fill="${withAlpha("#0b0908", 0.14)}" />
+      <text x="56" y="58" fill="#efe4d0" font-size="18" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" letter-spacing="0.08em" dominant-baseline="text-before-edge">${escapeXml((PREVIEW.badgeLabel || PRODUCT.name).toUpperCase())}</text>
+      <text x="56" y="88" fill="#f2e7d2" font-size="46" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">${escapeXml(PREVIEW.headline)}</text>
+      <text x="56" y="136" fill="#bfa88d" font-size="19" font-family="'Segoe UI', 'Noto Sans', sans-serif" dominant-baseline="text-before-edge">${escapeXml(PREVIEW.subheadline)}</text>
+      ${renderedPills}
+      ${renderHeroShowcase({ theme: defaultThemeMeta.theme, x: 42, y: 232, width: 930, height: 352 })}
+      ${renderTraitsCard({ theme: defaultThemeMeta.theme, x: 996, y: 232, width: 562, height: 228 })}
+      ${renderVariantSummaryCard({ themes, x: 996, y: 466, width: 562, height: 160 })}
+      ${bottomCards}
     </svg>
   `;
 }
@@ -437,6 +651,19 @@ async function run() {
 
   const promoSpecSha256 = sha256(JSON.stringify({
     renderer: PREVIEW_RENDERER,
+    product: {
+      id: PRODUCT.id,
+      name: PRODUCT.name,
+      displayName: PRODUCT.displayName,
+      summary: PRODUCT.summary,
+    },
+    scheme: {
+      id: SCHEME.id,
+      name: SCHEME.name,
+      headline: SCHEME.headline,
+      vocabulary: SCHEME.vocabulary,
+    },
+    preview: PREVIEW,
     roles: PROMO_ROLE_SWATCHES,
     canvas: { width: WIDTH, height: HEIGHT },
   }));
@@ -452,8 +679,23 @@ async function run() {
         renderer: PREVIEW_RENDERER,
         themes: themes.map((meta) => ({
           id: meta.id,
+          name: meta.name,
+          file: toPosixPath(meta.file),
           theme: meta.theme,
         })),
+        product: {
+          id: PRODUCT.id,
+          name: PRODUCT.name,
+          displayName: PRODUCT.displayName,
+          summary: PRODUCT.summary,
+        },
+        scheme: {
+          id: SCHEME.id,
+          name: SCHEME.name,
+          headline: SCHEME.headline,
+          vocabulary: SCHEME.vocabulary,
+        },
+        preview: PREVIEW,
         promoSpecSha256,
         hero: true,
         canvas: { width: WIDTH, height: HEIGHT },
@@ -480,4 +722,3 @@ run().catch((error) => {
   console.error(`✗ failed to generate preview images: ${error.message}`);
   process.exit(1);
 });
-

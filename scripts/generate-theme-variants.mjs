@@ -1,6 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
-import { loadColorSystemTuning, loadColorSystemVariants, loadRoleAdapters, loadSemanticPalette } from './color-system.mjs'
+import { COLOR_SYSTEM_SEMANTIC_PATH, loadColorSystemTuning, loadColorSystemVariants, loadRoleAdapters } from './color-system.mjs'
+import { buildColorLanguageModel } from './color-system/build.mjs'
+import { syncVscodeChromeReferenceFiles } from './color-system/vscode-chrome.mjs'
 import {
   clamp,
   contrastRatio,
@@ -20,8 +22,9 @@ import {
   xyzToRgb,
 } from './color-utils.mjs'
 
+const COLOR_LANGUAGE_MODEL = buildColorLanguageModel()
 const VARIANT_SPEC = loadColorSystemVariants()
-const SEMANTIC_PALETTE = loadSemanticPalette()
+const SEMANTIC_PALETTE = COLOR_LANGUAGE_MODEL.semanticPalette
 const READABILITY_ROLE_DEFS = loadRoleAdapters()
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
 
@@ -1482,12 +1485,18 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
 }
 
 export function generateThemeVariants() {
+  syncVscodeChromeReferenceFiles(COLOR_LANGUAGE_MODEL, VARIANT_SPEC)
   validateTemplateAvailability(DARK_THEME_SOURCE_PATH)
   validateTemplateAvailability(TEMPLATE_DARK_PATH)
 
   const currentDark = readJson(DARK_THEME_SOURCE_PATH)
   const baselineDark = readJson(TEMPLATE_DARK_PATH)
   const warnings = []
+
+  const semanticSnapshotChanged = writeJson(COLOR_SYSTEM_SEMANTIC_PATH, COLOR_LANGUAGE_MODEL.semanticSnapshot)
+  console.log(
+    `${semanticSnapshotChanged ? '✓ generated' : '- unchanged'} ${COLOR_SYSTEM_SEMANTIC_PATH} from ${COLOR_LANGUAGE_MODEL.sources.foundation}`
+  )
 
   warnTemplateDrift(currentDark, baselineDark, warnings)
   applySemanticPalette(currentDark, 'dark', warnings)

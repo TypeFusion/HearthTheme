@@ -1,6 +1,7 @@
 ---
 import { readFileSync } from "node:fs";
 import { tokens } from "../../data/tokens";
+import { productData } from "../../data/product";
 import type { Lang } from "../../i18n/utils";
 
 interface Props {
@@ -12,7 +13,16 @@ const d = tokens.dark;
 const s = tokens.darkSoft;
 const l = tokens.light;
 const ls = tokens.lightSoft;
-const changelogUrl = "https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md";
+const productName = productData.product.name;
+const changelogUrl = productData.links.changelogUrl;
+const philosophyUrl = productData.links.philosophyUrl;
+const schemeUrl = productData.links.schemeUrl;
+const specUrl = productData.links.specUrl;
+const baselineUrl = productData.links.baselineUrl;
+const tuningUrl = productData.links.tuningUrl;
+const reportUrl = productData.links.reportUrl;
+const contractChecklistUrl = productData.links.contractChecklistUrl;
+const contractReviewUrl = productData.links.contractReviewUrl;
 const CHANGELOG_VISIBLE_RELEASES = 6;
 const CHANGELOG_VISIBLE_CHANGES = 2;
 
@@ -34,7 +44,9 @@ function parseExtensionChangelog(markdown: string): ExtensionReleaseRow[] {
 
 		const [, version, date = ""] = headerMatch;
 		const bullets = [...section.matchAll(/^- (.+)$/gm)].map((match) => match[1].trim()).filter(Boolean);
-		if (bullets.length === 0) continue;
+		if (bullets.length === 0) {
+			throw new Error(`Release ${version} is missing bullet entries in extension/CHANGELOG.md.`);
+		}
 
 		const [summary, ...rest] = bullets;
 		rows.push({
@@ -45,28 +57,35 @@ function parseExtensionChangelog(markdown: string): ExtensionReleaseRow[] {
 		});
 	}
 
+	if (rows.length === 0) {
+		throw new Error("No parseable release entries found in extension/CHANGELOG.md.");
+	}
+
 	return rows;
 }
 
 function readExtensionChangelogRows(): ExtensionReleaseRow[] {
+	const changelogPath = new URL("../../../extension/CHANGELOG.md", import.meta.url);
+
 	try {
-		const changelogPath = new URL("../../../extension/CHANGELOG.md", import.meta.url);
 		const content = readFileSync(changelogPath, "utf8");
 		return parseExtensionChangelog(content);
-	} catch {
-		return [];
+	} catch (error) {
+		throw new Error(
+			`Baseline docs failed to load release history from ${changelogPath.pathname}: ${error instanceof Error ? error.message : String(error)}`,
+		);
 	}
 }
 
 const copy = {
 	en: {
 		eyebrow: "Color Language Governance",
-		title: "HearthCode Baseline",
+		title: `${productName} Baseline`,
 		subtitle:
 			"A stable baseline for Hearth Dark (default), Hearth Dark Soft, Hearth Light, and Hearth Light Soft across implementation surfaces.",
 		intentTitle: "Design Intent",
 		intent:
-			"HearthCode keeps one warm semantic language across surfaces and variants. The palette targets a 2800K desk-lamp feel: yellow-led atmosphere, brick-red accents, plus a restrained denim-blue function anchor for structural focus. Hearth Dark is for mixed-light daily work, Hearth Dark Soft for lower-stimulation night focus, Hearth Light for document-dense daytime work, and Hearth Light Soft for long daytime sessions with calmer contrast.",
+			`${productName} keeps one warm semantic language across surfaces and variants. The palette targets a 2800K desk-lamp feel: yellow-led atmosphere, brick-red accents, plus a restrained denim-blue function anchor for structural focus. Hearth Dark is for mixed-light daily work, Hearth Dark Soft for lower-stimulation night focus, Hearth Light for document-dense daytime work, and Hearth Light Soft for long daytime sessions with calmer contrast.`,
 		matrixTitle: "Semantic Matrix",
 		role: "Role",
 		dark: "Dark",
@@ -78,6 +97,10 @@ const copy = {
 		budgetMetric: "Metric",
 		budgetTarget: "Target",
 		snapshotTitle: "Current Snapshot",
+		stackTitle: "Documentation Stack",
+		stackSubtitle:
+			"Use the philosophy for community-facing intent, the spec for architecture, the contract checklist for lifecycle boundaries, the contract review for maturity status, the baseline for release truth, the tuning guide for calibration edits, and the report for generated consistency output.",
+		openDoc: "Open source file",
 		changelogTitle: "Change History",
 		changelogSubtitle: "Only the latest releases are shown here for quick scanning.",
 		changelogFullLink: "View full changelog",
@@ -98,14 +121,48 @@ const copy = {
 			variable: "Coffee-neutral information carriers",
 			comment: "Quiet guidance layer",
 		},
+		stackCards: {
+			philosophy: {
+				title: "Scheme Philosophy",
+				body: "The public-facing story: naming, mood, vocabulary, and what this color language is trying to preserve.",
+			},
+			scheme: {
+				title: "Scheme Manifest",
+				body: "The machine-readable scheme header that powers docs, previews, and release metadata.",
+			},
+			spec: {
+				title: "System Spec",
+				body: "The top-down philosophy: principles, platform translation rules, and change workflow.",
+			},
+			baseline: {
+				title: "Baseline Snapshot",
+				body: "The release-aligned semantic matrix, readability budget, and current audit snapshot.",
+			},
+			tuning: {
+				title: "Tuning Reference",
+				body: "The editing map for compensation rules, separation budgets, and derived site assets.",
+			},
+			contractChecklist: {
+				title: "Contract Checklist",
+				body: "The lifecycle registry for future-proof layers, calibration boundaries, migration anchors, and generated outputs.",
+			},
+			contractReview: {
+				title: "Contract Review",
+				body: "The maturity rubric showing which layers are already stable contracts and which are still bounded or transitional.",
+			},
+			report: {
+				title: "Consistency Report",
+				body: "The generated output report for current release consistency and cross-surface drift review.",
+			},
+		},
 	},
 	zh: {
 		eyebrow: "色彩语言治理",
-		title: "HearthCode 基线",
+		title: `${productName} 基线`,
 			subtitle: "用于稳定维护 Hearth Dark（默认）、Hearth Dark Soft、Hearth Light 与 Hearth Light Soft，并在不同实现载体中保持一致语义体系。",
 		intentTitle: "设计意图",
 		intent:
-			"HearthCode 在不同实现载体与全部变体中保持同一套暖色语义语言。目标是 2800K 屏幕挂灯打在桌面的色温感：黄系主导、砖红点缀，并保留克制的牛仔蓝 function 锚点用于结构聚焦。Hearth Dark 面向日常主力与混合光环境；Hearth Dark Soft 面向低刺激夜间专注；Hearth Light 面向白天办公与文档密集；Hearth Light Soft 面向长时白天工作并进一步柔化对比。",
+			`${productName} 在不同实现载体与全部变体中保持同一套暖色语义语言。目标是 2800K 屏幕挂灯打在桌面的色温感：黄系主导、砖红点缀，并保留克制的牛仔蓝 function 锚点用于结构聚焦。Hearth Dark 面向日常主力与混合光环境；Hearth Dark Soft 面向低刺激夜间专注；Hearth Light 面向白天办公与文档密集；Hearth Light Soft 面向长时白天工作并进一步柔化对比。`,
 		matrixTitle: "语义矩阵",
 		role: "角色",
 		dark: "深色",
@@ -117,6 +174,10 @@ const copy = {
 		budgetMetric: "指标",
 		budgetTarget: "目标",
 		snapshotTitle: "当前快照",
+		stackTitle: "文档栈",
+		stackSubtitle:
+			"对外叙事看色彩哲学，结构原则看主规范，生命周期边界看 contract checklist，成熟度判断看 contract review，当前发布真值看基线，校准参数看 tuning，生成一致性结果看报告。",
+		openDoc: "打开源文档",
 		changelogTitle: "变更历史",
 		changelogSubtitle: "页面仅展示最新版本摘要，便于快速浏览。",
 		changelogFullLink: "查看完整变更日志",
@@ -137,15 +198,49 @@ const copy = {
 			variable: "咖啡中性信息承载",
 			comment: "安静引导层",
 		},
+		stackCards: {
+			philosophy: {
+				title: "方案哲学",
+				body: "面向社区传播的那一层：命名、气质、词汇和这套色彩语言真正要守住的东西。",
+			},
+			scheme: {
+				title: "方案清单",
+				body: "面向机器读取的方案头信息，用于驱动文档、预览图与发布元数据。",
+			},
+			spec: {
+				title: "系统规范",
+				body: "自上而下的哲学说明：原则、平台翻译规则与变更工作流。",
+			},
+			baseline: {
+				title: "基线快照",
+				body: "与当前发布对齐的语义矩阵、可读性预算与审计快照。",
+			},
+			tuning: {
+				title: "Tuning 参考",
+				body: "补偿规则、分离预算与站点派生资产的编辑地图。",
+			},
+			contractChecklist: {
+				title: "契约清单",
+				body: "用于定义 future-proof 层、校准边界、迁移锚点与生成产物生命周期的清单。",
+			},
+			contractReview: {
+				title: "契约评审",
+				body: "用于说明哪些层已经稳定、哪些仍属于受限兼容或迁移状态的成熟度评审表。",
+			},
+			report: {
+				title: "一致性报告",
+				body: "当前发布的生成结果报告，用于检查跨载体漂移与一致性。",
+			},
+		},
 	},
 	ja: {
 		eyebrow: "カラー言語運用",
-		title: "HearthCode ベースライン",
+		title: `${productName} ベースライン`,
 		subtitle:
 			"Hearth Dark（標準）/ Hearth Dark Soft / Hearth Light / Hearth Light Soft を、実装面をまたいで同じセマンティクスで安定運用するための基準。",
 		intentTitle: "デザイン意図",
 		intent:
-			"HearthCode は実装面と全バリアントで同一の暖色セマンティック言語を維持します。狙いは 2800K のモニターライトが机を照らす色温感で、黄系主導・煉瓦赤はアクセント、構造の焦点には抑制したデニムブルー function 錨を少量だけ残します。Hearth Dark は日常の混合光向け、Hearth Dark Soft は低刺激の夜間集中向け、Hearth Light は文書密度の高い日中作業向け、Hearth Light Soft は長時間の日中作業向けにさらに穏やかな対比へ調整します。",
+			`${productName} は実装面と全バリアントで同一の暖色セマンティック言語を維持します。狙いは 2800K のモニターライトが机を照らす色温感で、黄系主導・煉瓦赤はアクセント、構造の焦点には抑制したデニムブルー function 錨を少量だけ残します。Hearth Dark は日常の混合光向け、Hearth Dark Soft は低刺激の夜間集中向け、Hearth Light は文書密度の高い日中作業向け、Hearth Light Soft は長時間の日中作業向けにさらに穏やかな対比へ調整します。`,
 		matrixTitle: "セマンティック行列",
 		role: "役割",
 		dark: "ダーク",
@@ -157,6 +252,10 @@ const copy = {
 		budgetMetric: "指標",
 		budgetTarget: "目標",
 		snapshotTitle: "現在のスナップショット",
+		stackTitle: "ドキュメント構成",
+		stackSubtitle:
+			"対外的な語りは哲学文書、構造原則は仕様書、ライフサイクル境界は contract checklist、成熟度判断は contract review、現行リリースの真値はベースライン、補正パラメータは tuning、生成結果は整合レポートを見る運用です。",
+		openDoc: "ソース文書を開く",
 		changelogTitle: "変更履歴",
 		changelogSubtitle: "このページでは最新リリース要約のみを表示します。",
 		changelogFullLink: "完全な変更履歴を見る",
@@ -176,6 +275,40 @@ const copy = {
 			type: "ダークオーカーの構造記号",
 			variable: "コーヒーニュートラルの情報キャリア",
 			comment: "静かなガイダンス層",
+		},
+		stackCards: {
+			philosophy: {
+				title: "スキーム哲学",
+				body: "コミュニティ向けの物語層。命名、雰囲気、語彙、そしてこのカラー言語が守るべき核を示します。",
+			},
+			scheme: {
+				title: "スキーム定義",
+				body: "ドキュメント、プレビュー、リリース情報を支える機械可読のスキームヘッダーです。",
+			},
+			spec: {
+				title: "システム仕様",
+				body: "トップダウンの思想、原則、プラットフォーム翻訳規則、変更ワークフロー。",
+			},
+			baseline: {
+				title: "ベースライン",
+				body: "現行リリースに揃えたセマンティック行列、可読性バジェット、監査スナップショット。",
+			},
+			tuning: {
+				title: "Tuning 参照",
+				body: "補正規則、分離バジェット、派生サイト資産を編集するための参照。",
+			},
+			contractChecklist: {
+				title: "契約チェックリスト",
+				body: "future-proof 層、補正境界、移行アンカー、生成物のライフサイクルを定義する一覧です。",
+			},
+			contractReview: {
+				title: "契約レビュー",
+				body: "どの層がすでに安定契約で、どの層が限定互換や移行段階なのかを示す成熟度ルーブリックです。",
+			},
+			report: {
+				title: "整合レポート",
+				body: "現行リリースの生成結果を確認し、面間ドリフトを点検するためのレポート。",
+			},
 		},
 	},
 } as const;
@@ -256,6 +389,17 @@ const snapshot = {
 	lightOperator: contrastRatio(l.operator, l.bg),
 	lightSoftOperator: contrastRatio(ls.operator, ls.bg),
 };
+
+const stackCards = [
+	{ href: philosophyUrl, title: c.stackCards.philosophy.title, body: c.stackCards.philosophy.body },
+	{ href: specUrl, title: c.stackCards.spec.title, body: c.stackCards.spec.body },
+	{ href: schemeUrl, title: c.stackCards.scheme.title, body: c.stackCards.scheme.body },
+	{ href: baselineUrl, title: c.stackCards.baseline.title, body: c.stackCards.baseline.body },
+	{ href: contractChecklistUrl, title: c.stackCards.contractChecklist.title, body: c.stackCards.contractChecklist.body },
+	{ href: contractReviewUrl, title: c.stackCards.contractReview.title, body: c.stackCards.contractReview.body },
+	{ href: tuningUrl, title: c.stackCards.tuning.title, body: c.stackCards.tuning.body },
+	{ href: reportUrl, title: c.stackCards.report.title, body: c.stackCards.report.body },
+];
 ---
 
 <section class="hearth-section hearth-section-y" data-reveal>
@@ -273,6 +417,29 @@ const snapshot = {
 			<section class="hearth-surface hearth-card p-6 sm:p-8">
 				<h2 class="font-ui font-semibold tracking-[-0.014em] text-[1.82rem] hearth-doc-heading mb-5">{c.intentTitle}</h2>
 				<p class="hearth-copy hearth-doc-body leading-relaxed text-[1.02rem]">{c.intent}</p>
+			</section>
+
+			<section class="hearth-surface hearth-card p-6 sm:p-8">
+				<div class="mb-6">
+					<h2 class="font-ui font-semibold tracking-[-0.014em] text-[1.82rem] hearth-doc-heading mb-3">{c.stackTitle}</h2>
+					<p class="hearth-copy hearth-doc-body text-[1rem] leading-relaxed">{c.stackSubtitle}</p>
+				</div>
+				<div class="grid gap-4 md:grid-cols-2">
+					{
+						stackCards.map((card) => (
+							<a
+								href={card.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="hearth-surface hearth-surface-soft hearth-card border hearth-doc-divider bg-[var(--hearth-surface-soft-bg)] p-5 transition-colors duration-200 hover:bg-[var(--hearth-grid-line-soft)]"
+							>
+								<p class="hearth-doc-heading font-ui font-semibold tracking-[-0.014em] text-[1.18rem] mb-2">{card.title}</p>
+								<p class="hearth-copy hearth-doc-note text-[0.97rem] leading-relaxed mb-4">{card.body}</p>
+								<span class="hearth-footer-link text-[0.78rem]">{c.openDoc}</span>
+							</a>
+						))
+					}
+				</div>
 			</section>
 
 			<section class="hearth-surface hearth-card p-6 sm:p-8">

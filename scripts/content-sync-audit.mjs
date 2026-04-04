@@ -22,6 +22,7 @@ const DOCS_BASELINE = 'docs/theme-baseline.md'
 const BASELINE_DOCS_COMPONENT = 'src/components/ui/BaselineDocs.astro'
 const PROOF_SECTION_COMPONENT = 'src/components/ui/ProofSection.astro'
 const CODE_PREVIEW_COMPONENT = 'src/components/code/CodePreview.astro'
+const CODE_PREVIEW_SOURCE = 'src/lib/codePreview.ts'
 const THEME_AUDIT_SCRIPT = 'scripts/theme-audit.mjs'
 const SITE_THEME_VARS = 'src/styles/theme-vars.css'
 const SOURCE_COLOR_SCAN_PATHS = ['src/components', 'src/layouts', 'src/styles']
@@ -583,27 +584,36 @@ function validateSiteParameterClaims() {
 
 function validateCodePreviewSourceOfTruth() {
   const codePreview = readText(CODE_PREVIEW_COMPONENT)
-  if (!codePreview) return
+  const codePreviewSource = readText(CODE_PREVIEW_SOURCE)
+  if (!codePreview || !codePreviewSource) return
+
+  if (!codePreview.includes("from '../../lib/codePreview'")) {
+    addIssue(`${CODE_PREVIEW_COMPONENT}: should read preview payload state from ${CODE_PREVIEW_SOURCE}`)
+  }
 
   const requiredThemeRefs = [
-    '../../../themes/hearth-dark.json',
-    '../../../themes/hearth-dark-soft.json',
-    '../../../themes/hearth-light.json',
-    '../../../themes/hearth-light-soft.json',
+    '../../themes/hearth-dark.json',
+    '../../themes/hearth-dark-soft.json',
+    '../../themes/hearth-light.json',
+    '../../themes/hearth-light-soft.json',
   ]
 
   for (const ref of requiredThemeRefs) {
-    if (!codePreview.includes(ref)) {
-      addIssue(`${CODE_PREVIEW_COMPONENT}: missing real theme source reference "${ref}"`)
+    if (!codePreviewSource.includes(ref)) {
+      addIssue(`${CODE_PREVIEW_SOURCE}: missing real theme source reference "${ref}"`)
     }
   }
 
-  if (!codePreview.includes("readFileSync(new URL(")) {
-    addIssue(`${CODE_PREVIEW_COMPONENT}: should load theme JSON via readFileSync + URL source path`)
+  if (!codePreviewSource.includes("readFileSync(new URL(")) {
+    addIssue(`${CODE_PREVIEW_SOURCE}: should load theme JSON via readFileSync + URL source path`)
   }
 
-  if (codePreview.includes("import { tokens } from '../../data/tokens'")) {
-    addIssue(`${CODE_PREVIEW_COMPONENT}: should not use generated token snapshot as preview theme source`)
+  if (
+    codePreview.includes("import { tokens } from '../../data/tokens'")
+    || codePreviewSource.includes("from '../data/tokens'")
+    || codePreviewSource.includes("from '../../data/tokens'")
+  ) {
+    addIssue(`${CODE_PREVIEW_SOURCE}: should not use generated token snapshot as preview theme source`)
   }
 }
 
@@ -790,7 +800,7 @@ function validateWarmAnchorContract(tokens) {
 
   for (const [variantId, roleBands] of Object.entries(coolHueByVariant)) {
     if (Object.keys(roleBands || {}).length > 0) {
-      addIssue(`color-system/tuning.json: roleSignalProfile.coolHueBandByVariant must be empty in warm-only mode (found entries in "${variantId}")`)
+      addIssue(`color-system/framework/tuning.json: roleSignalProfile.coolHueBandByVariant must be empty in warm-only mode (found entries in "${variantId}")`)
     }
   }
 
@@ -816,7 +826,7 @@ function validateWarmAnchorContract(tokens) {
   walkSite(siteDerived, ['siteAssetMapping', 'derivedColors'])
   walkSite(siteGroups, ['siteAssetMapping', 'groups'])
   for (const hit of hitPaths) {
-    addIssue(`color-system/tuning.json: site mapping must not reference @coolAnchor (${hit})`)
+        addIssue(`color-system/framework/tuning.json: site mapping must not reference @coolAnchor (${hit})`)
   }
 
   const variantToTokenSet = {
@@ -842,24 +852,24 @@ function validateWarmAnchorContract(tokens) {
     if (!tokenSet) continue
     const warmBandRoleProfile = resolveVariantRoleProfile(warmHueByVariant, variantId)
     if (Object.keys(warmBandRoleProfile).length === 0) {
-      addIssue(`color-system/tuning.json: roleSignalProfile.warmHueBandByVariant missing profile for variant "${variantId}"`)
+      addIssue(`color-system/framework/tuning.json: roleSignalProfile.warmHueBandByVariant missing profile for variant "${variantId}"`)
       continue
     }
     for (const roleId of Object.keys(roleTokenKey)) {
       if (!warmBandRoleProfile[roleId]) {
-        addIssue(`color-system/tuning.json: roleSignalProfile.warmHueBandByVariant missing "${roleId}" for variant "${variantId}"`)
+        addIssue(`color-system/framework/tuning.json: roleSignalProfile.warmHueBandByVariant missing "${roleId}" for variant "${variantId}"`)
       }
     }
   }
 
   if (!warmGamutGuard) {
-    addIssue('color-system/tuning.json: roleSignalProfile.warmGamutGuard is required in warm-only mode')
+    addIssue('color-system/framework/tuning.json: roleSignalProfile.warmGamutGuard is required in warm-only mode')
     return
   }
 
   const guardedRoles = new Set(Array.isArray(warmGamutGuard.roles) ? warmGamutGuard.roles : [])
   if (guardedRoles.size === 0) {
-    addIssue('color-system/tuning.json: roleSignalProfile.warmGamutGuard.roles must declare at least one guarded role')
+    addIssue('color-system/framework/tuning.json: roleSignalProfile.warmGamutGuard.roles must declare at least one guarded role')
     return
   }
 

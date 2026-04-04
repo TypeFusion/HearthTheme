@@ -1,7 +1,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import { buildColorLanguageModel } from './color-system/build.mjs'
+import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { getThemeOutputFiles } from './color-system.mjs'
 
+const COLOR_LANGUAGE_MODEL = buildColorLanguageModel()
 export const THEME_FILES = getThemeOutputFiles()
 
 export const VARIANT_META = {
@@ -28,10 +31,6 @@ export const VARIANT_META = {
 }
 
 const OUTPUT_DIR = 'obsidian/themes'
-
-function readJson(path) {
-  return JSON.parse(readFileSync(path, 'utf8'))
-}
 
 export function writeIfChanged(path, content) {
   if (existsSync(path)) {
@@ -110,42 +109,6 @@ function pickContrastText(backgroundHex) {
   return relativeLuminance(backgroundHex) > 0.34 ? darkText : lightText
 }
 
-function getToken(theme, scopes) {
-  for (const scope of scopes) {
-    const hit = (theme.tokenColors || []).find((entry) => (
-      Array.isArray(entry.scope) ? entry.scope.includes(scope) : entry.scope === scope
-    ))
-    if (hit?.settings?.foreground) {
-      const value = normalizeHex(hit.settings.foreground)
-      if (value) return value
-    }
-  }
-  return null
-}
-
-function extractThemeTokens(theme) {
-  return {
-    bg: normalizeHex(theme.colors?.['editor.background']),
-    fg: normalizeHex(theme.colors?.['editor.foreground']),
-    lineBg: normalizeHex(theme.colors?.['editor.lineHighlightBackground']),
-    lineNo: normalizeHex(theme.colors?.['editorLineNumber.foreground']),
-    sidebar: normalizeHex(theme.colors?.['sideBar.background']),
-    border: normalizeHex(theme.colors?.['sideBar.border']),
-    selection: normalizeHex(theme.colors?.['editor.selectionBackground']),
-    cursor: normalizeHex(theme.colors?.['editorCursor.foreground']),
-    keyword: getToken(theme, ['keyword']),
-    operator: getToken(theme, ['keyword.operator']),
-    fn: getToken(theme, ['entity.name.function']),
-    string: getToken(theme, ['string']),
-    number: getToken(theme, ['constant.numeric']),
-    type: getToken(theme, ['entity.name.type']),
-    variable: getToken(theme, ['variable']),
-    property: getToken(theme, ['variable.other.property', 'meta.object-literal.key']),
-    comment: getToken(theme, ['comment']),
-    tag: getToken(theme, ['entity.name.tag']),
-  }
-}
-
 function assertTokenSet(id, tokenSet) {
   for (const [key, value] of Object.entries(tokenSet)) {
     if (!value) {
@@ -154,58 +117,123 @@ function assertTokenSet(id, tokenSet) {
   }
 }
 
-function buildVars(tokens) {
+function buildVars(tokens, platformVars = {}) {
   const accent = tokens.cursor
   const accentHover = mixHex(accent, tokens.fg, 0.18)
   const accentSoft = alpha(accent, 0.18)
-  const bgSecondary = mixHex(tokens.sidebar, tokens.bg, 0.5)
-  const bgSecondaryAlt = mixHex(tokens.lineBg, tokens.bg, 0.4)
+  const bgSecondary = platformVars['--background-secondary'] ?? mixHex(tokens.sidebar, tokens.bg, 0.5)
+  const bgSecondaryAlt = platformVars['--background-secondary-alt'] ?? mixHex(tokens.lineBg, tokens.bg, 0.4)
   const borderHover = alpha(tokens.border, 0.48)
-  const borderFocus = alpha(accent, 0.46)
+  const borderFocus = platformVars['--background-modifier-border-focus'] ?? alpha(accent, 0.46)
   const codeBackground = alpha(mixHex(tokens.border, tokens.bg, 0.45), 0.38)
   const linkUnresolved = mixHex(tokens.comment, tokens.keyword, 0.22)
+  const feedbackNote = platformVars['--hearth-feedback-note'] ?? tokens.property
+  const feedbackInfo = platformVars['--hearth-feedback-info'] ?? tokens.fn
+  const feedbackSuccess = platformVars['--text-success'] ?? tokens.string
+  const feedbackWarning = platformVars['--text-warning'] ?? tokens.number
+  const feedbackError = platformVars['--text-error'] ?? tokens.keyword
+  const guide = platformVars['--hearth-guide'] ?? tokens.guide
+  const guideActive = platformVars['--hearth-guide-active'] ?? tokens.guideActive
+  const guideInk = platformVars['--hearth-guide-ink'] ?? tokens.guideInk
+  const whitespace = platformVars['--hearth-whitespace'] ?? tokens.whitespace
+  const bracketWarm = platformVars['--hearth-bracket-warm'] ?? tokens.bracketWarm
+  const bracketBright = platformVars['--hearth-bracket-bright'] ?? tokens.bracketBright
+  const bracketCool = platformVars['--hearth-bracket-cool'] ?? tokens.bracketCool
+  const bracketMatchFill = platformVars['--hearth-bracket-match-fill'] ?? tokens.bracketMatchFill
+  const bracketMatchStroke = platformVars['--hearth-bracket-match-stroke'] ?? tokens.bracketMatchStroke
+  const shellBand = platformVars['--hearth-shell-band'] ?? tokens.shellBand
+  const accentHoverFill = platformVars['--hearth-accent-hover'] ?? tokens.accentHover
+  const onStatusInk = platformVars['--hearth-on-status'] ?? tokens.onStatus
+  const navActiveInk = platformVars['--hearth-nav-active-ink'] ?? tokens.navActiveInk
+  const terminalBlack = platformVars['--hearth-terminal-black'] ?? tokens.terminalBlack
+  const terminalRed = platformVars['--hearth-terminal-red'] ?? tokens.terminalRed
+  const terminalGreen = platformVars['--hearth-terminal-green'] ?? tokens.terminalGreen
+  const terminalYellow = platformVars['--hearth-terminal-yellow'] ?? tokens.terminalYellow
+  const terminalBlue = platformVars['--hearth-terminal-blue'] ?? tokens.terminalBlue
+  const terminalMagenta = platformVars['--hearth-terminal-magenta'] ?? tokens.terminalMagenta
+  const terminalCyan = platformVars['--hearth-terminal-cyan'] ?? tokens.terminalCyan
+  const terminalWhite = platformVars['--hearth-terminal-white'] ?? tokens.terminalWhite
+  const terminalBrightBlack = platformVars['--hearth-terminal-bright-black'] ?? tokens.terminalBrightBlack
+  const terminalBrightRed = platformVars['--hearth-terminal-bright-red'] ?? tokens.terminalBrightRed
+  const terminalBrightGreen = platformVars['--hearth-terminal-bright-green'] ?? tokens.terminalBrightGreen
+  const terminalBrightYellow = platformVars['--hearth-terminal-bright-yellow'] ?? tokens.terminalBrightYellow
+  const terminalBrightBlue = platformVars['--hearth-terminal-bright-blue'] ?? tokens.terminalBrightBlue
+  const terminalBrightMagenta = platformVars['--hearth-terminal-bright-magenta'] ?? tokens.terminalBrightMagenta
+  const terminalBrightCyan = platformVars['--hearth-terminal-bright-cyan'] ?? tokens.terminalBrightCyan
+  const terminalBrightWhite = platformVars['--hearth-terminal-bright-white'] ?? tokens.terminalBrightWhite
   const h1 = tokens.keyword
   const h2 = tokens.fn
   const h3 = tokens.property
   const h4 = tokens.string
   const h5 = tokens.number
   const h6 = mixHex(tokens.comment, tokens.fg, 0.4)
-  const calloutNote = tokens.property
-  const calloutTip = tokens.string
-  const calloutWarning = tokens.number
-  const calloutDanger = tokens.keyword
+  const calloutNote = feedbackNote
+  const calloutTip = feedbackSuccess
+  const calloutWarning = feedbackWarning
+  const calloutDanger = feedbackError
 
   return {
-    '--background-primary': tokens.bg,
-    '--background-primary-alt': tokens.lineBg,
+    '--background-primary': platformVars['--background-primary'] ?? tokens.bg,
+    '--background-primary-alt': platformVars['--background-primary-alt'] ?? tokens.lineBg,
     '--background-secondary': bgSecondary,
     '--background-secondary-alt': bgSecondaryAlt,
-    '--background-modifier-border': alpha(tokens.border, 0.72),
+    '--background-modifier-border': platformVars['--background-modifier-border'] ?? alpha(tokens.border, 0.72),
     '--background-modifier-border-hover': borderHover,
     '--background-modifier-border-focus': borderFocus,
     '--background-modifier-form-field': alpha(tokens.border, 0.22),
-    '--background-modifier-hover': alpha(tokens.border, 0.28),
-    '--background-modifier-active-hover': alpha(accent, 0.26),
+    '--background-modifier-hover': platformVars['--background-modifier-hover'] ?? platformVars['--interactive-hover'] ?? alpha(tokens.border, 0.28),
+    '--background-modifier-active-hover': platformVars['--background-modifier-active-hover'] ?? alpha(accent, 0.26),
     '--background-modifier-box-shadow': alpha(tokens.bg, 0.6),
     '--background-modifier-success': alpha(tokens.string, 0.24),
     '--background-modifier-error': alpha(tokens.keyword, 0.2),
     '--background-modifier-error-hover': alpha(tokens.keyword, 0.3),
     '--background-modifier-message': accentSoft,
     '--background-modifier-cover': alpha(tokens.bg, 0.72),
-    '--text-normal': tokens.fg,
-    '--text-muted': mixHex(tokens.comment, tokens.fg, 0.36),
-    '--text-faint': mixHex(tokens.comment, tokens.bg, 0.28),
+    '--text-normal': platformVars['--text-normal'] ?? tokens.fg,
+    '--text-muted': platformVars['--text-muted'] ?? mixHex(tokens.comment, tokens.fg, 0.36),
+    '--text-faint': platformVars['--text-faint'] ?? mixHex(tokens.comment, tokens.bg, 0.28),
     '--text-accent': accent,
     '--text-accent-hover': accentHover,
-    '--text-on-accent': pickContrastText(accent),
-    '--text-success': tokens.string,
-    '--text-warning': tokens.number,
-    '--text-error': tokens.keyword,
+    '--text-on-accent': platformVars['--text-on-accent'] ?? pickContrastText(accent),
+    '--text-success': feedbackSuccess,
+    '--text-warning': feedbackWarning,
+    '--text-error': feedbackError,
+    '--hearth-feedback-note': feedbackNote,
+    '--hearth-feedback-info': feedbackInfo,
+    '--hearth-guide': guide,
+    '--hearth-guide-active': guideActive,
+    '--hearth-guide-ink': guideInk,
+    '--hearth-whitespace': whitespace,
+    '--hearth-bracket-warm': bracketWarm,
+    '--hearth-bracket-bright': bracketBright,
+    '--hearth-bracket-cool': bracketCool,
+    '--hearth-bracket-match-fill': bracketMatchFill,
+    '--hearth-bracket-match-stroke': bracketMatchStroke,
+    '--hearth-shell-band': shellBand,
+    '--hearth-accent-hover': accentHoverFill,
+    '--hearth-on-status': onStatusInk,
+    '--hearth-nav-active-ink': navActiveInk,
+    '--hearth-terminal-black': terminalBlack,
+    '--hearth-terminal-red': terminalRed,
+    '--hearth-terminal-green': terminalGreen,
+    '--hearth-terminal-yellow': terminalYellow,
+    '--hearth-terminal-blue': terminalBlue,
+    '--hearth-terminal-magenta': terminalMagenta,
+    '--hearth-terminal-cyan': terminalCyan,
+    '--hearth-terminal-white': terminalWhite,
+    '--hearth-terminal-bright-black': terminalBrightBlack,
+    '--hearth-terminal-bright-red': terminalBrightRed,
+    '--hearth-terminal-bright-green': terminalBrightGreen,
+    '--hearth-terminal-bright-yellow': terminalBrightYellow,
+    '--hearth-terminal-bright-blue': terminalBrightBlue,
+    '--hearth-terminal-bright-magenta': terminalBrightMagenta,
+    '--hearth-terminal-bright-cyan': terminalBrightCyan,
+    '--hearth-terminal-bright-white': terminalBrightWhite,
     '--text-highlight-bg': alpha(tokens.selection, 0.34),
-    '--text-selection': alpha(tokens.selection, 0.42),
+    '--text-selection': platformVars['--text-selection'] ?? alpha(tokens.selection, 0.42),
     '--interactive-normal': alpha(tokens.border, 0.2),
-    '--interactive-hover': alpha(tokens.border, 0.3),
-    '--interactive-accent': accent,
+    '--interactive-hover': platformVars['--interactive-hover'] ?? alpha(tokens.border, 0.3),
+    '--interactive-accent': platformVars['--interactive-accent'] ?? accent,
     '--interactive-accent-hover': accentHover,
     '--scrollbar-bg': alpha(tokens.bg, 0.24),
     '--scrollbar-thumb-bg': alpha(tokens.border, 0.5),
@@ -571,25 +599,25 @@ function renderThemeCss(meta, themePath, vars) {
   return `${header.join('\n')}${renderVars(meta.modeClass, vars)}${renderSyntaxSelectors(meta.modeClass)}${renderMarkdownSelectors(meta.modeClass)}${renderCalloutSelectors(meta.modeClass)}${renderUiSelectors(meta.modeClass)}`
 }
 
-export function buildVariantCssById(id) {
+export function buildVariantCssById(id, generatedPlatformMaps = buildGeneratedPlatformTokenMaps(COLOR_LANGUAGE_MODEL)) {
   const path = THEME_FILES[id]
   const meta = VARIANT_META[id]
   if (!path || !meta) throw new Error(`Unknown Obsidian variant id: ${id}`)
 
-  const theme = readJson(path)
-  const tokens = extractThemeTokens(theme)
+  const tokens = generatedPlatformMaps.tokenSets[id]
   assertTokenSet(id, tokens)
-  const vars = buildVars(tokens)
+  const vars = buildVars(tokens, generatedPlatformMaps.obsidian?.[id] || {})
   return renderThemeCss(meta, path, vars)
 }
 
 export function generateObsidianThemes() {
   mkdirSync(OUTPUT_DIR, { recursive: true })
+  const generatedPlatformMaps = buildGeneratedPlatformTokenMaps(COLOR_LANGUAGE_MODEL)
 
   let changed = 0
   for (const id of Object.keys(THEME_FILES)) {
     const meta = VARIANT_META[id]
-    const css = buildVariantCssById(id)
+    const css = buildVariantCssById(id, generatedPlatformMaps)
     const outPath = `${OUTPUT_DIR}/${meta.cssFile}`
     const didChange = writeIfChanged(outPath, css)
     if (didChange) changed += 1

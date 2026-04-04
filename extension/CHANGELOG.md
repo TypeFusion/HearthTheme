@@ -1,3 +1,9 @@
+## 1.1.4
+
+- Reframed the shared promo preview around a clearer default-dark editor composition so HearthCode reads as warm, low-glare, and structurally blue-anchored at first glance.
+- Fixed alignment drift in both the right-side variant summary and the left-side hero footer, so the generated marketplace, website, and Obsidian screenshots now share the same polished layout.
+- Tightened the preview copy to explain the four tuned atmospheres without competing with the main theme impression, keeping release imagery concise and easier to scan.
+
 ## 1.1.3
 
 - Reworked the README and website hero preview into a cleaner warm-neutral specimen poster, reducing card copy so the four variant differences read more directly through color.

@@ -1,98 +1,88 @@
-import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { buildColorLanguageModel, getExportedSiteTokenKeys } from './color-system/build.mjs'
+import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { generateThemeVariants } from './generate-theme-variants.mjs'
+import { generateColorLanguageLineage } from './generate-color-language-lineage.mjs'
+import { generateColorLanguageParity } from './generate-color-language-parity.mjs'
 import { generateSiteAssets } from './generate-site-assets.mjs'
 import { generateObsidianThemes } from './generate-obsidian-themes.mjs'
 import { generateObsidianAppTheme } from './generate-obsidian-app-theme.mjs'
 import { generateColorLanguageReport } from './generate-color-language-report.mjs'
-import { getThemeOutputFiles } from './color-system.mjs'
+import { generateColorLanguageContractChecklist } from './generate-color-language-contract-checklist.mjs'
+import { generateColorLanguageContractReview } from './generate-color-language-contract-review.mjs'
 
-// 0. 从 color-system 源生成四个主题 JSON 变体（themes/ 仅作为产物）
+const EXPORTED_SITE_TOKEN_KEYS = getExportedSiteTokenKeys()
+const TOKENS_TS_PATH = 'src/data/tokens.ts'
+
+function writeIfChanged(path, content) {
+  if (existsSync(path)) {
+    const prev = readFileSync(path, 'utf8').replace(/\r\n/g, '\n')
+    const next = content.replace(/\r\n/g, '\n')
+    if (prev === next) return false
+  }
+  writeFileSync(path, content)
+  return true
+}
+
+function buildExportedWebTokens(model) {
+  return Object.fromEntries(
+    Object.entries(model.platformTokenMaps.web).map(([variantId, tokenSet]) => [
+      variantId,
+      Object.fromEntries(EXPORTED_SITE_TOKEN_KEYS.map((key) => [key, tokenSet[key]])),
+    ])
+  )
+}
+
+// 0. 从新的 top-down color language sources 生成 semantic snapshot 与主题 JSON 产物
 generateThemeVariants()
 
 // 1. 同步 JSON 到 public 和 extension
 const src = 'themes'
 const targets = ['public/themes', 'extension/themes']
-const THEME_FILES = getThemeOutputFiles()
 
 for (const target of targets) {
-    mkdirSync(target, { recursive: true })
-    for (const file of readdirSync(src)) {
-        if (!file.endsWith('.json')) continue
-        copyFileSync(join(src, file), join(target, file))
-        console.log(`✓ ${src}/${file} → ${target}/${file}`)
-    }
+  mkdirSync(target, { recursive: true })
+  for (const file of readdirSync(src)) {
+    if (!file.endsWith('.json')) continue
+    copyFileSync(join(src, file), join(target, file))
+    console.log(`✓ ${src}/${file} → ${target}/${file}`)
+  }
 }
 
-// 2. 从 JSON 提取 token 颜色，生成 src/data/tokens.ts
-const themes = Object.fromEntries(
-    Object.entries(THEME_FILES).map(([id, path]) => [id, JSON.parse(readFileSync(path, 'utf8'))])
-)
-
-function getToken(theme, scopes) {
-    for (const scope of scopes) {
-        const hit = theme.tokenColors.find(t =>
-            Array.isArray(t.scope)
-                ? t.scope.includes(scope)
-                : t.scope === scope
-        )
-        if (hit) return hit.settings.foreground
-    }
-    return null
-}
-
-function buildTokenSet(theme) {
-    return {
-        bg: theme.colors['editor.background'],
-        fg: theme.colors['editor.foreground'],
-        lineBg: theme.colors['editor.lineHighlightBackground'],
-        lineNo: theme.colors['editorLineNumber.foreground'],
-        status: theme.colors['statusBar.background'],
-        sidebar: theme.colors['sideBar.background'],
-        border: theme.colors['sideBar.border'],
-        keyword: getToken(theme, ['keyword']),
-        fn: getToken(theme, ['entity.name.function']),
-        method: getToken(theme, [
-            'meta.function-call entity.name.function',
-            'meta.method-call entity.name.function',
-            'meta.function-call.js entity.name.function.js',
-            'meta.method-call.js entity.name.function.js',
-            'meta.function-call.ts entity.name.function.ts',
-            'meta.method-call.ts entity.name.function.ts',
-            'meta.function-call.py entity.name.function.py',
-            'meta.method-call.py entity.name.function.py',
-        ]),
-        property: getToken(theme, ['entity.name.function.member', 'variable.other.property', 'meta.property-name']),
-        string: getToken(theme, ['string']),
-        number: getToken(theme, ['constant.numeric']),
-        type: getToken(theme, ['entity.name.type']),
-        variable: getToken(theme, ['variable']),
-        operator: getToken(theme, ['keyword.operator']),
-        comment: getToken(theme, ['comment']),
-    }
-}
-
-const tokens = Object.fromEntries(
-    Object.entries(themes).map(([id, theme]) => [id, buildTokenSet(theme)])
-)
-
+// 2. 由 builder 输出 web token maps，生成 src/data/tokens.ts
+const colorLanguageModel = buildColorLanguageModel()
+const generatedPlatformMaps = buildGeneratedPlatformTokenMaps(colorLanguageModel)
+const tokens = buildExportedWebTokens({ platformTokenMaps: generatedPlatformMaps })
 mkdirSync('src/data', { recursive: true })
-writeFileSync(
-    'src/data/tokens.ts',
-    `// Auto-generated by scripts/sync-themes.mjs - DO NOT EDIT\n` +
+const tokensChanged = writeIfChanged(
+  TOKENS_TS_PATH,
+  `// Auto-generated by scripts/sync-themes.mjs - DO NOT EDIT\n` +
     `export const tokens = ${JSON.stringify(tokens, null, 2)} as const\n` +
     `export type TokenSet = typeof tokens.dark\n`
 )
-console.log('✓ src/data/tokens.ts generated')
+console.log(`${tokensChanged ? '✓ generated' : '- unchanged'} ${TOKENS_TS_PATH}`)
 
-// 3. 生成站点与文档派生产物（CSS vars / docs baseline / extension metadata）
+// 3. 生成 lineage 报告，保证任意下游 token 可反查
+generateColorLanguageLineage()
+
+// 4. 生成 parity 报告，确保同一颜色语言在各终端保持表现一致
+generateColorLanguageParity()
+
+// 5. 生成站点与文档派生产物（CSS vars / docs baseline / extension metadata）
 generateSiteAssets()
 
-// 4. 生成 Obsidian 主题产物（基于同一 token 语义）
+// 6. 生成 Obsidian 主题产物（基于同一 color language model）
 generateObsidianThemes()
 
-// 5. 生成 Obsidian 社区主题标准产物（manifest/theme.css/versions/screenshot）
+// 7. 生成 Obsidian 社区主题标准产物（manifest/theme.css/versions/screenshot）
 await generateObsidianAppTheme()
 
-// 6. 生成色彩语言一致性报告（供文档与 CI 产物使用）
+// 8. 生成色彩语言一致性报告（供文档与 CI 使用）
 generateColorLanguageReport()
+
+// 9. 生成长期契约清单（定义 future-proof / compatibility / generated lifecycle）
+generateColorLanguageContractChecklist()
+
+// 10. 生成长期契约评审清单（说明哪些层已稳定、哪些仍是迁移层）
+generateColorLanguageContractReview()

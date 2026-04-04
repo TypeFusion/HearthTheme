@@ -1,17 +1,26 @@
 import { execSync } from 'node:child_process'
 
 const SYNCED_PATHS = [
+  'color-system/hearth-dark.source.json',
+  'color-system/templates',
+  'color-system/semantic.json',
   'themes',
   'public/themes',
   'extension/themes',
   'obsidian/themes',
   'obsidian/app-theme',
   'docs/color-language-report.md',
+  'docs/color-language-contract-checklist.md',
+  'docs/color-language-contract-review.md',
+  'reports/color-language-lineage.json',
   'reports/color-language-consistency.json',
+  'reports/color-language-parity.json',
   'src/data/tokens.ts',
+  'src/data/product.ts',
   'src/styles/theme-vars.css',
   'docs/theme-baseline.md',
   'extension/package.json',
+  'reports/vscode-chrome-residual.json',
 ]
 
 function run(command, options = {}) {

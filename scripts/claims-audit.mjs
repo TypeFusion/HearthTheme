@@ -84,6 +84,23 @@ function validateRoleNarrativeClaims() {
 	);
 }
 
+function validateHomepageRoleNarrativeClaims() {
+	const localeFiles = ["src/i18n/en.json", "src/i18n/zh.json", "src/i18n/ja.json"];
+
+	for (const localeFile of localeFiles) {
+		assertNoMatch(
+			localeFile,
+			/Brass amber callable targets|黄铜琥珀色，用于可调用目标|呼び出し対象を示すブラスアンバー/,
+			"homepage function role copy is stale against the shipped palette narrative.",
+		);
+		assertNoMatch(
+			localeFile,
+			/mineral teal \+ italic|矿物青 \+ 斜体|ミネラルティール \+ イタリック/,
+			"homepage type role copy is stale against the shipped palette narrative.",
+		);
+	}
+}
+
 function validateStatusClaims() {
 	for (const readme of ["README.md", "README.zh-CN.md", "README.ja.md"]) {
 		assertNoMatch(
@@ -150,6 +167,7 @@ function validateDocsHygiene() {
 function run() {
 	validateAlgorithmClaims();
 	validateRoleNarrativeClaims();
+	validateHomepageRoleNarrativeClaims();
 	validateStatusClaims();
 	validateReadmeAlgorithmClaims();
 	validateVariantCountClaims();

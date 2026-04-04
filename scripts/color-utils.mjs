@@ -175,6 +175,51 @@ export function rgbToHsl(input) {
   return { h, s, l }
 }
 
+export function hslToRgb({ h, s, l }) {
+  const hue = ((Number(h) % 360) + 360) % 360
+  const sat = clamp(Number(s), 0, 1)
+  const light = clamp(Number(l), 0, 1)
+
+  const c = (1 - Math.abs(2 * light - 1)) * sat
+  const x = c * (1 - Math.abs(((hue / 60) % 2) - 1))
+  const m = light - c / 2
+
+  let r1 = 0
+  let g1 = 0
+  let b1 = 0
+
+  if (hue < 60) {
+    r1 = c
+    g1 = x
+  } else if (hue < 120) {
+    r1 = x
+    g1 = c
+  } else if (hue < 180) {
+    g1 = c
+    b1 = x
+  } else if (hue < 240) {
+    g1 = x
+    b1 = c
+  } else if (hue < 300) {
+    r1 = x
+    b1 = c
+  } else {
+    r1 = c
+    b1 = x
+  }
+
+  return [
+    (r1 + m) * 255,
+    (g1 + m) * 255,
+    (b1 + m) * 255,
+  ]
+}
+
+export function hslToHex(hsl) {
+  const [r, g, b] = hslToRgb(hsl)
+  return rgbaToHex({ r, g, b, hasAlpha: false })
+}
+
 export function hueDistance(a, b) {
   const diff = Math.abs(a - b)
   return Math.min(diff, 360 - diff)
