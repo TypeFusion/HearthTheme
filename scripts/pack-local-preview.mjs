@@ -4,8 +4,8 @@ import { spawnSync } from 'child_process'
 import { fileURLToPath } from 'url'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const DEFAULT_SCHEME_ID = 'signal'
-const DEFAULT_PRODUCT_ID = 'signal-local'
+const DEFAULT_SCHEME_ID = 'moss'
+const DEFAULT_PRODUCT_ID = 'moss-local'
 const DEFAULT_OUTPUT_DIR = 'local-builds'
 const DEFAULT_LOCAL_ITERATION = '1'
 const PACK_CANDIDATES = [
@@ -205,7 +205,7 @@ async function main() {
 
     rmSync(outPath, { force: true })
     tryPack(buildDir, outPath)
-    console.log(`✅ Local preview package created: ${outPath}`)
+    console.log(`鉁?Local preview package created: ${outPath}`)
   } finally {
     if (schemeId !== String(activeScheme?.schemeId || '').trim()) {
       for (const suffix of ['dark', 'dark-soft', 'light', 'light-soft']) {
@@ -227,6 +227,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(`❌ ${error instanceof Error ? error.message : String(error)}`)
+  console.error(`鉂?${error instanceof Error ? error.message : String(error)}`)
   process.exit(1)
 })

@@ -457,12 +457,12 @@ function validateVariantCountCopy() {
     {
       file: I18N_FILES.zh,
       key: 'proof.metric.3.label',
-      forbidden: [/三个变体/],
+      forbidden: [/\u4e09\u4e2a\u53d8\u4f53/],
     },
     {
       file: I18N_FILES.ja,
       key: 'proof.metric.3.label',
-      forbidden: [/3バリアント/],
+      forbidden: [/3\u30d0\u30ea\u30a2\u30f3\u30c8/],
     },
   ]
 
@@ -482,7 +482,7 @@ function validateVariantCountCopy() {
   }
 
   const readmeJa = readText(README_JA)
-  if (readmeJa && /3バリアント/.test(readmeJa)) {
+  if (readmeJa && /3\u30d0\u30ea\u30a2\u30f3\u30c8/.test(readmeJa)) {
     addIssue(`${README_JA}: still uses legacy "3バリアント" wording`)
   }
 }
@@ -741,14 +741,14 @@ function validateThemeVarsAndMetadata(themes) {
 }
 
 function validateWarmAnchorContract(tokens) {
-  const roleSignalProfile = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
-  const coolHueByVariant = roleSignalProfile.coolHueBandByVariant || {}
-  const warmHueByVariant = roleSignalProfile.warmHueBandByVariant || {}
-  const warmGamutGuard = roleSignalProfile.warmGamutGuard || null
+  const roleLaneProfile = COLOR_SYSTEM_TUNING.roleLaneProfile || {}
+  const coolHueByVariant = roleLaneProfile.coolHueBandByVariant || {}
+  const warmHueByVariant = roleLaneProfile.warmHueBandByVariant || {}
+  const warmGamutGuard = roleLaneProfile.warmGamutGuard || null
 
   for (const [variantId, roleBands] of Object.entries(coolHueByVariant)) {
     if (Object.keys(roleBands || {}).length > 0) {
-      addIssue(`color-system/framework/tuning.json: roleSignalProfile.coolHueBandByVariant must be empty in warm-only mode (found entries in "${variantId}")`)
+      addIssue(`color-system/framework/tuning.json: roleLaneProfile.coolHueBandByVariant must be empty in warm-only mode (found entries in "${variantId}")`)
     }
   }
 
@@ -800,24 +800,24 @@ function validateWarmAnchorContract(tokens) {
     if (!tokenSet) continue
     const warmBandRoleProfile = resolveVariantRoleProfile(warmHueByVariant, variantId)
     if (Object.keys(warmBandRoleProfile).length === 0) {
-      addIssue(`color-system/framework/tuning.json: roleSignalProfile.warmHueBandByVariant missing profile for variant "${variantId}"`)
+      addIssue(`color-system/framework/tuning.json: roleLaneProfile.warmHueBandByVariant missing profile for variant "${variantId}"`)
       continue
     }
     for (const roleId of Object.keys(roleTokenKey)) {
       if (!warmBandRoleProfile[roleId]) {
-        addIssue(`color-system/framework/tuning.json: roleSignalProfile.warmHueBandByVariant missing "${roleId}" for variant "${variantId}"`)
+        addIssue(`color-system/framework/tuning.json: roleLaneProfile.warmHueBandByVariant missing "${roleId}" for variant "${variantId}"`)
       }
     }
   }
 
   if (!warmGamutGuard) {
-    addIssue('color-system/framework/tuning.json: roleSignalProfile.warmGamutGuard is required in warm-only mode')
+    addIssue('color-system/framework/tuning.json: roleLaneProfile.warmGamutGuard is required in warm-only mode')
     return
   }
 
   const guardedRoles = new Set(Array.isArray(warmGamutGuard.roles) ? warmGamutGuard.roles : [])
   if (guardedRoles.size === 0) {
-    addIssue('color-system/framework/tuning.json: roleSignalProfile.warmGamutGuard.roles must declare at least one guarded role')
+    addIssue('color-system/framework/tuning.json: roleLaneProfile.warmGamutGuard.roles must declare at least one guarded role')
     return
   }
 
@@ -896,11 +896,11 @@ function validateReadabilityBudgetContract() {
   const operatorCommentProfile = COLOR_SYSTEM_TUNING.pairSeparationGates?.operatorCommentDeltaE || {}
   const methodPropertyProfile = COLOR_SYSTEM_TUNING.pairSeparationGates?.methodPropertyDeltaE || {}
   const lightFunctionProfile = COLOR_SYSTEM_TUNING.lightPolarityRoleOptimization?.light?.function || {}
-  const roleSignalProfile = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
-  const warmGamutGuard = roleSignalProfile.warmGamutGuard || null
-  const warmExposureProfile = roleSignalProfile.warmExposureProfile || null
-  const nearForegroundByVariant = roleSignalProfile.nearForegroundDeltaEByVariant || {}
-  const criticalPairsByVariant = roleSignalProfile.criticalPairDeltaEByVariant || {}
+  const roleLaneProfile = COLOR_SYSTEM_TUNING.roleLaneProfile || {}
+  const warmGamutGuard = roleLaneProfile.warmGamutGuard || null
+  const warmExposureProfile = roleLaneProfile.warmExposureProfile || null
+  const nearForegroundByVariant = roleLaneProfile.nearForegroundDeltaEByVariant || {}
+  const criticalPairsByVariant = roleLaneProfile.criticalPairDeltaEByVariant || {}
 
   const operatorCommentDefault = resolvePairGateThreshold(operatorCommentProfile, 'dark', 4.5)
   const operatorCommentLight = resolvePairGateThreshold(operatorCommentProfile, 'light', operatorCommentDefault)

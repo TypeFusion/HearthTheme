@@ -65,42 +65,42 @@
             {
                 "label": "HearthCode Ember Dark",
                 "uiTheme": "vs-dark",
-                "path": "./themes/hearth-dark.json"
+                "path": "./themes/ember-dark.json"
             },
             {
                 "label": "HearthCode Ember Dark Soft",
                 "uiTheme": "vs-dark",
-                "path": "./themes/hearth-dark-soft.json"
+                "path": "./themes/ember-dark-soft.json"
             },
             {
                 "label": "HearthCode Ember Light",
                 "uiTheme": "vs",
-                "path": "./themes/hearth-light.json"
+                "path": "./themes/ember-light.json"
             },
             {
                 "label": "HearthCode Ember Light Soft",
                 "uiTheme": "vs",
-                "path": "./themes/hearth-light-soft.json"
+                "path": "./themes/ember-light-soft.json"
             },
             {
                 "label": "HearthCode Moss Dark",
                 "uiTheme": "vs-dark",
-                "path": "./themes/signal-dark.json"
+                "path": "./themes/moss-dark.json"
             },
             {
                 "label": "HearthCode Moss Dark Soft",
                 "uiTheme": "vs-dark",
-                "path": "./themes/signal-dark-soft.json"
+                "path": "./themes/moss-dark-soft.json"
             },
             {
                 "label": "HearthCode Moss Light",
                 "uiTheme": "vs",
-                "path": "./themes/signal-light.json"
+                "path": "./themes/moss-light.json"
             },
             {
                 "label": "HearthCode Moss Light Soft",
                 "uiTheme": "vs",
-                "path": "./themes/signal-light-soft.json"
+                "path": "./themes/moss-light-soft.json"
             }
         ]
     }

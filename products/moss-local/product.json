@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "moss-local",
+  "name": "HearthCode Moss Local",
+  "displayName": "HearthCode Moss Local Preview",
+  "summary": "Local-only HearthCode Moss preview product for palette and smoke-check validation.",
+  "publisher": "HearthCode",
+  "websiteUrl": "https://theme.hearthcode.dev",
+  "author": {
+    "name": "HearthCode",
+    "url": "https://theme.hearthcode.dev"
+  },
+  "repository": {
+    "url": "https://github.com/hearth-code/HearthTheme",
+    "slug": "hearth-code/HearthTheme"
+  },
+  "supportedSchemeIds": [
+    "moss"
+  ],
+  "flavorNames": {
+    "moss": {
+      "picker": "Moss",
+      "theme": "HearthCode Moss",
+      "preview": "Moss"
+    }
+  },
+  "brandFlavorIds": [
+    "moss"
+  ],
+  "defaultSchemeId": "moss",
+  "channels": {
+    "website": false,
+    "vscode": false,
+    "openvsx": false,
+    "obsidian": false
+  }
+}

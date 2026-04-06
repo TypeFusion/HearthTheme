@@ -394,7 +394,7 @@ function renderHeroShowcase({ theme, x, y, width, height }) {
       <circle cx="${x + 88}" cy="${y + 50}" r="6" fill="${withAlpha(roleColor(theme, "function"), 0.9)}" />
       <rect x="${x + 116}" y="${y + 36}" width="148" height="28" rx="14" fill="${tabActive}" />
       <rect x="${x + 278}" y="${y + 36}" width="126" height="28" rx="14" fill="${withAlpha("#ffffff", 0.04)}" />
-      <text x="${x + 136}" y="${y + 43}" fill="${fg}" font-size="15" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">Hearth Dark</text>
+      <text x="${x + 136}" y="${y + 43}" fill="${fg}" font-size="15" font-family="'Segoe UI', 'Noto Sans', sans-serif" font-weight="700" dominant-baseline="text-before-edge">Ember Dark</text>
       <text x="${x + 296}" y="${y + 43}" fill="${tabMuted}" font-size="15" font-family="'Segoe UI', 'Noto Sans', sans-serif" dominant-baseline="text-before-edge">palette.ts</text>
 
       <rect x="${x + 24}" y="${y + 92}" width="60" height="${height - 124}" rx="20" fill="${activity}" />

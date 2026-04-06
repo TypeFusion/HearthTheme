@@ -242,7 +242,7 @@ This split-ready model is already scaffolded in the repository.
 Current state:
 
 - `products/hearthcode/*` remains the active shared package
-- `products/hearthcode-signal/*` now exists as a dormant future standalone Moss product skeleton
+- `products/hearthcode-moss/*` now exists as a dormant future standalone Moss product skeleton
 - the website and current release flow still point to the shared package
 - no public split has happened yet
 

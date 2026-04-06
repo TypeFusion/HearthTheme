@@ -1,8 +1,8 @@
 {
   "schemaVersion": 4,
   "scheme": {
-    "id": "hearth",
-    "name": "HearthCode"
+    "id": "ember",
+    "name": "Ember"
   },
   "thresholds": {
     "deltaE": 2,

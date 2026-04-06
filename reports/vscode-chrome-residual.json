@@ -3,18 +3,18 @@
     "generated": true,
     "generatedFrom": {
         "activeScheme": "color-system/active-scheme.json",
-        "scheme": "color-system/schemes/signal/scheme.json",
-        "surfaceRules": "color-system/schemes/signal/surface-rules.json",
-        "interactionRules": "color-system/schemes/signal/interaction-rules.json",
+        "scheme": "color-system/schemes/moss/scheme.json",
+        "surfaceRules": "color-system/schemes/moss/surface-rules.json",
+        "interactionRules": "color-system/schemes/moss/interaction-rules.json",
         "variants": "color-system/framework/variants.json",
         "vscodeChromeContract": "color-system/framework/vscode-chrome-contract.json",
         "compatibilityBoundaries": "color-system/framework/compatibility-boundaries.json",
-        "sourceSnapshot": "color-system/hearth-dark.source.json",
+        "sourceSnapshot": "color-system/ember-dark.source.json",
         "templateSnapshots": [
-            "color-system/templates/hearth-dark.base.json",
-            "color-system/templates/hearth-dark-soft.base.json",
-            "color-system/templates/hearth-light.base.json",
-            "color-system/templates/hearth-light-soft.base.json"
+            "color-system/templates/ember-dark.base.json",
+            "color-system/templates/ember-dark-soft.base.json",
+            "color-system/templates/ember-light.base.json",
+            "color-system/templates/ember-light-soft.base.json"
         ]
     },
     "summary": {
@@ -31,7 +31,7 @@
     },
     "variants": {
         "dark": {
-            "sourcePath": "color-system/templates/hearth-dark.base.json",
+            "sourcePath": "color-system/templates/ember-dark.base.json",
             "sourceKind": "template-snapshot",
             "residualKeyCount": 6,
             "residualKeys": [
@@ -134,7 +134,7 @@
             ]
         },
         "darkSoft": {
-            "sourcePath": "color-system/templates/hearth-dark-soft.base.json",
+            "sourcePath": "color-system/templates/ember-dark-soft.base.json",
             "sourceKind": "template-snapshot",
             "residualKeyCount": 6,
             "residualKeys": [
@@ -237,7 +237,7 @@
             ]
         },
         "light": {
-            "sourcePath": "color-system/templates/hearth-light.base.json",
+            "sourcePath": "color-system/templates/ember-light.base.json",
             "sourceKind": "template-snapshot",
             "residualKeyCount": 6,
             "residualKeys": [
@@ -340,7 +340,7 @@
             ]
         },
         "lightSoft": {
-            "sourcePath": "color-system/templates/hearth-light-soft.base.json",
+            "sourcePath": "color-system/templates/ember-light-soft.base.json",
             "sourceKind": "template-snapshot",
             "residualKeyCount": 6,
             "residualKeys": [

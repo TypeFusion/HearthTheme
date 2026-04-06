@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "baseSourcePath": "color-system/hearth-dark.source.json",
-  "baseTemplatePath": "color-system/templates/hearth-dark.base.json",
+  "baseSourcePath": "color-system/ember-dark.source.json",
+  "baseTemplatePath": "color-system/templates/ember-dark.base.json",
   "variants": [
     {
       "id": "dark",
       "fileSlug": "dark",
       "climateLabel": "Dark",
-      "name": "Hearth Dark",
+      "name": "Dark",
       "type": "dark",
       "mode": "source",
       "outputPathTemplate": "themes/{schemeId}-{variantFileSlug}.json"
@@ -16,30 +16,30 @@
       "id": "darkSoft",
       "fileSlug": "dark-soft",
       "climateLabel": "Dark Soft",
-      "name": "Hearth Dark Soft",
+      "name": "Dark Soft",
       "type": "dark",
       "mode": "derived",
-      "templatePath": "color-system/templates/hearth-dark-soft.base.json",
+      "templatePath": "color-system/templates/ember-dark-soft.base.json",
       "outputPathTemplate": "themes/{schemeId}-{variantFileSlug}.json"
     },
     {
       "id": "light",
       "fileSlug": "light",
       "climateLabel": "Light",
-      "name": "Hearth Light",
+      "name": "Light",
       "type": "light",
       "mode": "derived",
-      "templatePath": "color-system/templates/hearth-light.base.json",
+      "templatePath": "color-system/templates/ember-light.base.json",
       "outputPathTemplate": "themes/{schemeId}-{variantFileSlug}.json"
     },
     {
       "id": "lightSoft",
       "fileSlug": "light-soft",
       "climateLabel": "Light Soft",
-      "name": "Hearth Light Soft",
+      "name": "Light Soft",
       "type": "light",
       "mode": "derived",
-      "templatePath": "color-system/templates/hearth-light-soft.base.json",
+      "templatePath": "color-system/templates/ember-light-soft.base.json",
       "outputPathTemplate": "themes/{schemeId}-{variantFileSlug}.json"
     }
   ]

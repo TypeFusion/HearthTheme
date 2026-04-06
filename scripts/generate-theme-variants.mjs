@@ -29,7 +29,7 @@ const SEMANTIC_PALETTE = COLOR_LANGUAGE_MODEL.semanticPalette
 const READABILITY_ROLE_DEFS = loadRoleAdapters()
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
 const RAW_DARK_VARIANT = VARIANT_SPEC.variants.find((variant) => variant.id === 'dark') || null
-const ROLE_SIGNAL_MODE = String(COLOR_SCHEME?.constraints?.roleSignalMode || 'warm-balanced').trim().toLowerCase()
+const ROLE_LANE_MODE = String(COLOR_SCHEME?.constraints?.roleLaneMode || 'warm-balanced').trim().toLowerCase()
 const SOFT_ROLE_CHROMA_STRENGTH_BY_VARIANT = COLOR_SCHEME?.constraints?.softRoleChromaStrengthByVariant || {}
 const LIGHT_CALIBRATION_STRENGTH_BY_VARIANT = COLOR_SCHEME?.constraints?.lightReadabilityCalibrationStrengthByVariant || {}
 
@@ -105,13 +105,13 @@ const LIGHT_POLARITY_SEARCH_PROFILE = COLOR_SYSTEM_TUNING.lightPolaritySearchPro
 const GLOBAL_SEPARATION_DEFICIT_PROFILE = COLOR_SYSTEM_TUNING.globalSeparationDeficitProfile
 const LIGHT_READABILITY_SEARCH_PROFILE = COLOR_SYSTEM_TUNING.lightReadabilitySearchProfile
 const TELEMETRY_PROFILE = COLOR_SYSTEM_TUNING.telemetryProfile
-const ROLE_SIGNAL_PROFILE = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
+const ROLE_LANE_PROFILE = COLOR_SYSTEM_TUNING.roleLaneProfile || {}
 const INTERACTION_STATE_BUDGET = COLOR_SYSTEM_TUNING.interactionStateBudget || {}
-const ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.coolHueBandByVariant || {}
-const ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.warmHueBandByVariant || {}
-const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEByVariant || {}
-const ROLE_SIGNAL_WARM_GAMUT_GUARD = ROLE_SIGNAL_PROFILE.warmGamutGuard || null
-const ROLE_SIGNAL_WARM_EXPOSURE_PROFILE = ROLE_SIGNAL_PROFILE.warmExposureProfile || null
+const ROLE_LANE_COOL_HUE_BAND_BY_VARIANT = ROLE_LANE_PROFILE.coolHueBandByVariant || {}
+const ROLE_LANE_WARM_HUE_BAND_BY_VARIANT = ROLE_LANE_PROFILE.warmHueBandByVariant || {}
+const ROLE_LANE_NEAR_FG_BY_VARIANT = ROLE_LANE_PROFILE.nearForegroundDeltaEByVariant || {}
+const ROLE_LANE_WARM_GAMUT_GUARD = ROLE_LANE_PROFILE.warmGamutGuard || null
+const ROLE_LANE_WARM_EXPOSURE_PROFILE = ROLE_LANE_PROFILE.warmExposureProfile || null
 const DEFAULT_LIGHT_CALIBRATION = LIGHT_READABILITY_CALIBRATION.default || {}
 const LIGHT_ROLE_CALIBRATION = LIGHT_READABILITY_CALIBRATION.byRole || {}
 const GLOBAL_SEPARATION_MAX_BOOST_ROUNDS = VARIANT_BOOST_PROFILE.default?.maxBoostRounds ?? 6
@@ -698,7 +698,7 @@ function enforceRoleHueBand(theme, variantId, warnings, bandByVariant, label) {
     }
 
     if (!bestHex || String(bestHex).toLowerCase() === String(current).toLowerCase()) {
-      warnings.push(`${variantId}: role signal ${label} could not adjust ${roleId} into hue range ${band.hueMin}-${band.hueMax}`)
+      warnings.push(`${variantId}: role lane ${label} could not adjust ${roleId} into hue range ${band.hueMin}-${band.hueMax}`)
       continue
     }
 
@@ -709,7 +709,7 @@ function enforceRoleHueBand(theme, variantId, warnings, bandByVariant, label) {
 
     const nextHue = hexHue(bestHex)
     warnings.push(
-      `telemetry: ${variantId}: role signal ${label} adjusted ${roleId} hue ${(seedHue ?? 0).toFixed(1)} -> ${(nextHue ?? 0).toFixed(1)}`
+      `telemetry: ${variantId}: role lane ${label} adjusted ${roleId} hue ${(seedHue ?? 0).toFixed(1)} -> ${(nextHue ?? 0).toFixed(1)}`
     )
   }
 }
@@ -743,7 +743,7 @@ function computeWarmRoleFrequencyMap(profile) {
 }
 
 function resolveWarmExposureVariantProfile(variantId) {
-  const profile = ROLE_SIGNAL_WARM_EXPOSURE_PROFILE
+  const profile = ROLE_LANE_WARM_EXPOSURE_PROFILE
   if (!profile) return null
   const base = profile.variantTuning?.default || null
   if (!base) return null
@@ -759,7 +759,7 @@ function resolveWarmExposureVariantProfile(variantId) {
 }
 
 function applyWarmRoleExposureBalance(theme, variantId, warnings) {
-  const profile = ROLE_SIGNAL_WARM_EXPOSURE_PROFILE
+  const profile = ROLE_LANE_WARM_EXPOSURE_PROFILE
   if (!profile) return
   const variantProfile = resolveWarmExposureVariantProfile(variantId)
   if (!variantProfile) return
@@ -811,7 +811,7 @@ function applyWarmRoleExposureBalance(theme, variantId, warnings) {
 }
 
 function enforceWarmGamutGuard(theme, variantId, warnings) {
-  const guard = ROLE_SIGNAL_WARM_GAMUT_GUARD
+  const guard = ROLE_LANE_WARM_GAMUT_GUARD
   if (!guard) return
 
   for (const roleId of guard.roles || []) {
@@ -871,7 +871,7 @@ function enforceNearForegroundBudget(theme, variantId, warnings) {
   const bgColor = resolveHexValue(theme?.colors?.[REF_BG_KEY])
   if (!fgColor || !bgColor) return
 
-  const roleProfiles = resolveVariantRoleProfile(ROLE_SIGNAL_NEAR_FG_BY_VARIANT, variantId)
+  const roleProfiles = resolveVariantRoleProfile(ROLE_LANE_NEAR_FG_BY_VARIANT, variantId)
   for (const [roleId, profile] of Object.entries(roleProfiles)) {
     if (!profile || typeof profile !== 'object') continue
     const roleDef = getRoleDefById(roleId)
@@ -939,7 +939,7 @@ function enforceNearForegroundBudget(theme, variantId, warnings) {
     }
 
     if (!bestHex || String(bestHex).toLowerCase() === String(current).toLowerCase()) {
-      warnings.push(`${variantId}: role signal near-foreground budget could not adjust ${roleId} into deltaE ${minDeltaE}-${maxDeltaE}`)
+      warnings.push(`${variantId}: role lane near-foreground budget could not adjust ${roleId} into deltaE ${minDeltaE}-${maxDeltaE}`)
       continue
     }
 
@@ -950,27 +950,27 @@ function enforceNearForegroundBudget(theme, variantId, warnings) {
 
     const nextDelta = deltaE(bestHex, fgColor) ?? 0
     warnings.push(
-      `telemetry: ${variantId}: role signal near-foreground adjusted ${roleId} deltaE-to-fg ${currentDelta.toFixed(1)} -> ${nextDelta.toFixed(1)}`
+      `telemetry: ${variantId}: role lane near-foreground adjusted ${roleId} deltaE-to-fg ${currentDelta.toFixed(1)} -> ${nextDelta.toFixed(1)}`
     )
   }
 }
 
-function applyRoleSignalProfile(theme, variantId, warnings) {
-  if (ROLE_SIGNAL_MODE === 'gbm-clean' || ROLE_SIGNAL_MODE === 'material-editorial') {
+function applyRoleLaneProfile(theme, variantId, warnings) {
+  if (ROLE_LANE_MODE === 'material-editorial') {
     enforceNearForegroundBudget(theme, variantId, warnings)
     return
   }
 
-  if (ROLE_SIGNAL_MODE === 'contrast-forward' || ROLE_SIGNAL_MODE === 'earthy-groove') {
-    enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, 'cool band')
+  if (ROLE_LANE_MODE === 'contrast-forward' || ROLE_LANE_MODE === 'earthy-groove') {
+    enforceRoleHueBand(theme, variantId, warnings, ROLE_LANE_COOL_HUE_BAND_BY_VARIANT, 'cool band')
     enforceNearForegroundBudget(theme, variantId, warnings)
     return
   }
 
-  enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, 'cool band')
-  enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT, 'warm band')
+  enforceRoleHueBand(theme, variantId, warnings, ROLE_LANE_COOL_HUE_BAND_BY_VARIANT, 'cool band')
+  enforceRoleHueBand(theme, variantId, warnings, ROLE_LANE_WARM_HUE_BAND_BY_VARIANT, 'warm band')
   applyWarmRoleExposureBalance(theme, variantId, warnings)
-  enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT, 'warm band')
+  enforceRoleHueBand(theme, variantId, warnings, ROLE_LANE_WARM_HUE_BAND_BY_VARIANT, 'warm band')
   enforceWarmGamutGuard(theme, variantId, warnings)
   enforceNearForegroundBudget(theme, variantId, warnings)
   enforceWarmGamutGuard(theme, variantId, warnings)
@@ -1552,7 +1552,7 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
     // Soft chroma budgets can reintroduce low-separation cases; run a final polarity guard pass.
     applyLightPolarityCompensation(generated, variantMeta.id, warnings)
   }
-  applyRoleSignalProfile(generated, variantMeta.id, warnings)
+  applyRoleLaneProfile(generated, variantMeta.id, warnings)
   applyInteractionStateBudget(generated, variantMeta.id, warnings)
 
   return generated
@@ -1569,18 +1569,18 @@ export function generateThemeVariants() {
 
   const semanticSnapshotChanged = writeJson(COLOR_SYSTEM_SEMANTIC_PATH, COLOR_LANGUAGE_MODEL.semanticSnapshot)
   console.log(
-    `${semanticSnapshotChanged ? '✓ generated' : '- unchanged'} ${COLOR_SYSTEM_SEMANTIC_PATH} from ${COLOR_LANGUAGE_MODEL.sources.foundation}`
+    `${semanticSnapshotChanged ? '鉁?generated' : '- unchanged'} ${COLOR_SYSTEM_SEMANTIC_PATH} from ${COLOR_LANGUAGE_MODEL.sources.foundation}`
   )
 
   warnTemplateDrift(currentDark, baselineDark, warnings)
   applySemanticPalette(currentDark, 'dark', warnings)
-  applyRoleSignalProfile(currentDark, 'dark', warnings)
+  applyRoleLaneProfile(currentDark, 'dark', warnings)
   applyInteractionStateBudget(currentDark, 'dark', warnings)
   currentDark.name = DARK_VARIANT_META.name
   currentDark.type = DARK_VARIANT_META.type
   const darkChanged = writeJson(DARK_THEME_OUTPUT_PATH, currentDark)
   console.log(
-    `${darkChanged ? '✓ generated' : '- unchanged'} ${DARK_THEME_OUTPUT_PATH} from ${DARK_THEME_SOURCE_PATH}`
+    `${darkChanged ? '鉁?generated' : '- unchanged'} ${DARK_THEME_OUTPUT_PATH} from ${DARK_THEME_SOURCE_PATH}`
   )
 
   for (const variantMeta of VARIANT_CONFIG) {
@@ -1589,7 +1589,7 @@ export function generateThemeVariants() {
     const generated = buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMeta, warnings)
     const changed = writeJson(variantMeta.outputPath, generated)
     console.log(
-      `${changed ? '✓ generated' : '- unchanged'} ${variantMeta.outputPath} from ${DARK_THEME_SOURCE_PATH}`
+      `${changed ? '鉁?generated' : '- unchanged'} ${variantMeta.outputPath} from ${DARK_THEME_SOURCE_PATH}`
     )
   }
 

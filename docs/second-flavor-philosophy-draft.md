@@ -2,17 +2,17 @@
 
 Updated: 2026-04-05
 
-Working codename: `SignalCode`
+Working codename: `Moss`
 
 ## Core Statement
 
-`SignalCode` is a contrast-forward color language for code interfaces.
+`Moss` is a yellow-green-led color language for code interfaces.
 
 It is designed for users who want faster structure recognition, clearer syntax landmarks, and a more energetic editing mood than `HearthCode`, while still keeping the restraint needed for everyday work.
 
 ## Core Thesis
 
-SignalCode should feel:
+Moss should feel:
 
 - awake but not frantic
 - vivid but not neon
@@ -24,18 +24,18 @@ It should feel like a serious working environment with stronger visual signals.
 
 ## Product Relationship
 
-HearthCode and SignalCode should not compete as near duplicates.
+HearthCode Ember and Moss should not compete as near duplicates.
 
 They should form two clearly different product choices:
 
 - `HearthCode`: warm, steady, long-session, low-glare
-- `SignalCode`: high-recognition, active, vivid, contrast-forward
+- `Moss`: paper-and-pigment, dry, vivid, yellow-green-led
 
 The difference should be visible immediately, not only after careful comparison.
 
 ## User Promise
 
-SignalCode promises:
+Moss promises:
 
 - faster syntax landmarks
 - more immediate structure recognition
@@ -46,7 +46,7 @@ It is the flavor for users who want their editor to speak sooner.
 
 ## Surface Philosophy
 
-SignalCode should not derive its identity from a tinted background.
+Moss should not derive its identity from a tinted background.
 
 Its surfaces should:
 
@@ -61,7 +61,7 @@ The substrate is there to frame action, not to perform personality on its own.
 
 Colors are still assigned by meaning before widget.
 
-But unlike Hearth, SignalCode should intentionally push the most important landmarks farther apart.
+But unlike Ember, Moss should intentionally push the most important landmarks farther apart.
 
 - `keyword` should feel immediate
 - `function` should be one of the clearest anchors on screen
@@ -88,7 +88,7 @@ It should read as a sharper, more energized code language built around citrus, c
 
 ## Energy Model
 
-SignalCode should use concentrated energy, not ambient intensity.
+Moss should use concentrated pigment, not ambient intensity.
 
 That means:
 
@@ -113,7 +113,7 @@ They must not collapse back into Hearth's quieter energy.
 
 ## Anti-Goals
 
-SignalCode should avoid becoming:
+Moss should avoid becoming:
 
 - cyberpunk theater
 - retro-effect nostalgia
@@ -129,11 +129,11 @@ It should stay:
 
 ## Public Positioning Draft
 
-SignalCode is the vivid line in the system:
+Moss is the pigmented line in the system:
 
 - for faster scanning
 - stronger landmarks
 - sharper structure
 - and a more energized coding mood
 
-Where HearthCode settles the page, SignalCode sharpens it.
+Where HearthCode Ember warms the page, Moss dries it.

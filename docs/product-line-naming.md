@@ -36,7 +36,7 @@ These are current public working names, not permanent final names.
 ## What Should Stay Stable
 
 - brand name: `HearthCode`
-- internal scheme ids: `hearth`, `signal`
+- internal scheme ids: `ember`, `moss`
 
 Internal ids can stay stable even if public line names change later.
 

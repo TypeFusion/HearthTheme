@@ -4,7 +4,7 @@ Updated: 2026-04-05
 
 ## 1) Working Direction
 
-Working codename: `SignalCode`
+Working codename: `Moss`
 
 This is not the final product name.
 It is a temporary direction label for a second flavor that should feel clearly different from `HearthCode`.
@@ -47,7 +47,7 @@ It should change the pace, emphasis, and emotional posture of the theme.
 
 ## 3) Product Thesis
 
-`SignalCode` should be a retro groove code color language for people who want stronger syntax structure and material atmosphere without falling into sepia mush or novelty-theme noise.
+`Moss` should be a paper-and-pigment code color language for people who want stronger yellow-green rhythm and material atmosphere without falling into novelty-theme noise.
 
 It should feel:
 

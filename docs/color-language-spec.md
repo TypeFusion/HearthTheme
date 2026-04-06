@@ -66,9 +66,9 @@ Purpose:
 Primary files:
 
 - `color-system/active-scheme.json`
-- `color-system/schemes/hearth/scheme.json`
-- `color-system/schemes/hearth/philosophy.md`
-- `color-system/schemes/hearth/taxonomy.json`
+- `color-system/schemes/ember/scheme.json`
+- `color-system/schemes/ember/philosophy.md`
+- `color-system/schemes/ember/taxonomy.json`
 
 This layer owns:
 
@@ -91,14 +91,14 @@ Purpose:
 
 Primary files:
 
-- `color-system/schemes/hearth/foundation.json`
-- `color-system/schemes/hearth/semantic-rules.json`
-- `color-system/schemes/hearth/surface-rules.json`
-- `color-system/schemes/hearth/guidance-rules.json`
-- `color-system/schemes/hearth/terminal-rules.json`
-- `color-system/schemes/hearth/interface-rules.json`
-- `color-system/schemes/hearth/interaction-rules.json`
-- `color-system/schemes/hearth/feedback-rules.json`
+- `color-system/schemes/ember/foundation.json`
+- `color-system/schemes/ember/semantic-rules.json`
+- `color-system/schemes/ember/surface-rules.json`
+- `color-system/schemes/ember/guidance-rules.json`
+- `color-system/schemes/ember/terminal-rules.json`
+- `color-system/schemes/ember/interface-rules.json`
+- `color-system/schemes/ember/interaction-rules.json`
+- `color-system/schemes/ember/feedback-rules.json`
 
 This layer owns:
 
@@ -124,7 +124,7 @@ Primary files:
 
 - `color-system/framework/variant-profiles.json`
 - `color-system/framework/variants.json`
-- `color-system/schemes/hearth/variant-knobs.json`
+- `color-system/schemes/ember/variant-knobs.json`
 
 This layer owns:
 
@@ -152,7 +152,7 @@ Primary files:
 - `color-system/framework/contract-checklist.json`
 - `color-system/framework/contract-review-checklist.json`
 - `color-system/framework/tuning.json`
-- `color-system/hearth-dark.source.json`
+- `color-system/ember-dark.source.json`
 - `color-system/templates/*.base.json`
 
 Contracts:
@@ -218,7 +218,7 @@ Product layer:
 
 Active scheme:
 
-- `color-system/schemes/hearth/*`
+- `color-system/schemes/ember/*`
 - `color-system/active-scheme.json`
 
 Generated compatibility snapshot:
@@ -227,7 +227,7 @@ Generated compatibility snapshot:
 
 Migration anchors:
 
-- `color-system/hearth-dark.source.json`
+- `color-system/ember-dark.source.json`
 - `color-system/templates/*`
 
 Their workbench `colors` blocks are now sync-managed snapshots for migrated keys.

@@ -1,4 +1,4 @@
-// Hearth preview fixture: stable screenshot source
+// Ember preview fixture: stable screenshot source
 type ThemeKind = "dark" | "dark-soft" | "light" | "light-soft";
 
 interface ThemeConfig {
@@ -8,10 +8,10 @@ interface ThemeConfig {
 }
 
 const themes: ThemeConfig[] = [
-  { id: "dark", title: "Hearth Dark", contrast: 9.9 },
-  { id: "dark-soft", title: "Hearth Dark Soft", contrast: 9.4 },
-  { id: "light", title: "Hearth Light", contrast: 12.6 },
-  { id: "light-soft", title: "Hearth Light Soft", contrast: 10.5 },
+  { id: "dark", title: "Ember Dark", contrast: 9.9 },
+  { id: "dark-soft", title: "Ember Dark Soft", contrast: 9.4 },
+  { id: "light", title: "Ember Light", contrast: 12.6 },
+  { id: "light-soft", title: "Ember Light Soft", contrast: 10.5 },
 ];
 
 function pickTheme(id: ThemeKind): ThemeConfig | undefined {

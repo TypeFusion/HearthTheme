@@ -3,28 +3,28 @@
   "description": "Variant climate profiles. These describe intent and contrast texture, not platform mappings.",
   "variants": {
     "dark": {
-      "label": "Hearth Dark",
+      "label": "Dark",
       "polarity": "dark",
       "contrastTexture": "default",
       "environment": "mixed-light daily work",
       "derivesFrom": null
     },
     "darkSoft": {
-      "label": "Hearth Dark Soft",
+      "label": "Dark Soft",
       "polarity": "dark",
       "contrastTexture": "soft",
       "environment": "low-stimulation night focus",
       "derivesFrom": "dark"
     },
     "light": {
-      "label": "Hearth Light",
+      "label": "Light",
       "polarity": "light",
       "contrastTexture": "default",
       "environment": "document-dense daytime work",
       "derivesFrom": "dark"
     },
     "lightSoft": {
-      "label": "Hearth Light Soft",
+      "label": "Light Soft",
       "polarity": "light",
       "contrastTexture": "soft",
       "environment": "long-form daytime reading",

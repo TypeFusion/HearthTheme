@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "hearthcode-moss",
+  "name": "HearthCode Moss",
+  "displayName": "HearthCode Moss",
+  "summary": "A future-ready HearthCode line built around dry charcoal and yellow-green paper tones.",
+  "brand": {
+    "id": "hearthcode",
+    "name": "HearthCode",
+    "displayName": "HearthCode",
+    "summary": "A shared brand for authored, low-glare code themes with distinct color directions."
+  },
+  "publisher": "HearthCode",
+  "websiteUrl": "https://theme.hearthcode.dev",
+  "author": {
+    "name": "HearthCode",
+    "url": "https://theme.hearthcode.dev"
+  },
+  "repository": {
+    "url": "https://github.com/hearth-code/HearthTheme",
+    "slug": "hearth-code/HearthTheme"
+  },
+  "supportedSchemeIds": [
+    "moss"
+  ],
+  "flavorNames": {
+    "moss": {
+      "picker": "Moss",
+      "theme": "HearthCode Moss",
+      "preview": "Moss"
+    }
+  },
+  "featuredThemes": [
+    {
+      "id": "moss-dark",
+      "schemeId": "moss",
+      "variantId": "dark",
+      "label": "HearthCode Moss Dark",
+      "summary": "Dry charcoal.",
+      "isDefault": true
+    },
+    {
+      "id": "moss-light",
+      "schemeId": "moss",
+      "variantId": "light",
+      "label": "HearthCode Moss Light",
+      "summary": "Dry paper."
+    }
+  ],
+  "brandFlavorIds": [
+    "moss"
+  ],
+  "defaultSchemeId": "moss",
+  "channels": {
+    "website": false,
+    "vscode": false,
+    "openvsx": false,
+    "obsidian": false
+  }
+}

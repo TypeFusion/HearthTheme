@@ -17,21 +17,21 @@ This guide is about source layers, generation order, and release discipline.
 ### Scheme Layer
 
 - `color-system/active-scheme.json`
-- `color-system/schemes/hearth/scheme.json`
-- `color-system/schemes/hearth/philosophy.md`
-- `color-system/schemes/hearth/taxonomy.json`
+- `color-system/schemes/ember/scheme.json`
+- `color-system/schemes/ember/philosophy.md`
+- `color-system/schemes/ember/taxonomy.json`
 
 ### Color Language Core
 
-- `color-system/schemes/hearth/foundation.json`
-- `color-system/schemes/hearth/semantic-rules.json`
-- `color-system/schemes/hearth/surface-rules.json`
-- `color-system/schemes/hearth/guidance-rules.json`
-- `color-system/schemes/hearth/terminal-rules.json`
-- `color-system/schemes/hearth/interface-rules.json`
-- `color-system/schemes/hearth/interaction-rules.json`
-- `color-system/schemes/hearth/feedback-rules.json`
-- `color-system/schemes/hearth/variant-knobs.json`
+- `color-system/schemes/ember/foundation.json`
+- `color-system/schemes/ember/semantic-rules.json`
+- `color-system/schemes/ember/surface-rules.json`
+- `color-system/schemes/ember/guidance-rules.json`
+- `color-system/schemes/ember/terminal-rules.json`
+- `color-system/schemes/ember/interface-rules.json`
+- `color-system/schemes/ember/interaction-rules.json`
+- `color-system/schemes/ember/feedback-rules.json`
+- `color-system/schemes/ember/variant-knobs.json`
 
 ### Shared Framework
 
@@ -46,7 +46,7 @@ This guide is about source layers, generation order, and release discipline.
 
 ### Migration Anchors / Compatibility Baselines
 
-- `color-system/hearth-dark.source.json`
+- `color-system/ember-dark.source.json`
 - `color-system/templates/*.base.json`
 
 The `colors` sections in these files are sync-managed migration snapshots.
@@ -145,7 +145,7 @@ It is not a source file.
 - `compatibility-boundaries.json` is where bounded host/rendering exceptions live; it must stay free of design values.
 - The residual chrome report must either map a key to an abstract bucket or to a declared compatibility boundary with rationale.
 - New residual keys are not acceptable by default; add them only when the cross-product abstraction is genuinely not worth the complexity yet, and explain that tradeoff in `compatibility-boundaries.json`.
-- `hearth-dark.source.json` is a migration anchor, not the final philosophical authority.
+- `ember-dark.source.json` is a migration anchor, not the final philosophical authority.
 - `vscode-chrome-contract.json` owns migrated workbench color bindings; do not hand-tune those keys inside source/template snapshots.
 - lineage must be able to explain every generated downstream token.
 - the residual chrome report must explain which VS Code workbench keys still belong to abstract buckets vs temporary compatibility.

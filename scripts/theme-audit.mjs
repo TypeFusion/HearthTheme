@@ -91,12 +91,12 @@ const MAX_ROLE_HUE_DRIFT = 45
 const PAIR_SEPARATION_GATES = COLOR_SYSTEM_TUNING.pairSeparationGates || {}
 const OPERATOR_COMMENT_PAIR_GATE = PAIR_SEPARATION_GATES.operatorCommentDeltaE || {}
 const METHOD_PROPERTY_PAIR_GATE = PAIR_SEPARATION_GATES.methodPropertyDeltaE || {}
-const ROLE_SIGNAL_PROFILE = COLOR_SYSTEM_TUNING.roleSignalProfile || {}
-const ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.coolHueBandByVariant || {}
-const ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT = ROLE_SIGNAL_PROFILE.warmHueBandByVariant || {}
-const ROLE_SIGNAL_NEAR_FG_BY_VARIANT = ROLE_SIGNAL_PROFILE.nearForegroundDeltaEByVariant || {}
-const ROLE_SIGNAL_CRITICAL_PAIRS_BY_VARIANT = ROLE_SIGNAL_PROFILE.criticalPairDeltaEByVariant || {}
-const ROLE_SIGNAL_WARM_GAMUT_GUARD = ROLE_SIGNAL_PROFILE.warmGamutGuard || null
+const ROLE_LANE_PROFILE = COLOR_SYSTEM_TUNING.roleLaneProfile || {}
+const ROLE_LANE_COOL_HUE_BAND_BY_VARIANT = ROLE_LANE_PROFILE.coolHueBandByVariant || {}
+const ROLE_LANE_WARM_HUE_BAND_BY_VARIANT = ROLE_LANE_PROFILE.warmHueBandByVariant || {}
+const ROLE_LANE_NEAR_FG_BY_VARIANT = ROLE_LANE_PROFILE.nearForegroundDeltaEByVariant || {}
+const ROLE_LANE_CRITICAL_PAIRS_BY_VARIANT = ROLE_LANE_PROFILE.criticalPairDeltaEByVariant || {}
+const ROLE_LANE_WARM_GAMUT_GUARD = ROLE_LANE_PROFILE.warmGamutGuard || null
 const DARK_SOFT_PERCEPTION_GUARD = COLOR_SYSTEM_TUNING.darkSoftPerceptionGuard || null
 const INTERACTION_STATE_BUDGET = COLOR_SYSTEM_TUNING.interactionStateBudget || {}
 const INTERACTION_REPORT_JSON_PATH = 'reports/theme-audit-interaction.json'
@@ -615,14 +615,14 @@ function validateLightPolarityCompensation(themeMeta, theme) {
   }
 }
 
-function validateRoleSignalProfile(themeMeta, theme) {
+function validateRoleLaneProfile(themeMeta, theme) {
   if (!theme) return
 
   const bg = normalizeHex(theme.colors?.['editor.background'])
   const fg = normalizeHex(theme.colors?.['editor.foreground'])
   if (!bg || !fg) return
 
-  const coolHueRoleProfile = resolveVariantRoleProfile(ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, themeMeta.id)
+  const coolHueRoleProfile = resolveVariantRoleProfile(ROLE_LANE_COOL_HUE_BAND_BY_VARIANT, themeMeta.id)
   for (const [roleId, profile] of Object.entries(coolHueRoleProfile)) {
     const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
     if (!roleColor) continue
@@ -630,16 +630,16 @@ function validateRoleSignalProfile(themeMeta, theme) {
     const hsl = rgbToHsl(roleColor)
     if (!hsl) continue
     if (!isHueInBand(hsl.h, profile.hueMin, profile.hueMax)) {
-      addIssue(`${themeMeta.path}: role signal cool hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
+      addIssue(`${themeMeta.path}: role lane cool hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
     }
 
     const ratio = contrastRatio(roleColor, bg)
     if (ratio == null || ratio < profile.minBgContrast) {
-      addIssue(`${themeMeta.path}: role signal cool hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+      addIssue(`${themeMeta.path}: role lane cool hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
     }
   }
 
-  const warmHueRoleProfile = resolveVariantRoleProfile(ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT, themeMeta.id)
+  const warmHueRoleProfile = resolveVariantRoleProfile(ROLE_LANE_WARM_HUE_BAND_BY_VARIANT, themeMeta.id)
   for (const [roleId, profile] of Object.entries(warmHueRoleProfile)) {
     const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
     if (!roleColor) continue
@@ -647,31 +647,31 @@ function validateRoleSignalProfile(themeMeta, theme) {
     const hsl = rgbToHsl(roleColor)
     if (!hsl) continue
     if (!isHueInBand(hsl.h, profile.hueMin, profile.hueMax)) {
-      addIssue(`${themeMeta.path}: role signal warm hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
+      addIssue(`${themeMeta.path}: role lane warm hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
     }
 
     const ratio = contrastRatio(roleColor, bg)
     if (ratio == null || ratio < profile.minBgContrast) {
-      addIssue(`${themeMeta.path}: role signal warm hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+      addIssue(`${themeMeta.path}: role lane warm hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
     }
   }
 
-  if (ROLE_SIGNAL_WARM_GAMUT_GUARD) {
-    for (const roleId of ROLE_SIGNAL_WARM_GAMUT_GUARD.roles || []) {
+  if (ROLE_LANE_WARM_GAMUT_GUARD) {
+    for (const roleId of ROLE_LANE_WARM_GAMUT_GUARD.roles || []) {
       const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
       if (!roleColor) continue
       const hsl = rgbToHsl(roleColor)
       if (!hsl) continue
-      if (hsl.s < (ROLE_SIGNAL_WARM_GAMUT_GUARD.minSaturation ?? 0)) continue
-      if (isHueInBand(hsl.h, ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMin, ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMax)) {
+      if (hsl.s < (ROLE_LANE_WARM_GAMUT_GUARD.minSaturation ?? 0)) continue
+      if (isHueInBand(hsl.h, ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMin, ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMax)) {
         addIssue(
-          `${themeMeta.path}: warm gamut guard failed for "${roleId}" (${fixed(hsl.h)} in ${fixed(ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMin)}-${fixed(ROLE_SIGNAL_WARM_GAMUT_GUARD.forbiddenHueMax)})`
+          `${themeMeta.path}: warm gamut guard failed for "${roleId}" (${fixed(hsl.h)} in ${fixed(ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMin)}-${fixed(ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMax)})`
         )
       }
     }
   }
 
-  const nearForegroundRoleProfile = resolveVariantRoleProfile(ROLE_SIGNAL_NEAR_FG_BY_VARIANT, themeMeta.id)
+  const nearForegroundRoleProfile = resolveVariantRoleProfile(ROLE_LANE_NEAR_FG_BY_VARIANT, themeMeta.id)
   for (const [roleId, profile] of Object.entries(nearForegroundRoleProfile)) {
     const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
     if (!roleColor) continue
@@ -680,17 +680,17 @@ function validateRoleSignalProfile(themeMeta, theme) {
     if (fgDelta == null) continue
     if (fgDelta < profile.minDeltaE || fgDelta > profile.maxDeltaE) {
       addIssue(
-        `${themeMeta.path}: role signal near-foreground budget failed for "${roleId}" (deltaE ${fixed(fgDelta)} not in ${fixed(profile.minDeltaE)}-${fixed(profile.maxDeltaE)})`
+        `${themeMeta.path}: role lane near-foreground budget failed for "${roleId}" (deltaE ${fixed(fgDelta)} not in ${fixed(profile.minDeltaE)}-${fixed(profile.maxDeltaE)})`
       )
     }
 
     const ratio = contrastRatio(roleColor, bg)
     if (ratio == null || ratio < profile.minBgContrast) {
-      addIssue(`${themeMeta.path}: role signal near-foreground contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+      addIssue(`${themeMeta.path}: role lane near-foreground contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
     }
   }
 
-  const criticalPairs = resolveCriticalPairThresholds(ROLE_SIGNAL_CRITICAL_PAIRS_BY_VARIANT, themeMeta.id)
+  const criticalPairs = resolveCriticalPairThresholds(ROLE_LANE_CRITICAL_PAIRS_BY_VARIANT, themeMeta.id)
   for (const [pairKey, threshold] of Object.entries(criticalPairs)) {
     const pairMatch = String(pairKey).match(/^([a-zA-Z0-9_-]+)->([a-zA-Z0-9_-]+)$/)
     if (!pairMatch) continue
@@ -701,7 +701,7 @@ function validateRoleSignalProfile(themeMeta, theme) {
     const dE = deltaE(leftColor, rightColor)
     if (dE == null) continue
     if (dE < threshold) {
-      addIssue(`${themeMeta.path}: role signal critical pair "${leftRole}" vs "${rightRole}" deltaE ${fixed(dE)} is below ${fixed(threshold)}`)
+      addIssue(`${themeMeta.path}: role lane critical pair "${leftRole}" vs "${rightRole}" deltaE ${fixed(dE)} is below ${fixed(threshold)}`)
     }
   }
 }
@@ -870,7 +870,7 @@ function run() {
     validateCriticalPairSeparation(themeMeta, theme)
     validateSemanticAlignment(themeMeta, theme)
     validateLightPolarityCompensation(themeMeta, theme)
-    validateRoleSignalProfile(themeMeta, theme)
+  validateRoleLaneProfile(themeMeta, theme)
     validateDarkSoftPerception(themeMeta, theme)
     validateInteractionStateBudget(themeMeta, theme)
   }
