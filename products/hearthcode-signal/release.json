@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "site": {
+    "titleDescriptor": "Moss Product Line for HearthCode",
+    "ogImagePath": "/og-hearth.png"
+  },
+  "vscodeExtension": {
+    "name": "hearthcode-moss",
+    "publisher": "hearth-code",
+    "description": "HearthCode Moss: a future standalone VS Code theme line under the HearthCode brand, built around tactile charcoal surfaces and yellow-green paper lights.",
+    "categories": [
+      "Themes"
+    ],
+    "keywords": [
+      "theme",
+      "vscode theme",
+      "color theme",
+      "dark theme",
+      "light theme",
+      "hearth code",
+      "hearthcode",
+      "moss",
+      "moss dark",
+      "moss light",
+      "material editor theme",
+      "editorial theme",
+      "charcoal theme",
+      "paper light theme",
+      "low glare",
+      "semantic highlighting"
+    ],
+    "icon": "icon.png",
+    "license": "MIT",
+    "qna": false,
+    "engines": {
+      "vscode": "^1.70.0"
+    },
+    "galleryBanner": {
+      "theme": "dark"
+    },
+    "previewVariantId": "dark"
+  },
+  "obsidianAppTheme": {
+    "name": "HearthCode Moss",
+    "author": "HearthCode",
+    "authorUrl": "https://theme.hearthcode.dev",
+    "minAppVersion": "1.0.0",
+    "screenshotSourcePath": "public/previews/preview-contrast-v2.png",
+    "screenshotPath": "obsidian/app-theme/screenshot.png",
+    "packageBasename": "hearthcode-moss-obsidian-app-theme",
+    "modes": [
+      "dark",
+      "light"
+    ]
+  }
+}

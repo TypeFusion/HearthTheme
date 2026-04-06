@@ -59,6 +59,49 @@ function buildThemeLabel(flavorLabel, climateLabel) {
   return [String(flavorLabel || '').trim(), String(climateLabel || '').trim()].filter(Boolean).join(' ')
 }
 
+function toPublicThemeCatalog(entries) {
+  return entries.map((entry, index) => ({
+    id: entry.id || `${entry.schemeId}-${entry.variantId}`,
+    schemeId: entry.schemeId,
+    variantId: entry.variantId,
+    flavorLabel: entry.flavorLabel,
+    climateLabel: entry.climateLabel,
+    label: entry.label,
+    tabLabel: entry.tabLabel || entry.label,
+    summary: entry.summary || entry.label,
+    uiTheme: entry.uiTheme,
+    path: entry.path,
+    isDefaultTheme: entry.isDefaultTheme === true || index === 0,
+    isDark: entry.isDark ?? entry.uiTheme === 'vs-dark',
+  }))
+}
+
+function buildFeaturedThemeCatalog(product, flavors) {
+  if (!Array.isArray(product.featuredThemes) || product.featuredThemes.length === 0) return []
+
+  return product.featuredThemes.map((entry) => {
+    const flavor = flavors.find((item) => item.id === entry.schemeId)
+    const variant = getThemeMetaListForSchemeId(entry.schemeId).find((item) => item.id === entry.variantId)
+    if (!flavor || !variant) {
+      throw new Error(`buildProductMetadata: missing featured theme source for "${entry.id}"`)
+    }
+    return {
+      id: entry.id,
+      schemeId: entry.schemeId,
+      variantId: entry.variantId,
+      flavorLabel: flavor.pickerName,
+      climateLabel: variant.climateLabel,
+      label: entry.label,
+      tabLabel: buildThemeLabel(flavor.previewPrefix, variant.climateLabel),
+      summary: entry.summary,
+      uiTheme: variant.type === 'dark' ? 'vs-dark' : 'vs',
+      path: `./${String(variant.path || '').replace(/\\/g, '/')}`,
+      isDefaultTheme: entry.isDefault === true,
+      isDark: variant.type === 'dark',
+    }
+  })
+}
+
 export function buildProductMetadata() {
   const product = loadColorProductManifest()
   const preview = loadColorProductPreviewConfig()
@@ -79,11 +122,17 @@ export function buildProductMetadata() {
   const flavors = flavorIds.map((schemeId) => {
     const manifest = loadColorSchemeManifestById(schemeId)
     const flavorWordmark = splitBrandWordmark(manifest.name)
-    const shortName = flavorWordmark.primary || manifest.name
+    const configuredNames = product.flavorNames?.[schemeId] || {}
+    const pickerName = configuredNames.picker || flavorWordmark.primary || manifest.name
+    const themePrefix = configuredNames.theme || pickerName
+    const previewPrefix = configuredNames.preview || pickerName
     return {
       id: manifest.id,
       name: manifest.name,
-      shortName,
+      shortName: pickerName,
+      pickerName,
+      themePrefix,
+      previewPrefix,
       wordmark: flavorWordmark,
       headline: manifest.headline,
       summary: manifest.summary,
@@ -97,9 +146,10 @@ export function buildProductMetadata() {
     getThemeMetaListForSchemeId(flavor.id).map((variant) => ({
       variantId: variant.id,
       schemeId: flavor.id,
-      flavorLabel: flavor.shortName,
+      flavorLabel: flavor.pickerName,
       climateLabel: variant.climateLabel,
-      label: buildThemeLabel(flavor.shortName, variant.climateLabel),
+      label: buildThemeLabel(flavor.themePrefix, variant.climateLabel),
+      tabLabel: buildThemeLabel(flavor.previewPrefix, variant.climateLabel),
       uiTheme: variant.type === 'dark' ? 'vs-dark' : 'vs',
       path: `./${String(variant.path || '').replace(/\\/g, '/')}`,
       isActiveFlavor: flavor.isActive,
@@ -107,8 +157,17 @@ export function buildProductMetadata() {
       isPublishedFlavor: flavor.isPublished,
     }))
   ))
-  const activeThemeCatalog = themeCatalog.filter((entry) => entry.schemeId === scheme.id)
-  const previewThemeLabel = activeThemeCatalog.find((entry) => entry.variantId === releaseConfig.vscodeExtension.previewVariantId)?.label
+  const featuredThemeCatalog = buildFeaturedThemeCatalog(product, flavors)
+  const publishedThemeCatalog = themeCatalog.filter((entry) => entry.isPublishedFlavor)
+  const extensionThemeCatalog = toPublicThemeCatalog(publishedThemeCatalog)
+  const publicThemeCatalog = featuredThemeCatalog.length > 0
+    ? toPublicThemeCatalog(featuredThemeCatalog)
+    : toPublicThemeCatalog(publishedThemeCatalog)
+  const previewThemeLabel =
+    extensionThemeCatalog.find(
+      (entry) => entry.schemeId === product.defaultSchemeId && entry.variantId === releaseConfig.vscodeExtension.previewVariantId,
+    )?.label
+    || extensionThemeCatalog.find((entry) => entry.variantId === releaseConfig.vscodeExtension.previewVariantId)?.label
     || preview.variantNames[releaseConfig.vscodeExtension.previewVariantId]
 
   return {
@@ -123,6 +182,7 @@ export function buildProductMetadata() {
       headline: scheme.headline,
     },
     flavors,
+    themes: publicThemeCatalog,
     preview,
     release: {
       version: releaseVersion,
@@ -154,7 +214,7 @@ export function buildProductMetadata() {
       previewVariantId: releaseConfig.vscodeExtension.previewVariantId,
       previewThemeLabel,
       themeCatalog,
-      themes: activeThemeCatalog.map((variant) => ({
+      themes: extensionThemeCatalog.map((variant) => ({
         label: variant.label,
         uiTheme: variant.uiTheme,
         path: variant.path,

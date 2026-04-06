@@ -3,8 +3,7 @@ import path from 'node:path'
 
 import { productData } from '../data/product'
 
-export type FitFlavorId = (typeof productData.flavors)[number]['id']
-export type FitClimateId = 'dark' | 'darkSoft' | 'light' | 'lightSoft'
+export type FitThemeId = string
 
 type ThemeTokenValue =
   | string
@@ -25,27 +24,38 @@ export type ThemePaletteSwatch = {
 }
 
 export type ThemePaletteTheme = {
-  climateId: FitClimateId
-  climateLabel: string
+  themeId: FitThemeId
+  schemeId: string
+  variantId: string
   label: string
+  summary: string
   surface: string
   foreground: string
   accent: string
+  uiTheme: 'vs' | 'vs-dark'
+  isDefault: boolean
   swatches: ThemePaletteSwatch[]
 }
 
-export type ThemePaletteFlavor = {
-  flavorId: FitFlavorId
-  name: string
-  summary: string
-  isPublished: boolean
-  isDefault: boolean
-  isActive: boolean
-  defaultClimateId: FitClimateId
-  themes: ThemePaletteTheme[]
-}
-
-export const climateOrder = ['dark', 'darkSoft', 'light', 'lightSoft'] as const
+const fullThemeCatalog = productData.extension.themeCatalog.map((theme) => {
+  const flavor = productData.flavors.find((entry) => entry.id === theme.schemeId)
+  const publicTheme = productData.themes.find(
+    (entry) => entry.schemeId === theme.schemeId && entry.variantId === theme.variantId,
+  )
+  const id = `${theme.schemeId}-${theme.variantId}`
+  return {
+    id,
+    schemeId: theme.schemeId,
+    variantId: theme.variantId,
+    label: theme.label,
+    summary: publicTheme?.summary || theme.label,
+    uiTheme: theme.uiTheme,
+    path: theme.path,
+    isDefault:
+      Boolean(flavor?.isDefault) &&
+      String(flavor?.defaultVariant || '') === String(theme.variantId || ''),
+  }
+})
 
 function getThemeAbsolutePath(themePath: string): string {
   return path.resolve(process.cwd(), themePath.replace(/^\.\//, ''))
@@ -64,7 +74,7 @@ function getTokenForeground(value: ThemeTokenValue | undefined, fallback: string
   return fallback
 }
 
-function getThemePalette(themePath: string): Omit<ThemePaletteTheme, 'climateId' | 'climateLabel' | 'label'> {
+function getThemePalette(themePath: string): Omit<ThemePaletteTheme, 'themeId' | 'schemeId' | 'variantId' | 'label' | 'summary' | 'uiTheme' | 'isDefault'> {
   const theme = readThemeJson(themePath)
   const colors = theme.colors || {}
   const semantic = theme.semanticTokenColors || {}
@@ -106,42 +116,21 @@ function getThemePalette(themePath: string): Omit<ThemePaletteTheme, 'climateId'
   }
 }
 
-function getThemeMeta(flavorId: FitFlavorId, climateId: FitClimateId) {
-  return productData.extension.themeCatalog.find(
-    (entry) => entry.schemeId === flavorId && entry.variantId === climateId,
-  )
-}
-
-export function getDefaultThemeSelection(): { flavorId: FitFlavorId; climateId: FitClimateId } {
-  const flavor =
-    productData.flavors.find((item) => item.isActive) ||
-    productData.flavors.find((item) => item.isDefault) ||
-    productData.flavors[0]
+export function getDefaultThemeSelection(): { themeId: FitThemeId } {
+  const theme = fullThemeCatalog.find((item) => item.isDefault) || fullThemeCatalog[0]
 
   return {
-    flavorId: flavor.id as FitFlavorId,
-    climateId: flavor.defaultVariant as FitClimateId,
+    themeId: theme.id as FitThemeId,
   }
 }
 
-export const themePaletteCatalog: ThemePaletteFlavor[] = productData.flavors.map((flavor) => ({
-  flavorId: flavor.id as FitFlavorId,
-  name: flavor.shortName || flavor.name,
-  summary: flavor.summary,
-  isPublished: flavor.isPublished,
-  isDefault: flavor.isDefault,
-  isActive: flavor.isActive,
-  defaultClimateId: flavor.defaultVariant as FitClimateId,
-  themes: climateOrder
-    .map((climateId) => {
-      const meta = getThemeMeta(flavor.id as FitFlavorId, climateId)
-      if (!meta) return null
-      return {
-        climateId,
-        climateLabel: meta.climateLabel,
-        label: meta.label,
-        ...getThemePalette(meta.path),
-      }
-    })
-    .filter((theme): theme is ThemePaletteTheme => Boolean(theme)),
+export const themePaletteCatalog: ThemePaletteTheme[] = fullThemeCatalog.map((theme) => ({
+  themeId: theme.id as FitThemeId,
+  schemeId: theme.schemeId,
+  variantId: theme.variantId,
+  label: theme.label,
+  summary: theme.summary,
+  uiTheme: theme.uiTheme,
+  isDefault: Boolean(theme.isDefaultTheme),
+  ...getThemePalette(theme.path),
 }))

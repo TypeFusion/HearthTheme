@@ -3,8 +3,8 @@
   "id": "hearth",
   "name": "HearthCode",
   "headline": "Warm-neutral code color language",
-  "summary": "A warm, low-glare color philosophy for code interfaces and reading surfaces.",
-  "positioning": "One palette philosophy translated across editors, documents, and web surfaces.",
+  "summary": "A warm ember-paper color philosophy for code interfaces.",
+  "positioning": "A warm ember-paper line inside Hearth Code.",
   "mood": [
     "warm-neutral",
     "low-glare",
@@ -12,9 +12,9 @@
     "quietly expressive"
   ],
   "audiences": [
-    "code-first editing",
-    "long-form reading",
-    "narrative product surfaces"
+    "users who prefer warmer color worlds",
+    "ember-paper palette preference",
+    "low-glare material mood"
   ],
   "vocabulary": [
     "ember",
@@ -24,10 +24,10 @@
     "chalk"
   ],
   "variantPhilosophy": {
-    "dark": "Warm default for mixed-light daily work.",
-    "darkSoft": "Lower-stimulation night focus without losing structure.",
-    "light": "Paper-tone daylight for document-dense work.",
-    "lightSoft": "Gentle long-form light with calmer daytime contrast."
+    "dark": "Deeper warm charcoal.",
+    "darkSoft": "Softer warm charcoal.",
+    "light": "Warm paper light.",
+    "lightSoft": "Softer warm paper light."
   },
   "constraints": {
     "thermalBaseline": "warm-neutral",

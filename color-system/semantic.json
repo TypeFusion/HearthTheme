@@ -3,17 +3,17 @@
     "generated": true,
     "generatedFrom": {
         "activeScheme": "color-system/active-scheme.json",
-        "scheme": "color-system/schemes/cairn/scheme.json",
-        "philosophy": "color-system/schemes/cairn/philosophy.md",
-        "taxonomy": "color-system/schemes/cairn/taxonomy.json",
-        "foundation": "color-system/schemes/cairn/foundation.json",
-        "surfaceRules": "color-system/schemes/cairn/surface-rules.json",
-        "terminalRules": "color-system/schemes/cairn/terminal-rules.json",
-        "interfaceRules": "color-system/schemes/cairn/interface-rules.json",
-        "interactionRules": "color-system/schemes/cairn/interaction-rules.json",
-        "feedbackRules": "color-system/schemes/cairn/feedback-rules.json",
-        "semanticRules": "color-system/schemes/cairn/semantic-rules.json",
-        "variantKnobs": "color-system/schemes/cairn/variant-knobs.json",
+        "scheme": "color-system/schemes/signal/scheme.json",
+        "philosophy": "color-system/schemes/signal/philosophy.md",
+        "taxonomy": "color-system/schemes/signal/taxonomy.json",
+        "foundation": "color-system/schemes/signal/foundation.json",
+        "surfaceRules": "color-system/schemes/signal/surface-rules.json",
+        "terminalRules": "color-system/schemes/signal/terminal-rules.json",
+        "interfaceRules": "color-system/schemes/signal/interface-rules.json",
+        "interactionRules": "color-system/schemes/signal/interaction-rules.json",
+        "feedbackRules": "color-system/schemes/signal/feedback-rules.json",
+        "semanticRules": "color-system/schemes/signal/semantic-rules.json",
+        "variantKnobs": "color-system/schemes/signal/variant-knobs.json",
         "variantProfiles": "color-system/framework/variant-profiles.json",
         "variants": "color-system/framework/variants.json",
         "adapters": "color-system/framework/adapters.json",
@@ -21,76 +21,76 @@
     },
     "roles": {
         "comment": {
-            "dark": "#6e665d",
-            "darkSoft": "#837b72",
-            "light": "#7e7467",
-            "lightSoft": "#84786d"
+            "dark": "#817566",
+            "darkSoft": "#887c70",
+            "light": "#8c7c69",
+            "lightSoft": "#968774"
         },
         "keyword": {
-            "dark": "#c7654d",
-            "darkSoft": "#b4705d",
-            "light": "#a8553d",
-            "lightSoft": "#aa6452"
+            "dark": "#cf6650",
+            "darkSoft": "#c87766",
+            "light": "#ba5146",
+            "lightSoft": "#c56458"
         },
         "operator": {
-            "dark": "#9e8760",
-            "darkSoft": "#8f7d60",
-            "light": "#695a3d",
-            "lightSoft": "#796a52"
+            "dark": "#b58e55",
+            "darkSoft": "#b08d60",
+            "light": "#966a2d",
+            "lightSoft": "#a37a42"
         },
         "function": {
-            "dark": "#7894a8",
-            "darkSoft": "#6d8798",
-            "light": "#587182",
-            "lightSoft": "#6b7980"
+            "dark": "#8ea560",
+            "darkSoft": "#8fa16c",
+            "light": "#718246",
+            "lightSoft": "#7c8b55"
         },
         "method": {
-            "dark": "#9b6b4d",
-            "darkSoft": "#8e6a54",
-            "light": "#8c6448",
-            "lightSoft": "#886952"
+            "dark": "#7fa083",
+            "darkSoft": "#7f9b84",
+            "light": "#608763",
+            "lightSoft": "#70906f"
         },
         "property": {
-            "dark": "#72805d",
-            "darkSoft": "#787a62",
-            "light": "#56604c",
-            "lightSoft": "#626a56"
+            "dark": "#cfbea2",
+            "darkSoft": "#c8b79c",
+            "light": "#4e4237",
+            "lightSoft": "#5f5146"
         },
         "string": {
-            "dark": "#9ba68c",
-            "darkSoft": "#9b9d89",
-            "light": "#728064",
-            "lightSoft": "#7a8776"
+            "dark": "#bf9552",
+            "darkSoft": "#b99760",
+            "light": "#9d7124",
+            "lightSoft": "#aa7e3e"
         },
         "number": {
-            "dark": "#bf8353",
-            "darkSoft": "#b17e5a",
-            "light": "#ae7245",
-            "lightSoft": "#ad7a55"
+            "dark": "#b07d93",
+            "darkSoft": "#ad8799",
+            "light": "#a26179",
+            "lightSoft": "#af758d"
         },
         "type": {
-            "dark": "#9b8d63",
-            "darkSoft": "#98895f",
-            "light": "#807149",
-            "lightSoft": "#8a7c58"
+            "dark": "#658f8b",
+            "darkSoft": "#6a8d88",
+            "light": "#4d7771",
+            "lightSoft": "#5c827c"
         },
         "variable": {
-            "dark": "#c7bdaf",
-            "darkSoft": "#c3b8ac",
-            "light": "#5a4838",
-            "lightSoft": "#665646"
+            "dark": "#cfbea2",
+            "darkSoft": "#c8b79c",
+            "light": "#4e4237",
+            "lightSoft": "#5f5146"
         },
         "parameter": {
-            "dark": "#beb4a7",
-            "darkSoft": "#bbb1a5",
-            "light": "#58493b",
-            "lightSoft": "#6c5c4e"
+            "dark": "#c2b08f",
+            "darkSoft": "#bda98b",
+            "light": "#5e5045",
+            "lightSoft": "#6d5d52"
         },
         "tag": {
-            "dark": "#aa5a49",
-            "darkSoft": "#a86656",
-            "light": "#87493a",
-            "lightSoft": "#8d5a4c"
+            "dark": "#ca824a",
+            "darkSoft": "#c48659",
+            "light": "#bb6934",
+            "lightSoft": "#c77b49"
         }
     }
 }

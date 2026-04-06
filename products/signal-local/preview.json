@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "badgeLabel": "MOSS LOCAL",
+  "headline": "Local Moss preview",
+  "subheadline": "Moss across dark and light.",
+  "familyLabels": {
+    "dark": "DARK FAMILY",
+    "light": "LIGHT FAMILY"
+  },
+  "variantNames": {
+    "dark": "Moss Dark",
+    "darkSoft": "Moss Dark Soft",
+    "light": "Moss Light",
+    "lightSoft": "Moss Light Soft"
+  }
+}

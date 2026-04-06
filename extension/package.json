@@ -1,7 +1,7 @@
 {
     "name": "hearth-theme",
     "displayName": "HearthCode Theme",
-    "description": "HearthCode Theme: Code by Hearthlight. A warm-toned VS Code theme set with Hearth Dark (default), Hearth Dark Soft, Hearth Light, and Hearth Light Soft, tuned for low-glare long-session readability.",
+    "description": "HearthCode Theme: a low-glare VS Code theme family with HearthCode Ember and HearthCode Moss in dark and light.",
     "version": "1.1.4",
     "publisher": "hearth-code",
     "engines": {
@@ -17,6 +17,7 @@
         "dark theme",
         "light theme",
         "warm theme",
+        "material theme",
         "low glare",
         "eye strain",
         "long coding sessions",
@@ -25,16 +26,21 @@
         "cjk",
         "semantic highlighting",
         "hearthcode",
-        "hearth",
+        "ember",
         "hearth code",
         "hearthcode theme",
         "hearth-code",
-        "hearth dark",
-        "hearth light",
-        "hearth soft",
-        "light soft theme",
+        "hearthcode ember",
+        "hearthcode moss",
+        "ember dark",
+        "ember light",
+        "moss dark",
+        "charcoal theme",
+        "material editor theme",
         "cursor",
-        "cursor theme"
+        "cursor theme",
+        "editorial theme",
+        "paper light theme"
     ],
     "galleryBanner": {
         "color": "#211d1a",
@@ -57,24 +63,44 @@
     "contributes": {
         "themes": [
             {
-                "label": "Hearth Dark",
+                "label": "HearthCode Ember Dark",
                 "uiTheme": "vs-dark",
                 "path": "./themes/hearth-dark.json"
             },
             {
-                "label": "Hearth Dark Soft",
+                "label": "HearthCode Ember Dark Soft",
                 "uiTheme": "vs-dark",
                 "path": "./themes/hearth-dark-soft.json"
             },
             {
-                "label": "Hearth Light",
+                "label": "HearthCode Ember Light",
                 "uiTheme": "vs",
                 "path": "./themes/hearth-light.json"
             },
             {
-                "label": "Hearth Light Soft",
+                "label": "HearthCode Ember Light Soft",
                 "uiTheme": "vs",
                 "path": "./themes/hearth-light-soft.json"
+            },
+            {
+                "label": "HearthCode Moss Dark",
+                "uiTheme": "vs-dark",
+                "path": "./themes/signal-dark.json"
+            },
+            {
+                "label": "HearthCode Moss Dark Soft",
+                "uiTheme": "vs-dark",
+                "path": "./themes/signal-dark-soft.json"
+            },
+            {
+                "label": "HearthCode Moss Light",
+                "uiTheme": "vs",
+                "path": "./themes/signal-light.json"
+            },
+            {
+                "label": "HearthCode Moss Light Soft",
+                "uiTheme": "vs",
+                "path": "./themes/signal-light-soft.json"
             }
         ]
     }

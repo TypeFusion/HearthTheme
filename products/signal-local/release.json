@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "site": {
+    "titleDescriptor": "Local Preview for HearthCode Moss",
+    "ogImagePath": "/og-hearth.png"
+  },
+  "vscodeExtension": {
+    "name": "moss-theme-local",
+    "publisher": "hearth-code",
+    "description": "HearthCode Moss Local Preview: a local VS Code theme set for validating the Moss line.",
+    "categories": [
+      "Themes"
+    ],
+    "keywords": [
+      "theme",
+      "vscode theme",
+      "color theme",
+      "dark theme",
+      "light theme",
+      "charcoal",
+      "moss",
+      "hearthcode moss",
+      "local preview"
+    ],
+    "icon": "icon.png",
+    "license": "MIT",
+    "qna": false,
+    "engines": {
+      "vscode": "^1.70.0"
+    },
+    "galleryBanner": {
+      "theme": "dark"
+    },
+    "previewVariantId": "dark"
+  },
+  "obsidianAppTheme": {
+    "name": "HearthCode Moss Local",
+    "author": "HearthCode",
+    "authorUrl": "https://theme.hearthcode.dev",
+    "minAppVersion": "1.0.0",
+    "screenshotSourcePath": "public/previews/preview-contrast-v2.png",
+    "screenshotPath": "obsidian/app-theme/screenshot.png",
+    "packageBasename": "moss-obsidian-app-theme-local",
+    "modes": [
+      "dark",
+      "light"
+    ]
+  }
+}

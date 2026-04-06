@@ -1,5 +1,6 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'fs'
 import { pathToFileURL } from 'url'
+import path from 'path'
 import { buildColorLanguageModel } from './color-system/build.mjs'
 import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { getThemeOutputFiles, loadColorSystemTuning } from './color-system.mjs'
@@ -11,6 +12,7 @@ const SITE_DOCS_PROFILE = COLOR_SYSTEM_TUNING.siteDocsProfile
 const SITE_ASSET_MAPPING = COLOR_SYSTEM_TUNING.siteAssetMapping
 
 const EXTENSION_PACKAGE_PATH = 'extension/package.json'
+const EXTENSION_THEMES_DIR = 'extension/themes'
 const DOCS_BASELINE_PATH = 'docs/theme-baseline.md'
 const PRODUCT_DATA_PATH = 'src/data/product.ts'
 const THEME_VARS_CSS_PATH = 'src/styles/theme-vars.css'
@@ -235,6 +237,7 @@ function renderProductDataModule(productData) {
     },
     scheme: productData.scheme,
     flavors: productData.flavors,
+    themes: productData.themes,
     site: productData.site,
     release: productData.release,
     extension: {
@@ -285,6 +288,37 @@ function syncExtensionPackage(tokens, productData) {
   }
   const content = `${JSON.stringify(pkg, null, 4)}\n`
   return writeIfChanged(EXTENSION_PACKAGE_PATH, content)
+}
+
+function syncExtensionThemes(productData) {
+  const themeEntries = Array.isArray(productData.extension?.themes) ? productData.extension.themes : []
+  const publicThemeFiles = new Set(
+    themeEntries
+      .map((theme) => String(theme.path || '').split(/[\\/]/).pop())
+      .filter(Boolean)
+  )
+
+  mkdirSync(EXTENSION_THEMES_DIR, { recursive: true })
+
+  let changed = false
+  for (const file of readdirSync(EXTENSION_THEMES_DIR)) {
+    if (!file.endsWith('.json')) continue
+    if (publicThemeFiles.has(file)) continue
+    rmSync(path.join(EXTENSION_THEMES_DIR, file), { force: true })
+    changed = true
+  }
+
+  for (const theme of themeEntries) {
+    const sourcePath = String(theme.path || '').replace(/^\.\//, '')
+    const source = path.join(process.cwd(), sourcePath)
+    const file = String(theme.path || '').split(/[\\/]/).pop()
+    if (!file) continue
+    const destination = path.join(process.cwd(), EXTENSION_THEMES_DIR, file)
+    copyFileSync(source, destination)
+    changed = true
+  }
+
+  return changed
 }
 
 function buildSemanticMatrixTable(tokens) {
@@ -352,12 +386,14 @@ export function generateSiteAssets() {
     themeVars: writeIfChanged(THEME_VARS_CSS_PATH, css),
     productData: syncProductData(productData),
     extensionPackage: syncExtensionPackage(tokens, productData),
+    extensionThemes: syncExtensionThemes(productData),
     docsBaseline: syncDocsBaseline(),
   }
 
   console.log(`${results.themeVars ? '✓ updated' : '- unchanged'} ${THEME_VARS_CSS_PATH}`)
   console.log(`${results.productData ? '✓ updated' : '- unchanged'} ${PRODUCT_DATA_PATH}`)
   console.log(`${results.extensionPackage ? '✓ updated' : '- unchanged'} ${EXTENSION_PACKAGE_PATH}`)
+  console.log(`${results.extensionThemes ? '✓ updated' : '- unchanged'} ${EXTENSION_THEMES_DIR}`)
   console.log(`${results.docsBaseline ? '✓ updated' : '- unchanged'} ${DOCS_BASELINE_PATH}`)
 }
 

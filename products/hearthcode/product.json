@@ -3,12 +3,12 @@
   "id": "hearthcode",
   "name": "HearthCode",
   "displayName": "HearthCode Theme",
-  "summary": "Warm-neutral color language distributed across editors, reading surfaces, and the website.",
+  "summary": "A low-glare theme family for code interfaces.",
   "brand": {
-    "id": "vesper",
-    "name": "Vesper",
-    "displayName": "Vesper Color Languages",
-    "summary": "A shared brand umbrella for distinct low-glare code color-language flavors."
+    "id": "hearthcode-theme",
+    "name": "HearthCode Theme",
+    "displayName": "HearthCode Theme",
+    "summary": "A theme family for code interfaces."
   },
   "publisher": "HearthCode",
   "websiteUrl": "https://theme.hearthcode.dev",
@@ -21,11 +21,55 @@
     "slug": "hearth-code/HearthTheme"
   },
   "supportedSchemeIds": [
-    "hearth"
+    "hearth",
+    "signal"
+  ],
+  "flavorNames": {
+    "hearth": {
+      "picker": "Ember",
+      "theme": "HearthCode Ember",
+      "preview": "Ember"
+    },
+    "signal": {
+      "picker": "Moss",
+      "theme": "HearthCode Moss",
+      "preview": "Moss"
+    }
+  },
+  "featuredThemes": [
+    {
+      "id": "hearth-dark",
+      "schemeId": "hearth",
+      "variantId": "dark",
+      "label": "HearthCode Ember Dark",
+      "summary": "Warm charcoal.",
+      "isDefault": true
+    },
+    {
+      "id": "hearth-light",
+      "schemeId": "hearth",
+      "variantId": "light",
+      "label": "HearthCode Ember Light",
+      "summary": "Warm paper."
+    },
+    {
+      "id": "signal-dark",
+      "schemeId": "signal",
+      "variantId": "dark",
+      "label": "HearthCode Moss Dark",
+      "summary": "Dry charcoal."
+    },
+    {
+      "id": "signal-light",
+      "schemeId": "signal",
+      "variantId": "light",
+      "label": "HearthCode Moss Light",
+      "summary": "Dry paper."
+    }
   ],
   "brandFlavorIds": [
     "hearth",
-    "cairn"
+    "signal"
   ],
   "defaultSchemeId": "hearth",
   "channels": {

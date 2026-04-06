@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 2,
+  "description": "Abstract interaction primitives for Moss with restrained bronze chrome, parchment cursor relief, and lower-pressure emphasis.",
+  "interactions": {
+    "selection": {
+      "description": "Primary text-selection wash.",
+      "source": {
+        "type": "interaction",
+        "id": "tabEmphasis"
+      },
+      "derive": {
+        "alphaFromVariantKnob": "interactionAlpha.selection"
+      }
+    },
+    "cursor": {
+      "description": "Primary live cursor and active relief signal.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#d8c2a1",
+          "darkSoft": "#ceb997",
+          "light": "#43545b",
+          "lightSoft": "#55656a"
+        }
+      }
+    },
+    "status": {
+      "description": "Persistent emphasis band used for status presence and release accents.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#69543f",
+          "darkSoft": "#675647",
+          "light": "#6d7a7d",
+          "lightSoft": "#7c878a"
+        }
+      }
+    },
+    "focusRing": {
+      "description": "Focusable edge signal used for ring and border emphasis.",
+      "source": {
+        "type": "interaction",
+        "id": "tabEmphasis"
+      },
+      "derive": {
+        "alphaFromVariantKnob": "interactionAlpha.focusRing"
+      }
+    },
+    "lineEmphasis": {
+      "description": "Current-line substrate emphasis without becoming a spotlight.",
+      "source": {
+        "type": "surface",
+        "id": "panel"
+      }
+    },
+    "listHover": {
+      "description": "Hover substrate for navigational lists and tabs.",
+      "source": {
+        "type": "foundation",
+        "family": "shell",
+        "tone": "lift"
+      }
+    },
+    "tabEmphasis": {
+      "description": "Active-tab and active-panel accent edge.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#77613f",
+          "darkSoft": "#74634e",
+          "light": "#5a6d75",
+          "lightSoft": "#6c7f84"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "signal",
+  "name": "SignalCode",
+  "headline": "Contrast-forward code color language",
+  "summary": "A vivid, high-recognition color philosophy for active coding and faster syntax scanning.",
+  "positioning": "A sharper companion line to HearthCode for users who prefer stronger landmarks and more energized editing sessions.",
+  "mood": [
+    "contrast-forward",
+    "high-recognition",
+    "vivid",
+    "disciplined"
+  ],
+  "audiences": [
+    "active implementation",
+    "debugging",
+    "multi-file scanning",
+    "fast structure recognition"
+  ],
+  "vocabulary": [
+    "carbon",
+    "chalk",
+    "spark",
+    "voltage",
+    "citron",
+    "jade",
+    "amber"
+  ],
+  "variantPhilosophy": {
+    "dark": "Flagship dark climate with the clearest syntax landmarks and strongest product identity.",
+    "darkSoft": "Lower-stimulation night version that keeps Signal's energy without turning muddy.",
+    "light": "Bright studio daylight with firm structure pop and cleaner contrast than Hearth Light.",
+    "lightSoft": "Approachable light climate that stays lively rather than paper-soft."
+  },
+  "constraints": {
+    "thermalBaseline": "cool-neutral substrate with warm and yellow-green signal peaks",
+    "allowWarmPressure": "yes, but only at high-signal roles",
+    "avoid": [
+      "background personality tint",
+      "full-page neon saturation",
+      "mushy low-separation syntax",
+      "Hearth-adjacent calm"
+    ]
+  },
+  "defaultVariant": "dark"
+}

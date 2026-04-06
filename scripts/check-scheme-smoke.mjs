@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, rmSync } from 'fs'
+import { existsSync, readFileSync, rmSync, writeFileSync } from 'fs'
 import { buildColorLanguageModel } from './color-system/build.mjs'
 import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { buildColorLanguageLineage } from './color-system/trace.mjs'
@@ -18,6 +18,9 @@ function getConfiguredActiveSchemeId() {
 function main() {
   const model = buildColorLanguageModel()
   const generatedThemePaths = Object.values(getThemeOutputFiles())
+  const themeSnapshots = new Map(
+    generatedThemePaths.map((path) => [path, existsSync(path) ? readFileSync(path, 'utf8') : null])
+  )
   const configuredActiveSchemeId = getConfiguredActiveSchemeId()
 
   try {
@@ -57,7 +60,10 @@ function main() {
   } finally {
     if (model.scheme.id !== configuredActiveSchemeId) {
       for (const path of generatedThemePaths) {
-        if (existsSync(path)) {
+        const previous = themeSnapshots.get(path)
+        if (typeof previous === 'string') {
+          writeFileSync(path, previous)
+        } else if (existsSync(path)) {
           rmSync(path, { force: true })
         }
       }

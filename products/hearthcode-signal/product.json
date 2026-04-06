@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "hearthcode-signal",
+  "name": "HearthCode Moss",
+  "displayName": "HearthCode Moss",
+  "summary": "A future-ready HearthCode line built around dry charcoal and yellow-green paper tones.",
+  "brand": {
+    "id": "hearthcode",
+    "name": "HearthCode",
+    "displayName": "HearthCode",
+    "summary": "A shared brand for authored, low-glare code themes with distinct color directions."
+  },
+  "publisher": "HearthCode",
+  "websiteUrl": "https://theme.hearthcode.dev",
+  "author": {
+    "name": "HearthCode",
+    "url": "https://theme.hearthcode.dev"
+  },
+  "repository": {
+    "url": "https://github.com/hearth-code/HearthTheme",
+    "slug": "hearth-code/HearthTheme"
+  },
+  "supportedSchemeIds": [
+    "signal"
+  ],
+  "flavorNames": {
+    "signal": {
+      "picker": "Moss",
+      "theme": "HearthCode Moss",
+      "preview": "Moss"
+    }
+  },
+  "featuredThemes": [
+    {
+      "id": "signal-dark",
+      "schemeId": "signal",
+      "variantId": "dark",
+      "label": "HearthCode Moss Dark",
+      "summary": "Dry charcoal.",
+      "isDefault": true
+    },
+    {
+      "id": "signal-light",
+      "schemeId": "signal",
+      "variantId": "light",
+      "label": "HearthCode Moss Light",
+      "summary": "Dry paper."
+    }
+  ],
+  "brandFlavorIds": [
+    "signal"
+  ],
+  "defaultSchemeId": "signal",
+  "channels": {
+    "website": false,
+    "vscode": false,
+    "openvsx": false,
+    "obsidian": false
+  }
+}

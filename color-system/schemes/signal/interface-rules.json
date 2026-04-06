@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "description": "Abstract interface tones for material editorial Moss with restrained bronze chrome that stays out of the syntax hero lanes.",
+  "interfaces": {
+    "shellInk": {
+      "description": "Primary readable shell ink for active tabs, controls, and focused chrome.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#d2bea2",
+          "darkSoft": "#cab89d",
+          "light": "#43382e",
+          "lightSoft": "#584c40"
+        }
+      }
+    },
+    "supportInk": {
+      "description": "Readable supporting shell ink for general navigation copy.",
+      "source": {
+        "type": "interface",
+        "id": "shellInk"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "sidebar"
+          },
+          "tFromVariantKnob": "interfaceMix.supportInk"
+        }
+      }
+    },
+    "mutedInk": {
+      "description": "Secondary shell ink for inactive labels and quieter navigation copy.",
+      "source": {
+        "type": "interface",
+        "id": "shellInk"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "sidebar"
+          },
+          "tFromVariantKnob": "interfaceMix.mutedInk"
+        }
+      }
+    },
+    "subtleInk": {
+      "description": "Dormant shell ink for placeholders and low-attention iconography.",
+      "source": {
+        "type": "interface",
+        "id": "mutedInk"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "surface",
+            "id": "sidebar"
+          },
+          "tFromVariantKnob": "interfaceMix.subtleInk"
+        }
+      }
+    },
+    "onAccentInk": {
+      "description": "Readable inverse ink placed on accent and badge fills.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#ece1d3",
+          "darkSoft": "#e5dbce",
+          "light": "#f7f0e6",
+          "lightSoft": "#f3ece3"
+        }
+      }
+    },
+    "shellRaised": {
+      "description": "Raised shell substrate for secondary buttons and grouped controls.",
+      "source": {
+        "type": "surface",
+        "id": "sidebar"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "interface",
+            "id": "shellInk"
+          },
+          "tFromVariantKnob": "interfaceMix.shellRaised"
+        }
+      }
+    },
+    "navActiveFill": {
+      "description": "Selected navigation fill for active rows and active tabs.",
+      "source": {
+        "type": "surface",
+        "id": "sidebar"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "interface",
+            "id": "shellInk"
+          },
+          "tFromVariantKnob": "interfaceMix.navActiveFill"
+        }
+      }
+    },
+    "navInactiveFill": {
+      "description": "Softer navigation fill for inactive hover groups and passive grouping.",
+      "source": {
+        "type": "surface",
+        "id": "sidebar"
+      },
+      "derive": {
+        "mix": {
+          "with": {
+            "type": "interface",
+            "id": "shellInk"
+          },
+          "tFromVariantKnob": "interfaceMix.navInactiveFill"
+        }
+      }
+    },
+    "shellBand": {
+      "description": "Intermediate shell band for grouped chrome strata and side sections.",
+      "source": {
+        "type": "foundation",
+        "family": "shell",
+        "tone": "lift"
+      }
+    },
+    "accentHoverFill": {
+      "description": "Hover-stage accent fill for buttons and raised controls.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#7d6642",
+          "darkSoft": "#796852",
+          "light": "#64767f",
+          "lightSoft": "#74858a"
+        }
+      }
+    },
+    "onStatusInk": {
+      "description": "Readable ink placed on persistent status surfaces.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#eddfcc",
+          "darkSoft": "#e4d9c8",
+          "light": "#f4ede2",
+          "lightSoft": "#f1e9df"
+        }
+      }
+    },
+    "navActiveInk": {
+      "description": "Readable ink placed on active navigation fills.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#e4d5bc",
+          "darkSoft": "#dfd0ba",
+          "light": "#302821",
+          "lightSoft": "#3c332b"
+        }
+      }
+    }
+  }
+}

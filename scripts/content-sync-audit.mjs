@@ -1,7 +1,8 @@
 import { readdirSync, readFileSync, statSync } from 'fs'
-import { getThemeOutputFiles, loadColorSystemTuning, loadColorSystemVariants } from './color-system.mjs'
+import { getThemeOutputFiles, loadColorProductManifest, loadColorSystemTuning, loadColorSystemVariants } from './color-system.mjs'
 
 const THEME_FILES = getThemeOutputFiles()
+const PRODUCT = loadColorProductManifest()
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
 const VARIANT_SPEC = loadColorSystemVariants()
 const SITE_DOCS_PROFILE = COLOR_SYSTEM_TUNING.siteDocsProfile
@@ -488,6 +489,8 @@ function validateVariantCountCopy() {
 
 function validateSiteParameterClaims() {
   const variantCount = VARIANT_SPEC.variants.length
+  const publishedStyleCount = PRODUCT.supportedSchemeIds.length
+  const publishedThemeCount = publishedStyleCount * variantCount
   const liveSurfaceCount = LIVE_SURFACE_IDS.length
   const proofSection = readText(PROOF_SECTION_COMPONENT)
   const baselineDocsComponent = readText(BASELINE_DOCS_COMPONENT)
@@ -569,12 +572,12 @@ function validateSiteParameterClaims() {
     } else {
       const numbers = [...finalMetaSecondary.matchAll(/\d+/g)].map((match) => Number(match[0]))
       if (numbers.length < 3) {
-        addIssue(`${file}: "final.meta.secondary" must include system/variant/surface counts`)
+        addIssue(`${file}: "final.meta.secondary" must include style/theme/surface counts`)
       } else {
-        const [systemCount, variantMetaCount, surfaceMetaCount] = numbers
-        if (systemCount !== 1 || variantMetaCount !== variantCount || surfaceMetaCount !== liveSurfaceCount) {
+        const [styleCount, themeMetaCount, surfaceMetaCount] = numbers
+        if (styleCount !== publishedStyleCount || themeMetaCount !== publishedThemeCount || surfaceMetaCount !== liveSurfaceCount) {
           addIssue(
-            `${file}: "final.meta.secondary" expected counts 1/${variantCount}/${liveSurfaceCount}, got ${systemCount}/${variantMetaCount}/${surfaceMetaCount}`
+            `${file}: "final.meta.secondary" expected counts ${publishedStyleCount}/${publishedThemeCount}/${liveSurfaceCount}, got ${styleCount}/${themeMetaCount}/${surfaceMetaCount}`
           )
         }
       }
@@ -616,63 +619,18 @@ function validateCodePreviewSourceOfTruth() {
 }
 
 function validateExtensionReadmeSnapshot() {
-  const themes = Object.fromEntries(
-    Object.entries(THEME_FILES).map(([id, file]) => [id, readJson(file)])
-  )
-  if (Object.values(themes).some((theme) => !theme)) return
-
-  const metrics = Object.fromEntries(
-    Object.entries(themes).map(([id, theme]) => {
-      const bg = normalizeHex(theme.colors?.['editor.background'])
-      const fg = normalizeHex(theme.colors?.['editor.foreground'])
-      const comment = getTokenColor(theme, 'comment')
-      return [
-        id,
-        {
-          fgBg: bg && fg ? contrastRatio(fg, bg) : null,
-          commentBg: bg && comment ? contrastRatio(comment, bg) : null,
-        },
-      ]
-    })
-  )
+  const pkg = readJson(EXTENSION_PACKAGE)
+  const packagedThemes = Array.isArray(pkg?.contributes?.themes) ? pkg.contributes.themes : []
+  if (packagedThemes.length === 0) return
 
   const readme = readText(EXTENSION_README)
   if (!readme) return
 
-  const expectedLines = [
-    ['Dark editor foreground/background contrast', fixed(metrics.dark.fgBg)],
-    ['Dark Soft editor foreground/background contrast', fixed(metrics.darkSoft.fgBg)],
-    ['Light editor foreground/background contrast', fixed(metrics.light.fgBg)],
-    ['Light Soft editor foreground/background contrast', fixed(metrics.lightSoft.fgBg)],
-  ]
-
-  for (const [label, expected] of expectedLines) {
-    const pattern = new RegExp(`- ${escapeRegExp(label)}:\\s*` + '`([^`]+)`')
-    const match = readme.match(pattern)
-    if (!match) {
-      addIssue(`${EXTENSION_README}: missing line "${label}"`)
-      continue
-    }
-    const actual = String(match[1]).trim()
-    if (actual !== expected) {
-      addIssue(`${EXTENSION_README}: "${label}" expected ${expected}, got ${actual}`)
-    }
-  }
-
-  const commentValues = Object.values(metrics)
-    .map((item) => item.commentBg)
-    .filter((value) => value != null)
-  const expectedMin = fixed(Math.min(...commentValues))
-  const expectedMax = fixed(Math.max(...commentValues))
-  const windowMatch = readme.match(/- Comment contrast window:\s*`([0-9.]+)\s*-\s*([0-9.]+)`/)
-  if (!windowMatch) {
-    addIssue(`${EXTENSION_README}: missing "Comment contrast window" line`)
-  } else {
-    const [, minValue, maxValue] = windowMatch
-    if (minValue !== expectedMin || maxValue !== expectedMax) {
-      addIssue(
-        `${EXTENSION_README}: "Comment contrast window" expected ${expectedMin} - ${expectedMax}, got ${minValue} - ${maxValue}`
-      )
+  for (const entry of packagedThemes) {
+    const label = String(entry.label || '').trim()
+    if (!label) continue
+    if (!readme.includes(`\`${label}\``)) {
+      addIssue(`${EXTENSION_README}: missing packaged theme label "${label}"`)
     }
   }
 }
@@ -708,22 +666,18 @@ function validateReadmePreviewAssets() {
   const expectedReadmes = [
     {
       file: README_EN,
-      note: 'The image below is assembled directly from the shipped theme files, showing the four Hearth variants through their real surface and semantic role colors instead of a simulated editor screenshot.',
       previewPaths: expectedRootPreviewPaths,
     },
     {
       file: README_ZH,
-      note: '下方图片直接由随包发布的主题文件生成，用四个变体的真实界面色与语义角色色来展示 HearthCode，而不是模拟编辑器截图。',
       previewPaths: expectedRootPreviewPaths,
     },
     {
       file: README_JA,
-      note: 'この画像は同梱されるテーマファイルから直接組み立てており、4つのバリアントを実際のサーフェス色とセマンティクス色で見せるもので、エディタの擬似スクリーンショットではありません。',
       previewPaths: expectedRootPreviewPaths,
     },
     {
       file: EXTENSION_README,
-      note: 'The image below is assembled directly from the shipped theme files, showing the four Hearth variants through their real surface and semantic role colors instead of a simulated editor screenshot.',
       previewPaths: expectedExtensionPreviewPaths,
     },
   ]
@@ -731,10 +685,6 @@ function validateReadmePreviewAssets() {
   for (const spec of expectedReadmes) {
     const readme = readText(spec.file)
     if (!readme) continue
-
-    if (!readme.includes(spec.note)) {
-      addIssue(`${spec.file}: missing preview/source-of-truth note`)
-    }
 
     const previewPaths = collectMarkdownImagePaths(readme).filter((path) => /preview-.*\.png$/i.test(path))
     if (previewPaths.length !== spec.previewPaths.length) {

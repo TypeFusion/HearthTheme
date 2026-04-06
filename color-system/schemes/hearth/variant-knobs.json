@@ -5,14 +5,14 @@
     "selection": {
       "dark": 0.184,
       "darkSoft": 0.075,
-      "light": 0.129,
-      "lightSoft": 0.129
+      "light": 0.138,
+      "lightSoft": 0.136
     },
     "focusRing": {
       "dark": 0.321,
       "darkSoft": 0.227,
-      "light": 0.29,
-      "lightSoft": 0.29
+      "light": 0.31,
+      "lightSoft": 0.3
     }
   },
   "surfaceMix": {
@@ -63,14 +63,14 @@
     "navActiveFill": {
       "dark": 0.195,
       "darkSoft": 0.204,
-      "light": 0.015,
-      "lightSoft": 0.012
+      "light": 0.055,
+      "lightSoft": 0.048
     },
     "navInactiveFill": {
       "dark": 0.134,
       "darkSoft": 0.175,
-      "light": 0.041,
-      "lightSoft": 0
+      "light": 0.05,
+      "lightSoft": 0.024
     }
   },
   "guidanceMix": {

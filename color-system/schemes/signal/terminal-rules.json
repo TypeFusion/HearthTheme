@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "description": "Abstract terminal palette for the Moss concept.",
+  "terminals": {
+    "ansiBlack": {
+      "description": "Primary dark terminal neutral.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#1d201f",
+          "darkSoft": "#232220",
+          "light": "#3a342e",
+          "lightSoft": "#4a443d"
+        }
+      }
+    },
+    "ansiRed": {
+      "description": "Terminal failure and destructive hot signal.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#e06c5e",
+          "darkSoft": "#d77768",
+          "light": "#ba5146",
+          "lightSoft": "#c56458"
+        }
+      }
+    },
+    "ansiGreen": {
+      "description": "Terminal success and healthy-state signal.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#9fb86f",
+          "darkSoft": "#9aaf73",
+          "light": "#718246",
+          "lightSoft": "#7c8b55"
+        }
+      }
+    },
+    "ansiYellow": {
+      "description": "Terminal caution signal.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#d2ab61",
+          "darkSoft": "#c9a869",
+          "light": "#9d7124",
+          "lightSoft": "#aa7e3e"
+        }
+      }
+    },
+    "ansiBlue": {
+      "description": "Terminal informational and callable signal.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#79a89f",
+          "darkSoft": "#7ba198",
+          "light": "#517d76",
+          "lightSoft": "#62877f"
+        }
+      }
+    },
+    "ansiMagenta": {
+      "description": "Terminal secondary accent with warmer edge.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#ca8ea5",
+          "darkSoft": "#c295a8",
+          "light": "#a26179",
+          "lightSoft": "#af758d"
+        }
+      }
+    },
+    "ansiCyan": {
+      "description": "Terminal connective cool accent between info and success.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#8fb686",
+          "darkSoft": "#8aaf88",
+          "light": "#608763",
+          "lightSoft": "#70906f"
+        }
+      }
+    },
+    "ansiWhite": {
+      "description": "Terminal readable bright neutral.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#d6c3a3",
+          "darkSoft": "#cfbda0",
+          "light": "#43382e",
+          "lightSoft": "#584c40"
+        }
+      }
+    },
+    "ansiBrightBlack": {
+      "description": "Raised neutral used for muted terminal structure.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#675d52",
+          "darkSoft": "#6e6459",
+          "light": "#8c7c69",
+          "lightSoft": "#968774"
+        }
+      }
+    },
+    "ansiBrightRed": {
+      "description": "Higher-energy terminal danger accent.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#ee8376",
+          "darkSoft": "#e48578",
+          "light": "#c9675c",
+          "lightSoft": "#d3796d"
+        }
+      }
+    },
+    "ansiBrightGreen": {
+      "description": "Higher-energy terminal success accent.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#b6c97f",
+          "darkSoft": "#aec081",
+          "light": "#79914c",
+          "lightSoft": "#889960"
+        }
+      }
+    },
+    "ansiBrightYellow": {
+      "description": "Higher-energy terminal warning accent.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#deba72",
+          "darkSoft": "#d4b478",
+          "light": "#ab8034",
+          "lightSoft": "#b99251"
+        }
+      }
+    },
+    "ansiBrightBlue": {
+      "description": "Higher-energy terminal informational accent.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#92bbb1",
+          "darkSoft": "#92b2ab",
+          "light": "#658d85",
+          "lightSoft": "#749790"
+        }
+      }
+    },
+    "ansiBrightMagenta": {
+      "description": "Higher-energy terminal secondary accent.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#dc9fb2",
+          "darkSoft": "#d39fb0",
+          "light": "#b9758b",
+          "lightSoft": "#c2889c"
+        }
+      }
+    },
+    "ansiBrightCyan": {
+      "description": "Higher-energy terminal cool connective accent.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#9bc099",
+          "darkSoft": "#95b99a",
+          "light": "#70946f",
+          "lightSoft": "#80a083"
+        }
+      }
+    },
+    "ansiBrightWhite": {
+      "description": "Highest-visibility terminal neutral highlight.",
+      "source": {
+        "type": "literal",
+        "values": {
+          "dark": "#f1e6d4",
+          "darkSoft": "#eadfce",
+          "light": "#2d241e",
+          "lightSoft": "#3d322b"
+        }
+      }
+    }
+  }
+}

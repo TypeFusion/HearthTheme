@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "description": "Top-level palette families for Moss as a clean-background material companion to HearthCode. The palette is charcoal-led, parchment-carried, and arranged around authored syntax lanes rather than copied historical mappings.",
+  "families": {
+    "ground": {
+      "description": "Primary charcoal substrate with almost no visible haze.",
+      "tones": {
+        "base": {
+          "dark": "#1d201f",
+          "darkSoft": "#252320",
+          "light": "#f1ead7",
+          "lightSoft": "#ece4d8"
+        }
+      }
+    },
+    "carrier": {
+      "description": "Readable parchment carrier neutral for body text and long-lived structure.",
+      "tones": {
+        "base": {
+          "dark": "#d2bea2",
+          "darkSoft": "#cab89d",
+          "light": "#43382e",
+          "lightSoft": "#584c40"
+        }
+      }
+    },
+    "shell": {
+      "description": "Raised shell family for layered rails, grouped chrome, and side housing.",
+      "tones": {
+        "base": {
+          "dark": "#1d1c1a",
+          "darkSoft": "#22201e",
+          "light": "#e6dcc8",
+          "lightSoft": "#e0d7c8"
+        },
+        "lift": {
+          "dark": "#2b2826",
+          "darkSoft": "#302d2b",
+          "light": "#dcd2c0",
+          "lightSoft": "#d7cebf"
+        }
+      }
+    },
+    "slate": {
+      "description": "Warm gray-slate neutral for comments and low-pressure guidance.",
+      "tones": {
+        "base": {
+          "dark": "#817566",
+          "darkSoft": "#887c70",
+          "light": "#8c7c69",
+          "lightSoft": "#968774"
+        }
+      }
+    },
+    "spark": {
+      "description": "Brick, ember, and clay-orange family for control flow, directives, and hot tags.",
+      "tones": {
+        "base": {
+          "dark": "#cf6650",
+          "darkSoft": "#c87766",
+          "light": "#ba5146",
+          "lightSoft": "#c56458"
+        },
+        "tag": {
+          "dark": "#ca824a",
+          "darkSoft": "#c48659",
+          "light": "#bb6934",
+          "lightSoft": "#c77b49"
+        },
+        "presence": {
+          "dark": "#7e664d",
+          "darkSoft": "#79634d",
+          "light": "#9e794d",
+          "lightSoft": "#ab8660"
+        }
+      }
+    },
+    "amber": {
+      "description": "Burnished brass family for strings, measured highlights, and material warmth.",
+      "tones": {
+        "base": {
+          "dark": "#bf9552",
+          "darkSoft": "#b99760",
+          "light": "#9d7124",
+          "lightSoft": "#aa7e3e"
+        },
+        "method": {
+          "dark": "#ad7f40",
+          "darkSoft": "#aa8650",
+          "light": "#8f621d",
+          "lightSoft": "#9d7135"
+        }
+      }
+    },
+    "voltage": {
+      "description": "Dried plum and mulberry family for constants and small but important jump points.",
+      "tones": {
+        "base": {
+          "dark": "#b07d93",
+          "darkSoft": "#ad8799",
+          "light": "#a26179",
+          "lightSoft": "#af758d"
+        }
+      }
+    },
+    "citron": {
+      "description": "Secondary ochre-brass family for operators, warm separators, and material metal edges.",
+      "tones": {
+        "base": {
+          "dark": "#b58e55",
+          "darkSoft": "#b08d60",
+          "light": "#966a2d",
+          "lightSoft": "#a37a42"
+        },
+        "hot": {
+          "dark": "#bf9759",
+          "darkSoft": "#bb9766",
+          "light": "#9f7634",
+          "lightSoft": "#ac854c"
+        }
+      }
+    },
+    "jade": {
+      "description": "Lichen, sage, and oxidized patina family for callables, type structure, and quiet cool relief.",
+      "tones": {
+        "base": {
+          "dark": "#8ea560",
+          "darkSoft": "#8fa16c",
+          "light": "#718246",
+          "lightSoft": "#7c8b55"
+        },
+        "call": {
+          "dark": "#7fa083",
+          "darkSoft": "#7f9b84",
+          "light": "#608763",
+          "lightSoft": "#70906f"
+        },
+        "property": {
+          "dark": "#90a485",
+          "darkSoft": "#8ea088",
+          "light": "#638167",
+          "lightSoft": "#728b73"
+        },
+        "type": {
+          "dark": "#658f8b",
+          "darkSoft": "#6a8d88",
+          "light": "#4d7771",
+          "lightSoft": "#5c827c"
+        }
+      }
+    },
+    "chalk": {
+      "description": "Parchment neutral carrier for variables, properties, and parameters, keeping the page rhythmic.",
+      "tones": {
+        "base": {
+          "dark": "#cfbea2",
+          "darkSoft": "#c8b79c",
+          "light": "#4e4237",
+          "lightSoft": "#5f5146"
+        },
+        "operator": {
+          "dark": "#b69161",
+          "darkSoft": "#b3916a",
+          "light": "#7e6033",
+          "lightSoft": "#8d6d46"
+        },
+        "parameter": {
+          "dark": "#c2b08f",
+          "darkSoft": "#bda98b",
+          "light": "#5e5045",
+          "lightSoft": "#6d5d52"
+        }
+      }
+    }
+  }
+}

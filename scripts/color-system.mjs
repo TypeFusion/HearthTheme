@@ -649,6 +649,53 @@ export function loadColorProductManifest() {
   const defaultSchemeId = String(data.defaultSchemeId || '').trim()
   const supportedSchemeIds = toStringList(data.supportedSchemeIds, `${COLOR_SYSTEM_PRODUCT_PATH}: supportedSchemeIds`)
   const brandFlavorIds = toStringList(data.brandFlavorIds, `${COLOR_SYSTEM_PRODUCT_PATH}: brandFlavorIds`)
+  const flavorNames = data.flavorNames && typeof data.flavorNames === 'object' && !Array.isArray(data.flavorNames)
+    ? Object.fromEntries(
+        Object.entries(data.flavorNames).map(([schemeIdRaw, entry]) => {
+          const schemeId = String(schemeIdRaw || '').trim()
+          assert(schemeId, `${COLOR_SYSTEM_PRODUCT_PATH}: flavorNames has invalid scheme id`)
+          assert(entry && typeof entry === 'object' && !Array.isArray(entry), `${COLOR_SYSTEM_PRODUCT_PATH}: flavorNames.${schemeId} must be an object`)
+          const picker = String(entry.picker || '').trim()
+          const theme = String(entry.theme || '').trim()
+          const preview = String(entry.preview || '').trim()
+          assert(picker || theme || preview, `${COLOR_SYSTEM_PRODUCT_PATH}: flavorNames.${schemeId} must define picker, theme, or preview`)
+          return [
+            schemeId,
+            {
+              picker,
+              theme,
+              preview,
+            },
+          ]
+        }),
+      )
+    : {}
+  const variantIds = new Set(loadColorSystemVariants().variants.map((variant) => variant.id))
+  const featuredThemes = Array.isArray(data.featuredThemes)
+    ? data.featuredThemes.map((entry, index) => {
+        assert(entry && typeof entry === 'object' && !Array.isArray(entry), `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes[${index}] must be an object`)
+        const id = String(entry.id || '').trim()
+        const schemeId = String(entry.schemeId || '').trim()
+        const variantId = String(entry.variantId || '').trim()
+        const label = String(entry.label || '').trim()
+        const summary = String(entry.summary || '').trim()
+        const isDefault = entry.isDefault === true
+        assert(id, `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes[${index}].id is required`)
+        assert(schemeId, `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes[${index}].schemeId is required`)
+        assert(variantId, `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes[${index}].variantId is required`)
+        assert(label, `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes[${index}].label is required`)
+        assert(summary, `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes[${index}].summary is required`)
+        assert(variantIds.has(variantId), `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes[${index}].variantId "${variantId}" is not registered`)
+        return {
+          id,
+          schemeId,
+          variantId,
+          label,
+          summary,
+          isDefault,
+        }
+      })
+    : []
   const brand = data.brand && typeof data.brand === 'object' && !Array.isArray(data.brand)
     ? {
         id: String(data.brand.id || '').trim(),
@@ -697,6 +744,23 @@ export function loadColorProductManifest() {
     assert(brandFlavorIds.includes(defaultSchemeId), `${COLOR_SYSTEM_PRODUCT_PATH}: defaultSchemeId must be included in brandFlavorIds when brandFlavorIds is set`)
     assert(brandFlavorIds.includes(COLOR_SYSTEM_SCHEME_ID), `${COLOR_SYSTEM_PRODUCT_PATH}: active scheme "${COLOR_SYSTEM_SCHEME_ID}" must be included in brandFlavorIds when brandFlavorIds is set`)
   }
+  if (Object.keys(flavorNames).length > 0) {
+    const knownFlavorIds = new Set([...supportedSchemeIds, ...brandFlavorIds])
+    for (const schemeId of Object.keys(flavorNames)) {
+      assert(knownFlavorIds.has(schemeId), `${COLOR_SYSTEM_PRODUCT_PATH}: flavorNames.${schemeId} must use a supported or branded scheme id`)
+    }
+  }
+  if (featuredThemes.length > 0) {
+    const ids = new Set()
+    let defaultCount = 0
+    for (const entry of featuredThemes) {
+      assert(!ids.has(entry.id), `${COLOR_SYSTEM_PRODUCT_PATH}: duplicate featuredThemes id "${entry.id}"`)
+      ids.add(entry.id)
+      assert(supportedSchemeIds.includes(entry.schemeId), `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes "${entry.id}" must use a supported scheme`)
+      if (entry.isDefault) defaultCount += 1
+    }
+    assert(defaultCount <= 1, `${COLOR_SYSTEM_PRODUCT_PATH}: featuredThemes can only mark one default theme`)
+  }
 
   return {
     schemaVersion: Number(data.schemaVersion || 1),
@@ -711,6 +775,8 @@ export function loadColorProductManifest() {
     repository,
     defaultSchemeId,
     supportedSchemeIds,
+    flavorNames,
+    featuredThemes,
     brandFlavorIds,
     channels,
   }

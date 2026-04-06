@@ -21,6 +21,7 @@ const themeColor = tokens.dark.bg;
 
 const home = lang === "en" ? "/" : `/${lang}`;
 const docs = lang === "en" ? "/docs" : `/${lang}/docs`;
+const showDocs = false;
 const marketplaceUrl = productData.links.marketplaceUrl;
 const obsidianReleaseUrl = productData.links.releasesUrl;
 const changelogUrl = productData.links.changelogUrl;
@@ -122,13 +123,15 @@ const ogImage = new URL(productData.site.ogImagePath, siteBase).href;
 						>
 							{t(lang, "nav.home")}
 						</a>
-						<a
-							href={docs}
-							class={`hearth-nav-pill ${isDocsPage ? "is-active" : ""}`}
-							aria-current={isDocsPage ? "page" : undefined}
-						>
-							{t(lang, "nav.docs")}
-						</a>
+						{showDocs ? (
+							<a
+								href={docs}
+								class={`hearth-nav-pill ${isDocsPage ? "is-active" : ""}`}
+								aria-current={isDocsPage ? "page" : undefined}
+							>
+								{t(lang, "nav.docs")}
+							</a>
+						) : null}
 					</div>
 				</div>
 
@@ -175,7 +178,7 @@ const ogImage = new URL(productData.site.ogImagePath, siteBase).href;
 				</span>
 			</div>
 			<div class="hearth-footer-links">
-				<a href={docs} class="hearth-footer-link">{t(lang, "footer.docs")}</a>
+				{showDocs ? <a href={docs} class="hearth-footer-link">{t(lang, "footer.docs")}</a> : null}
 				<a href={changelogUrl} target="_blank" rel="noopener noreferrer" class="hearth-footer-link">
 					{t(lang, "footer.changelog")}
 				</a>

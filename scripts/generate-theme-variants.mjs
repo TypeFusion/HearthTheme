@@ -29,6 +29,9 @@ const SEMANTIC_PALETTE = COLOR_LANGUAGE_MODEL.semanticPalette
 const READABILITY_ROLE_DEFS = loadRoleAdapters()
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
 const RAW_DARK_VARIANT = VARIANT_SPEC.variants.find((variant) => variant.id === 'dark') || null
+const ROLE_SIGNAL_MODE = String(COLOR_SCHEME?.constraints?.roleSignalMode || 'warm-balanced').trim().toLowerCase()
+const SOFT_ROLE_CHROMA_STRENGTH_BY_VARIANT = COLOR_SCHEME?.constraints?.softRoleChromaStrengthByVariant || {}
+const LIGHT_CALIBRATION_STRENGTH_BY_VARIANT = COLOR_SCHEME?.constraints?.lightReadabilityCalibrationStrengthByVariant || {}
 
 function splitWordmark(name) {
   const full = String(name || '').trim()
@@ -615,6 +618,9 @@ function applyLightPolarityCompensation(theme, variantId, warnings) {
 function applySoftRoleChromaBudget(theme, variantId, warnings) {
   const budgets = SOFT_ROLE_CHROMA_BUDGET[variantId]
   if (!budgets) return
+  const rawBudgetStrength = SOFT_ROLE_CHROMA_STRENGTH_BY_VARIANT?.[variantId]
+  const budgetStrength = rawBudgetStrength == null ? 1 : clamp(Number(rawBudgetStrength), 0, 1)
+  if (budgetStrength <= 0) return
 
   for (const [roleId, tuning] of Object.entries(budgets)) {
     const roleDef = getRoleDefById(roleId)
@@ -623,12 +629,13 @@ function applySoftRoleChromaBudget(theme, variantId, warnings) {
     const current = getRoleColorFromTheme(theme, roleDef)
     if (!current) continue
 
-    const next = scaleColorChroma(
+    const adjusted = scaleColorChroma(
       current,
       tuning.factor ?? 1,
       tuning.lightnessLift ?? 0,
       tuning.maxChroma ?? null
     )
+    const next = budgetStrength >= 0.999 ? adjusted : mixHex(current, adjusted, budgetStrength)
     if (String(next).toLowerCase() === String(current).toLowerCase()) continue
 
     applyRoleColorToTokenEntries(theme, roleDef.scopes || [], next)
@@ -949,6 +956,17 @@ function enforceNearForegroundBudget(theme, variantId, warnings) {
 }
 
 function applyRoleSignalProfile(theme, variantId, warnings) {
+  if (ROLE_SIGNAL_MODE === 'gbm-clean' || ROLE_SIGNAL_MODE === 'material-editorial') {
+    enforceNearForegroundBudget(theme, variantId, warnings)
+    return
+  }
+
+  if (ROLE_SIGNAL_MODE === 'contrast-forward' || ROLE_SIGNAL_MODE === 'earthy-groove') {
+    enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, 'cool band')
+    enforceNearForegroundBudget(theme, variantId, warnings)
+    return
+  }
+
   enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_COOL_HUE_BAND_BY_VARIANT, 'cool band')
   enforceRoleHueBand(theme, variantId, warnings, ROLE_SIGNAL_WARM_HUE_BAND_BY_VARIANT, 'warm band')
   applyWarmRoleExposureBalance(theme, variantId, warnings)
@@ -1311,6 +1329,10 @@ function computeGlobalSeparationRatio(theme, darkTheme) {
 }
 
 function calibrateTokenEntriesForLight(theme, darkTheme, warnings, variantId, bg, fg, darkBg, darkFg) {
+  const rawStrength = LIGHT_CALIBRATION_STRENGTH_BY_VARIANT?.[variantId]
+  const calibrationStrength = rawStrength == null ? 1 : clamp(Number(rawStrength), 0, 1)
+  if (calibrationStrength <= 0) return
+
   const tokenCount = Math.min(theme?.tokenColors?.length || 0, darkTheme?.tokenColors?.length || 0)
   for (let i = 0; i < tokenCount; i += 1) {
     const darkEntry = darkTheme.tokenColors[i]
@@ -1333,15 +1355,16 @@ function calibrateTokenEntriesForLight(theme, darkTheme, warnings, variantId, bg
       targetFgContrast,
       profile
     )
+    const nextColor = calibrationStrength >= 1 ? calibrated : mixHex(variantColor, calibrated, calibrationStrength)
 
     if (variantEntry?.settings?.foreground) {
       variantEntry.settings = {
         ...variantEntry.settings,
-        foreground: calibrated,
+        foreground: nextColor,
       }
     }
 
-    const drift = deltaE(variantColor, calibrated)
+    const drift = deltaE(variantColor, nextColor)
     if (drift != null && drift > TELEMETRY_PROFILE.readabilityDriftWarningDeltaE) {
       warnings.push(`${variantId}: full-matrix calibration adjusted token[${i}] by deltaE ${drift.toFixed(1)}`)
     }
@@ -1349,6 +1372,10 @@ function calibrateTokenEntriesForLight(theme, darkTheme, warnings, variantId, bg
 }
 
 function calibrateSemanticEntriesForLight(theme, darkTheme, warnings, variantId, bg, fg, darkBg, darkFg) {
+  const rawStrength = LIGHT_CALIBRATION_STRENGTH_BY_VARIANT?.[variantId]
+  const calibrationStrength = rawStrength == null ? 1 : clamp(Number(rawStrength), 0, 1)
+  if (calibrationStrength <= 0) return
+
   const semanticKeys = new Set([
     ...Object.keys(theme?.semanticTokenColors || {}),
     ...Object.keys(darkTheme?.semanticTokenColors || {}),
@@ -1373,10 +1400,11 @@ function calibrateSemanticEntriesForLight(theme, darkTheme, warnings, variantId,
       targetFgContrast,
       profile
     )
+    const nextColor = calibrationStrength >= 1 ? calibrated : mixHex(variantColor, calibrated, calibrationStrength)
 
-    setSemanticColor(theme, semanticKey, calibrated)
+    setSemanticColor(theme, semanticKey, nextColor)
 
-    const drift = deltaE(variantColor, calibrated)
+    const drift = deltaE(variantColor, nextColor)
     if (drift != null && drift > TELEMETRY_PROFILE.readabilityDriftWarningDeltaE) {
       warnings.push(`${variantId}: full-matrix calibration adjusted semantic "${semanticKey}" by deltaE ${drift.toFixed(1)}`)
     }

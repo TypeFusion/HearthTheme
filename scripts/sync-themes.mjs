@@ -3,7 +3,7 @@ import { execFileSync } from 'child_process'
 import { join } from 'path'
 import { buildColorLanguageModel, getExportedSiteTokenKeys } from './color-system/build.mjs'
 import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
-import { COLOR_SYSTEM_SCHEME_ID, getThemeOutputFiles, loadColorProductManifest } from './color-system.mjs'
+import { COLOR_SYSTEM_SCHEME_ID, getThemeMetaListForSchemeId, getThemeOutputFiles, loadColorProductManifest } from './color-system.mjs'
 import { generateThemeVariants } from './generate-theme-variants.mjs'
 import { generateColorLanguageLineage } from './generate-color-language-lineage.mjs'
 import { generateColorLanguageParity } from './generate-color-language-parity.mjs'
@@ -59,19 +59,23 @@ for (const schemeId of brandFlavorIds) {
 
 // 1. 同步 JSON 到 public 和 extension
 const targets = ['public/themes', 'extension/themes']
+const publishedThemePaths = product.supportedSchemeIds.flatMap((schemeId) =>
+  getThemeMetaListForSchemeId(schemeId).map((theme) => theme.path)
+)
 const activeThemePaths = Object.values(getThemeOutputFiles())
-const activeThemeFiles = activeThemePaths.map((path) => path.split(/[\\/]/).pop()).filter(Boolean)
-const activeThemeFileSet = new Set(activeThemeFiles)
+const syncThemePaths = Array.from(new Set([...activeThemePaths, ...publishedThemePaths]))
+const syncThemeFiles = syncThemePaths.map((path) => path.split(/[\\/]/).pop()).filter(Boolean)
+const syncThemeFileSet = new Set(syncThemeFiles)
 
 for (const target of targets) {
   mkdirSync(target, { recursive: true })
   for (const file of readdirSync(target)) {
     if (!file.endsWith('.json')) continue
-    if (activeThemeFileSet.has(file)) continue
+    if (syncThemeFileSet.has(file)) continue
     rmSync(join(target, file), { force: true })
     console.log(`✓ removed stale ${target}/${file}`)
   }
-  for (const srcPath of activeThemePaths) {
+  for (const srcPath of syncThemePaths) {
     const file = srcPath.split(/[\\/]/).pop()
     copyFileSync(srcPath, join(target, file))
     console.log(`✓ ${srcPath} → ${target}/${file}`)

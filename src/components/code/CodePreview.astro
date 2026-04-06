@@ -2,12 +2,10 @@
 import { t, type Lang } from '../../i18n/utils'
 import {
   DEFAULT_PREVIEW_FILE,
-  DEFAULT_PREVIEW_FLAVOR,
-  DEFAULT_PREVIEW_THEME,
+  DEFAULT_PREVIEW_THEME_ID,
   getPreviewRootStyle,
-  previewFlavorTabs,
   previewTabs,
-  previewThemeStateByFlavor,
+  previewThemeStateById,
   previewThemeTabs,
   renderPreviewState,
 } from '../../lib/codePreview'
@@ -23,10 +21,10 @@ function escapeJsonForScript(value: unknown): string {
   return JSON.stringify(value).replace(/</g, '\\u003c')
 }
 
-const previewRootStyle = getPreviewRootStyle(DEFAULT_PREVIEW_FLAVOR, DEFAULT_PREVIEW_THEME)
-const previewThemeJson = escapeJsonForScript(previewThemeStateByFlavor)
-const initialPreviewHtml = await renderPreviewState(DEFAULT_PREVIEW_FILE, DEFAULT_PREVIEW_FLAVOR, DEFAULT_PREVIEW_THEME)
-const initialThemeLabel = previewThemeStateByFlavor[DEFAULT_PREVIEW_FLAVOR][DEFAULT_PREVIEW_THEME].label
+const previewRootStyle = getPreviewRootStyle(DEFAULT_PREVIEW_THEME_ID)
+const previewThemeJson = escapeJsonForScript(previewThemeStateById)
+const initialPreviewHtml = await renderPreviewState(DEFAULT_PREVIEW_FILE, DEFAULT_PREVIEW_THEME_ID)
+const initialThemeLabel = previewThemeStateById[DEFAULT_PREVIEW_THEME_ID].label
 const previewDataEndpoint = '/code-preview-data.json'
 ---
 
@@ -38,8 +36,7 @@ const previewDataEndpoint = '/code-preview-data.json'
       data-auto-carousel="true"
       data-preview-endpoint={previewDataEndpoint}
       data-default-file={DEFAULT_PREVIEW_FILE}
-      data-default-flavor={DEFAULT_PREVIEW_FLAVOR}
-      data-default-theme={DEFAULT_PREVIEW_THEME}
+      data-default-theme-id={DEFAULT_PREVIEW_THEME_ID}
       style={previewRootStyle}
     >
       <script type="application/json" data-preview-themes set:html={previewThemeJson}></script>
@@ -58,21 +55,9 @@ const previewDataEndpoint = '/code-preview-data.json'
             ))}
           </div>
           <div class="preview-controls mt-2.5 flex flex-wrap items-center gap-2 sm:gap-2.5">
-            <div class="flavor-switch inline-flex flex-wrap gap-1 rounded-full border p-1">
-              {previewFlavorTabs.map(({ key, label, description }) => (
-                <button
-                  type="button"
-                  data-flavor-tab={key}
-                  title={description}
-                  class={`flavor-tab ${key === DEFAULT_PREVIEW_FLAVOR ? 'is-active' : ''}`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-            <div class="theme-switch inline-flex gap-1 rounded-full border p-1">
+            <div class="theme-switch inline-flex flex-wrap gap-1 rounded-full border p-1">
               {previewThemeTabs.map(({ key, label }) => (
-                <button type="button" data-theme-tab={key} class={`theme-tab ${key === DEFAULT_PREVIEW_THEME ? 'is-active' : ''}`}>{label}</button>
+                <button type="button" data-theme-tab={key} class={`theme-tab ${key === DEFAULT_PREVIEW_THEME_ID ? 'is-active' : ''}`}>{label}</button>
               ))}
             </div>
           </div>
@@ -105,8 +90,7 @@ const previewDataEndpoint = '/code-preview-data.json'
           data-code-preview
           data-preview-endpoint={previewDataEndpoint}
           data-default-file={DEFAULT_PREVIEW_FILE}
-          data-default-flavor={DEFAULT_PREVIEW_FLAVOR}
-          data-default-theme={DEFAULT_PREVIEW_THEME}
+          data-default-theme-id={DEFAULT_PREVIEW_THEME_ID}
           style={previewRootStyle}
         >
           <script type="application/json" data-preview-themes set:html={previewThemeJson}></script>
@@ -124,21 +108,9 @@ const previewDataEndpoint = '/code-preview-data.json'
               ))}
             </div>
             <div class="preview-controls mt-2.5 flex flex-wrap items-center gap-2 sm:gap-2.5">
-              <div class="flavor-switch inline-flex flex-wrap gap-1 rounded-full border p-1">
-                {previewFlavorTabs.map(({ key, label, description }) => (
-                  <button
-                    type="button"
-                    data-flavor-tab={key}
-                    title={description}
-                    class={`flavor-tab ${key === DEFAULT_PREVIEW_FLAVOR ? 'is-active' : ''}`}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-              <div class="theme-switch inline-flex gap-1 rounded-full border p-1">
+              <div class="theme-switch inline-flex flex-wrap gap-1 rounded-full border p-1">
                 {previewThemeTabs.map(({ key, label }) => (
-                  <button type="button" data-theme-tab={key} class={`theme-tab ${key === DEFAULT_PREVIEW_THEME ? 'is-active' : ''}`}>{label}</button>
+                  <button type="button" data-theme-tab={key} class={`theme-tab ${key === DEFAULT_PREVIEW_THEME_ID ? 'is-active' : ''}`}>{label}</button>
                 ))}
               </div>
             </div>
@@ -510,7 +482,6 @@ const previewDataEndpoint = '/code-preview-data.json'
     root.dataset.previewReady = 'true'
 
     const fileTabs = root.querySelectorAll<HTMLElement>('[data-file-tab]')
-    const flavorTabs = root.querySelectorAll<HTMLElement>('[data-flavor-tab]')
     const themeTabs = root.querySelectorAll<HTMLElement>('[data-theme-tab]')
     const previewDisplay = root.querySelector<HTMLElement>('[data-preview-display]')
     const previewContent = root.querySelector<HTMLElement>('[data-preview-content]')
@@ -520,7 +491,7 @@ const previewDataEndpoint = '/code-preview-data.json'
 
     const themeStateMap = (() => {
       try {
-        return JSON.parse(themeScript?.textContent || '{}') as Record<string, Record<string, Record<string, string | boolean>>>
+        return JSON.parse(themeScript?.textContent || '{}') as Record<string, Record<string, string | boolean>>
       } catch {
         return {}
       }
@@ -528,16 +499,14 @@ const previewDataEndpoint = '/code-preview-data.json'
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const fileOrder = Array.from(fileTabs).map(tab => tab.dataset.fileTab).filter(Boolean) as string[]
-    const flavorOrder = Array.from(flavorTabs).map(tab => tab.dataset.flavorTab).filter(Boolean) as string[]
     const themeOrder = Array.from(themeTabs).map(tab => tab.dataset.themeTab).filter(Boolean) as string[]
 
     let currentFile = root.dataset.defaultFile || fileOrder[0] || 'ts'
-    let currentFlavor = root.dataset.defaultFlavor || flavorOrder[0] || 'hearth'
-    let currentTheme = root.dataset.defaultTheme || themeOrder[0] || 'dark'
-    let currentRenderKey = `${currentFile}:${currentFlavor}:${currentTheme}`
-    let renderedMap: Record<string, Record<string, Record<string, string>>> = {}
+    let currentThemeId = root.dataset.defaultThemeId || themeOrder[0] || ''
+    let currentRenderKey = `${currentFile}:${currentThemeId}`
+    let renderedMap: Record<string, Record<string, string>> = {}
     let hasFullPreviewData = false
-    let previewDataPromise: Promise<Record<string, Record<string, Record<string, string>>>> | null = null
+    let previewDataPromise: Promise<Record<string, Record<string, string>>> | null = null
     let lastInteractionAt = 0
     const warmupTimer = window.setTimeout(() => {
       void ensureRenderedMap()
@@ -550,11 +519,7 @@ const previewDataEndpoint = '/code-preview-data.json'
     const THEME_INTERVAL_MS = 17000
 
     if (previewContent?.innerHTML) {
-      renderedMap[currentFile] = {
-        [currentFlavor]: {
-          [currentTheme]: previewContent.innerHTML,
-        },
-      }
+      renderedMap[currentFile] = { [currentThemeId]: previewContent.innerHTML }
     }
 
     const markInteraction = () => {
@@ -571,7 +536,7 @@ const previewDataEndpoint = '/code-preview-data.json'
             if (!response.ok) {
               throw new Error(`HTTP ${response.status}`)
             }
-            const payload = await response.json() as { rendered?: Record<string, Record<string, Record<string, string>>> }
+            const payload = await response.json() as { rendered?: Record<string, Record<string, string>> }
             if (!payload?.rendered) {
               throw new Error('Missing rendered preview payload.')
             }
@@ -599,20 +564,19 @@ const previewDataEndpoint = '/code-preview-data.json'
 
     const renderActive = async (animate = true) => {
       const targetFile = currentFile
-      const targetFlavor = currentFlavor
-      const targetTheme = currentTheme
-      let nextHtml = renderedMap?.[targetFile]?.[targetFlavor]?.[targetTheme]
+      const targetThemeId = currentThemeId
+      let nextHtml = renderedMap?.[targetFile]?.[targetThemeId]
 
       if (!nextHtml) {
         await ensureRenderedMap()
-        nextHtml = renderedMap?.[targetFile]?.[targetFlavor]?.[targetTheme]
+        nextHtml = renderedMap?.[targetFile]?.[targetThemeId]
       }
 
-      if (!nextHtml || targetFile !== currentFile || targetFlavor !== currentFlavor || targetTheme !== currentTheme) {
+      if (!nextHtml || targetFile !== currentFile || targetThemeId !== currentThemeId) {
         return false
       }
 
-      const nextRenderKey = `${targetFile}:${targetFlavor}:${targetTheme}`
+      const nextRenderKey = `${targetFile}:${targetThemeId}`
       if (previewContent && currentRenderKey !== nextRenderKey) {
         previewContent.innerHTML = nextHtml
       }
@@ -621,8 +585,8 @@ const previewDataEndpoint = '/code-preview-data.json'
       return true
     }
 
-    const applyThemeUi = (flavorKey: string, themeKey: string) => {
-      const ui = themeStateMap?.[flavorKey]?.[themeKey]
+    const applyThemeUi = (themeId: string) => {
+      const ui = themeStateMap?.[themeId]
       if (!ui) return
       if (typeof ui.toolbarBg === 'string') root.style.setProperty('--preview-toolbar-bg', ui.toolbarBg)
       if (typeof ui.toolbarBorder === 'string') root.style.setProperty('--preview-toolbar-border', ui.toolbarBorder)
@@ -648,13 +612,7 @@ const previewDataEndpoint = '/code-preview-data.json'
 
     const syncThemeTabs = () => {
       themeTabs.forEach(tab => {
-        tab.classList.toggle('is-active', tab.dataset.themeTab === currentTheme)
-      })
-    }
-
-    const syncFlavorTabs = () => {
-      flavorTabs.forEach(tab => {
-        tab.classList.toggle('is-active', tab.dataset.flavorTab === currentFlavor)
+        tab.classList.toggle('is-active', tab.dataset.themeTab === currentThemeId)
       })
     }
 
@@ -664,33 +622,18 @@ const previewDataEndpoint = '/code-preview-data.json'
       })
     }
 
-    const setTheme = async (themeKey: string | null, animate = true) => {
-      if (!themeKey) return
-      const previousTheme = currentTheme
-      currentTheme = themeKey
-      applyThemeUi(currentFlavor, themeKey)
+    const setTheme = async (themeId: string | null, animate = true) => {
+      if (!themeId) return
+      const previousTheme = currentThemeId
+      currentThemeId = themeId
+      applyThemeUi(themeId)
       syncThemeTabs()
 
       const didRender = await renderActive(animate)
-      if (!didRender && currentTheme === themeKey) {
-        currentTheme = previousTheme
-        applyThemeUi(currentFlavor, previousTheme)
+      if (!didRender && currentThemeId === themeId) {
+        currentThemeId = previousTheme
+        applyThemeUi(previousTheme)
         syncThemeTabs()
-      }
-    }
-
-    const setFlavor = async (flavorKey: string | null, animate = true) => {
-      if (!flavorKey) return
-      const previousFlavor = currentFlavor
-      currentFlavor = flavorKey
-      applyThemeUi(flavorKey, currentTheme)
-      syncFlavorTabs()
-
-      const didRender = await renderActive(animate)
-      if (!didRender && currentFlavor === flavorKey) {
-        currentFlavor = previousFlavor
-        applyThemeUi(previousFlavor, currentTheme)
-        syncFlavorTabs()
       }
     }
 
@@ -707,24 +650,18 @@ const previewDataEndpoint = '/code-preview-data.json'
       }
     }
 
-    const applyPreset = async (flavorKey: string | null, themeKey: string | null, animate = true) => {
-      const nextFlavor = flavorKey || currentFlavor
-      const nextTheme = themeKey || currentTheme
-      const previousFlavor = currentFlavor
-      const previousTheme = currentTheme
+    const applyPreset = async (themeId: string | null, animate = true) => {
+      const nextTheme = themeId || currentThemeId
+      const previousTheme = currentThemeId
 
-      currentFlavor = nextFlavor
-      currentTheme = nextTheme
-      applyThemeUi(nextFlavor, nextTheme)
-      syncFlavorTabs()
+      currentThemeId = nextTheme
+      applyThemeUi(nextTheme)
       syncThemeTabs()
 
       const didRender = await renderActive(animate)
       if (!didRender) {
-        currentFlavor = previousFlavor
-        currentTheme = previousTheme
-        applyThemeUi(previousFlavor, previousTheme)
-        syncFlavorTabs()
+        currentThemeId = previousTheme
+        applyThemeUi(previousTheme)
         syncThemeTabs()
       }
     }
@@ -748,7 +685,7 @@ const previewDataEndpoint = '/code-preview-data.json'
 
       themeTimer = window.setInterval(() => {
         if (Date.now() - lastInteractionAt < INTERACTION_PAUSE_MS) return
-        const nextTheme = nextFrom(themeOrder, currentTheme)
+        const nextTheme = nextFrom(themeOrder, currentThemeId)
         void setTheme(nextTheme, true)
       }, THEME_INTERVAL_MS)
     }
@@ -757,13 +694,6 @@ const previewDataEndpoint = '/code-preview-data.json'
       tab.addEventListener('click', () => {
         markInteraction()
         void setFile(tab.dataset.fileTab ?? null, true)
-      })
-    })
-
-    flavorTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        markInteraction()
-        void setFlavor(tab.dataset.flavorTab ?? null, true)
       })
     })
 
@@ -778,16 +708,15 @@ const previewDataEndpoint = '/code-preview-data.json'
     root.addEventListener('focusin', markInteraction, { passive: true })
 
     const handleExternalPreset = (event: Event) => {
-      const detail = (event as CustomEvent<{ flavorId?: string; themeId?: string }>).detail || {}
+      const detail = (event as CustomEvent<{ themeId?: string }>).detail || {}
       markInteraction()
-      void applyPreset(detail.flavorId ?? null, detail.themeId ?? null, true)
+      void applyPreset(detail.themeId ?? null, true)
     }
 
     window.addEventListener('theme-fit-preview', handleExternalPreset as EventListener)
 
-    applyThemeUi(currentFlavor, currentTheme)
+    applyThemeUi(currentThemeId)
     syncFileTabs()
-    syncFlavorTabs()
     syncThemeTabs()
     setupAutoCarousel()
 

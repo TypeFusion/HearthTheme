@@ -2,7 +2,7 @@
 import { t, type Lang } from '../../i18n/utils'
 import CodePreview from '../code/CodePreview.astro'
 import { productData } from '../../data/product'
-import { climateOrder, getDefaultThemeSelection, themePaletteCatalog, type ThemePaletteTheme } from '../../lib/themeFit'
+import { getDefaultThemeSelection, themePaletteCatalog, type ThemePaletteTheme } from '../../lib/themeFit'
 
 interface Props {
   lang: Lang
@@ -36,60 +36,67 @@ const installUrl = '#get-started'
 const heroTitle = productData.product.wordmark.full
 const defaultSelection = getDefaultThemeSelection()
 
-const flavors = themePaletteCatalog.map((flavor) => ({
-  id: flavor.flavorId,
-  name: flavor.name,
-  summary: localize(lang, `fit.flavor.${flavor.flavorId}.summary`, flavor.summary),
-  isPublished: flavor.isPublished,
-  isDefault: flavor.isDefault,
-  isActive: flavor.isActive,
-  defaultClimateId: flavor.defaultClimateId,
-  themes: flavor.themes.map((theme) => ({
-    climateId: theme.climateId,
-    climateLabel: localize(lang, `fit.climate.${theme.climateId}.label`, theme.climateLabel),
-    climateSummary: localize(lang, `fit.climate.${theme.climateId}.summary`, theme.climateLabel),
-    label: theme.label,
-    surface: theme.surface,
-    foreground: theme.foreground,
-    accent: theme.accent,
-    swatches: theme.swatches,
-  })),
+const themes = themePaletteCatalog.map((theme) => ({
+  id: theme.themeId,
+  schemeId: theme.schemeId,
+  variantId: theme.variantId,
+  label: theme.label,
+  summary: localize(lang, `fit.theme.${theme.themeId}.summary`, theme.summary),
+  surface: theme.surface,
+  foreground: theme.foreground,
+  accent: theme.accent,
+  swatches: theme.swatches,
+  isDefault: theme.isDefault,
+  isPublished: true,
 }))
 
-const initialFlavor =
-  flavors.find((flavor) => flavor.id === defaultSelection.flavorId) ||
-  flavors.find((flavor) => flavor.isActive) ||
-  flavors[0]
+const flavors = productData.flavors
+  .filter((flavor) => flavor.isPublished)
+  .map((flavor) => {
+    const representativeTheme =
+      themes.find((theme) => theme.schemeId === flavor.id && theme.variantId === flavor.defaultVariant) ||
+      themes.find((theme) => theme.schemeId === flavor.id) ||
+      themes[0]
+
+    return {
+      id: flavor.id,
+      label: flavor.shortName,
+      summary: localize(lang, `fit.flavor.${flavor.id}.summary`, flavor.summary),
+      representativeThemeId: representativeTheme.id,
+      defaultVariantId: representativeTheme.variantId,
+    }
+  })
+
+const variants = Array.from(
+  new Map(
+    productData.extension.themeCatalog.map((theme) => [
+      theme.variantId,
+      {
+        id: theme.variantId,
+        label: localize(lang, `fit.climate.${theme.variantId}.label`, theme.climateLabel),
+        summary: localize(lang, `fit.climate.${theme.variantId}.summary`, theme.climateLabel),
+      },
+    ]),
+  ).values(),
+)
 
 const initialTheme =
-  initialFlavor.themes.find((theme) => theme.climateId === defaultSelection.climateId) ||
-  initialFlavor.themes[0]
-
-const climateMeta = climateOrder.map((climateId) => ({
-  id: climateId,
-  label: localize(lang, `fit.climate.${climateId}.label`, climateId),
-  theme: initialFlavor.themes.find((theme) => theme.climateId === climateId) || initialTheme,
-}))
+  themes.find((theme) => theme.id === defaultSelection.themeId) ||
+  themes.find((theme) => theme.isDefault) ||
+  themes[0]
 
 const pickerData = {
-  defaultSelection,
+  defaultSelection: {
+    ...defaultSelection,
+    flavorId: initialTheme.schemeId,
+    variantId: initialTheme.variantId,
+  },
   installUrl,
   colorSystemUrl: '#color-system',
+  themes,
   flavors,
-  climates: climateMeta.map((climate) => ({
-    id: climate.id,
-    label: climate.label,
-  })),
+  variants,
   copy: {
-    roleLabels: {
-      surface: t(lang, 'fit.role.surface'),
-      keyword: t(lang, 'fit.role.keyword'),
-      function: t(lang, 'fit.role.function'),
-      property: t(lang, 'fit.role.property'),
-      type: t(lang, 'fit.role.type'),
-    },
-    publishedLabel: t(lang, 'fit.result.published'),
-    previewLabel: t(lang, 'fit.result.preview'),
     installCta: t(lang, 'hero.quick.install'),
     previewCta: t(lang, 'hero.cta.system'),
   },
@@ -110,14 +117,12 @@ const pickerDataJson = escapeJsonForScript(pickerData)
         <div
           class="hero-picker"
           data-hero-picker
-          data-default-flavor={defaultSelection.flavorId}
-          data-default-climate={defaultSelection.climateId}
+          data-default-theme={defaultSelection.themeId}
         >
           <script type="application/json" data-hero-catalog set:html={pickerDataJson}></script>
 
           <div class="hero-picker-group">
             <div class="hero-picker-group-head">
-              <span class="hero-step">1</span>
               <div class="hero-picker-group-copy">
                 <strong>{t(lang, 'hero.quick.flavor')}</strong>
               </div>
@@ -125,22 +130,18 @@ const pickerDataJson = escapeJsonForScript(pickerData)
 
             <div class="hero-flavor-grid">
               {flavors.map((flavor) => {
-                const previewTheme =
-                  flavor.themes.find((theme) => theme.climateId === flavor.defaultClimateId) || flavor.themes[0]
+                const theme = themes.find((entry) => entry.id === flavor.representativeThemeId) || initialTheme
                 return (
                   <button
                     type="button"
-                    class={`hero-flavor-card ${flavor.id === initialFlavor.id ? 'is-active' : ''}`}
+                    class={`hero-flavor-card ${flavor.id === initialTheme.schemeId ? 'is-active' : ''}`}
                     data-hero-flavor
                     data-flavor-id={flavor.id}
-                    aria-pressed={flavor.id === initialFlavor.id ? 'true' : 'false'}
-                    style={paletteStyle(previewTheme)}
+                    aria-pressed={flavor.id === initialTheme.schemeId ? 'true' : 'false'}
+                    style={paletteStyle(theme)}
                   >
                     <div class="hero-flavor-top">
-                      <strong class="hero-flavor-name">{flavor.name}</strong>
-                      <span class="hero-release-pill">
-                        {flavor.isPublished ? t(lang, 'fit.result.published') : t(lang, 'fit.result.preview')}
-                      </span>
+                      <strong class="hero-flavor-name">{flavor.label}</strong>
                     </div>
                     <div class="hero-flavor-preview" aria-hidden="true">
                       <span class="hero-flavor-line hero-flavor-line--keyword"></span>
@@ -155,54 +156,56 @@ const pickerDataJson = escapeJsonForScript(pickerData)
 
           <div class="hero-picker-group">
             <div class="hero-picker-group-head">
-              <span class="hero-step">2</span>
               <div class="hero-picker-group-copy">
                 <strong>{t(lang, 'hero.quick.climate')}</strong>
               </div>
             </div>
 
             <div class="hero-climate-row">
-              {climateMeta.map((climate) => (
-                <button
-                  type="button"
-                  class={`hero-climate-pill ${climate.id === initialTheme.climateId ? 'is-active' : ''}`}
-                  data-hero-climate
-                  data-climate-id={climate.id}
-                  aria-pressed={climate.id === initialTheme.climateId ? 'true' : 'false'}
-                  style={paletteStyle(climate.theme)}
-                >
-                  <span class="hero-climate-preview" aria-hidden="true">
-                    <span class="hero-climate-preview-top"></span>
-                    <span class="hero-climate-preview-body">
-                      <span class="hero-climate-preview-line hero-climate-preview-line--soft"></span>
-                      <span class="hero-climate-preview-line hero-climate-preview-line--strong"></span>
-                    </span>
-                  </span>
-                  <span class="hero-climate-pill-label">{climate.label}</span>
-                </button>
-              ))}
+              {variants.map((variant) => {
+                const theme =
+                  themes.find((entry) => entry.schemeId === initialTheme.schemeId && entry.variantId === variant.id) ||
+                  initialTheme
+                return (
+                  <button
+                    type="button"
+                    class={`hero-climate-pill ${variant.id === initialTheme.variantId ? 'is-active' : ''}`}
+                    data-hero-variant
+                    data-variant-id={variant.id}
+                    data-climate-id={variant.id}
+                    aria-pressed={variant.id === initialTheme.variantId ? 'true' : 'false'}
+                    style={paletteStyle(theme)}
+                  >
+                    <div class="hero-climate-preview" aria-hidden="true">
+                      <span class="hero-climate-preview-top"></span>
+                      <div class="hero-climate-preview-body">
+                        <span class="hero-climate-preview-line hero-climate-preview-line--soft"></span>
+                        <span class="hero-climate-preview-line hero-climate-preview-line--strong"></span>
+                      </div>
+                    </div>
+                    <span class="hero-climate-pill-label">{variant.label}</span>
+                  </button>
+                )
+              })}
             </div>
           </div>
 
           <div class="hero-current" data-hero-current style={paletteStyle(initialTheme)}>
             <div class="hero-current-top">
               <h2 class="hero-current-title" data-hero-title>{initialTheme.label}</h2>
-              <span class="hero-release-pill" data-hero-release>
-                {initialFlavor.isPublished ? t(lang, 'fit.result.published') : t(lang, 'fit.result.preview')}
-              </span>
             </div>
 
             <div class="hero-current-copy">
-              <p class="hero-current-body" data-hero-body>{initialTheme.climateSummary}</p>
+              <p class="hero-current-body" data-hero-body>{initialTheme.summary}</p>
             </div>
 
             <div class="hero-current-actions">
               <a
-                href={initialFlavor.isPublished ? installUrl : '#color-system'}
+                href={initialTheme.isPublished ? installUrl : '#color-system'}
                 class="hearth-btn-primary hero-action"
                 data-hero-primary
               >
-                {initialFlavor.isPublished ? t(lang, 'hero.quick.install') : t(lang, 'hero.cta.system')}
+                {initialTheme.isPublished ? t(lang, 'hero.quick.install') : t(lang, 'hero.cta.system')}
               </a>
             </div>
           </div>
@@ -304,23 +307,7 @@ const pickerDataJson = escapeJsonForScript(pickerData)
   }
 
   .hero-picker-group-head {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .hero-step {
-    width: 1.8rem;
-    height: 1.8rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: color-mix(in srgb, var(--hearth-ember) 12%, var(--hearth-panel));
-    color: var(--hearth-ink-strong);
-    font-family: var(--font-ui);
-    font-size: 0.8rem;
-    font-weight: 700;
+    display: block;
   }
 
   .hero-picker-group-copy {
@@ -422,7 +409,6 @@ const pickerDataJson = escapeJsonForScript(pickerData)
   .hero-current-top {
     display: flex;
     align-items: start;
-    justify-content: space-between;
     gap: 0.7rem;
   }
 
@@ -435,22 +421,6 @@ const pickerDataJson = escapeJsonForScript(pickerData)
 
   .hero-flavor-name {
     font-size: 1rem;
-  }
-
-  .hero-release-pill {
-    display: inline-flex;
-    align-items: center;
-    min-height: 1.75rem;
-    padding: 0.28rem 0.66rem;
-    border-radius: 9999px;
-    background: color-mix(in srgb, var(--hearth-panel-soft) 88%, black 12%);
-    color: var(--hearth-ink-strong);
-    border: 1px solid color-mix(in srgb, var(--hearth-card-border) 96%, transparent);
-    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--hearth-paper-grid-soft) 48%, transparent);
-    font-family: var(--font-ui);
-    font-size: 0.72rem;
-    font-weight: 700;
-    line-height: 1;
   }
 
   .hero-flavor-preview {
@@ -763,14 +733,15 @@ const pickerDataJson = escapeJsonForScript(pickerData)
 
 <script>
   document.querySelectorAll('[data-hero-picker]').forEach((root) => {
-    type ClimateId = 'dark' | 'darkSoft' | 'light' | 'lightSoft'
     type SwatchId = 'surface' | 'keyword' | 'function' | 'property' | 'type'
 
     type ThemeData = {
-      climateId: ClimateId
-      climateLabel: string
-      climateSummary: string
+      id: string
+      schemeId: string
+      variantId: string
       label: string
+      summary: string
+      isPublished: boolean
       surface: string
       foreground: string
       accent: string
@@ -779,25 +750,30 @@ const pickerDataJson = escapeJsonForScript(pickerData)
 
     type FlavorData = {
       id: string
-      name: string
+      label: string
       summary: string
-      isPublished: boolean
-      defaultClimateId: ClimateId
-      themes: ThemeData[]
+      representativeThemeId: string
+      defaultVariantId: string
+    }
+
+    type VariantData = {
+      id: string
+      label: string
+      summary: string
     }
 
     type PickerData = {
       defaultSelection: {
+        themeId: string
         flavorId: string
-        climateId: ClimateId
+        variantId: string
       }
       installUrl: string
       colorSystemUrl: string
+      themes: ThemeData[]
       flavors: FlavorData[]
+      variants: VariantData[]
       copy: {
-        roleLabels: Record<SwatchId, string>
-        publishedLabel: string
-        previewLabel: string
         installCta: string
         previewCta: string
       }
@@ -807,22 +783,25 @@ const pickerDataJson = escapeJsonForScript(pickerData)
     if (!catalogEl?.textContent) return
 
     const data = JSON.parse(catalogEl.textContent) as PickerData
-    let selectedFlavorId = (root.getAttribute('data-default-flavor') || data.defaultSelection.flavorId || '').trim()
-    let selectedClimateId = (root.getAttribute('data-default-climate') || data.defaultSelection.climateId || 'dark') as ClimateId
+    let selectedThemeId = (root.getAttribute('data-default-theme') || data.defaultSelection.themeId || '').trim()
+    let selectedFlavorId = data.defaultSelection.flavorId || data.flavors[0]?.id || ''
+    let selectedVariantId = data.defaultSelection.variantId || data.variants[0]?.id || ''
 
     const flavorButtons = Array.from(root.querySelectorAll('[data-hero-flavor]'))
-    const climateButtons = Array.from(root.querySelectorAll('[data-hero-climate]'))
+    const variantButtons = Array.from(root.querySelectorAll('[data-hero-variant]'))
     const titleEl = root.querySelector('[data-hero-title]')
     const bodyEl = root.querySelector('[data-hero-body]')
-    const releaseEl = root.querySelector('[data-hero-release]')
     const currentEl = root.querySelector('[data-hero-current]')
     const primaryEl = root.querySelector('[data-hero-primary]')
 
+    const getTheme = (themeId: string) => data.themes.find((theme) => theme.id === themeId) || data.themes[0]
     const getFlavor = (flavorId: string) => data.flavors.find((flavor) => flavor.id === flavorId) || data.flavors[0]
-    const getTheme = (flavor: FlavorData, climateId: ClimateId) =>
-      flavor.themes.find((theme) => theme.climateId === climateId) ||
-      flavor.themes.find((theme) => theme.climateId === flavor.defaultClimateId) ||
-      flavor.themes[0]
+    const getVariant = (variantId: string) => data.variants.find((variant) => variant.id === variantId) || data.variants[0]
+    const getThemeByFlavorVariant = (flavorId: string, variantId: string) => (
+      data.themes.find((theme) => theme.schemeId === flavorId && theme.variantId === variantId)
+      || data.themes.find((theme) => theme.schemeId === flavorId)
+      || data.themes[0]
+    )
 
     const applyPaletteVars = (el: Element | null, theme: ThemeData) => {
       if (!(el instanceof HTMLElement)) return
@@ -836,52 +815,43 @@ const pickerDataJson = escapeJsonForScript(pickerData)
       el.style.setProperty('--pick-type', swatches.type || theme.foreground)
     }
 
-    const syncClimateButtons = (flavor: FlavorData) => {
-      climateButtons.forEach((button) => {
-        const climateId = button.getAttribute('data-climate-id')
-        if (!climateId) return
-        const theme = getTheme(flavor, climateId as ClimateId)
-        applyPaletteVars(button, theme)
-      })
-    }
-
     const sync = () => {
-      const flavor = getFlavor(selectedFlavorId)
-      const theme = getTheme(flavor, selectedClimateId)
-
-      selectedFlavorId = flavor.id
-      selectedClimateId = theme.climateId
+      const theme = getThemeByFlavorVariant(selectedFlavorId, selectedVariantId)
+      selectedThemeId = theme.id
+      selectedFlavorId = theme.schemeId
+      selectedVariantId = theme.variantId
 
       flavorButtons.forEach((button) => {
-        const isActive = button.getAttribute('data-flavor-id') === flavor.id
+        const flavorId = button.getAttribute('data-flavor-id') || ''
+        const flavor = getFlavor(flavorId)
+        const representativeTheme = getTheme(flavor.representativeThemeId)
+        const isActive = flavorId === selectedFlavorId
         button.classList.toggle('is-active', isActive)
         button.setAttribute('aria-pressed', isActive ? 'true' : 'false')
+        applyPaletteVars(button, representativeTheme)
       })
 
-      climateButtons.forEach((button) => {
-        const isActive = button.getAttribute('data-climate-id') === theme.climateId
+      variantButtons.forEach((button) => {
+        const variantId = button.getAttribute('data-variant-id') || ''
+        const variantTheme = getThemeByFlavorVariant(selectedFlavorId, variantId)
+        const isActive = variantId === selectedVariantId
         button.classList.toggle('is-active', isActive)
         button.setAttribute('aria-pressed', isActive ? 'true' : 'false')
+        applyPaletteVars(button, variantTheme)
       })
-
-      syncClimateButtons(flavor)
       applyPaletteVars(currentEl, theme)
 
       if (titleEl instanceof HTMLElement) titleEl.textContent = theme.label
-      if (bodyEl instanceof HTMLElement) bodyEl.textContent = theme.climateSummary
-      if (releaseEl instanceof HTMLElement) {
-        releaseEl.textContent = flavor.isPublished ? data.copy.publishedLabel : data.copy.previewLabel
-      }
+      if (bodyEl instanceof HTMLElement) bodyEl.textContent = theme.summary
       if (primaryEl instanceof HTMLAnchorElement) {
-        primaryEl.href = flavor.isPublished ? data.installUrl : data.colorSystemUrl
-        primaryEl.textContent = flavor.isPublished ? data.copy.installCta : data.copy.previewCta
+        primaryEl.href = theme.isPublished ? data.installUrl : data.colorSystemUrl
+        primaryEl.textContent = theme.isPublished ? data.copy.installCta : data.copy.previewCta
       }
 
       window.dispatchEvent(
         new CustomEvent('theme-fit-preview', {
           detail: {
-            flavorId: selectedFlavorId,
-            themeId: selectedClimateId,
+            themeId: selectedThemeId,
           },
         }),
       )
@@ -896,11 +866,11 @@ const pickerDataJson = escapeJsonForScript(pickerData)
       })
     })
 
-    climateButtons.forEach((button) => {
+    variantButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const climateId = button.getAttribute('data-climate-id')
-        if (!climateId) return
-        selectedClimateId = climateId as ClimateId
+        const variantId = button.getAttribute('data-variant-id')
+        if (!variantId) return
+        selectedVariantId = variantId
         sync()
       })
     })

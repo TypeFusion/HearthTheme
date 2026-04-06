@@ -15,8 +15,13 @@
     "cursor": {
       "description": "Primary live cursor and accent signal.",
       "source": {
-        "type": "role",
-        "id": "number"
+        "type": "literal",
+        "values": {
+          "dark": "#cb844a",
+          "darkSoft": "#bb845a",
+          "light": "#5a7481",
+          "lightSoft": "#68787c"
+        }
       }
     },
     "status": {
