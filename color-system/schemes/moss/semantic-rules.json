@@ -23,7 +23,7 @@
       "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
     },
     "property": {
-      "source": { "family": "chalk", "tone": "base" },
+      "source": { "family": "jade", "tone": "property" },
       "flags": { "nearForeground": true, "contrastCritical": true, "allowEscapeHatch": false }
     },
     "string": {

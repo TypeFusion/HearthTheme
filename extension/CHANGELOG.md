@@ -1,3 +1,9 @@
+## 2.0.1
+
+- Tightened Moss member-access separation so chained property reads like `this.xxx.yyy` are easier to parse at a glance, especially in Vue and JavaScript-heavy files.
+- Moved Moss `property` tokens onto their dedicated semantic lane instead of the near-foreground variable lane, improving distinction between carriers and member names across all four Moss variants.
+- Regenerated synced theme, website, extension, and preview release artifacts for the patch publish.
+
 ## 2.0.0
 
 - Formalized HearthCode around two flagship directions: Ember and Moss, each now presented as first-class choices across Dark, Dark Soft, Light, and Light Soft.

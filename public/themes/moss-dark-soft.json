@@ -215,7 +215,7 @@
                 "support.type.property-name"
             ],
             "settings": {
-                "foreground": "#c8b79d"
+                "foreground": "#8ea088"
             }
         },
         {
@@ -387,7 +387,7 @@
     "semanticTokenColors": {
         "variable": "#dfcdb0",
         "variable.readonly": "#c89254",
-        "property": "#c8b79d",
+        "property": "#8ea088",
         "property.readonly": "#c89254",
         "function": "#8da167",
         "method": "#7f9a84",
