@@ -11,7 +11,7 @@
       "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
     },
     "operator": {
-      "source": { "family": "brass", "tone": "base" },
+      "source": { "family": "chalk", "tone": "operator" },
       "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
     },
     "function": {
@@ -27,11 +27,11 @@
       "flags": { "nearForeground": true, "contrastCritical": true, "allowEscapeHatch": false }
     },
     "string": {
-      "source": { "family": "moss", "tone": "base" },
+      "source": { "family": "moss", "tone": "literal" },
       "flags": { "nearForeground": false, "contrastCritical": false, "allowEscapeHatch": false }
     },
     "number": {
-      "source": { "family": "terracotta", "tone": "base" },
+      "source": { "family": "terracotta", "tone": "numeric" },
       "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
     },
     "type": {
@@ -39,7 +39,7 @@
       "flags": { "nearForeground": false, "contrastCritical": true, "allowEscapeHatch": false }
     },
     "variable": {
-      "source": { "family": "chalk", "tone": "base" },
+      "source": { "family": "chalk", "tone": "variable" },
       "flags": { "nearForeground": true, "contrastCritical": false, "allowEscapeHatch": false }
     },
     "parameter": {

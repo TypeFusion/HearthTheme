@@ -20,7 +20,7 @@
           "dark": "#d2bea2",
           "darkSoft": "#cab89d",
           "light": "#403730",
-          "lightSoft": "#544b44"
+          "lightSoft": "#524940"
         }
       }
     },
@@ -76,13 +76,19 @@
       }
     },
     "amber": {
-      "description": "Burnished brass family for strings, measured highlights, and material warmth.",
+      "description": "Burnished brass family for strings, measured highlights, and dry straw warmth.",
       "tones": {
         "base": {
           "dark": "#bf9552",
           "darkSoft": "#b99760",
           "light": "#9d7124",
           "lightSoft": "#aa7e3e"
+        },
+        "straw": {
+          "dark": "#b6a25f",
+          "darkSoft": "#b7a86f",
+          "light": "#9d8843",
+          "lightSoft": "#b09f68"
         },
         "method": {
           "dark": "#ad7f40",
@@ -93,13 +99,19 @@
       }
     },
     "voltage": {
-      "description": "Dried plum and mulberry family for constants and small but important jump points.",
+      "description": "Dried plum, heather, and mulberry family for constants, callable accents, and small but important jump points.",
       "tones": {
         "base": {
           "dark": "#b07d93",
           "darkSoft": "#ad8799",
           "light": "#a26179",
           "lightSoft": "#af758d"
+        },
+        "method": {
+          "dark": "#9d8eb8",
+          "darkSoft": "#9a8bb2",
+          "light": "#725f8a",
+          "lightSoft": "#806c97"
         }
       }
     },
@@ -111,6 +123,12 @@
           "darkSoft": "#b08d60",
           "light": "#966a2d",
           "lightSoft": "#a37a42"
+        },
+        "patina": {
+          "dark": "#9e9a6a",
+          "darkSoft": "#99936e",
+          "light": "#746d46",
+          "lightSoft": "#7b724f"
         },
         "hot": {
           "dark": "#bf9759",
@@ -130,10 +148,10 @@
           "lightSoft": "#7c8b55"
         },
         "call": {
-          "dark": "#7fa083",
-          "darkSoft": "#7f9b84",
-          "light": "#608763",
-          "lightSoft": "#70906f"
+          "dark": "#6f96a1",
+          "darkSoft": "#6f929d",
+          "light": "#4f7480",
+          "lightSoft": "#5c7d88"
         },
         "property": {
           "dark": "#90a485",
@@ -163,6 +181,18 @@
           "darkSoft": "#b3916a",
           "light": "#7e6033",
           "lightSoft": "#8d6d46"
+        },
+        "variable": {
+          "dark": "#c3bfb9",
+          "darkSoft": "#bfbcb5",
+          "light": "#504c46",
+          "lightSoft": "#59544e"
+        },
+        "operator": {
+          "dark": "#a29d96",
+          "darkSoft": "#9e9991",
+          "light": "#756e64",
+          "lightSoft": "#6f685f"
         },
         "parameter": {
           "dark": "#c2b08f",

@@ -118,10 +118,10 @@
         "notifications.foreground": "#403730",
         "notifications.border": "#d8d0c3",
         "notificationLink.foreground": "#536f77",
-        "gitDecoration.addedResourceForeground": "#608763",
+        "gitDecoration.addedResourceForeground": "#4f7480",
         "gitDecoration.modifiedResourceForeground": "#9d7124",
         "gitDecoration.deletedResourceForeground": "#ba5146",
-        "gitDecoration.untrackedResourceForeground": "#608763",
+        "gitDecoration.untrackedResourceForeground": "#4f7480",
         "gitDecoration.ignoredResourceForeground": "#a9a196",
         "gitDecoration.conflictingResourceForeground": "#ba5146"
     },

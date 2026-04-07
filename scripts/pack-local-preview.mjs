@@ -126,13 +126,11 @@ function buildPackageJson({ productData, version, bannerColor }) {
 
 async function loadProductRuntime(targetEnv) {
   Object.assign(process.env, targetEnv)
-  const [{ buildProductMetadata }, colorSystemModule] = await Promise.all([
+  const [{ buildProductMetadata }] = await Promise.all([
     import('./product-metadata.mjs'),
-    import('./color-system.mjs'),
   ])
   return {
     productData: buildProductMetadata(),
-    themeMetaList: colorSystemModule.getThemeMetaList(),
   }
 }
 
@@ -151,7 +149,7 @@ function copyThemes(themeMetaList, buildThemesDir) {
 }
 
 function getBannerColor(themeMetaList) {
-  const darkTheme = themeMetaList.find((theme) => theme.id === 'dark') || themeMetaList[0]
+  const darkTheme = themeMetaList.find((theme) => theme.uiTheme === 'vs-dark') || themeMetaList[0]
   const themeJson = readJson(join(ROOT, normalizeThemePath(darkTheme.path)))
   return String(themeJson?.colors?.['editor.background'] || '#1f1a17').trim() || '#1f1a17'
 }
@@ -181,7 +179,8 @@ async function main() {
       label: `generate theme variants for ${schemeId}`,
     })
 
-    const { productData, themeMetaList } = await loadProductRuntime(targetEnv)
+    const { productData } = await loadProductRuntime(targetEnv)
+    const themeMetaList = productData.extension.themes
     const releaseMeta = readJson(join(ROOT, 'releases', 'color-language.json'))
     const version = buildLocalVersion(releaseMeta.version, schemeId, localIteration)
     const outPath = join(outDir, `${productData.extension.name}-${version}.vsix`)

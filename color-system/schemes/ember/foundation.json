@@ -71,6 +71,12 @@
           "darkSoft": "#977c62",
           "light": "#805b24",
           "lightSoft": "#8c612a"
+        },
+        "patina": {
+          "dark": "#a29663",
+          "darkSoft": "#8d8160",
+          "light": "#83784a",
+          "lightSoft": "#7c6747"
         }
       }
     },
@@ -115,17 +121,29 @@
           "darkSoft": "#9d9f7c",
           "light": "#6a7d58",
           "lightSoft": "#728160"
+        },
+        "literal": {
+          "dark": "#8eaa79",
+          "darkSoft": "#8aa776",
+          "light": "#6a7f58",
+          "lightSoft": "#6f8460"
         }
       }
     },
     "terracotta": {
-      "description": "Numeric warmth for constants and measured emphasis.",
+      "description": "Numeric family for constants, measured emphasis, and a controlled dusty-plum accent.",
       "tones": {
         "base": {
           "dark": "#cb844a",
           "darkSoft": "#bb845a",
           "light": "#ba7239",
           "lightSoft": "#b77949"
+        },
+        "numeric": {
+          "dark": "#aa7a94",
+          "darkSoft": "#a27790",
+          "light": "#8c5f75",
+          "lightSoft": "#95657d"
         },
         "presence": {
           "dark": "#864a22",
@@ -154,6 +172,18 @@
           "darkSoft": "#c5b9ad",
           "light": "#5b4430",
           "lightSoft": "#615143"
+        },
+        "variable": {
+          "dark": "#c3bfb9",
+          "darkSoft": "#bfbcb5",
+          "light": "#504c46",
+          "lightSoft": "#534f48"
+        },
+        "operator": {
+          "dark": "#a29d96",
+          "darkSoft": "#9e9991",
+          "light": "#756e64",
+          "lightSoft": "#6e6861"
         },
         "parameter": {
           "dark": "#c0b5a3",

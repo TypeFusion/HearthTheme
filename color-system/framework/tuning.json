@@ -413,12 +413,12 @@
       "dark": {
         "variable": {
           "minDeltaE": 3,
-          "maxDeltaE": 12,
+          "maxDeltaE": 14,
           "minBgContrast": 2.2
         },
         "parameter": {
           "minDeltaE": 3,
-          "maxDeltaE": 12,
+          "maxDeltaE": 14,
           "minBgContrast": 2.1
         },
         "operator": {
@@ -430,12 +430,12 @@
       "darkSoft": {
         "variable": {
           "minDeltaE": 3,
-          "maxDeltaE": 12,
+          "maxDeltaE": 14,
           "minBgContrast": 2.2
         },
         "parameter": {
           "minDeltaE": 3,
-          "maxDeltaE": 12,
+          "maxDeltaE": 14,
           "minBgContrast": 2.1
         },
         "operator": {
@@ -464,13 +464,13 @@
       },
       "lightSoft": {
         "variable": {
-          "minDeltaE": 5,
-          "maxDeltaE": 14,
+          "minDeltaE": 3,
+          "maxDeltaE": 16,
           "minBgContrast": 3.1
         },
         "parameter": {
-          "minDeltaE": 5,
-          "maxDeltaE": 14,
+          "minDeltaE": 3,
+          "maxDeltaE": 16,
           "minBgContrast": 2.9
         },
         "operator": {

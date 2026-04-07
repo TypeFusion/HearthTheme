@@ -1,12 +1,15 @@
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import {
+  COLOR_SYSTEM_SCHEME_ID,
   COLOR_SYSTEM_SEMANTIC_PATH,
   COLOR_SYSTEM_TUNING_PATH,
   getThemeMetaList,
+  loadColorSchemeManifest,
   loadColorSystemTuning,
   loadColorSystemVariants,
   loadRoleAdapters,
+  loadSemanticRules,
 } from './color-system.mjs'
 import {
   contrastRatio,
@@ -23,6 +26,8 @@ const VARIANT_SPEC = loadColorSystemVariants()
 const THEME_FILES = getThemeMetaList()
 const ROLE_ADAPTERS = loadRoleAdapters()
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
+const COLOR_SCHEME = loadColorSchemeManifest()
+const SEMANTIC_RULES = loadSemanticRules()
 
 const COLOR_SYSTEM = {
   darkSource: VARIANT_SPEC.baseSourcePath,
@@ -33,6 +38,7 @@ const COLOR_SYSTEM = {
   tuning: COLOR_SYSTEM_TUNING_PATH,
 }
 
+const REPORT_DIR = join('reports', 'theme-audit', COLOR_SYSTEM_SCHEME_ID)
 const REQUIRED_UI_KEYS = [
   'editor.background',
   'editor.foreground',
@@ -54,7 +60,12 @@ const REQUIRED_UI_KEYS = [
   'editorBracketHighlight.foreground1',
 ]
 
+const ROLE_ADAPTER_BY_ID = Object.fromEntries(ROLE_ADAPTERS.map((role) => [role.id, role]))
 const ROLE_SCOPES = Object.fromEntries(ROLE_ADAPTERS.map((role) => [role.id, role.scopes]))
+const HIGH_EXPOSURE_ROLES = ['keyword', 'operator', 'function', 'method', 'property', 'string', 'number', 'type', 'variable']
+const HUE_BUCKET_SPAN = 45
+const HUE_BUCKET_COUNT = 8
+const NEUTRAL_SATURATION_THRESHOLD = 0.08
 
 const FIXTURE_DIR = 'fixtures/theme-audit'
 const REQUIRED_FIXTURES = [
@@ -77,20 +88,32 @@ const PAIR_SEPARATION_GATES = COLOR_SYSTEM_TUNING.pairSeparationGates || {}
 const OPERATOR_COMMENT_PAIR_GATE = PAIR_SEPARATION_GATES.operatorCommentDeltaE || {}
 const METHOD_PROPERTY_PAIR_GATE = PAIR_SEPARATION_GATES.methodPropertyDeltaE || {}
 const ROLE_LANE_PROFILE = COLOR_SYSTEM_TUNING.roleLaneProfile || {}
+const ROLE_LANE_MODE = String(COLOR_SCHEME?.constraints?.roleLaneMode || 'warm-balanced').trim().toLowerCase()
 const ROLE_LANE_COOL_HUE_BAND_BY_VARIANT = ROLE_LANE_PROFILE.coolHueBandByVariant || {}
 const ROLE_LANE_WARM_HUE_BAND_BY_VARIANT = ROLE_LANE_PROFILE.warmHueBandByVariant || {}
 const ROLE_LANE_NEAR_FG_BY_VARIANT = ROLE_LANE_PROFILE.nearForegroundDeltaEByVariant || {}
 const ROLE_LANE_CRITICAL_PAIRS_BY_VARIANT = ROLE_LANE_PROFILE.criticalPairDeltaEByVariant || {}
 const ROLE_LANE_WARM_GAMUT_GUARD = ROLE_LANE_PROFILE.warmGamutGuard || null
+const ROLE_LANE_WARM_EXPOSURE_PROFILE = ROLE_LANE_PROFILE.warmExposureProfile || null
 const DARK_SOFT_PERCEPTION_GUARD = COLOR_SYSTEM_TUNING.darkSoftPerceptionGuard || null
 const INTERACTION_STATE_BUDGET = COLOR_SYSTEM_TUNING.interactionStateBudget || {}
-const INTERACTION_REPORT_JSON_PATH = 'reports/theme-audit-interaction.json'
-const INTERACTION_REPORT_MD_PATH = 'reports/theme-audit-interaction.md'
+const INTERACTION_REPORT_JSON_PATH = join(REPORT_DIR, 'interaction.json')
+const INTERACTION_REPORT_MD_PATH = join(REPORT_DIR, 'interaction.md')
+const RICHNESS_REPORT_JSON_PATH = join(REPORT_DIR, 'richness.json')
+const RICHNESS_REPORT_MD_PATH = join(REPORT_DIR, 'richness.md')
+const DOMINANT_SOURCE_FAMILY_SHARE_WARN = 0.4
+const DOMINANT_HUE_BAND_SHARE_WARN = 0.42
+const ADJACENT_HUE_BAND_SHARE_WARN = 0.58
 
 const issues = []
 const warnings = []
 const notes = []
 const interactionMetricsByVariant = {}
+const richnessMetrics = {
+  roleWeights: {},
+  sourceFamilyOccupancy: {},
+  hueConcentration: {},
+}
 
 function addIssue(message) {
   issues.push(message)
@@ -200,8 +223,19 @@ function getSemanticColor(theme, semanticKey) {
   return null
 }
 
+function getRoleColor(theme, roleId) {
+  const roleDef = ROLE_ADAPTER_BY_ID[roleId]
+  if (!roleDef) return null
+  return getTokenColor(theme, roleDef.scopes || []) ?? (roleDef.semanticKeys || []).map((key) => getSemanticColor(theme, key)).find(Boolean) ?? null
+}
+
 function fixed(n) {
   return Number(n).toFixed(1)
+}
+
+function formatPercent(value, digits = 1) {
+  if (value == null || Number.isNaN(value)) return 'n/a'
+  return `${(value * 100).toFixed(digits)}%`
 }
 
 function resolvePairGateThreshold(profile, variantId, fallback) {
@@ -240,6 +274,78 @@ function getInteractionBudget(variantId) {
     ...(INTERACTION_STATE_BUDGET.default || {}),
     ...(INTERACTION_STATE_BUDGET[variantId] || {}),
   }
+}
+
+function getHighExposureRoleWeights() {
+  const fallback = Object.fromEntries(HIGH_EXPOSURE_ROLES.map((roleId) => [roleId, 1 / HIGH_EXPOSURE_ROLES.length]))
+  if (!ROLE_LANE_WARM_EXPOSURE_PROFILE) return fallback
+
+  const rawWeights = {}
+  for (const roleId of HIGH_EXPOSURE_ROLES) {
+    let weightedFrequency = 0
+    for (const [languageId, mixWeight] of Object.entries(ROLE_LANE_WARM_EXPOSURE_PROFILE.languageMixWeights || {})) {
+      const frequency = ROLE_LANE_WARM_EXPOSURE_PROFILE.roleFrequencyByLanguage?.[languageId]?.[roleId]
+      if (typeof frequency === 'number') {
+        weightedFrequency += mixWeight * frequency
+      }
+    }
+    const saliency = typeof ROLE_LANE_WARM_EXPOSURE_PROFILE.saliencyByRole?.[roleId] === 'number'
+      ? ROLE_LANE_WARM_EXPOSURE_PROFILE.saliencyByRole[roleId]
+      : 1
+    rawWeights[roleId] = weightedFrequency * saliency
+  }
+
+  const total = Object.values(rawWeights).reduce((sum, value) => sum + value, 0)
+  if (!(total > 0)) return fallback
+
+  return Object.fromEntries(
+    Object.entries(rawWeights).map(([roleId, value]) => [roleId, value / total])
+  )
+}
+
+function getEffectiveSemanticSource(roleId, variantId) {
+  const rule = SEMANTIC_RULES.roles?.[roleId]
+  if (!rule) return null
+  return rule.byVariant?.[variantId]?.source || rule.source || null
+}
+
+function getHueBucketId(index) {
+  return `band-${index}`
+}
+
+function getHueBucketLabel(index) {
+  const start = index * HUE_BUCKET_SPAN
+  const end = start + HUE_BUCKET_SPAN - 1
+  return `${start}-${end}`
+}
+
+function getHueBucketForColor(hex) {
+  const hsl = rgbToHsl(hex)
+  if (!hsl) return null
+  if (hsl.s < NEUTRAL_SATURATION_THRESHOLD) {
+    return {
+      id: 'neutral',
+      label: 'neutral',
+      hsl,
+    }
+  }
+
+  const hue = ((hsl.h % 360) + 360) % 360
+  const index = Math.floor(hue / HUE_BUCKET_SPAN) % HUE_BUCKET_COUNT
+  return {
+    id: getHueBucketId(index),
+    label: getHueBucketLabel(index),
+    index,
+    hsl,
+  }
+}
+
+function summarizeWeightEntries(entryMap, shareKey = 'share') {
+  return Object.entries(entryMap || {})
+    .filter(([, detail]) => (detail?.weight ?? 0) > 0)
+    .sort(([, left], [, right]) => (right?.weight ?? 0) - (left?.weight ?? 0))
+    .map(([id, detail]) => `${id} ${formatPercent(detail?.[shareKey] ?? null)}`)
+    .join(', ')
 }
 
 function blendStateColorOverBackground(colorHex, bgHex) {
@@ -357,6 +463,7 @@ function buildInteractionReport() {
   return {
     schemaVersion: 1,
     generatedBy: 'scripts/theme-audit.mjs',
+    schemeId: COLOR_SYSTEM_SCHEME_ID,
     thresholds: INTERACTION_STATE_BUDGET,
     variants: interactionMetricsByVariant,
   }
@@ -367,6 +474,8 @@ function buildInteractionMarkdown(report) {
     '# Theme Audit Interaction State Report',
     '',
     'Auto-generated by `scripts/theme-audit.mjs`.',
+    '',
+    `Scheme: \`${report.schemeId}\``,
     '',
     '| Variant | Status | lineHighlight | list.hover | tab.hover | lineNo delta |',
     '| --- | --- | --- | --- | --- | --- |',
@@ -398,9 +507,267 @@ function buildInteractionMarkdown(report) {
 
 function writeInteractionReport() {
   const report = buildInteractionReport()
-  mkdirSync('reports', { recursive: true })
+  mkdirSync(REPORT_DIR, { recursive: true })
   writeFileSync(INTERACTION_REPORT_JSON_PATH, `${JSON.stringify(report, null, 2)}\n`)
   writeFileSync(INTERACTION_REPORT_MD_PATH, `${buildInteractionMarkdown(report)}\n`)
+}
+
+function buildSourceFamilyOccupancy(roleWeights) {
+  const sourceByVariant = {}
+  const groupedWarnings = new Map()
+
+  for (const themeMeta of THEME_FILES) {
+    const families = {}
+    let totalWeight = 0
+
+    for (const roleId of HIGH_EXPOSURE_ROLES) {
+      const roleWeight = roleWeights[roleId] ?? 0
+      if (!(roleWeight > 0)) continue
+
+      const source = getEffectiveSemanticSource(roleId, themeMeta.id)
+      const familyId = String(source?.family || 'unmapped').trim() || 'unmapped'
+      if (!families[familyId]) {
+        families[familyId] = {
+          weight: 0,
+          roles: [],
+        }
+      }
+      families[familyId].weight += roleWeight
+      families[familyId].roles.push(roleId)
+      totalWeight += roleWeight
+    }
+
+    for (const detail of Object.values(families)) {
+      detail.roles.sort()
+      detail.weight = roundMetric(detail.weight, 4)
+      detail.share = totalWeight > 0 ? roundMetric(detail.weight / totalWeight, 4) : null
+    }
+
+    const sortedFamilies = Object.entries(families)
+      .sort(([, left], [, right]) => (right?.weight ?? 0) - (left?.weight ?? 0) || left.roles.join(',').localeCompare(right.roles.join(',')))
+    const [dominantFamilyId, dominantFamilyDetail] = sortedFamilies[0] || [null, null]
+    const dominantShare = dominantFamilyDetail?.share ?? null
+
+    sourceByVariant[themeMeta.id] = {
+      totalWeight: roundMetric(totalWeight, 4),
+      dominantFamily: dominantFamilyId,
+      dominantShare,
+      families,
+    }
+
+    if (dominantFamilyId && dominantShare != null && dominantShare > DOMINANT_SOURCE_FAMILY_SHARE_WARN) {
+      const key = `${dominantFamilyId}:${dominantShare.toFixed(4)}`
+      if (!groupedWarnings.has(key)) {
+        groupedWarnings.set(key, {
+          family: dominantFamilyId,
+          share: dominantShare,
+          variants: [],
+        })
+      }
+      groupedWarnings.get(key).variants.push(themeMeta.id)
+    }
+  }
+
+  for (const violation of groupedWarnings.values()) {
+    addWarning(
+      `${COLOR_SYSTEM_SCHEME_ID}: richness dominant source family "${violation.family}" share ${formatPercent(violation.share)} exceeds ${formatPercent(DOMINANT_SOURCE_FAMILY_SHARE_WARN)} (${violation.variants.join(', ')})`
+    )
+  }
+
+  return sourceByVariant
+}
+
+function buildHueConcentration(themes, roleWeights) {
+  const byVariant = {}
+
+  for (const themeMeta of THEME_FILES) {
+    const theme = themes[themeMeta.id]
+    if (!theme) continue
+
+    const buckets = {
+      neutral: { label: 'neutral', weight: 0, roles: [] },
+    }
+    for (let index = 0; index < HUE_BUCKET_COUNT; index += 1) {
+      buckets[getHueBucketId(index)] = {
+        label: getHueBucketLabel(index),
+        weight: 0,
+        roles: [],
+      }
+    }
+
+    let totalWeight = 0
+    let chromaticWeight = 0
+
+    for (const roleId of HIGH_EXPOSURE_ROLES) {
+      const roleWeight = roleWeights[roleId] ?? 0
+      if (!(roleWeight > 0)) continue
+
+      const color = getRoleColor(theme, roleId)
+      if (!color) continue
+
+      const bucket = getHueBucketForColor(color)
+      if (!bucket) continue
+
+      const bucketDetail = buckets[bucket.id]
+      bucketDetail.weight += roleWeight
+      bucketDetail.roles.push(roleId)
+      totalWeight += roleWeight
+      if (bucket.id !== 'neutral') {
+        chromaticWeight += roleWeight
+      }
+    }
+
+    for (const detail of Object.values(buckets)) {
+      detail.roles.sort()
+      detail.weight = roundMetric(detail.weight, 4)
+      detail.share = totalWeight > 0 ? roundMetric(detail.weight / totalWeight, 4) : null
+      detail.shareChromatic = detail.label === 'neutral' || chromaticWeight <= 0
+        ? null
+        : roundMetric(detail.weight / chromaticWeight, 4)
+    }
+
+    let dominantBucketId = null
+    let dominantBucketShare = null
+    let dominantBucketWeight = -1
+    for (let index = 0; index < HUE_BUCKET_COUNT; index += 1) {
+      const bucketId = getHueBucketId(index)
+      const detail = buckets[bucketId]
+      if ((detail?.weight ?? 0) <= dominantBucketWeight) continue
+      dominantBucketId = bucketId
+      dominantBucketWeight = detail?.weight ?? 0
+      dominantBucketShare = detail?.shareChromatic ?? null
+    }
+
+    let adjacentPair = null
+    let adjacentPairShare = null
+    if (chromaticWeight > 0) {
+      let bestWeight = -1
+      for (let index = 0; index < HUE_BUCKET_COUNT; index += 1) {
+        const nextIndex = (index + 1) % HUE_BUCKET_COUNT
+        const left = buckets[getHueBucketId(index)]
+        const right = buckets[getHueBucketId(nextIndex)]
+        const pairWeight = (left?.weight ?? 0) + (right?.weight ?? 0)
+        if (pairWeight <= bestWeight) continue
+        bestWeight = pairWeight
+        adjacentPair = [left?.label ?? getHueBucketLabel(index), right?.label ?? getHueBucketLabel(nextIndex)]
+        adjacentPairShare = roundMetric(pairWeight / chromaticWeight, 4)
+      }
+    }
+
+    byVariant[themeMeta.id] = {
+      totalWeight: roundMetric(totalWeight, 4),
+      chromaticWeight: roundMetric(chromaticWeight, 4),
+      neutralShare: buckets.neutral.share,
+      dominantHueBand: dominantBucketId ? buckets[dominantBucketId]?.label ?? null : null,
+      dominantShare: dominantBucketShare,
+      topAdjacentHueBands: adjacentPair,
+      topAdjacentShare: adjacentPairShare,
+      buckets,
+    }
+
+    if (dominantBucketShare != null && dominantBucketShare > DOMINANT_HUE_BAND_SHARE_WARN) {
+      addWarning(
+        `${themeMeta.path}: richness dominant hue band "${byVariant[themeMeta.id].dominantHueBand}" share ${formatPercent(dominantBucketShare)} exceeds ${formatPercent(DOMINANT_HUE_BAND_SHARE_WARN)}`
+      )
+    }
+    if (adjacentPairShare != null && adjacentPairShare > ADJACENT_HUE_BAND_SHARE_WARN) {
+      addWarning(
+        `${themeMeta.path}: richness adjacent hue bands "${adjacentPair?.join(' + ')}" share ${formatPercent(adjacentPairShare)} exceeds ${formatPercent(ADJACENT_HUE_BAND_SHARE_WARN)}`
+      )
+    }
+  }
+
+  return byVariant
+}
+
+function buildRichnessReport() {
+  return {
+    schemaVersion: 1,
+    generatedBy: 'scripts/theme-audit.mjs',
+    schemeId: COLOR_SYSTEM_SCHEME_ID,
+    thresholds: {
+      neutralSaturationThreshold: NEUTRAL_SATURATION_THRESHOLD,
+      hueBucketSpan: HUE_BUCKET_SPAN,
+      dominantSourceFamilyShareMax: DOMINANT_SOURCE_FAMILY_SHARE_WARN,
+      dominantHueBandShareMax: DOMINANT_HUE_BAND_SHARE_WARN,
+      adjacentHueBandShareMax: ADJACENT_HUE_BAND_SHARE_WARN,
+    },
+    roleWeights: richnessMetrics.roleWeights,
+    sourceFamilyOccupancy: richnessMetrics.sourceFamilyOccupancy,
+    hueConcentration: richnessMetrics.hueConcentration,
+  }
+}
+
+function buildRichnessMarkdown(report) {
+  const lines = [
+    '# Theme Audit Richness Report',
+    '',
+    'Auto-generated by `scripts/theme-audit.mjs`.',
+    '',
+    `Scheme: \`${report.schemeId}\``,
+    '',
+    '## Role Weights',
+    '',
+    '| Role | Weight |',
+    '| --- | --- |',
+  ]
+
+  for (const roleId of HIGH_EXPOSURE_ROLES) {
+    lines.push(`| ${roleId} | ${formatPercent(report.roleWeights?.[roleId] ?? null)} |`)
+  }
+
+  lines.push('', '## Source-Family Occupancy', '', '| Variant | Dominant family | Dominant share | Families |', '| --- | --- | --- | --- |')
+  for (const themeMeta of THEME_FILES) {
+    const detail = report.sourceFamilyOccupancy?.[themeMeta.id] || null
+    lines.push(
+      `| ${themeMeta.id} | ${detail?.dominantFamily ?? 'n/a'} | ${formatPercent(detail?.dominantShare ?? null)} | ${summarizeWeightEntries(detail?.families || {}) || 'n/a'} |`
+    )
+  }
+
+  lines.push('', '## Hue Concentration', '', '| Variant | Dominant hue band | Dominant share | Adjacent top-two | Adjacent share | Neutral share |', '| --- | --- | --- | --- | --- | --- |')
+  for (const themeMeta of THEME_FILES) {
+    const detail = report.hueConcentration?.[themeMeta.id] || null
+    const adjacentLabel = Array.isArray(detail?.topAdjacentHueBands) ? detail.topAdjacentHueBands.join(' + ') : 'n/a'
+    lines.push(
+      `| ${themeMeta.id} | ${detail?.dominantHueBand ?? 'n/a'} | ${formatPercent(detail?.dominantShare ?? null)} | ${adjacentLabel} | ${formatPercent(detail?.topAdjacentShare ?? null)} | ${formatPercent(detail?.neutralShare ?? null)} |`
+    )
+  }
+
+  lines.push('', '## Bucket Breakdown', '')
+  for (const themeMeta of THEME_FILES) {
+    const detail = report.hueConcentration?.[themeMeta.id] || null
+    if (!detail) continue
+    lines.push(`### ${themeMeta.id}`, '')
+    lines.push('| Bucket | Share | Chromatic share | Roles |')
+    lines.push('| --- | --- | --- | --- |')
+    lines.push(`| neutral | ${formatPercent(detail.buckets?.neutral?.share ?? null)} | n/a | ${(detail.buckets?.neutral?.roles || []).join(', ') || 'none'} |`)
+    for (let index = 0; index < HUE_BUCKET_COUNT; index += 1) {
+      const bucketId = getHueBucketId(index)
+      const bucket = detail.buckets?.[bucketId]
+      lines.push(
+        `| ${bucket?.label ?? getHueBucketLabel(index)} | ${formatPercent(bucket?.share ?? null)} | ${formatPercent(bucket?.shareChromatic ?? null)} | ${(bucket?.roles || []).join(', ') || 'none'} |`
+      )
+    }
+    lines.push('')
+  }
+
+  return lines.join('\n')
+}
+
+function writeRichnessReport() {
+  const report = buildRichnessReport()
+  mkdirSync(REPORT_DIR, { recursive: true })
+  writeFileSync(RICHNESS_REPORT_JSON_PATH, `${JSON.stringify(report, null, 2)}\n`)
+  writeFileSync(RICHNESS_REPORT_MD_PATH, `${buildRichnessMarkdown(report)}\n`)
+}
+
+function validateRichnessDiagnostics(themes) {
+  const roleWeights = getHighExposureRoleWeights()
+  richnessMetrics.roleWeights = Object.fromEntries(
+    Object.entries(roleWeights).map(([roleId, weight]) => [roleId, roundMetric(weight, 4)])
+  )
+  richnessMetrics.sourceFamilyOccupancy = buildSourceFamilyOccupancy(roleWeights)
+  richnessMetrics.hueConcentration = buildHueConcentration(themes, roleWeights)
 }
 
 function validateFixtures() {
@@ -641,6 +1008,45 @@ function validateRoleLaneProfile(themeMeta, theme) {
   const fg = normalizeHex(theme.colors?.['editor.foreground'])
   if (!bg || !fg) return
 
+  if (ROLE_LANE_MODE === 'material-editorial') {
+    const nearForegroundRoleProfile = resolveVariantRoleProfile(ROLE_LANE_NEAR_FG_BY_VARIANT, themeMeta.id)
+    for (const [roleId, profile] of Object.entries(nearForegroundRoleProfile)) {
+      const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
+      if (!roleColor) continue
+
+      const fgDelta = deltaE(roleColor, fg)
+      if (fgDelta == null) continue
+      if (fgDelta < profile.minDeltaE || fgDelta > profile.maxDeltaE) {
+        addIssue(
+          `${themeMeta.path}: role lane near-foreground budget failed for "${roleId}" (deltaE ${fixed(fgDelta)} not in ${fixed(profile.minDeltaE)}-${fixed(profile.maxDeltaE)})`
+        )
+      }
+
+      const ratio = contrastRatio(roleColor, bg)
+      if (ratio == null || ratio < profile.minBgContrast) {
+        addIssue(`${themeMeta.path}: role lane near-foreground contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+      }
+    }
+
+    const criticalPairs = resolveCriticalPairThresholds(ROLE_LANE_CRITICAL_PAIRS_BY_VARIANT, themeMeta.id)
+    for (const [pairKey, threshold] of Object.entries(criticalPairs)) {
+      const pairMatch = String(pairKey).match(/^([a-zA-Z0-9_-]+)->([a-zA-Z0-9_-]+)$/)
+      if (!pairMatch) continue
+      const [, leftRole, rightRole] = pairMatch
+      const leftColor = getTokenColor(theme, ROLE_SCOPES[leftRole] || [])
+      const rightColor = getTokenColor(theme, ROLE_SCOPES[rightRole] || [])
+      if (!leftColor || !rightColor) continue
+      const dE = deltaE(leftColor, rightColor)
+      if (dE == null) continue
+      if (dE < threshold) {
+        addIssue(`${themeMeta.path}: role lane critical pair "${leftRole}" vs "${rightRole}" deltaE ${fixed(dE)} is below ${fixed(threshold)}`)
+      }
+    }
+
+    return
+  }
+
+  const useCoolBandOnly = ROLE_LANE_MODE === 'contrast-forward' || ROLE_LANE_MODE === 'earthy-groove'
   const coolHueRoleProfile = resolveVariantRoleProfile(ROLE_LANE_COOL_HUE_BAND_BY_VARIANT, themeMeta.id)
   for (const [roleId, profile] of Object.entries(coolHueRoleProfile)) {
     const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
@@ -658,34 +1064,36 @@ function validateRoleLaneProfile(themeMeta, theme) {
     }
   }
 
-  const warmHueRoleProfile = resolveVariantRoleProfile(ROLE_LANE_WARM_HUE_BAND_BY_VARIANT, themeMeta.id)
-  for (const [roleId, profile] of Object.entries(warmHueRoleProfile)) {
-    const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
-    if (!roleColor) continue
-
-    const hsl = rgbToHsl(roleColor)
-    if (!hsl) continue
-    if (!isHueInBand(hsl.h, profile.hueMin, profile.hueMax)) {
-      addIssue(`${themeMeta.path}: role lane warm hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
-    }
-
-    const ratio = contrastRatio(roleColor, bg)
-    if (ratio == null || ratio < profile.minBgContrast) {
-      addIssue(`${themeMeta.path}: role lane warm hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
-    }
-  }
-
-  if (ROLE_LANE_WARM_GAMUT_GUARD) {
-    for (const roleId of ROLE_LANE_WARM_GAMUT_GUARD.roles || []) {
+  if (!useCoolBandOnly) {
+    const warmHueRoleProfile = resolveVariantRoleProfile(ROLE_LANE_WARM_HUE_BAND_BY_VARIANT, themeMeta.id)
+    for (const [roleId, profile] of Object.entries(warmHueRoleProfile)) {
       const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
       if (!roleColor) continue
+
       const hsl = rgbToHsl(roleColor)
       if (!hsl) continue
-      if (hsl.s < (ROLE_LANE_WARM_GAMUT_GUARD.minSaturation ?? 0)) continue
-      if (isHueInBand(hsl.h, ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMin, ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMax)) {
-        addIssue(
-          `${themeMeta.path}: warm gamut guard failed for "${roleId}" (${fixed(hsl.h)} in ${fixed(ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMin)}-${fixed(ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMax)})`
-        )
+      if (!isHueInBand(hsl.h, profile.hueMin, profile.hueMax)) {
+        addIssue(`${themeMeta.path}: role lane warm hue band failed for "${roleId}" (${fixed(hsl.h)} not in ${fixed(profile.hueMin)}-${fixed(profile.hueMax)})`)
+      }
+
+      const ratio = contrastRatio(roleColor, bg)
+      if (ratio == null || ratio < profile.minBgContrast) {
+        addIssue(`${themeMeta.path}: role lane warm hue band contrast failed for "${roleId}" (${fixed(ratio ?? 0)} < ${fixed(profile.minBgContrast)})`)
+      }
+    }
+
+    if (ROLE_LANE_WARM_GAMUT_GUARD) {
+      for (const roleId of ROLE_LANE_WARM_GAMUT_GUARD.roles || []) {
+        const roleColor = getTokenColor(theme, ROLE_SCOPES[roleId] || [])
+        if (!roleColor) continue
+        const hsl = rgbToHsl(roleColor)
+        if (!hsl) continue
+        if (hsl.s < (ROLE_LANE_WARM_GAMUT_GUARD.minSaturation ?? 0)) continue
+        if (isHueInBand(hsl.h, ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMin, ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMax)) {
+          addIssue(
+            `${themeMeta.path}: warm gamut guard failed for "${roleId}" (${fixed(hsl.h)} in ${fixed(ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMin)}-${fixed(ROLE_LANE_WARM_GAMUT_GUARD.forbiddenHueMax)})`
+          )
+        }
       }
     }
   }
@@ -899,7 +1307,9 @@ function run() {
   validateSoftPairDrift(themes.darkSoft, themes.lightSoft)
   validateThemeParity(themes)
   validateFixtures()
+  validateRichnessDiagnostics(themes)
   writeInteractionReport()
+  writeRichnessReport()
 
   if (issues.length > 0) {
     console.log('[FAIL] Theme audit found blocking issues:')
@@ -918,6 +1328,7 @@ function run() {
     for (const note of notes) console.log(`  - ${note}`)
   }
   console.log(`\n[INFO] Interaction state report: ${INTERACTION_REPORT_JSON_PATH}`)
+  console.log(`[INFO] Richness report: ${RICHNESS_REPORT_JSON_PATH}`)
 
   process.exit(issues.length > 0 ? 1 : 0)
 }
