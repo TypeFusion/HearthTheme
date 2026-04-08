@@ -21,8 +21,8 @@
     "slug": "hearth-code/HearthTheme"
   },
   "supportedSchemeIds": [
-    "ember",
-    "moss"
+    "moss",
+    "ember"
   ],
   "flavorNames": {
     "ember": {
@@ -38,26 +38,12 @@
   },
   "featuredThemes": [
     {
-      "id": "ember-dark",
-      "schemeId": "ember",
-      "variantId": "dark",
-      "label": "HearthCode Ember Dark",
-      "summary": "Warm charcoal.",
-      "isDefault": true
-    },
-    {
-      "id": "ember-light",
-      "schemeId": "ember",
-      "variantId": "light",
-      "label": "HearthCode Ember Light",
-      "summary": "Warm paper."
-    },
-    {
       "id": "moss-dark",
       "schemeId": "moss",
       "variantId": "dark",
       "label": "HearthCode Moss Dark",
-      "summary": "Dry charcoal."
+      "summary": "Dry charcoal.",
+      "isDefault": true
     },
     {
       "id": "moss-light",
@@ -65,13 +51,27 @@
       "variantId": "light",
       "label": "HearthCode Moss Light",
       "summary": "Dry paper."
+    },
+    {
+      "id": "ember-dark",
+      "schemeId": "ember",
+      "variantId": "dark",
+      "label": "HearthCode Ember Dark",
+      "summary": "Warm charcoal."
+    },
+    {
+      "id": "ember-light",
+      "schemeId": "ember",
+      "variantId": "light",
+      "label": "HearthCode Ember Light",
+      "summary": "Warm paper."
     }
   ],
   "brandFlavorIds": [
-    "ember",
-    "moss"
+    "moss",
+    "ember"
   ],
-  "defaultSchemeId": "ember",
+  "defaultSchemeId": "moss",
   "channels": {
     "website": true,
     "vscode": true,

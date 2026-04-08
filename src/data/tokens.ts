@@ -186,7 +186,7 @@ export const tokens = {
     "number": "#8c5f75",
     "type": "#836f2d",
     "variable": "#504c46",
-    "operator": "#756f66",
+    "operator": "#534b41",
     "comment": "#85776b"
   },
   "lightSoft": {

@@ -1,3 +1,9 @@
+## 2.0.3
+
+- Polished `Moss Light` and `Moss Light Soft` around a clearer “paper + ink” model, deepening structure roles, sharpening green callable lanes, and improving shell layering without losing the dry editorial character.
+- Stabilized the light-variant lane logic so near-foreground operators and comments no longer collapse together while current-line, sidebar, tab, and panel depth stay readable in long sessions.
+- Promoted `HearthCode Moss Dark` to the product default across release metadata, website picker defaults, generated preview surfaces, and published theme ordering, then regenerated synced VS Code, website, and Obsidian artifacts for the new flagship baseline.
+
 ## 2.0.2
 
 - Rebalanced Ember and Moss semantic lanes to improve member-access readability, reduce muddy color overlap, and introduce a clearer green lane in Moss without losing its low-glare character.

@@ -458,8 +458,9 @@
         },
         "operator": {
           "minDeltaE": 12,
-          "maxDeltaE": 38,
-          "minBgContrast": 2.8
+          "maxDeltaE": 28,
+          "minBgContrast": 2.8,
+          "targetDeltaE": 17
         }
       },
       "lightSoft": {
@@ -475,9 +476,9 @@
         },
         "operator": {
           "minDeltaE": 12,
-          "maxDeltaE": 30,
+          "maxDeltaE": 24,
           "minBgContrast": 2.8,
-          "targetDeltaE": 20
+          "targetDeltaE": 16
         }
       }
     },

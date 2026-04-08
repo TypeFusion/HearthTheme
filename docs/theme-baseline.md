@@ -1,6 +1,6 @@
 # HearthCode Ember Baseline
 
-Updated: 2026-04-07
+Updated: 2026-04-08
 
 ## 1) Design Intent
 
@@ -20,7 +20,7 @@ Role parity is mandatory: syntax roles keep the same meaning across all variants
 | background | `#1f1a17` | `#261f1b` | `#ecdfcd` | `#e7dbc9` | Soot board base vs parchment desk-paper base |
 | foreground | `#d3c9b8` | `#cec5ba` | `#30261b` | `#46413a` | Chalk-walnut ink readability spine |
 | keyword | `#cc5a3f` | `#ac6553` | `#b04935` | `#a65c4b` | Brick-red control-flow anchors (accent only) |
-| operator | `#a29d96` | `#9d9891` | `#756f66` | `#6f6861` | Brass connective symbols with low noise |
+| operator | `#a29d96` | `#9d9891` | `#534b41` | `#6f6861` | Brass connective symbols with low noise |
 | function | `#6f94a4` | `#5a8aa0` | `#456a80` | `#58717b` | Denim-blue callable anchors for deliberate contrast |
 | method | `#ad6a45` | `#8f6854` | `#906147` | `#8d4b2a` | Leather-orange method calls for secondary action |
 | property | `#788058` | `#7c795f` | `#5b6249` | `#5d6646` | Muted olive member access cues |
@@ -67,7 +67,7 @@ Current snapshot from audit:
 - light soft comment: `3.0`
 - dark operator: `6.4`
 - dark soft operator: `5.7`
-- light operator: `3.8`
+- light operator: `6.5`
 - light soft operator: `4.0`
 
 ## 4) Token Coverage Standard

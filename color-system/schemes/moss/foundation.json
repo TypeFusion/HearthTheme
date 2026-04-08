@@ -8,8 +8,8 @@
         "base": {
           "dark": "#1b1d1a",
           "darkSoft": "#22211d",
-          "light": "#f1eadf",
-          "lightSoft": "#ece5da"
+          "light": "#eee6d8",
+          "lightSoft": "#e8e0d4"
         }
       }
     },
@@ -19,8 +19,8 @@
         "base": {
           "dark": "#d2bea2",
           "darkSoft": "#cab89d",
-          "light": "#403730",
-          "lightSoft": "#524940"
+          "light": "#392f29",
+          "lightSoft": "#494038"
         }
       }
     },
@@ -30,14 +30,14 @@
         "base": {
           "dark": "#191815",
           "darkSoft": "#1f1d1a",
-          "light": "#e5ddd1",
-          "lightSoft": "#dfd7cb"
+          "light": "#dbd1c3",
+          "lightSoft": "#d4cabd"
         },
         "lift": {
           "dark": "#282521",
           "darkSoft": "#2d2925",
-          "light": "#ddd4c8",
-          "lightSoft": "#d8cfc3"
+          "light": "#d0c6b8",
+          "lightSoft": "#c8beb1"
         }
       }
     },
@@ -47,8 +47,8 @@
         "base": {
           "dark": "#817566",
           "darkSoft": "#887c70",
-          "light": "#887d70",
-          "lightSoft": "#91867a"
+          "light": "#776c61",
+          "lightSoft": "#80756b"
         }
       }
     },
@@ -58,8 +58,8 @@
         "base": {
           "dark": "#cf6650",
           "darkSoft": "#c87766",
-          "light": "#ba5146",
-          "lightSoft": "#c56458"
+          "light": "#993e35",
+          "lightSoft": "#a94d43"
         },
         "tag": {
           "dark": "#ca824a",
@@ -87,8 +87,8 @@
         "straw": {
           "dark": "#d7ae49",
           "darkSoft": "#d2af5b",
-          "light": "#b48524",
-          "lightSoft": "#c09441"
+          "light": "#6d6211",
+          "lightSoft": "#7a7024"
         },
         "method": {
           "dark": "#ad7f40",
@@ -104,8 +104,8 @@
         "base": {
           "dark": "#b07d93",
           "darkSoft": "#ad8799",
-          "light": "#a26179",
-          "lightSoft": "#af758d"
+          "light": "#834c60",
+          "lightSoft": "#8c5d71"
         },
         "method": {
           "dark": "#9d8eb8",
@@ -144,14 +144,14 @@
         "base": {
           "dark": "#8ea560",
           "darkSoft": "#8fa16c",
-          "light": "#718246",
-          "lightSoft": "#7c8b55"
+          "light": "#526924",
+          "lightSoft": "#5c6d39"
         },
         "call": {
           "dark": "#72a8b9",
           "darkSoft": "#71a2b3",
-          "light": "#4f8797",
-          "lightSoft": "#5a92a0"
+          "light": "#347d8f",
+          "lightSoft": "#438793"
         },
         "method": {
           "dark": "#81b8ad",
@@ -162,14 +162,14 @@
         "property": {
           "dark": "#7f988f",
           "darkSoft": "#7e938d",
-          "light": "#60776f",
-          "lightSoft": "#697f77"
+          "light": "#425851",
+          "lightSoft": "#4a5f59"
         },
         "type": {
           "dark": "#4f8d98",
           "darkSoft": "#558792",
-          "light": "#456f79",
-          "lightSoft": "#527a84"
+          "light": "#2e5778",
+          "lightSoft": "#376681"
         }
       }
     },
@@ -179,32 +179,26 @@
         "base": {
           "dark": "#cfbea2",
           "darkSoft": "#c8b79c",
-          "light": "#4d433b",
-          "lightSoft": "#5c524a"
-        },
-        "operator": {
-          "dark": "#b69161",
-          "darkSoft": "#b3916a",
-          "light": "#7e6033",
-          "lightSoft": "#8d6d46"
+          "light": "#453c35",
+          "lightSoft": "#514740"
         },
         "variable": {
           "dark": "#c3bfb9",
           "darkSoft": "#bfbcb5",
-          "light": "#504c46",
-          "lightSoft": "#59544e"
+          "light": "#433e38",
+          "lightSoft": "#4d4842"
         },
         "operator": {
           "dark": "#979087",
           "darkSoft": "#938d85",
-          "light": "#6e665d",
-          "lightSoft": "#665e55"
+          "light": "#56514c",
+          "lightSoft": "#605b56"
         },
         "parameter": {
           "dark": "#c2b08f",
           "darkSoft": "#bda98b",
-          "light": "#5d524a",
-          "lightSoft": "#6b5f56"
+          "light": "#554a43",
+          "lightSoft": "#60544c"
         }
       }
     }

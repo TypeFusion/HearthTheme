@@ -35,6 +35,7 @@ const RAW_DARK_VARIANT = VARIANT_SPEC.variants.find((variant) => variant.id === 
 const ROLE_LANE_MODE = String(COLOR_SCHEME?.constraints?.roleLaneMode || 'warm-balanced').trim().toLowerCase()
 const SOFT_ROLE_CHROMA_STRENGTH_BY_VARIANT = COLOR_SCHEME?.constraints?.softRoleChromaStrengthByVariant || {}
 const LIGHT_CALIBRATION_STRENGTH_BY_VARIANT = COLOR_SCHEME?.constraints?.lightReadabilityCalibrationStrengthByVariant || {}
+const LIGHT_SEMANTIC_ANCHOR_STRENGTH_BY_VARIANT = COLOR_SCHEME?.constraints?.lightSemanticAnchorStrengthByVariant || {}
 
 function splitWordmark(name) {
   const full = String(name || '').trim()
@@ -481,6 +482,33 @@ function applySemanticPalette(theme, variantId, warnings) {
     for (const semanticKey of roleDef.semanticKeys || []) {
       setSemanticColor(theme, semanticKey, color)
     }
+  }
+}
+
+function applyLightSemanticAnchor(theme, variantId, warnings) {
+  if (!theme || !variantId) return
+  const rawStrength = LIGHT_SEMANTIC_ANCHOR_STRENGTH_BY_VARIANT?.[variantId]
+  const anchorStrength = rawStrength == null ? 0 : clamp(Number(rawStrength), 0, 1)
+  if (anchorStrength <= 0) return
+
+  for (const roleDef of READABILITY_ROLE_DEFS) {
+    const roleId = roleDef.id
+    if (!roleId) continue
+
+    const target = SEMANTIC_PALETTE[roleId]?.[variantId]
+    const current = getRoleColorFromTheme(theme, roleDef)
+    if (!target || !current) continue
+
+    const nextColor = anchorStrength >= 1 ? target : mixHex(current, target, anchorStrength)
+    if (!nextColor || normalizeHex(nextColor) === normalizeHex(current)) continue
+
+    applyRoleColorToTokenEntries(theme, roleDef.scopes || [], nextColor)
+    for (const semanticKey of roleDef.semanticKeys || []) {
+      setSemanticColor(theme, semanticKey, nextColor)
+    }
+
+    const drift = deltaE(current, nextColor) ?? 0
+    warnings.push(`telemetry: ${variantId}: light semantic anchor nudged ${roleId} by deltaE ${drift.toFixed(1)}`)
   }
 }
 
@@ -1648,6 +1676,9 @@ function buildVariantTheme(currentDark, baselineDark, baselineVariant, variantMe
   if (variantMeta.type === 'light' && variantMeta.id.toLowerCase().includes('soft')) {
     // Soft chroma budgets can reintroduce low-separation cases; run a final polarity guard pass.
     applyLightPolarityCompensation(generated, variantMeta.id, warnings)
+  }
+  if (variantMeta.type === 'light') {
+    applyLightSemanticAnchor(generated, variantMeta.id, warnings)
   }
   applyRoleLaneProfile(generated, variantMeta.id, warnings)
   applyInteractionStateBudget(generated, variantMeta.id, warnings)

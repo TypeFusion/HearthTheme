@@ -19,58 +19,58 @@
     "panelLift": {
       "dark": 0.09,
       "darkSoft": 0.075,
-      "light": 0.072,
-      "lightSoft": 0.078
+      "light": 0.118,
+      "lightSoft": 0.124
     },
     "gutterBand": {
       "dark": 0.36,
       "darkSoft": 0.39,
-      "light": 0.294,
-      "lightSoft": 0.326
+      "light": 0.36,
+      "lightSoft": 0.384
     },
     "borderBand": {
       "dark": 0.18,
       "darkSoft": 0.18,
-      "light": 0.148,
-      "lightSoft": 0.176
+      "light": 0.2,
+      "lightSoft": 0.225
     }
   },
   "interfaceMix": {
     "supportInk": {
       "dark": 0.22,
       "darkSoft": 0.24,
-      "light": 0.208,
-      "lightSoft": 0.234
+      "light": 0.12,
+      "lightSoft": 0.14
     },
     "mutedInk": {
       "dark": 0.42,
       "darkSoft": 0.45,
-      "light": 0.424,
-      "lightSoft": 0.486
+      "light": 0.3,
+      "lightSoft": 0.33
     },
     "subtleInk": {
       "dark": 0.26,
       "darkSoft": 0.3,
-      "light": 0.356,
-      "lightSoft": 0.392
+      "light": 0.24,
+      "lightSoft": 0.26
     },
     "shellRaised": {
       "dark": 0.23,
       "darkSoft": 0.22,
-      "light": 0.09,
-      "lightSoft": 0.102
+      "light": 0.145,
+      "lightSoft": 0.158
     },
     "navActiveFill": {
       "dark": 0.18,
       "darkSoft": 0.14,
-      "light": 0.076,
-      "lightSoft": 0.07
+      "light": 0.14,
+      "lightSoft": 0.128
     },
     "navInactiveFill": {
       "dark": 0.11,
       "darkSoft": 0.11,
-      "light": 0.036,
-      "lightSoft": 0.028
+      "light": 0.08,
+      "lightSoft": 0.072
     }
   },
   "guidanceMix": {

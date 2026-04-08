@@ -22,35 +22,16 @@ export const productData = {
     }
   },
   "defaultFlavor": {
-    "id": "ember",
-    "name": "Ember",
-    "headline": "Warm-neutral code color language",
-    "summary": "A warm ember-paper color philosophy for code interfaces."
+    "id": "moss",
+    "name": "Moss",
+    "headline": "Yellow-green paper color language",
+    "summary": "A dry yellow-green palette for code interfaces."
   },
   "featuredFlavorIds": [
-    "ember",
-    "moss"
+    "moss",
+    "ember"
   ],
   "flavors": [
-    {
-      "id": "ember",
-      "name": "Ember",
-      "shortName": "Ember",
-      "pickerName": "Ember",
-      "themePrefix": "HearthCode Ember",
-      "previewPrefix": "Ember",
-      "wordmark": {
-        "full": "Ember",
-        "primary": "Ember",
-        "secondary": ""
-      },
-      "headline": "Warm-neutral code color language",
-      "summary": "A warm ember-paper color philosophy for code interfaces.",
-      "defaultVariant": "dark",
-      "isDefault": true,
-      "isFeatured": true,
-      "isPublished": true
-    },
     {
       "id": "moss",
       "name": "Moss",
@@ -66,40 +47,31 @@ export const productData = {
       "headline": "Yellow-green paper color language",
       "summary": "A dry yellow-green palette for code interfaces.",
       "defaultVariant": "dark",
+      "isDefault": true,
+      "isFeatured": true,
+      "isPublished": true
+    },
+    {
+      "id": "ember",
+      "name": "Ember",
+      "shortName": "Ember",
+      "pickerName": "Ember",
+      "themePrefix": "HearthCode Ember",
+      "previewPrefix": "Ember",
+      "wordmark": {
+        "full": "Ember",
+        "primary": "Ember",
+        "secondary": ""
+      },
+      "headline": "Warm-neutral code color language",
+      "summary": "A warm ember-paper color philosophy for code interfaces.",
+      "defaultVariant": "dark",
       "isDefault": false,
       "isFeatured": true,
       "isPublished": true
     }
   ],
   "themes": [
-    {
-      "id": "ember-dark",
-      "schemeId": "ember",
-      "variantId": "dark",
-      "flavorLabel": "Ember",
-      "climateLabel": "Dark",
-      "label": "HearthCode Ember Dark",
-      "tabLabel": "Ember Dark",
-      "summary": "Warm charcoal.",
-      "uiTheme": "vs-dark",
-      "path": "./themes/ember-dark.json",
-      "isDefaultTheme": true,
-      "isDark": true
-    },
-    {
-      "id": "ember-light",
-      "schemeId": "ember",
-      "variantId": "light",
-      "flavorLabel": "Ember",
-      "climateLabel": "Light",
-      "label": "HearthCode Ember Light",
-      "tabLabel": "Ember Light",
-      "summary": "Warm paper.",
-      "uiTheme": "vs",
-      "path": "./themes/ember-light.json",
-      "isDefaultTheme": false,
-      "isDark": false
-    },
     {
       "id": "moss-dark",
       "schemeId": "moss",
@@ -111,7 +83,7 @@ export const productData = {
       "summary": "Dry charcoal.",
       "uiTheme": "vs-dark",
       "path": "./themes/moss-dark.json",
-      "isDefaultTheme": false,
+      "isDefaultTheme": true,
       "isDark": true
     },
     {
@@ -125,6 +97,34 @@ export const productData = {
       "summary": "Dry paper.",
       "uiTheme": "vs",
       "path": "./themes/moss-light.json",
+      "isDefaultTheme": false,
+      "isDark": false
+    },
+    {
+      "id": "ember-dark",
+      "schemeId": "ember",
+      "variantId": "dark",
+      "flavorLabel": "Ember",
+      "climateLabel": "Dark",
+      "label": "HearthCode Ember Dark",
+      "tabLabel": "Ember Dark",
+      "summary": "Warm charcoal.",
+      "uiTheme": "vs-dark",
+      "path": "./themes/ember-dark.json",
+      "isDefaultTheme": false,
+      "isDark": true
+    },
+    {
+      "id": "ember-light",
+      "schemeId": "ember",
+      "variantId": "light",
+      "flavorLabel": "Ember",
+      "climateLabel": "Light",
+      "label": "HearthCode Ember Light",
+      "tabLabel": "Ember Light",
+      "summary": "Warm paper.",
+      "uiTheme": "vs",
+      "path": "./themes/ember-light.json",
       "isDefaultTheme": false,
       "isDark": false
     }
@@ -145,64 +145,12 @@ export const productData = {
     }
   },
   "release": {
-    "version": "2.0.2"
+    "version": "2.0.3"
   },
   "extension": {
     "itemName": "hearth-code.hearth-theme",
-    "defaultPreviewThemeLabel": "HearthCode Ember Dark",
+    "defaultPreviewThemeLabel": "HearthCode Moss Dark",
     "themeCatalog": [
-      {
-        "variantId": "dark",
-        "schemeId": "ember",
-        "flavorLabel": "Ember",
-        "climateLabel": "Dark",
-        "label": "HearthCode Ember Dark",
-        "tabLabel": "Ember Dark",
-        "uiTheme": "vs-dark",
-        "path": "./themes/ember-dark.json",
-        "isFeaturedFlavor": true,
-        "isDefaultFlavor": true,
-        "isPublishedFlavor": true
-      },
-      {
-        "variantId": "darkSoft",
-        "schemeId": "ember",
-        "flavorLabel": "Ember",
-        "climateLabel": "Dark Soft",
-        "label": "HearthCode Ember Dark Soft",
-        "tabLabel": "Ember Dark Soft",
-        "uiTheme": "vs-dark",
-        "path": "./themes/ember-dark-soft.json",
-        "isFeaturedFlavor": true,
-        "isDefaultFlavor": true,
-        "isPublishedFlavor": true
-      },
-      {
-        "variantId": "light",
-        "schemeId": "ember",
-        "flavorLabel": "Ember",
-        "climateLabel": "Light",
-        "label": "HearthCode Ember Light",
-        "tabLabel": "Ember Light",
-        "uiTheme": "vs",
-        "path": "./themes/ember-light.json",
-        "isFeaturedFlavor": true,
-        "isDefaultFlavor": true,
-        "isPublishedFlavor": true
-      },
-      {
-        "variantId": "lightSoft",
-        "schemeId": "ember",
-        "flavorLabel": "Ember",
-        "climateLabel": "Light Soft",
-        "label": "HearthCode Ember Light Soft",
-        "tabLabel": "Ember Light Soft",
-        "uiTheme": "vs",
-        "path": "./themes/ember-light-soft.json",
-        "isFeaturedFlavor": true,
-        "isDefaultFlavor": true,
-        "isPublishedFlavor": true
-      },
       {
         "variantId": "dark",
         "schemeId": "moss",
@@ -213,7 +161,7 @@ export const productData = {
         "uiTheme": "vs-dark",
         "path": "./themes/moss-dark.json",
         "isFeaturedFlavor": true,
-        "isDefaultFlavor": false,
+        "isDefaultFlavor": true,
         "isPublishedFlavor": true
       },
       {
@@ -226,7 +174,7 @@ export const productData = {
         "uiTheme": "vs-dark",
         "path": "./themes/moss-dark-soft.json",
         "isFeaturedFlavor": true,
-        "isDefaultFlavor": false,
+        "isDefaultFlavor": true,
         "isPublishedFlavor": true
       },
       {
@@ -239,7 +187,7 @@ export const productData = {
         "uiTheme": "vs",
         "path": "./themes/moss-light.json",
         "isFeaturedFlavor": true,
-        "isDefaultFlavor": false,
+        "isDefaultFlavor": true,
         "isPublishedFlavor": true
       },
       {
@@ -251,6 +199,58 @@ export const productData = {
         "tabLabel": "Moss Light Soft",
         "uiTheme": "vs",
         "path": "./themes/moss-light-soft.json",
+        "isFeaturedFlavor": true,
+        "isDefaultFlavor": true,
+        "isPublishedFlavor": true
+      },
+      {
+        "variantId": "dark",
+        "schemeId": "ember",
+        "flavorLabel": "Ember",
+        "climateLabel": "Dark",
+        "label": "HearthCode Ember Dark",
+        "tabLabel": "Ember Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ember-dark.json",
+        "isFeaturedFlavor": true,
+        "isDefaultFlavor": false,
+        "isPublishedFlavor": true
+      },
+      {
+        "variantId": "darkSoft",
+        "schemeId": "ember",
+        "flavorLabel": "Ember",
+        "climateLabel": "Dark Soft",
+        "label": "HearthCode Ember Dark Soft",
+        "tabLabel": "Ember Dark Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ember-dark-soft.json",
+        "isFeaturedFlavor": true,
+        "isDefaultFlavor": false,
+        "isPublishedFlavor": true
+      },
+      {
+        "variantId": "light",
+        "schemeId": "ember",
+        "flavorLabel": "Ember",
+        "climateLabel": "Light",
+        "label": "HearthCode Ember Light",
+        "tabLabel": "Ember Light",
+        "uiTheme": "vs",
+        "path": "./themes/ember-light.json",
+        "isFeaturedFlavor": true,
+        "isDefaultFlavor": false,
+        "isPublishedFlavor": true
+      },
+      {
+        "variantId": "lightSoft",
+        "schemeId": "ember",
+        "flavorLabel": "Ember",
+        "climateLabel": "Light Soft",
+        "label": "HearthCode Ember Light Soft",
+        "tabLabel": "Ember Light Soft",
+        "uiTheme": "vs",
+        "path": "./themes/ember-light-soft.json",
         "isFeaturedFlavor": true,
         "isDefaultFlavor": false,
         "isPublishedFlavor": true
@@ -264,8 +264,8 @@ export const productData = {
     "sitePreviewUrl": "https://theme.hearthcode.dev",
     "vscodeDevUrl": "https://theme.hearthcode.dev",
     "vscodeDevFlavorUrls": {
-      "ember": "https://vscode.dev/theme/hearth-code.hearth-theme/HearthCode%20Ember%20Dark",
-      "moss": "https://vscode.dev/theme/hearth-code.hearth-theme/HearthCode%20Moss%20Dark"
+      "moss": "https://vscode.dev/theme/hearth-code.hearth-theme/HearthCode%20Moss%20Dark",
+      "ember": "https://vscode.dev/theme/hearth-code.hearth-theme/HearthCode%20Ember%20Dark"
     },
     "repositoryUrl": "https://github.com/hearth-code/HearthTheme",
     "issuesUrl": "https://github.com/hearth-code/HearthTheme/issues",
@@ -278,13 +278,13 @@ export const productData = {
     "philosophyUrl": "https://github.com/hearth-code/HearthTheme/tree/main/color-system/schemes",
     "schemeUrl": "https://github.com/hearth-code/HearthTheme/tree/main/color-system/schemes",
     "flavorLinks": {
-      "ember": {
-        "philosophyUrl": "https://github.com/hearth-code/HearthTheme/blob/main/color-system/schemes/ember/philosophy.md",
-        "schemeUrl": "https://github.com/hearth-code/HearthTheme/blob/main/color-system/schemes/ember/scheme.json"
-      },
       "moss": {
         "philosophyUrl": "https://github.com/hearth-code/HearthTheme/blob/main/color-system/schemes/moss/philosophy.md",
         "schemeUrl": "https://github.com/hearth-code/HearthTheme/blob/main/color-system/schemes/moss/scheme.json"
+      },
+      "ember": {
+        "philosophyUrl": "https://github.com/hearth-code/HearthTheme/blob/main/color-system/schemes/ember/philosophy.md",
+        "schemeUrl": "https://github.com/hearth-code/HearthTheme/blob/main/color-system/schemes/ember/scheme.json"
       }
     },
     "specUrl": "https://github.com/hearth-code/HearthTheme/blob/main/docs/color-language-spec.md",

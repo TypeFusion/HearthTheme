@@ -39,13 +39,17 @@
     "allowWarmPressure": "yes, but in disciplined rust, olive, old-gold, plum, and oxidized teal lanes rather than full-page sepia",
     "roleLaneMode": "material-editorial",
     "softRoleChromaStrengthByVariant": {
-      "light": 0.24,
+      "light": 0.1,
       "darkSoft": 0.5,
-      "lightSoft": 0.46
+      "lightSoft": 0.18
     },
     "lightReadabilityCalibrationStrengthByVariant": {
-      "light": 0.26,
-      "lightSoft": 0.34
+      "light": 0.46,
+      "lightSoft": 0.58
+    },
+    "lightSemanticAnchorStrengthByVariant": {
+      "light": 0.68,
+      "lightSoft": 0.8
     },
     "avoid": [
       "cold stone substrate",

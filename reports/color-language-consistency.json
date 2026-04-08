@@ -296,9 +296,9 @@
           "contrastToBackground": 5.67
         },
         "light": {
-          "textmate": "#756f66",
+          "textmate": "#534b41",
           "semantic": null,
-          "contrastToBackground": 3.79
+          "contrastToBackground": 6.53
         },
         "lightSoft": {
           "textmate": "#6f6861",
@@ -307,7 +307,7 @@
         }
       },
       "metrics": {
-        "defaultPairHueDrift": 1,
+        "defaultPairHueDrift": 1.7,
         "softPairHueDrift": 5,
         "semanticDeltaE": {
           "dark": null,
@@ -719,7 +719,7 @@
       "softPairHueDrift": 0.9
     },
     "operator": {
-      "defaultPairHueDrift": 1,
+      "defaultPairHueDrift": 1.7,
       "softPairHueDrift": 5
     },
     "function": {
@@ -762,7 +762,7 @@
       "color": "#456a80",
       "metrics": {
         "bgHueDistance": 167.5,
-        "minAnchorDeltaE": 23.7,
+        "minAnchorDeltaE": 27.1,
         "minGuardDeltaE": 36.4
       },
       "targets": {

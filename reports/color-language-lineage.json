@@ -19312,7 +19312,7 @@
       "variant": "light",
       "roleId": "operator",
       "familyId": "chalk",
-      "resolvedColor": "#756f66",
+      "resolvedColor": "#534b41",
       "chainRefs": [
         "foundation.families.chalk.tones.operator.light",
         "semantic-rules.roles.operator",
@@ -19330,7 +19330,7 @@
       "variant": "light",
       "roleId": "operator",
       "familyId": "chalk",
-      "resolvedColor": "#756f66",
+      "resolvedColor": "#534b41",
       "chainRefs": [
         "foundation.families.chalk.tones.operator.light",
         "semantic-rules.roles.operator",
@@ -19352,7 +19352,7 @@
       "variant": "light",
       "roleId": "operator",
       "familyId": "chalk",
-      "resolvedColor": "#756f66",
+      "resolvedColor": "#534b41",
       "chainRefs": [
         "foundation.families.chalk.tones.operator.light",
         "semantic-rules.roles.operator",
@@ -35404,7 +35404,7 @@
         "variant": "light",
         "roleId": "operator",
         "familyId": "chalk",
-        "resolvedColor": "#756f66",
+        "resolvedColor": "#534b41",
         "chainRefs": [
           "foundation.families.chalk.tones.operator.light",
           "semantic-rules.roles.operator",
@@ -35422,7 +35422,7 @@
         "variant": "light",
         "roleId": "operator",
         "familyId": "chalk",
-        "resolvedColor": "#756f66",
+        "resolvedColor": "#534b41",
         "chainRefs": [
           "foundation.families.chalk.tones.operator.light",
           "semantic-rules.roles.operator",
@@ -35444,7 +35444,7 @@
         "variant": "light",
         "roleId": "operator",
         "familyId": "chalk",
-        "resolvedColor": "#756f66",
+        "resolvedColor": "#534b41",
         "chainRefs": [
           "foundation.families.chalk.tones.operator.light",
           "semantic-rules.roles.operator",
