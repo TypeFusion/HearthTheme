@@ -7,20 +7,20 @@ on:
     paths:
       - 'themes/**'
       - 'color-system/**'
-      - 'src/**'
-      - 'public/**'
+      - 'packages/site/**'
+      - 'packages/extension/**'
       - 'docs/theme-baseline.md'
       - 'docs/color-language-spec.md'
       - 'docs/color-language-report.md'
       - 'reports/**'
       - 'releases/**'
-      - 'extension/package.json'
       - 'scripts/**'
       - '.husky/**'
       - 'fixtures/**'
+      - '.npmrc'
       - 'package.json'
       - 'pnpm-lock.yaml'
-      - 'astro.config.mjs'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/theme-audit.yml'
       - '.github/CODEOWNERS'
       - '.github/pull_request_template.md'
@@ -58,7 +58,7 @@ jobs:
         run: pnpm run audit:all
 
       - name: Build site
-        run: pnpm run build
+        run: pnpm --filter @hearth/site build
 
       - name: Generate color-language consistency report
         run: pnpm run generate:color-report
@@ -67,8 +67,8 @@ jobs:
         run: node scripts/generate-color-language-change-summary.mjs --base-ref "${{ github.base_ref }}" --head-sha "${{ github.sha }}"
 
       - name: Package extension smoke test
-        working-directory: extension
-        run: pnpm dlx @vscode/vsce package --no-dependencies --out hearth-theme-pr.vsix
+        working-directory: packages/extension
+        run: pnpm exec vsce package --no-dependencies --out hearth-theme-pr.vsix
 
       - name: Upload color-language report artifact
         uses: actions/upload-artifact@v6
@@ -88,6 +88,6 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: hearth-theme-pr-vsix
-          path: extension/hearth-theme-pr.vsix
+          path: packages/extension/hearth-theme-pr.vsix
           if-no-files-found: error
           retention-days: 7

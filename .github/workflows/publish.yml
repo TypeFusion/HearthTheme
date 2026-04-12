@@ -46,7 +46,7 @@ jobs:
         run: pnpm run audit:all
 
       - name: Build site
-        run: pnpm run build
+        run: pnpm --filter @hearth/site build
 
       - name: Generate color-language consistency report
         run: pnpm run generate:color-report
@@ -96,10 +96,6 @@ jobs:
       - name: Generate preview images
         run: pnpm run preview:generate
 
-      - name: Install extension dependencies
-        working-directory: extension
-        run: pnpm install --frozen-lockfile
-
       - name: Detect extension payload changes
         id: extension_diff
         uses: actions/github-script@v8
@@ -128,15 +124,15 @@ jobs:
               return
             }
 
-            const requiresPublishPrefixes = ['extension/themes/']
+            const requiresPublishPrefixes = ['packages/extension/themes/']
             const requiresPublishFiles = new Set([
-              'extension/package.json',
-              'extension/CHANGELOG.md',
-              'extension/icon.png',
+              'packages/extension/package.json',
+              'packages/extension/CHANGELOG.md',
+              'packages/extension/icon.png',
             ])
-            const docsOnlyPrefixes = ['extension/images/']
+            const docsOnlyPrefixes = ['packages/extension/images/']
             const docsOnlyFiles = new Set([
-              'extension/README.md',
+              'packages/extension/README.md',
             ])
 
             const requiresPublish = files.some((file) =>
@@ -162,7 +158,7 @@ jobs:
             const fs = require('node:fs')
             const path = require('node:path')
 
-            const pkgPath = path.join(process.env.GITHUB_WORKSPACE, 'extension', 'package.json')
+            const pkgPath = path.join(process.env.GITHUB_WORKSPACE, 'packages', 'extension', 'package.json')
             const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
             const publisher = pkg.publisher
             const extensionName = pkg.name
@@ -231,7 +227,7 @@ jobs:
       - name: Skip publish (docs/image-only changes with existing version)
         if: ${{ env.VSCE_PAT != '' && steps.extension_diff.outputs.docs_only == 'true' && steps.marketplace.outputs.should_publish != 'true' }}
         run: |
-          echo "Only README/images changed under extension."
+          echo "Only README/images changed under packages/extension."
           echo "Marketplace publish is skipped because this version already exists."
 
       - name: Skip publish (no VSCE token)
@@ -244,11 +240,11 @@ jobs:
 
       - name: Publish to VS Marketplace
         if: ${{ env.VSCE_PAT != '' && steps.marketplace.outputs.should_publish == 'true' }}
-        working-directory: extension
+        working-directory: packages/extension
         run: >
-          pnpm vsce publish --no-dependencies --skip-duplicate
-          --baseContentUrl "https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/extension"
-          --baseImagesUrl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/extension"
+          pnpm exec vsce publish --no-dependencies --skip-duplicate
+          --baseContentUrl "https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/packages/extension"
+          --baseImagesUrl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/packages/extension"
 
   publish-openvsx:
     runs-on: ubuntu-latest
@@ -278,10 +274,6 @@ jobs:
       - name: Generate preview images
         run: pnpm run preview:generate
 
-      - name: Install extension dependencies
-        working-directory: extension
-        run: pnpm install --frozen-lockfile
-
       - name: Detect extension payload changes
         id: extension_diff
         uses: actions/github-script@v8
@@ -310,15 +302,15 @@ jobs:
               return
             }
 
-            const requiresPublishPrefixes = ['extension/themes/']
+            const requiresPublishPrefixes = ['packages/extension/themes/']
             const requiresPublishFiles = new Set([
-              'extension/package.json',
-              'extension/CHANGELOG.md',
-              'extension/icon.png',
+              'packages/extension/package.json',
+              'packages/extension/CHANGELOG.md',
+              'packages/extension/icon.png',
             ])
-            const docsOnlyPrefixes = ['extension/images/']
+            const docsOnlyPrefixes = ['packages/extension/images/']
             const docsOnlyFiles = new Set([
-              'extension/README.md',
+              'packages/extension/README.md',
             ])
 
             const requiresPublish = files.some((file) =>
@@ -344,7 +336,7 @@ jobs:
             const fs = require('node:fs')
             const path = require('node:path')
 
-            const pkgPath = path.join(process.env.GITHUB_WORKSPACE, 'extension', 'package.json')
+            const pkgPath = path.join(process.env.GITHUB_WORKSPACE, 'packages', 'extension', 'package.json')
             const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
             const publisher = pkg.publisher
             const extensionName = pkg.name
@@ -395,7 +387,7 @@ jobs:
       - name: Skip publish (docs/image-only changes with existing version)
         if: ${{ env.OVSX_PAT != '' && steps.extension_diff.outputs.docs_only == 'true' && steps.openvsx.outputs.should_publish != 'true' }}
         run: |
-          echo "Only README/images changed under extension."
+          echo "Only README/images changed under packages/extension."
           echo "Open VSX publish is skipped because this version already exists."
 
       - name: Skip publish (no Open VSX token)
@@ -408,7 +400,7 @@ jobs:
 
       - name: Ensure Open VSX namespace (first publish bootstrap)
         if: ${{ env.OVSX_PAT != '' && steps.openvsx.outputs.should_publish == 'true' }}
-        working-directory: extension
+        working-directory: packages/extension
         run: |
           NAMESPACE=$(node -e "const p=require('./package.json'); process.stdout.write(p.publisher)")
           set +e
@@ -431,11 +423,11 @@ jobs:
 
       - name: Publish to Open VSX
         if: ${{ env.OVSX_PAT != '' && steps.openvsx.outputs.should_publish == 'true' }}
-        working-directory: extension
+        working-directory: packages/extension
         run: >
           pnpm dlx ovsx publish --no-dependencies --skip-duplicate
-          --baseContentUrl "https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/extension"
-          --baseImagesUrl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/extension"
+          --baseContentUrl "https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/packages/extension"
+          --baseImagesUrl "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/packages/extension"
           -p "${OVSX_PAT}"
 
   release-github:
@@ -492,8 +484,8 @@ jobs:
 
             const changed =
               files.includes('releases/color-language.json') ||
-              files.includes('extension/package.json') ||
-              files.includes('extension/CHANGELOG.md')
+              files.includes('packages/extension/package.json') ||
+              files.includes('packages/extension/CHANGELOG.md')
             core.setOutput('changed', changed ? 'true' : 'false')
 
       - name: Create GitHub release from extension changelog
@@ -519,7 +511,7 @@ jobs:
               if (error.status !== 404) throw error
             }
 
-            const changelogPath = path.join(process.env.GITHUB_WORKSPACE, 'extension', 'CHANGELOG.md')
+            const changelogPath = path.join(process.env.GITHUB_WORKSPACE, 'packages', 'extension', 'CHANGELOG.md')
             const changelog = fs.readFileSync(changelogPath, 'utf8')
             const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
             const sectionRe = new RegExp(`^##\\s+${escape(version)}\\s*\\n([\\s\\S]*?)(?=\\n##\\s+\\d+\\.\\d+\\.\\d+|$)`, 'm')

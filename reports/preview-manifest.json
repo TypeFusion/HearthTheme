@@ -10,8 +10,8 @@
   "contrastImage": {
     "inputSha256": "612be9baecdbd1e89afac58768edf6109ecc9b2acdc1b2f74dde66d1c35e8b01",
     "outputs": [
-      "extension/images/preview-contrast-v2.png",
-      "public/previews/preview-contrast-v2.png"
+      "packages/extension/images/preview-contrast-v2.png",
+      "packages/site/public/previews/preview-contrast-v2.png"
     ]
   }
 }

@@ -31,6 +31,7 @@ packages/extension/*.vsix
 # runtime-generated release comparison artifacts
 reports/color-language-version-summary.json
 reports/color-language-version-summary.md
+reports/theme-audit/
 reports/theme-audit-interaction.json
 reports/theme-audit-interaction.md
 
