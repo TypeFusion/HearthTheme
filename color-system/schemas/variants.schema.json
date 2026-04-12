@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hearthcode.dev/schemas/color-system/variants.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "baseSourcePath",
+    "baseTemplatePath",
+    "variants"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "baseSourcePath": {
+      "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+    },
+    "baseTemplatePath": {
+      "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "type",
+          "mode"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/nonEmptyString"
+          },
+          "fileSlug": {
+            "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/nonEmptyString"
+          },
+          "climateLabel": {
+            "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/nonEmptyString"
+          },
+          "name": {
+            "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/nonEmptyString"
+          },
+          "type": {
+            "enum": [
+              "dark",
+              "light"
+            ]
+          },
+          "mode": {
+            "enum": [
+              "source",
+              "derived"
+            ]
+          },
+          "templatePath": {
+            "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+          },
+          "outputPath": {
+            "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+          },
+          "outputPathTemplate": {
+            "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "source"
+                }
+              }
+            },
+            "then": {
+              "anyOf": [
+                {
+                  "required": [
+                    "outputPath"
+                  ]
+                },
+                {
+                  "required": [
+                    "outputPathTemplate"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "derived"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "templatePath"
+              ],
+              "anyOf": [
+                {
+                  "required": [
+                    "outputPath"
+                  ]
+                },
+                {
+                  "required": [
+                    "outputPathTemplate"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

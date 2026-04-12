@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hearthcode.dev/schemas/color-system/semantic.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generated",
+    "generatedFrom",
+    "roles"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "generated": {
+      "const": true
+    },
+    "generatedFrom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activeScheme",
+        "scheme",
+        "philosophy",
+        "taxonomy",
+        "foundation",
+        "surfaceRules",
+        "terminalRules",
+        "interfaceRules",
+        "interactionRules",
+        "feedbackRules",
+        "semanticRules",
+        "variantKnobs",
+        "variantProfiles",
+        "variants",
+        "adapters",
+        "calibration"
+      ],
+      "properties": {
+        "activeScheme": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "scheme": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "philosophy": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "taxonomy": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "foundation": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "surfaceRules": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "terminalRules": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "interfaceRules": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "interactionRules": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "feedbackRules": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "semanticRules": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "variantKnobs": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "variantProfiles": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "variants": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "adapters": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        },
+        "calibration": {
+          "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/pathString"
+        }
+      }
+    },
+    "roles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "https://hearthcode.dev/schemas/color-system/common.schema.json#/definitions/roleColorSet"
+      }
+    }
+  }
+}

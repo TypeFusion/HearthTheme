@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://hearthcode.dev/schemas/color-system/common.schema.json",
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nullableString": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pathString": {
+      "$ref": "#/definitions/nonEmptyString"
+    },
+    "hex6": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "numberArray": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/nonEmptyString"
+      },
+      "minItems": 1
+    },
+    "platformContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "webToken",
+        "obsidianVar",
+        "vscodeColor",
+        "includeInReport"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "webToken": {
+          "$ref": "#/definitions/nullableString"
+        },
+        "obsidianVar": {
+          "$ref": "#/definitions/nullableString"
+        },
+        "vscodeColor": {
+          "$ref": "#/definitions/nullableString"
+        },
+        "includeInReport": {
+          "type": "boolean"
+        }
+      }
+    },
+    "roleColorSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dark",
+        "darkSoft",
+        "light",
+        "lightSoft"
+      ],
+      "properties": {
+        "dark": {
+          "$ref": "#/definitions/hex6"
+        },
+        "darkSoft": {
+          "$ref": "#/definitions/hex6"
+        },
+        "light": {
+          "$ref": "#/definitions/hex6"
+        },
+        "lightSoft": {
+          "$ref": "#/definitions/hex6"
+        }
+      }
+    }
+  }
+}

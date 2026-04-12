@@ -22,6 +22,7 @@
     "check:sync": "node scripts/check-sync-clean.mjs",
     "check:schemes": "node scripts/check-schemes.mjs",
     "check:preview": "node scripts/check-preview-clean.mjs",
+    "validate:schemas": "node scripts/validate-color-system.mjs",
     "audit:generated-origin": "node scripts/generated-origin-audit.mjs",
     "audit:theme": "node scripts/theme-audit.mjs",
     "audit:source-layer": "node scripts/audit-source-layer.mjs",
@@ -49,6 +50,7 @@
     "pack:obsidian:snippets": "node scripts/pack-obsidian-snippets.mjs"
   },
   "devDependencies": {
+    "ajv": "^8.18.0",
     "husky": "^9.1.7",
     "sharp": "^0.34.4"
   }
