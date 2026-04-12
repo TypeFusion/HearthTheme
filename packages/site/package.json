@@ -1,0 +1,21 @@
+{
+  "name": "@hearth/site",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "pnpm --dir ../.. run sync && astro dev",
+    "build": "pnpm --dir ../.. run sync && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.1",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.5",
+    "shiki": "^4.0.2",
+    "tailwindcss": "^4.2.1"
+  }
+}

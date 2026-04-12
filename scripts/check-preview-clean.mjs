@@ -1,11 +1,12 @@
 import { execSync } from 'node:child_process'
+import { EXTENSION_IMAGES_DIR, REPORT_PREVIEW_MANIFEST_PATH, SITE_PREVIEWS_DIR } from './paths.mjs'
 
 const PREVIEW_IMAGE_PATHS = [
-  'extension/images',
-  'public/previews',
+  EXTENSION_IMAGES_DIR,
+  SITE_PREVIEWS_DIR,
 ]
 const PREVIEW_MANIFEST_PATHS = [
-  'reports/preview-manifest.json',
+  REPORT_PREVIEW_MANIFEST_PATH,
 ]
 
 function run(command, options = {}) {

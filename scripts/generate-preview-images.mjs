@@ -3,12 +3,18 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node
 import { dirname, join } from "node:path";
 import sharp from "sharp";
 import { getThemeMetaListForSchemeId, loadColorProductManifest, loadColorProductPreviewConfig, loadColorSchemeManifestById, loadRoleAdapters } from "./color-system.mjs";
+import {
+  EXTENSION_IMAGES_DIR,
+  REPORT_PREVIEW_MANIFEST_PATH,
+  SITE_PREVIEWS_DIR,
+  relocateWorkspacePath,
+} from "./paths.mjs";
 
 const WIDTH = 1600;
 const HEIGHT = 900;
-const OUTPUT_DIR = join("extension", "images");
-const WEBSITE_OUTPUT_DIR = join("public", "previews");
-const MANIFEST_PATH = join("reports", "preview-manifest.json");
+const OUTPUT_DIR = EXTENSION_IMAGES_DIR;
+const WEBSITE_OUTPUT_DIR = SITE_PREVIEWS_DIR;
+const MANIFEST_PATH = REPORT_PREVIEW_MANIFEST_PATH;
 const PREVIEW_RENDERER = "promo-color-board-v8";
 
 const PRODUCT = loadColorProductManifest();
@@ -914,7 +920,7 @@ async function run() {
         themes: themes.map((meta) => ({
           id: meta.id,
           name: meta.name,
-          file: toPosixPath(meta.file),
+          file: toPosixPath(relocateWorkspacePath(meta.file)),
           theme: meta.theme,
         })),
         product: {
@@ -931,7 +937,7 @@ async function run() {
           name: meta.name,
           shortName: meta.shortName,
           summary: meta.summary,
-          file: toPosixPath(meta.file),
+          file: toPosixPath(relocateWorkspacePath(meta.file)),
           theme: meta.theme,
         })),
         preview: PREVIEW,

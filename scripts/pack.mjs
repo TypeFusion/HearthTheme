@@ -1,5 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { chdir } from "node:process";
+import { EXTENSION_PACKAGE_DIR } from "./paths.mjs";
 
 function run(command, args) {
   const result = spawnSync(command, args, {
@@ -22,7 +23,7 @@ console.log("🖼️ Generating preview images...");
 }
 
 console.log("📦 Packaging extension...");
-chdir("extension");
+chdir(EXTENSION_PACKAGE_DIR);
 
 const packCandidates = [
   ["pnpm", ["dlx", "@vscode/vsce", "package", "--no-dependencies"]],

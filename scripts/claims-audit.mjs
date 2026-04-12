@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { DOCS_THEME_BASELINE_PATH, SITE_COMPONENTS_DIR, SITE_I18N_DIR, repoPath } from "./paths.mjs";
 
 const issues = [];
 
@@ -38,8 +39,8 @@ function assertHasMatch(path, pattern, message) {
 }
 
 function validateAlgorithmClaims() {
-	const baselineDocs = "src/components/ui/BaselineDocs.astro";
-	const baselineDocFile = "docs/theme-baseline.md";
+	const baselineDocs = repoPath(SITE_COMPONENTS_DIR, "ui", "BaselineDocs.astro");
+	const baselineDocFile = DOCS_THEME_BASELINE_PATH;
 
 	assertNoMatch(
 		baselineDocs,
@@ -69,8 +70,8 @@ function validateAlgorithmClaims() {
 }
 
 function validateRoleNarrativeClaims() {
-	const baselineDocs = "src/components/ui/BaselineDocs.astro";
-	const baselineDocFile = "docs/theme-baseline.md";
+	const baselineDocs = repoPath(SITE_COMPONENTS_DIR, "ui", "BaselineDocs.astro");
+	const baselineDocFile = DOCS_THEME_BASELINE_PATH;
 
 	assertNoMatch(
 		baselineDocs,
@@ -85,7 +86,11 @@ function validateRoleNarrativeClaims() {
 }
 
 function validateHomepageRoleNarrativeClaims() {
-	const localeFiles = ["src/i18n/en.json", "src/i18n/zh.json", "src/i18n/ja.json"];
+	const localeFiles = [
+		repoPath(SITE_I18N_DIR, "en.json"),
+		repoPath(SITE_I18N_DIR, "zh.json"),
+		repoPath(SITE_I18N_DIR, "ja.json"),
+	];
 
 	for (const localeFile of localeFiles) {
 		assertNoMatch(
@@ -151,7 +156,7 @@ function validateVariantCountClaims() {
 }
 
 function validateDocsHygiene() {
-	const baselineDocFile = "docs/theme-baseline.md";
+	const baselineDocFile = DOCS_THEME_BASELINE_PATH;
 	assertNoMatch(
 		baselineDocFile,
 		/`npm run\s+/,
@@ -160,7 +165,7 @@ function validateDocsHygiene() {
 	assertNoMatch(
 		baselineDocFile,
 		/^- \d{4}-\d{2}-\d{2}\s+`v\d+\.\d+\.\d+`/m,
-		"remove static historical release bullets; source history from extension/CHANGELOG.md.",
+		"remove static historical release bullets; source history from packages/extension/CHANGELOG.md.",
 	);
 }
 

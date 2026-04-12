@@ -191,12 +191,12 @@ Tracked paths:
 
 - `color-system/semantic.json`
 - `themes/*.json`
-- `public/themes/*.json`
-- `extension/themes/*.json`
+- `packages/site/public/themes/*.json`
+- `packages/extension/themes/*.json`
 - `obsidian/themes/*.css`
 - `obsidian/app-theme/*`
-- `src/data/tokens.ts`
-- `src/styles/theme-vars.css`
+- `packages/site/src/data/tokens.ts`
+- `packages/site/src/styles/theme-vars.css`
 - `docs/theme-baseline.md`
 - `docs/color-language-report.md`
 - `docs/color-language-contract-checklist.md`

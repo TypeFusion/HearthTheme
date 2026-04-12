@@ -6475,7 +6475,7 @@
   "artifactEntries": [
     {
       "id": "web-surface:canvas:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.bg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6526,7 +6526,7 @@
     },
     {
       "id": "web-surface:ink:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.fg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6577,7 +6577,7 @@
     },
     {
       "id": "web-surface:panel:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.lineBg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6640,7 +6640,7 @@
     },
     {
       "id": "web-surface:gutter:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.lineNo",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6682,7 +6682,7 @@
     },
     {
       "id": "web-surface:sidebar:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.sidebar",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6733,7 +6733,7 @@
     },
     {
       "id": "web-surface:border:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.border",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6796,7 +6796,7 @@
     },
     {
       "id": "web-surface:canvas:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.bg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6847,7 +6847,7 @@
     },
     {
       "id": "web-surface:ink:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.fg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6898,7 +6898,7 @@
     },
     {
       "id": "web-surface:panel:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.lineBg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -6961,7 +6961,7 @@
     },
     {
       "id": "web-surface:gutter:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.lineNo",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7003,7 +7003,7 @@
     },
     {
       "id": "web-surface:sidebar:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.sidebar",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7054,7 +7054,7 @@
     },
     {
       "id": "web-surface:border:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.border",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7117,7 +7117,7 @@
     },
     {
       "id": "web-surface:canvas:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.bg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7168,7 +7168,7 @@
     },
     {
       "id": "web-surface:ink:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.fg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7219,7 +7219,7 @@
     },
     {
       "id": "web-surface:panel:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.lineBg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7284,7 +7284,7 @@
     },
     {
       "id": "web-surface:gutter:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.lineNo",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7326,7 +7326,7 @@
     },
     {
       "id": "web-surface:sidebar:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.sidebar",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7377,7 +7377,7 @@
     },
     {
       "id": "web-surface:border:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.border",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7440,7 +7440,7 @@
     },
     {
       "id": "web-surface:canvas:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.bg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7491,7 +7491,7 @@
     },
     {
       "id": "web-surface:ink:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.fg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7542,7 +7542,7 @@
     },
     {
       "id": "web-surface:panel:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.lineBg",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7607,7 +7607,7 @@
     },
     {
       "id": "web-surface:gutter:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.lineNo",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7649,7 +7649,7 @@
     },
     {
       "id": "web-surface:sidebar:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.sidebar",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7700,7 +7700,7 @@
     },
     {
       "id": "web-surface:border:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.border",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7763,7 +7763,7 @@
     },
     {
       "id": "web-interaction:selection:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.selection",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7820,7 +7820,7 @@
     },
     {
       "id": "web-interaction:cursor:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.cursor",
       "artifactType": "webToken",
       "adapter": "web",
@@ -7871,7 +7871,7 @@
     },
     {
       "id": "web-interaction:status:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.status",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8040,7 +8040,7 @@
     },
     {
       "id": "web-interaction:selection:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.selection",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8097,7 +8097,7 @@
     },
     {
       "id": "web-interaction:cursor:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.cursor",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8148,7 +8148,7 @@
     },
     {
       "id": "web-interaction:status:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.status",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8317,7 +8317,7 @@
     },
     {
       "id": "web-interaction:selection:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.selection",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8374,7 +8374,7 @@
     },
     {
       "id": "web-interaction:cursor:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.cursor",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8425,7 +8425,7 @@
     },
     {
       "id": "web-interaction:status:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.status",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8595,7 +8595,7 @@
     },
     {
       "id": "web-interaction:selection:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.selection",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8652,7 +8652,7 @@
     },
     {
       "id": "web-interaction:cursor:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.cursor",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8703,7 +8703,7 @@
     },
     {
       "id": "web-interaction:status:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.status",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8872,7 +8872,7 @@
     },
     {
       "id": "web-interface:shellInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.shellInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8926,7 +8926,7 @@
     },
     {
       "id": "web-interface:supportInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.shellSupport",
       "artifactType": "webToken",
       "adapter": "web",
@@ -8992,7 +8992,7 @@
     },
     {
       "id": "web-interface:mutedInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.shellMuted",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9058,7 +9058,7 @@
     },
     {
       "id": "web-interface:subtleInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.shellSubtle",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9130,7 +9130,7 @@
     },
     {
       "id": "web-interface:onAccentInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.onAccent",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9184,7 +9184,7 @@
     },
     {
       "id": "web-interface:shellRaised:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.shellRaised",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9250,7 +9250,7 @@
     },
     {
       "id": "web-interface:navActiveFill:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.navActiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9316,7 +9316,7 @@
     },
     {
       "id": "web-interface:navInactiveFill:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.navInactiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9382,7 +9382,7 @@
     },
     {
       "id": "web-interface:shellBand:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.shellBand",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9436,7 +9436,7 @@
     },
     {
       "id": "web-interface:accentHoverFill:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.accentHover",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9490,7 +9490,7 @@
     },
     {
       "id": "web-interface:onStatusInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.onStatus",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9544,7 +9544,7 @@
     },
     {
       "id": "web-interface:navActiveInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.navActiveInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9598,7 +9598,7 @@
     },
     {
       "id": "web-interface:shellInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.shellInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9652,7 +9652,7 @@
     },
     {
       "id": "web-interface:supportInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.shellSupport",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9718,7 +9718,7 @@
     },
     {
       "id": "web-interface:mutedInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.shellMuted",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9784,7 +9784,7 @@
     },
     {
       "id": "web-interface:subtleInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.shellSubtle",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9856,7 +9856,7 @@
     },
     {
       "id": "web-interface:onAccentInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.onAccent",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9910,7 +9910,7 @@
     },
     {
       "id": "web-interface:shellRaised:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.shellRaised",
       "artifactType": "webToken",
       "adapter": "web",
@@ -9976,7 +9976,7 @@
     },
     {
       "id": "web-interface:navActiveFill:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.navActiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10042,7 +10042,7 @@
     },
     {
       "id": "web-interface:navInactiveFill:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.navInactiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10108,7 +10108,7 @@
     },
     {
       "id": "web-interface:shellBand:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.shellBand",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10162,7 +10162,7 @@
     },
     {
       "id": "web-interface:accentHoverFill:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.accentHover",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10216,7 +10216,7 @@
     },
     {
       "id": "web-interface:onStatusInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.onStatus",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10270,7 +10270,7 @@
     },
     {
       "id": "web-interface:navActiveInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.navActiveInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10324,7 +10324,7 @@
     },
     {
       "id": "web-interface:shellInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.shellInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10378,7 +10378,7 @@
     },
     {
       "id": "web-interface:supportInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.shellSupport",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10444,7 +10444,7 @@
     },
     {
       "id": "web-interface:mutedInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.shellMuted",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10510,7 +10510,7 @@
     },
     {
       "id": "web-interface:subtleInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.shellSubtle",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10582,7 +10582,7 @@
     },
     {
       "id": "web-interface:onAccentInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.onAccent",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10636,7 +10636,7 @@
     },
     {
       "id": "web-interface:shellRaised:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.shellRaised",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10702,7 +10702,7 @@
     },
     {
       "id": "web-interface:navActiveFill:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.navActiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10768,7 +10768,7 @@
     },
     {
       "id": "web-interface:navInactiveFill:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.navInactiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10834,7 +10834,7 @@
     },
     {
       "id": "web-interface:shellBand:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.shellBand",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10888,7 +10888,7 @@
     },
     {
       "id": "web-interface:accentHoverFill:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.accentHover",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10942,7 +10942,7 @@
     },
     {
       "id": "web-interface:onStatusInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.onStatus",
       "artifactType": "webToken",
       "adapter": "web",
@@ -10996,7 +10996,7 @@
     },
     {
       "id": "web-interface:navActiveInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.navActiveInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11050,7 +11050,7 @@
     },
     {
       "id": "web-interface:shellInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.shellInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11104,7 +11104,7 @@
     },
     {
       "id": "web-interface:supportInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.shellSupport",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11170,7 +11170,7 @@
     },
     {
       "id": "web-interface:mutedInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.shellMuted",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11236,7 +11236,7 @@
     },
     {
       "id": "web-interface:subtleInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.shellSubtle",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11308,7 +11308,7 @@
     },
     {
       "id": "web-interface:onAccentInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.onAccent",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11362,7 +11362,7 @@
     },
     {
       "id": "web-interface:shellRaised:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.shellRaised",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11428,7 +11428,7 @@
     },
     {
       "id": "web-interface:navActiveFill:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.navActiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11494,7 +11494,7 @@
     },
     {
       "id": "web-interface:navInactiveFill:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.navInactiveFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11560,7 +11560,7 @@
     },
     {
       "id": "web-interface:shellBand:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.shellBand",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11614,7 +11614,7 @@
     },
     {
       "id": "web-interface:accentHoverFill:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.accentHover",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11668,7 +11668,7 @@
     },
     {
       "id": "web-interface:onStatusInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.onStatus",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11722,7 +11722,7 @@
     },
     {
       "id": "web-interface:navActiveInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.navActiveInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11776,7 +11776,7 @@
     },
     {
       "id": "web-guidance:guide:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.guide",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11860,7 +11860,7 @@
     },
     {
       "id": "web-guidance:guideActive:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.guideActive",
       "artifactType": "webToken",
       "adapter": "web",
@@ -11914,7 +11914,7 @@
     },
     {
       "id": "web-guidance:whitespace:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.whitespace",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12001,7 +12001,7 @@
     },
     {
       "id": "web-guidance:bracketWarm:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.bracketWarm",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12061,7 +12061,7 @@
     },
     {
       "id": "web-guidance:bracketBright:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.bracketBright",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12115,7 +12115,7 @@
     },
     {
       "id": "web-guidance:bracketCool:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.bracketCool",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12169,7 +12169,7 @@
     },
     {
       "id": "web-guidance:bracketMatchFill:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.bracketMatchFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12235,7 +12235,7 @@
     },
     {
       "id": "web-guidance:bracketMatchStroke:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.bracketMatchStroke",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12301,7 +12301,7 @@
     },
     {
       "id": "web-guidance:guideInk:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.guideInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12355,7 +12355,7 @@
     },
     {
       "id": "web-guidance:guide:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.guide",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12439,7 +12439,7 @@
     },
     {
       "id": "web-guidance:guideActive:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.guideActive",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12493,7 +12493,7 @@
     },
     {
       "id": "web-guidance:whitespace:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.whitespace",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12580,7 +12580,7 @@
     },
     {
       "id": "web-guidance:bracketWarm:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.bracketWarm",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12640,7 +12640,7 @@
     },
     {
       "id": "web-guidance:bracketBright:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.bracketBright",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12694,7 +12694,7 @@
     },
     {
       "id": "web-guidance:bracketCool:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.bracketCool",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12748,7 +12748,7 @@
     },
     {
       "id": "web-guidance:bracketMatchFill:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.bracketMatchFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12814,7 +12814,7 @@
     },
     {
       "id": "web-guidance:bracketMatchStroke:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.bracketMatchStroke",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12880,7 +12880,7 @@
     },
     {
       "id": "web-guidance:guideInk:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.guideInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -12934,7 +12934,7 @@
     },
     {
       "id": "web-guidance:guide:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.guide",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13018,7 +13018,7 @@
     },
     {
       "id": "web-guidance:guideActive:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.guideActive",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13072,7 +13072,7 @@
     },
     {
       "id": "web-guidance:whitespace:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.whitespace",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13159,7 +13159,7 @@
     },
     {
       "id": "web-guidance:bracketWarm:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.bracketWarm",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13219,7 +13219,7 @@
     },
     {
       "id": "web-guidance:bracketBright:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.bracketBright",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13273,7 +13273,7 @@
     },
     {
       "id": "web-guidance:bracketCool:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.bracketCool",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13327,7 +13327,7 @@
     },
     {
       "id": "web-guidance:bracketMatchFill:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.bracketMatchFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13393,7 +13393,7 @@
     },
     {
       "id": "web-guidance:bracketMatchStroke:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.bracketMatchStroke",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13459,7 +13459,7 @@
     },
     {
       "id": "web-guidance:guideInk:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.guideInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13513,7 +13513,7 @@
     },
     {
       "id": "web-guidance:guide:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.guide",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13597,7 +13597,7 @@
     },
     {
       "id": "web-guidance:guideActive:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.guideActive",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13651,7 +13651,7 @@
     },
     {
       "id": "web-guidance:whitespace:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.whitespace",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13738,7 +13738,7 @@
     },
     {
       "id": "web-guidance:bracketWarm:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.bracketWarm",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13798,7 +13798,7 @@
     },
     {
       "id": "web-guidance:bracketBright:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.bracketBright",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13852,7 +13852,7 @@
     },
     {
       "id": "web-guidance:bracketCool:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.bracketCool",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13906,7 +13906,7 @@
     },
     {
       "id": "web-guidance:bracketMatchFill:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.bracketMatchFill",
       "artifactType": "webToken",
       "adapter": "web",
@@ -13972,7 +13972,7 @@
     },
     {
       "id": "web-guidance:bracketMatchStroke:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.bracketMatchStroke",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14038,7 +14038,7 @@
     },
     {
       "id": "web-guidance:guideInk:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.guideInk",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14092,7 +14092,7 @@
     },
     {
       "id": "web-terminal:ansiBlack:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14146,7 +14146,7 @@
     },
     {
       "id": "web-terminal:ansiRed:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14200,7 +14200,7 @@
     },
     {
       "id": "web-terminal:ansiGreen:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14254,7 +14254,7 @@
     },
     {
       "id": "web-terminal:ansiYellow:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14308,7 +14308,7 @@
     },
     {
       "id": "web-terminal:ansiBlue:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14362,7 +14362,7 @@
     },
     {
       "id": "web-terminal:ansiMagenta:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14416,7 +14416,7 @@
     },
     {
       "id": "web-terminal:ansiCyan:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14470,7 +14470,7 @@
     },
     {
       "id": "web-terminal:ansiWhite:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14524,7 +14524,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlack:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14578,7 +14578,7 @@
     },
     {
       "id": "web-terminal:ansiBrightRed:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14632,7 +14632,7 @@
     },
     {
       "id": "web-terminal:ansiBrightGreen:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14686,7 +14686,7 @@
     },
     {
       "id": "web-terminal:ansiBrightYellow:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14740,7 +14740,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlue:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14794,7 +14794,7 @@
     },
     {
       "id": "web-terminal:ansiBrightMagenta:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14848,7 +14848,7 @@
     },
     {
       "id": "web-terminal:ansiBrightCyan:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14902,7 +14902,7 @@
     },
     {
       "id": "web-terminal:ansiBrightWhite:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.terminalBrightWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -14956,7 +14956,7 @@
     },
     {
       "id": "web-terminal:ansiBlack:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15010,7 +15010,7 @@
     },
     {
       "id": "web-terminal:ansiRed:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15064,7 +15064,7 @@
     },
     {
       "id": "web-terminal:ansiGreen:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15118,7 +15118,7 @@
     },
     {
       "id": "web-terminal:ansiYellow:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15172,7 +15172,7 @@
     },
     {
       "id": "web-terminal:ansiBlue:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15226,7 +15226,7 @@
     },
     {
       "id": "web-terminal:ansiMagenta:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15280,7 +15280,7 @@
     },
     {
       "id": "web-terminal:ansiCyan:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15334,7 +15334,7 @@
     },
     {
       "id": "web-terminal:ansiWhite:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15388,7 +15388,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlack:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15442,7 +15442,7 @@
     },
     {
       "id": "web-terminal:ansiBrightRed:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15496,7 +15496,7 @@
     },
     {
       "id": "web-terminal:ansiBrightGreen:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15550,7 +15550,7 @@
     },
     {
       "id": "web-terminal:ansiBrightYellow:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15604,7 +15604,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlue:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15658,7 +15658,7 @@
     },
     {
       "id": "web-terminal:ansiBrightMagenta:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15712,7 +15712,7 @@
     },
     {
       "id": "web-terminal:ansiBrightCyan:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15766,7 +15766,7 @@
     },
     {
       "id": "web-terminal:ansiBrightWhite:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.terminalBrightWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15820,7 +15820,7 @@
     },
     {
       "id": "web-terminal:ansiBlack:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15874,7 +15874,7 @@
     },
     {
       "id": "web-terminal:ansiRed:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15928,7 +15928,7 @@
     },
     {
       "id": "web-terminal:ansiGreen:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -15982,7 +15982,7 @@
     },
     {
       "id": "web-terminal:ansiYellow:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16036,7 +16036,7 @@
     },
     {
       "id": "web-terminal:ansiBlue:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16090,7 +16090,7 @@
     },
     {
       "id": "web-terminal:ansiMagenta:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16144,7 +16144,7 @@
     },
     {
       "id": "web-terminal:ansiCyan:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16198,7 +16198,7 @@
     },
     {
       "id": "web-terminal:ansiWhite:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16252,7 +16252,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlack:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16306,7 +16306,7 @@
     },
     {
       "id": "web-terminal:ansiBrightRed:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16360,7 +16360,7 @@
     },
     {
       "id": "web-terminal:ansiBrightGreen:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16414,7 +16414,7 @@
     },
     {
       "id": "web-terminal:ansiBrightYellow:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16468,7 +16468,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlue:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16522,7 +16522,7 @@
     },
     {
       "id": "web-terminal:ansiBrightMagenta:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16576,7 +16576,7 @@
     },
     {
       "id": "web-terminal:ansiBrightCyan:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16630,7 +16630,7 @@
     },
     {
       "id": "web-terminal:ansiBrightWhite:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.terminalBrightWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16684,7 +16684,7 @@
     },
     {
       "id": "web-terminal:ansiBlack:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16738,7 +16738,7 @@
     },
     {
       "id": "web-terminal:ansiRed:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16792,7 +16792,7 @@
     },
     {
       "id": "web-terminal:ansiGreen:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16846,7 +16846,7 @@
     },
     {
       "id": "web-terminal:ansiYellow:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16900,7 +16900,7 @@
     },
     {
       "id": "web-terminal:ansiBlue:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -16954,7 +16954,7 @@
     },
     {
       "id": "web-terminal:ansiMagenta:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17008,7 +17008,7 @@
     },
     {
       "id": "web-terminal:ansiCyan:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17062,7 +17062,7 @@
     },
     {
       "id": "web-terminal:ansiWhite:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17116,7 +17116,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlack:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightBlack",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17170,7 +17170,7 @@
     },
     {
       "id": "web-terminal:ansiBrightRed:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightRed",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17224,7 +17224,7 @@
     },
     {
       "id": "web-terminal:ansiBrightGreen:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightGreen",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17278,7 +17278,7 @@
     },
     {
       "id": "web-terminal:ansiBrightYellow:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightYellow",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17332,7 +17332,7 @@
     },
     {
       "id": "web-terminal:ansiBrightBlue:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightBlue",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17386,7 +17386,7 @@
     },
     {
       "id": "web-terminal:ansiBrightMagenta:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightMagenta",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17440,7 +17440,7 @@
     },
     {
       "id": "web-terminal:ansiBrightCyan:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightCyan",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17494,7 +17494,7 @@
     },
     {
       "id": "web-terminal:ansiBrightWhite:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.terminalBrightWhite",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17548,7 +17548,7 @@
     },
     {
       "id": "web-feedback:note:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.note",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17584,7 +17584,7 @@
     },
     {
       "id": "web-feedback:info:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.info",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17638,7 +17638,7 @@
     },
     {
       "id": "web-feedback:success:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.success",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17674,7 +17674,7 @@
     },
     {
       "id": "web-feedback:warning:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.warning",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17728,7 +17728,7 @@
     },
     {
       "id": "web-feedback:error:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.error",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17782,7 +17782,7 @@
     },
     {
       "id": "web-feedback:note:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.note",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17818,7 +17818,7 @@
     },
     {
       "id": "web-feedback:info:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.info",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17872,7 +17872,7 @@
     },
     {
       "id": "web-feedback:success:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.success",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17908,7 +17908,7 @@
     },
     {
       "id": "web-feedback:warning:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.warning",
       "artifactType": "webToken",
       "adapter": "web",
@@ -17962,7 +17962,7 @@
     },
     {
       "id": "web-feedback:error:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.error",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18016,7 +18016,7 @@
     },
     {
       "id": "web-feedback:note:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.note",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18052,7 +18052,7 @@
     },
     {
       "id": "web-feedback:info:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.info",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18106,7 +18106,7 @@
     },
     {
       "id": "web-feedback:success:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.success",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18142,7 +18142,7 @@
     },
     {
       "id": "web-feedback:warning:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.warning",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18196,7 +18196,7 @@
     },
     {
       "id": "web-feedback:error:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.error",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18250,7 +18250,7 @@
     },
     {
       "id": "web-feedback:note:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.note",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18286,7 +18286,7 @@
     },
     {
       "id": "web-feedback:info:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.info",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18340,7 +18340,7 @@
     },
     {
       "id": "web-feedback:success:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.success",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18376,7 +18376,7 @@
     },
     {
       "id": "web-feedback:warning:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.warning",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18430,7 +18430,7 @@
     },
     {
       "id": "web-feedback:error:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.error",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18501,7 +18501,7 @@
     },
     {
       "id": "web-role:comment:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.comment",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18573,7 +18573,7 @@
     },
     {
       "id": "web-role:comment:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.comment",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18645,7 +18645,7 @@
     },
     {
       "id": "web-role:comment:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.comment",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18717,7 +18717,7 @@
     },
     {
       "id": "web-role:comment:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.comment",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18789,7 +18789,7 @@
     },
     {
       "id": "web-role:keyword:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.keyword",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18880,7 +18880,7 @@
     },
     {
       "id": "web-role:keyword:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.keyword",
       "artifactType": "webToken",
       "adapter": "web",
@@ -18974,7 +18974,7 @@
     },
     {
       "id": "web-role:keyword:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.keyword",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19065,7 +19065,7 @@
     },
     {
       "id": "web-role:keyword:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.keyword",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19159,7 +19159,7 @@
     },
     {
       "id": "web-role:operator:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.operator",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19231,7 +19231,7 @@
     },
     {
       "id": "web-role:operator:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.operator",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19305,7 +19305,7 @@
     },
     {
       "id": "web-role:operator:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.operator",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19379,7 +19379,7 @@
     },
     {
       "id": "web-role:operator:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.operator",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19453,7 +19453,7 @@
     },
     {
       "id": "web-role:function:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.fn",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19556,7 +19556,7 @@
     },
     {
       "id": "web-role:function:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.fn",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19662,7 +19662,7 @@
     },
     {
       "id": "web-role:function:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.fn",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19768,7 +19768,7 @@
     },
     {
       "id": "web-role:function:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.fn",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19874,7 +19874,7 @@
     },
     {
       "id": "web-role:method:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.method",
       "artifactType": "webToken",
       "adapter": "web",
@@ -19972,7 +19972,7 @@
     },
     {
       "id": "web-role:method:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.method",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20073,7 +20073,7 @@
     },
     {
       "id": "web-role:method:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.method",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20174,7 +20174,7 @@
     },
     {
       "id": "web-role:method:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.method",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20275,7 +20275,7 @@
     },
     {
       "id": "web-role:property:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.property",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20366,7 +20366,7 @@
     },
     {
       "id": "web-role:property:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.property",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20460,7 +20460,7 @@
     },
     {
       "id": "web-role:property:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.property",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20554,7 +20554,7 @@
     },
     {
       "id": "web-role:property:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.property",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20645,7 +20645,7 @@
     },
     {
       "id": "web-role:string:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.string",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20719,7 +20719,7 @@
     },
     {
       "id": "web-role:string:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.string",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20795,7 +20795,7 @@
     },
     {
       "id": "web-role:string:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.string",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20871,7 +20871,7 @@
     },
     {
       "id": "web-role:string:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.string",
       "artifactType": "webToken",
       "adapter": "web",
@@ -20947,7 +20947,7 @@
     },
     {
       "id": "web-role:number:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.number",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21040,7 +21040,7 @@
     },
     {
       "id": "web-role:number:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.number",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21136,7 +21136,7 @@
     },
     {
       "id": "web-role:number:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.number",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21229,7 +21229,7 @@
     },
     {
       "id": "web-role:number:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.number",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21325,7 +21325,7 @@
     },
     {
       "id": "web-role:type:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.type",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21421,7 +21421,7 @@
     },
     {
       "id": "web-role:type:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.type",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21520,7 +21520,7 @@
     },
     {
       "id": "web-role:type:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.type",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21616,7 +21616,7 @@
     },
     {
       "id": "web-role:type:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.type",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21715,7 +21715,7 @@
     },
     {
       "id": "web-role:variable:dark",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.dark.variable",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21805,7 +21805,7 @@
     },
     {
       "id": "web-role:variable:darkSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.darkSoft.variable",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21895,7 +21895,7 @@
     },
     {
       "id": "web-role:variable:light",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.light.variable",
       "artifactType": "webToken",
       "adapter": "web",
@@ -21985,7 +21985,7 @@
     },
     {
       "id": "web-role:variable:lightSoft",
-      "path": "src/data/tokens.ts",
+      "path": "packages/site/src/data/tokens.ts",
       "field": "tokens.lightSoft.variable",
       "artifactType": "webToken",
       "adapter": "web",
@@ -22567,7 +22567,7 @@
     "byArtifactId": {
       "web-surface:canvas:dark": {
         "id": "web-surface:canvas:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.bg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22618,7 +22618,7 @@
       },
       "web-surface:ink:dark": {
         "id": "web-surface:ink:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.fg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22669,7 +22669,7 @@
       },
       "web-surface:panel:dark": {
         "id": "web-surface:panel:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.lineBg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22732,7 +22732,7 @@
       },
       "web-surface:gutter:dark": {
         "id": "web-surface:gutter:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.lineNo",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22774,7 +22774,7 @@
       },
       "web-surface:sidebar:dark": {
         "id": "web-surface:sidebar:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.sidebar",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22825,7 +22825,7 @@
       },
       "web-surface:border:dark": {
         "id": "web-surface:border:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.border",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22888,7 +22888,7 @@
       },
       "web-surface:canvas:darkSoft": {
         "id": "web-surface:canvas:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.bg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22939,7 +22939,7 @@
       },
       "web-surface:ink:darkSoft": {
         "id": "web-surface:ink:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.fg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -22990,7 +22990,7 @@
       },
       "web-surface:panel:darkSoft": {
         "id": "web-surface:panel:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.lineBg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23053,7 +23053,7 @@
       },
       "web-surface:gutter:darkSoft": {
         "id": "web-surface:gutter:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.lineNo",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23095,7 +23095,7 @@
       },
       "web-surface:sidebar:darkSoft": {
         "id": "web-surface:sidebar:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.sidebar",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23146,7 +23146,7 @@
       },
       "web-surface:border:darkSoft": {
         "id": "web-surface:border:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.border",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23209,7 +23209,7 @@
       },
       "web-surface:canvas:light": {
         "id": "web-surface:canvas:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.bg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23260,7 +23260,7 @@
       },
       "web-surface:ink:light": {
         "id": "web-surface:ink:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.fg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23311,7 +23311,7 @@
       },
       "web-surface:panel:light": {
         "id": "web-surface:panel:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.lineBg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23376,7 +23376,7 @@
       },
       "web-surface:gutter:light": {
         "id": "web-surface:gutter:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.lineNo",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23418,7 +23418,7 @@
       },
       "web-surface:sidebar:light": {
         "id": "web-surface:sidebar:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.sidebar",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23469,7 +23469,7 @@
       },
       "web-surface:border:light": {
         "id": "web-surface:border:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.border",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23532,7 +23532,7 @@
       },
       "web-surface:canvas:lightSoft": {
         "id": "web-surface:canvas:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.bg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23583,7 +23583,7 @@
       },
       "web-surface:ink:lightSoft": {
         "id": "web-surface:ink:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.fg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23634,7 +23634,7 @@
       },
       "web-surface:panel:lightSoft": {
         "id": "web-surface:panel:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.lineBg",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23699,7 +23699,7 @@
       },
       "web-surface:gutter:lightSoft": {
         "id": "web-surface:gutter:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.lineNo",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23741,7 +23741,7 @@
       },
       "web-surface:sidebar:lightSoft": {
         "id": "web-surface:sidebar:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.sidebar",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23792,7 +23792,7 @@
       },
       "web-surface:border:lightSoft": {
         "id": "web-surface:border:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.border",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23855,7 +23855,7 @@
       },
       "web-interaction:selection:dark": {
         "id": "web-interaction:selection:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.selection",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23912,7 +23912,7 @@
       },
       "web-interaction:cursor:dark": {
         "id": "web-interaction:cursor:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.cursor",
         "artifactType": "webToken",
         "adapter": "web",
@@ -23963,7 +23963,7 @@
       },
       "web-interaction:status:dark": {
         "id": "web-interaction:status:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.status",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24132,7 +24132,7 @@
       },
       "web-interaction:selection:darkSoft": {
         "id": "web-interaction:selection:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.selection",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24189,7 +24189,7 @@
       },
       "web-interaction:cursor:darkSoft": {
         "id": "web-interaction:cursor:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.cursor",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24240,7 +24240,7 @@
       },
       "web-interaction:status:darkSoft": {
         "id": "web-interaction:status:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.status",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24409,7 +24409,7 @@
       },
       "web-interaction:selection:light": {
         "id": "web-interaction:selection:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.selection",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24466,7 +24466,7 @@
       },
       "web-interaction:cursor:light": {
         "id": "web-interaction:cursor:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.cursor",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24517,7 +24517,7 @@
       },
       "web-interaction:status:light": {
         "id": "web-interaction:status:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.status",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24687,7 +24687,7 @@
       },
       "web-interaction:selection:lightSoft": {
         "id": "web-interaction:selection:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.selection",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24744,7 +24744,7 @@
       },
       "web-interaction:cursor:lightSoft": {
         "id": "web-interaction:cursor:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.cursor",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24795,7 +24795,7 @@
       },
       "web-interaction:status:lightSoft": {
         "id": "web-interaction:status:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.status",
         "artifactType": "webToken",
         "adapter": "web",
@@ -24964,7 +24964,7 @@
       },
       "web-interface:shellInk:dark": {
         "id": "web-interface:shellInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.shellInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25018,7 +25018,7 @@
       },
       "web-interface:supportInk:dark": {
         "id": "web-interface:supportInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.shellSupport",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25084,7 +25084,7 @@
       },
       "web-interface:mutedInk:dark": {
         "id": "web-interface:mutedInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.shellMuted",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25150,7 +25150,7 @@
       },
       "web-interface:subtleInk:dark": {
         "id": "web-interface:subtleInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.shellSubtle",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25222,7 +25222,7 @@
       },
       "web-interface:onAccentInk:dark": {
         "id": "web-interface:onAccentInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.onAccent",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25276,7 +25276,7 @@
       },
       "web-interface:shellRaised:dark": {
         "id": "web-interface:shellRaised:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.shellRaised",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25342,7 +25342,7 @@
       },
       "web-interface:navActiveFill:dark": {
         "id": "web-interface:navActiveFill:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.navActiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25408,7 +25408,7 @@
       },
       "web-interface:navInactiveFill:dark": {
         "id": "web-interface:navInactiveFill:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.navInactiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25474,7 +25474,7 @@
       },
       "web-interface:shellBand:dark": {
         "id": "web-interface:shellBand:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.shellBand",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25528,7 +25528,7 @@
       },
       "web-interface:accentHoverFill:dark": {
         "id": "web-interface:accentHoverFill:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.accentHover",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25582,7 +25582,7 @@
       },
       "web-interface:onStatusInk:dark": {
         "id": "web-interface:onStatusInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.onStatus",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25636,7 +25636,7 @@
       },
       "web-interface:navActiveInk:dark": {
         "id": "web-interface:navActiveInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.navActiveInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25690,7 +25690,7 @@
       },
       "web-interface:shellInk:darkSoft": {
         "id": "web-interface:shellInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.shellInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25744,7 +25744,7 @@
       },
       "web-interface:supportInk:darkSoft": {
         "id": "web-interface:supportInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.shellSupport",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25810,7 +25810,7 @@
       },
       "web-interface:mutedInk:darkSoft": {
         "id": "web-interface:mutedInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.shellMuted",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25876,7 +25876,7 @@
       },
       "web-interface:subtleInk:darkSoft": {
         "id": "web-interface:subtleInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.shellSubtle",
         "artifactType": "webToken",
         "adapter": "web",
@@ -25948,7 +25948,7 @@
       },
       "web-interface:onAccentInk:darkSoft": {
         "id": "web-interface:onAccentInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.onAccent",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26002,7 +26002,7 @@
       },
       "web-interface:shellRaised:darkSoft": {
         "id": "web-interface:shellRaised:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.shellRaised",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26068,7 +26068,7 @@
       },
       "web-interface:navActiveFill:darkSoft": {
         "id": "web-interface:navActiveFill:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.navActiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26134,7 +26134,7 @@
       },
       "web-interface:navInactiveFill:darkSoft": {
         "id": "web-interface:navInactiveFill:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.navInactiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26200,7 +26200,7 @@
       },
       "web-interface:shellBand:darkSoft": {
         "id": "web-interface:shellBand:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.shellBand",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26254,7 +26254,7 @@
       },
       "web-interface:accentHoverFill:darkSoft": {
         "id": "web-interface:accentHoverFill:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.accentHover",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26308,7 +26308,7 @@
       },
       "web-interface:onStatusInk:darkSoft": {
         "id": "web-interface:onStatusInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.onStatus",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26362,7 +26362,7 @@
       },
       "web-interface:navActiveInk:darkSoft": {
         "id": "web-interface:navActiveInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.navActiveInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26416,7 +26416,7 @@
       },
       "web-interface:shellInk:light": {
         "id": "web-interface:shellInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.shellInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26470,7 +26470,7 @@
       },
       "web-interface:supportInk:light": {
         "id": "web-interface:supportInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.shellSupport",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26536,7 +26536,7 @@
       },
       "web-interface:mutedInk:light": {
         "id": "web-interface:mutedInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.shellMuted",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26602,7 +26602,7 @@
       },
       "web-interface:subtleInk:light": {
         "id": "web-interface:subtleInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.shellSubtle",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26674,7 +26674,7 @@
       },
       "web-interface:onAccentInk:light": {
         "id": "web-interface:onAccentInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.onAccent",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26728,7 +26728,7 @@
       },
       "web-interface:shellRaised:light": {
         "id": "web-interface:shellRaised:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.shellRaised",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26794,7 +26794,7 @@
       },
       "web-interface:navActiveFill:light": {
         "id": "web-interface:navActiveFill:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.navActiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26860,7 +26860,7 @@
       },
       "web-interface:navInactiveFill:light": {
         "id": "web-interface:navInactiveFill:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.navInactiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26926,7 +26926,7 @@
       },
       "web-interface:shellBand:light": {
         "id": "web-interface:shellBand:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.shellBand",
         "artifactType": "webToken",
         "adapter": "web",
@@ -26980,7 +26980,7 @@
       },
       "web-interface:accentHoverFill:light": {
         "id": "web-interface:accentHoverFill:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.accentHover",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27034,7 +27034,7 @@
       },
       "web-interface:onStatusInk:light": {
         "id": "web-interface:onStatusInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.onStatus",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27088,7 +27088,7 @@
       },
       "web-interface:navActiveInk:light": {
         "id": "web-interface:navActiveInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.navActiveInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27142,7 +27142,7 @@
       },
       "web-interface:shellInk:lightSoft": {
         "id": "web-interface:shellInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.shellInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27196,7 +27196,7 @@
       },
       "web-interface:supportInk:lightSoft": {
         "id": "web-interface:supportInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.shellSupport",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27262,7 +27262,7 @@
       },
       "web-interface:mutedInk:lightSoft": {
         "id": "web-interface:mutedInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.shellMuted",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27328,7 +27328,7 @@
       },
       "web-interface:subtleInk:lightSoft": {
         "id": "web-interface:subtleInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.shellSubtle",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27400,7 +27400,7 @@
       },
       "web-interface:onAccentInk:lightSoft": {
         "id": "web-interface:onAccentInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.onAccent",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27454,7 +27454,7 @@
       },
       "web-interface:shellRaised:lightSoft": {
         "id": "web-interface:shellRaised:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.shellRaised",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27520,7 +27520,7 @@
       },
       "web-interface:navActiveFill:lightSoft": {
         "id": "web-interface:navActiveFill:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.navActiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27586,7 +27586,7 @@
       },
       "web-interface:navInactiveFill:lightSoft": {
         "id": "web-interface:navInactiveFill:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.navInactiveFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27652,7 +27652,7 @@
       },
       "web-interface:shellBand:lightSoft": {
         "id": "web-interface:shellBand:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.shellBand",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27706,7 +27706,7 @@
       },
       "web-interface:accentHoverFill:lightSoft": {
         "id": "web-interface:accentHoverFill:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.accentHover",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27760,7 +27760,7 @@
       },
       "web-interface:onStatusInk:lightSoft": {
         "id": "web-interface:onStatusInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.onStatus",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27814,7 +27814,7 @@
       },
       "web-interface:navActiveInk:lightSoft": {
         "id": "web-interface:navActiveInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.navActiveInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27868,7 +27868,7 @@
       },
       "web-guidance:guide:dark": {
         "id": "web-guidance:guide:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.guide",
         "artifactType": "webToken",
         "adapter": "web",
@@ -27952,7 +27952,7 @@
       },
       "web-guidance:guideActive:dark": {
         "id": "web-guidance:guideActive:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.guideActive",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28006,7 +28006,7 @@
       },
       "web-guidance:whitespace:dark": {
         "id": "web-guidance:whitespace:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.whitespace",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28093,7 +28093,7 @@
       },
       "web-guidance:bracketWarm:dark": {
         "id": "web-guidance:bracketWarm:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.bracketWarm",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28153,7 +28153,7 @@
       },
       "web-guidance:bracketBright:dark": {
         "id": "web-guidance:bracketBright:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.bracketBright",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28207,7 +28207,7 @@
       },
       "web-guidance:bracketCool:dark": {
         "id": "web-guidance:bracketCool:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.bracketCool",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28261,7 +28261,7 @@
       },
       "web-guidance:bracketMatchFill:dark": {
         "id": "web-guidance:bracketMatchFill:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.bracketMatchFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28327,7 +28327,7 @@
       },
       "web-guidance:bracketMatchStroke:dark": {
         "id": "web-guidance:bracketMatchStroke:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.bracketMatchStroke",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28393,7 +28393,7 @@
       },
       "web-guidance:guideInk:dark": {
         "id": "web-guidance:guideInk:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.guideInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28447,7 +28447,7 @@
       },
       "web-guidance:guide:darkSoft": {
         "id": "web-guidance:guide:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.guide",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28531,7 +28531,7 @@
       },
       "web-guidance:guideActive:darkSoft": {
         "id": "web-guidance:guideActive:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.guideActive",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28585,7 +28585,7 @@
       },
       "web-guidance:whitespace:darkSoft": {
         "id": "web-guidance:whitespace:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.whitespace",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28672,7 +28672,7 @@
       },
       "web-guidance:bracketWarm:darkSoft": {
         "id": "web-guidance:bracketWarm:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.bracketWarm",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28732,7 +28732,7 @@
       },
       "web-guidance:bracketBright:darkSoft": {
         "id": "web-guidance:bracketBright:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.bracketBright",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28786,7 +28786,7 @@
       },
       "web-guidance:bracketCool:darkSoft": {
         "id": "web-guidance:bracketCool:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.bracketCool",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28840,7 +28840,7 @@
       },
       "web-guidance:bracketMatchFill:darkSoft": {
         "id": "web-guidance:bracketMatchFill:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.bracketMatchFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28906,7 +28906,7 @@
       },
       "web-guidance:bracketMatchStroke:darkSoft": {
         "id": "web-guidance:bracketMatchStroke:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.bracketMatchStroke",
         "artifactType": "webToken",
         "adapter": "web",
@@ -28972,7 +28972,7 @@
       },
       "web-guidance:guideInk:darkSoft": {
         "id": "web-guidance:guideInk:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.guideInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29026,7 +29026,7 @@
       },
       "web-guidance:guide:light": {
         "id": "web-guidance:guide:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.guide",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29110,7 +29110,7 @@
       },
       "web-guidance:guideActive:light": {
         "id": "web-guidance:guideActive:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.guideActive",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29164,7 +29164,7 @@
       },
       "web-guidance:whitespace:light": {
         "id": "web-guidance:whitespace:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.whitespace",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29251,7 +29251,7 @@
       },
       "web-guidance:bracketWarm:light": {
         "id": "web-guidance:bracketWarm:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.bracketWarm",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29311,7 +29311,7 @@
       },
       "web-guidance:bracketBright:light": {
         "id": "web-guidance:bracketBright:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.bracketBright",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29365,7 +29365,7 @@
       },
       "web-guidance:bracketCool:light": {
         "id": "web-guidance:bracketCool:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.bracketCool",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29419,7 +29419,7 @@
       },
       "web-guidance:bracketMatchFill:light": {
         "id": "web-guidance:bracketMatchFill:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.bracketMatchFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29485,7 +29485,7 @@
       },
       "web-guidance:bracketMatchStroke:light": {
         "id": "web-guidance:bracketMatchStroke:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.bracketMatchStroke",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29551,7 +29551,7 @@
       },
       "web-guidance:guideInk:light": {
         "id": "web-guidance:guideInk:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.guideInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29605,7 +29605,7 @@
       },
       "web-guidance:guide:lightSoft": {
         "id": "web-guidance:guide:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.guide",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29689,7 +29689,7 @@
       },
       "web-guidance:guideActive:lightSoft": {
         "id": "web-guidance:guideActive:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.guideActive",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29743,7 +29743,7 @@
       },
       "web-guidance:whitespace:lightSoft": {
         "id": "web-guidance:whitespace:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.whitespace",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29830,7 +29830,7 @@
       },
       "web-guidance:bracketWarm:lightSoft": {
         "id": "web-guidance:bracketWarm:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.bracketWarm",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29890,7 +29890,7 @@
       },
       "web-guidance:bracketBright:lightSoft": {
         "id": "web-guidance:bracketBright:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.bracketBright",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29944,7 +29944,7 @@
       },
       "web-guidance:bracketCool:lightSoft": {
         "id": "web-guidance:bracketCool:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.bracketCool",
         "artifactType": "webToken",
         "adapter": "web",
@@ -29998,7 +29998,7 @@
       },
       "web-guidance:bracketMatchFill:lightSoft": {
         "id": "web-guidance:bracketMatchFill:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.bracketMatchFill",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30064,7 +30064,7 @@
       },
       "web-guidance:bracketMatchStroke:lightSoft": {
         "id": "web-guidance:bracketMatchStroke:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.bracketMatchStroke",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30130,7 +30130,7 @@
       },
       "web-guidance:guideInk:lightSoft": {
         "id": "web-guidance:guideInk:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.guideInk",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30184,7 +30184,7 @@
       },
       "web-terminal:ansiBlack:dark": {
         "id": "web-terminal:ansiBlack:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30238,7 +30238,7 @@
       },
       "web-terminal:ansiRed:dark": {
         "id": "web-terminal:ansiRed:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30292,7 +30292,7 @@
       },
       "web-terminal:ansiGreen:dark": {
         "id": "web-terminal:ansiGreen:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30346,7 +30346,7 @@
       },
       "web-terminal:ansiYellow:dark": {
         "id": "web-terminal:ansiYellow:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30400,7 +30400,7 @@
       },
       "web-terminal:ansiBlue:dark": {
         "id": "web-terminal:ansiBlue:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30454,7 +30454,7 @@
       },
       "web-terminal:ansiMagenta:dark": {
         "id": "web-terminal:ansiMagenta:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30508,7 +30508,7 @@
       },
       "web-terminal:ansiCyan:dark": {
         "id": "web-terminal:ansiCyan:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30562,7 +30562,7 @@
       },
       "web-terminal:ansiWhite:dark": {
         "id": "web-terminal:ansiWhite:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30616,7 +30616,7 @@
       },
       "web-terminal:ansiBrightBlack:dark": {
         "id": "web-terminal:ansiBrightBlack:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30670,7 +30670,7 @@
       },
       "web-terminal:ansiBrightRed:dark": {
         "id": "web-terminal:ansiBrightRed:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30724,7 +30724,7 @@
       },
       "web-terminal:ansiBrightGreen:dark": {
         "id": "web-terminal:ansiBrightGreen:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30778,7 +30778,7 @@
       },
       "web-terminal:ansiBrightYellow:dark": {
         "id": "web-terminal:ansiBrightYellow:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30832,7 +30832,7 @@
       },
       "web-terminal:ansiBrightBlue:dark": {
         "id": "web-terminal:ansiBrightBlue:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30886,7 +30886,7 @@
       },
       "web-terminal:ansiBrightMagenta:dark": {
         "id": "web-terminal:ansiBrightMagenta:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30940,7 +30940,7 @@
       },
       "web-terminal:ansiBrightCyan:dark": {
         "id": "web-terminal:ansiBrightCyan:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -30994,7 +30994,7 @@
       },
       "web-terminal:ansiBrightWhite:dark": {
         "id": "web-terminal:ansiBrightWhite:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.terminalBrightWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31048,7 +31048,7 @@
       },
       "web-terminal:ansiBlack:darkSoft": {
         "id": "web-terminal:ansiBlack:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31102,7 +31102,7 @@
       },
       "web-terminal:ansiRed:darkSoft": {
         "id": "web-terminal:ansiRed:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31156,7 +31156,7 @@
       },
       "web-terminal:ansiGreen:darkSoft": {
         "id": "web-terminal:ansiGreen:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31210,7 +31210,7 @@
       },
       "web-terminal:ansiYellow:darkSoft": {
         "id": "web-terminal:ansiYellow:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31264,7 +31264,7 @@
       },
       "web-terminal:ansiBlue:darkSoft": {
         "id": "web-terminal:ansiBlue:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31318,7 +31318,7 @@
       },
       "web-terminal:ansiMagenta:darkSoft": {
         "id": "web-terminal:ansiMagenta:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31372,7 +31372,7 @@
       },
       "web-terminal:ansiCyan:darkSoft": {
         "id": "web-terminal:ansiCyan:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31426,7 +31426,7 @@
       },
       "web-terminal:ansiWhite:darkSoft": {
         "id": "web-terminal:ansiWhite:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31480,7 +31480,7 @@
       },
       "web-terminal:ansiBrightBlack:darkSoft": {
         "id": "web-terminal:ansiBrightBlack:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31534,7 +31534,7 @@
       },
       "web-terminal:ansiBrightRed:darkSoft": {
         "id": "web-terminal:ansiBrightRed:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31588,7 +31588,7 @@
       },
       "web-terminal:ansiBrightGreen:darkSoft": {
         "id": "web-terminal:ansiBrightGreen:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31642,7 +31642,7 @@
       },
       "web-terminal:ansiBrightYellow:darkSoft": {
         "id": "web-terminal:ansiBrightYellow:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31696,7 +31696,7 @@
       },
       "web-terminal:ansiBrightBlue:darkSoft": {
         "id": "web-terminal:ansiBrightBlue:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31750,7 +31750,7 @@
       },
       "web-terminal:ansiBrightMagenta:darkSoft": {
         "id": "web-terminal:ansiBrightMagenta:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31804,7 +31804,7 @@
       },
       "web-terminal:ansiBrightCyan:darkSoft": {
         "id": "web-terminal:ansiBrightCyan:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31858,7 +31858,7 @@
       },
       "web-terminal:ansiBrightWhite:darkSoft": {
         "id": "web-terminal:ansiBrightWhite:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.terminalBrightWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31912,7 +31912,7 @@
       },
       "web-terminal:ansiBlack:light": {
         "id": "web-terminal:ansiBlack:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -31966,7 +31966,7 @@
       },
       "web-terminal:ansiRed:light": {
         "id": "web-terminal:ansiRed:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32020,7 +32020,7 @@
       },
       "web-terminal:ansiGreen:light": {
         "id": "web-terminal:ansiGreen:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32074,7 +32074,7 @@
       },
       "web-terminal:ansiYellow:light": {
         "id": "web-terminal:ansiYellow:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32128,7 +32128,7 @@
       },
       "web-terminal:ansiBlue:light": {
         "id": "web-terminal:ansiBlue:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32182,7 +32182,7 @@
       },
       "web-terminal:ansiMagenta:light": {
         "id": "web-terminal:ansiMagenta:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32236,7 +32236,7 @@
       },
       "web-terminal:ansiCyan:light": {
         "id": "web-terminal:ansiCyan:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32290,7 +32290,7 @@
       },
       "web-terminal:ansiWhite:light": {
         "id": "web-terminal:ansiWhite:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32344,7 +32344,7 @@
       },
       "web-terminal:ansiBrightBlack:light": {
         "id": "web-terminal:ansiBrightBlack:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32398,7 +32398,7 @@
       },
       "web-terminal:ansiBrightRed:light": {
         "id": "web-terminal:ansiBrightRed:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32452,7 +32452,7 @@
       },
       "web-terminal:ansiBrightGreen:light": {
         "id": "web-terminal:ansiBrightGreen:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32506,7 +32506,7 @@
       },
       "web-terminal:ansiBrightYellow:light": {
         "id": "web-terminal:ansiBrightYellow:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32560,7 +32560,7 @@
       },
       "web-terminal:ansiBrightBlue:light": {
         "id": "web-terminal:ansiBrightBlue:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32614,7 +32614,7 @@
       },
       "web-terminal:ansiBrightMagenta:light": {
         "id": "web-terminal:ansiBrightMagenta:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32668,7 +32668,7 @@
       },
       "web-terminal:ansiBrightCyan:light": {
         "id": "web-terminal:ansiBrightCyan:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32722,7 +32722,7 @@
       },
       "web-terminal:ansiBrightWhite:light": {
         "id": "web-terminal:ansiBrightWhite:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.terminalBrightWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32776,7 +32776,7 @@
       },
       "web-terminal:ansiBlack:lightSoft": {
         "id": "web-terminal:ansiBlack:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32830,7 +32830,7 @@
       },
       "web-terminal:ansiRed:lightSoft": {
         "id": "web-terminal:ansiRed:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32884,7 +32884,7 @@
       },
       "web-terminal:ansiGreen:lightSoft": {
         "id": "web-terminal:ansiGreen:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32938,7 +32938,7 @@
       },
       "web-terminal:ansiYellow:lightSoft": {
         "id": "web-terminal:ansiYellow:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -32992,7 +32992,7 @@
       },
       "web-terminal:ansiBlue:lightSoft": {
         "id": "web-terminal:ansiBlue:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33046,7 +33046,7 @@
       },
       "web-terminal:ansiMagenta:lightSoft": {
         "id": "web-terminal:ansiMagenta:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33100,7 +33100,7 @@
       },
       "web-terminal:ansiCyan:lightSoft": {
         "id": "web-terminal:ansiCyan:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33154,7 +33154,7 @@
       },
       "web-terminal:ansiWhite:lightSoft": {
         "id": "web-terminal:ansiWhite:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33208,7 +33208,7 @@
       },
       "web-terminal:ansiBrightBlack:lightSoft": {
         "id": "web-terminal:ansiBrightBlack:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightBlack",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33262,7 +33262,7 @@
       },
       "web-terminal:ansiBrightRed:lightSoft": {
         "id": "web-terminal:ansiBrightRed:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightRed",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33316,7 +33316,7 @@
       },
       "web-terminal:ansiBrightGreen:lightSoft": {
         "id": "web-terminal:ansiBrightGreen:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightGreen",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33370,7 +33370,7 @@
       },
       "web-terminal:ansiBrightYellow:lightSoft": {
         "id": "web-terminal:ansiBrightYellow:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightYellow",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33424,7 +33424,7 @@
       },
       "web-terminal:ansiBrightBlue:lightSoft": {
         "id": "web-terminal:ansiBrightBlue:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightBlue",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33478,7 +33478,7 @@
       },
       "web-terminal:ansiBrightMagenta:lightSoft": {
         "id": "web-terminal:ansiBrightMagenta:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightMagenta",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33532,7 +33532,7 @@
       },
       "web-terminal:ansiBrightCyan:lightSoft": {
         "id": "web-terminal:ansiBrightCyan:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightCyan",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33586,7 +33586,7 @@
       },
       "web-terminal:ansiBrightWhite:lightSoft": {
         "id": "web-terminal:ansiBrightWhite:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.terminalBrightWhite",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33640,7 +33640,7 @@
       },
       "web-feedback:note:dark": {
         "id": "web-feedback:note:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.note",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33676,7 +33676,7 @@
       },
       "web-feedback:info:dark": {
         "id": "web-feedback:info:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.info",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33730,7 +33730,7 @@
       },
       "web-feedback:success:dark": {
         "id": "web-feedback:success:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.success",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33766,7 +33766,7 @@
       },
       "web-feedback:warning:dark": {
         "id": "web-feedback:warning:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.warning",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33820,7 +33820,7 @@
       },
       "web-feedback:error:dark": {
         "id": "web-feedback:error:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.error",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33874,7 +33874,7 @@
       },
       "web-feedback:note:darkSoft": {
         "id": "web-feedback:note:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.note",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33910,7 +33910,7 @@
       },
       "web-feedback:info:darkSoft": {
         "id": "web-feedback:info:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.info",
         "artifactType": "webToken",
         "adapter": "web",
@@ -33964,7 +33964,7 @@
       },
       "web-feedback:success:darkSoft": {
         "id": "web-feedback:success:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.success",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34000,7 +34000,7 @@
       },
       "web-feedback:warning:darkSoft": {
         "id": "web-feedback:warning:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.warning",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34054,7 +34054,7 @@
       },
       "web-feedback:error:darkSoft": {
         "id": "web-feedback:error:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.error",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34108,7 +34108,7 @@
       },
       "web-feedback:note:light": {
         "id": "web-feedback:note:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.note",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34144,7 +34144,7 @@
       },
       "web-feedback:info:light": {
         "id": "web-feedback:info:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.info",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34198,7 +34198,7 @@
       },
       "web-feedback:success:light": {
         "id": "web-feedback:success:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.success",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34234,7 +34234,7 @@
       },
       "web-feedback:warning:light": {
         "id": "web-feedback:warning:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.warning",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34288,7 +34288,7 @@
       },
       "web-feedback:error:light": {
         "id": "web-feedback:error:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.error",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34342,7 +34342,7 @@
       },
       "web-feedback:note:lightSoft": {
         "id": "web-feedback:note:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.note",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34378,7 +34378,7 @@
       },
       "web-feedback:info:lightSoft": {
         "id": "web-feedback:info:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.info",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34432,7 +34432,7 @@
       },
       "web-feedback:success:lightSoft": {
         "id": "web-feedback:success:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.success",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34468,7 +34468,7 @@
       },
       "web-feedback:warning:lightSoft": {
         "id": "web-feedback:warning:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.warning",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34522,7 +34522,7 @@
       },
       "web-feedback:error:lightSoft": {
         "id": "web-feedback:error:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.error",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34593,7 +34593,7 @@
       },
       "web-role:comment:dark": {
         "id": "web-role:comment:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.comment",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34665,7 +34665,7 @@
       },
       "web-role:comment:darkSoft": {
         "id": "web-role:comment:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.comment",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34737,7 +34737,7 @@
       },
       "web-role:comment:light": {
         "id": "web-role:comment:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.comment",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34809,7 +34809,7 @@
       },
       "web-role:comment:lightSoft": {
         "id": "web-role:comment:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.comment",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34881,7 +34881,7 @@
       },
       "web-role:keyword:dark": {
         "id": "web-role:keyword:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.keyword",
         "artifactType": "webToken",
         "adapter": "web",
@@ -34972,7 +34972,7 @@
       },
       "web-role:keyword:darkSoft": {
         "id": "web-role:keyword:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.keyword",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35066,7 +35066,7 @@
       },
       "web-role:keyword:light": {
         "id": "web-role:keyword:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.keyword",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35157,7 +35157,7 @@
       },
       "web-role:keyword:lightSoft": {
         "id": "web-role:keyword:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.keyword",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35251,7 +35251,7 @@
       },
       "web-role:operator:dark": {
         "id": "web-role:operator:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.operator",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35323,7 +35323,7 @@
       },
       "web-role:operator:darkSoft": {
         "id": "web-role:operator:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.operator",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35397,7 +35397,7 @@
       },
       "web-role:operator:light": {
         "id": "web-role:operator:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.operator",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35471,7 +35471,7 @@
       },
       "web-role:operator:lightSoft": {
         "id": "web-role:operator:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.operator",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35545,7 +35545,7 @@
       },
       "web-role:function:dark": {
         "id": "web-role:function:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.fn",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35648,7 +35648,7 @@
       },
       "web-role:function:darkSoft": {
         "id": "web-role:function:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.fn",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35754,7 +35754,7 @@
       },
       "web-role:function:light": {
         "id": "web-role:function:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.fn",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35860,7 +35860,7 @@
       },
       "web-role:function:lightSoft": {
         "id": "web-role:function:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.fn",
         "artifactType": "webToken",
         "adapter": "web",
@@ -35966,7 +35966,7 @@
       },
       "web-role:method:dark": {
         "id": "web-role:method:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.method",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36064,7 +36064,7 @@
       },
       "web-role:method:darkSoft": {
         "id": "web-role:method:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.method",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36165,7 +36165,7 @@
       },
       "web-role:method:light": {
         "id": "web-role:method:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.method",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36266,7 +36266,7 @@
       },
       "web-role:method:lightSoft": {
         "id": "web-role:method:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.method",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36367,7 +36367,7 @@
       },
       "web-role:property:dark": {
         "id": "web-role:property:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.property",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36458,7 +36458,7 @@
       },
       "web-role:property:darkSoft": {
         "id": "web-role:property:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.property",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36552,7 +36552,7 @@
       },
       "web-role:property:light": {
         "id": "web-role:property:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.property",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36646,7 +36646,7 @@
       },
       "web-role:property:lightSoft": {
         "id": "web-role:property:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.property",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36737,7 +36737,7 @@
       },
       "web-role:string:dark": {
         "id": "web-role:string:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.string",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36811,7 +36811,7 @@
       },
       "web-role:string:darkSoft": {
         "id": "web-role:string:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.string",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36887,7 +36887,7 @@
       },
       "web-role:string:light": {
         "id": "web-role:string:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.string",
         "artifactType": "webToken",
         "adapter": "web",
@@ -36963,7 +36963,7 @@
       },
       "web-role:string:lightSoft": {
         "id": "web-role:string:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.string",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37039,7 +37039,7 @@
       },
       "web-role:number:dark": {
         "id": "web-role:number:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.number",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37132,7 +37132,7 @@
       },
       "web-role:number:darkSoft": {
         "id": "web-role:number:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.number",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37228,7 +37228,7 @@
       },
       "web-role:number:light": {
         "id": "web-role:number:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.number",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37321,7 +37321,7 @@
       },
       "web-role:number:lightSoft": {
         "id": "web-role:number:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.number",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37417,7 +37417,7 @@
       },
       "web-role:type:dark": {
         "id": "web-role:type:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.type",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37513,7 +37513,7 @@
       },
       "web-role:type:darkSoft": {
         "id": "web-role:type:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.type",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37612,7 +37612,7 @@
       },
       "web-role:type:light": {
         "id": "web-role:type:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.type",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37708,7 +37708,7 @@
       },
       "web-role:type:lightSoft": {
         "id": "web-role:type:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.type",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37807,7 +37807,7 @@
       },
       "web-role:variable:dark": {
         "id": "web-role:variable:dark",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.dark.variable",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37897,7 +37897,7 @@
       },
       "web-role:variable:darkSoft": {
         "id": "web-role:variable:darkSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.darkSoft.variable",
         "artifactType": "webToken",
         "adapter": "web",
@@ -37987,7 +37987,7 @@
       },
       "web-role:variable:light": {
         "id": "web-role:variable:light",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.light.variable",
         "artifactType": "webToken",
         "adapter": "web",
@@ -38077,7 +38077,7 @@
       },
       "web-role:variable:lightSoft": {
         "id": "web-role:variable:lightSoft",
-        "path": "src/data/tokens.ts",
+        "path": "packages/site/src/data/tokens.ts",
         "field": "tokens.lightSoft.variable",
         "artifactType": "webToken",
         "adapter": "web",
@@ -38656,7 +38656,7 @@
       }
     },
     "byPath": {
-      "src/data/tokens.ts": [
+      "packages/site/src/data/tokens.ts": [
         "web-surface:canvas:dark",
         "web-surface:ink:dark",
         "web-surface:panel:dark",

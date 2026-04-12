@@ -1,15 +1,13 @@
 {
-  "name": "hearthcode-site",
+  "name": "hearthcode-workspace",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "engines": {
     "node": ">=22.12.0"
   },
   "scripts": {
     "prepare": "husky",
-    "dev": "node scripts/sync-themes.mjs && astro dev",
-    "build": "node scripts/sync-themes.mjs && astro build",
-    "preview": "astro preview",
     "generate:variants": "node scripts/generate-theme-variants.mjs",
     "generate:site-assets": "node scripts/generate-site-assets.mjs",
     "generate:obsidian": "node scripts/generate-obsidian-themes.mjs",
@@ -56,12 +54,5 @@
   "devDependencies": {
     "husky": "^9.1.7",
     "sharp": "^0.34.4"
-  },
-  "dependencies": {
-    "@astrojs/sitemap": "^3.7.1",
-    "@tailwindcss/vite": "^4.2.1",
-    "astro": "^6.0.5",
-    "shiki": "^4.0.2",
-    "tailwindcss": "^4.2.1"
   }
 }

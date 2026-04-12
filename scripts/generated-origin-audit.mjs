@@ -1,23 +1,42 @@
 import { execSync } from 'node:child_process'
+import {
+  COLOR_SYSTEM_SEMANTIC_PATH,
+  DOCS_COLOR_LANGUAGE_REPORT_PATH,
+  DOCS_CONTRACT_CHECKLIST_PATH,
+  DOCS_CONTRACT_REVIEW_PATH,
+  DOCS_THEME_BASELINE_PATH,
+  EXTENSION_PACKAGE_JSON_PATH,
+  EXTENSION_THEMES_DIR,
+  OBSIDIAN_APP_THEME_DIR,
+  OBSIDIAN_THEMES_DIR,
+  REPORT_COLOR_LANGUAGE_CONSISTENCY_PATH,
+  REPORT_COLOR_LANGUAGE_LINEAGE_PATH,
+  REPORT_COLOR_LANGUAGE_PARITY_PATH,
+  REPORT_VSCODE_CHROME_RESIDUAL_PATH,
+  SITE_PRODUCT_DATA_PATH,
+  SITE_PUBLIC_THEMES_DIR,
+  SITE_THEME_VARS_PATH,
+  SITE_TOKENS_PATH,
+} from './paths.mjs'
 
 const GENERATED_PATH_RULES = [
-  { type: 'exact', value: 'color-system/semantic.json' },
+  { type: 'exact', value: COLOR_SYSTEM_SEMANTIC_PATH },
   { type: 'prefix', value: 'themes/' },
-  { type: 'prefix', value: 'public/themes/' },
-  { type: 'prefix', value: 'extension/themes/' },
-  { type: 'prefix', value: 'obsidian/themes/' },
-  { type: 'prefix', value: 'obsidian/app-theme/' },
-  { type: 'exact', value: 'docs/color-language-report.md' },
-  { type: 'exact', value: 'docs/color-language-contract-checklist.md' },
-  { type: 'exact', value: 'docs/color-language-contract-review.md' },
-  { type: 'exact', value: 'docs/theme-baseline.md' },
-  { type: 'exact', value: 'reports/color-language-lineage.json' },
-  { type: 'exact', value: 'reports/color-language-consistency.json' },
-  { type: 'exact', value: 'reports/color-language-parity.json' },
-  { type: 'exact', value: 'reports/vscode-chrome-residual.json' },
-  { type: 'exact', value: 'src/data/tokens.ts' },
-  { type: 'exact', value: 'src/data/product.ts' },
-  { type: 'exact', value: 'src/styles/theme-vars.css' },
+  { type: 'prefix', value: `${SITE_PUBLIC_THEMES_DIR}/` },
+  { type: 'prefix', value: `${EXTENSION_THEMES_DIR}/` },
+  { type: 'prefix', value: `${OBSIDIAN_THEMES_DIR}/` },
+  { type: 'prefix', value: `${OBSIDIAN_APP_THEME_DIR}/` },
+  { type: 'exact', value: DOCS_COLOR_LANGUAGE_REPORT_PATH },
+  { type: 'exact', value: DOCS_CONTRACT_CHECKLIST_PATH },
+  { type: 'exact', value: DOCS_CONTRACT_REVIEW_PATH },
+  { type: 'exact', value: DOCS_THEME_BASELINE_PATH },
+  { type: 'exact', value: REPORT_COLOR_LANGUAGE_LINEAGE_PATH },
+  { type: 'exact', value: REPORT_COLOR_LANGUAGE_CONSISTENCY_PATH },
+  { type: 'exact', value: REPORT_COLOR_LANGUAGE_PARITY_PATH },
+  { type: 'exact', value: REPORT_VSCODE_CHROME_RESIDUAL_PATH },
+  { type: 'exact', value: SITE_TOKENS_PATH },
+  { type: 'exact', value: SITE_PRODUCT_DATA_PATH },
+  { type: 'exact', value: SITE_THEME_VARS_PATH },
 ]
 
 const SOURCE_OF_TRUTH_RULES = [
@@ -122,7 +141,7 @@ function isSourceOfTruthPath(path) {
 }
 
 function isVersionDerivedGeneratedPath(path) {
-  return path === 'obsidian/app-theme/manifest.json' || path === 'obsidian/app-theme/versions.json'
+  return path === `${OBSIDIAN_APP_THEME_DIR}/manifest.json` || path === `${OBSIDIAN_APP_THEME_DIR}/versions.json`
 }
 
 function resolveDiffMode(args) {
@@ -202,7 +221,7 @@ function main() {
   const hasSourceChange = files.some(isSourceOfTruthPath)
   const hasVersionSource =
     files.includes('releases/color-language.json') ||
-    files.includes('extension/package.json')
+    files.includes(EXTENSION_PACKAGE_JSON_PATH)
   const onlyVersionDerivedGenerated = generatedChanged.every(isVersionDerivedGeneratedPath)
 
   if (!hasSourceChange && hasVersionSource && onlyVersionDerivedGenerated) {

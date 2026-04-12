@@ -1,5 +1,6 @@
 import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
+import { relocateWorkspacePath } from '../paths.mjs'
 
 export const COLOR_SYSTEM_CONTRACT_CHECKLIST_PATH = 'color-system/framework/contract-checklist.json'
 export const COLOR_SYSTEM_CONTRACT_CHECKLIST_DOC_PATH = 'docs/color-language-contract-checklist.md'
@@ -45,7 +46,7 @@ export function loadContractChecklist() {
     const paths = [...new Set(contract.paths.map((path, pathIndex) => {
       const value = String(path || '').trim()
       assert(value, `${COLOR_SYSTEM_CONTRACT_CHECKLIST_PATH}: contracts[${index}].paths[${pathIndex}] is invalid`)
-      return value.replace(/\\/g, '/')
+      return relocateWorkspacePath(value.replace(/\\/g, '/'))
     }))]
     const guardrails = contract.guardrails.map((guardrail, guardrailIndex) => {
       const value = String(guardrail || '').trim()

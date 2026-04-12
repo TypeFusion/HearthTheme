@@ -1,11 +1,12 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
+import { REPO_ROOT, SITE_LAYOUTS_DIR, SITE_SRC_DIR, SITE_STYLES_DIR } from "./paths.mjs";
 
-const ROOT = process.cwd();
+const ROOT = REPO_ROOT;
 const TARGET_DIRS = [
-  path.join(ROOT, "src", "components"),
-  path.join(ROOT, "src", "layouts"),
-  path.join(ROOT, "src", "pages"),
+  path.join(ROOT, SITE_SRC_DIR, "components"),
+  path.join(ROOT, SITE_LAYOUTS_DIR),
+  path.join(ROOT, SITE_SRC_DIR, "pages"),
 ];
 const findings = [];
 
@@ -105,10 +106,10 @@ for (const file of astroFiles) {
   auditLocalizedTags(file, source);
 }
 
-const layoutFile = path.join(ROOT, "src", "layouts", "Layout.astro");
+const layoutFile = path.join(ROOT, SITE_LAYOUTS_DIR, "Layout.astro");
 auditLayoutBodyClass(layoutFile, readFileSync(layoutFile, "utf8"));
 
-const globalCssFile = path.join(ROOT, "src", "styles", "global.css");
+const globalCssFile = path.join(ROOT, SITE_STYLES_DIR, "global.css");
 auditGlobalCss(globalCssFile, readFileSync(globalCssFile, "utf8"));
 
 if (findings.length > 0) {

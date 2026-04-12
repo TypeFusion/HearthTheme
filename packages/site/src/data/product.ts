@@ -270,7 +270,7 @@ export const productData = {
     "repositoryUrl": "https://github.com/hearth-code/HearthTheme",
     "issuesUrl": "https://github.com/hearth-code/HearthTheme/issues",
     "releasesUrl": "https://github.com/hearth-code/HearthTheme/releases",
-    "changelogUrl": "https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md",
+    "changelogUrl": "https://github.com/hearth-code/HearthTheme/blob/main/packages/extension/CHANGELOG.md",
     "licenseUrl": "https://github.com/hearth-code/HearthTheme/blob/main/LICENSE",
     "docsRootUrl": "https://github.com/hearth-code/HearthTheme/blob/main/docs",
     "repoBlobRootUrl": "https://github.com/hearth-code/HearthTheme/blob/main",

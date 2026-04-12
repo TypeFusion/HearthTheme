@@ -5,6 +5,7 @@ import {
   getReleaseVersion,
   setReleaseVersion,
 } from './release-metadata.mjs'
+import { EXTENSION_CHANGELOG_PATH } from './paths.mjs'
 
 const LEVELS = new Set(['major', 'minor', 'patch'])
 const DEFAULT_NOTE = '- Update notes pending'
@@ -41,7 +42,7 @@ function main() {
     process.exit(1)
   }
 
-  const changelogPath = 'extension/CHANGELOG.md'
+  const changelogPath = EXTENSION_CHANGELOG_PATH
   const current = getReleaseVersion()
   const next = bump(current, level)
   if (!next) {
@@ -52,7 +53,7 @@ function main() {
   const syncResult = setReleaseVersion(next, { syncExtensionPackage: true })
   prependChangelogSection(changelogPath, next)
 
-  console.log(`[OK] release version bumped: ${current} -> ${next}`)
+  console.log(`bumped: ${current} -> ${next}`)
   console.log(
     `[OK] ${RELEASE_METADATA_PATH} ${syncResult.releaseChanged ? 'updated' : 'already up to date'}`
   )

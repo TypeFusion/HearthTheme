@@ -181,12 +181,12 @@ Generated files include:
 
 - `color-system/semantic.json`
 - `themes/*.json`
-- `public/themes/*.json`
-- `extension/themes/*.json`
+- `packages/site/public/themes/*.json`
+- `packages/extension/themes/*.json`
 - `obsidian/themes/*.css`
 - `obsidian/app-theme/theme.css`
-- `src/data/tokens.ts`
-- `src/styles/theme-vars.css`
+- `packages/site/src/data/tokens.ts`
+- `packages/site/src/styles/theme-vars.css`
 - `docs/theme-baseline.md`
 - `docs/color-language-report.md`
 - `docs/color-language-contract-checklist.md`
@@ -249,7 +249,7 @@ The expected workflow is:
 7. run `pnpm run audit:compatibility`
 8. run `pnpm run check:schemes`
 9. run `pnpm run audit:all`
-10. run `pnpm run build`
+10. run `pnpm --filter @hearth/site build`
 11. inspect previews, reports, and docs
 12. commit sources and generated outputs together
 

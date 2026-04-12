@@ -1,8 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { dirname } from 'path'
+import { EXTENSION_PACKAGE_JSON_PATH } from './paths.mjs'
 
 export const RELEASE_METADATA_PATH = 'releases/color-language.json'
-export const EXTENSION_PACKAGE_PATH = 'extension/package.json'
+export const EXTENSION_PACKAGE_PATH = EXTENSION_PACKAGE_JSON_PATH
 
 const SEMVER_RE = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/
 

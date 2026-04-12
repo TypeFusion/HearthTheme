@@ -9,7 +9,7 @@
 
 HearthCode is a theme family for code interfaces with two design directions: Ember and Moss. Each direction ships Dark, Dark Soft, Light, and Light Soft across VS Code, Open VSX-compatible editors, and Obsidian.
 
-![HearthCode Theme Preview](./extension/images/preview-contrast-v2.png)
+![HearthCode Theme Preview](./packages/extension/images/preview-contrast-v2.png)
 
 ## Start Here
 
@@ -49,4 +49,4 @@ HearthCode is a theme family for code interfaces with two design directions: Emb
 - Preview Moss in vscode.dev: <https://vscode.dev/theme/hearth-code.hearth-theme/HearthCode%20Moss%20Dark>
 - Source: <https://github.com/hearth-code/HearthTheme>
 - Issues: <https://github.com/hearth-code/HearthTheme/issues>
-- Changelog: <https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
+- Changelog: <https://github.com/hearth-code/HearthTheme/blob/main/packages/extension/CHANGELOG.md>

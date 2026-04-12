@@ -7,6 +7,7 @@ release/
 
 # dependencies
 node_modules/
+.pnpm-store/
 
 # logs
 npm-debug.log*
@@ -25,7 +26,7 @@ pnpm-debug.log*
 .idea/
 
 # local extension packages
-extension/*.vsix
+packages/extension/*.vsix
 
 # runtime-generated release comparison artifacts
 reports/color-language-version-summary.json

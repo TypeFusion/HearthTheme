@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { tokens } from "../../data/tokens";
 import { productData } from "../../data/product";
 import type { Lang } from "../../i18n/utils";
+import { EXTENSION_CHANGELOG_PATH } from "../../lib/repoPaths";
 
 interface Props {
 	lang: Lang;
@@ -45,7 +46,7 @@ function parseExtensionChangelog(markdown: string): ExtensionReleaseRow[] {
 		const [, version, date = ""] = headerMatch;
 		const bullets = [...section.matchAll(/^- (.+)$/gm)].map((match) => match[1].trim()).filter(Boolean);
 		if (bullets.length === 0) {
-			throw new Error(`Release ${version} is missing bullet entries in extension/CHANGELOG.md.`);
+			throw new Error(`Release ${version} is missing bullet entries in packages/extension/CHANGELOG.md.`);
 		}
 
 		const [summary, ...rest] = bullets;
@@ -58,21 +59,19 @@ function parseExtensionChangelog(markdown: string): ExtensionReleaseRow[] {
 	}
 
 	if (rows.length === 0) {
-		throw new Error("No parseable release entries found in extension/CHANGELOG.md.");
+		throw new Error("No parseable release entries found in packages/extension/CHANGELOG.md.");
 	}
 
 	return rows;
 }
 
 function readExtensionChangelogRows(): ExtensionReleaseRow[] {
-	const changelogPath = new URL("../../../extension/CHANGELOG.md", import.meta.url);
-
 	try {
-		const content = readFileSync(changelogPath, "utf8");
+		const content = readFileSync(EXTENSION_CHANGELOG_PATH, "utf8");
 		return parseExtensionChangelog(content);
 	} catch (error) {
 		throw new Error(
-			`Baseline docs failed to load release history from ${changelogPath.pathname}: ${error instanceof Error ? error.message : String(error)}`,
+			`Baseline docs failed to load release history from ${EXTENSION_CHANGELOG_PATH}: ${error instanceof Error ? error.message : String(error)}`,
 		);
 	}
 }
@@ -106,7 +105,7 @@ const copy = {
 		changelogFullLink: "View full changelog",
 		changelogMoreChangesLabel: "more changes in full changelog",
 		releasePrefix: "Release",
-		noReleaseNotes: "No release notes found in extension/CHANGELOG.md.",
+		noReleaseNotes: "No release notes found in packages/extension/CHANGELOG.md.",
 		roles: {
 			background: "Soot board base vs parchment desk-paper base",
 			foreground: "Chalk-walnut ink readability spine",
@@ -183,7 +182,7 @@ const copy = {
 		changelogFullLink: "查看完整变更日志",
 		changelogMoreChangesLabel: "项变更见完整日志",
 		releasePrefix: "版本",
-		noReleaseNotes: "未在 extension/CHANGELOG.md 中找到发布记录。",
+		noReleaseNotes: "未在 packages/extension/CHANGELOG.md 中找到发布记录。",
 		roles: {
 			background: "炭黑底板 vs 羊皮纸桌面底",
 			foreground: "粉笔胡桃墨阅读主脊",
@@ -261,7 +260,7 @@ const copy = {
 		changelogFullLink: "完全な変更履歴を見る",
 		changelogMoreChangesLabel: "件の変更は完全版に掲載",
 		releasePrefix: "リリース",
-		noReleaseNotes: "extension/CHANGELOG.md にリリース履歴が見つかりません。",
+		noReleaseNotes: "packages/extension/CHANGELOG.md にリリース履歴が見つかりません。",
 		roles: {
 			background: "煤けたボード基盤 vs 羊皮紙デスク基盤",
 			foreground: "チョーク+ウォルナットインクの可読主軸",

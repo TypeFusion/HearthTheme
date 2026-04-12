@@ -266,7 +266,7 @@ export function buildProductMetadata() {
       repositoryUrl,
       issuesUrl: `${repositoryUrl}/issues`,
       releasesUrl: `${repositoryUrl}/releases`,
-      changelogUrl: `${repositoryUrl}/blob/main/extension/CHANGELOG.md`,
+      changelogUrl: `${repositoryUrl}/blob/main/packages/extension/CHANGELOG.md`,
       licenseUrl: `${repositoryUrl}/blob/main/LICENSE`,
       docsRootUrl: `${repositoryUrl}/blob/main/docs`,
       repoBlobRootUrl: `${repositoryUrl}/blob/main`,

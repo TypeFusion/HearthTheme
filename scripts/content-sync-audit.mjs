@@ -1,5 +1,18 @@
 import { readdirSync, readFileSync, statSync } from 'fs'
 import { getThemeOutputFiles, loadColorProductManifest, loadColorSystemTuning, loadColorSystemVariants, loadRoleAdapters } from './color-system.mjs'
+import {
+  DOCS_THEME_BASELINE_PATH,
+  EXTENSION_PACKAGE_JSON_PATH,
+  EXTENSION_README_PATH,
+  REPORT_PREVIEW_MANIFEST_PATH,
+  SITE_COMPONENTS_DIR,
+  SITE_I18N_DIR,
+  SITE_LAYOUTS_DIR,
+  SITE_PRODUCT_DATA_PATH,
+  SITE_STYLES_DIR,
+  SITE_THEME_VARS_PATH,
+  repoPath,
+} from './paths.mjs'
 
 const THEME_FILES = getThemeOutputFiles()
 const PRODUCT = loadColorProductManifest()
@@ -9,25 +22,25 @@ const ROLE_SCOPES = Object.fromEntries(loadRoleAdapters().map((role) => [role.id
 const SITE_DOCS_PROFILE = COLOR_SYSTEM_TUNING.siteDocsProfile
 
 const I18N_FILES = {
-  en: 'src/i18n/en.json',
-  zh: 'src/i18n/zh.json',
-  ja: 'src/i18n/ja.json',
+  en: repoPath(SITE_I18N_DIR, 'en.json'),
+  zh: repoPath(SITE_I18N_DIR, 'zh.json'),
+  ja: repoPath(SITE_I18N_DIR, 'ja.json'),
 }
 
-const EXTENSION_README = 'extension/README.md'
-const EXTENSION_PACKAGE = 'extension/package.json'
+const EXTENSION_README = EXTENSION_README_PATH
+const EXTENSION_PACKAGE = EXTENSION_PACKAGE_JSON_PATH
 const README_EN = 'README.md'
 const README_ZH = 'README.zh-CN.md'
 const README_JA = 'README.ja.md'
-const PREVIEW_MANIFEST = 'reports/preview-manifest.json'
-const DOCS_BASELINE = 'docs/theme-baseline.md'
-const BASELINE_DOCS_COMPONENT = 'src/components/ui/BaselineDocs.astro'
-const PROOF_SECTION_COMPONENT = 'src/components/ui/ProofSection.astro'
-const CODE_PREVIEW_COMPONENT = 'src/components/code/CodePreview.astro'
-const CODE_PREVIEW_SOURCE = 'src/lib/codePreview.ts'
+const PREVIEW_MANIFEST = REPORT_PREVIEW_MANIFEST_PATH
+const DOCS_BASELINE = DOCS_THEME_BASELINE_PATH
+const BASELINE_DOCS_COMPONENT = repoPath(SITE_COMPONENTS_DIR, 'ui', 'BaselineDocs.astro')
+const PROOF_SECTION_COMPONENT = repoPath(SITE_COMPONENTS_DIR, 'ui', 'ProofSection.astro')
+const CODE_PREVIEW_COMPONENT = repoPath(SITE_COMPONENTS_DIR, 'code', 'CodePreview.astro')
+const CODE_PREVIEW_SOURCE = repoPath('packages', 'site', 'src', 'lib', 'codePreview.ts')
 const THEME_AUDIT_SCRIPT = 'scripts/theme-audit.mjs'
-const SITE_THEME_VARS = 'src/styles/theme-vars.css'
-const SOURCE_COLOR_SCAN_PATHS = ['src/components', 'src/layouts', 'src/styles']
+const SITE_THEME_VARS = SITE_THEME_VARS_PATH
+const SOURCE_COLOR_SCAN_PATHS = [SITE_COMPONENTS_DIR, SITE_LAYOUTS_DIR, SITE_STYLES_DIR]
 const LEGACY_HEX = ['#2a2723', '#ece2d3']
 const SITE_TEXT_CONTRAST_BUDGET = [
   { fgVar: '--hearth-metric-muted', bgVar: '--hearth-bg', minRatio: 4.5 },
@@ -620,7 +633,7 @@ function validateCodePreviewSourceOfTruth() {
   }
 
   if (!codePreviewSource.includes("from \"../data/product\"")) {
-    addIssue(`${CODE_PREVIEW_SOURCE}: should read active theme metadata from src/data/product.ts`)
+    addIssue(`${CODE_PREVIEW_SOURCE}: should read active theme metadata from ${SITE_PRODUCT_DATA_PATH}`)
   }
 
   if (!codePreviewSource.includes('productData.extension.themeCatalog')) {
@@ -683,8 +696,8 @@ function validateReadmePreviewAssets() {
 
   const expectedRootPreviewPaths = [`./${contrastOutput}`]
   const expectedExtensionPreviewPaths = [
-    contrastOutput.startsWith('extension/')
-      ? contrastOutput.slice('extension/'.length)
+    contrastOutput.startsWith('packages/extension/')
+      ? contrastOutput.slice('packages/extension/'.length)
       : contrastOutput,
   ]
 

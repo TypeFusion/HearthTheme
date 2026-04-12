@@ -1,5 +1,6 @@
 import { getExportedSiteTokenKeys } from './build.mjs'
 import { getObsidianThemeOutputFiles } from '../color-system.mjs'
+import { SITE_TOKENS_PATH } from '../paths.mjs'
 
 const OBSIDIAN_THEME_PATHS = getObsidianThemeOutputFiles()
 
@@ -57,7 +58,7 @@ function buildSurfaceEntries(model, artifactMaps, indexes) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
         const entry = {
           id: `web-surface:${contract.id}:${variant.id}`,
-          path: 'src/data/tokens.ts',
+          path: SITE_TOKENS_PATH,
           field: `tokens.${variant.id}.${contract.webToken}`,
           artifactType: 'webToken',
           adapter: 'web',
@@ -125,7 +126,7 @@ function buildInteractionEntries(model, artifactMaps, indexes) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
         const entry = {
           id: `web-interaction:${contract.id}:${variant.id}`,
-          path: 'src/data/tokens.ts',
+          path: SITE_TOKENS_PATH,
           field: `tokens.${variant.id}.${contract.webToken}`,
           artifactType: 'webToken',
           adapter: 'web',
@@ -194,7 +195,7 @@ function buildInterfaceEntries(model, artifactMaps, indexes) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
         const entry = {
           id: `web-interface:${contract.id}:${variant.id}`,
-          path: 'src/data/tokens.ts',
+          path: SITE_TOKENS_PATH,
           field: `tokens.${variant.id}.${contract.webToken}`,
           artifactType: 'webToken',
           adapter: 'web',
@@ -266,7 +267,7 @@ function buildGuidanceEntries(model, artifactMaps, indexes) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
         const entry = {
           id: `web-guidance:${contract.id}:${variant.id}`,
-          path: 'src/data/tokens.ts',
+          path: SITE_TOKENS_PATH,
           field: `tokens.${variant.id}.${contract.webToken}`,
           artifactType: 'webToken',
           adapter: 'web',
@@ -338,7 +339,7 @@ function buildTerminalEntries(model, artifactMaps, indexes) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
         const entry = {
           id: `web-terminal:${contract.id}:${variant.id}`,
-          path: 'src/data/tokens.ts',
+          path: SITE_TOKENS_PATH,
           field: `tokens.${variant.id}.${contract.webToken}`,
           artifactType: 'webToken',
           adapter: 'web',
@@ -410,7 +411,7 @@ function buildFeedbackEntries(model, artifactMaps, indexes) {
         const outputColor = artifactMaps.web?.[variant.id]?.[contract.webToken] ?? model.platformTokenMaps.web[variant.id][contract.webToken]
         const entry = {
           id: `web-feedback:${contract.id}:${variant.id}`,
-          path: 'src/data/tokens.ts',
+          path: SITE_TOKENS_PATH,
           field: `tokens.${variant.id}.${contract.webToken}`,
           artifactType: 'webToken',
           adapter: 'web',
@@ -505,7 +506,7 @@ function buildRoleEntries(model, artifactMaps, indexes) {
         const outputColor = artifactMaps.web?.[variant.id]?.[webTokenKey] ?? model.platformTokenMaps.web[variant.id][webTokenKey]
         const webEntry = {
           id: `web-role:${roleId}:${variant.id}`,
-          path: 'src/data/tokens.ts',
+          path: SITE_TOKENS_PATH,
           field: `tokens.${variant.id}.${webTokenKey}`,
           artifactType: 'webToken',
           adapter: 'web',

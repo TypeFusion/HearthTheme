@@ -1,7 +1,7 @@
 import fs from 'node:fs'
-import path from 'node:path'
 
 import { productData } from '../data/product'
+import { resolveSiteThemePath } from './repoPaths'
 
 export type FitThemeId = string
 
@@ -58,7 +58,7 @@ const fullThemeCatalog = productData.extension.themeCatalog.map((theme) => {
 })
 
 function getThemeAbsolutePath(themePath: string): string {
-  return path.resolve(process.cwd(), themePath.replace(/^\.\//, ''))
+  return resolveSiteThemePath(themePath)
 }
 
 function readThemeJson(themePath: string): ThemeJson {

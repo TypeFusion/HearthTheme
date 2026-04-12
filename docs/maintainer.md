@@ -56,13 +56,13 @@ They exist to keep the current VS Code derivation path stable while design inten
 
 - `color-system/semantic.json`
 - `themes/`
-- `public/themes/`
-- `extension/themes/`
+- `packages/site/public/themes/`
+- `packages/extension/themes/`
 - `obsidian/themes/`
 - `obsidian/app-theme/`
-- `src/data/tokens.ts`
-- `src/data/product.ts`
-- `src/styles/theme-vars.css`
+- `packages/site/src/data/tokens.ts`
+- `packages/site/src/data/product.ts`
+- `packages/site/src/styles/theme-vars.css`
 - `docs/theme-baseline.md`
 - `docs/color-language-report.md`
 - `docs/color-language-contract-checklist.md`
@@ -75,8 +75,8 @@ They exist to keep the current VS Code derivation path stable while design inten
 ### Release Metadata
 
 - `releases/color-language.json`
-- `extension/package.json`
-- `extension/CHANGELOG.md`
+- `packages/extension/package.json`
+- `packages/extension/CHANGELOG.md`
 
 ## 2. Editing Policy
 
@@ -118,7 +118,7 @@ It is not a source file.
 10. Run `pnpm run check:preview`.
 11. Run `pnpm run audit:generated-origin`.
 12. Run `pnpm run audit:all`.
-13. Run `pnpm run build`.
+13. Run `pnpm --filter @hearth/site build`.
 14. Commit source and generated outputs together.
 
 ## 4. Interpretation Rules
@@ -154,8 +154,8 @@ If a change cannot be explained in lineage, the change is not in a good state.
 
 ## 5. Versioning and Release
 
-- Bump release version from the canonical file: `pnpm run bump:release:patch` (or `minor` / `major`).
-- The bump command synchronizes `releases/color-language.json` and `extension/package.json`, and ensures a changelog heading exists.
+- Bump release version from the canonical file: `pnpm run bump:ext:patch` (or `minor` / `major`).
+- The bump command synchronizes `releases/color-language.json` and `packages/extension/package.json`, and ensures a changelog heading exists.
 - Before publishing, replace placeholder notes in the top changelog section.
 - Obsidian package release (local): `pnpm run release:obsidian`.
 - Optional snippets-only package: `pnpm run pack:obsidian:snippets`.

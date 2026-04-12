@@ -9,7 +9,7 @@
 
 HearthCode 是一套面向代码界面的主题家族，核心只有两条设计方向：Ember 和 Moss。每条方向都提供 Dark、Dark Soft、Light、Light Soft 四个版本，并覆盖 VS Code、Open VSX 兼容编辑器和 Obsidian。
 
-![HearthCode 主题预览](./extension/images/preview-contrast-v2.png)
+![HearthCode 主题预览](./packages/extension/images/preview-contrast-v2.png)
 
 ## 先这样选
 
@@ -49,4 +49,4 @@ HearthCode 是一套面向代码界面的主题家族，核心只有两条设计
 - 在 vscode.dev 预览 Moss：<https://vscode.dev/theme/hearth-code.hearth-theme/HearthCode%20Moss%20Dark>
 - 源码仓库：<https://github.com/hearth-code/HearthTheme>
 - 问题反馈：<https://github.com/hearth-code/HearthTheme/issues>
-- 更新日志：<https://github.com/hearth-code/HearthTheme/blob/main/extension/CHANGELOG.md>
+- 更新日志：<https://github.com/hearth-code/HearthTheme/blob/main/packages/extension/CHANGELOG.md>

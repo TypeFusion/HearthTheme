@@ -6,17 +6,26 @@ import { buildGeneratedPlatformTokenMaps } from './color-system/artifacts.mjs'
 import { getThemeOutputFiles, loadColorSystemTuning, loadRoleAdapters } from './color-system.mjs'
 import { contrastRatio, hexToRgb, normalizeHex } from './color-utils.mjs'
 import { buildProductMetadata } from './product-metadata.mjs'
+import {
+  DOCS_THEME_BASELINE_PATH,
+  EXTENSION_PACKAGE_JSON_PATH,
+  EXTENSION_THEMES_DIR,
+  SITE_PRODUCT_DATA_PATH,
+  SITE_THEME_VARS_PATH,
+  THEMES_DIR,
+  pathBasename,
+  resolveRepoPath,
+} from './paths.mjs'
 
 const COLOR_SYSTEM_TUNING = loadColorSystemTuning()
 const SITE_DOCS_PROFILE = COLOR_SYSTEM_TUNING.siteDocsProfile
 const SITE_ASSET_MAPPING = COLOR_SYSTEM_TUNING.siteAssetMapping
 const ROLE_SCOPES = Object.fromEntries(loadRoleAdapters().map((role) => [role.id, role.scopes || []]))
 
-const EXTENSION_PACKAGE_PATH = 'extension/package.json'
-const EXTENSION_THEMES_DIR = 'extension/themes'
-const DOCS_BASELINE_PATH = 'docs/theme-baseline.md'
-const PRODUCT_DATA_PATH = 'src/data/product.ts'
-const THEME_VARS_CSS_PATH = 'src/styles/theme-vars.css'
+const EXTENSION_PACKAGE_PATH = EXTENSION_PACKAGE_JSON_PATH
+const DOCS_BASELINE_PATH = DOCS_THEME_BASELINE_PATH
+const PRODUCT_DATA_PATH = SITE_PRODUCT_DATA_PATH
+const THEME_VARS_CSS_PATH = SITE_THEME_VARS_PATH
 const THEME_FILES = getThemeOutputFiles()
 
 function readJson(path) {
@@ -335,11 +344,10 @@ function syncExtensionThemes(productData) {
   }
 
   for (const theme of themeEntries) {
-    const sourcePath = String(theme.path || '').replace(/^\.\//, '')
-    const source = path.join(process.cwd(), sourcePath)
-    const file = String(theme.path || '').split(/[\\/]/).pop()
+    const file = pathBasename(theme.path)
     if (!file) continue
-    const destination = path.join(process.cwd(), EXTENSION_THEMES_DIR, file)
+    const source = resolveRepoPath(THEMES_DIR, file)
+    const destination = resolveRepoPath(EXTENSION_THEMES_DIR, file)
     copyFileSync(source, destination)
     changed = true
   }

@@ -101,7 +101,7 @@ All palette changes must follow this order:
 8. Run `pnpm run audit:all` (`theme + lineage + obsidian + copy + claims + generated-origin + cjk + release`).
 9. Check fixtures in `fixtures/theme-audit/` (TS/Python/Rust/Go/JSON/Markdown).
 10. If thresholds or governance changed, update this document and audit scripts in the same PR.
-11. If you are releasing extension metadata/theme changes, update `extension/CHANGELOG.md` in the same PR.
+11. If you are releasing extension metadata/theme changes, update `packages/extension/CHANGELOG.md` in the same PR.
 
 One-shot alternative:
 
@@ -120,10 +120,10 @@ One-shot alternative:
 - `color-system/ember-dark.source.json` is the UI/token migration anchor; migrated workbench colors are synced from `color-system/framework/vscode-chrome-contract.json`.
 - `themes/ember-dark.json`, `themes/ember-dark-soft.json`, `themes/ember-light.json`, and `themes/ember-light-soft.json` are regenerated artifacts.
 - `color-system/templates/*.base.json` are updated only when intentionally changing derivation baseline; their workbench colors are sync-managed for migrated keys.
-- `src/data/tokens.ts` regenerated via sync script.
-- `src/styles/theme-vars.css` regenerated via sync script.
+- `packages/site/src/data/tokens.ts` regenerated via sync script.
+- `packages/site/src/styles/theme-vars.css` regenerated via sync script.
 - `reports/color-language-lineage.json` regenerated via sync script.
-- `extension/package.json` `galleryBanner.color` matches `themes/ember-dark.json` background.
+- `packages/extension/package.json` `galleryBanner.color` matches `themes/ember-dark.json` background.
 - `docs/theme-baseline.md` semantic matrix + snapshot lines are in sync with current themes.
 - `pnpm run check:sync` passes (no generated drift after sync).
 - `pnpm run audit:generated-origin` passes (generated outputs are source-linked).
@@ -133,14 +133,14 @@ One-shot alternative:
 - `pnpm run audit:copy` also enforces "no hardcoded color literals" in site source files.
 - `pnpm run audit:claims` passes (no stale or misleading public claims).
 - `pnpm run audit:cjk` passes without typography regressions.
-- `pnpm run build` passes and static pages can be generated.
+- `pnpm --filter @hearth/site build` passes and static pages can be generated.
 - Local git hooks are enabled (`pnpm install` runs `prepare` to install Husky).
 - Any warnings are explicitly accepted with rationale in PR notes.
-- `extension/CHANGELOG.md` is updated when extension metadata/themes are changed.
+- `packages/extension/CHANGELOG.md` is updated when extension metadata/themes are changed.
 
 ## 7) Change History
 
-Website `/docs` change history is sourced from `extension/CHANGELOG.md` to stay aligned with Marketplace releases.
+Website `/docs` change history is sourced from `packages/extension/CHANGELOG.md` to stay aligned with Marketplace releases.
 
-- Full history source: `extension/CHANGELOG.md`
+- Full history source: `packages/extension/CHANGELOG.md`
 - Live docs page preview: `/docs`

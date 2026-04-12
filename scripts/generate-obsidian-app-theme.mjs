@@ -3,8 +3,13 @@ import { pathToFileURL } from 'url'
 import { buildVariantCssById, writeIfChanged } from './generate-obsidian-themes.mjs'
 import { getReleaseVersion } from './release-metadata.mjs'
 import { loadColorProductManifest, loadColorProductReleaseConfig } from './color-system.mjs'
+import {
+  EXTENSION_PACKAGE_JSON_PATH,
+  OBSIDIAN_APP_THEME_DIR,
+  resolveWorkspacePath,
+} from './paths.mjs'
 
-const APP_THEME_DIR = 'obsidian/app-theme'
+const APP_THEME_DIR = OBSIDIAN_APP_THEME_DIR
 const MANIFEST_PATH = `${APP_THEME_DIR}/manifest.json`
 const THEME_CSS_PATH = `${APP_THEME_DIR}/theme.css`
 const VERSIONS_PATH = `${APP_THEME_DIR}/versions.json`
@@ -77,7 +82,7 @@ function buildAppThemeCss() {
 
 function loadThemeVersionInfo() {
   const version = getReleaseVersion()
-  const extPackage = readJson('extension/package.json')
+  const extPackage = readJson(EXTENSION_PACKAGE_JSON_PATH)
 
   const repoSlug = PRODUCT.repository.slug || parseRepoSlug(extPackage.repository?.url) || 'hearth-code/HearthTheme'
   return { version, repoSlug }
@@ -112,17 +117,18 @@ function buildSubmissionTemplate(repoSlug) {
 }
 
 async function generateScreenshot() {
-  if (!existsSync(SCREENSHOT_SOURCE_PATH)) {
-    throw new Error(`Screenshot source not found: ${SCREENSHOT_SOURCE_PATH}`)
+  const screenshotSourcePath = resolveWorkspacePath(SCREENSHOT_SOURCE_PATH)
+  if (!existsSync(screenshotSourcePath)) {
+    throw new Error(`Screenshot source not found: ${screenshotSourcePath}`)
   }
 
   const sharp = (await import('sharp')).default
-  const src = sharp(SCREENSHOT_SOURCE_PATH)
+  const src = sharp(screenshotSourcePath)
   const meta = await src.metadata()
   const width = Number(meta.width)
   const height = Number(meta.height)
   if (!width || !height) {
-    throw new Error(`Cannot read screenshot dimensions from ${SCREENSHOT_SOURCE_PATH}`)
+    throw new Error(`Cannot read screenshot dimensions from ${screenshotSourcePath}`)
   }
 
   const sourceRatio = width / height
@@ -141,7 +147,7 @@ async function generateScreenshot() {
     top = Math.floor((height - extractHeight) / 2)
   }
 
-  const buffer = await sharp(SCREENSHOT_SOURCE_PATH)
+  const buffer = await sharp(screenshotSourcePath)
     .extract({ left, top, width: extractWidth, height: extractHeight })
     .resize(TARGET_SCREENSHOT_WIDTH, TARGET_SCREENSHOT_HEIGHT, { fit: 'cover' })
     .png()

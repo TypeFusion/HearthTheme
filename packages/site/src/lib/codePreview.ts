@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs"
-import { resolve } from "node:path"
 
 import { productData } from "../data/product"
+import { COLOR_SYSTEM_ADAPTERS_PATH, resolveSiteThemePath } from "./repoPaths"
 import {
   previewSampleFiles,
   type PreviewFileKey,
@@ -116,7 +116,7 @@ function getThemeMeta(themeId: PreviewThemeId): PreviewThemeCatalogEntry {
 
 function loadTheme(themeId: PreviewThemeId): PreviewTheme {
   const meta = getThemeMeta(themeId)
-  const themePath = resolve(process.cwd(), String(meta.path).replace(/^\.\//, ''))
+  const themePath = resolveSiteThemePath(String(meta.path))
   const raw = JSON.parse(readFileSync(themePath, 'utf8'))
   return {
     ...raw,
@@ -126,8 +126,7 @@ function loadTheme(themeId: PreviewThemeId): PreviewTheme {
 }
 
 const previewRoleScopesById = (() => {
-  const adaptersPath = resolve(process.cwd(), 'color-system/framework/adapters.json')
-  const raw = JSON.parse(readFileSync(adaptersPath, 'utf8')) as { roles?: PreviewRoleAdapter[] }
+  const raw = JSON.parse(readFileSync(COLOR_SYSTEM_ADAPTERS_PATH, 'utf8')) as { roles?: PreviewRoleAdapter[] }
   return Object.fromEntries(
     (raw.roles || []).map((role) => [role.id, Array.isArray(role.scopes) ? role.scopes : []]),
   ) as Record<string, string[]>
